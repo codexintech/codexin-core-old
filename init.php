@@ -75,12 +75,11 @@ class Codexin_Core {
 	 */
 	public function codexin_enqueque() {
 
-		// Registering Custom Posts
 		add_action( 'init', array( $this, 'codexin_scripts' ) );
 
 	}
 
-	public function codexin_scripts {
+	public function codexin_scripts() {
 
 		wp_enqueue_style( 'codexin-shortcodes-stylesheet', CODEXIN_CORE_ASSET_DIR . 'assets/css/shortcodes.css',false,'1.0','all');
 		wp_enqueue_script( 'codexin-js-script', CODEXIN_CORE_ASSET_DIR . 'assets/js/shortcode.js', array ( 'jquery' ), 1.0, true);
