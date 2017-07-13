@@ -41,16 +41,16 @@ class Codexin_Core {
 	public function codexin_includes() {
 
 		// Registering Custom Posts
-		require_once CODEXIN_CORE_INC_DIR . '/inc/custompost.php';
+		require_once CODEXIN_CORE_INC_DIR . 'custompost.php';
 
 		// Registering Shortcodes
-		require_once CODEXIN_CORE_INC_DIR . '/inc/cx_shortcodes.php';
+		require_once CODEXIN_CORE_INC_DIR . 'cx_shortcodes.php';
 
 		// Register widgets and Custom widgets
-		require_once CODEXIN_CORE_INC_DIR . '/inc/widgets.php';
+		require_once CODEXIN_CORE_INC_DIR . 'widgets.php';
 
 		// Integrating the Shortcodes in King Composer 
-		require_once CODEXIN_CORE_INC_DIR . '/inc/kc_integrated.php';
+		require_once CODEXIN_CORE_INC_DIR . 'kc_integrated.php';
 
 	}
 
@@ -67,8 +67,8 @@ class Codexin_Core {
 
 	public function codexin_scripts() {
 
-		wp_enqueue_style( 'codexin-shortcodes-stylesheet', CODEXIN_CORE_ASSET_DIR . 'assets/css/shortcodes.css',false,'1.0','all');
-		wp_enqueue_script( 'codexin-js-script', CODEXIN_CORE_ASSET_DIR . 'assets/js/shortcode.js', array ( 'jquery' ), 1.0, true);
+		wp_enqueue_style( 'codexin-shortcodes-stylesheet', CODEXIN_CORE_ASSET_DIR . 'css/shortcodes.css',false,'1.0','all');
+		wp_enqueue_script( 'codexin-js-script', CODEXIN_CORE_ASSET_DIR . 'js/shortcode.js', array ( 'jquery' ), 1.0, true);
 
 	}
 
