@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Codexin Core Zaman
+Plugin Name: Codexin Core
 Plugin URI: http://codexin.com
 Description: a plugin to create custom shortcodes
 Version: 1.0
