@@ -112,6 +112,8 @@ class Codexin_Core {
 
 	}
 
+}
+
 
 // Instantiating the class
 $codexin_core = new Codexin_Core();
