@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Codexin Shortcodes rafiz
+Plugin Name: Codexin Shortcodes
 Plugin URI: http://codexin.com
 Description: a plugin to create custom shortcodes
 Version: 1.0
