@@ -20,7 +20,7 @@ class Codexin_Core {
 	public function __construct() {
 
         define('CODEXIN_CORE_INC_DIR', plugin_dir_path( __FILE__ ) .'inc');
-        define('CODEXIN_CORE_ASSET_DIR', plugin_dir_path( __FILE__ ) .'assets');
+        define('CODEXIN_CORE_ASSET_DIR', plugin_dir_url( __FILE__ ) .'assets');
 
 		// Loading the core files
 		$this -> codexin_includes();
