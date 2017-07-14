@@ -29,7 +29,7 @@ class Codexin_Core {
 		$this -> codexin_enqueque();
 
 		// Register actions using add_actions() custom function.
-		$this -> reveal_add_actions();
+		$this -> codexin_add_actions();
 
 	}
 
@@ -77,10 +77,7 @@ class Codexin_Core {
 	 * @since v1.0.0
 	 */
 
-	public function reveal_add_actions() {
-
-		// Providing Shortcode Support on text widget
-		add_filter( 'widget_text', 'do_shortcode' );
+	public function codexin_add_actions() {
 
 		/**
 		 * Load plugin text domain.
