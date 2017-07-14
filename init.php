@@ -7,6 +7,7 @@ Version: 1.0
 Author: Codexin
 Author URI: http://codexin.com
 License: GPL2
+Text Domain: codexin
 */
 
 
@@ -87,7 +88,7 @@ class Codexin_Core {
 		add_action( 'init', 'codexin_core_load_textdomain' );
 
 		function codexin_core_load_textdomain() {
-		  load_plugin_textdomain( 'codexin-core', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' ); 
+			load_plugin_textdomain( 'codexin-core', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' ); 
 		}
 
 	}
