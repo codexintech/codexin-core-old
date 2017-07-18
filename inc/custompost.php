@@ -76,8 +76,8 @@
  			'labels'				=> $labels,
  			'menu_icon'				=> 'dashicons-location',
  			'public'				=> true,
- 			'has_archive'			=> true,
- 			'publicly_queryable'	=> true,
+ 			'has_archive'			=> false,
+ 			'publicly_queryable'	=> false,
  			'query_var'				=> true,
  			'rewrite'				=> true,
  			'capability-type'		=> 'post',
@@ -119,8 +119,8 @@
  			'labels'				=> $labels,
  			'menu_icon'				=> 'dashicons-admin-customizer',
  			'public'				=> true,
- 			'has_archive'			=> true,
- 			'publicly_queryable'	=> true,
+ 			'has_archive'			=> false,
+ 			'publicly_queryable'	=> false,
  			'query_var'				=> true,
  			'rewrite'				=> true,
  			'capability-type'		=> 'post',
@@ -161,8 +161,8 @@
  			'labels'				=> $labels,
  			'menu_icon'				=> 'dashicons-universal-access-alt',
  			'public'				=> true,
- 			'has_archive'			=> true,
- 			'publicly_queryable'	=> true,
+ 			'has_archive'			=> false,
+ 			'publicly_queryable'	=> false,
  			'query_var'				=> true,
  			'rewrite'				=> true,
  			'capability-type'		=> 'post',
@@ -184,18 +184,24 @@
 
 
 /**
- * Create Custome Place Holders..
+ * Create Custom Place Holders..
  */
-	add_filter('enter_title_here', 'project_title_place_holder', 0, 2 );
+	add_filter('enter_title_here', 'codexin_title_placeholder', 0, 2 );
 
-	function project_title_place_holder( $title , $post ){
+	function codexin_title_placeholder( $title , $post ){
 
 		if( $post->post_type == 'portfolio' ) {
-			$my_title = "Enter Portfolio Title..";
-			return $my_title;
-		}elseif( $post->post_type == 'team' ) {
-			$my_title = "Enter Team Member Or Staff Name";
-			return $my_title;
+			$cx_title = "Enter Portfolio Title..";
+			return $cx_title;
+		} elseif( $post->post_type == 'team' ) {
+			$cx_title = "Enter Team Member Or Staff Name..";
+			return $cx_title;
+		} elseif( $post->post_type == 'testimonial' ) {
+			$cx_title = "Enter Testimonial Name..";
+			return $cx_title;
+		} elseif( $post->post_type == 'clients' ) {
+			$cx_title = "Enter Client Name..";
+			return $cx_title;
 		}
 
 		return $title;
