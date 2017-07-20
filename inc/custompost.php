@@ -44,7 +44,8 @@
  										'title',
  										'editor',
  										'excerpt',
- 										'thumbnail'
+ 										'thumbnail',
+ 										'comments'
  									),
  			'taxonomies'			=> array( ''),
  			'menu_position'			=> 5,
