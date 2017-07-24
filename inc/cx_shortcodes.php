@@ -8,7 +8,8 @@ function codexin_shortcodes() {
 		'cx_section_heading',
 		'cx_about_box',
 		'cx_animated_counter',
-		'cx_service_box'
+		'cx_service_box',
+		'cx_information_box',
 
 	);
 
@@ -199,3 +200,49 @@ function cx_service_box_shortcode( $atts, $content = null ) {
 		$result .= ob_get_clean();
 		return $result;
 }
+
+
+
+/*  
+* 
+*  Codexin Information Box Shortcode
+*
+*/
+
+
+function cx_information_box_shortcode( $atts, $content = null ) {
+	   extract(shortcode_atts(array(
+			'info_title'	=> '',
+			'title_color'  	=> '',
+			'info_desc' 	=> '',
+			'info_image'	=> '',
+			'img_alt'		=> '',
+			'info_button_text' => '',
+			'href'			=> ''
+
+	   ), $atts));
+
+	   $result = '';
+
+	   $retrive_img_url = retrieve_img_src( $info_image, 'events-image' );
+
+	   $retrieve_link = retrieve_url( $href );
+
+	   ob_start(); 
+		?>
+		<div class="col-sm-12">
+			<div class="contest-wrapper">
+				<img src="<?php echo $retrive_img_url; ?>" alt="" class="img-responsive">
+				<div class="content-mask">	
+					<h2 style="color: <?php echo $title_color; ?>"><?php echo $info_title; ?></h2>
+					<p> <?php echo $info_desc; ?> </p>
+					<a href="<?php echo esc_url( $retrieve_link ); ?>"><?php echo $info_button_text; ?></a>
+				</div>
+			</div>
+		</div>
+
+		<?php
+		$result .= ob_get_clean();
+		return $result;
+
+} //End cx_information_box

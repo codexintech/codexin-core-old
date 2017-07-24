@@ -181,6 +181,49 @@
  	register_post_type( 'clients', $args );
 
 
+ 	//Create a custom post for Events...
+ 	$labels = array(
+ 				'name'					=> 'Events',
+ 				'singular_name'			=> 'Events',
+ 				'add_new'				=> 'Add Events',
+ 				'all_items'				=> 'All Events',
+ 				'add_new_item'			=> 'Add Events',
+ 				'edit_item'				=> 'Edit Events',
+ 				'new_item'				=> 'New Events',
+ 				'view_item'				=> 'View Events',
+ 				'search_item'			=> 'Search Events Post',
+ 				'not_found'				=> 'No Events Found',
+ 				'not_found_in_trash' 	=> 'No Events In Trash',
+ 				'parent_item_colon'		=> 'Parent Events'
+
+ 			);
+
+ 	// Create a Aruments Array that Store all argumens of posts..
+ 	$args = array(
+ 			'labels'				=> $labels,
+ 			'menu_icon'				=> 'dashicons-nametag',
+ 			'public'				=> true,
+ 			'has_archive'			=> true,
+ 			'publicly_queryable'	=> true,
+ 			'query_var'				=> true,
+ 			'rewrite'				=> true,
+ 			'capability-type'		=> 'post',
+ 			'hierarchical'			=> true,
+ 			// $Supports Array Create Custome From Fiels In WP-Dashbord,Defults are (title,Editor)
+ 			'supports'				=> array(
+ 										'title',
+ 										'editor',
+ 										'excerpt',
+ 										'thumbnail',
+ 									),
+ 			'taxonomies'			=> array( ''),
+ 			'menu_position'			=> 7,
+ 			'exclude_from_search'	=> false
+ 		);
+
+ 	register_post_type( 'events', $args );
+
+
 } // End reveal_framework_custompost_type()...
 
 

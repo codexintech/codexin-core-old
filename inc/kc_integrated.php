@@ -282,6 +282,57 @@ function codexin_shortcode() {
 	            ),  // End of elemnt cx_service_box
 
 
+	            'cx_information_box' => array(
+	                'name' => __( 'Codexin Information Box', 'codexin' ),
+	                'description' => __('Information Box', 'codexin'),
+	                'icon' => 'fa-yelp',
+	                'category' => 'Codexin',
+	                'params' => array(
+	                   
+	                    array(
+	                        'name' 			=> 'info_title',
+	                        'label' 		=> __( 'Information Title ', 'codexin' ),
+	                        'type' 			=> 'text',
+	                        'description'	=> __( 'Enter Information Title Here', 'codexin' ),
+	                        'admin_label' 	=> false,
+	                    ),
+
+	                    array(
+	                        'name' 			=> 'title_color',
+	                        'label' 		=> __( 'Information Title Color ', 'codexin' ),
+	                        'type' 			=> 'color_picker',
+	                        'description'	=> __( 'Select Information Title Color', 'codexin' ),
+	                        'admin_label' 	=> false,
+	                    ),
+
+	                    array(
+	                        'name' 			=> 'info_image',
+	                        'label' 		=> __( 'Upload Image', 'codexin' ),
+	                        'type' 			=> 'attach_image',
+	                        'admin_label' 	=> false,
+	                    ),
+
+	                    array(
+	                        'name' 			=> 'info_desc',
+	                        'label' 		=> __( 'Information Description ', 'codexin' ),
+	                        'type' 			=> 'textarea',
+	                        'description'	=> __( 'Enter Information Description Here', 'codexin' ),
+	                        'admin_label' 	=> false,
+	                    ),
+
+	                    array(
+	                        'name' 			=> 'info_button_text',
+	                        'label' 		=> __( 'Information Button Text ', 'codexin' ),
+	                        'type' 			=> 'text',
+	                        'description'	=> __( 'Enter Button Text Here', 'codexin' ),
+	                        'admin_label' 	=> false,
+	                    ),
+
+	                ) //End params array()..
+
+	            ),  // End of elemnt cx_service_box
+
+
 
 	        ) //End add map array().....
 
