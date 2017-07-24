@@ -59,9 +59,6 @@ class Codexin_Core {
 	 */
 	public function codexin_enqueque() {
 
-<<<<<<< HEAD
-		add_action( 'wp_footer', array( $this, 'codexin_scripts' ) );
-=======
 		add_action( 'wp_enqueue_scripts', array( $this, 'codexin_styles' ), 9 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'codexin_scripts' ), 999 );
 
@@ -70,18 +67,12 @@ class Codexin_Core {
 	public function codexin_styles() {
 
 		wp_enqueue_style( 'codexin-shortcodes-stylesheet', CODEXIN_CORE_ASSET_DIR . '/css/shortcodes.css', false, '1.0','all');
->>>>>>> e0a19e9d8b2d575a50a8687502e73f4243a96536
 
 	}
 
 	public function codexin_scripts() {
 
-<<<<<<< HEAD
-		wp_enqueue_style( 'codexin-shortcodes-stylesheet', CODEXIN_CORE_ASSET_DIR . '/css/shortcodes.css',false,'1.0','all' );
-		wp_enqueue_script( 'codexin-js-script', CODEXIN_CORE_ASSET_DIR . '/js/shortcode.js', array ( 'jquery' ), 1.0, true );
-=======
 		wp_enqueue_script( 'codexin-js-script', CODEXIN_CORE_ASSET_DIR . '/js/shortcode.js', array ( 'jquery' ), 1.0, true);
->>>>>>> e0a19e9d8b2d575a50a8687502e73f4243a96536
 
 	}
 

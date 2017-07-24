@@ -205,10 +205,10 @@ function codexin_shortcode() {
 							'name'			=> 'layout',
 							'admin_label'	=> true,
 							'options'		=> array(
-								'1'	=> CODEXIN_CORE_ASSET_DIR . '/assets/images/service-box/layout1.png',
-								'2'	=> CODEXIN_CORE_ASSET_DIR . '/assets/images/service-box/layout2.png',
-								'3'	=> CODEXIN_CORE_ASSET_DIR . '/assets/images/service-box/layout3.png',
-								'4'	=> CODEXIN_CORE_ASSET_DIR . '/assets/images/service-box/layout4.png',
+								'1'	=> CODEXIN_CORE_ASSET_DIR . '/images/service-box/layout-1.png',
+								'2'	=> CODEXIN_CORE_ASSET_DIR . '/images/service-box/layout-2.png',
+								'3'	=> CODEXIN_CORE_ASSET_DIR . '/images/service-box/layout-3.png',
+								'4'	=> CODEXIN_CORE_ASSET_DIR . '/images/service-box/layout-4.png',
 							),
 							'value'			=> '3'
 						),
@@ -246,6 +246,34 @@ function codexin_shortcode() {
 							        'show_when' => 'yes',
 							    ),
 	                        'description'	=> __( 'Select Service Icon', 'codexin' ),
+	                        'admin_label' 	=> false,
+	                    ),
+
+	                    array(
+	                        'name' 			=> 'icon_color',
+	                        'label' 		=> __( 'Servce Icon Color ', 'codexin' ),
+	                        'type' 			=> 'color_picker',
+	                        'relation' 		=> array(
+							        'parent'    => 'icon_toggle',
+							        'show_when' => 'yes',
+							    ),
+	                        'description'	=> __( 'Select Service Icon Color', 'codexin' ),
+	                        'admin_label' 	=> false,
+	                    ),
+
+	                    array(
+	                        'name' 			=> 'service_desc',
+	                        'label' 		=> __( 'Servce Description ', 'codexin' ),
+	                        'type' 			=> 'textarea',
+	                        'description'	=> __( 'Enter Service Description Here', 'codexin' ),
+	                        'admin_label' 	=> false,
+	                    ),
+
+	                    array(
+	                        'name' 			=> 'service_desc_color',
+	                        'label' 		=> __( 'Servce Description Text Color ', 'codexin' ),
+	                        'type' 			=> 'color_picker',
+	                        'description'	=> __( 'Select Service Description Text Color', 'codexin' ),
 	                        'admin_label' 	=> false,
 	                    ),
 

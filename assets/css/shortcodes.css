@@ -120,6 +120,36 @@
     float: none;
 }
 
+/***************************************
+    004 - cx_service_box
+****************************************/
+.service {
+    margin-bottom: 60px;
+}
+
+.single-service {
+    margin-bottom: 40px;
+    margin-top: 50px;
+}
+
+.single-service .media-left {
+    padding-right: 10px;
+    padding-top: 7px;
+}
+
+.single-service .media-heading {
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    margin-top: 5px;
+}
+
+.single-service .media-left i {
+    border-radius: 100px;
+    color: #295970;
+    font-size: 50px;
+    padding: 5px;
+    text-align: center;
+}
 
 
 

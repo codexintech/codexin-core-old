@@ -8,6 +8,7 @@ function codexin_shortcodes() {
 		'cx_section_heading',
 		'cx_about_box',
 		'cx_animated_counter',
+		'cx_service_box'
 
 	);
 
