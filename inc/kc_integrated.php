@@ -285,7 +285,7 @@ function codexin_shortcode() {
 	            'cx_information_box' => array(
 	                'name' => __( 'Codexin Information Box', 'codexin' ),
 	                'description' => __('Information Box', 'codexin'),
-	                'icon' => 'fa-yelp',
+	                'icon' => 'et-hazardous',
 	                'category' => 'Codexin',
 	                'params' => array(
 	                   

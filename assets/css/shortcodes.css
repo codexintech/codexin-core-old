@@ -151,6 +151,89 @@
     text-align: center;
 }
 
+/**************************************
+ 005 - cx_information/events
+**************************************/
+#events {
+    margin-top: 80px;
+}
+
+.events-description .panel-group .panel {
+    border-radius: 0;
+}
+
+.contest-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.events-description .panel-body p {
+    margin-bottom: 0;
+}
+
+.events-description .panel-body {
+    padding: 18px 15px;
+}
+
+.contest-wrapper img {
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -ms-transition: all .3s;
+    -o-transition: all .3s;
+    transition: all .3s;
+}
+
+.content-mask {
+    text-align: center;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-image: url("assets/images/subtle-white-feathers.png");
+    -webkit-transform: translateX(-100%);
+    -moz-transform: translateX(-100%);
+    -ms-transform: translateX(-100%);
+    -o-transform: translateX(-100%);
+    transform: translateX(-100%);
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -ms-transition: all .3s;
+    -o-transition: all .3s;
+    transition: all .3s;
+}
+
+.content-mask h2 {
+    padding: 10px;
+    margin-top: 12%;
+}
+
+.content-mask h2::after {
+    content: "";
+    width: 100px;
+    height: 3px;
+    display: block;
+    margin: 20px auto 0;
+}
+
+.content-mask p {
+    padding: 5px 20px;
+}
+
+.content-mask a {
+    display: block;
+    width: 190px;
+    margin: 0 auto;
+    padding: 10px 15px;
+    border-radius: 3px;
+    text-decoration: none;
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -ms-transition: all .3s;
+    -o-transition: all .3s;
+    transition: all .3s;
+}
+
 
 
 
