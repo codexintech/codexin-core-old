@@ -10,6 +10,7 @@ function codexin_shortcodes() {
 		'cx_animated_counter',
 		'cx_service_box',
 		'cx_information_box',
+		'cx_events',
 
 	);
 
@@ -246,3 +247,56 @@ function cx_information_box_shortcode( $atts, $content = null ) {
 		return $result;
 
 } //End cx_information_box
+
+
+
+
+/*  
+* 
+*  Codexin Events Box Shortcode
+*
+*/
+
+
+function cx_events_shortcode( $atts, $content = null ) {
+	   extract(shortcode_atts(array(
+			'event_title'	=> '',
+			'title_color'  	=> '',
+			'event_desc' 	=> '',
+			'event_icon'	=> '',
+			'icon_color'	=> ''
+
+	   ), $atts));
+
+	   $result = '';
+
+	   ob_start(); 
+		?>
+		<div class="col-sm-12">
+			<div class="events-description">
+				<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+					<div class="panel panel-default">
+						<div class="panel-heading active" role="tab" id="headingOne">
+							<h4 class="panel-title">
+								<a class="accordion-toggle" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+									<i class="<?php echo $event_icon; ?>"></i> <?php echo $event_title; ?>
+								</a>
+							</h4>
+						</div>
+						<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+							<div class="panel-body">
+								<p> <?php echo $event_desc; ?> </p>
+							</div>
+						</div>
+					</div><!--/.panel- panel-defult-->
+					
+				</div><!--/.panel-group-->
+			</div>  <!-- end of events description -->
+		</div>  <!-- end of col -->
+
+		<?php
+		$result .= ob_get_clean();
+		return $result;
+
+} //End cx_events

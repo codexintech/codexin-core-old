@@ -283,25 +283,25 @@ function codexin_shortcode() {
 
 
 	            'cx_information_box' => array(
-	                'name' => __( 'Codexin Information Box', 'codexin' ),
-	                'description' => __('Information Box', 'codexin'),
+	                'name' => __( 'Codexin Events Box', 'codexin' ),
+	                'description' => __('Events Box', 'codexin'),
 	                'icon' => 'et-hazardous',
 	                'category' => 'Codexin',
 	                'params' => array(
 	                   
 	                    array(
 	                        'name' 			=> 'info_title',
-	                        'label' 		=> __( 'Information Title ', 'codexin' ),
+	                        'label' 		=> __( 'Events Title ', 'codexin' ),
 	                        'type' 			=> 'text',
-	                        'description'	=> __( 'Enter Information Title Here', 'codexin' ),
+	                        'description'	=> __( 'Enter Events Title Here', 'codexin' ),
 	                        'admin_label' 	=> false,
 	                    ),
 
 	                    array(
 	                        'name' 			=> 'title_color',
-	                        'label' 		=> __( 'Information Title Color ', 'codexin' ),
+	                        'label' 		=> __( 'Events Title Color ', 'codexin' ),
 	                        'type' 			=> 'color_picker',
-	                        'description'	=> __( 'Select Information Title Color', 'codexin' ),
+	                        'description'	=> __( 'Select Events Title Color', 'codexin' ),
 	                        'admin_label' 	=> false,
 	                    ),
 
@@ -314,15 +314,66 @@ function codexin_shortcode() {
 
 	                    array(
 	                        'name' 			=> 'info_desc',
-	                        'label' 		=> __( 'Information Description ', 'codexin' ),
+	                        'label' 		=> __( 'Events Description ', 'codexin' ),
 	                        'type' 			=> 'textarea',
-	                        'description'	=> __( 'Enter Information Description Here', 'codexin' ),
+	                        'description'	=> __( 'Enter Events Description Here', 'codexin' ),
 	                        'admin_label' 	=> false,
 	                    ),
 
 	                    array(
 	                        'name' 			=> 'info_button_text',
 	                        'label' 		=> __( 'Information Button Text ', 'codexin' ),
+	                        'type' 			=> 'text',
+	                        'description'	=> __( 'Enter Button Text Here', 'codexin' ),
+	                        'admin_label' 	=> false,
+	                    ),
+
+	                ) //End params array()..
+
+	            ),  // End of elemnt cx_service_box
+
+
+	            'cx_events_box' => array(
+	                'name' => __( 'Codexin Events Section', 'codexin' ),
+	                'description' => __('Events Section', 'codexin'),
+	                'icon' => 'et-hazardous',
+	                'category' => 'Codexin',
+	                'params' => array(
+	                   
+	                    array(
+	                        'name' 			=> 'info_title',
+	                        'label' 		=> __( 'Events Title ', 'codexin' ),
+	                        'type' 			=> 'text',
+	                        'description'	=> __( 'Enter Events Title Here', 'codexin' ),
+	                        'admin_label' 	=> false,
+	                    ),
+
+	                    array(
+	                        'name' 			=> 'title_color',
+	                        'label' 		=> __( 'Events Title Color ', 'codexin' ),
+	                        'type' 			=> 'color_picker',
+	                        'description'	=> __( 'Select Events Title Color', 'codexin' ),
+	                        'admin_label' 	=> false,
+	                    ),
+
+	                    array(
+	                        'name' 			=> 'info_image',
+	                        'label' 		=> __( 'Upload Image', 'codexin' ),
+	                        'type' 			=> 'attach_image',
+	                        'admin_label' 	=> false,
+	                    ),
+
+	                    array(
+	                        'name' 			=> 'info_desc',
+	                        'label' 		=> __( 'Events Description ', 'codexin' ),
+	                        'type' 			=> 'textarea',
+	                        'description'	=> __( 'Enter Events Description Here', 'codexin' ),
+	                        'admin_label' 	=> false,
+	                    ),
+
+	                    array(
+	                        'name' 			=> 'info_button_text',
+	                        'label' 		=> __( 'Events Button Text ', 'codexin' ),
 	                        'type' 			=> 'text',
 	                        'description'	=> __( 'Enter Button Text Here', 'codexin' ),
 	                        'admin_label' 	=> false,
