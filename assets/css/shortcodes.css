@@ -1,0 +1,134 @@
+/**********************************
+    001 - cx_section_heading
+**********************************/
+
+.primary-title {
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+.secondary-title {
+    margin-bottom: 35px;
+    text-transform: uppercase;
+}
+
+.secondary-title::after {
+    content: "";
+    width: 80px;
+    height: 3px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px;
+}
+
+
+/***********************************
+    002 - cx_about_box
+***********************************/
+
+.img-thumb {
+    position: relative;
+}
+
+.img-thumb img {
+    width: 100%;
+}
+
+.img-thumb a {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.img-thumb a::before {
+    content: "";
+    -webkit-transform: scale(0, 1);
+    -moz-transform: scale(0, 1);
+    -ms-transform: scale(0, 1);
+    -o-transform: scale(0, 1);
+    transform: scale(0, 1);
+}
+
+.img-thumb a::after {
+    content: "";
+    -webkit-transform: scale(1, 0);
+    -moz-transform: scale(1, 0);
+    -ms-transform: scale(1, 0);
+    -o-transform: scale(1, 0);
+    transform: scale(1, 0);
+}
+
+.img-thumb a::before,
+.img-thumb a::after {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    bottom: 20px;
+    left: 20px;
+    content: '';
+    opacity: 0;
+    z-index: 1;
+    -webkit-transition: opacity .35s, transform .35s;
+    -moz-transition: opacity .35s, transform .35s;
+    -ms-transition: opacity .35s, transform .35s;
+    -o-transition: opacity .35s, transform .35s;
+    transition: opacity .35s, transform .35s;
+}
+
+.img-thumb a:hover:after,
+.img-thumb a:hover:before {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1);
+}
+
+
+/***********************************
+    003 - cx_animated_counter
+***********************************/
+
+#achievement-counters {
+    padding-bottom: 0;
+    padding-top: 0;
+}
+
+.achievement-counters {
+    margin-top: 80px;
+}
+
+
+
+.project {
+    width: 228px;
+    float: left;
+    text-align: center;
+    padding: 100px 25px;
+}
+
+.project:last-child {}
+
+.project .counter {
+    display: block;
+    clear: both;
+    line-height: 72px;
+    float: none;
+}
+
+
+
+
+
+/*--------------------------------------
+    Responsive CSS
+--------------------------------------*/
+/*---For Heaader ---*/
+@media only screen and (max-width: 479px)
+h2 {
+    font-size: 26px;
+}

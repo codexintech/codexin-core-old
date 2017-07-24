@@ -113,6 +113,15 @@ function codexin_shortcode() {
 	                'description' => __('Animated Single Counter', 'codexin'),
 	                'icon' => 'kc-icon-counter',
 	                'category' => 'Codexin',
+	                // Only load assets when using this element
+	                'assets' => array(
+	                	'scripts' => array(
+	                		'waypoints-js-script' => CODEXIN_CORE_ASSET_DIR . '/js/waypoints.min.js',
+	                		'counterup-js-script' => CODEXIN_CORE_ASSET_DIR . '/js/jquery.counterup.min.js',         	            
+ 	            	    ),
+
+	                ), //End assets
+
 	                'params' => array(
 
 	                    array(
@@ -181,9 +190,73 @@ function codexin_shortcode() {
 	                    ),
 
 	                )
-	            ),  // End of elemnt cx_animated_counter 
+	            ),  // End of elemnt cx_animated_counter  
 
-	        )
+
+	            'cx_service_box' => array(
+	                'name' => __( 'Codexin Service Box', 'codexin' ),
+	                'description' => __('Service Box', 'codexin'),
+	                'icon' => 'fa-yelp',
+	                'category' => 'Codexin',
+	                'params' => array(
+		                	array(
+							'type'			=> 'radio_image',
+							'label'			=> __( 'Select Service Box Template', 'kingcomposer' ),
+							'name'			=> 'layout',
+							'admin_label'	=> true,
+							'options'		=> array(
+								'1'	=> CODEXIN_CORE_ASSET_DIR . '/assets/images/service-box/layout1.png',
+								'2'	=> CODEXIN_CORE_ASSET_DIR . '/assets/images/service-box/layout2.png',
+								'3'	=> CODEXIN_CORE_ASSET_DIR . '/assets/images/service-box/layout3.png',
+								'4'	=> CODEXIN_CORE_ASSET_DIR . '/assets/images/service-box/layout4.png',
+							),
+							'value'			=> '3'
+						),
+
+	                   
+	                    array(
+	                        'name' 			=> 'service_title',
+	                        'label' 		=> __( 'Servce Title ', 'codexin' ),
+	                        'type' 			=> 'text',
+	                        'description'	=> __( 'Enter Service Title Here', 'codexin' ),
+	                        'admin_label' 	=> false,
+	                    ),
+
+	                    array(
+	                        'name' 			=> 'service_title_color',
+	                        'label' 		=> __( 'Servce Title Color ', 'codexin' ),
+	                        'type' 			=> 'color_picker',
+	                        'description'	=> __( 'Select Service Title Color', 'codexin' ),
+	                        'admin_label' 	=> false,
+	                    ),
+
+	                    array(
+	                        'name' 			=> 'icon_toggle',
+	                        'label' 		=> __( 'Enable Service Icon? ', 'codexin' ),
+	                        'type' 			=> 'toggle',
+	                        'admin_label' 	=> false,
+	                    ),
+
+	                    array(
+	                        'name' 			=> 'icon',
+	                        'label' 		=> __( 'Choose Service Icon', 'codexin' ),
+	                        'type' 			=> 'icon_picker',
+							'relation' 		=> array(
+							        'parent'    => 'icon_toggle',
+							        'show_when' => 'yes',
+							    ),
+	                        'description'	=> __( 'Select Service Icon', 'codexin' ),
+	                        'admin_label' 	=> false,
+	                    ),
+
+	                ) //End params array()..
+
+	            ),  // End of elemnt cx_service_box
+
+
+
+	        ) //End add map array().....
+
 	    ); // End add map
 	
 	} // End if

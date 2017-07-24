@@ -59,14 +59,14 @@ class Codexin_Core {
 	 */
 	public function codexin_enqueque() {
 
-		add_action( 'init', array( $this, 'codexin_scripts' ) );
+		add_action( 'wp_footer', array( $this, 'codexin_scripts' ) );
 
 	}
 
 	public function codexin_scripts() {
 
-		wp_enqueue_style( 'codexin-shortcodes-stylesheet', CODEXIN_CORE_ASSET_DIR . '/css/shortcodes.css',false,'1.0','all');
-		wp_enqueue_script( 'codexin-js-script', CODEXIN_CORE_ASSET_DIR . '/js/shortcode.js', array ( 'jquery' ), 1.0, true);
+		wp_enqueue_style( 'codexin-shortcodes-stylesheet', CODEXIN_CORE_ASSET_DIR . '/css/shortcodes.css',false,'1.0','all' );
+		wp_enqueue_script( 'codexin-js-script', CODEXIN_CORE_ASSET_DIR . '/js/shortcode.js', array ( 'jquery' ), 1.0, true );
 
 	}
 
