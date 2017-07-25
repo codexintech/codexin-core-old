@@ -13,6 +13,8 @@ function codexin_shortcodes() {
 		'cx_events_box',
 		'cx_testimonial',
 		'cx_team',
+		'cx_portfolio',
+		'cx_client',
 
 	);
 
@@ -529,6 +531,7 @@ function cx_team_shortcode( $atts, $content = null ) {
 				</div><!--/.row-->
 			</div><!--/#container-->
 		</section>
+		<div class="clearfix"></div>
 
 		<?php
 		$result .= ob_get_clean();
@@ -536,6 +539,150 @@ function cx_team_shortcode( $atts, $content = null ) {
 
 } //End cx_team
 
+
+
+/*  
+* 
+*  Codexin Portfolio Shortcode
+*
+*/
+function cx_portfolio_shortcode( $atts, $content = null ) {
+	   extract(shortcode_atts(array(
+	   		'img_alt'	=> 'Portfolio Image',
+	   ), $atts));
+
+	   $result = '';
+
+	   ob_start(); 
+		?>
+		
+		<section id="portfolio" class="portfolios">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="portfolio-filter">
+							<ul class="list-inline">
+								<li class="active" data-filter="*">All</li>
+								<?php 
+								$taxonomy = 'portfolio-category';
+								$taxonomies = get_terms($taxonomy); 
+								foreach ( $taxonomies as $tax ) {
+									echo '<li data-filter=".' .strtolower($tax->slug) .'" >' . $tax->name . '</li>';
+
+								}
+								?>
+							</ul>
+						</div><!--/.portfolio-filter-->
+					</div><!--/.col-xs-12-->
+				</div> <!-- end of row -->
+			</div> <!-- end of container -->
+
+			<div class="portfolio-wrapper">
+			<?php 
+				//start wp query..
+				$args = array(
+					'post_type'			=> 'portfolio',
+					'orderby'			=> 'data',
+					'order'				=> 'DESC',
+					'posts_per_page'	=> -1
+					);
+				$data = new WP_Query( $args );
+				//Check post
+				if( $data->have_posts() ) :
+					//startloop here..
+					while( $data->have_posts() ) : $data->the_post();		
+
+						$id =  $post->ID;  
+
+						$term_list = wp_get_post_terms( get_the_ID(), 'portfolio-category' ); 
+			 	?>
+						<div class="portfolio <?php foreach ($term_list as $sterm) { echo $sterm->slug.' '; } ?>">
+							<img src="<?php echo esc_url( the_post_thumbnail_url( 'portfolio-mini-image' ) ); ?>" alt="<?php echo esc_attr( $img_alt ); ?>">
+							<a href="<?php echo esc_url( the_post_thumbnail_url( 'full' ) ); ?>" class="img-pop-up">
+								<div class="image-mask">
+									<div class="image-content">
+										<img src="<?php echo get_template_directory_uri(); ?>/assets/images/portfolio/hover-icon.png" alt="">
+										<h3><?php echo esc_html( the_title() ); ?></h3>
+										<p>
+											<?php foreach ( $term_list as $sterm ) { echo $sterm->name . " "; } ?>
+										</p>
+									</div>
+								</div>
+							</a>
+						</div>
+
+				<?php 
+						endwhile;
+					endif;
+					wp_reset_postdata();
+				 ?>
+
+			</div> <!-- end of portfolio-wrapper -->
+		</section> <!-- end of portfolio -->
+
+		<?php
+		$result .= ob_get_clean();
+		return $result;
+
+} //End cx_portfolio
+
+
+
+/*  
+* 
+*  Codexin Client Shortcode
+*
+*/
+function cx_client_shortcode( $atts, $content = null ) {
+	   extract(shortcode_atts(array(
+	   		'img_alt'	=> 'Portfolio Image',
+	   ), $atts));
+
+	   $result = '';
+
+	   ob_start(); 
+		?>
+		<div id="clients" class="clients">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12">
+						<div id="client-carousel" class="owl-carousel">
+							<?php 
+								//start wp query..
+								$args = array(
+									'post_type'			=> 'clients',
+									'orderby'			=> 'data',
+									'order'				=> 'DESC',
+									'posts_per_page'	=> -1
+									);
+								$data = new WP_Query( $args );
+								//Check post
+								if( $data->have_posts() ) :
+									//startloop here..
+									while( $data->have_posts() ) : $data->the_post();
+										$client_url = rwmb_meta( 'reveal_clients_surl', 'type=text' );
+								?>
+											<div class="item">
+												<a href="<?php if( ! empty( $client_url ) ) : echo esc_url( $client_url ); endif; ?>"><img src="<?php echo esc_url( the_post_thumbnail_url( 'full' ) ); ?>" alt="<?php echo esc_attr( $img_alt ); ?>"/></a>
+											</div>
+
+								<?php
+										endwhile;
+									endif;
+									wp_reset_postdata();
+								 ?>			
+
+						</div> <!--/#client-carousel-->				
+					</div> <!-- end of col -->
+				</div> <!-- end of row -->
+			</div> <!-- end of container -->
+		</div> <!-- end of clients -->
+
+		<?php
+		$result .= ob_get_clean();
+		return $result;
+
+} //End cx_client
 
 
 
