@@ -12,6 +12,7 @@ function codexin_shortcodes() {
 		'cx_information_box',
 		'cx_events_box',
 		'cx_testimonial',
+		'cx_team',
 
 	);
 
@@ -269,7 +270,6 @@ function cx_events_box_shortcode( $atts, $content = null ) {
 
 	   ob_start(); 
 		?>
-		<div class="col-sm-12">
 			<div class="events-description">
 				<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
@@ -291,22 +291,41 @@ function cx_events_box_shortcode( $atts, $content = null ) {
 							$i++;
 							if( $i == 1 ) { 
 								$event_icon = $event_icon_one;
+								$heading_id = 'headingOne';
+								$collapse_id = 'collapseOne';
 							}elseif ( $i == 2 ) {
 								$event_icon = $event_icon_two;
+								$heading_id = 'headingTwo';
+								$collapse_id = 'collapseTwo';
 							}elseif ( $i == 3 ) {
 								$event_icon = $event_icon_three;
+								$heading_id = 'headingThree';
+								$collapse_id = 'collapseThree';
 							}
 				 ?>
 
 					<div class="panel panel-default">
-						<div class="panel-heading active" role="tab" id="headingOne">
+					<?php
+						if( $i == 1 ) :
+							$class_in = 'in';
+					 ?>
+						<div class="panel-heading active" role="tab" id="<?php echo $heading_id; ?>">
+					<?php
+						else : 
+							$class_in = '';
+					?>
+						<div class="panel-heading" role="tab" id="<?php echo $heading_id; ?>">
+
+					<?php	
+						endif;
+					 ?>	
 							<h4 class="panel-title">
-								<a class="accordion-toggle" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+								<a class="accordion-toggle" role="button" data-toggle="collapse" data-parent="#accordion" href="#<?php echo $collapse_id;?>" aria-expanded="true" aria-controls="<?php echo $collapse_id;?>">
 									<i class="<?php echo esc_attr( $event_icon );?>" > </i> <?php echo esc_html( the_title() ); ?>
 								</a>
 							</h4>
 						</div>
-						<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+						<div id="<?php echo $collapse_id;?>" class="panel-collapse collapse <?php echo $class_in; ?>" role="tabpanel" aria-labelledby="<?php echo $heading_id; ?> ">
 							<div class="panel-body">
 								<p> <?php printf('%s', the_excerpt() ); ?> </p>
 							</div>
@@ -320,7 +339,6 @@ function cx_events_box_shortcode( $atts, $content = null ) {
 					
 				</div><!--/.panel-group-->
 			</div>  <!-- end of events description -->
-		</div>  <!-- end of col -->
 
 		<?php
 		$result .= ob_get_clean();
@@ -337,11 +355,9 @@ function cx_events_box_shortcode( $atts, $content = null ) {
 *  Codexin Testimonial Shortcode
 *
 */
-function cx_testiomonial_shortcode( $atts, $content = null ) {
+function cx_testimonial_shortcode( $atts, $content = null ) {
 	   extract(shortcode_atts(array(
-			'event_icon_one'	=> '',
-			'event_icon_two'	=> '',
-			'event_icon_three'	=> '',
+
 	   ), $atts));
 
 	   $result = '';
@@ -372,20 +388,34 @@ function cx_testiomonial_shortcode( $atts, $content = null ) {
 			 									);
 
 			 								$data = new WP_Query( $args );
-
+			 								$i = 0;
 			 								if( $data->have_posts() ) :
 												//Start loop here...
 			 									while( $data->have_posts() ) : $data->the_post();
+			 								$i++;
 
-			 								?>
+			 								if( $i == 1 ) :
+			 									?>
 			 								<div class="item active">
+			 									<?php 
+			 									else : ?>
+			 									<div class="item">
+	 										<?php
+	 										endif;
+	 										?>
+
 			 									<div class="quote-wrapper">
 			 										<div class="quote-author-thumb">
 			 											<i class="fa fa-comments"></i>
 			 										</div>
 			 										<div class="quote-text">
-			 											<p>“Lorem ipsum dolor sit amet, consectetur adipisicing elit. In, accusantium distinctio obcaecati tempore ducimus minima alias ex dolor unde, modi non quisquam eligendi ea!”</p>
-			 											<p class="quote-author-name">Jim lory</p>
+			 											<p> <?php printf( '%s', the_excerpt() ); ?> </p>
+			 											<p class="quote-author-name">
+			 												<?php 
+			 													$aut_name = rwmb_meta( 'reveal_author_name','type=text' );
+			 													echo esc_html( $aut_name );
+			 												 ?>
+			 											</p>
 			 										</div>
 			 									</div>
 			 								</div> <!--/item-->
@@ -417,6 +447,94 @@ function cx_testiomonial_shortcode( $atts, $content = null ) {
 		return $result;
 
 } //End cx_testiomonial
+
+
+
+
+/*  
+* 
+*  Codexin Team Shortcode
+*
+*/
+function cx_team_shortcode( $atts, $content = null ) {
+	   extract(shortcode_atts(array(
+	   		'img_alt'	=> 'Team Image',
+	   ), $atts));
+
+	   $result = '';
+
+	   ob_start(); 
+		?>
+		
+		<section id="team" class="team">
+			<div class="container">
+				<div class="row">	
+					<?php 
+					//start new query..
+					$args = array(
+						'post_type'		 => 'team',
+						'order'			 => 'DESC',
+						'posts_per_page' => 4,
+						);
+
+					$data = new WP_Query( $args );
+					//check post..
+					if( $data->have_posts() ) :
+						//Start loop here..
+						while( $data->have_posts() ) :	$data->the_post();
+					?>
+						<div class="col-sm-3">
+							<div class="single-team">
+								<img src="<?php echo esc_url( the_post_thumbnail_url('team-mini-image') ); ?>" alt="<?php echo esc_attr( $img_alt ); ?>" class="img-responsive" />
+								<div class="single-team-wrapper">
+									<div class="team-social">
+										<?php 
+											$designation = rwmb_meta( 'reveal_team_designation', 'type=text' );
+											$fb = rwmb_meta( 'reveal_team_facebook', 'type=text' );
+											$tr = rwmb_meta( 'reveal_team_twitter', 'type=text' );
+											$ig = rwmb_meta( 'reveal_team_ig', 'type=text' );
+											$gp = rwmb_meta( 'reveal_team_gp', 'type=text' );
+
+											if( ! empty( $fb ) ) :
+										 ?>
+											<a href="<?php echo esc_url( $fb ); ?>"><i class="fa fa-facebook"></i></a>
+										<?php endif;
+											if( ! empty( $tr ) ) :
+										 ?>
+											<a href="<?php echo esc_url( $tr ); ?>"><i class="fa fa-twitter"></i></a>
+										<?php endif;
+											if( ! empty( $ig ) ) :
+										 ?>
+											<a href="<?php echo esc_url( $ig ); ?>"><i class="fa fa-instagram"></i></a>
+										<?php endif;
+											if( ! empty( $gp ) ) :
+									 	?>
+											<a href="<?php echo esc_url( $gp ); ?>"><i class="fa fa-google-plus"></i></a>
+										<?php endif; ?>
+									</div>
+								</div>
+							</div>
+							<div class="team-description text-center">
+								<p><?php echo esc_html( the_title() ); ?></p>
+								<p><?php echo esc_html( $designation ); ?></p>
+							</div>
+						</div><!--/.col-sm-3-->
+
+					<?php 
+							endwhile;
+						endif; //End check-post if()..
+						wp_reset_postdata();
+					 ?>
+
+				</div><!--/.row-->
+			</div><!--/#container-->
+		</section>
+
+		<?php
+		$result .= ob_get_clean();
+		return $result;
+
+} //End cx_team
 
 
 

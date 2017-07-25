@@ -369,6 +369,32 @@ function codexin_shortcode() {
 	            ),  // End of elemnt cx_events_box
 
 
+	            'cx_testimonial' => array(
+	                'name' => esc_html__( 'Codexin Testimonial', 'codexin' ),
+	                'description' => esc_html__('Testimonial Section', 'codexin'),
+	                'icon' => 'et-hazardous',
+	                'category' => 'Codexin',
+	                'params' => array(
+	                	
+	                	
+	                ) //End params array()..
+
+	            ),  // End of elemnt cx_testimonial
+	            
+
+	            'cx_team' => array(
+	                'name' => esc_html__( 'Codexin Team Section', 'codexin' ),
+	                'description' => esc_html__('Team Section', 'codexin'),
+	                'icon' => 'et-hazardous',
+	                'category' => 'Codexin',
+	                'params' => array(
+
+
+	                ) //End params array()..
+
+	            ),  // End of elemnt cx_tem
+
+
 
 	        ) //End add map array().....
 

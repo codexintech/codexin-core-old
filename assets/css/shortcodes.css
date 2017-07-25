@@ -234,6 +234,193 @@
     transition: all .3s;
 }
 
+.contest-wrapper:hover .content-mask {
+    -webkit-transform: translateX(0);
+    -moz-transform: translateX(0);
+    -ms-transform: translateX(0);
+    -o-transform: translateX(0);
+    transform: translateX(0);
+}
+
+.contest-wrapper:hover > img {
+    -webkit-transform: translateX(100%);
+    -moz-transform: translateX(100%);
+    -ms-transform: translateX(100%);
+    -o-transform: translateX(100%);
+    transform: translateX(100%);
+}
+
+.events-container {
+    margin-bottom: 80px;
+}
+
+.events-content {
+    margin-bottom: 50px;
+}
+
+.events-description .panel-heading {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.events-description .panel-title {
+    text-transform: uppercase;
+    overflow: hidden;
+}
+
+.events-description .panel-title i {
+    margin-right: 10px;
+    float: left;
+}
+
+.events-description .panel-title a {
+    position: relative;
+    width: 100%;
+    display: block;
+    vertical-align: bottom;
+    overflow: hidden;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.events-description .panel-title a::after {
+    content: "";
+    position: absolute;
+    right: 1px;
+}
+
+.events-description .panel-title a.collapsed::after {
+    content: "";
+    position: absolute;
+    right: 0;
+}
+
+
+.events-description .panel-title a:hover,
+.events-description .panel-title a:focus,
+.events-description .panel-title a:active {
+    text-decoration: none;
+}
+
+/*-----quote----*/
+#quote {
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+.quote-carousel-control {
+    position: absolute;
+    top: 30%;
+    font-size: 40px;
+}
+
+.left.quote-carousel-control {
+    left: 8%;
+}
+
+.right.quote-carousel-control {
+    right: 8%;
+}
+.quote-author-thumb {
+    float: left;
+    margin-right: 40px;
+}
+.quote-author-thumb i {
+    padding: 20px;
+}
+.quote-text p.quote-author-name {
+    margin-bottom: 0;
+}
+
+.quote-text p.quote-author-name::before {
+    content: "";
+    height: 2px;
+    width: 50px;
+    margin-right: 15px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/*************************************
+    cx_team
+*************************************/
+#team {
+    padding-bottom: 0;
+    margin-bottom: 80px;
+    margin-top: 0;
+}
+
+.single-team {
+    margin-top: 35px;
+    position: relative;
+}
+
+.single-team-wrapper {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -ms-transition: all .3s;
+    -o-transition: all .3s;
+    transition: all .3s;
+}
+
+.single-team:hover .single-team-wrapper {
+    opacity: 1;
+}
+
+.team-social {
+    position: relative;
+    top: 45%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 160px;
+    overflow: hidden;
+}
+
+.team-social i {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    display: block;
+    float: left;
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -ms-transition: all .3s;
+    -o-transition: all .3s;
+    transition: all .3s;
+}
+
+
+.team-description {
+    margin-top: 20px;
+}
+
+.team-description p {
+    margin: 0;
+}
+.team-description p:first-child {
+    text-transform: uppercase;
+}
+
+
 
 
 
