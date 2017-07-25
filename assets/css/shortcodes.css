@@ -190,7 +190,7 @@
     height: 100%;
     left: 0;
     top: 0;
-    background-image: url("assets/images/subtle-white-feathers.png");
+    background-image: url("../images/subtle-white-feathers.png") ! important;
     -webkit-transform: translateX(-100%);
     -moz-transform: translateX(-100%);
     -ms-transform: translateX(-100%);

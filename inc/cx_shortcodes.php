@@ -60,11 +60,11 @@ function cx_section_heading_shortcode(  $atts, $content = null) {
 	   ob_start(); ?>
 
 				<div class="text-center">
-					<h3 class="primary-title"><?php echo $title; ?></h3>
-					<h2 class="secondary-title"><?php echo $subtitle; ?></h2>
+					<h3 class="primary-title"><?php echo esc_html( $title ); ?></h3>
+					<h2 class="secondary-title"><?php echo esc_html( $subtitle ); ?></h2>
 					<?php if( $description_toggle == 'yes' ): ?>
 					<div class="col-md-10 col-md-offset-1">
-						<p><?php echo $description; ?></p>		
+						<p><?php printf('%s', $description ); ?></p>		
 					</div>
 					<?php endif; ?>
 				</div>
@@ -107,10 +107,10 @@ function cx_about_box_shortcode(  $atts, $content = null) {
 							<div class="single-content">
 
 								<?php if( $icon_toggle == 'yes' ): ?>
-								<i class="<?php echo $hover_icon; ?>"></i>
+								<i class="<?php echo esc_attr( $hover_icon ); ?>"></i>
 								<?php endif; ?>
 								
-								<p><?php echo $hover_text; ?></p>
+								<p><?php echo esc_html( $hover_text ); ?></p>
 							</div>
 						</div>
 					</a>
@@ -150,11 +150,11 @@ function cx_animated_counter_shortcode( $atts, $content = null ) {
 		<div class="project" style="background: <?php echo $bg_color; ?>">
 
 			<?php if( $icon_toggle == 'yes' ): ?>
-			<i class="fa <?php echo $icon; ?>" style="color: <?php echo $icon_color; ?>"></i>
+			<i class="fa <?php echo esc_attr( $icon ); ?>" style="color: <?php echo $icon_color; ?>"></i>
 			<?php endif; ?>
 
-			<span class="counter" style="color: <?php echo $count_color; ?>"><?php echo $count_up; ?></span>
-			<p style="color: <?php echo $txt_color; ?>"><?php echo $txt; ?></p>
+			<span class="counter" style="color: <?php echo $count_color; ?>"><?php echo esc_html($count_up ); ?></span>
+			<p style="color: <?php echo $txt_color; ?>"><?php echo esc_html( $txt ); ?></p>
 		</div>
 
 		<?php
@@ -188,11 +188,11 @@ function cx_service_box_shortcode( $atts, $content = null ) {
 		<div class="single-service">
 			<div class="media">
 				<div class="media-left">
-					<i class="<?php echo $icon; ?>" style="color: <?php echo $icon_color; ?>"></i>
+					<i class="<?php echo esc_attr( $icon ); ?>" style="color: <?php echo $icon_color; ?>"></i>
 				</div>
 				<div class="media-body">
-				<h4 class="media-heading" style="color: <?php echo $title_color; ?>"><?php echo $service_title; ?></h4>
-				<p><?php echo $service_desc; ?></p>
+				<h4 class="media-heading" style="color: <?php echo $title_color; ?>"><?php echo esc_html( $service_title ); ?></h4>
+				<p><?php printf( '%s', $service_desc ) ; ?></p>
 				</div>
 			</div>
 		</div>
@@ -225,7 +225,7 @@ function cx_information_box_shortcode( $atts, $content = null ) {
 
 	   $result = '';
 
-	   $retrive_img_url = retrieve_img_src( $info_image, 'events-image' );
+	   $retrive_img_url = retrieve_img_src( $info_image, 'info-image' );
 
 	   $retrieve_link = retrieve_url( $href );
 
@@ -235,9 +235,9 @@ function cx_information_box_shortcode( $atts, $content = null ) {
 			<div class="contest-wrapper">
 				<img src="<?php echo $retrive_img_url; ?>" alt="" class="img-responsive">
 				<div class="content-mask">	
-					<h2 style="color: <?php echo $title_color; ?>"><?php echo $info_title; ?></h2>
-					<p> <?php echo $info_desc; ?> </p>
-					<a href="<?php echo esc_url( $retrieve_link ); ?>"><?php echo $info_button_text; ?></a>
+					<h2 style="color: <?php echo $title_color; ?>"><?php echo esc_html( $info_title ); ?></h2>
+					<p> <?php printf('%s', $info_desc ); ?> </p>
+					<a href="<?php echo esc_url( $retrieve_link ); ?>"><?php echo esc_html( $info_button_text ); ?></a>
 				</div>
 			</div>
 		</div>
@@ -262,9 +262,9 @@ function cx_events_shortcode( $atts, $content = null ) {
 	   extract(shortcode_atts(array(
 			'event_title'	=> '',
 			'title_color'  	=> '',
-			'event_desc' 	=> '',
 			'event_icon'	=> '',
-			'icon_color'	=> ''
+			'icon_color'	=> '',
+			'event_desc' 	=> ''
 
 	   ), $atts));
 
