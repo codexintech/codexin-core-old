@@ -195,7 +195,6 @@
  				'not_found'				=> 'No Events Found',
  				'not_found_in_trash' 	=> 'No Events In Trash',
  				'parent_item_colon'		=> 'Parent Events'
-
  			);
 
  	// Create a Aruments Array that Store all argumens of posts..
