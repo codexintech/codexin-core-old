@@ -131,7 +131,6 @@
  										'title',
  										'editor',
  										'excerpt',
- 										'thumbnail'
  									),
  			'taxonomies'			=> array(''),
  			'menu_position'			=> 11,
@@ -241,10 +240,13 @@
 			$cx_title = "Enter Team Member Or Staff Name..";
 			return $cx_title;
 		} elseif( $post->post_type == 'testimonial' ) {
-			$cx_title = "Enter Testimonial Name..";
+			$cx_title = "Enter Testimonial Title..";
 			return $cx_title;
 		} elseif( $post->post_type == 'clients' ) {
 			$cx_title = "Enter Client Name..";
+			return $cx_title;
+		}elseif( $post->post_type == 'events' ) {
+			$cx_title = "Enter Events Title..";
 			return $cx_title;
 		}
 
