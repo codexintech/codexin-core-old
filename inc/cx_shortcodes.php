@@ -10,7 +10,8 @@ function codexin_shortcodes() {
 		'cx_animated_counter',
 		'cx_service_box',
 		'cx_information_box',
-		'cx_events',
+		'cx_events_box',
+		'cx_testimonial',
 
 	);
 
@@ -233,9 +234,9 @@ function cx_information_box_shortcode( $atts, $content = null ) {
 		?>
 		<div class="col-sm-12">
 			<div class="contest-wrapper">
-				<img src="<?php echo $retrive_img_url; ?>" alt="" class="img-responsive">
+				<img src="<?php echo esc_url( $retrive_img_url ); ?>" alt="<?php echo esc_attr( $img_alt ); ?>" class="img-responsive">
 				<div class="content-mask">	
-					<h2 style="color: <?php echo $title_color; ?>"><?php echo esc_html( $info_title ); ?></h2>
+					<h2 style="color: <?php echo $title_color; ?>"><?php echo esc_html( $info_title, 'codexin' ); ?></h2>
 					<p> <?php printf('%s', $info_desc ); ?> </p>
 					<a href="<?php echo esc_url( $retrieve_link ); ?>"><?php echo esc_html( $info_button_text ); ?></a>
 				</div>
@@ -250,7 +251,6 @@ function cx_information_box_shortcode( $atts, $content = null ) {
 
 
 
-
 /*  
 * 
 *  Codexin Events Box Shortcode
@@ -258,14 +258,11 @@ function cx_information_box_shortcode( $atts, $content = null ) {
 */
 
 
-function cx_events_shortcode( $atts, $content = null ) {
+function cx_events_box_shortcode( $atts, $content = null ) {
 	   extract(shortcode_atts(array(
-			'event_title'	=> '',
-			'title_color'  	=> '',
-			'event_icon'	=> '',
-			'icon_color'	=> '',
-			'event_desc' 	=> ''
-
+			'event_icon_one'	=> '',
+			'event_icon_two'	=> '',
+			'event_icon_three'	=> '',
 	   ), $atts));
 
 	   $result = '';
@@ -276,20 +273,50 @@ function cx_events_shortcode( $atts, $content = null ) {
 			<div class="events-description">
 				<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
+				<?php 
+					//start new query..
+
+					$args = array(
+							'post_type'		 => 'events',
+							'order' 		 => 'DESC',
+							'posts_per_page' => 3,
+						);
+
+					$data = new WP_Query( $args );
+
+					if( $data->have_posts() ) :
+						//Start loop here...
+						$i = 0;
+						while( $data->have_posts() ) : $data->the_post();
+							$i++;
+							if( $i == 1 ) { 
+								$event_icon = $event_icon_one;
+							}elseif ( $i == 2 ) {
+								$event_icon = $event_icon_two;
+							}elseif ( $i == 3 ) {
+								$event_icon = $event_icon_three;
+							}
+				 ?>
+
 					<div class="panel panel-default">
 						<div class="panel-heading active" role="tab" id="headingOne">
 							<h4 class="panel-title">
 								<a class="accordion-toggle" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-									<i class="<?php echo $event_icon; ?>"></i> <?php echo $event_title; ?>
+									<i class="<?php echo esc_attr( $event_icon );?>" > </i> <?php echo esc_html( the_title() ); ?>
 								</a>
 							</h4>
 						</div>
 						<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
 							<div class="panel-body">
-								<p> <?php echo $event_desc; ?> </p>
+								<p> <?php printf('%s', the_excerpt() ); ?> </p>
 							</div>
 						</div>
 					</div><!--/.panel- panel-defult-->
+					<?php 
+							endwhile;
+						endif; //End check-posts if()....
+						wp_reset_postdata();
+					 ?>
 					
 				</div><!--/.panel-group-->
 			</div>  <!-- end of events description -->
@@ -299,4 +326,98 @@ function cx_events_shortcode( $atts, $content = null ) {
 		$result .= ob_get_clean();
 		return $result;
 
-} //End cx_events
+} //End cx_events_box
+
+
+
+
+
+/*  
+* 
+*  Codexin Testimonial Shortcode
+*
+*/
+function cx_testiomonial_shortcode( $atts, $content = null ) {
+	   extract(shortcode_atts(array(
+			'event_icon_one'	=> '',
+			'event_icon_two'	=> '',
+			'event_icon_three'	=> '',
+	   ), $atts));
+
+	   $result = '';
+
+	   ob_start(); 
+		?>
+		
+			 <div id="quote" class="quote">
+			 	<div class="container">
+			 		<div class="row">
+			 			<div class="col-xs-12">
+			 				<div id="quote-carousel" class="carousel slide" data-ride="carousel">
+			 					<!-- Indicators -->
+			 					<ol class="carousel-indicators hidden">
+			 						<li data-target="#quote-carousel" data-slide-to="0" class="active"></li>
+			 						<li data-target="#quote-carousel" data-slide-to="1"></li>
+			 					</ol>
+
+			 					<!-- Wrapper for slides -->
+			 					<div class="row">
+			 						<div class="col-sm-8 col-sm-offset-2">
+			 							<div class="carousel-inner" role="listbox">
+			 								<?php 
+											//start new query..
+			 								$args = array(
+			 									'post_type'		 => 'testimonial',
+			 									'posts_per_page' => -1,
+			 									);
+
+			 								$data = new WP_Query( $args );
+
+			 								if( $data->have_posts() ) :
+												//Start loop here...
+			 									while( $data->have_posts() ) : $data->the_post();
+
+			 								?>
+			 								<div class="item active">
+			 									<div class="quote-wrapper">
+			 										<div class="quote-author-thumb">
+			 											<i class="fa fa-comments"></i>
+			 										</div>
+			 										<div class="quote-text">
+			 											<p>“Lorem ipsum dolor sit amet, consectetur adipisicing elit. In, accusantium distinctio obcaecati tempore ducimus minima alias ex dolor unde, modi non quisquam eligendi ea!”</p>
+			 											<p class="quote-author-name">Jim lory</p>
+			 										</div>
+			 									</div>
+			 								</div> <!--/item-->
+									<?php 
+											endwhile;
+										endif; //End check-posts if()....
+										wp_reset_postdata();
+									 ?>	
+			 							</div> <!-- end of carousel inner -->
+			 						</div> <!-- end of col -->
+			 					</div> <!-- end of row -->
+
+
+			 					<!-- Controls -->
+			 					<a class="left quote-carousel-control" href="#quote-carousel" role="button" data-slide="prev">
+			 						<i class="fa fa-angle-left"></i>
+			 					</a>
+			 					<a class="right quote-carousel-control" href="#quote-carousel" role="button" data-slide="next">
+			 						<i class="fa fa-angle-right"></i>
+			 					</a>
+			 				</div><!--#quote-carousel-->
+			 			</div><!--/.col-xs-12-->
+			 		</div><!--/.row-->
+			 	</div><!--/container-->
+			 </div>  <!-- end of quote -->
+
+		<?php
+		$result .= ob_get_clean();
+		return $result;
+
+} //End cx_testiomonial
+
+
+
+
