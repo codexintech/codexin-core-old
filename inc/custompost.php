@@ -245,7 +245,7 @@
 			$cx_title = "Enter Client Name..";
 			return $cx_title;
 		}elseif( $post->post_type == 'events' ) {
-			$cx_title = "Enter Events Title..";
+			$cx_title = "Enter Events Name..";
 			return $cx_title;
 		}
 
