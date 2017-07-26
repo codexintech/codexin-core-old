@@ -15,6 +15,9 @@ function codexin_shortcodes() {
 		'cx_team',
 		'cx_portfolio',
 		'cx_client',
+		'cx_client',
+		'cx_happy_client_testimonial',
+		'cx_blog'
 
 	);
 
@@ -386,7 +389,9 @@ function cx_testimonial_shortcode( $atts, $content = null ) {
 											//start new query..
 			 								$args = array(
 			 									'post_type'		 => 'testimonial',
-			 									'posts_per_page' => -1,
+			 									'order'			 => 'date',
+			 									'orderby'		 => 'DESC',
+			 									'posts_per_page' => 2,
 			 									);
 
 			 								$data = new WP_Query( $args );
@@ -683,6 +688,154 @@ function cx_client_shortcode( $atts, $content = null ) {
 		return $result;
 
 } //End cx_client
+
+
+
+
+/*  
+* 
+*  Codexin Happy Client Testimonial Shortcode
+*
+*/
+function cx_happy_client_testimonial_shortcode( $atts, $content = null ) {
+	   extract(shortcode_atts(array(
+	   		'img_alt'	=> 'Image',
+	   ), $atts));
+
+	   $result = '';
+
+	   ob_start(); 
+		?>
+		<section id="testimonials" class="testimonials animated">
+			<div class="container">
+				<div class="row">
+					<?php 
+					//start new query..
+					$args = array(
+						'post_type'		 => 'testimonial',
+						'order'			 => 'date',
+						'orderby'		 => 'DESC',
+						'posts_per_page' => 4,
+						);
+
+					$data = new WP_Query( $args );
+					if( $data->have_posts() ) :
+						//Start loop here...
+						while( $data->have_posts() ) : $data->the_post();
+
+					?>
+						<div class="col-sm-6 quote-wrapper">
+							<div class="media">
+								<div class="media-left">
+									<img class="media-object img-circle" src="<?php echo esc_url( the_post_thumbnail_url( 'testimonial-mini-image' ) ); ?>" alt="<?php echo esc_attr( $img_alt ); ?>">
+								</div>
+								<div class="media-body">
+									<h3 class="media-heading">
+										<?php 
+											$name = rwmb_meta( 'reveal_author_name', 'type=text' ); 
+											echo esc_html( $name );
+										?>
+									</h3>
+									<p class="designation">
+										<?php 
+											$desig = rwmb_meta( 'reveal_author_desig', 'type=text' ); 
+											echo esc_html( $desig );
+										?>
+									</p>
+									<p> <?php printf('%s', get_the_excerpt() ); ?> </p>
+								</div>
+							</div>
+						</div> <!--/.quote-wrapper -->
+
+					<?php 
+							endwhile;
+						endif;
+						wp_reset_postdata();
+					 ?>
+
+				</div><!--/.row -->
+			</div><!--/.container -->
+		</section> <!-- end of testimonials -->
+
+		<?php
+		$result .= ob_get_clean();
+		return $result;
+
+} //End cx_happy_client
+
+
+
+/*  
+* 
+*  Codexin Blog Shortcode
+*
+*/
+function cx_blog_shortcode( $atts, $content = null ) {
+	   extract(shortcode_atts(array(
+	   		'img_alt'	=> 'Image',
+	   ), $atts));
+
+	   $result = '';
+
+	   ob_start(); 
+		?>
+		<section id="blog" class="blog">
+			<div class="container">
+				<div class="row">
+
+					<?php 
+					//start query..
+					$args = array(
+						'post_type'			=> 'post',
+						'order'				=> 'date',
+						'orderby'			=> 'DESC',
+						'posts_per_page'	=> 3
+						);
+
+					$data = new WP_Query( $args );
+
+						if( $data->have_posts() ) :
+							//Srat loop here..
+							while( $data->have_posts() ) : $data->the_post();
+					 ?>
+
+						<div class="col-sm-4">
+							<div class="blog-wrapper">
+								<div class="img-thumb">
+									<div class="img-wrapper"><img src="<?php echo esc_url( the_post_thumbnail_url( 'blog-mini-image' ) ); ?>" alt="<?php echo esc_attr( $img_alt ); ?>" class="img-responsive"></div>
+									<div class="meta">
+										<p><?php the_time( 'd' ); ?></p>
+										<p><?php the_time( 'M' ); ?></p>
+									</div>
+								</div>
+
+								<div class="blog-content">
+									<p class="blog-title"><?php echo esc_html( get_the_title() ); ?></p>
+									<p> <?php echo esc_html( wp_trim_words( get_the_excerpt(), 16 ) ); ?> </p>
+									<a href="<?php echo esc_url( get_the_permalink() ); ?>">Read More</a>
+								</div>
+
+								<div class="blog-info">
+									<span><i class="fa fa-eye"></i> <i>542</i></span>
+									<span><i class="fa fa-comments"></i> <i><?php comments_number(); ?></i></span>
+								</div>
+							</div><!--/.blog-wrapper -->
+						</div> <!-- end of col -->
+					<?php
+						endwhile;
+					endif;
+					?>
+				</div> <!-- end of row -->
+			</div> <!-- end of container -->
+		</section> <!-- end of blog -->
+
+		<div class="clearfix"></div>
+
+		<?php
+		$result .= ob_get_clean();
+		return $result;
+
+} //End cx_blog
 
 
 

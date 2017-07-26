@@ -376,7 +376,7 @@ function codexin_shortcode() {
 	                'category' => 'Codexin',
 	                'params' => array(
 	                	
-	                	
+
 	                ) //End params array()..
 
 	            ),  // End of elemnt cx_testimonial
@@ -418,7 +418,32 @@ function codexin_shortcode() {
 
 	                ) //End params array()..
 
-	            ),  // End of elemnt cx_tem
+	            ),  // End of elemnt cx_client
+
+
+	            'cx_happy_client_testimonial' => array(
+	                'name' => esc_html__( 'Codexin Clients Testimonial', 'codexin' ),
+	                'description' => esc_html__('Happy Clients Testimonial', 'codexin'),
+	                'icon' => 'et-hazardous',
+	                'category' => 'Codexin',
+	                'params' => array(
+
+
+	                ) //End params array()..
+
+	            ),  // End of elemnt cx_happy_client_testimonial
+
+	            'cx_blog' => array(
+	                'name' => esc_html__( 'Codexin Blog', 'codexin' ),
+	                'description' => esc_html__('Codexin Blog', 'codexin'),
+	                'icon' => 'et-hazardous',
+	                'category' => 'Codexin',
+	                'params' => array(
+
+
+	                ) //End params array()..
+
+	            ),  // End of elemnt cx_blog
 
 
 
