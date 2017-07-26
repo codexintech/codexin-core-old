@@ -840,7 +840,6 @@ function cx_blog_shortcode( $atts, $content = null ) {
 
 } //End cx_blog
 
-<<<<<<< HEAD
 
 
 /*  
@@ -999,10 +998,3 @@ function cx_social_media_share_shortcode( $atts, $content = null ) {
 
 } //End cx_social_media_share
 
-
-
-
-
-
-=======
->>>>>>> 71db0cb1762ac6b8ae41015f8a482cfce673edcf
