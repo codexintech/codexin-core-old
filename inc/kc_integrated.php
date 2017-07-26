@@ -402,7 +402,6 @@ function codexin_shortcode() {
 	                'category' => 'Codexin',
 	                'params' => array(
 
-
 	                ) //End params array()..
 
 	            ),  // End of elemnt cx_tem
@@ -444,6 +443,121 @@ function codexin_shortcode() {
 	                ) //End params array()..
 
 	            ),  // End of elemnt cx_blog
+
+	            'cx_map' => array(
+	                'name' => esc_html__( 'Codexin Google Map', 'codexin' ),
+	                'description' => esc_html__('Codexin Google Map', 'codexin'),
+	                'icon' => 'et-hazardous',
+	                'category' => 'Codexin',
+	                'params' => array(
+	                	
+
+	                ) //End params array()..
+
+	            ),  // End of elemnt cx_blog....
+
+	            'cx_contact_form' => array(
+	                'name' => esc_html__( 'Codexin Contact Form', 'codexin' ),
+	                'description' => esc_html__('Codexin Contact From', 'codexin'),
+	                'icon' => 'et-hazardous',
+	                'category' => 'Codexin',
+	                'params' => array(
+	                	array(
+	                        'name' 			=> 'contact_title',
+	                        'label' 		=> esc_html__( 'Enter Title ', 'codexin' ),
+	                        'type' 			=> 'text',
+	                        'value'			=> esc_html__( 'Get In touch', 'codexin' ),
+	                        'admin_label' 	=> false,
+	                    ),
+
+	                    array(
+	                        'name' 			=> 'show_form_id',
+	                        'label' 		=> esc_html__( 'Select Form ', 'codexin' ),
+	                        'type' 			=> 'select',
+	                        'value'			=> esc_html__( 'Select Your Contact Form Here', 'codexin' ),
+	                        'options'		=> array(
+								'4'	=> 'Contact Form - 1',
+								'5'	=> 'Contact Form - 2',
+								'6'	=> 'Contact Form - 3',
+							),
+							'value'			=> '1',
+	                        'admin_label' 	=> false,
+	                    ),
+
+	                    array(
+	                        'name' 			=> 'description_toggle',
+	                        'label' 		=> esc_html__( 'Enable Description Field? ', 'codexin' ),
+	                        'type' 			=> 'toggle',
+	                        'admin_label' 	=> false,
+	                    ),
+
+	                    array(
+	                        'name' 			=> 'contact_desc',
+	                        'label' 		=> esc_html__( 'Enter Description', 'codexin' ),
+	                        'type' 			=> 'textarea',
+							'relation' 		=> array(
+							        'parent'    => 'description_toggle',
+							        'show_when' => 'yes',
+							    ),
+	                        'admin_label' 	=> false,
+	                    )
+
+	                ) //End params array()..
+
+	            ),  // End of elemnt cx_contact_form...
+
+
+	            'cx_social_media_share' => array(
+	                'name' => esc_html__( 'Codexin Sopcial Media', 'codexin' ),
+	                'description' => esc_html__('Codexin Social Media', 'codexin'),
+	                'icon' => 'et-hazardous',
+	                'category' => 'Codexin',
+	                'params' => array(
+	                	array(
+	                        'name' 			=> 'fb',
+	                        'label' 		=> esc_html__( 'Face Book Link ', 'codexin' ),
+	                        'type' 			=> 'text',
+	                        'description'	=> esc_html__( 'Enter Your Face-Book URL Here', 'codexin' ),
+	                        'admin_label' 	=> false,
+	                    ),
+
+	                    array(
+	                        'name' 			=> 'tw',
+	                        'label' 		=> esc_html__( 'Twitter Link ', 'codexin' ),
+	                        'type' 			=> 'text',
+	                        'description'	=> esc_html__( 'Enter Your Twitter URL Here', 'codexin' ),
+	                        'admin_label' 	=> false,
+	                    ),
+
+	                    array(
+	                        'name' 			=> 'ld',
+	                        'label' 		=> esc_html__( 'Linkedin Link ', 'codexin' ),
+	                        'type' 			=> 'text',
+	                        'description'	=> esc_html__( 'Enter Your Linkedin URL Here', 'codexin' ),
+	                        'admin_label' 	=> false,
+	                    ),
+
+	                    array(
+	                        'name' 			=> 'ig',
+	                        'label' 		=> esc_html__( 'Instagram Link ', 'codexin' ),
+	                        'type' 			=> 'text',
+	                        'description'	=> esc_html__( 'Enter Your Instagram URL Here', 'codexin' ),
+	                        'admin_label' 	=> false,
+	                    ),
+
+	                    array(
+	                        'name' 			=> 'be',
+	                        'label' 		=> esc_html__( 'Behance Link ', 'codexin' ),
+	                        'type' 			=> 'text',
+	                        'description'	=> esc_html__( 'Enter Your Behance URL Here', 'codexin' ),
+	                        'admin_label' 	=> false,
+	                    ),
+
+	                    
+
+	                ) //End params array()..
+
+	            ),  // End of elemnt cx_social_media_share...
 
 
 
