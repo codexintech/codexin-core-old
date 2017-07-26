@@ -12,7 +12,7 @@ function codexin_shortcodes() {
 		'cx_information_box',
 		'cx_events_box',
 		'cx_testimonial',
-		'cx_team',
+		'cx_team'
 
 	);
 
@@ -535,7 +535,3 @@ function cx_team_shortcode( $atts, $content = null ) {
 		return $result;
 
 } //End cx_team
-
-
-
-

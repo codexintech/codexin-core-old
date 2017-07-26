@@ -38,13 +38,13 @@ function codexin_shortcode() {
 	                    ),
 
 	                    array(
-	                        'name' 			=> 'description',
-	                        'label' 		=> esc_html__( 'Enter Description', 'codexin' ),
-	                        'type' 			=> 'textarea',
-							'relation' 		=> array(
-							        'parent'    => 'description_toggle',
-							        'show_when' => 'yes',
-							    ),
+	                        'name' 				=> 'description',
+	                        'label' 			=> esc_html__( 'Enter Description', 'codexin' ),
+	                        'type' 				=> 'textarea',
+													'relation' 		=> array(
+													        'parent'    => 'description_toggle',
+													        'show_when' => 'yes',
+													    ),
 	                        'admin_label' 	=> false,
 	                    )
 
@@ -393,8 +393,6 @@ function codexin_shortcode() {
 	                ) //End params array()..
 
 	            ),  // End of elemnt cx_tem
-
-
 
 	        ) //End add map array().....
 
