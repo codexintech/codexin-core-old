@@ -394,8 +394,6 @@ function codexin_shortcode() {
 
 	            ),  // End of elemnt cx_tem
 
-<<<<<<< HEAD
-=======
 
 	            'cx_portfolio' => array(
 	                'name' => esc_html__( 'Codexin Portfolio', 'codexin' ),
@@ -448,8 +446,6 @@ function codexin_shortcode() {
 	            ),  // End of elemnt cx_blog
 
 
-
->>>>>>> 63a1c819334e87f6c1cbf6970af24de297f51a17
 	        ) //End add map array().....
 
 	    ); // End add map
