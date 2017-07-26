@@ -376,11 +376,11 @@ function codexin_shortcode() {
 	                'category' => 'Codexin',
 	                'params' => array(
 	                	
-	                	
+
 	                ) //End params array()..
 
 	            ),  // End of elemnt cx_testimonial
-	            
+
 
 	            'cx_team' => array(
 	                'name' => esc_html__( 'Codexin Team Section', 'codexin' ),
@@ -394,6 +394,62 @@ function codexin_shortcode() {
 
 	            ),  // End of elemnt cx_tem
 
+<<<<<<< HEAD
+=======
+
+	            'cx_portfolio' => array(
+	                'name' => esc_html__( 'Codexin Portfolio', 'codexin' ),
+	                'description' => esc_html__('Portfolio Section', 'codexin'),
+	                'icon' => 'et-hazardous',
+	                'category' => 'Codexin',
+	                'params' => array(
+
+
+	                ) //End params array()..
+
+	            ),  // End of elemnt cx_tem
+
+
+	            'cx_client' => array(
+	                'name' => esc_html__( 'Codexin Clients', 'codexin' ),
+	                'description' => esc_html__('Clients Section', 'codexin'),
+	                'icon' => 'et-hazardous',
+	                'category' => 'Codexin',
+	                'params' => array(
+
+
+	                ) //End params array()..
+
+	            ),  // End of elemnt cx_client
+
+
+	            'cx_happy_client_testimonial' => array(
+	                'name' => esc_html__( 'Codexin Clients Testimonial', 'codexin' ),
+	                'description' => esc_html__('Happy Clients Testimonial', 'codexin'),
+	                'icon' => 'et-hazardous',
+	                'category' => 'Codexin',
+	                'params' => array(
+
+
+	                ) //End params array()..
+
+	            ),  // End of elemnt cx_happy_client_testimonial
+
+	            'cx_blog' => array(
+	                'name' => esc_html__( 'Codexin Blog', 'codexin' ),
+	                'description' => esc_html__('Codexin Blog', 'codexin'),
+	                'icon' => 'et-hazardous',
+	                'category' => 'Codexin',
+	                'params' => array(
+
+
+	                ) //End params array()..
+
+	            ),  // End of elemnt cx_blog
+
+
+
+>>>>>>> 63a1c819334e87f6c1cbf6970af24de297f51a17
 	        ) //End add map array().....
 
 	    ); // End add map

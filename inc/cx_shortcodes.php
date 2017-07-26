@@ -12,7 +12,12 @@ function codexin_shortcodes() {
 		'cx_information_box',
 		'cx_events_box',
 		'cx_testimonial',
-		'cx_team'
+		'cx_team',
+		'cx_portfolio',
+		'cx_client',
+		'cx_client',
+		'cx_happy_client_testimonial',
+		'cx_blog'
 
 	);
 
@@ -384,7 +389,9 @@ function cx_testimonial_shortcode( $atts, $content = null ) {
 											//start new query..
 			 								$args = array(
 			 									'post_type'		 => 'testimonial',
-			 									'posts_per_page' => -1,
+			 									'order'			 => 'date',
+			 									'orderby'		 => 'DESC',
+			 									'posts_per_page' => 2,
 			 									);
 
 			 								$data = new WP_Query( $args );
@@ -529,9 +536,304 @@ function cx_team_shortcode( $atts, $content = null ) {
 				</div><!--/.row-->
 			</div><!--/#container-->
 		</section>
+		<div class="clearfix"></div>
 
 		<?php
 		$result .= ob_get_clean();
 		return $result;
 
 } //End cx_team
+
+
+
+/*  
+* 
+*  Codexin Portfolio Shortcode
+*
+*/
+function cx_portfolio_shortcode( $atts, $content = null ) {
+	   extract(shortcode_atts(array(
+	   		'img_alt'	=> 'Portfolio Image',
+	   ), $atts));
+
+	   $result = '';
+
+	   ob_start(); 
+		?>
+		
+		<section id="portfolio" class="portfolios">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="portfolio-filter">
+							<ul class="list-inline">
+								<li class="active" data-filter="*">All</li>
+								<?php 
+								$taxonomy = 'portfolio-category';
+								$taxonomies = get_terms($taxonomy); 
+								foreach ( $taxonomies as $tax ) {
+									echo '<li data-filter=".' .strtolower($tax->slug) .'" >' . $tax->name . '</li>';
+
+								}
+								?>
+							</ul>
+						</div><!--/.portfolio-filter-->
+					</div><!--/.col-xs-12-->
+				</div> <!-- end of row -->
+			</div> <!-- end of container -->
+
+			<div class="portfolio-wrapper">
+			<?php 
+				//start wp query..
+				$args = array(
+					'post_type'			=> 'portfolio',
+					'orderby'			=> 'data',
+					'order'				=> 'DESC',
+					'posts_per_page'	=> -1
+					);
+				$data = new WP_Query( $args );
+				//Check post
+				if( $data->have_posts() ) :
+					//startloop here..
+					while( $data->have_posts() ) : $data->the_post();		
+
+						$id =  $post->ID;  
+
+						$term_list = wp_get_post_terms( get_the_ID(), 'portfolio-category' ); 
+			 	?>
+						<div class="portfolio <?php foreach ($term_list as $sterm) { echo $sterm->slug.' '; } ?>">
+							<img src="<?php echo esc_url( the_post_thumbnail_url( 'portfolio-mini-image' ) ); ?>" alt="<?php echo esc_attr( $img_alt ); ?>">
+							<a href="<?php echo esc_url( the_post_thumbnail_url( 'full' ) ); ?>" class="img-pop-up">
+								<div class="image-mask">
+									<div class="image-content">
+										<img src="<?php echo get_template_directory_uri(); ?>/assets/images/portfolio/hover-icon.png" alt="">
+										<h3><?php echo esc_html( the_title() ); ?></h3>
+										<p>
+											<?php foreach ( $term_list as $sterm ) { echo $sterm->name . " "; } ?>
+										</p>
+									</div>
+								</div>
+							</a>
+						</div>
+
+				<?php 
+						endwhile;
+					endif;
+					wp_reset_postdata();
+				 ?>
+
+			</div> <!-- end of portfolio-wrapper -->
+		</section> <!-- end of portfolio -->
+
+		<?php
+		$result .= ob_get_clean();
+		return $result;
+
+} //End cx_portfolio
+
+
+
+/*  
+* 
+*  Codexin Client Shortcode
+*
+*/
+function cx_client_shortcode( $atts, $content = null ) {
+	   extract(shortcode_atts(array(
+	   		'img_alt'	=> 'Portfolio Image',
+	   ), $atts));
+
+	   $result = '';
+
+	   ob_start(); 
+		?>
+		<div id="clients" class="clients">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12">
+						<div id="client-carousel" class="owl-carousel">
+							<?php 
+								//start wp query..
+								$args = array(
+									'post_type'			=> 'clients',
+									'orderby'			=> 'data',
+									'order'				=> 'DESC',
+									'posts_per_page'	=> -1
+									);
+								$data = new WP_Query( $args );
+								//Check post
+								if( $data->have_posts() ) :
+									//startloop here..
+									while( $data->have_posts() ) : $data->the_post();
+										$client_url = rwmb_meta( 'reveal_clients_surl', 'type=text' );
+								?>
+											<div class="item">
+												<a href="<?php if( ! empty( $client_url ) ) : echo esc_url( $client_url ); endif; ?>"><img src="<?php echo esc_url( the_post_thumbnail_url( 'full' ) ); ?>" alt="<?php echo esc_attr( $img_alt ); ?>"/></a>
+											</div>
+
+								<?php
+										endwhile;
+									endif;
+									wp_reset_postdata();
+								 ?>			
+
+						</div> <!--/#client-carousel-->				
+					</div> <!-- end of col -->
+				</div> <!-- end of row -->
+			</div> <!-- end of container -->
+		</div> <!-- end of clients -->
+
+		<?php
+		$result .= ob_get_clean();
+		return $result;
+
+} //End cx_client
+
+
+
+
+/*  
+* 
+*  Codexin Happy Client Testimonial Shortcode
+*
+*/
+function cx_happy_client_testimonial_shortcode( $atts, $content = null ) {
+	   extract(shortcode_atts(array(
+	   		'img_alt'	=> 'Image',
+	   ), $atts));
+
+	   $result = '';
+
+	   ob_start(); 
+		?>
+		<section id="testimonials" class="testimonials animated">
+			<div class="container">
+				<div class="row">
+					<?php 
+					//start new query..
+					$args = array(
+						'post_type'		 => 'testimonial',
+						'order'			 => 'date',
+						'orderby'		 => 'DESC',
+						'posts_per_page' => 4,
+						);
+
+					$data = new WP_Query( $args );
+					if( $data->have_posts() ) :
+						//Start loop here...
+						while( $data->have_posts() ) : $data->the_post();
+
+					?>
+						<div class="col-sm-6 quote-wrapper">
+							<div class="media">
+								<div class="media-left">
+									<img class="media-object img-circle" src="<?php echo esc_url( the_post_thumbnail_url( 'testimonial-mini-image' ) ); ?>" alt="<?php echo esc_attr( $img_alt ); ?>">
+								</div>
+								<div class="media-body">
+									<h3 class="media-heading">
+										<?php 
+											$name = rwmb_meta( 'reveal_author_name', 'type=text' ); 
+											echo esc_html( $name );
+										?>
+									</h3>
+									<p class="designation">
+										<?php 
+											$desig = rwmb_meta( 'reveal_author_desig', 'type=text' ); 
+											echo esc_html( $desig );
+										?>
+									</p>
+									<p> <?php printf('%s', get_the_excerpt() ); ?> </p>
+								</div>
+							</div>
+						</div> <!--/.quote-wrapper -->
+
+					<?php 
+							endwhile;
+						endif;
+						wp_reset_postdata();
+					 ?>
+
+				</div><!--/.row -->
+			</div><!--/.container -->
+		</section> <!-- end of testimonials -->
+
+		<?php
+		$result .= ob_get_clean();
+		return $result;
+
+} //End cx_happy_client
+
+
+
+/*  
+* 
+*  Codexin Blog Shortcode
+*
+*/
+function cx_blog_shortcode( $atts, $content = null ) {
+	   extract(shortcode_atts(array(
+	   		'img_alt'	=> 'Image',
+	   ), $atts));
+
+	   $result = '';
+
+	   ob_start(); 
+		?>
+		<section id="blog" class="blog">
+			<div class="container">
+				<div class="row">
+
+					<?php 
+					//start query..
+					$args = array(
+						'post_type'			=> 'post',
+						'order'				=> 'date',
+						'orderby'			=> 'DESC',
+						'posts_per_page'	=> 3
+						);
+
+					$data = new WP_Query( $args );
+
+						if( $data->have_posts() ) :
+							//Srat loop here..
+							while( $data->have_posts() ) : $data->the_post();
+					 ?>
+
+						<div class="col-sm-4">
+							<div class="blog-wrapper">
+								<div class="img-thumb">
+									<div class="img-wrapper"><img src="<?php echo esc_url( the_post_thumbnail_url( 'blog-mini-image' ) ); ?>" alt="<?php echo esc_attr( $img_alt ); ?>" class="img-responsive"></div>
+									<div class="meta">
+										<p><?php the_time( 'd' ); ?></p>
+										<p><?php the_time( 'M' ); ?></p>
+									</div>
+								</div>
+
+								<div class="blog-content">
+									<p class="blog-title"><?php echo esc_html( get_the_title() ); ?></p>
+									<p> <?php echo esc_html( wp_trim_words( get_the_excerpt(), 16 ) ); ?> </p>
+									<a href="<?php echo esc_url( get_the_permalink() ); ?>">Read More</a>
+								</div>
+
+								<div class="blog-info">
+									<span><i class="fa fa-eye"></i> <i>542</i></span>
+									<span><i class="fa fa-comments"></i> <i><?php comments_number(); ?></i></span>
+								</div>
+							</div><!--/.blog-wrapper -->
+						</div> <!-- end of col -->
+					<?php
+						endwhile;
+					endif;
+					?>
+				</div> <!-- end of row -->
+			</div> <!-- end of container -->
+		</section> <!-- end of blog -->
+
+		<div class="clearfix"></div>
+
+		<?php
+		$result .= ob_get_clean();
+		return $result;
+
+} //End cx_blog
+

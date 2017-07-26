@@ -351,7 +351,7 @@
 *************************************/
 #team {
     padding-bottom: 0;
-    margin-bottom: 80px;
+    margin-bottom: 0;
     margin-top: 0;
 }
 
@@ -421,6 +421,130 @@
 }
 
 
+
+/**************************************
+ cx_portfolio
+**************************************/
+
+#portfolio {
+    overflow: hidden;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+.portfolio-filter ul {
+    text-align: center;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.portfolio-filter ul li {
+    cursor: pointer;
+    text-transform: uppercase;
+    position: relative;
+    padding: 7px 15px;
+    letter-spacing: 1px;
+    margin: 2px;
+}
+
+
+.home .portfolio {
+    width: 25%;
+    position: relative;
+    overflow: hidden;
+}
+
+
+.portfolio img {
+    width: 100%;
+    display: block;
+}
+
+.portfolio .image-mask {
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -ms-transition: all .3s;
+    -o-transition: all .3s;
+    transition: all .3s;
+}
+
+.image-content {
+    position: relative;
+    top: 34%;
+    text-align: center;
+}
+
+.image-content img {
+    display: block;
+    margin: 0 auto;
+    width: 30px;
+    height: 30px;
+}
+
+.image-content h3 {
+    text-transform: uppercase;
+    font-size: 20px;
+    margin-bottom: 0;
+    margin-top: 20px;
+    color: #fff;
+}
+
+.portfolio:hover .image-mask {
+    opacity: 1;
+}
+
+#clients .clients {
+    padding-top: 80px;
+    padding-bottom: 80px;
+    background: #fff;
+}
+
+/******************************************
+
+******************************************/
+#testimonials {
+    /*background: url('images/happyclients/happy-quotes.jpg') no-repeat scroll;*/
+    background-position: center;
+    background-size: cover;
+    margin-top: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.testimonials .media-left {
+    padding-right: 25px;
+}
+
+.testimonials .media-heading {
+    text-transform: uppercase; 
+}
+
+.testimonials .designation {
+    font-style: italic;
+    position: relative;
+}
+
+.testimonials .designation::after {
+    content: "";
+    width: 70px;
+    height: 3px;
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.quote-wrapper {
+    margin-top: 35px;
+    margin-bottom: 35px;
+}
 
 
 

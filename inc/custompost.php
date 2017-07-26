@@ -131,6 +131,7 @@
  										'title',
  										'editor',
  										'excerpt',
+ 										'thumbnail'
  									),
  			'taxonomies'			=> array(''),
  			'menu_position'			=> 11,
