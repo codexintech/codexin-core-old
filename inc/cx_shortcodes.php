@@ -62,21 +62,28 @@ function cx_section_heading_shortcode(  $atts, $content = null) {
 	   			'title' 				=> '',
 	   			'subtitle'	 			=> '',
 	   			'description_toggle' 	=> '',
-	   			'description'  			=> ''
+	   			'description'  			=> '',
+	   			'class'		  			=> '',
 	   ), $atts));
+
+	   $master_class = apply_filters( 'kc-el-class', $atts );
+	   $master_class[] = 'section-heading';
+	   $classes = array( 'cx-section-heading' );
+	   (!empty($class)) ? $classes[] = $class : '';
 
 	   $result = '';
 	   ob_start(); ?>
-
-				<div class="text-center">
+			<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
+				<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
 					<h3 class="primary-title"><?php echo esc_html( $title ); ?></h3>
 					<h2 class="secondary-title"><?php echo esc_html( $subtitle ); ?></h2>
 					<?php if( $description_toggle == 'yes' ): ?>
-					<div class="col-md-10 col-md-offset-1">
+					<div class="col-md-10 col-md-offset-1 cx-description">
 						<p><?php printf('%s', $description ); ?></p>		
 					</div>
 					<?php endif; ?>
 				</div>
+			</div>
 
 		<?php
 		$result .= ob_get_clean();

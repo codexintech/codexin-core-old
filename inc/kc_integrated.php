@@ -15,38 +15,119 @@ function codexin_shortcode() {
 	                'icon' => 'kc-icon-title',
 	                'category' => 'Codexin',
 	                'params' => array(
+						'general' => array(
 
-	                    array(
-	                        'name' 			=> 'title',
-	                        'label' 		=> esc_html__( 'Enter Primary Title', 'codexin' ),
-	                        'type' 			=> 'text',
-	                        'admin_label' 	=> false,
-	                    ),
+		                    array(
+		                        'name' 			=> 'title',
+		                        'label' 		=> esc_html__( 'Enter Title', 'codexin' ),
+		                        'type' 			=> 'text',
+		                        'admin_label' 	=> false,
+		                    ),
 
-	                    array(
-	                        'name' 			=> 'subtitle',
-	                        'label' 		=> esc_html__( 'Enter Secondary Title', 'codexin' ),
-	                        'type' 			=> 'text',
-	                        'admin_label' 	=> false,
-	                    ),
+		                    array(
+		                        'name' 			=> 'subtitle',
+		                        'label' 		=> esc_html__( 'Enter Subtitle', 'codexin' ),
+		                        'type' 			=> 'text',
+		                        'admin_label' 	=> false,
+		                    ),
 
-	                    array(
-	                        'name' 			=> 'description_toggle',
-	                        'label' 		=> esc_html__( 'Enable Description Field? ', 'codexin' ),
-	                        'type' 			=> 'toggle',
-	                        'admin_label' 	=> false,
-	                    ),
+		                    array(
+		                        'name' 			=> 'description_toggle',
+		                        'label' 		=> esc_html__( 'Enable Description Field? ', 'codexin' ),
+		                        'type' 			=> 'toggle',
+		                        'admin_label' 	=> false,
+		                    ),
 
-	                    array(
-	                        'name' 				=> 'description',
-	                        'label' 			=> esc_html__( 'Enter Description', 'codexin' ),
-	                        'type' 				=> 'textarea',
-													'relation' 		=> array(
-													        'parent'    => 'description_toggle',
-													        'show_when' => 'yes',
-													    ),
-	                        'admin_label' 	=> false,
-	                    )
+		                    array(
+		                        'name' 			=> 'description',
+		                        'label' 		=> esc_html__( 'Enter Description', 'codexin' ),
+		                        'type' 			=> 'textarea',
+								'relation' 		=> array(
+								        'parent'    => 'description_toggle',
+								        'show_when' => 'yes',
+								    ),
+		                        'admin_label' 	=> false,
+		                    ),
+
+							array(
+								'name'	=> 'class',
+								'label' => __(' Extra Class', 'kingcomposer'),
+								'type'	=> 'text'
+							),
+						),
+
+						'styling' => array(
+							array(
+								'name'    => 'codexin_css',
+								'type'    => 'css',
+								'options' => array(
+									array(
+										"screens" => "any,1199,991,767,479",
+										'Title' => array(
+											array('property' => 'color', 'label' => 'Label Color', 'selector' => '.primary-title'),
+											array('property' => 'font-family', 'label' => 'Font Family', 'selector' => '.primary-title'),
+											array('property' => 'font-size', 'label' => 'Font Size', 'selector' => '.primary-title'),
+											array('property' => 'line-height', 'label' => 'Line Height', 'selector' => '.primary-title'),
+											array('property' => 'font-weight', 'label' => 'Font Weight', 'selector' => '.primary-title'),
+											array('property' => 'text-align', 'label' => 'Text Align', 'selector' => '.primary-title'),
+											array('property' => 'text-transform', 'label' => 'Text Transform', 'selector' => '.primary-title'),
+											array('property' => 'padding', 'label' => 'Padding', 'selector' => '.primary-title'),
+											array('property' => 'margin', 'label' => 'Margin', 'selector' => '.primary-title')
+										),
+
+										'Subtitle' => array(
+											array('property' => 'color', 'label' => 'Label Color', 'selector' => '.secondary-title'),
+											array('property' => 'font-family', 'label' => 'Font Family', 'selector' => '.secondary-title'),
+											array('property' => 'font-size', 'label' => 'Font Size', 'selector' => '.secondary-title'),
+											array('property' => 'line-height', 'label' => 'Line Height', 'selector' => '.secondary-title'),
+											array('property' => 'font-weight', 'label' => 'Font Weight', 'selector' => '.secondary-title'),
+											array('property' => 'text-align', 'label' => 'Text Align', 'selector' => '.secondary-title'),
+											array('property' => 'text-transform', 'label' => 'Text Transform', 'selector' => '.secondary-title'),
+											array('property' => 'padding', 'label' => 'Padding', 'selector' => '.secondary-title'),
+											array('property' => 'margin', 'label' => 'Margin', 'selector' => '.secondary-title'),
+										),
+
+										'Divider' => array(
+											array('property' => 'background', 'label' => 'Label Color', 'selector' => '.secondary-title::after'),
+											array('property' => 'width', 'label' => 'Width', 'selector' => '.secondary-title::after'),
+											array('property' => 'height', 'label' => 'Height', 'selector' => '.secondary-title::after'),
+											array('property' => 'display', 'label' => 'Display', 'selector' => '.secondary-title::after'),
+											array('property' => 'margin', 'label' => 'Margin', 'selector' => '.secondary-title::after')
+										),
+
+										'Desc' => array(
+											array('property' => 'color', 'label' => 'Label Color', 'selector' => '.cx-description'),
+											array('property' => 'font-family', 'label' => 'Font Family', 'selector' => '.cx-description'),
+											array('property' => 'font-size', 'label' => 'Font Size', 'selector' => '.cx-description'),
+											array('property' => 'line-height', 'label' => 'Line Height', 'selector' => '.cx-description'),
+											array('property' => 'font-weight', 'label' => 'Font Weight', 'selector' => '.cx-description'),
+											array('property' => 'text-align', 'label' => 'Text Align', 'selector' => '.cx-description'),
+											array('property' => 'text-transform', 'label' => 'Text Transform', 'selector' => '.cx-description'),
+											array('property' => 'padding', 'label' => 'Padding', 'selector' => '.cx-description'),
+											array('property' => 'margin', 'label' => 'Margin', 'selector' => '.cx-description'),
+										),
+
+										'Box'	=> array(
+											array('property' => 'background'),
+											array('property' => 'border', 'label' => 'Border'),
+											array('property' => 'display', 'label' => 'Display'),
+											array('property' => 'border-radius', 'label' => 'Border Radius'),
+											array('property' => 'box-shadow', 'label' => 'Box Shadow', 'selector' => '+.section-heading'),
+											array('property' => 'margin', 'label' => 'Margin'),
+											array('property' => 'padding', 'label' => 'Padding'),
+										)
+										
+									)
+								)
+							)
+						),
+
+						'animate' => array(
+							array(
+								'name'    => 'animate',
+								'type'    => 'animate'
+							)
+						),
 
 	                )
 	            ),  // End of elemnt cx_section_heading 

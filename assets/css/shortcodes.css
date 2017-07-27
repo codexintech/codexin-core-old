@@ -5,11 +5,13 @@
 .primary-title {
     margin-top: 0;
     margin-bottom: 5px;
+    text-align: center;
 }
 
 .secondary-title {
     margin-bottom: 35px;
     text-transform: uppercase;
+    text-align: center;
 }
 
 .secondary-title::after {
