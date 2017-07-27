@@ -990,4 +990,7 @@ function cx_social_media_share_shortcode( $atts, $content = null ) {
 
 } //End cx_social_media_share
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 00aa1067a68577378358fb1569d8db9c5f18de04
