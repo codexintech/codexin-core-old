@@ -289,13 +289,13 @@
 }
 
 .events-description .panel-title a::after {
-    content: "";
+    content: "\f078";
     position: absolute;
     right: 1px;
 }
 
 .events-description .panel-title a.collapsed::after {
-    content: "";
+    content: "\f077";
     position: absolute;
     right: 0;
 }
