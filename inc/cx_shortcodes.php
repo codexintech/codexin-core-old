@@ -840,7 +840,6 @@ function cx_blog_shortcode( $atts, $content = null ) {
 
 } //End cx_blog
 
-<<<<<<< HEAD
 
 
 /*  
@@ -887,14 +886,6 @@ function cx_map_shortcode( $atts, $content = null ) {
 	   echo $codeopt;
 
 	   ?>
-
-		<script type="text/javascript">
-			var codexin_lat = "<?= $latitude ?>"; 
-			var codexin_long = "<?= $longtitude ?>"; 
-			var codexin_marker = "<?= $gmap_marker['url'] ?>"; 
-			var codexin_m_zoom = Number ("<?= $c_zoom ?>"); 
-
-		</script>
 		
 		<div id="map">
 			<div id="gmap-wrap">
@@ -1000,9 +991,3 @@ function cx_social_media_share_shortcode( $atts, $content = null ) {
 } //End cx_social_media_share
 
 
-
-
-
-
-=======
->>>>>>> 71db0cb1762ac6b8ae41015f8a482cfce673edcf

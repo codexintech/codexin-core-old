@@ -118,6 +118,7 @@ function codexin_shortcode() {
 	                	'scripts' => array(
 	                		'waypoints-js-script' => CODEXIN_CORE_ASSET_DIR . '/js/waypoints.min.js',
 	                		'counterup-js-script' => CODEXIN_CORE_ASSET_DIR . '/js/jquery.counterup.min.js',         	            
+	                		'counter-js-script' => CODEXIN_CORE_ASSET_DIR . '/js/shortcode-js/cx_animated_counter.js',         	            
  	            	    ),
 
 	                ), //End assets
@@ -400,7 +401,20 @@ function codexin_shortcode() {
 	                'description' => esc_html__('Portfolio Section', 'codexin'),
 	                'icon' => 'et-hazardous',
 	                'category' => 'Codexin',
+	                //Only load assets when using this element
+	                'assets' => array(
+	                	'scripts' => array(
+	                		'imagesloaded-js' => CODEXIN_CORE_ASSET_DIR . '/js/imagesloaded.pkgd.min.js',
+	                		'isotope-js-script' => CODEXIN_CORE_ASSET_DIR . '/js/isotope.pkgd.min.js',
+	                		'magnific-js-script' => CODEXIN_CORE_ASSET_DIR . '/js/jquery.magnific-popup.min.js',
+	                		'portfolio-isotope-js' => CODEXIN_CORE_ASSET_DIR . '/js/shortcode-js/cx_portfolio-isotope.js',      
+	                		'portfolio-popup-js' => CODEXIN_CORE_ASSET_DIR . '/js/shortcode-js/cx_portfolio-popup.js',         	          
+ 	            	    ),
+
+	                ), //End assets
+
 	                'params' => array(
+
 
 	                ) //End params array()..
 
@@ -412,6 +426,14 @@ function codexin_shortcode() {
 	                'description' => esc_html__('Clients Section', 'codexin'),
 	                'icon' => 'et-hazardous',
 	                'category' => 'Codexin',
+	                //Only load assets when using this element
+	                'assets' => array(
+	                	'scripts' => array(
+	                		'owl-carousel-js' => CODEXIN_CORE_ASSET_DIR . '/js/owl.carousel.min.js',
+	                		'client-carousel-script' => CODEXIN_CORE_ASSET_DIR . '/js/shortcode-js/cx_client-carousel.js',
+	                	),
+
+	                ), //End assets
 	                'params' => array(
 
 
