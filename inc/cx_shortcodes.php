@@ -106,37 +106,57 @@ function cx_section_heading_shortcode(  $atts, $content = null) {
 
 function cx_about_box_shortcode(  $atts, $content = null) {
 	   extract(shortcode_atts(array(
-	   			'img'	 			=> '',
+	   			'image'	 			=> '',
 	   			'img_alt'		 	=> '',
-	   			'hover_text'  		=> '',
+	   			'hover'  		=> '',
 	   			'icon_toggle'  		=> '',
+	   			'link_toggle'  		=> '',
 	   			'hover_icon'  		=> '',
-	   			'href'		  		=> ''
+	   			'href'		  		=> '',
+	   			'img_action'  		=> '',
 		), $atts));
 
 		$result = '';
 
-		$retrive_img_url = retrieve_img_src( $img, 'about-mini-image' );
+		$retrive_img_url = retrieve_img_src( $image, 'about-mini-image' );
+		$ret_full_img_url = retrieve_img_src( $image, 'full' );
 
 		$retrieve_link = retrieve_url( $href );
 
+		$master_class = apply_filters( 'kc-el-class', $atts );
+		$master_class[] = 'about-box';
+		$classes = array( 'img-thumb' );
+		(!empty($class)) ? $classes[] = $class : '';
+
 	   ob_start(); ?>
 
-				<div class="img-thumb">
+			<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
+				<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
+					<?php if ( $img_action == 'open_custom_link' ): ?>
 					<a href="<?php echo esc_url($retrieve_link[0]); ?>" title="<?php echo esc_attr($retrieve_link[1]); ?>" target="<?php echo esc_attr($retrieve_link[2]); ?>">
+					<?php elseif ( $img_action == 'img_pop' ): ?>
+					<a href="<?php echo $ret_full_img_url; ?>" class="event-image-popup">
+					<?php else: ?>
+					<div class="content-wrapper">
+					<?php endif; ?>
 						<img src="<?php echo $retrive_img_url; ?>" alt="<?php echo $img_alt; ?>" />
 						<div class="single-content-wrapper">
 							<div class="single-content">
 
-								<?php if( $icon_toggle == 'yes' ): ?>
+								<?php if( $icon_toggle ): ?>
 								<i class="<?php echo esc_attr( $hover_icon ); ?>"></i>
 								<?php endif; ?>
 								
-								<p><?php echo esc_html( $hover_text ); ?></p>
+								<p><?php echo esc_html( $hover ); ?></p>
 							</div>
 						</div>
+					<?php if ( $img_action == 'open_custom_link' || $img_action == 'img_pop' ): ?>
 					</a>
+					<?php else: ?>
+					</div>
+					<?php endif; ?>
 				</div>
+			</div>
 
 		<?php
 		$result .= ob_get_clean();
