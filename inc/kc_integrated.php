@@ -197,6 +197,18 @@ function codexin_shortcode() {
 								'value'    		=> '#',
 								'description' 	=> esc_html__(' The URL which this box assigned to. You can select page/post or other post type', 'codexin')
 							),
+
+							array(
+								'name'			=> 'class',
+								'label' 		=> __(' Extra Class', 'codexin'),
+								'type'			=> 'text'
+							),
+
+							array(
+								'name'			=> 'img_class',
+								'label' 		=> __(' Extra Image Class', 'codexin'),
+								'type'			=> 'text'
+							),
 						),
 
 						'styling' => array(

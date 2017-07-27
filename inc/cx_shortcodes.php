@@ -114,6 +114,8 @@ function cx_about_box_shortcode(  $atts, $content = null) {
 	   			'hover_icon'  		=> '',
 	   			'href'		  		=> '',
 	   			'img_action'  		=> '',
+	   			'class'				=> '',
+	   			'img_class'			=> ''
 		), $atts));
 
 		$result = '';
@@ -125,8 +127,12 @@ function cx_about_box_shortcode(  $atts, $content = null) {
 
 		$master_class = apply_filters( 'kc-el-class', $atts );
 		$master_class[] = 'about-box';
+
 		$classes = array( 'img-thumb' );
+		$img_classes = array();
+		
 		(!empty($class)) ? $classes[] = $class : '';
+		(!empty($img_class)) ? $img_classes[] = $img_class : '';
 
 	   ob_start(); ?>
 
@@ -139,7 +145,7 @@ function cx_about_box_shortcode(  $atts, $content = null) {
 					<?php else: ?>
 					<div class="content-wrapper">
 					<?php endif; ?>
-						<img src="<?php echo $retrive_img_url; ?>" alt="<?php echo $img_alt; ?>" />
+						<img src="<?php echo $retrive_img_url; ?>" alt="<?php echo $img_alt; ?>" class="<?php echo esc_attr( implode( ' ', $img_classes ) ); ?>" />
 						<div class="single-content-wrapper">
 							<div class="single-content">
 
