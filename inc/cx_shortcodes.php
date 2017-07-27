@@ -17,7 +17,10 @@ function codexin_shortcodes() {
 		'cx_client',
 		'cx_client',
 		'cx_happy_client_testimonial',
-		'cx_blog'
+		'cx_blog',
+		'cx_map',
+		'cx_contact_form',
+		'cx_social_media_share',
 
 	);
 
@@ -779,7 +782,7 @@ function cx_blog_shortcode( $atts, $content = null ) {
 
 	   ob_start(); 
 		?>
-		<section id="blog" class="blog">
+		<section id="blog" class="blog blog-shortcode">
 			<div class="container">
 				<div class="row">
 
@@ -817,7 +820,7 @@ function cx_blog_shortcode( $atts, $content = null ) {
 
 								<div class="blog-info">
 									<span><i class="fa fa-eye"></i> <i>542</i></span>
-									<span><i class="fa fa-comments"></i> <i><?php comments_number(); ?></i></span>
+									<span><i class="fa fa-comments"></i> <i><?php comments_number('No Comments', '1', '%'); ?></i></span>
 								</div>
 							</div><!--/.blog-wrapper -->
 						</div> <!-- end of col -->
@@ -836,4 +839,155 @@ function cx_blog_shortcode( $atts, $content = null ) {
 		return $result;
 
 } //End cx_blog
+
+
+
+/*  
+* 
+*  Codexin Map Shortcode
+*
+*/
+function cx_map_shortcode( $atts, $content = null ) {
+	   extract(shortcode_atts(array(
+	   		'img_alt'	=> 'Image',
+	   ), $atts));
+
+	   $result = '';
+
+	   ob_start(); 
+
+	   if(!empty(reveal_option('reveal-google-map-latitude'))):
+	   	$latitude = reveal_option('reveal-google-map-latitude');
+	   endif;
+
+	   if(!empty(reveal_option('reveal-google-map-longitude'))):
+	   	$longtitude = reveal_option('reveal-google-map-longitude');
+	   endif;
+
+	   if(!empty(reveal_option('reveal-google-map-zoom'))):
+	   	$c_zoom = reveal_option('reveal-google-map-zoom');
+	   endif;
+
+	   if(!empty(reveal_option('reveal-google-map-marker'))):
+	   	$gmap_marker = reveal_option('reveal-google-map-marker');
+	   endif;
+
+	   $codeopt = '';
+	   $codeopt .= '
+	   <script type="text/javascript">
+	   	var reveal_lat = "'. $latitude .'"; 
+	   	var reveal_long = "'. $longtitude .'"; 
+	   	var reveal_marker = "'. $gmap_marker['url'] .'"; 
+	   	var reveal_m_zoom = Number ("'. $c_zoom .'"); 
+	   </script>
+
+	   ';
+
+	   echo $codeopt;
+
+	   ?>
+		
+		<div id="map">
+			<div id="gmap-wrap">
+				<div id="gmap"> 				
+				</div>	 			
+			</div>
+		</div><!--/#map-->
+				
+
+		<?php
+		$result .= ob_get_clean();
+		return $result;
+
+} //End cx_map
+
+
+/*  
+* 
+*  Codexin Contact form Shortcode
+*
+*/
+function cx_contact_form_shortcode( $atts, $content = null ) {
+	   extract(shortcode_atts(array(
+	   		'contact_title'	=> 'Get In touch',
+	   		'show_form_id'	=> '',
+	   		'contact_desc'	=> ''
+	   ), $atts));
+
+	   $result = '';
+
+	   ob_start(); 
+	?>
+		<section id="location" class="location contact-location">
+			<div class="contact-form-wrapper">
+				<div class=" contact-form">
+					<div class="contact-intro">
+						<h3><?php echo esc_html( $contact_title ); ?></h3>
+						<p><?php printf( '%s', $contact_desc ); ?></p>
+					</div>		
+					<div class="row">
+
+						<?php echo do_shortcode( '[contact-form-7 id="'. $show_form_id .'" title="Contact form 1"]' ); ?>
+
+					</div> <!-- end of col -->
+				</div> <!-- end of row -->
+			</div> <!-- end of col -->		
+		</section>
+
+	<?php
+		$result .= ob_get_clean();
+		return $result;
+
+} //End cx_contact_form
+
+
+
+/*  
+* 
+*  Codexin Social Media Share Shortcode
+*
+*/
+function cx_social_media_share_shortcode( $atts, $content = null ) {
+	   extract(shortcode_atts(array(
+	   		'fb'	=> '',
+	   		'tw'	=> '',
+	   		'ld'	=> '',
+	   		'ig'	=> '',
+	   		'be'	=> '',
+	   ), $atts));
+
+	   $result = '';
+
+	   ob_start(); 
+	?>
+		<div class="socials">
+			<?php 
+				if( ! empty( $fb ) ) :
+			 ?>
+				<a href="<?php echo esc_url( $fb ); ?>"><i class="fa fa-facebook"></i></a>
+			<?php endif;
+				if( ! empty( $tw ) ) :
+			 ?>
+				<a href="<?php echo esc_url( $tw ); ?>"><i class="fa fa-twitter"></i></a>
+			<?php endif; 
+				if( ! empty( $ld ) ) :
+			?>
+			<a href="<?php echo esc_url( $ld ); ?>"><i class="fa fa-linkedin"></i></a>
+			<?php endif;
+				if( $ig ) :
+			 ?>
+				<a href="<?php echo esc_url( $ig ); ?>"><i class="fa fa-instagram"></i></a>
+			<?php endif;
+				if( $be ) :
+			 ?>
+				<a href="<?php echo esc_url( $be ); ?>"><i class="fa fa-behance"></i></a>
+			<?php endif; ?>
+		</div>
+
+	<?php
+		$result .= ob_get_clean();
+		return $result;
+
+} //End cx_social_media_share
+
 

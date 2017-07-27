@@ -1,5 +1,6 @@
 (function($) {
-    "use strict";
+	"use strict";
+
 
 /*--------------------------------------------------------------
 	animating the numbers for counting up for the achievement section
@@ -11,4 +12,4 @@
     });
 
 
- });
+ })(jQuery);
