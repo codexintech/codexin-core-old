@@ -40,13 +40,19 @@ function retrieve_img_src ( $image, $image_size ) {
 }
 
 
-// Custom function for retrieving page URL using kc_parse_link function
+// Custom function for retrieving page URL, title and target
 function retrieve_url ( $href ) {
 
-	$href	= ( '||' === $href ) ? '' : $href;
-	$href	= kc_parse_link($href);
-	$a_href = $href['url'];
-	return $a_href;
+	if ( !empty( $href ) ) {
+		$link_arr = explode( "|", $href );
+
+		( !empty( $link_arr[0] ) ) ? $link_url = $link_arr[0] : $link_url = '';
+		( !empty( $link_arr[1] ) ) ? $cx_link_title = $link_arr[1] : $cx_link_title = '';
+		( !empty( $link_arr[2] ) ) ? $link_target = $link_arr[2] : $link_target = '';
+
+		return array( $link_url, $cx_link_title, $link_target );
+
+	}
 
 }
 
@@ -117,7 +123,7 @@ function cx_about_box_shortcode(  $atts, $content = null) {
 	   ob_start(); ?>
 
 				<div class="img-thumb">
-					<a href="<?php echo esc_url($retrieve_link); ?>">
+					<a href="<?php echo esc_url($retrieve_link[0]); ?>" title="<?php echo esc_attr($retrieve_link[1]); ?>" target="<?php echo esc_attr($retrieve_link[2]); ?>">
 						<img src="<?php echo $retrive_img_url; ?>" alt="<?php echo $img_alt; ?>" />
 						<div class="single-content-wrapper">
 							<div class="single-content">
