@@ -9,13 +9,13 @@ function codexin_shortcode() {
 	    kc_add_map(
 	        array(
 
-	            'cx_section_heading' => array(
-	                'name' => esc_html__( 'Codexin Section Header', 'codexin' ),
-	                'description' => esc_html__('Section Header', 'codexin'),
-	                'icon' => 'kc-icon-title',
-	                'category' => 'Codexin',
-	                'params' => array(
-						'general' => array(
+	            'cx_section_heading'=> array(
+	                'name' 			=> esc_html__( 'Codexin Section Header', 'codexin' ),
+	                'description' 	=> esc_html__('Section Header', 'codexin'),
+	                'icon' 			=> 'kc-icon-title',
+	                'category' 		=> 'Codexin',
+	                'params' 		=> array(
+						'general' 	=> array(
 
 		                    array(
 		                        'name' 			=> 'title',
@@ -47,21 +47,21 @@ function codexin_shortcode() {
 		                    ),
 
 							array(
-								'name'	=> 'class',
-								'label' => __(' Extra Class', 'codexin'),
-								'type'	=> 'text'
+								'name'			=> 'class',
+								'label' 		=> __(' Extra Class', 'codexin'),
+								'type'			=> 'text'
 							),
 						),
 
-						'styling' => array(
+						'styling' 	=> array(
 							array(
-								'name'    => 'codexin_css',
-								'type'    => 'css',
+								'name'    		=> 'codexin_css',
+								'type'    		=> 'css',
 								'options' => array(
 									array(
 										"screens" => "any,1199,991,767,479",
 										'Title' => array(
-											array('property' => 'color', 'label' => 'Label Color', 'selector' => '.primary-title'),
+											array('property' => 'color', 'label' => 'Color', 'selector' => '.primary-title'),
 											array('property' => 'font-family', 'label' => 'Font Family', 'selector' => '.primary-title'),
 											array('property' => 'font-size', 'label' => 'Font Size', 'selector' => '.primary-title'),
 											array('property' => 'line-height', 'label' => 'Line Height', 'selector' => '.primary-title'),
@@ -73,7 +73,7 @@ function codexin_shortcode() {
 										),
 
 										'Subtitle' => array(
-											array('property' => 'color', 'label' => 'Label Color', 'selector' => '.secondary-title'),
+											array('property' => 'color', 'label' => 'Color', 'selector' => '.secondary-title'),
 											array('property' => 'font-family', 'label' => 'Font Family', 'selector' => '.secondary-title'),
 											array('property' => 'font-size', 'label' => 'Font Size', 'selector' => '.secondary-title'),
 											array('property' => 'line-height', 'label' => 'Line Height', 'selector' => '.secondary-title'),
@@ -85,7 +85,7 @@ function codexin_shortcode() {
 										),
 
 										'Divider' => array(
-											array('property' => 'background', 'label' => 'Label Color', 'selector' => '.secondary-title::after'),
+											array('property' => 'background', 'label' => 'Color', 'selector' => '.secondary-title::after'),
 											array('property' => 'width', 'label' => 'Width', 'selector' => '.secondary-title::after'),
 											array('property' => 'height', 'label' => 'Height', 'selector' => '.secondary-title::after'),
 											array('property' => 'display', 'label' => 'Display', 'selector' => '.secondary-title::after'),
@@ -93,7 +93,7 @@ function codexin_shortcode() {
 										),
 
 										'Desc' => array(
-											array('property' => 'color', 'label' => 'Label Color', 'selector' => '.cx-description'),
+											array('property' => 'color', 'label' => 'Color', 'selector' => '.cx-description'),
 											array('property' => 'font-family', 'label' => 'Font Family', 'selector' => '.cx-description'),
 											array('property' => 'font-size', 'label' => 'Font Size', 'selector' => '.cx-description'),
 											array('property' => 'line-height', 'label' => 'Line Height', 'selector' => '.cx-description'),
@@ -119,28 +119,28 @@ function codexin_shortcode() {
 							)
 						),
 
-						'animate' => array(
+						'animate' 	=> array(
 							array(
-								'name'    => 'animate',
-								'type'    => 'animate'
+								'name'    		=> 'animate',
+								'type'    		=> 'animate'
 							)
 						),
 
 	                )
 	            ),  // End of elemnt cx_section_heading 
 
-	            'cx_about_box' => array(
-	                'name' => esc_html__( 'Codexin About Box', 'codexin' ),
-	                'description' => esc_html__('Mini About Box', 'codexin'),
-	                'icon' => 'kc-icon-feature-box',
-	                'category' => 'Codexin',
-	                'params' => array(
-						'general' => array(
+	            'cx_about_box' 		=> array(
+	                'name' 			=> esc_html__( 'Codexin About Box', 'codexin' ),
+	                'description' 	=> esc_html__('Mini About Box', 'codexin'),
+	                'icon' 			=> 'kc-icon-feature-box',
+	                'category' 		=> 'Codexin',
+	                'params' 		=> array(
+						'general' 	=> array(
 		                    array(
-								'name'        => 'image',
-								'label'       => esc_html__(' Upload Image', 'kingcomposer'),
-								'type'        => 'attach_image',
-								'admin_label' => true,
+								'name'        	=> 'image',
+								'label'       	=> esc_html__(' Upload Image', 'kingcomposer'),
+								'type'        	=> 'attach_image',
+								'admin_label' 	=> true,
 		                    ),
 
 		                    array(
@@ -174,15 +174,15 @@ function codexin_shortcode() {
 		                    ),
 
 							array(
-								'name'    => 'img_action',
-								'label'   => esc_html__(' On click event', 'codexin'),
-								'type'    => 'select',
-								'options' => array(
+								'name'    		=> 'img_action',
+								'label'   		=> esc_html__(' On click event', 'codexin'),
+								'type'    		=> 'select',
+								'options' 		=> array(
 									''                 => esc_html__(' None', 'codexin'),
 									'img_pop'          => esc_html__(' Open Image In Lightbox', 'codexin'),
 									'open_custom_link' => esc_html__(' Open Custom Link', 'codexin')
 								),
-								'value'	  => '',
+								'value'	  		=> '',
 								'description' => esc_html__(' Select the click event when users click on the image.', 'codexin')
 							),
 
@@ -195,68 +195,56 @@ function codexin_shortcode() {
 								        'show_when' => 'open_custom_link',
 								    ),
 								'value'    		=> '#',
-								'description' => esc_html__(' The URL which this box assigned to. You can select page/post or other post type', 'codexin')
+								'description' 	=> esc_html__(' The URL which this box assigned to. You can select page/post or other post type', 'codexin')
 							),
 						),
 
 						'styling' => array(
 							array(
-								'name'    => 'codexin_css',
-								'type'    => 'css',
-								'options' => array(
+								'name'    		=> 'codexin_css',
+								'type'    		=> 'css',
+								'options' 		=> array(
 									array(
 										"screens" => "any,1199,991,767,479",
+
+										'Hover Text' => array(
+											array('property' => 'color', 'label' => 'Label Color', 'selector' => '.single-content p'),
+											array('property' => 'font-family', 'label' => 'Font Family', 'selector' => '.single-content p'),
+											array('property' => 'font-size', 'label' => 'Font Size', 'selector' => '.single-content p'),
+											array('property' => 'line-height', 'label' => 'Line Height', 'selector' => '.single-content p'),
+											array('property' => 'font-weight', 'label' => 'Font Weight', 'selector' => '.single-content p'),
+											array('property' => 'text-align', 'label' => 'Text Align', 'selector' => '.single-content p'),
+											array('property' => 'text-transform', 'label' => 'Text Transform', 'selector' => '.single-content p'),
+											array('property' => 'padding', 'label' => 'Padding', 'selector' => '.single-content p'),
+											array('property' => 'margin', 'label' => 'Margin', 'selector' => '.single-content p'),
+										),
+
 										'Icon' => array(
 											array('property' => 'color', 'label' => 'Label Color', 'selector' => '.single-content i'),
+											array('property' => 'background', 'label' => 'Label Color', 'selector' => '.single-content i'),
 											array('property' => 'font-size', 'label' => 'Font Size', 'selector' => '.single-content i'),
 											array('property' => 'display', 'label' => 'Display', 'selector' => '.single-content i'),
 											array('property' => 'text-align', 'label' => 'Text Align', 'selector' => '.single-content i'),
+											array('property' => 'width', 'label' => 'Width', 'selector' => '.single-content i'),
 											array('property' => 'padding', 'label' => 'Padding', 'selector' => '.single-content i'),
 											array('property' => 'margin', 'label' => 'Margin', 'selector' => '.single-content i')
 										),
 
-										'Subtitle' => array(
-											array('property' => 'color', 'label' => 'Label Color', 'selector' => '.secondary-title'),
-											array('property' => 'font-family', 'label' => 'Font Family', 'selector' => '.secondary-title'),
-											array('property' => 'font-size', 'label' => 'Font Size', 'selector' => '.secondary-title'),
-											array('property' => 'line-height', 'label' => 'Line Height', 'selector' => '.secondary-title'),
-											array('property' => 'font-weight', 'label' => 'Font Weight', 'selector' => '.secondary-title'),
-											array('property' => 'text-align', 'label' => 'Text Align', 'selector' => '.secondary-title'),
-											array('property' => 'text-transform', 'label' => 'Text Transform', 'selector' => '.secondary-title'),
-											array('property' => 'padding', 'label' => 'Padding', 'selector' => '.secondary-title'),
-											array('property' => 'margin', 'label' => 'Margin', 'selector' => '.secondary-title'),
-										),
-
-										'Divider' => array(
-											array('property' => 'background', 'label' => 'Label Color', 'selector' => '.secondary-title::after'),
-											array('property' => 'width', 'label' => 'Width', 'selector' => '.secondary-title::after'),
-											array('property' => 'height', 'label' => 'Height', 'selector' => '.secondary-title::after'),
-											array('property' => 'display', 'label' => 'Display', 'selector' => '.secondary-title::after'),
-											array('property' => 'margin', 'label' => 'Margin', 'selector' => '.secondary-title::after')
-										),
-
-										'Desc' => array(
-											array('property' => 'color', 'label' => 'Label Color', 'selector' => '.cx-description'),
-											array('property' => 'font-family', 'label' => 'Font Family', 'selector' => '.cx-description'),
-											array('property' => 'font-size', 'label' => 'Font Size', 'selector' => '.cx-description'),
-											array('property' => 'line-height', 'label' => 'Line Height', 'selector' => '.cx-description'),
-											array('property' => 'font-weight', 'label' => 'Font Weight', 'selector' => '.cx-description'),
-											array('property' => 'text-align', 'label' => 'Text Align', 'selector' => '.cx-description'),
-											array('property' => 'text-transform', 'label' => 'Text Transform', 'selector' => '.cx-description'),
-											array('property' => 'padding', 'label' => 'Padding', 'selector' => '.cx-description'),
-											array('property' => 'margin', 'label' => 'Margin', 'selector' => '.cx-description'),
+										'Hover Border' => array(
+											array('property' => 'border-color', 'label' => 'Color', 'selector' => '.img-thumb .content-wrapper::before, .img-thumb a::before, .img-thumb .content-wrapper::after, .img-thumb a::after'),
+											array('property' => 'border-width', 'label' => 'Border Width', 'selector' => '.img-thumb .content-wrapper::before, .img-thumb a::before, .img-thumb .content-wrapper::after, .img-thumb a::after'),
+											array('property' => 'margin', 'label' => 'Margin', 'selector' => '.img-thumb .content-wrapper::before, .img-thumb a::before, .img-thumb .content-wrapper::after, .img-thumb a::after')
 										),
 
 										'Box'	=> array(
-											array('property' => 'background'),
 											array('property' => 'border', 'label' => 'Border'),
-											array('property' => 'display', 'label' => 'Display'),
 											array('property' => 'border-radius', 'label' => 'Border Radius'),
-											array('property' => 'box-shadow', 'label' => 'Box Shadow', 'selector' => '+.section-heading'),
+											array('property' => 'box-shadow', 'label' => 'Box Shadow', 'selector' => '+.about-box'),
+											array('property' => 'box-shadow', 'label' => 'Box Shadow on Hover', 'selector' => '+.about-box:hover'),
+											array('property' => 'transition', 'label' => 'Hover Transition Animation', 'selector' => '+.about-box'),
 											array('property' => 'margin', 'label' => 'Margin'),
 											array('property' => 'padding', 'label' => 'Padding'),
-										)
-										
+										)									
 									)
 								)
 							)
@@ -264,8 +252,8 @@ function codexin_shortcode() {
 
 						'animate' => array(
 							array(
-								'name'    => 'animate',
-								'type'    => 'animate'
+								'name'    		=> 'animate',
+								'type'    		=> 'animate'
 							)
 						),
 	                )
