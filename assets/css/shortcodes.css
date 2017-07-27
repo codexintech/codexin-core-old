@@ -759,7 +759,7 @@ section#location {
 
 .contact-form-wrapper {
     /*background-image: url('../images/subtle-white-feathers.png') ! important;*/
-    padding: 35px 20px 45px 35px;
+    padding: 35px 20px 0 35px;
     background-color: transparent !important;
 }
 
@@ -775,9 +775,12 @@ section#location {
     position: relative;
 }
 
-#gmap,
-.contact-form-wrapper {
+#gmap{
     height: 480px;
+}
+
+.contact-form-wrapper {
+
 }
 
 .contact-intro {
@@ -803,7 +806,8 @@ section#location {
 
 /***---Social media--**/
 .socials {
-    padding-left: 15px;
+    padding-left: 45px;
+    margin-top: -25px;
 }
 
 .socials i {
