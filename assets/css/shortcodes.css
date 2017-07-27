@@ -758,8 +758,9 @@ section#location {
 }
 
 .contact-form-wrapper {
-    background-image: url('../images/subtle-white-feathers.png') ! important;
+    /*background-image: url('../images/subtle-white-feathers.png') ! important;*/
     padding: 35px 20px 45px 35px;
+    background-color: transparent !important;
 }
 
 #location .contact-form {
@@ -796,6 +797,9 @@ section#location {
     margin-bottom: 0;
 }
 
+.reveal-contact-form {
+
+}
 
 /***---Social media--**/
 .socials {

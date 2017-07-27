@@ -16,7 +16,6 @@ function codexin_shortcodes() {
 		'cx_portfolio',
 		'cx_client',
 		'cx_client',
-		'cx_happy_client_testimonial',
 		'cx_blog',
 		'cx_map',
 		'cx_contact_form',
@@ -356,111 +355,6 @@ function cx_events_box_shortcode( $atts, $content = null ) {
 
 
 
-
-
-/*  
-* 
-*  Codexin Testimonial Shortcode
-*
-*/
-function cx_testimonial_shortcode( $atts, $content = null ) {
-	   extract(shortcode_atts(array(
-
-	   ), $atts));
-
-	   $result = '';
-
-	   ob_start(); 
-		?>
-		
-			 <div id="quote" class="quote">
-			 	<div class="container">
-			 		<div class="row">
-			 			<div class="col-xs-12">
-			 				<div id="quote-carousel" class="carousel slide" data-ride="carousel">
-			 					<!-- Indicators -->
-			 					<ol class="carousel-indicators hidden">
-			 						<li data-target="#quote-carousel" data-slide-to="0" class="active"></li>
-			 						<li data-target="#quote-carousel" data-slide-to="1"></li>
-			 					</ol>
-
-			 					<!-- Wrapper for slides -->
-			 					<div class="row">
-			 						<div class="col-sm-8 col-sm-offset-2">
-			 							<div class="carousel-inner" role="listbox">
-			 								<?php 
-											//start new query..
-			 								$args = array(
-			 									'post_type'		 => 'testimonial',
-			 									'order'			 => 'date',
-			 									'orderby'		 => 'DESC',
-			 									'posts_per_page' => 2,
-			 									);
-
-			 								$data = new WP_Query( $args );
-			 								$i = 0;
-			 								if( $data->have_posts() ) :
-												//Start loop here...
-			 									while( $data->have_posts() ) : $data->the_post();
-			 								$i++;
-
-			 								if( $i == 1 ) :
-			 									?>
-			 								<div class="item active">
-			 									<?php 
-			 									else : ?>
-			 									<div class="item">
-	 										<?php
-	 										endif;
-	 										?>
-
-			 									<div class="quote-wrapper">
-			 										<div class="quote-author-thumb">
-			 											<i class="fa fa-comments"></i>
-			 										</div>
-			 										<div class="quote-text">
-			 											<p> <?php printf( '%s', the_excerpt() ); ?> </p>
-			 											<p class="quote-author-name">
-			 												<?php 
-			 													$aut_name = rwmb_meta( 'reveal_author_name','type=text' );
-			 													echo esc_html( $aut_name );
-			 												 ?>
-			 											</p>
-			 										</div>
-			 									</div>
-			 								</div> <!--/item-->
-									<?php 
-											endwhile;
-										endif; //End check-posts if()....
-										wp_reset_postdata();
-									 ?>	
-			 							</div> <!-- end of carousel inner -->
-			 						</div> <!-- end of col -->
-			 					</div> <!-- end of row -->
-
-
-			 					<!-- Controls -->
-			 					<a class="left quote-carousel-control" href="#quote-carousel" role="button" data-slide="prev">
-			 						<i class="fa fa-angle-left"></i>
-			 					</a>
-			 					<a class="right quote-carousel-control" href="#quote-carousel" role="button" data-slide="next">
-			 						<i class="fa fa-angle-right"></i>
-			 					</a>
-			 				</div><!--#quote-carousel-->
-			 			</div><!--/.col-xs-12-->
-			 		</div><!--/.row-->
-			 	</div><!--/container-->
-			 </div>  <!-- end of quote -->
-
-		<?php
-		$result .= ob_get_clean();
-		return $result;
-
-} //End cx_testiomonial
-
-
-
-
 /*  
 * 
 *  Codexin Team Shortcode
@@ -697,70 +591,164 @@ function cx_client_shortcode( $atts, $content = null ) {
 
 /*  
 * 
-*  Codexin Happy Client Testimonial Shortcode
+*  Codexin Client Testimonial Shortcode
 *
 */
-function cx_happy_client_testimonial_shortcode( $atts, $content = null ) {
+function cx_testimonial_shortcode( $atts, $content = null ) {
 	   extract(shortcode_atts(array(
 	   		'img_alt'	=> 'Image',
+	   		'layout'	=> '',
 	   ), $atts));
 
 	   $result = '';
 
 	   ob_start(); 
+
+	   		if( ! empty( $layout ) ) :
+	   			if( $layout == 2 ) :
 		?>
-		<section id="testimonials" class="testimonials animated">
-			<div class="container">
-				<div class="row">
-					<?php 
-					//start new query..
-					$args = array(
-						'post_type'		 => 'testimonial',
-						'order'			 => 'date',
-						'orderby'		 => 'DESC',
-						'posts_per_page' => 4,
-						);
+					<section id="testimonials" class="testimonials animated">
+						<div class="container">
+							<div class="row">
+								<?php 
+								//start new query..
+								$args = array(
+									'post_type'		 => 'testimonial',
+									'order'			 => 'date',
+									'orderby'		 => 'DESC',
+									'posts_per_page' => 4,
+									);
 
-					$data = new WP_Query( $args );
-					if( $data->have_posts() ) :
-						//Start loop here...
-						while( $data->have_posts() ) : $data->the_post();
+								$data = new WP_Query( $args );
+								if( $data->have_posts() ) :
+									//Start loop here...
+									while( $data->have_posts() ) : $data->the_post();
 
-					?>
-						<div class="col-sm-6 quote-wrapper">
-							<div class="media">
-								<div class="media-left">
-									<img class="media-object img-circle" src="<?php echo esc_url( the_post_thumbnail_url( 'testimonial-mini-image' ) ); ?>" alt="<?php echo esc_attr( $img_alt ); ?>">
-								</div>
-								<div class="media-body">
-									<h3 class="media-heading">
-										<?php 
-											$name = rwmb_meta( 'reveal_author_name', 'type=text' ); 
-											echo esc_html( $name );
-										?>
-									</h3>
-									<p class="designation">
-										<?php 
-											$desig = rwmb_meta( 'reveal_author_desig', 'type=text' ); 
-											echo esc_html( $desig );
-										?>
-									</p>
-									<p> <?php printf('%s', get_the_excerpt() ); ?> </p>
-								</div>
-							</div>
-						</div> <!--/.quote-wrapper -->
+								?>
+									<div class="col-sm-6 quote-wrapper">
+										<div class="media">
+											<div class="media-left">
+												<img class="media-object img-circle" src="<?php echo esc_url( the_post_thumbnail_url( 'testimonial-mini-image' ) ); ?>" alt="<?php echo esc_attr( $img_alt ); ?>">
+											</div>
+											<div class="media-body">
+												<h3 class="media-heading">
+													<?php 
+														$name = rwmb_meta( 'reveal_author_name', 'type=text' ); 
+														echo esc_html( $name );
+													?>
+												</h3>
+												<p class="designation">
+													<?php 
+														$desig = rwmb_meta( 'reveal_author_desig', 'type=text' ); 
+														echo esc_html( $desig );
+													?>
+												</p>
+												<p> <?php printf('%s', get_the_excerpt() ); ?> </p>
+											</div>
+										</div>
+									</div> <!--/.quote-wrapper -->
 
-					<?php 
-							endwhile;
-						endif;
-						wp_reset_postdata();
-					 ?>
+								<?php 
+										endwhile;
+									endif;
+									wp_reset_postdata();
+								 ?>
 
-				</div><!--/.row -->
-			</div><!--/.container -->
-		</section> <!-- end of testimonials -->
+							</div><!--/.row -->
+						</div><!--/.container -->
+					</section> <!-- end of testimonials -->
+
+			<?php 
+				endif; //End layout - 2 ...
+
+					if( $layout == 1 ) :
+			?>
+
+						<div id="quote" class="quote">
+							<div class="container">
+								<div class="row">
+									<div class="col-xs-12">
+										<div id="quote-carousel" class="carousel slide" data-ride="carousel">
+											<!-- Indicators -->
+											<ol class="carousel-indicators hidden">
+												<li data-target="#quote-carousel" data-slide-to="0" class="active"></li>
+												<li data-target="#quote-carousel" data-slide-to="1"></li>
+											</ol>
+
+											<!-- Wrapper for slides -->
+											<div class="row">
+												<div class="col-sm-8 col-sm-offset-2">
+													<div class="carousel-inner" role="listbox">
+														<?php 
+															//start new query..
+														$args = array(
+															'post_type'		 => 'testimonial',
+															'order'			 => 'date',
+															'orderby'		 => 'DESC',
+															'posts_per_page' => -1,
+															);
+
+														$data = new WP_Query( $args );
+														$i = 0;
+														if( $data->have_posts() ) :
+																//Start loop here...
+															while( $data->have_posts() ) : $data->the_post();
+														$i++;
+
+														if( $i == 1 ) :
+															?>
+														<div class="item active">
+															<?php 
+															else : ?>
+															<div class="item">
+																<?php
+																endif;
+																?>
+
+																<div class="quote-wrapper">
+																	<div class="quote-author-thumb">
+																		<i class="fa fa-comments"></i>
+																	</div>
+																	<div class="quote-text">
+																		<p> <?php printf( '%s', the_excerpt() ); ?> </p>
+																		<p class="quote-author-name">
+																			<?php 
+																			$aut_name = rwmb_meta( 'reveal_author_name','type=text' );
+																			echo esc_html( $aut_name );
+																			?>
+																		</p>
+																	</div>
+																</div>
+															</div> <!--/item-->
+															<?php 
+															endwhile;
+														endif; //End check-posts if()....
+														wp_reset_postdata();
+														?>	
+													</div> <!-- end of carousel inner -->
+												</div> <!-- end of col -->
+											</div> <!-- end of row -->
+
+
+											<!-- Controls -->
+											<a class="left quote-carousel-control" href="#quote-carousel" role="button" data-slide="prev">
+												<i class="fa fa-angle-left"></i>
+											</a>
+											<a class="right quote-carousel-control" href="#quote-carousel" role="button" data-slide="next">
+												<i class="fa fa-angle-right"></i>
+											</a>
+										</div><!--#quote-carousel-->
+									</div><!--/.col-xs-12-->
+								</div><!--/.row-->
+							</div><!--/container-->
+						</div>  <!-- end of quote -->
+
+			<?php			
+				endif; //End layout-1
+			?>
 
 		<?php
+			endif;
 		$result .= ob_get_clean();
 		return $result;
 
@@ -918,8 +906,8 @@ function cx_contact_form_shortcode( $atts, $content = null ) {
 
 	   ob_start(); 
 	?>
-		<section id="location" class="location contact-location">
-			<div class="contact-form-wrapper">
+		<!-- <section id="location" class="location contact-location"> -->
+			<div class="contact-form-wrapper reveal-contact-form">
 				<div class=" contact-form">
 					<div class="contact-intro">
 						<h3><?php echo esc_html( $contact_title ); ?></h3>
@@ -932,7 +920,7 @@ function cx_contact_form_shortcode( $atts, $content = null ) {
 					</div> <!-- end of col -->
 				</div> <!-- end of row -->
 			</div> <!-- end of col -->		
-		</section>
+		<!-- </section> -->
 
 	<?php
 		$result .= ob_get_clean();

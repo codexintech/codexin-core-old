@@ -202,7 +202,7 @@ function codexin_shortcode() {
 	                'params' => array(
 		                	array(
 							'type'			=> 'radio_image',
-							'label'			=> esc_html__( 'Select Service Box Template', 'kingcomposer' ),
+							'label'			=> esc_html__( 'Select Service Box Template', 'codexin' ),
 							'name'			=> 'layout',
 							'admin_label'	=> true,
 							'options'		=> array(
@@ -369,20 +369,6 @@ function codexin_shortcode() {
 
 	            ),  // End of elemnt cx_events_box
 
-
-	            'cx_testimonial' => array(
-	                'name' => esc_html__( 'Codexin Testimonial', 'codexin' ),
-	                'description' => esc_html__('Testimonial Section', 'codexin'),
-	                'icon' => 'et-hazardous',
-	                'category' => 'Codexin',
-	                'params' => array(
-	                	
-
-	                ) //End params array()..
-
-	            ),  // End of elemnt cx_testimonial
-
-
 	            'cx_team' => array(
 	                'name' => esc_html__( 'Codexin Team Section', 'codexin' ),
 	                'description' => esc_html__('Team Section', 'codexin'),
@@ -442,17 +428,27 @@ function codexin_shortcode() {
 	            ),  // End of elemnt cx_client
 
 
-	            'cx_happy_client_testimonial' => array(
-	                'name' => esc_html__( 'Codexin Clients Testimonial', 'codexin' ),
-	                'description' => esc_html__('Happy Clients Testimonial', 'codexin'),
+	            'cx_testimonial' => array(
+	                'name' => esc_html__( 'Codexin Testimonial', 'codexin' ),
+	                'description' => esc_html__('Codexin Testimonial', 'codexin'),
 	                'icon' => 'et-hazardous',
 	                'category' => 'Codexin',
 	                'params' => array(
-
+	                	array(
+							'type'			=> 'radio_image',
+							'label'			=> esc_html__( 'Select Testimonial Template', 'codexin' ),
+							'name'			=> 'layout',
+							'admin_label'	=> true,
+							'options'		=> array(
+								'1'	=> CODEXIN_CORE_ASSET_DIR . '/images/testimonial/layout-1.png',
+								'2'	=> CODEXIN_CORE_ASSET_DIR . '/images/testimonial/layout-2.png',
+							),
+							'value'	=> '1'
+						),
 
 	                ) //End params array()..
 
-	            ),  // End of elemnt cx_happy_client_testimonial
+	            ),  // End of elemnt cx_testimonial
 
 	            'cx_blog' => array(
 	                'name' => esc_html__( 'Codexin Blog', 'codexin' ),
@@ -464,13 +460,24 @@ function codexin_shortcode() {
 
 	                ) //End params array()..
 
-	            ),  // End of elemnt cx_blog
+	            ),  // End of elemnt cx_blog....
+
 
 	            'cx_map' => array(
 	                'name' => esc_html__( 'Codexin Google Map', 'codexin' ),
 	                'description' => esc_html__('Codexin Google Map', 'codexin'),
 	                'icon' => 'et-hazardous',
 	                'category' => 'Codexin',
+	                //Only load assets when using this element
+	                'assets' => array(
+	                	'scripts' => array(
+	                		'google-js' => 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAKKh6e3XWgzR69Mb8cqk30ndps_hzaMls',
+	                		'gmap-js'		=> CODEXIN_CORE_ASSET_DIR . '/js/gmaps.js',
+	                		'cx-map-js'		=> CODEXIN_CORE_ASSET_DIR . '/js/shortcode-js/cx_map.js',
+	                	),
+
+	               ), //End assets
+
 	                'params' => array(
 	                	
 
