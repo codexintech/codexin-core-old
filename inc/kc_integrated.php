@@ -473,10 +473,8 @@ function codexin_shortcode() {
 	                	'scripts' => array(
 	                		'imagesloaded-js' => CODEXIN_CORE_ASSET_DIR . '/js/imagesloaded.pkgd.min.js',
 	                		'isotope-js-script' => CODEXIN_CORE_ASSET_DIR . '/js/isotope.pkgd.min.js',
-	                		'magnific-js-script' => CODEXIN_CORE_ASSET_DIR . '/js/jquery.magnific-popup.min.js',
-	                		'portfolio-isotope-js' => CODEXIN_CORE_ASSET_DIR . '/js/shortcode-js/cx_portfolio-isotope.js',      
-	                		'portfolio-popup-js' => CODEXIN_CORE_ASSET_DIR . '/js/shortcode-js/cx_portfolio-popup.js',         	          
- 	            	    ),
+	                		'portfolio-isotope-js' => CODEXIN_CORE_ASSET_DIR . '/js/shortcode-js/cx_portfolio-isotope.js',
+	                	),
 
 	                ), //End assets
 
