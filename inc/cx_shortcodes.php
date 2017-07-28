@@ -259,7 +259,7 @@ function cx_information_box_shortcode( $atts, $content = null ) {
 				<div class="content-mask">	
 					<h2 style="color: <?php echo $title_color; ?>"><?php echo esc_html( $info_title, 'codexin' ); ?></h2>
 					<p> <?php printf('%s', $info_desc ); ?> </p>
-					<a href="<?php echo esc_url( $retrieve_link ); ?>"><?php echo esc_html( $info_button_text ); ?></a>
+					<a href="<?php echo esc_url($retrieve_link[0]); ?>" title="<?php echo esc_attr($retrieve_link[1]); ?>" target="<?php echo esc_attr($retrieve_link[2]); ?>"><?php echo esc_html( $info_button_text ); ?></a>
 				</div>
 			</div>
 		</div>
@@ -820,7 +820,7 @@ function cx_blog_shortcode( $atts, $content = null ) {
 								</div>
 
 								<div class="blog-info">
-									<span><i class="fa fa-eye"></i> <i>542</i></span>
+									<span><i class="fa fa-eye"></i> <i><?php echo reveal_get_post_views(get_the_ID()); ?></i></span>
 									<span><i class="fa fa-comments"></i> <i><?php comments_number('No Comments', '1', '%'); ?></i></span>
 								</div>
 							</div><!--/.blog-wrapper -->

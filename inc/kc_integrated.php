@@ -558,7 +558,13 @@ function codexin_shortcode() {
 	               ), //End assets
 
 	                'params' => array(
-	                	
+	                	array(
+	                        'name' 			=> 'gmap_apikey',
+	                        'label' 		=> esc_html__( 'Google Map Api Key', 'codexin' ),
+	                        'type' 			=> 'text',
+	                        'description'	=> esc_html__( 'Enter Google Map Api Key Here', 'codexin' ),
+	                        'admin_label' 	=> false,
+	                    ),
 
 	                ) //End params array()..
 
