@@ -399,79 +399,50 @@ function codexin_shortcode() {
 	                'params' 		=> array(
 	                	'general'	=> array(
 		                	array(
-							'type'			=> 'radio_image',
-							'label'			=> esc_html__( 'Select Service Box Template', 'codexin' ),
-							'name'			=> 'layout',
-							'options'		=> array(
-								'1'	=> CODEXIN_CORE_ASSET_DIR . '/images/service-box/layout-1.png',
-								// '2'	=> CODEXIN_CORE_ASSET_DIR . '/images/service-box/layout-2.png',
-								// '3'	=> CODEXIN_CORE_ASSET_DIR . '/images/service-box/layout-3.png',
+								'type'			=> 'radio_image',
+								'label'			=> esc_html__( 'Select Service Box Template', 'codexin' ),
+								'name'			=> 'layout',
+								'options'		=> array(
+									'1'	=> CODEXIN_CORE_ASSET_DIR . '/images/kc_image/service-box-1.png',
+									'2'	=> CODEXIN_CORE_ASSET_DIR . '/images/kc_image/service-box-2.png',
+									'3'	=> CODEXIN_CORE_ASSET_DIR . '/images/kc_image/service-box-3.png',
+								),
+								'value'			=> '1'
 							),
-							'value'			=> '1'
-						),
 
-	                   
-	                    array(
-	                        'name' 			=> 'service_title',
-	                        'label' 		=> esc_html__( 'Servce Title ', 'codexin' ),
-	                        'type' 			=> 'text',
-	                        'description'	=> esc_html__( 'Enter Service Title', 'codexin' ),
-	                        'admin_label' 	=> true,
-	                    ),
+		                   
+		                    array(
+		                        'name' 			=> 'service_title',
+		                        'label' 		=> esc_html__( 'Servce Title ', 'codexin' ),
+		                        'type' 			=> 'text',
+		                        'description'	=> esc_html__( 'Enter Service Title', 'codexin' ),
+		                        'admin_label' 	=> true,
+		                    ),
 
-	                    // array(
-	                    //     'name' 			=> 'service_title_color',
-	                    //     'label' 		=> esc_html__( 'Servce Title Color ', 'codexin' ),
-	                    //     'type' 			=> 'color_picker',
-	                    //     'description'	=> esc_html__( 'Select Service Title Color', 'codexin' ),
-	                    //     'admin_label' 	=> false,
-	                    // ),
+		                    array(
+		                        'name' 			=> 'icon_toggle',
+		                        'label' 		=> esc_html__( 'Enable Service Icon? ', 'codexin' ),
+		                        'type' 			=> 'toggle',
+		                        'value'			=> 'no'
+		                    ),
 
-	                    array(
-	                        'name' 			=> 'icon_toggle',
-	                        'label' 		=> esc_html__( 'Enable Service Icon? ', 'codexin' ),
-	                        'type' 			=> 'toggle',
-	                        'value'			=> 'no'
-	                    ),
+		                    array(
+		                        'name' 			=> 'icon',
+		                        'label' 		=> esc_html__( 'Choose Service Icon', 'codexin' ),
+		                        'type' 			=> 'icon_picker',
+								'relation' 		=> array(
+								        'parent'    => 'icon_toggle',
+								        'show_when' => 'yes',
+								    ),
+		                        'description'	=> esc_html__( 'Select Service Icon', 'codexin' ),
+		                    ),
 
-	                    array(
-	                        'name' 			=> 'icon',
-	                        'label' 		=> esc_html__( 'Choose Service Icon', 'codexin' ),
-	                        'type' 			=> 'icon_picker',
-							'relation' 		=> array(
-							        'parent'    => 'icon_toggle',
-							        'show_when' => 'yes',
-							    ),
-	                        'description'	=> esc_html__( 'Select Service Icon', 'codexin' ),
-	                    ),
-
-	          //           array(
-	          //               'name' 			=> 'icon_color',
-	          //               'label' 		=> esc_html__( 'Servce Icon Color ', 'codexin' ),
-	          //               'type' 			=> 'color_picker',
-	          //               'relation' 		=> array(
-							    //     'parent'    => 'icon_toggle',
-							    //     'show_when' => 'yes',
-							    // ),
-	          //               'description'	=> esc_html__( 'Select Service Icon Color', 'codexin' ),
-	          //               'admin_label' 	=> false,
-	          //           ),
-
-	                    array(
-	                        'name' 			=> 'service_desc',
-	                        'label' 		=> esc_html__( 'Service Description ', 'codexin' ),
-	                        'type' 			=> 'textarea',
-	                        'description'	=> esc_html__( 'Enter Service Description', 'codexin' ),
-	                    ),
-
-	                    // array(
-	                    //     'name' 			=> 'service_desc_color',
-	                    //     'label' 		=> esc_html__( 'Servce Description Text Color ', 'codexin' ),
-	                    //     'type' 			=> 'color_picker',
-	                    //     'description'	=> esc_html__( 'Select Service Description Text Color', 'codexin' ),
-	                    //     'admin_label' 	=> false,
-	                    // ),
-
+		                    array(
+		                        'name' 			=> 'service_desc',
+		                        'label' 		=> esc_html__( 'Service Description ', 'codexin' ),
+		                        'type' 			=> 'textarea',
+		                        'description'	=> esc_html__( 'Enter Service Description', 'codexin' ),
+		                    ),
 		                ),
 
 	                	'styling' => array(
