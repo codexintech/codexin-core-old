@@ -770,7 +770,7 @@ function codexin_shortcode() {
 
 
 	            'cx_social_media_share' => array(
-	                'name' => esc_html__( 'Codexin Sopcial Media', 'codexin' ),
+	                'name' => esc_html__( 'Codexin Social Media', 'codexin' ),
 	                'description' => esc_html__('Codexin Social Media', 'codexin'),
 	                'icon' => 'et-hazardous',
 	                'category' => 'Codexin',
