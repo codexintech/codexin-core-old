@@ -171,6 +171,7 @@ function codexin_shortcode() {
 								        'parent'    => 'icon_toggle',
 								        'show_when' => 'yes',
 								    ),
+								'value'			=> 'no'
 		                    ),
 
 							array(
@@ -201,12 +202,6 @@ function codexin_shortcode() {
 							array(
 								'name'			=> 'class',
 								'label' 		=> __(' Extra Class', 'codexin'),
-								'type'			=> 'text'
-							),
-
-							array(
-								'name'			=> 'img_class',
-								'label' 		=> __(' Extra Image Class', 'codexin'),
 								'type'			=> 'text'
 							),
 						),
@@ -271,110 +266,148 @@ function codexin_shortcode() {
 	                )
 	            ),  // End of elemnt cx_about_box 
 
-	            'cx_animated_counter' => array(
-	                'name' => esc_html__( 'Codexin Counter Box', 'codexin' ),
-	                'description' => esc_html__('Animated Single Counter', 'codexin'),
-	                'icon' => 'kc-icon-counter',
-	                'category' => 'Codexin',
+	            'cx_animated_counter' 	=> array(
+	                'name' 				=> esc_html__( 'Codexin Counter Box', 'codexin' ),
+	                'description' 		=> esc_html__('Animated Single Counter', 'codexin'),
+	                'icon' 				=> 'kc-icon-counter',
+	                'category' 			=> 'Codexin',
 	                // Only load assets when using this element
-	                'assets' => array(
-	                	'scripts' => array(
-	                		'waypoints-js-script' => CODEXIN_CORE_ASSET_DIR . '/js/waypoints.min.js',
-	                		'counterup-js-script' => CODEXIN_CORE_ASSET_DIR . '/js/jquery.counterup.min.js',         	            
-	                		'counter-js-script' => CODEXIN_CORE_ASSET_DIR . '/js/shortcode-js/cx_animated_counter.js',         	            
+	                'assets' 			=> array(
+	                	'scripts' 		=> array(
+	                		'waypoints-js-script' 	=> CODEXIN_CORE_ASSET_DIR . '/js/waypoints.min.js',
+	                		'counterup-js-script' 	=> CODEXIN_CORE_ASSET_DIR . '/js/jquery.counterup.min.js',         	            
+	                		'counter-js-script' 	=> CODEXIN_CORE_ASSET_DIR . '/js/shortcode-js/cx_animated_counter.js',         	            
  	            	    ),
 
 	                ), //End assets
 
 	                'params' => array(
+						'general' 	=> array(
 
-	                    array(
-	                        'name' 			=> 'bg_color',
-	                        'label' 		=> esc_html__( 'Choose Background color', 'codexin' ),
-	                        'type' 			=> 'color_picker',
-	                        'value'			=> 'rgba(255,155,255,0)',
-	                        'admin_label' 	=> false,
-	                    ),
+		                    array(
+		                        'name' 			=> 'count_up',
+		                        'label' 		=> __( 'Input Numeric Value to Counter Up', 'codexin' ),
+		                        'type' 			=> 'text',
+		                        'admin_label' 	=> true,
+		                    ),
 
-	                    array(
-	                        'name' 			=> 'count_up',
-	                        'label' 		=> __( 'Input Numeric Value to Counter Up', 'codexin' ),
-	                        'type' 			=> 'text',
-	                        'admin_label' 	=> false,
-	                    ),
+		                    array(
+		                        'name' 			=> 'txt',
+		                        'label' 		=> esc_html__( 'Enter Text', 'codexin' ),
+		                        'type' 			=> 'text',
+		                        'admin_label' 	=> true,
+		                    ),
 
-	                    array(
-	                        'name' 			=> 'count_color',
-	                        'label' 		=> esc_html__( 'Choose Counter Number Color', 'codexin' ),
-	                        'type' 			=> 'color_picker',
-	                        'admin_label' 	=> false,
-	                    ),
+		                    array(
+		                        'name' 			=> 'icon_toggle',
+		                        'label' 		=> esc_html__( 'Enable Icon? ', 'codexin' ),
+		                        'type' 			=> 'toggle',
+		                    ),
 
-	                    array(
-	                        'name' 			=> 'txt',
-	                        'label' 		=> esc_html__( 'Enter Text', 'codexin' ),
-	                        'type' 			=> 'text',
-	                        'admin_label' 	=> false,
-	                    ),
+		                    array(
+		                        'name' 			=> 'icon',
+		                        'label' 		=> esc_html__( 'Choose Icon', 'codexin' ),
+		                        'type' 			=> 'icon_picker',
+								'relation' 		=> array(
+								        'parent'    => 'icon_toggle',
+								        'show_when' => 'yes',
+								    ),
+		                    ),
 
-	                    array(
-	                        'name' 			=> 'txt_color',
-	                        'label' 		=> esc_html__( 'Choose Text Color', 'codexin' ),
-	                        'type' 			=> 'color_picker',
-	                        'admin_label' 	=> false,
-	                    ),
+							array(
+								'name'			=> 'class',
+								'label' 		=> __(' Extra Class', 'codexin'),
+								'type'			=> 'text'
+							),
 
-	                    array(
-	                        'name' 			=> 'icon_toggle',
-	                        'label' 		=> esc_html__( 'Enable Icon? ', 'codexin' ),
-	                        'type' 			=> 'toggle',
-	                        'admin_label' 	=> false,
-	                    ),
+	                	),
 
-	                    array(
-	                        'name' 			=> 'icon',
-	                        'label' 		=> esc_html__( 'Choose Icon', 'codexin' ),
-	                        'type' 			=> 'icon_picker',
-							'relation' 		=> array(
-							        'parent'    => 'icon_toggle',
-							        'show_when' => 'yes',
-							    ),
-	                        'admin_label' 	=> false,
-	                    ),
+	                	'styling' => array(
 
-	                    array(
-	                        'name' 			=> 'icon_color',
-	                        'label' 		=> esc_html__( 'Choose Icon Color', 'codexin' ),
-	                        'type' 			=> 'color_picker',
-							'relation' 		=> array(
-							        'parent'    => 'icon_toggle',
-							        'show_when' => 'yes',
-							    ),
-	                        'admin_label' 	=> false,
-	                    ),
+							array(
+								'name'    		=> 'codexin_css',
+								'type'    		=> 'css',
+								'options' 		=> array(
+									array(
+										"screens" => "any,1199,991,767,479",
+
+										'Count Number' => array(
+											array('property' => 'color', 'label' => 'Color', 'selector' => '.project .counter'),
+											array('property' => 'font-family', 'label' => 'Font Family', 'selector' => '.project .counter'),
+											array('property' => 'font-size', 'label' => 'Font Size', 'selector' => '.project .counter'),
+											array('property' => 'line-height', 'label' => 'Line Height', 'selector' => '.project .counter'),
+											array('property' => 'font-weight', 'label' => 'Font Weight', 'selector' => '.project .counter'),
+											array('property' => 'text-align', 'label' => 'Text Align', 'selector' => '.project .counter'),
+											array('property' => 'text-transform', 'label' => 'Text Transform', 'selector' => '.project .counter'),
+											array('property' => 'padding', 'label' => 'Padding', 'selector' => '.project .counter'),
+											array('property' => 'margin', 'label' => 'Margin', 'selector' => '.project .counter'),
+										),
+
+										'Count Text' => array(
+											array('property' => 'color', 'label' => 'Color', 'selector' => '.project p'),
+											array('property' => 'font-family', 'label' => 'Font Family', 'selector' => '.project p'),
+											array('property' => 'font-size', 'label' => 'Font Size', 'selector' => '.project p'),
+											array('property' => 'line-height', 'label' => 'Line Height', 'selector' => '.project p'),
+											array('property' => 'font-weight', 'label' => 'Font Weight', 'selector' => '.project p'),
+											array('property' => 'text-align', 'label' => 'Text Align', 'selector' => '.project p'),
+											array('property' => 'text-transform', 'label' => 'Text Transform', 'selector' => '.project p'),
+											array('property' => 'padding', 'label' => 'Padding', 'selector' => '.project p'),
+											array('property' => 'margin', 'label' => 'Margin', 'selector' => '.project p'),
+										),
+
+										'Icon' => array(
+											array('property' => 'color', 'label' => 'Label Color', 'selector' => '.project i'),
+											array('property' => 'font-size', 'label' => 'Font Size', 'selector' => '.project i'),
+											array('property' => 'display', 'label' => 'Display', 'selector' => '.project i'),
+											array('property' => 'text-align', 'label' => 'Text Align', 'selector' => '.project i'),
+											array('property' => 'width', 'label' => 'Width', 'selector' => '.project i'),
+											array('property' => 'padding', 'label' => 'Padding', 'selector' => '.project i'),
+											array('property' => 'margin', 'label' => 'Margin', 'selector' => '.project i')
+										),
+
+										'Box'	=> array(
+											array('property' => 'background'),
+											array('property' => 'border', 'label' => 'Border'),
+											array('property' => 'border-radius', 'label' => 'Border Radius'),
+											array('property' => 'box-shadow', 'label' => 'Box Shadow', 'selector' => '+.cx-animated-counter'),
+											array('property' => 'box-shadow', 'label' => 'Box Shadow on Hover', 'selector' => '+.cx-animated-counter:hover'),
+											array('property' => 'transition', 'label' => 'Hover Transition Animation', 'selector' => '+.cx-animated-counter'),
+											array('property' => 'margin', 'label' => 'Margin'),
+											array('property' => 'padding', 'label' => 'Padding'),
+										)									
+									)
+								)
+							)
+                		),
+
+						'animate' => array(
+							array(
+								'name'    		=> 'animate',
+								'type'    		=> 'animate'
+							)
+						),
 
 	                )
 	            ),  // End of elemnt cx_animated_counter  
 
 
-	            'cx_service_box' => array(
-	                'name' => esc_html__( 'Codexin Service Box', 'codexin' ),
-	                'description' => esc_html__('Service Box', 'codexin'),
-	                'icon' => 'fa-yelp',
-	                'category' => 'Codexin',
-	                'params' => array(
+	            'cx_service_box' 	=> array(
+	                'name' 			=> esc_html__( 'Codexin Service Box', 'codexin' ),
+	                'description' 	=> esc_html__('Service Box', 'codexin'),
+	                'icon' 			=> 'fa-yelp',
+	                'category' 		=> 'Codexin',
+	                'params' 		=> array(
+	                	'general'	=> array(
 		                	array(
 							'type'			=> 'radio_image',
 							'label'			=> esc_html__( 'Select Service Box Template', 'codexin' ),
 							'name'			=> 'layout',
-							'admin_label'	=> true,
 							'options'		=> array(
 								'1'	=> CODEXIN_CORE_ASSET_DIR . '/images/service-box/layout-1.png',
-								'2'	=> CODEXIN_CORE_ASSET_DIR . '/images/service-box/layout-2.png',
-								'3'	=> CODEXIN_CORE_ASSET_DIR . '/images/service-box/layout-3.png',
-								'4'	=> CODEXIN_CORE_ASSET_DIR . '/images/service-box/layout-4.png',
+								// '2'	=> CODEXIN_CORE_ASSET_DIR . '/images/service-box/layout-2.png',
+								// '3'	=> CODEXIN_CORE_ASSET_DIR . '/images/service-box/layout-3.png',
 							),
-							'value'			=> '3'
+							'value'			=> '1'
 						),
 
 	                   
@@ -382,23 +415,23 @@ function codexin_shortcode() {
 	                        'name' 			=> 'service_title',
 	                        'label' 		=> esc_html__( 'Servce Title ', 'codexin' ),
 	                        'type' 			=> 'text',
-	                        'description'	=> esc_html__( 'Enter Service Title Here', 'codexin' ),
-	                        'admin_label' 	=> false,
+	                        'description'	=> esc_html__( 'Enter Service Title', 'codexin' ),
+	                        'admin_label' 	=> true,
 	                    ),
 
-	                    array(
-	                        'name' 			=> 'service_title_color',
-	                        'label' 		=> esc_html__( 'Servce Title Color ', 'codexin' ),
-	                        'type' 			=> 'color_picker',
-	                        'description'	=> esc_html__( 'Select Service Title Color', 'codexin' ),
-	                        'admin_label' 	=> false,
-	                    ),
+	                    // array(
+	                    //     'name' 			=> 'service_title_color',
+	                    //     'label' 		=> esc_html__( 'Servce Title Color ', 'codexin' ),
+	                    //     'type' 			=> 'color_picker',
+	                    //     'description'	=> esc_html__( 'Select Service Title Color', 'codexin' ),
+	                    //     'admin_label' 	=> false,
+	                    // ),
 
 	                    array(
 	                        'name' 			=> 'icon_toggle',
 	                        'label' 		=> esc_html__( 'Enable Service Icon? ', 'codexin' ),
 	                        'type' 			=> 'toggle',
-	                        'admin_label' 	=> false,
+	                        'value'			=> 'no'
 	                    ),
 
 	                    array(
@@ -410,36 +443,98 @@ function codexin_shortcode() {
 							        'show_when' => 'yes',
 							    ),
 	                        'description'	=> esc_html__( 'Select Service Icon', 'codexin' ),
-	                        'admin_label' 	=> false,
 	                    ),
 
-	                    array(
-	                        'name' 			=> 'icon_color',
-	                        'label' 		=> esc_html__( 'Servce Icon Color ', 'codexin' ),
-	                        'type' 			=> 'color_picker',
-	                        'relation' 		=> array(
-							        'parent'    => 'icon_toggle',
-							        'show_when' => 'yes',
-							    ),
-	                        'description'	=> esc_html__( 'Select Service Icon Color', 'codexin' ),
-	                        'admin_label' 	=> false,
-	                    ),
+	          //           array(
+	          //               'name' 			=> 'icon_color',
+	          //               'label' 		=> esc_html__( 'Servce Icon Color ', 'codexin' ),
+	          //               'type' 			=> 'color_picker',
+	          //               'relation' 		=> array(
+							    //     'parent'    => 'icon_toggle',
+							    //     'show_when' => 'yes',
+							    // ),
+	          //               'description'	=> esc_html__( 'Select Service Icon Color', 'codexin' ),
+	          //               'admin_label' 	=> false,
+	          //           ),
 
 	                    array(
 	                        'name' 			=> 'service_desc',
-	                        'label' 		=> esc_html__( 'Servce Description ', 'codexin' ),
+	                        'label' 		=> esc_html__( 'Service Description ', 'codexin' ),
 	                        'type' 			=> 'textarea',
-	                        'description'	=> esc_html__( 'Enter Service Description Here', 'codexin' ),
-	                        'admin_label' 	=> false,
+	                        'description'	=> esc_html__( 'Enter Service Description', 'codexin' ),
 	                    ),
 
-	                    array(
-	                        'name' 			=> 'service_desc_color',
-	                        'label' 		=> esc_html__( 'Servce Description Text Color ', 'codexin' ),
-	                        'type' 			=> 'color_picker',
-	                        'description'	=> esc_html__( 'Select Service Description Text Color', 'codexin' ),
-	                        'admin_label' 	=> false,
-	                    ),
+	                    // array(
+	                    //     'name' 			=> 'service_desc_color',
+	                    //     'label' 		=> esc_html__( 'Servce Description Text Color ', 'codexin' ),
+	                    //     'type' 			=> 'color_picker',
+	                    //     'description'	=> esc_html__( 'Select Service Description Text Color', 'codexin' ),
+	                    //     'admin_label' 	=> false,
+	                    // ),
+
+		                ),
+
+	                	'styling' => array(
+
+							array(
+								'name'    		=> 'codexin_css',
+								'type'    		=> 'css',
+								'options' 		=> array(
+									array(
+										"screens" => "any,1199,991,767,479",
+
+										'Title' => array(
+											array('property' => 'color', 'label' => 'Color', 'selector' => '.single-service h4'),
+											array('property' => 'font-family', 'label' => 'Font Family', 'selector' => '.single-service h4'),
+											array('property' => 'font-size', 'label' => 'Font Size', 'selector' => '.single-service h4'),
+											array('property' => 'line-height', 'label' => 'Line Height', 'selector' => '.single-service h4'),
+											array('property' => 'font-weight', 'label' => 'Font Weight', 'selector' => '.single-service h4'),
+											array('property' => 'text-align', 'label' => 'Text Align', 'selector' => '.single-service h4'),
+											array('property' => 'text-transform', 'label' => 'Text Transform', 'selector' => '.single-service h4'),
+											array('property' => 'padding', 'label' => 'Padding', 'selector' => '.single-service h4'),
+											array('property' => 'margin', 'label' => 'Margin', 'selector' => '.single-service h4'),
+										),
+
+										'Description' => array(
+											array('property' => 'color', 'label' => 'Color', 'selector' => '.single-service p'),
+											array('property' => 'font-family', 'label' => 'Font Family', 'selector' => '.single-service p'),
+											array('property' => 'font-size', 'label' => 'Font Size', 'selector' => '.single-service p'),
+											array('property' => 'line-height', 'label' => 'Line Height', 'selector' => '.single-service p'),
+											array('property' => 'font-weight', 'label' => 'Font Weight', 'selector' => '.single-service p'),
+											array('property' => 'text-align', 'label' => 'Text Align', 'selector' => '.single-service p'),
+											array('property' => 'text-transform', 'label' => 'Text Transform', 'selector' => '.single-service p'),
+											array('property' => 'padding', 'label' => 'Padding', 'selector' => '.single-service p'),
+											array('property' => 'margin', 'label' => 'Margin', 'selector' => '.single-service p'),
+										),
+
+										'Icon' => array(
+											array('property' => 'color', 'label' => 'Label Color', 'selector' => '.single-service i'),
+											array('property' => 'font-size', 'label' => 'Font Size', 'selector' => '.single-service i'),
+											array('property' => 'padding', 'label' => 'Padding', 'selector' => '.single-service i'),
+											array('property' => 'margin', 'label' => 'Margin', 'selector' => '.single-service i')
+										),
+
+										'Box'	=> array(
+											array('property' => 'background'),
+											array('property' => 'border', 'label' => 'Border'),
+											array('property' => 'border-radius', 'label' => 'Border Radius'),
+											array('property' => 'box-shadow', 'label' => 'Box Shadow', 'selector' => '+.cx-service-box'),
+											array('property' => 'box-shadow', 'label' => 'Box Shadow on Hover', 'selector' => '+.cx-service-box:hover'),
+											array('property' => 'transition', 'label' => 'Hover Transition Animation', 'selector' => '+.cx-service-box'),
+											array('property' => 'margin', 'label' => 'Margin'),
+											array('property' => 'padding', 'label' => 'Padding'),
+										)									
+									)
+								)
+							)
+                		),
+
+						'animate' => array(
+							array(
+								'name'    		=> 'animate',
+								'type'    		=> 'animate'
+							)
+						),
 
 	                ) //End params array()..
 

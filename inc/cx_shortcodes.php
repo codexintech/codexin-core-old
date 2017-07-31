@@ -130,11 +130,11 @@ function cx_about_box_shortcode(  $atts, $content = null) {
 
 		$classes = array( 'img-thumb' );
 		$img_classes = array();
-		
+
 		(!empty($class)) ? $classes[] = $class : '';
 		(!empty($img_class)) ? $img_classes[] = $img_class : '';
 
-	   ob_start(); ?>
+	   	ob_start(); ?>
 
 			<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
 				<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
@@ -145,7 +145,7 @@ function cx_about_box_shortcode(  $atts, $content = null) {
 					<?php else: ?>
 					<div class="content-wrapper">
 					<?php endif; ?>
-						<img src="<?php echo $retrive_img_url; ?>" alt="<?php echo $img_alt; ?>" class="<?php echo esc_attr( implode( ' ', $img_classes ) ); ?>" />
+						<img src="<?php echo $retrive_img_url; ?>" alt="<?php echo $img_alt; ?>" />
 						<div class="single-content-wrapper">
 							<div class="single-content">
 
@@ -180,29 +180,35 @@ function cx_about_box_shortcode(  $atts, $content = null) {
 
 function cx_animated_counter_shortcode( $atts, $content = null ) {
 	   extract(shortcode_atts(array(
-	   		'bg_color'    => '',
 			'icon_toggle' => '',
 			'icon'        => '',
-			'icon_color'  => '',
 			'count_up'    => '',
-			'count_color' => '',
 			'txt' 		  => '',
-			'txt_color'   => ''
+			'class'		  => ''
 
-	   ), $atts));
+	   	), $atts));
 
-	   $result = '';
-	   ob_start(); 
+	   	$result = '';
+
+		$master_class = apply_filters( 'kc-el-class', $atts );
+		$master_class[] = 'cx-animated-counter';
+		
+		$classes = array( 'project' );
+		(!empty($class)) ? $classes[] = $class : '';
+
+	   	ob_start(); 
 		?>
 
-		<div class="project" style="background: <?php echo $bg_color; ?>">
+		<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
+			<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
 
-			<?php if( $icon_toggle == 'yes' ): ?>
-			<i class="fa <?php echo esc_attr( $icon ); ?>" style="color: <?php echo $icon_color; ?>"></i>
-			<?php endif; ?>
+				<?php if( $icon_toggle == 'yes' ): ?>
+				<i class="<?php echo esc_attr( $icon ); ?>"></i>
+				<?php endif; ?>
 
-			<span class="counter" style="color: <?php echo $count_color; ?>"><?php echo esc_html($count_up ); ?></span>
-			<p style="color: <?php echo $txt_color; ?>"><?php echo esc_html( $txt ); ?></p>
+				<span class="counter"><?php echo esc_html( $count_up ); ?></span>
+				<p><?php echo esc_html( $txt ); ?></p>
+			</div>
 		</div>
 
 		<?php
@@ -221,29 +227,42 @@ function cx_animated_counter_shortcode( $atts, $content = null ) {
 
 function cx_service_box_shortcode( $atts, $content = null ) {
 	   extract(shortcode_atts(array(
-	   		'icon'    	  	=> '',
-			'icon_color'  	=> '',
-			'service_title'	=> '',
-			'title_color'  	=> '',
-			'service_desc' 	=> '',
+	   		'layout'    		=> '',
+	   		'icon'    	  		=> '',
+	   		'icon_toggle'		=> '',
+			'service_title'		=> '',
+			'service_desc' 		=> '',
 
-	   ), $atts));
+	   	), $atts));
 
-	   $result = '';
-	   ob_start(); 
+	   	$result = '';
+
+		$master_class = apply_filters( 'kc-el-class', $atts );
+		$master_class[] = 'cx-service-box';
+		
+		$classes = array( 'single-service' );
+		(!empty($class)) ? $classes[] = $class : '';
+
+	   	ob_start(); 
 		?>
 
-		<div class="single-service">
-			<div class="media">
-				<div class="media-left">
-					<i class="<?php echo esc_attr( $icon ); ?>" style="color: <?php echo $icon_color; ?>"></i>
-				</div>
-				<div class="media-body">
-				<h4 class="media-heading" style="color: <?php echo $title_color; ?>"><?php echo esc_html( $service_title ); ?></h4>
-				<p><?php printf( '%s', $service_desc ) ; ?></p>
+		<?php if( $layout == 3 ): ?>
+		<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
+			<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
+				<div class="media">
+					<?php if( $icon_toggle ): ?>
+					<div class="media-left">
+						<i class="<?php echo esc_attr( $icon ); ?>"></i>
+					</div>
+					<?php endif; ?>
+					<div class="media-body">
+					<h4 class="media-heading"><?php echo esc_html( $service_title ); ?></h4>
+					<p><?php printf( '%s', $service_desc ) ; ?></p>
+					</div>
 				</div>
 			</div>
 		</div>
+		<?php endif; ?>
 
 		<?php
 		$result .= ob_get_clean();
