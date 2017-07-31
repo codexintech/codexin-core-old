@@ -281,14 +281,20 @@ function cx_service_box_shortcode( $atts, $content = null ) {
 function cx_information_box_shortcode( $atts, $content = null ) {
 	   extract(shortcode_atts(array(
 			'info_title'	=> '',
-			'title_color'  	=> '',
 			'info_desc' 	=> '',
 			'info_image'	=> '',
 			'img_alt'		=> '',
+			'button_toggle'	=> '',
 			'info_button_text' => '',
-			'href'			=> ''
+			'href'			=> '',
+			'class'			=> ''
 
 	   ), $atts));
+
+	   $master_class = apply_filters( 'kc-el-class', $atts );
+	   $master_class[] = 'contest-wrapper';
+	   $classes = array( 'content-mask' );
+	   (!empty($class)) ? $classes[] = $class : '';
 
 	   $result = '';
 
@@ -299,12 +305,14 @@ function cx_information_box_shortcode( $atts, $content = null ) {
 	   ob_start(); 
 		?>
 			<!-- <div class="col-sm-12"> -->
-				<div class="contest-wrapper">
+				<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
 					<img src="<?php echo esc_url( $retrive_img_url ); ?>" alt="<?php echo esc_attr( $img_alt ); ?>" class="img-responsive">
-					<div class="content-mask">	
-						<h2 style="color: <?php echo $title_color; ?>"><?php echo esc_html( $info_title, 'codexin' ); ?></h2>
+					<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">	
+						<h2><?php echo esc_html( $info_title, 'codexin' ); ?></h2>
 						<p> <?php printf('%s', $info_desc ); ?> </p>
-						<a href="<?php echo esc_url($retrieve_link[0]); ?>" title="<?php echo esc_attr($retrieve_link[1]); ?>" target="<?php echo esc_attr($retrieve_link[2]); ?>"><?php echo esc_html( $info_button_text ); ?></a>
+						<?php if( $button_toggle ) : ?>
+							<a href="<?php echo esc_url($retrieve_link[0]); ?>" title="<?php echo esc_attr($retrieve_link[1]); ?>" target="<?php echo esc_attr($retrieve_link[2]); ?>"><?php echo esc_html( $info_button_text ); ?></a>
+						<?php endif; ?>
 					</div>
 				</div>
 			<!-- </div> -->
