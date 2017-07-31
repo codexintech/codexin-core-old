@@ -200,9 +200,6 @@
 /**************************************
  005 - cx_information/events
 **************************************/
-#events {
-    margin-top: 80px;
-}
 
 .events-description .panel-group .panel {
     border-radius: 0;
@@ -307,6 +304,11 @@
 .events-description .panel-heading {
     padding-top: 0;
     padding-bottom: 0;
+}
+
+.events-description .panel-title .accordion-toggle {
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .events-description .panel-title {
@@ -851,7 +853,7 @@ section#location {
 }
 
 /***---Social media--**/
-.socials {
+.socials-share {
     padding-left: 45px;
     margin-top: -25px;
 }

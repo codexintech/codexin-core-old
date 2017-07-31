@@ -279,17 +279,16 @@ function cx_information_box_shortcode( $atts, $content = null ) {
 
 	   ob_start(); 
 		?>
-		<div class="col-sm-12">
-			<div class="contest-wrapper">
-				<img src="<?php echo esc_url( $retrive_img_url ); ?>" alt="<?php echo esc_attr( $img_alt ); ?>" class="img-responsive">
-				<div class="content-mask">	
-					<h2 style="color: <?php echo $title_color; ?>"><?php echo esc_html( $info_title, 'codexin' ); ?></h2>
-					<p> <?php printf('%s', $info_desc ); ?> </p>
-					<a href="<?php echo esc_url($retrieve_link[0]); ?>" title="<?php echo esc_attr($retrieve_link[1]); ?>" target="<?php echo esc_attr($retrieve_link[2]); ?>"><?php echo esc_html( $info_button_text ); ?></a>
+			<!-- <div class="col-sm-12"> -->
+				<div class="contest-wrapper">
+					<img src="<?php echo esc_url( $retrive_img_url ); ?>" alt="<?php echo esc_attr( $img_alt ); ?>" class="img-responsive">
+					<div class="content-mask">	
+						<h2 style="color: <?php echo $title_color; ?>"><?php echo esc_html( $info_title, 'codexin' ); ?></h2>
+						<p> <?php printf('%s', $info_desc ); ?> </p>
+						<a href="<?php echo esc_url($retrieve_link[0]); ?>" title="<?php echo esc_attr($retrieve_link[1]); ?>" target="<?php echo esc_attr($retrieve_link[2]); ?>"><?php echo esc_html( $info_button_text ); ?></a>
+					</div>
 				</div>
-			</div>
-		</div>
-
+			<!-- </div> -->
 		<?php
 		$result .= ob_get_clean();
 		return $result;
@@ -316,6 +315,7 @@ function cx_events_box_shortcode( $atts, $content = null ) {
 
 	   ob_start(); 
 		?>
+		
 			<div class="events-description">
 				<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
@@ -386,6 +386,7 @@ function cx_events_box_shortcode( $atts, $content = null ) {
 				</div><!--/.panel-group-->
 			</div>  <!-- end of events description -->
 
+
 		<?php
 		$result .= ob_get_clean();
 		return $result;
@@ -410,7 +411,7 @@ function cx_team_shortcode( $atts, $content = null ) {
 		?>
 		
 		<section id="team" class="team">
-			<div class="container">
+			<!-- <div class="container"> -->
 				<div class="row">	
 					<?php 
 					//start new query..
@@ -470,7 +471,7 @@ function cx_team_shortcode( $atts, $content = null ) {
 					 ?>
 
 				</div><!--/.row-->
-			</div><!--/#container-->
+			<!-- </div> --><!--/#container-->
 		</section>
 		<div class="clearfix"></div>
 
@@ -647,7 +648,7 @@ function cx_testimonial_shortcode( $atts, $content = null ) {
 	   			if( $layout == 2 ) :
 		?>
 					<section id="testimonials" class="testimonials animated">
-						<div class="container">
+						<!-- <div class="container"> -->
 							<div class="row">
 								<?php 
 								//start new query..
@@ -694,7 +695,7 @@ function cx_testimonial_shortcode( $atts, $content = null ) {
 								 ?>
 
 							</div><!--/.row -->
-						</div><!--/.container -->
+						<!-- </div> --><!--/.container -->
 					</section> <!-- end of testimonials -->
 
 			<?php 
@@ -704,9 +705,9 @@ function cx_testimonial_shortcode( $atts, $content = null ) {
 			?>
 
 						<div id="quote" class="quote">
-							<div class="container">
-								<div class="row">
-									<div class="col-xs-12">
+							<!-- <div class="container"> -->
+								<div class="testimonial-row">
+									<!-- <div class="col-xs-12"> -->
 										<div id="quote-carousel" class="carousel slide" data-ride="carousel">
 											<!-- Indicators -->
 											<ol class="carousel-indicators hidden">
@@ -777,9 +778,9 @@ function cx_testimonial_shortcode( $atts, $content = null ) {
 												<i class="fa fa-angle-right"></i>
 											</a>
 										</div><!--#quote-carousel-->
-									</div><!--/.col-xs-12-->
+									<!-- </div> --><!--/.col-xs-12-->
 								</div><!--/.row-->
-							</div><!--/container-->
+							<!-- </div> --><!--/container-->
 						</div>  <!-- end of quote -->
 
 			<?php			
@@ -987,7 +988,7 @@ function cx_social_media_share_shortcode( $atts, $content = null ) {
 
 	   ob_start(); 
 	?>
-		<div class="socials">
+		<div class="socials socials-share">
 			<?php 
 				if( ! empty( $fb ) ) :
 			 ?>
