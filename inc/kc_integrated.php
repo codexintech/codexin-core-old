@@ -624,13 +624,8 @@ function codexin_shortcode() {
 	                						array('property' => 'transition', 'label' => 'Hover Background Transition', 'selector' => '.content-mask a:hover'),
 	                						array('property' => 'border', 'label' => 'Border', 'selector' => '.content-mask a'),
 	                						array('property' => 'border-radius', 'label' => 'Border Radius', 'selector' => '.content-mask a'),
-	                						array('property' => 'line-height', 'label' => 'Line Height', 'selector' => '.content-mask a'),
-	                						array('property' => 'font-weight', 'label' => 'Font Weight', 'selector' => '.content-mask a'),
-	                						array('property' => 'text-align', 'label' => 'Text Align', 'selector' => '.content-mask a'),
-	                						array('property' => 'text-transform', 'label' => 'Text Transform', 'selector' => '.content-mask a'),
 	                						array('property' => 'padding', 'label' => 'Padding', 'selector' => '.content-mask a'),
 	                						array('property' => 'margin', 'label' => 'Margin', 'selector' => '.content-mask a'),
-	                						
 	                						),
 
 	                					'Box'	=> array(

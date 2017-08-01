@@ -310,7 +310,7 @@ function cx_information_box_shortcode( $atts, $content = null ) {
 					<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">	
 						<h2><?php echo esc_html( $info_title, 'codexin' ); ?></h2>
 						<p> <?php printf('%s', $info_desc ); ?> </p>
-						<?php if( $button_toggle ) : ?>
+						<?php if( $button_toggle == 'yes') : ?>
 							<a href="<?php echo esc_url($retrieve_link[0]); ?>" title="<?php echo esc_attr($retrieve_link[1]); ?>" target="<?php echo esc_attr($retrieve_link[2]); ?>"><?php echo esc_html( $info_button_text ); ?></a>
 						<?php endif; ?>
 					</div>
