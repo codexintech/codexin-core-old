@@ -113,12 +113,38 @@ class Codexin_Core {
 
 		// Load shortcode maps into kc map
 		add_action( 'init', 'cx_section_heading_kc', 99 );
+		add_action( 'init', 'cx_about_box_kc', 99 );
+		add_action( 'init', 'cx_animated_counter_kc', 99 );
+		add_action( 'init', 'cx_service_box_kc', 99 );
+		add_action( 'init', 'cx_information_box_kc', 99 );
+		add_action( 'init', 'cx_events_box_kc', 99 );
+		add_action( 'init', 'cx_team_kc', 99 );
+		add_action( 'init', 'cx_portfolio_kc', 99 );
+		add_action( 'init', 'cx_client_kc', 99 );
+		add_action( 'init', 'cx_testimonial_kc', 99 );
+		add_action( 'init', 'cx_blog_kc', 99 );
+		add_action( 'init', 'cx_map_kc', 99 );
+		add_action( 'init', 'cx_contact_form_kc', 99 );
+		add_action( 'init', 'cx_social_media_share_kc', 99 );
 
 		// Registering the shortcodes 
 		add_action('init', 'codexin_shortcodes' );
 		function codexin_shortcodes() {
 			$shortcodes = array(
 				'cx_section_heading',
+				'cx_about_box',
+				'cx_animated_counter',
+				'cx_service_box',
+				'cx_information_box',
+				'cx_events_box',
+				'cx_team',
+				'cx_portfolio',
+				'cx_client',
+				'cx_testimonial',
+				'cx_blog',
+				'cx_map',
+				'cx_contact_form',
+				'cx_social_media_share',
 
 			);
 			foreach ($shortcodes as $shortcode) {
