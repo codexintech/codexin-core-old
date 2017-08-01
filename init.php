@@ -21,6 +21,7 @@ class Codexin_Core {
 
 	public function __construct() {
 
+		// Declaring Global Variables for plugin paths and URL
         define('CODEXIN_CORE_INC_DIR', plugin_dir_path( __FILE__ ) .'inc');
         define('CODEXIN_CORE_ASSET_DIR', plugin_dir_url( __FILE__ ) .'assets');
         define('CODEXIN_CORE_SC_DIR', plugin_dir_path( __FILE__ ) .'inc/shortcodes');
@@ -29,13 +30,11 @@ class Codexin_Core {
 		// Loading the core files
 		$this -> codexin_includes();
 
-		// Enquequeing styles and scripts 
+		// Enquequeing styles
 		$this -> codexin_enqueque();
 
 		// Register actions using add_actions() custom function.
 		$this -> codexin_add_actions();
-
-		// $this->template_path = plugin_dir_url( __FILE__ ) . 'inc/shortcodes';
 
 	}
 
@@ -49,29 +48,23 @@ class Codexin_Core {
 		// Registering Custom Posts
 		require_once CODEXIN_CORE_INC_DIR . '/custompost.php';
 
-		// Registering Shortcodes
-		// require_once CODEXIN_CORE_INC_DIR . '/cx_shortcodes.php';
+		// Registering and Integrating the Shortcodes in King Composer 
+		require_once CODEXIN_CORE_INC_DIR . '/shortcode_loader.php';
 
-		// Integrating the Shortcodes in King Composer 
-		// require_once CODEXIN_CORE_INC_DIR . '/kc_integrated.php';
-		// require_once CODEXIN_CORE_INC_DIR . '/shortcodes/cx-section-heading.php';
-
-
+		// Loading all the custom shortcode files
 		$cx_files = glob(CODEXIN_CORE_SC_DIR.'/*.php');
-
 		foreach ($cx_files as $filename){
-
-		    require_once($filename);    
-		    
+		    require_once( sanitize_text_field( $filename ) );    		    
 		}
 
 	}
 
 	/**
-	 * Enqueques styles and scripts
+	 * Enqueques styles
 	 * 
 	 * @since v1.0.0
 	 */
+
 	public function codexin_enqueque() {
 
 		add_action( 'wp_enqueue_scripts', array( $this, 'codexin_styles' ), 9 );
@@ -99,58 +92,11 @@ class Codexin_Core {
 		 *
 		 * @since 1.0.0
 		 */
+
 		add_action( 'init', 'codexin_core_load_textdomain' );
 
 		function codexin_core_load_textdomain() {
 			load_plugin_textdomain( 'codexin-core', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' ); 
-		}
-
-		// $class_methods = get_class_methods(new SectionHeading());
-
-		// foreach ($class_methods as $method_name) {
-		//     echo "$method_name\n";
-		// }
-
-		// Load shortcode maps into kc map
-		add_action( 'init', 'cx_section_heading_kc', 99 );
-		add_action( 'init', 'cx_about_box_kc', 99 );
-		add_action( 'init', 'cx_animated_counter_kc', 99 );
-		add_action( 'init', 'cx_service_box_kc', 99 );
-		add_action( 'init', 'cx_information_box_kc', 99 );
-		add_action( 'init', 'cx_events_box_kc', 99 );
-		add_action( 'init', 'cx_team_kc', 99 );
-		add_action( 'init', 'cx_portfolio_kc', 99 );
-		add_action( 'init', 'cx_client_kc', 99 );
-		add_action( 'init', 'cx_testimonial_kc', 99 );
-		add_action( 'init', 'cx_blog_kc', 99 );
-		add_action( 'init', 'cx_map_kc', 99 );
-		add_action( 'init', 'cx_contact_form_kc', 99 );
-		add_action( 'init', 'cx_social_media_share_kc', 99 );
-
-		// Registering the shortcodes 
-		add_action('init', 'codexin_shortcodes' );
-		function codexin_shortcodes() {
-			$shortcodes = array(
-				'cx_section_heading',
-				'cx_about_box',
-				'cx_animated_counter',
-				'cx_service_box',
-				'cx_information_box',
-				'cx_events_box',
-				'cx_team',
-				'cx_portfolio',
-				'cx_client',
-				'cx_testimonial',
-				'cx_blog',
-				'cx_map',
-				'cx_contact_form',
-				'cx_social_media_share',
-
-			);
-			foreach ($shortcodes as $shortcode) {
-				add_shortcode( $shortcode, $shortcode . '_shortcode' );
-			}
-			
 		}
 
 	}
