@@ -5,7 +5,7 @@ add_action('init', 'codexin_shortcodes');
 function codexin_shortcodes() {
 
 	$shortcodes = array(
-		'cx_section_heading',
+		// 'cx_section_heading',
 		'cx_about_box',
 		'cx_animated_counter',
 		'cx_service_box',
@@ -61,7 +61,7 @@ function retrieve_url ( $href ) {
 * 
 *  Codexin Section Header Shortcode
 *
-*/
+
 
 function cx_section_heading_shortcode(  $atts, $content = null) {
 	   extract(shortcode_atts(array(
@@ -97,6 +97,7 @@ function cx_section_heading_shortcode(  $atts, $content = null) {
 
 }
 
+*/
 
 /*  
 * 

@@ -18,10 +18,13 @@ class Codexin_Core {
 	 * 
 	 * @since v1.0.0
 	 */
+
 	public function __construct() {
 
         define('CODEXIN_CORE_INC_DIR', plugin_dir_path( __FILE__ ) .'inc');
         define('CODEXIN_CORE_ASSET_DIR', plugin_dir_url( __FILE__ ) .'assets');
+        define('CODEXIN_CORE_SC_DIR', plugin_dir_path( __FILE__ ) .'inc/shortcodes');
+
 
 		// Loading the core files
 		$this -> codexin_includes();
@@ -31,6 +34,8 @@ class Codexin_Core {
 
 		// Register actions using add_actions() custom function.
 		$this -> codexin_add_actions();
+
+		// $this->template_path = plugin_dir_url( __FILE__ ) . 'inc/shortcodes';
 
 	}
 
@@ -45,10 +50,20 @@ class Codexin_Core {
 		require_once CODEXIN_CORE_INC_DIR . '/custompost.php';
 
 		// Registering Shortcodes
-		require_once CODEXIN_CORE_INC_DIR . '/cx_shortcodes.php';
+		// require_once CODEXIN_CORE_INC_DIR . '/cx_shortcodes.php';
 
 		// Integrating the Shortcodes in King Composer 
-		require_once CODEXIN_CORE_INC_DIR . '/kc_integrated.php';
+		// require_once CODEXIN_CORE_INC_DIR . '/kc_integrated.php';
+		// require_once CODEXIN_CORE_INC_DIR . '/shortcodes/cx-section-heading.php';
+
+
+		$cx_files = glob(CODEXIN_CORE_SC_DIR.'/*.php');
+
+		foreach ($cx_files as $filename){
+
+		    require_once($filename);    
+		    
+		}
 
 	}
 
@@ -60,19 +75,12 @@ class Codexin_Core {
 	public function codexin_enqueque() {
 
 		add_action( 'wp_enqueue_scripts', array( $this, 'codexin_styles' ), 9 );
-		add_action( 'wp_enqueue_scripts', array( $this, 'codexin_scripts' ), 999 );
 
 	}
 
 	public function codexin_styles() {
 
 		wp_enqueue_style( 'codexin-shortcodes-stylesheet', CODEXIN_CORE_ASSET_DIR . '/css/shortcodes.css', false, '1.0','all');
-
-	}
-
-	public function codexin_scripts() {
-
-		// wp_enqueue_script( 'codexin-js-script', CODEXIN_CORE_ASSET_DIR . '/js/shortcode.js', array ( 'jquery' ), 1.0, true);
 
 	}
 
@@ -97,6 +105,28 @@ class Codexin_Core {
 			load_plugin_textdomain( 'codexin-core', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' ); 
 		}
 
+		// $class_methods = get_class_methods(new SectionHeading());
+
+		// foreach ($class_methods as $method_name) {
+		//     echo "$method_name\n";
+		// }
+
+		// Load shortcode maps into kc map
+		add_action( 'init', 'cx_section_heading_kc', 99 );
+
+		// Registering the shortcodes 
+		add_action('init', 'codexin_shortcodes' );
+		function codexin_shortcodes() {
+			$shortcodes = array(
+				'cx_section_heading',
+
+			);
+			foreach ($shortcodes as $shortcode) {
+				add_shortcode( $shortcode, $shortcode . '_shortcode' );
+			}
+			
+		}
+
 	}
 
 }
@@ -104,5 +134,6 @@ class Codexin_Core {
 
 // Instantiating the class
 $codexin_core = new Codexin_Core();
+		
 
 ?>
