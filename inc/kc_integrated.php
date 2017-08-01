@@ -662,40 +662,97 @@ function codexin_shortcode() {
 	            ),  // End of elemnt cx_service_box
 
 
-	            'cx_events_box' => array(
-	                'name' => esc_html__( 'Codexin Events Section', 'codexin' ),
-	                'description' => esc_html__('Events Section', 'codexin'),
-	                'icon' => 'et-hazardous',
-	                'category' => 'Codexin',
-	                'params' => array(
+				'cx_events_box' => array(
+					'name' => esc_html__( 'Codexin Events Section', 'codexin' ),
+					'description' => esc_html__('Events Section', 'codexin'),
+					'icon' => 'et-hazardous',
+					'category' => 'Codexin',
+					'params' => array(
 
-	                    array(
-	                        'name' 			=> 'event_icon_one',
-	                        'label' 		=> __( 'Select First Icon', 'codexin' ),
-	                        'type' 			=> 'icon_picker',
-	                        'description'	=> esc_html__( 'Select Event First Icon Here', 'codexin' ),
-	                        'admin_label' 	=> false,
-	                    ),
+						'general'	=> array(
 
-	                    array(
-	                        'name' 			=> 'event_icon_two',
-	                        'label' 		=> __( 'Select Second Icon', 'codexin' ),
-	                        'type' 			=> 'icon_picker',
-	                        'description'	=> esc_html__( 'Select Event Second Icon Here', 'codexin' ),
-	                        'admin_label' 	=> false,
-	                    ),
+							array(
+								'name' 			=> 'event_icon_one',
+								'label' 		=> __( 'Select First Icon', 'codexin' ),
+								'type' 			=> 'icon_picker',
+								'description'	=> esc_html__( 'Select Event First Icon Here', 'codexin' ),
+								'admin_label' 	=> false,
+								),
 
-	                    array(
-	                        'name' 			=> 'event_icon_three',
-	                        'label' 		=> __( 'Select Third Icon', 'codexin' ),
-	                        'type' 			=> 'icon_picker',
-	                        'description'	=> esc_html__( 'Select Event Third Icon Here', 'codexin' ),
-	                        'admin_label' 	=> false,
-	                    ),
+							array(
+								'name' 			=> 'event_icon_two',
+								'label' 		=> __( 'Select Second Icon', 'codexin' ),
+								'type' 			=> 'icon_picker',
+								'description'	=> esc_html__( 'Select Event Second Icon Here', 'codexin' ),
+								'admin_label' 	=> false,
+								),
+
+							array(
+								'name' 			=> 'event_icon_three',
+								'label' 		=> __( 'Select Third Icon', 'codexin' ),
+								'type' 			=> 'icon_picker',
+								'description'	=> esc_html__( 'Select Event Third Icon Here', 'codexin' ),
+								'admin_label' 	=> false,
+								),
+
+							array(
+								'name' 			=> 'class',
+								'label' 		=> __( 'Enter Class', 'codexin' ),
+								'type' 			=> 'text',
+								'description'	=> esc_html__( 'If you wish to style a particular content element differently, please add a class name to this field and refer to it in your custom CSS.', 'codexin' ),
+								'admin_label' 	=> false,
+								),
+
+					        ), //End general array
+
+						'styling' => array(
+
+							array(
+								'name'    		=> 'codexin_css',
+								'type'    		=> 'css',
+								'options' 		=> array(
+									array(
+										"screens" => "any,1199,991,767,479",
+
+										'Icon' => array(
+											array('property' => 'color', 'label' => 'Label Color', 'selector' => '.panel-title i'),
+											array('property' => 'font-size', 'label' => 'Font Size', 'selector' => '.panel-title i'),
+											array('property' => 'padding', 'label' => 'Padding', 'selector' => '.panel-title i'),
+											array('property' => 'margin', 'label' => 'Margin', 'selector' => '.panel-title i')
+											),
+
+										'Box'	=> array(
+											array('property' => 'background'),
+											array('property' => 'border', 'label' => 'Border'),
+											array('property' => 'border-radius', 'label' => 'Border Radius'),
+											array('property' => 'box-shadow', 'label' => 'Box Shadow'),
+											array('property' => 'box-shadow', 'label' => 'Box Shadow on Hover'),
+											array('property' => 'transition', 'label' => 'Hover Transition Animation'),
+											array('property' => 'margin', 'label' => 'Margin'),
+											array('property' => 'padding', 'label' => 'Padding'),
+											),
+
+
+
+									) //End inner-option array
+
+								) //End option array
+
+							) //End inner-styling array
+
+                		), //End styling array..
+
+						'animate' => array(
+							array(
+								'name'    		=> 'animate',
+								'type'    		=> 'animate'
+								)
+
+						),//End animate
 
 	                ) //End params array()..
 
-	            ),  // End of elemnt cx_events_box
+	            ),  // End of elemnt cx_events_box...
 
 	            'cx_team' => array(
 	                'name' => esc_html__( 'Codexin Team Section', 'codexin' ),
@@ -703,11 +760,60 @@ function codexin_shortcode() {
 	                'icon' => 'et-hazardous',
 	                'category' => 'Codexin',
 	                'params' => array(
+	                	'general'	=> array(
+
+	                		array(
+								'name' 			=> 'class',
+								'label' 		=> __( 'Enter Class', 'codexin' ),
+								'type' 			=> 'text',
+								'description'	=> esc_html__( 'If you wish to style a particular content element differently, please add a class name to this field and refer to it in your custom CSS.', 'codexin' ),
+								'admin_label' 	=> false,
+								),
+
+	                		), //End general array..
+
+	                	'styling' => array(
+
+							array(
+								'name'    		=> 'codexin_css',
+								'type'    		=> 'css',
+								 'options' 		=> array(
+									array(
+										"screens" => "any,1199,991,767,479",
+
+										'Box'	=> array(
+											array('property' => 'background'),
+											array('property' => 'border', 'label' => 'Border'),
+											array('property' => 'border-radius', 'label' => 'Border Radius'),
+											array('property' => 'box-shadow', 'label' => 'Box Shadow'),
+											array('property' => 'box-shadow', 'label' => 'Box Shadow on Hover'),
+											array('property' => 'transition', 'label' => 'Hover Transition Animation'),
+											array('property' => 'margin', 'label' => 'Margin'),
+											array('property' => 'padding', 'label' => 'Padding'),
+											),
+
+
+
+									) //End inner-option array
+
+								) //End option array
+
+							) //End inner-styling array
+
+                		), //End styling array..
+
+						'animate' => array(
+							array(
+								'name'    		=> 'animate',
+								'type'    		=> 'animate'
+								)
+
+						),//End animate
 
 
 	                ) //End params array()..
 
-	            ),  // End of elemnt cx_tem
+	            ),  // End of elemnt cx_tem...
 
 
 	            'cx_portfolio' => array(
@@ -760,19 +866,112 @@ function codexin_shortcode() {
 	                'icon' => 'et-hazardous',
 	                'category' => 'Codexin',
 	                'params' => array(
-	                	array(
-							'type'			=> 'radio_image',
-							'label'			=> esc_html__( 'Select Testimonial Template', 'codexin' ),
-							'name'			=> 'layout',
-							'admin_label'	=> true,
-							'options'		=> array(
-								'1'	=> CODEXIN_CORE_ASSET_DIR . '/images/testimonial/layout-1.png',
-								'2'	=> CODEXIN_CORE_ASSET_DIR . '/images/testimonial/layout-2.png',
-							),
-							'value'	=> '1'
-						),
+	                	'general' => array(
+	                		array(
+	                			'type'			=> 'radio_image',
+	                			'label'			=> esc_html__( 'Select Testimonial Template', 'codexin' ),
+	                			'name'			=> 'layout',
+	                			'admin_label'	=> true,
+	                			'options'		=> array(
+	                				'1'	=> CODEXIN_CORE_ASSET_DIR . '/images/testimonial/layout-1.png',
+	                				'2'	=> CODEXIN_CORE_ASSET_DIR . '/images/testimonial/layout-2.png',
+	                				),
+	                			'value'	=> '1'
+	                			),
+	                		//layout One 
+	                		array(
+	                			'name' 			=> 'class_layout_one',
+	                			'label' 		=> __( 'Enter Class', 'codexin' ),
+	                			'type' 			=> 'text',
+	                			'relation'		=> array(
+	                				'parent'	=> 'layout',
+	                				'show_when' => '1',
+	                				),
+	                			'description'	=> esc_html__( 'If you wish to style a particular content element differently, please add a class name to this field and refer to it in your custom CSS.', 'codexin' ),
+	                			'admin_label' 	=> false,
+	                		),
 
-	                ) //End params array()..
+	                		array(
+	                			'name' 			=> 'testimonial_icon',
+	                			'label' 		=> __( 'Testimonial Icon', 'codexin' ),
+	                			'type' 			=> 'icon_picker',
+	                			'relation'		=> array(
+	                				'parent'	=> 'layout',
+	                				'show_when' => '1',
+	                				),
+	                			'description'	=> esc_html__( 'Select Your Icon Here', 'codexin' ),
+	                			'admin_label' 	=> false,
+	                		),
+
+	                		//Layout Two
+	                		array(
+	                			'name' 			=> 'class_layout_two',
+	                			'label' 		=> __( 'Enter Class', 'codexin' ),
+	                			'type' 			=> 'text',
+	                			'relation'		=> array(
+	                				'parent'	=> 'layout',
+	                				'show_when' => '2',
+	                				),
+	                			'description'	=> esc_html__( 'If you wish to style a particular content element differently, please add a class name to this field and refer to it in your custom CSS.', 'codexin' ),
+	                			'admin_label' 	=> false,
+	                			),
+
+	                	), //End general array..
+
+	                	//Styling Layout One
+	                	'styling' => array(
+
+							array(
+								'name'    		=> 'codexin_css',
+								'type'    		=> 'css',
+								 'options' 		=> array(
+									array(
+										"screens" => "any,1199,991,767,479",
+
+										'Icon'	=> array(
+											array( 'property' => 'color', 'label' => 'Icon Color', 'selector' => '.quote-author-thumb i' ),
+											array( 'property' => 'border', 'label' => 'Icon Box Border', 'selector' => '.quote-author-thumb i' ),
+										 	),
+
+										'Description' => array(
+											array('property' => 'color', 'label' => 'Color', 'selector' => '.quote-text p'),
+											array('property' => 'font-family', 'label' => 'Font Family', 'selector' => '.quote-text p'),
+											array('property' => 'text-align', 'label' => 'Text Align', 'selector' => '.quote-text p'),
+											array('property' => 'padding', 'label' => 'Padding', 'selector' => '.quote-text p'),
+											array('property' => 'margin', 'label' => 'Margin', 'selector' => '.quote-text p'),
+										),
+
+										'Box'	=> array(
+											array('property' => 'background'),
+											array('property' => 'border', 'label' => 'Border'),
+											array('property' => 'border-radius', 'label' => 'Border Radius'),
+											array('property' => 'box-shadow', 'label' => 'Box Shadow'),
+											array('property' => 'box-shadow', 'label' => 'Box Shadow on Hover'),
+											array('property' => 'transition', 'label' => 'Hover Transition Animation'),
+											array('property' => 'margin', 'label' => 'Margin'),
+											array('property' => 'padding', 'label' => 'Padding'),
+											),
+
+
+
+									) //End inner-option array
+
+								) //End option array
+
+							) //End inner-styling array
+
+                		), //End styling array..
+
+						'animate' => array(
+							array(
+								'name'    		=> 'animate',
+								'type'    		=> 'animate'
+								)
+
+						),//End animate
+
+
+	                ), //End params array()..
 
 	            ),  // End of elemnt cx_testimonial
 

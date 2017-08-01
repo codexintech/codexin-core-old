@@ -336,15 +336,21 @@ function cx_events_box_shortcode( $atts, $content = null ) {
 			'event_icon_one'	=> '',
 			'event_icon_two'	=> '',
 			'event_icon_three'	=> '',
+			'class'				=> '',
 	   ), $atts));
+
+	   $master_class = apply_filters( 'kc-el-class', $atts );
+	   $master_class[] = 'events-description';
+	   $classes = array( 'panel-group' );
+	   (!empty($class)) ? $classes[] = $class : '';
 
 	   $result = '';
 
 	   ob_start(); 
 		?>
 		
-			<div class="events-description">
-				<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+			<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
+				<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>" id="accordion" role="tablist" aria-multiselectable="true">
 
 				<?php 
 					//start new query..
@@ -429,17 +435,22 @@ function cx_events_box_shortcode( $atts, $content = null ) {
 */
 function cx_team_shortcode( $atts, $content = null ) {
 	   extract(shortcode_atts(array(
-	   		'img_alt'	=> 'Team Image',
+	   		'img_alt'	=> '',
+	   		'class'		=> ''
 	   ), $atts));
+
+	   $master_class = apply_filters( 'kc-el-class', $atts );
+	   $master_class[] = 'team';
+	   $classes = array( 'row' );
+	   (!empty($class)) ? $classes[] = $class : '';
 
 	   $result = '';
 
 	   ob_start(); 
 		?>
 		
-		<section id="team" class="team">
-			<!-- <div class="container"> -->
-				<div class="row">	
+		<div id="team" class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
+				<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">	
 					<?php 
 					//start new query..
 					$args = array(
@@ -498,8 +509,7 @@ function cx_team_shortcode( $atts, $content = null ) {
 					 ?>
 
 				</div><!--/.row-->
-			<!-- </div> --><!--/#container-->
-		</section>
+		</div>
 		<div class="clearfix"></div>
 
 		<?php
@@ -663,8 +673,11 @@ function cx_client_shortcode( $atts, $content = null ) {
 */
 function cx_testimonial_shortcode( $atts, $content = null ) {
 	   extract(shortcode_atts(array(
-	   		'img_alt'	=> 'Image',
+	   		'img_alt'	=> '',
 	   		'layout'	=> '',
+	   		'class_layout_one' => '',
+	   		'class_layout_two' => '',
+	   		'testimonial_icon' => '',
 	   ), $atts));
 
 	   $result = '';
@@ -673,10 +686,13 @@ function cx_testimonial_shortcode( $atts, $content = null ) {
 
 	   		if( ! empty( $layout ) ) :
 	   			if( $layout == 2 ) :
+	   				$master_class = apply_filters( 'kc-el-class', $atts );
+		   			$master_class[] = 'testimonials animated';
+		   			$classes = array( 'testimonial-two-row' );
+		   			(!empty($class_layout_one)) ? $classes[] = $class_layout_one : '';
 		?>
-					<section id="testimonials" class="testimonials animated">
-						<!-- <div class="container"> -->
-							<div class="row">
+					<section id="testimonials" class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
+							<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
 								<?php 
 								//start new query..
 								$args = array(
@@ -722,97 +738,97 @@ function cx_testimonial_shortcode( $atts, $content = null ) {
 								 ?>
 
 							</div><!--/.row -->
-						<!-- </div> --><!--/.container -->
 					</section> <!-- end of testimonials -->
 
 			<?php 
 				endif; //End layout - 2 ...
 
 					if( $layout == 1 ) :
+						$master_class = apply_filters( 'kc-el-class', $atts );
+						$master_class[] = 'quote';
+						$classes = array( 'testimonial-row' );
+						(!empty($class_layout_one)) ? $classes[] = $class_layout_one : '';
 			?>
 
-						<div id="quote" class="quote">
-							<!-- <div class="container"> -->
-								<div class="testimonial-row">
-									<!-- <div class="col-xs-12"> -->
-										<div id="quote-carousel" class="carousel slide" data-ride="carousel">
-											<!-- Indicators -->
-											<ol class="carousel-indicators hidden">
-												<li data-target="#quote-carousel" data-slide-to="0" class="active"></li>
-												<li data-target="#quote-carousel" data-slide-to="1"></li>
-											</ol>
+					<div id="quote" class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
+						<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
+							<div id="quote-carousel" class="carousel slide" data-ride="carousel">
+								<!-- Indicators -->
+								<ol class="carousel-indicators hidden">
+									<li data-target="#quote-carousel" data-slide-to="0" class="active"></li>
+									<li data-target="#quote-carousel" data-slide-to="1"></li>
+								</ol>
 
-											<!-- Wrapper for slides -->
-											<div class="row">
-												<div class="col-sm-8 col-sm-offset-2">
-													<div class="carousel-inner" role="listbox">
-														<?php 
-															//start new query..
-														$args = array(
-															'post_type'		 => 'testimonial',
-															'order'			 => 'date',
-															'orderby'		 => 'DESC',
-															'posts_per_page' => -1,
-															);
+								<!-- Wrapper for slides -->
+								<div class="row">
+									<div class="col-sm-8 col-sm-offset-2">
+										<div class="carousel-inner" role="listbox">
+											<?php 
+																			//start new query..
+											$args = array(
+												'post_type'		 => 'testimonial',
+												'order'			 => 'date',
+												'orderby'		 => 'DESC',
+												'posts_per_page' => -1,
+												);
 
-														$data = new WP_Query( $args );
-														$i = 0;
-														if( $data->have_posts() ) :
-																//Start loop here...
-															while( $data->have_posts() ) : $data->the_post();
-														$i++;
+											$data = new WP_Query( $args );
+											$i = 0;
+											if( $data->have_posts() ) :
+																				//Start loop here...
+												while( $data->have_posts() ) : $data->the_post();
+											$i++;
 
-														if( $i == 1 ) :
-															?>
-														<div class="item active">
-															<?php 
-															else : ?>
-															<div class="item">
-																<?php
-																endif;
+											if( $i == 1 ) :
+												?>
+											<div class="item active">
+												<?php 
+												else : ?>
+												<div class="item">
+													<?php
+													endif;
+													?>
+
+													<div class="quote-wrapper">
+														<div class="quote-author-thumb">
+															<i class="fa <?php echo $testimonial_icon; ?>"></i>
+														</div>
+														<div class="quote-text">
+															<p> <?php printf( '%s', the_excerpt() ); ?> </p>
+															<p class="quote-author-name">
+																<?php 
+																$aut_name = rwmb_meta( 'reveal_author_name','type=text' );
+																echo esc_html( $aut_name );
 																?>
-
-																<div class="quote-wrapper">
-																	<div class="quote-author-thumb">
-																		<i class="fa fa-comments"></i>
-																	</div>
-																	<div class="quote-text">
-																		<p> <?php printf( '%s', the_excerpt() ); ?> </p>
-																		<p class="quote-author-name">
-																			<?php 
-																			$aut_name = rwmb_meta( 'reveal_author_name','type=text' );
-																			echo esc_html( $aut_name );
-																			?>
-																		</p>
-																	</div>
-																</div>
-															</div> <!--/item-->
-															<?php 
-															endwhile;
-														endif; //End check-posts if()....
-														wp_reset_postdata();
-														?>	
-													</div> <!-- end of carousel inner -->
-												</div> <!-- end of col -->
-											</div> <!-- end of row -->
+															</p>
+														</div>
+													</div>
+												</div> <!--/item-->
+												<?php 
+												endwhile;
+													endif; //End check-posts if()....
+													wp_reset_postdata();
+													?>	
+												</div> <!-- end of carousel inner -->
+											</div> <!-- end of col -->
+										</div> <!-- end of row -->
 
 
-											<!-- Controls -->
-											<a class="left quote-carousel-control" href="#quote-carousel" role="button" data-slide="prev">
-												<i class="fa fa-angle-left"></i>
-											</a>
-											<a class="right quote-carousel-control" href="#quote-carousel" role="button" data-slide="next">
-												<i class="fa fa-angle-right"></i>
-											</a>
-										</div><!--#quote-carousel-->
-									<!-- </div> --><!--/.col-xs-12-->
+										<!-- Controls -->
+										<a class="left quote-carousel-control" href="#quote-carousel" role="button" data-slide="prev">
+											<i class="fa fa-angle-left"></i>
+										</a>
+										<a class="right quote-carousel-control" href="#quote-carousel" role="button" data-slide="next">
+											<i class="fa fa-angle-right"></i>
+										</a>
+									</div><!--#quote-carousel-->
 								</div><!--/.row-->
-							<!-- </div> --><!--/container-->
+							</div><!--/.testimonial-row-->
 						</div>  <!-- end of quote -->
 
-			<?php			
-				endif; //End layout-1
-			?>
+				<?php			
+					endif; //End layout-1
+				?>
 
 		<?php
 			endif;
