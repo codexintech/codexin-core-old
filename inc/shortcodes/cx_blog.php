@@ -45,7 +45,7 @@
 					<div class="col-md-<?php echo $column ?> col-ss-12">
 						<div class="blog-wrapper">
 							<div class="img-thumb">
-								<div class="img-wrapper"><img src="<?php echo esc_url( the_post_thumbnail_url( 'blog-mini-image' ) ); ?>" alt="<?php echo esc_attr( $img_alt ); ?>" class="img-responsive"></div>
+								<div class="img-wrapper"><img src="<?php echo esc_url( the_post_thumbnail_url( 'blog-grid-image' ) ); ?>" alt="<?php echo esc_attr( $img_alt ); ?>" class="img-responsive"></div>
 								<?php if( $atts['show_date'] == 'yes') : ?>
 									<div class="meta">
 										<p><?php the_time( 'd' ); ?></p>
