@@ -8,88 +8,86 @@
 	   		'show_date'			=> '',
 	   		'title_length'		=> '',
 	   		'desc_length'		=> '',
-	   		'count_post_view'	=> '',
-	   		'count_comment'		=> '',
+	   		'postview_comments'	=> '',
 	   		'readmore_text'		=> '',
 	   		'class'				=> ''
 	   ), $atts));
+
+	   $master_class = apply_filters( 'kc-el-class', $atts );
+	   $master_class[] = 'blog blog-shortcode';
+	   $classes = array( 'blog-row' );
+	   (!empty($class)) ? $classes[] = $class : '';
 
 	   $result = '';
 
 	   ob_start(); 
 		?>
-		<section id="blog" class="blog blog-shortcode">
-			<div class="container">
-				<div class="row">
+		<section id="blog" class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
+			<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
 
-					<?php 
-					//start query..
-					$args = array(
-							'post_type'			=> 'post',
-							'posts_per_page'	=> $posts_per_page,
-							'order'				=> $order,
-							'orderby'			=> $orderby,
-						);
+				<?php 
+				//start query..
+				$args = array(
+						'post_type'			=> 'post',
+						'posts_per_page'	=> $posts_per_page,
+						'order'				=> $order,
+						'orderby'			=> $orderby,
+						'meta_key'			=> 'cx_post_views',
+					);
 
-					$data = new WP_Query( $args );
+				$data = new WP_Query( $args );
 
-						if( $data->have_posts() ) :
-							//Srat loop here..
-							while( $data->have_posts() ) : $data->the_post();
-					 ?>
+					if( $data->have_posts() ) :
+						//Srat loop here..
+						while( $data->have_posts() ) : $data->the_post();
+					$column = 12/$posts_per_page;
+				 ?>
+					<div class="col-md-<?php echo $column ?> col-ss-12">
+						<div class="blog-wrapper">
+							<div class="img-thumb">
+								<div class="img-wrapper"><img src="<?php echo esc_url( the_post_thumbnail_url( 'blog-mini-image' ) ); ?>" alt="<?php echo esc_attr( $img_alt ); ?>" class="img-responsive"></div>
+								<?php if( $atts['show_date'] == 'yes') : ?>
+									<div class="meta">
+										<p><?php the_time( 'd' ); ?></p>
+										<p><?php the_time( 'M' ); ?></p>
+									</div>
+								<?php endif; ?>
+							</div>
 
-						<div class="col-sm-4">
-							<div class="blog-wrapper">
-								<div class="img-thumb">
-									<div class="img-wrapper"><img src="<?php echo esc_url( the_post_thumbnail_url( 'blog-mini-image' ) ); ?>" alt="<?php echo esc_attr( $img_alt ); ?>" class="img-responsive"></div>
-									<?php if( $show_date ) : ?>
-										<div class="meta">
-											<p><?php the_time( 'd' ); ?></p>
-											<p><?php the_time( 'M' ); ?></p>
-										</div>
-									<?php endif; ?>
-								</div>
-
-								<div class="blog-content">
-									<p class="blog-title">
-										<?php echo esc_html( wp_trim_words( get_the_title(), $title_length ) ); ?>
-									</p>
-									<p> 
-										<?php echo esc_html( wp_trim_words( get_the_excerpt(), $desc_length ) ); ?> 
-									</p>
-									<a href="<?php echo esc_url( get_the_permalink() ); ?>">
-										<?php echo esc_html( $readmore_text ); ?>
-									</a>
-								</div>
-
-								<div class="blog-info">
-									<span>
-										<i class="fa fa-eye"></i> <i>
-											<?php
-												if( $count_post_view ) :
-											 		echo reveal_get_post_views(get_the_ID()); 
-											 	endif;
-											 ?>
-										</i>
-									</span>
-									<span>
-										<i class="fa fa-comments"></i> <i>
-											<?php 
-											if( $count_comment ) :
-												comments_number('No Comments', '1', '%'); 
-											endif;
-											?>
-										</i>
-									</span>
-								</div>
-							</div><!--/.blog-wrapper -->
-						</div> <!-- end of col -->
-					<?php
-						endwhile;
-					endif;
-					?>
-				</div> <!-- end of row -->
-			</div> <!-- end of container -->
+							<div class="blog-content">
+								<p class="blog-title">
+									<?php echo esc_html( wp_trim_words( get_the_title(), $title_length ) ); ?>
+								</p>
+								<p class="blog-desc"> 
+									<?php echo esc_html( wp_trim_words( get_the_excerpt(), $desc_length ) ); ?> 
+								</p>
+								<a href="<?php echo esc_url( get_the_permalink() ); ?>">
+									<?php echo esc_html( $readmore_text ); ?>
+								</a>
+							</div>
+						<?php
+							if( $atts['postview_comments'] == 'yes' ) : ?>
+							<div class="blog-info">
+								<span>
+									<i class="fa fa-eye"></i> <i>
+										<?php echo reveal_get_post_views(get_the_ID()); ?>
+									</i>
+								</span>
+								<span> 											
+									<i class="fa fa-comments"></i> <i>
+										<?php comments_number('No Comments', '1', '%'); ?>	
+									</i>
+								</span>
+							</div>
+						<?php endif; ?>
+						</div><!--/.blog-wrapper -->
+					</div> <!-- end of col -->
+				<?php
+					endwhile;
+				endif;
+				?>
+			</div> <!-- end of blog-row -->
+			<!-- </div> end of container -->
 		</section> <!-- end of blog -->
 
 		<div class="clearfix"></div>
@@ -123,7 +121,7 @@
 		    								'3'	=> '3',
 		    								'4'	=> '4',
 		    							),
-		    						'value'		=> '2',
+		    						'value'		=> '3',
 		    						'description'	=> esc_html__( 'The number of posts you want to show.', 'codexin' ),
 		    						'admin_label' 	=> true,
 		    					),
@@ -146,14 +144,10 @@
 		    						'label'       	=> esc_html__('Post Order By', 'codexin'),
 		    						'type'        	=> 'select',
 		    						'options'		=> array(
-		    								'ID'	=> 'Post ID',
-		    								'author'	=> 'Author',
-		    								'title'	=> 'Title',
-		    								'name'	=> 'Post Name',
-		    								'type'	=> 'Post Type',
-		    								'date'	=> 'Date',
-		    								'comment_count'	=> 'Namber Of Comments',
-		    								'rand'	=> 'Random Order',
+		    								'date'			 => 'Date',
+		    								'comment_count'	 => 'Namber Of Comments',
+		    								'meta_value_num' => 'Sort By Views Count',
+		    								'rand'			 => 'Random Order',
 		    							),
 		    						'value'		=> 'date',
 		    						'description'	=> esc_html__( 'Select posts order by Option you want to show', 'codexin' ),
@@ -198,18 +192,10 @@
 
 		    					array(
 		    						'type'			=> 'toggle',
-		    						'name'			=> 'count_post_view',
-		    						'label'			=> esc_html__( 'Show Posts Count View', 'codexin' ),
+		    						'name'			=> 'postview_comments',
+		    						'label'			=> esc_html__( 'Show Posts View & Comments Number', 'codexin' ),
 		    						'value'			=> 'yes',
-		    						'description'	=> esc_html__(' Display count number of visited posts.', 'codexin')
-		    					),
-
-		    					array(
-		    						'type'			=> 'toggle',
-		    						'name'			=> 'count_comment',
-		    						'label'			=> esc_html__( 'Show Comments Count View', 'codexin' ),
-		    						'value'			=> 'yes',
-		    						'description'	=> esc_html__(' Display count number of comments in a post.', 'codexin')
+		    						'description'	=> esc_html__(' Display count number of visited posts & Total number of comments in a post ', 'codexin')
 		    					),
 
 		    					array(
@@ -229,7 +215,83 @@
 		    						'admin_label' => true
 		    					),
 
-							), //End general array(),,
+							), //End general array(),
+						
+						'styling' => array(
+
+	 							array(
+	 								'name'    		=> 'codexin_css',
+	 								'type'    		=> 'css',
+	 								'options' 		=> array(
+	 									array(
+	 										"screens" => "any,1199,991,767,479",
+
+	 										'Title' => array(
+	 											array('property' => 'color', 'label' => 'Color', 'selector' => '.blog-title'),
+	 											array('property' => 'font-family', 'label' => 'Font family', 'selector' => '.blog-title'),
+	 											array('property' => 'font-size', 'label' => 'Font Size', 'selector' => '.blog-title'),
+	 											array('property' => 'font-weight', 'label' => 'Font Weight', 'selector' => '.blog-title'),
+	 											array('property' => 'line-height', 'label' => 'Line Height', 'selector' => '.blog-title'),
+	 											array('property' => 'padding', 'label' => 'Padding', 'selector' => '.blog-title'),
+	 											array('property' => 'margin', 'label' => 'Margin', 'selector' => '.blog-title')
+	 											),
+
+	 										'Meta Text' => array(
+	 											array('property' => 'color', 'label' => 'Color', 'selector' => '.meta, .blog-info i'),
+	 											array('property' => 'font-family', 'label' => 'Font family', 'selector' => '.meta'),
+	 											array('property' => 'font-size', 'label' => 'Font Size', 'selector' => '.meta'),
+	 											array('property' => 'font-weight', 'label' => 'Font Weight', 'selector' => '.meta'),
+	 											array('property' => 'line-height', 'label' => 'Line Height', 'selector' => '.meta'),
+	 											array('property' => 'background', 'label' => 'Line Height', 'selector' => '.meta'),
+	 											array('property' => 'padding', 'label' => 'Padding', 'selector' => '.meta'),
+	 											array('property' => 'margin', 'label' => 'Margin', 'selector' => '.meta')
+	 											),
+
+	 										'Text' => array(
+	 											array('property' => 'color', 'label' => 'Color', 'selector' => '.blog-content, .blog-desc'),
+	 											array('property' => 'font-family', 'label' => 'Font family', 'selector' => '.blog-content, .blog-desc'),
+	 											array('property' => 'font-size', 'label' => 'Font Size', 'selector' => '..blog-content, .blog-desc'),
+	 											array('property' => 'font-weight', 'label' => 'Font Weight', 'selector' => '..blog-content, .blog-desc'),
+	 											array('property' => 'line-height', 'label' => 'Line Height', 'selector' => '..blog-content, .blog-desc'),
+	 											array('property' => 'padding', 'label' => 'Padding', 'selector' => '..blog-content, .blog-desc'),
+	 											array('property' => 'margin', 'label' => 'Margin', 'selector' => '..blog-content, .blog-desc')
+	 											),
+
+	 										'Read More' => array(
+	 											array('property' => 'color', 'label' => 'Color', 'selector' => '.blog-content a'),
+	 											array('property' => 'background-color', 'label' => 'Background Color', 'selector' => '.blog-content a'),
+	 											array('property' => 'color', 'label' => 'Hover Color', 'selector' => '.blog-content a:hover'),
+	 											array('property' => 'background-color', 'label' => 'Backgroung Hover Color', 'selector' => '.blog-content a:hover'),
+	 											array('property' => 'border', 'label' => 'Border', 'selector' => '.blog-content a:hover'),
+	 											array('property' => 'border-color', 'label' => 'Border Hover Color', 'selector' => '.blog-content a:hover'),
+	 											array('property' => 'transition', 'label' => 'Hover Transition', 'selector' => '.blog-content a:hover'),
+	 											array('property' => 'font-family', 'label' => 'Font family', 'selector' => '.blog-content a'),
+	 											array('property' => 'font-size', 'label' => 'Font Size', 'selector' => '..blog-content a'),
+	 											array('property' => 'font-weight', 'label' => 'Font Weight', 'selector' => '..blog-content a'),
+	 											array('property' => 'line-height', 'label' => 'Line Height', 'selector' => '..blog-content a'),
+	 											array('property' => 'padding', 'label' => 'Padding', 'selector' => '..blog-content a'),
+	 											array('property' => 'margin', 'label' => 'Margin', 'selector' => '..blog-content a')
+	 											),
+
+	 										'Box'	=> array(
+	 											array('property' => 'background'),
+	 											array('property' => 'border', 'label' => 'Border'),
+	 											array('property' => 'border-radius', 'label' => 'Border Radius'),
+	 											array('property' => 'box-shadow', 'label' => 'Box Shadow'),
+	 											array('property' => 'margin', 'label' => 'Margin'),
+	 											array('property' => 'padding', 'label' => 'Padding'),
+	 											),
+
+
+
+										) //End inner-option array
+
+									) //End option array
+
+								) //End inner-styling array
+
+	                		), //End styling array..
+
 
 		                ) //End params array()..
 

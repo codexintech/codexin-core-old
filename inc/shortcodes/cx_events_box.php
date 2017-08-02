@@ -154,7 +154,7 @@
 	 										"screens" => "any,1199,991,767,479",
 
 	 										'Icon' => array(
-	 											array('property' => 'color', 'label' => 'Label Color', 'selector' => '.panel-title i'),
+	 											array('property' => 'color', 'label' => 'Color', 'selector' => '.panel-title i'),
 	 											array('property' => 'font-size', 'label' => 'Font Size', 'selector' => '.panel-title i'),
 	 											array('property' => 'padding', 'label' => 'Padding', 'selector' => '.panel-title i'),
 	 											array('property' => 'margin', 'label' => 'Margin', 'selector' => '.panel-title i')

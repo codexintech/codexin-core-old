@@ -603,6 +603,10 @@ section#portfolio {
 /**************************************
     cx_blog
 *************************************/
+section#blog {
+    margin-top: 0;
+}
+
 .home .blog {
     margin-top: 0;
 }
