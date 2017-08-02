@@ -84,7 +84,7 @@
 			    				'general' 	=> array(
 			    					array(
 			    						'name'        	=> 'image',
-			    						'label'       	=> esc_html__(' Upload Image', 'kingcomposer'),
+			    						'label'       	=> esc_html__(' Upload Image', 'codexin'),
 			    						'type'        	=> 'attach_image',
 			    						'admin_label' 	=> true,
 			    						),
