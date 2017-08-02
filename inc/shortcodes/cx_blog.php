@@ -68,6 +68,11 @@
 						<?php
 							if( $atts['postview_comments'] == 'yes' ) : ?>
 							<div class="blog-info">
+							<?php
+							$order_cpv = 'meta_value_num';
+							$order_com = 'comment_count';
+							 if( $orderby == $order_cpv ) : 
+							?>
 								<span>
 									<i class="fa fa-eye"></i> <i>
 										<?php echo reveal_get_post_views(get_the_ID()); ?>
@@ -78,8 +83,34 @@
 										<?php comments_number('No Comments', '1', '%'); ?>	
 									</i>
 								</span>
+							<?php elseif( $orderby == $order_com ) : ?>
+									<span> 											
+									<i class="fa fa-comments"></i> <i>
+										<?php comments_number('No Comments', '1', '%'); ?>	
+									</i>
+								</span>
+								<span>
+									<i class="fa fa-eye"></i> <i>
+										<?php echo reveal_get_post_views(get_the_ID()); ?>
+									</i>
+								</span>
+							<?php else : ?>
+								<span>
+									<i class="fa fa-eye"></i> <i>
+										<?php echo reveal_get_post_views(get_the_ID()); ?>
+									</i>
+								</span>
+								<span> 											
+									<i class="fa fa-comments"></i> <i>
+										<?php comments_number('No Comments', '1', '%'); ?>	
+									</i>
+								</span>
+							<?php endif; ?>	
+
 							</div>
-						<?php endif; ?>
+
+						<?php endif; //End postview_comments if ?>
+
 						</div><!--/.blog-wrapper -->
 					</div> <!-- end of col -->
 				<?php
@@ -87,7 +118,6 @@
 				endif;
 				?>
 			</div> <!-- end of blog-row -->
-			<!-- </div> end of container -->
 		</section> <!-- end of blog -->
 
 		<div class="clearfix"></div>
@@ -247,7 +277,7 @@
 	 											array('property' => 'margin', 'label' => 'Margin', 'selector' => '.meta')
 	 											),
 
-	 										'Text' => array(
+	 										'Description' => array(
 	 											array('property' => 'color', 'label' => 'Color', 'selector' => '.blog-content, .blog-desc'),
 	 											array('property' => 'font-family', 'label' => 'Font family', 'selector' => '.blog-content, .blog-desc'),
 	 											array('property' => 'font-size', 'label' => 'Font Size', 'selector' => '..blog-content, .blog-desc'),
@@ -282,8 +312,6 @@
 	 											array('property' => 'padding', 'label' => 'Padding'),
 	 											),
 
-
-
 										) //End inner-option array
 
 									) //End option array
@@ -291,6 +319,14 @@
 								) //End inner-styling array
 
 	                		), //End styling array..
+
+						'animate' => array(
+ 							array(
+ 								'name'    		=> 'animate',
+ 								'type'    		=> 'animate'
+ 								)
+
+						),//End animate
 
 
 		                ) //End params array()..
