@@ -15,8 +15,8 @@
 		?>
 		
 		<section id="portfolio" class="<?php echo esc_attr(); ?>">
-			<!-- <div class="container"> -->
-				<div class="portfolio-row">
+			<div class="container">
+				<div class="row">
 					<div class="col-xs-12">
 						<div class="portfolio-filter">
 							<ul class="list-inline">
@@ -75,7 +75,7 @@
 					wp_reset_postdata();
 				 ?>
 
-			<!-- </div> end of portfolio-wrapper -->
+			</div> <!-- end of portfolio-wrapper -->
 		</section> <!-- end of portfolio -->
 
 		<?php
