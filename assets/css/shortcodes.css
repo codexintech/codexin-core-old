@@ -681,7 +681,7 @@ section#portfolio {
     padding-bottom: 10px; 
 }
 
-.blog-content a {
+.blog-content a.read-more {
     padding: 7px 15px 5px;
     text-transform: uppercase;
     text-decoration: none;

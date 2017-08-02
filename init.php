@@ -36,6 +36,9 @@ class Codexin_Core {
 		// Register actions using add_actions() custom function.
 		$this -> codexin_add_actions();
 
+		// Register Custom Menu for plugin
+		$this -> codexin_menu_actions();
+
 	}
 
 	/**
@@ -94,10 +97,122 @@ class Codexin_Core {
 		 */
 
 		add_action( 'init', 'codexin_core_load_textdomain' );
-
 		function codexin_core_load_textdomain() {
 			load_plugin_textdomain( 'codexin-core', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' ); 
 		}
+
+	}
+
+	public function codexin_menu_actions() {
+
+		add_action( 'admin_menu', array($this, 'cx_register_menu') );
+
+		add_action( 'admin_init', array( $this, 'cx_settings_fields' ) );
+
+	}
+
+	public function cx_register_menu()
+	{
+		$menu = add_menu_page(
+				esc_html__('Codexin Core Options', 'codexin'),
+				esc_html__('Codexin Options', 'codexin'),
+				'manage_options',
+				'cx_options',
+				array($this, 'cx_show_options')
+		 );
+		
+	}
+
+	public function cx_show_options() {
+
+		?>
+		<div id="wrap">
+		<?php
+		$current_screen = get_current_screen();
+		// Verify that data is being saved ONLY from the NinjaStars options page.
+		if ( $current_screen->id == "cx_options" && isset( $_POST['cx_submit_opts'] ) ) :
+			if ( isset( $_POST['ninjastars_color'] ) ) : 
+				update_option( 'ninjastars_color', sanitize_text_field( $_POST['ninjastars_color'] ) );
+			endif;
+			if ( isset( $_POST['ninjastars_logo'] ) ) :
+				update_option( 'ninjastars_logo', sanitize_text_field( $_POST['ninjastars_logo'] ) );
+			endif;
+			if ( isset( $_POST['ninjastars_rcolor'] ) ) :
+				update_option( 'ninjastars_rcolor', sanitize_text_field( $_POST['ninjastars_rcolor'] ) );
+			endif;
+			if ( isset( $_POST['ninjastars_readmore'] ) ) :
+				update_option( 'ninjastars_readmore', sanitize_text_field( $_POST['ninjastars_readmore'] ) );
+			endif;
+			if ( isset( $_POST['ninjastars_fcolor'] ) ) :
+				update_option( 'ninjastars_fcolor', sanitize_text_field( $_POST['ninjastars_fcolor'] ) );
+			endif;
+		endif;
+		?>
+			<form method="POST" action="">
+		<?php
+			settings_fields( 'cx_settings_group' );   
+            do_settings_sections( 'cx_options' );
+            submit_button( 'Save Codexin Options', 'primary', 'cx_submit_opts' );
+		?>
+ 			</form>
+ 		</div>
+		<?php
+
+	}
+
+	public function cx_settings_fields() {
+
+ 		register_setting(
+ 			'cx_settings_group',
+ 			'cx_settings'
+ 		);
+
+ 		add_settings_section(
+ 			'cx_settings_group',
+ 			'<b>Codexin Settings</b>',
+ 			array( $this, 'ns_settings_section_cb' ),
+ 			'cx_settings'
+ 		);
+
+ 		add_settings_field(
+ 			'ninjastars_color',
+ 			'<b>Primary Theme Color</b>',
+ 			array( $this, 'ns_settings_color_cb' ),
+ 			'ninjastars',
+ 			'cx_settings_group'
+ 		);
+
+  		add_settings_field(
+ 			'ninjastars_rcolor',
+ 			'<b>Review Content BG Color</b>',
+ 			array( $this, 'ns_settings_rcolor_cb' ),
+ 			'ninjastars',
+ 			'cx_settings_group'
+ 		);
+		
+  		add_settings_field(
+ 			'ninjastars_fcolor',
+ 			'<b>Widget Author Name Text Color</b>',
+ 			array( $this, 'ns_settings_fcolor_cb' ),
+ 			'ninjastars',
+ 			'cx_settings_group'
+ 		);
+
+ 		add_settings_field(
+ 			'ninjastars_logo',
+ 			'<b>Logo Upload URL</b>',
+ 			array( $this, 'ns_settings_logo_cb' ),
+ 			'ninjastars',
+ 			'cx_settings_group'
+ 		);
+
+ 		add_settings_field(
+ 			'ninjastars_readmore',
+ 			'<b>Reviews Link</b>',
+ 			array( $this, 'ns_settings_readmore_cb'),
+ 			'ninjastars',
+ 			'cx_settings_group'
+ 		);
 
 	}
 
