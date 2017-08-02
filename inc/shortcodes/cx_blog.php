@@ -61,7 +61,7 @@
 								<p class="blog-desc"> 
 									<?php echo esc_html( wp_trim_words( get_the_excerpt(), $desc_length ) ); ?> 
 								</p>
-								<a href="<?php echo esc_url( get_the_permalink() ); ?>">
+								<a class="read-more" href="<?php echo esc_url( get_the_permalink() ); ?>">
 									<?php echo esc_html( $readmore_text ); ?>
 								</a>
 							</div>

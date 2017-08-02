@@ -1,17 +1,22 @@
 <?php
 	function cx_portfolio_shortcode( $atts, $content = null ) {
 	   extract(shortcode_atts(array(
-	   		'img_alt'	=> 'Portfolio Image',
+	   		'img_alt'	=> '',
 	   ), $atts));
+
+	   $master_class = apply_filters( 'kc-el-class', $atts );
+	   $master_class[] = 'portfolios';
+	   $classes = array( 'portfolio-row' );
+	   (!empty($class)) ? $classes[] = $class : '';
 
 	   $result = '';
 
 	   ob_start(); 
 		?>
 		
-		<section id="portfolio" class="portfolios">
-			<div class="container">
-				<div class="row">
+		<section id="portfolio" class="<?php echo esc_attr(); ?>">
+			<!-- <div class="container"> -->
+				<div class="portfolio-row">
 					<div class="col-xs-12">
 						<div class="portfolio-filter">
 							<ul class="list-inline">
@@ -70,7 +75,7 @@
 					wp_reset_postdata();
 				 ?>
 
-			</div> <!-- end of portfolio-wrapper -->
+			<!-- </div> end of portfolio-wrapper -->
 		</section> <!-- end of portfolio -->
 
 		<?php
