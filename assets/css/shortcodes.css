@@ -603,6 +603,10 @@ section#portfolio {
 /**************************************
     cx_blog
 *************************************/
+section#blog {
+    margin-top: 0;
+}
+
 .home .blog {
     margin-top: 0;
 }
@@ -695,7 +699,7 @@ section#portfolio {
     transition: all .3s;
 }
 
-.blog-content a:hover {
+.blog-content a.read-more:hover {
     text-decoration: none;
 }
 

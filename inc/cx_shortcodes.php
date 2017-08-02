@@ -876,7 +876,7 @@ function cx_blog_shortcode( $atts, $content = null ) {
 						<div class="col-sm-4">
 							<div class="blog-wrapper">
 								<div class="img-thumb">
-									<div class="img-wrapper"><img src="<?php echo esc_url( the_post_thumbnail_url( 'blog-mini-image' ) ); ?>" alt="<?php echo esc_attr( $img_alt ); ?>" class="img-responsive"></div>
+									<div class="img-wrapper"><img src="<?php echo esc_url( the_post_thumbnail_url( 'blog-grid-image' ) ); ?>" alt="<?php echo esc_attr( $img_alt ); ?>" class="img-responsive"></div>
 									<div class="meta">
 										<p><?php the_time( 'd' ); ?></p>
 										<p><?php the_time( 'M' ); ?></p>
