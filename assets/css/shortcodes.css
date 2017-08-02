@@ -685,7 +685,7 @@ section#blog {
     padding-bottom: 10px; 
 }
 
-.blog-content a {
+.blog-content a.read-more {
     padding: 7px 15px 5px;
     text-transform: uppercase;
     text-decoration: none;
@@ -699,7 +699,7 @@ section#blog {
     transition: all .3s;
 }
 
-.blog-content a:hover {
+.blog-content a.read-more:hover {
     text-decoration: none;
 }
 
