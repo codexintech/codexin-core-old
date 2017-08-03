@@ -39,7 +39,7 @@
             {
                 "featureType": "road",
                 "stylers": [
-                { "color": "#b4b4b4" }
+                { "color": reveal_map_color }
                 ]
             },{
                 "featureType": "water",

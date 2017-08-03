@@ -1,8 +1,15 @@
 <?php
 	function cx_map_shortcode( $atts, $content = null ) {
 	   extract(shortcode_atts(array(
-	   		'img_alt'	=> 'Image',
+	   		'img_alt'	=> '',
+	   		'map_color' => '',
+	   		'class'		=> ''
 	   ), $atts));
+
+	   $master_class = apply_filters( 'kc-el-class', $atts );
+	   $master_class[] = 'map-wrapper';
+	   $classes = array( 'reveal-map-wrapper' );
+	   (!empty($class)) ? $classes[] = $class : '';
 
 	   $result = '';
 
@@ -31,6 +38,7 @@
 	   	var reveal_long = "'. $longtitude .'"; 
 	   	var reveal_marker = "'. $gmap_marker['url'] .'"; 
 	   	var reveal_m_zoom = Number ("'. $c_zoom .'"); 
+	   	var reveal_map_color = "' . $map_color . '";
 	   </script>
 
 	   ';
@@ -39,8 +47,8 @@
 
 	   ?>
 		
-		<div id="map">
-			<div id="gmap-wrap">
+		<div id="map" class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
+			<div id="gmap-wrap" class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
 				<div id="gmap"> 				
 				</div>	 			
 			</div>
@@ -81,6 +89,28 @@
 	 							'label' 		=> esc_html__( 'Google Map Api Key', 'codexin' ),
 	 							'type' 			=> 'text',
 	 							'description'	=> esc_html__( 'Enter Google Map Api Key Here', 'codexin' ),
+	 							'admin_label' 	=> false,
+	 							),
+
+	 						array(
+	 							'name' 			=> 'class',
+	 							'label' 		=> esc_html__( 'Extra Class', 'codexin' ),
+	 							'type' 			=> 'text',
+	 							'description'	=> esc_html__( 'If you wish to style a particular content element differently, please add a class name to this field and refer to it in your custom CSS.', 'codexin' ),
+	 							'admin_label' 	=> false,
+	 							),
+
+	 						array(
+	 							'name' 			=> 'map_color',
+	 							'label' 		=> esc_html__( 'Select You Color', 'codexin' ),
+	 							'type' 			=> 'select',
+	 							'options'		=> array(
+	 													'#b4b4b4' => 'Gray Color',
+	 													'#' => 'Gray-light Color',
+	 													'#' => 'Gray-dark Color',
+	 												),
+	 							'value'			=> '#b4b4b4',
+	 							'description'	=> esc_html__( 'You can select the map color here', 'codexin' ),
 	 							'admin_label' 	=> false,
 	 							),
 

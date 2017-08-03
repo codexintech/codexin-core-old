@@ -1,7 +1,7 @@
 <?php
 	function cx_contact_form_shortcode( $atts, $content = null ) {
 	   extract(shortcode_atts(array(
-	   		'contact_title'	=> 'Get In touch',
+	   		'contact_title'	=> '',
 	   		'show_form_id'	=> '',
 	   		'contact_desc'	=> '',
 	   		'class'			=> ''
@@ -23,7 +23,7 @@
 					<p><?php printf( '%s', $contact_desc ); ?></p>
 				</div>		
 				<div class="row form-element">
-
+						<?php echo $show_form_id; ?>
 					<?php echo do_shortcode( '[contact-form-7 id="'. $show_form_id .'" title="Contact form 1"]' ); ?>
 
 				</div> <!-- end of col -->
@@ -35,6 +35,58 @@
 		return $result;
 
  } //End cx_contact_form
+
+
+
+
+/*-------------------
+	Add Param Type 
+	------------------*/
+ 
+		add_action('init', 'cx_add_contact_form_param', 99 );
+ 		//The function add a new param-type in KC ..
+		function cx_add_contact_form_param(){
+		 
+		    global $kc;
+		    $kc->add_param_type( 'cx_form_title', 'cx_get_contact_form' );
+
+		}//End
+		 
+		/**
+		 * The function face the all data of created contact-form by contact-form-7 plugin
+		 * develop by sazzad on 8/03/2017 
+		 *
+		 */  
+		function cx_get_contact_form(){
+			$args = array( 
+				'post_type' 	 => 'wpcf7_contact_form', 
+				'posts_per_page' => -1
+			);
+			$rs = array();
+			if( $data = get_posts( $args ) ){ ?>
+			<select class="kc-param">
+				<?php
+					echo '<option value=""> Please Select...</option>';
+					foreach( $data as $v_form ){ 
+						$form_title = $v_form->post_title;
+						$form_id = $v_form->ID;
+						echo '<option value="'.$form_id.'">'. $form_id .'</option>';
+						return $form_id;
+					 } 
+				 ?>
+			</select>
+			<?php	
+			}else{
+				$rs['0'] = esc_html__( 'No Contact Form found', 'codexin' );
+			} //End else
+			
+		} //End cx_get_contact_form()..
+
+	/*-------------------
+	End Param Type 
+	------------------*/
+
+
 
 
 	 function cx_contact_form_kc() {
@@ -50,55 +102,49 @@
 	 					'category' => 'Codexin',
 	 					'params' => array(
 	 						'general' => array(
-	 								array(
-	 							'name' 			=> 'contact_title',
-	 							'label' 		=> esc_html__( 'Enter Title ', 'codexin' ),
-	 							'type' 			=> 'text',
-	 							'value'			=> esc_html__( 'Get In touch', 'codexin' ),
-	 							'admin_label' 	=> false,
-	 							),
+		 						array(
+		 							'name' 			=> 'contact_title',
+		 							'label' 		=> esc_html__( 'Enter Title ', 'codexin' ),
+		 							'type' 			=> 'text',
+		 							'description'	=> esc_html__( 'Get In touch', 'codexin' ),
+		 							'admin_label' 	=> false,
+		 							),
 
-	 						array(
-	 							'name' 			=> 'show_form_id',
-	 							'label' 		=> esc_html__( 'Select Form ', 'codexin' ),
-	 							'type' 			=> 'select',
-	 							'value'			=> esc_html__( 'Select Your Contact Form Here', 'codexin' ),
-	 							'options'		=> array(
-	 								'4'	=> 'Contact Form - 1',
-	 								'5'	=> 'Contact Form - 2',
-	 								'6'	=> 'Contact Form - 3',
-	 								),
-	 							'value'			=> '1',
-	 							'admin_label' 	=> false,
-	 							),
+		 						array(
+		 							'name' 			=> 'show_form_id',
+		 							'label' 		=> esc_html__( 'Select Form ', 'codexin' ),
+		 							'type' 			=> 'cx_form_title',
+		 							'description'	=> esc_html__( 'Select Your Contact Form Here', 'codexin' ),
+		 							'admin_label' 	=> false,
+		 							),
 
-	 						array(
-	 							'name' 			=> 'description_toggle',
-	 							'label' 		=> esc_html__( 'Enable Description Field? ', 'codexin' ),
-	 							'type' 			=> 'toggle',
-	 							'admin_label' 	=> false,
-	 							),
+		 						array(
+		 							'name' 			=> 'description_toggle',
+		 							'label' 		=> esc_html__( 'Enable Description Field? ', 'codexin' ),
+		 							'type' 			=> 'toggle',
+		 							'admin_label' 	=> false,
+		 							),
 
-	 						array(
-	 							'name' 			=> 'contact_desc',
-	 							'label' 		=> esc_html__( 'Enter Description', 'codexin' ),
-	 							'type' 			=> 'textarea',
-	 							'relation' 		=> array(
-	 								'parent'    => 'description_toggle',
-	 								'show_when' => 'yes',
-	 								),
-	 							'admin_label' 	=> false,
-	 							),
+		 						array(
+		 							'name' 			=> 'contact_desc',
+		 							'label' 		=> esc_html__( 'Enter Description', 'codexin' ),
+		 							'type' 			=> 'textarea',
+		 							'relation' 		=> array(
+		 								'parent'    => 'description_toggle',
+		 								'show_when' => 'yes',
+		 								),
+		 							'admin_label' 	=> false,
+		 							),
 
-	 						array(
-	 							'name' 			=> 'class',
-	 							'label' 		=> esc_html__( 'Extra Class', 'codexin' ),
-	 							'type' 			=> 'text',
-	 							'description'	=> esc_html__( 'If you wish to style a particular content element differently, please add a class name to this field and refer to it in your custom CSS.', 'codexin' ),
-	 							'admin_label' 	=> false,
-	 							),
+		 						array(
+		 							'name' 			=> 'class',
+		 							'label' 		=> esc_html__( 'Extra Class', 'codexin' ),
+		 							'type' 			=> 'text',
+		 							'description'	=> esc_html__( 'If you wish to style a particular content element differently, please add a class name to this field and refer to it in your custom CSS.', 'codexin' ),
+		 							'admin_label' 	=> false,
+		 							),
 
-	 						),//End general array
+		 					),//End general array
 
 	 						'styling' => array(
 

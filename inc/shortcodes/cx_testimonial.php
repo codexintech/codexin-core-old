@@ -257,6 +257,14 @@
 												array('property' => 'border-radius', 'label' => 'Image Box Border Radius', 'selector' => '.img-circle'),
 												),
 
+											'Divider' => array(
+												array('property' => 'background', 'label' => 'Color', 'selector' => '.quote-author-name::before, .designation::after'),
+												array('property' => 'width', 'label' => 'Width', 'selector' => '.quote-author-name::before, .designation::after'),
+												array('property' => 'height', 'label' => 'Height', 'selector' => '.quote-author-name::before, .designation::after'),
+												array('property' => 'margin', 'label' => 'Margin', 'selector' => '.quote-author-name::before, .designation::after'),
+												array('property' => 'padding', 'label' => 'padding', 'selector' => '.quote-author-name::before, .designation::after')
+												),
+
 											'Box'	=> array(
 												array('property' => 'background'),
 												array('property' => 'border', 'label' => 'Border'),

@@ -144,18 +144,18 @@
 	 											),
 
 	 										'Icons' => array(
-	 											array('property' => 'color', 'label' => 'Color', 'selector' => '.socials i'),
-	 											array('property' => 'background-color', 'label' => 'Background Color', 'selector' => '.socials i'),
-	 											array('property' => 'color', 'label' => 'Color Hover', 'selector' => '.socials i:hover'),
-	 											array('property' => 'background-color', 'label' => 'Background Color Hover', 'selector' => '.socials i:hover'),
-	 											array('property' => 'font-size', 'label' => 'Font Size', 'selector' => '.socials i'),
-	 											array('property' => 'line-height', 'label' => 'Line Height', 'selector' => '.socials i'),
-	 											array('property' => 'text-align', 'label' => 'Text Align', 'selector' => '.socials i'),
-	 											array('property' => 'border', 'label' => 'Border', 'selector' => '.socials i'),
-	 											array('property' => 'border-radius', 'label' => 'Border Radius', 'selector' => '.socials i'),
-	 											array('property' => 'transition', 'label' => 'Background Transition Hover', 'selector' => '.socials i:hover'),
-	 											array('property' => 'padding', 'label' => 'Padding', 'selector' => '.socials i'),
-	 											array('property' => 'margin', 'label' => 'Margin', 'selector' => '.socials i')
+	 											array('property' => 'color', 'label' => 'Color', 'selector' => 'i'),
+	 											array('property' => 'background-color', 'label' => 'Background Color', 'selector' => 'i'),
+	 											array('property' => 'color', 'label' => 'Color Hover', 'selector' => 'i:hover'),
+	 											array('property' => 'background-color', 'label' => 'Background Color Hover', 'selector' => 'i:hover'),
+	 											array('property' => 'font-size', 'label' => 'Font Size', 'selector' => 'i'),
+	 											array('property' => 'line-height', 'label' => 'Line Height', 'selector' => 'i'),
+	 											array('property' => 'text-align', 'label' => 'Text Align', 'selector' => 'i'),
+	 											array('property' => 'border', 'label' => 'Border', 'selector' => 'i'),
+	 											array('property' => 'border-radius', 'label' => 'Border Radius', 'selector' => 'i'),
+	 											array('property' => 'transition', 'label' => 'Transition Hover', 'selector' => 'i:hover'),
+	 											array('property' => 'padding', 'label' => 'Padding', 'selector' => 'i'),
+	 											array('property' => 'margin', 'label' => 'Margin', 'selector' => 'i')
 	 											),
 
 	 										'Box'	=> array(
