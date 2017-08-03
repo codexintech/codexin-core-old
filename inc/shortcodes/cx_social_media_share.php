@@ -1,44 +1,56 @@
 <?php
-function cx_social_media_share_shortcode( $atts, $content = null ) {
-	extract(shortcode_atts(array(
-		'fb'	=> '',
-		'tw'	=> '',
-		'ld'	=> '',
-		'ig'	=> '',
-		'be'	=> '',
-		), $atts));
+	function cx_social_media_share_shortcode( $atts, $content = null ) {
+		extract(shortcode_atts(array(
+			'social_title' => '',
+			'fb'	=> '',
+			'tw'	=> '',
+			'ld'	=> '',
+			'ig'	=> '',
+			'be'	=> '',
+			'class' => ''
+			), $atts));
 
-	$result = '';
+		$master_class = apply_filters( 'kc-el-class', $atts );
+	   $master_class[] = 'socials socials-share';
+	   $classes = array( 'social-content' );
+	   (!empty($class)) ? $classes[] = $class : '';
 
-	ob_start(); 
-	?>
-	<div class="socials socials-share">
-		<?php 
-		if( ! empty( $fb ) ) :
-			?>
-		<a href="<?php echo esc_url( $fb ); ?>"><i class="fa fa-facebook"></i></a>
-	<?php endif;
-	if( ! empty( $tw ) ) :
+		$result = '';
+
+		ob_start(); 
 		?>
-	<a href="<?php echo esc_url( $tw ); ?>"><i class="fa fa-twitter"></i></a>
-<?php endif; 
-if( ! empty( $ld ) ) :
-	?>
-<a href="<?php echo esc_url( $ld ); ?>"><i class="fa fa-linkedin"></i></a>
-<?php endif;
-if( $ig ) :
-	?>
-<a href="<?php echo esc_url( $ig ); ?>"><i class="fa fa-instagram"></i></a>
-<?php endif;
-if( $be ) :
-	?>
-<a href="<?php echo esc_url( $be ); ?>"><i class="fa fa-behance"></i></a>
-<?php endif; ?>
-</div>
+		<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
+			<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
+				<?php if( ! empty( $social_title ) ) : ?>
+					<div class="socials-title"><h4>Follow Us</h4></div>
+				<?php endif; ?>
+				<?php 
+				if( ! empty( $fb ) ) :
+					?>
+				<a href="<?php echo esc_url( $fb ); ?>"><i class="fa fa-facebook"></i></a>
+			<?php endif;
+			if( ! empty( $tw ) ) :
+				?>
+			<a href="<?php echo esc_url( $tw ); ?>"><i class="fa fa-twitter"></i></a>
+		<?php endif; 
+		if( ! empty( $ld ) ) :
+			?>
+		<a href="<?php echo esc_url( $ld ); ?>"><i class="fa fa-linkedin"></i></a>
+		<?php endif;
+		if( $ig ) :
+			?>
+		<a href="<?php echo esc_url( $ig ); ?>"><i class="fa fa-instagram"></i></a>
+		<?php endif;
+		if( $be ) :
+			?>
+		<a href="<?php echo esc_url( $be ); ?>"><i class="fa fa-behance"></i></a>
+		<?php endif; ?>
+		</div><!--social-content -->
+	</div><!--/.socials -->
 
-<?php
-$result .= ob_get_clean();
-return $result;
+	<?php
+	$result .= ob_get_clean();
+	return $result;
 
  } //End cx_social_media_share
 
@@ -55,45 +67,121 @@ return $result;
  					'icon' => 'et-hazardous',
  					'category' => 'Codexin',
  					'params' => array(
- 						array(
- 							'name' 			=> 'fb',
- 							'label' 		=> esc_html__( 'Face Book Link ', 'codexin' ),
- 							'type' 			=> 'text',
- 							'description'	=> esc_html__( 'Enter Your Face-Book URL Here', 'codexin' ),
- 							'admin_label' 	=> false,
- 							),
+ 						'general' => array(
+	 						array(
+	 							'name' 			=> 'social_title',
+	 							'label' 		=> esc_html__( 'Title ', 'codexin' ),
+	 							'type' 			=> 'text',
+	 							'description'	=> esc_html__( 'Enter Your Title Here', 'codexin' ),
+	 							'admin_label' 	=> false,
+	 							),
+	 						array(
+	 							'name' 			=> 'fb',
+	 							'label' 		=> esc_html__( 'Face Book Link ', 'codexin' ),
+	 							'type' 			=> 'text',
+	 							'description'	=> esc_html__( 'Enter Your Face-Book URL Here', 'codexin' ),
+	 							'admin_label' 	=> false,
+	 							),
 
- 						array(
- 							'name' 			=> 'tw',
- 							'label' 		=> esc_html__( 'Twitter Link ', 'codexin' ),
- 							'type' 			=> 'text',
- 							'description'	=> esc_html__( 'Enter Your Twitter URL Here', 'codexin' ),
- 							'admin_label' 	=> false,
- 							),
+	 						array(
+	 							'name' 			=> 'tw',
+	 							'label' 		=> esc_html__( 'Twitter Link ', 'codexin' ),
+	 							'type' 			=> 'text',
+	 							'description'	=> esc_html__( 'Enter Your Twitter URL Here', 'codexin' ),
+	 							'admin_label' 	=> false,
+	 							),
 
- 						array(
- 							'name' 			=> 'ld',
- 							'label' 		=> esc_html__( 'Linkedin Link ', 'codexin' ),
- 							'type' 			=> 'text',
- 							'description'	=> esc_html__( 'Enter Your Linkedin URL Here', 'codexin' ),
- 							'admin_label' 	=> false,
- 							),
+	 						array(
+	 							'name' 			=> 'ld',
+	 							'label' 		=> esc_html__( 'Linkedin Link ', 'codexin' ),
+	 							'type' 			=> 'text',
+	 							'description'	=> esc_html__( 'Enter Your Linkedin URL Here', 'codexin' ),
+	 							'admin_label' 	=> false,
+	 							),
 
- 						array(
- 							'name' 			=> 'ig',
- 							'label' 		=> esc_html__( 'Instagram Link ', 'codexin' ),
- 							'type' 			=> 'text',
- 							'description'	=> esc_html__( 'Enter Your Instagram URL Here', 'codexin' ),
- 							'admin_label' 	=> false,
- 							),
+	 						array(
+	 							'name' 			=> 'ig',
+	 							'label' 		=> esc_html__( 'Instagram Link ', 'codexin' ),
+	 							'type' 			=> 'text',
+	 							'description'	=> esc_html__( 'Enter Your Instagram URL Here', 'codexin' ),
+	 							'admin_label' 	=> false,
+	 							),
 
- 						array(
- 							'name' 			=> 'be',
- 							'label' 		=> esc_html__( 'Behance Link ', 'codexin' ),
- 							'type' 			=> 'text',
- 							'description'	=> esc_html__( 'Enter Your Behance URL Here', 'codexin' ),
- 							'admin_label' 	=> false,
- 							),
+	 						array(
+	 							'name' 			=> 'be',
+	 							'label' 		=> esc_html__( 'Behance Link ', 'codexin' ),
+	 							'type' 			=> 'text',
+	 							'description'	=> esc_html__( 'Enter Your Behance URL Here', 'codexin' ),
+	 							'admin_label' 	=> false,
+	 							),
+	 						array(
+	 							'name' 			=> 'class',
+	 							'label' 		=> esc_html__( 'Extra Class ', 'codexin' ),
+	 							'type' 			=> 'text',
+	 							'description'	=> esc_html__( 'If you wish to style a particular content element differently, please add a class name to this field and refer to it in your custom CSS.', 'codexin' ),
+	 							'admin_label' 	=> false,
+	 							),
+
+ 						),//End general array
+
+ 						'styling' => array(
+
+	 							array(
+	 								'name'    		=> 'codexin_css',
+	 								'type'    		=> 'css',
+	 								'options' 		=> array(
+	 									array(
+	 										"screens" => "any,1199,991,767,479",
+
+	 										'Title' => array(
+	 											array('property' => 'color', 'label' => 'Color', 'selector' => '.socials-title h4'),
+	 											array('property' => 'font-family', 'label' => 'Font family', 'selector' => '.socials-title h4'),
+	 											array('property' => 'font-size', 'label' => 'Font Size', 'selector' => '.socials-title h4'),
+	 											array('property' => 'font-weight', 'label' => 'Font Weight', 'selector' => '.socials-title h4'),
+	 											array('property' => 'line-height', 'label' => 'Line Height', 'selector' => '.socials-title h4'),
+	 											array('property' => 'padding', 'label' => 'Padding', 'selector' => '.socials-title h4'),
+	 											array('property' => 'margin', 'label' => 'Margin', 'selector' => '.socials-title h4')
+	 											),
+
+	 										'Icons' => array(
+	 											array('property' => 'color', 'label' => 'Color', 'selector' => '.socials i'),
+	 											array('property' => 'background-color', 'label' => 'Background Color', 'selector' => '.socials i'),
+	 											array('property' => 'color', 'label' => 'Color Hover', 'selector' => '.socials i:hover'),
+	 											array('property' => 'background-color', 'label' => 'Background Color Hover', 'selector' => '.socials i:hover'),
+	 											array('property' => 'font-size', 'label' => 'Font Size', 'selector' => '.socials i'),
+	 											array('property' => 'line-height', 'label' => 'Line Height', 'selector' => '.socials i'),
+	 											array('property' => 'text-align', 'label' => 'Text Align', 'selector' => '.socials i'),
+	 											array('property' => 'border', 'label' => 'Border', 'selector' => '.socials i'),
+	 											array('property' => 'border-radius', 'label' => 'Border Radius', 'selector' => '.socials i'),
+	 											array('property' => 'transition', 'label' => 'Background Transition Hover', 'selector' => '.socials i:hover'),
+	 											array('property' => 'padding', 'label' => 'Padding', 'selector' => '.socials i'),
+	 											array('property' => 'margin', 'label' => 'Margin', 'selector' => '.socials i')
+	 											),
+
+	 										'Box'	=> array(
+	 											array('property' => 'background'),
+	 											array('property' => 'border', 'label' => 'Border'),
+	 											array('property' => 'border-radius', 'label' => 'Border Radius'),
+	 											array('property' => 'box-shadow', 'label' => 'Box Shadow'),
+	 											array('property' => 'margin', 'label' => 'Margin'),
+	 											array('property' => 'padding', 'label' => 'Padding'),
+	 											),
+
+										) //End inner-option array
+
+									) //End option array
+
+								) //End inner-styling array
+
+	                		), //End styling array..
+
+						'animate' => array(
+ 							array(
+ 								'name'    		=> 'animate',
+ 								'type'    		=> 'animate'
+ 								)
+
+						),//End animate
 
  						
 

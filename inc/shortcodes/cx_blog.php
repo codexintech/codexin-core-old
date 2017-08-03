@@ -272,7 +272,7 @@
 	 											array('property' => 'font-size', 'label' => 'Font Size', 'selector' => '.meta'),
 	 											array('property' => 'font-weight', 'label' => 'Font Weight', 'selector' => '.meta'),
 	 											array('property' => 'line-height', 'label' => 'Line Height', 'selector' => '.meta'),
-	 											array('property' => 'background', 'label' => 'Line Height', 'selector' => '.meta'),
+	 											array('property' => 'background', 'label' => 'Background', 'selector' => '.meta'),
 	 											array('property' => 'padding', 'label' => 'Padding', 'selector' => '.meta'),
 	 											array('property' => 'margin', 'label' => 'Margin', 'selector' => '.meta')
 	 											),
