@@ -48,9 +48,7 @@
 				//Check post
 				if( $data->have_posts() ) :
 					//startloop here..
-					while( $data->have_posts() ) : $data->the_post();		
-
-						$id =  $post->ID;  
+					while( $data->have_posts() ) : $data->the_post(); 
 
 						$term_list = wp_get_post_terms( get_the_ID(), 'portfolio-category' ); 
 			 	?>

@@ -7,24 +7,22 @@
 	   ), $atts));
 
 	   $result = '';
-
+	 
 	   ob_start(); 
 	?>
-		<!-- <section id="location" class="location contact-location"> -->
-			<div class="contact-form-wrapper reveal-contact-form">
-				<div class=" contact-form">
-					<div class="contact-intro">
-						<h3><?php echo esc_html( $contact_title ); ?></h3>
-						<p><?php printf( '%s', $contact_desc ); ?></p>
-					</div>		
-					<div class="row">
+		<div class="contact-form-wrapper reveal-contact-form">
+			<div class=" contact-form">
+				<div class="contact-intro">
+					<h3><?php echo esc_html( $contact_title ); ?></h3>
+					<p><?php printf( '%s', $contact_desc ); ?></p>
+				</div>		
+				<div class="row">
 
-						<?php echo do_shortcode( '[contact-form-7 id="'. $show_form_id .'" title="Contact form 1"]' ); ?>
+					<?php echo do_shortcode( '[contact-form-7 id="'. $show_form_id .'" title="Contact form 1"]' ); ?>
 
-					</div> <!-- end of col -->
-				</div> <!-- end of row -->
-			</div> <!-- end of col -->		
-		<!-- </section> -->
+				</div> <!-- end of col -->
+			</div> <!-- end of row -->
+		</div> <!-- end of col -->
 
 	<?php
 		$result .= ob_get_clean();
