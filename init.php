@@ -54,9 +54,15 @@ class Codexin_Core {
 		// Registering Admin Menu for plugin
 		require_once CODEXIN_CORE_INC_DIR . '/admin_menu.php';
 
+		// Initalizing custom widgets
+		$cx_widgets = glob(CODEXIN_CORE_INC_DIR.'/widgets/*.php');
+		foreach ($cx_widgets as $cx_widget){
+		    require_once( sanitize_text_field( $cx_widget ) );    		    
+		}
+
 		// Loading all the custom shortcode files
-		$cx_files = glob(CODEXIN_CORE_SC_DIR.'/*.php');
-		foreach ($cx_files as $filename){
+		$cx_sc_files = glob(CODEXIN_CORE_SC_DIR.'/*.php');
+		foreach ($cx_sc_files as $filename){
 		    require_once( sanitize_text_field( $filename ) );    		    
 		}
 
