@@ -75,7 +75,7 @@
 							?>
 								<span>
 									<i class="fa fa-eye"></i> <i>
-										<?php echo reveal_get_post_views(get_the_ID()); ?>
+										<?php echo codexin_get_post_views(get_the_ID()); ?>
 									</i>
 								</span>
 								<span> 											
@@ -91,13 +91,13 @@
 								</span>
 								<span>
 									<i class="fa fa-eye"></i> <i>
-										<?php echo reveal_get_post_views(get_the_ID()); ?>
+										<?php echo codexin_get_post_views(get_the_ID()); ?>
 									</i>
 								</span>
 							<?php else : ?>
 								<span>
 									<i class="fa fa-eye"></i> <i>
-										<?php echo reveal_get_post_views(get_the_ID()); ?>
+										<?php echo codexin_get_post_views(get_the_ID()); ?>
 									</i>
 								</span>
 								<span> 											
