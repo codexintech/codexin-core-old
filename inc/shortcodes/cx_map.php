@@ -62,10 +62,16 @@
  } //End cx_map
 
 
+
+
 	 function cx_map_kc() {
 
 	 	if (function_exists('kc_add_map')) 
 	 	{ 
+
+		 	$get_api = get_option( 'codexin_options_gmap_api' )[ 'gmap_api' ];
+			$cx_api = ( !empty( $get_api ) ) ? $get_api : '';
+
 	 		kc_add_map(
 	 			array(
 	 				'cx_map' => array(
@@ -76,7 +82,7 @@
 		                //Only load assets when using this element
 	 					'assets' => array(
 	 						'scripts' => array(
-	 							'google-js' => 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAKKh6e3XWgzR69Mb8cqk30ndps_hzaMls',
+	 							'google-js' => 'https://maps.googleapis.com/maps/api/js?key=' . $cx_api,
 	 							'gmap-js'		=> CODEXIN_CORE_ASSET_DIR . '/js/gmaps.js',
 	 							'cx-map-js'		=> CODEXIN_CORE_ASSET_DIR . '/js/shortcode-js/cx_map.js',
 	 							),
@@ -102,7 +108,7 @@
 
 	 						array(
 	 							'name' 			=> 'map_color',
-	 							'label' 		=> esc_html__( 'Select You Color', 'codexin' ),
+	 							'label' 		=> esc_html__( 'Choose Color Scheme', 'codexin' ),
 	 							'type' 			=> 'select',
 	 							'options'		=> array(
 	 													'#b4b4b4' => 'Gray Color',

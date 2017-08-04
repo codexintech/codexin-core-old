@@ -37,10 +37,10 @@ class CodexinAdminMenu {
 
 		$this->options_general = get_option( 'codexin_options_general' );
 		$this->options_social = get_option( 'codexin_options_social' );
-		$this->options_in_api = get_option( 'codexin_options_in_api' ); 
+		$this->options_in_api = get_option( 'codexin_options_gmap_api' ); 
 
 		$social_Screen = ( isset( $_GET['action'] ) && 'social' == $_GET['action'] ) ? true : false;
-		$api_Screen = ( isset( $_GET['action'] ) && 'api' == $_GET['action'] ) ? true : false;
+		$gmap_api_Screen = ( isset( $_GET['action'] ) && 'api' == $_GET['action'] ) ? true : false;
 	     ?>
 	    <!-- Create a header in the default WordPress 'wrap' container -->
 	    <div class="wrap">    
@@ -49,7 +49,7 @@ class CodexinAdminMenu {
             <h2 class="nav-tab-wrapper">
 				<a href="<?php echo admin_url( 'admin.php?page=codexin-options' ); ?>" class="nav-tab<?php if ( ! isset( $_GET['action'] ) || isset( $_GET['action'] ) && 'social' != $_GET['action']  && 'api' != $_GET['action'] ) echo ' nav-tab-active'; ?>"><?php esc_html_e( 'General', 'codexin' ); ?></a>
 				<a href="<?php echo esc_url( add_query_arg( array( 'action' => 'social' ), admin_url( 'admin.php?page=codexin-options' ) ) ); ?>" class="nav-tab<?php if ( $social_Screen ) echo ' nav-tab-active'; ?>"><?php esc_html_e( 'Social Media', 'codexin' ); ?></a> 
-				<a href="<?php echo esc_url( add_query_arg( array( 'action' => 'api' ), admin_url( 'admin.php?page=codexin-options' ) ) ); ?>" class="nav-tab<?php if ( $api_Screen ) echo ' nav-tab-active'; ?>"><?php esc_html_e( 'Instagram API Settings', 'codexin' ); ?></a>        
+				<a href="<?php echo esc_url( add_query_arg( array( 'action' => 'api' ), admin_url( 'admin.php?page=codexin-options' ) ) ); ?>" class="nav-tab<?php if ( $gmap_api_Screen ) echo ' nav-tab-active'; ?>"><?php esc_html_e( 'Google Map API', 'codexin' ); ?></a>        
 			</h2>
 	        <?php settings_errors(); ?>
 
@@ -58,9 +58,9 @@ class CodexinAdminMenu {
 					settings_fields( 'codexin_options_social' );
 					do_settings_sections( 'codexin-setting-social' );
 					submit_button();
-				} elseif($api_Screen) {
-					settings_fields( 'codexin_options_in_api' );
-					do_settings_sections( 'codexin-setting-instagram' );
+				} elseif($gmap_api_Screen) {
+					settings_fields( 'codexin_options_gmap_api' );
+					do_settings_sections( 'codexin-setting-gmap' );
 					submit_button();
 				}else { 
 					settings_fields( 'codexin_options_general' );
@@ -182,49 +182,25 @@ class CodexinAdminMenu {
         );	
 		
 		register_setting(
-            'codexin_options_in_api', // Option group
-            'codexin_options_in_api', // Option name
+            'codexin_options_gmap_api', // Option group
+            'codexin_options_gmap_api', // Option name
             array( $this, 'cx_sanitize' ) // Sanitize
         );
 
         add_settings_section(
             'setting_section_id', // ID
-            esc_html__('Instagram API Details', 'codexin'), // Title
-            array( $this, 'instagram_section_info' ), // Callback
-            'codexin-setting-instagram' // Page
+            esc_html__('Google Map API', 'codexin'), // Title
+            array( $this, 'gmap_section_info' ), // Callback
+            'codexin-setting-gmap' // Page
         );         
 
 		add_settings_field(
-            'in_name', // ID
-            esc_html__('Instagram Username', 'codexin'), // Title 
-            array( $this, 'in_name_callback' ), // Callback
-            'codexin-setting-instagram', // Page
+            'gmap_api', // ID
+            esc_html__('Google Map API Key', 'codexin'), // Title 
+            array( $this, 'gmap_api_callback' ), // Callback
+            'codexin-setting-gmap', // Page
             'setting_section_id' // Section      
         );	
-
-		add_settings_field(
-            'in_id', // ID
-            esc_html__('Instagram User ID', 'codexin'), // Title 
-            array( $this, 'in_id_callback' ), // Callback
-            'codexin-setting-instagram', // Page
-            'setting_section_id' // Section      
-        );	
-
-		add_settings_field(
-            'acc_token', // ID
-            esc_html__('Access Token', 'codexin'), // Title 
-            array( $this, 'acc_token_callback' ), // Callback
-            'codexin-setting-instagram', // Page
-            'setting_section_id' // Section      
-        );
-
-		add_settings_field(
-            'cli_id', // ID
-            esc_html__('Client ID', 'codexin'), // Title 
-            array( $this, 'cli_id_callback' ), // Callback
-            'codexin-setting-instagram', // Page
-            'setting_section_id' // Section      
-        );		
 	     
 	} // end codexin_admin_init
 	 
@@ -234,11 +210,11 @@ class CodexinAdminMenu {
 	}
 
 	public function social_section_info() {
-		printf( '<p>%s</p>', __( 'This Section Represents the Social Profile Input Section. Please Enter Your Valid Social Profile Information listed below:', 'codexin' ) );
+		printf( '<p>%s</p>', esc_html__( 'This Section Represents the Social Profile Input Section. Please Enter Your Valid Social Profile Information listed below:', 'codexin' ) );
 	}
 
-	public function instagram_section_info() {
-		printf( '<p>%s</p>', __( 'This Section Represents the Instagram API Input Section. Please Enter Required Valid Information listed below:', 'codexin' ) );
+	public function gmap_section_info() {
+		printf( '<p>%s</p>', esc_html__( 'This Section Represents the Google Map API Input Section. Please Enter Required Valid Information listed below:', 'codexin' ) );
 	}
 
 	public function tw_url_callback() {
@@ -246,7 +222,7 @@ class CodexinAdminMenu {
             '<input type="text" class="regular-text" id="tw_url" name="codexin_options_social[tw_url]" value="%s" />',
             isset( $this->options_social['tw_url'] ) ? esc_attr( $this->options_social['tw_url']) : ''
         );
-        printf( '&nbsp;&nbsp;<span class="description">%s</span>', __( 'Please Insert Your Twitter Profile URL', 'codexin' ) );
+        printf( '&nbsp;&nbsp;<span class="description">%s</span>', esc_html__( 'Please Insert Your Twitter Profile URL', 'codexin' ) );
     }
 
 	public function fb_url_callback() {
@@ -254,7 +230,7 @@ class CodexinAdminMenu {
             '<input type="text" class="regular-text" id="fb_url" name="codexin_options_social[fb_url]" value="%s" />',
             isset( $this->options_social['fb_url'] ) ? esc_attr( $this->options_social['fb_url']) : ''
         );
-        printf( '&nbsp;&nbsp;<span class="description">%s</span>', __( 'Please Insert Your Facebook Profile URL', 'codexin' ) );
+        printf( '&nbsp;&nbsp;<span class="description">%s</span>', esc_html__( 'Please Insert Your Facebook Profile URL', 'codexin' ) );
     }
 
 	public function in_url_callback() {
@@ -262,7 +238,7 @@ class CodexinAdminMenu {
             '<input type="text" class="regular-text" id="in_url" name="codexin_options_social[in_url]" value="%s" />',
             isset( $this->options_social['in_url'] ) ? esc_attr( $this->options_social['in_url']) : ''
         );
-        printf( '&nbsp;&nbsp;<span class="description">%s</span>', __( 'Please Insert Your Instagram Profile URL', 'codexin' ) );
+        printf( '&nbsp;&nbsp;<span class="description">%s</span>', esc_html__( 'Please Insert Your Instagram Profile URL', 'codexin' ) );
     }
 
 	public function pin_url_callback() {
@@ -270,7 +246,7 @@ class CodexinAdminMenu {
             '<input type="text" class="regular-text" id="pin_url" name="codexin_options_social[pin_url]" value="%s" />',
             isset( $this->options_social['pin_url'] ) ? esc_attr( $this->options_social['pin_url']) : ''
         );
-        printf( '&nbsp;&nbsp;<span class="description">%s</span>', __( 'Please Insert Your Pinterest Profile URL', 'codexin' ) );
+        printf( '&nbsp;&nbsp;<span class="description">%s</span>', esc_html__( 'Please Insert Your Pinterest Profile URL', 'codexin' ) );
     }
 
 	public function be_url_callback() {
@@ -278,7 +254,7 @@ class CodexinAdminMenu {
             '<input type="text" class="regular-text" id="be_url" name="codexin_options_social[be_url]" value="%s" />',
             isset( $this->options_social['be_url'] ) ? esc_attr( $this->options_social['be_url']) : ''
         );
-        printf( '&nbsp;&nbsp;<span class="description">%s</span>', __( 'Please Insert Your Behance Profile URL', 'codexin' ) );
+        printf( '&nbsp;&nbsp;<span class="description">%s</span>', esc_html__( 'Please Insert Your Behance Profile URL', 'codexin' ) );
     }
 
 	public function gp_url_callback() {
@@ -286,7 +262,7 @@ class CodexinAdminMenu {
             '<input type="text" class="regular-text" id="gp_url" name="codexin_options_social[gp_url]" value="%s" />',
             isset( $this->options_social['gp_url'] ) ? esc_attr( $this->options_social['gp_url']) : ''
         );
-        printf( '&nbsp;&nbsp;<span class="description">%s</span>', __( 'Please Insert Your GooglePlus Profile URL', 'codexin' ) );
+        printf( '&nbsp;&nbsp;<span class="description">%s</span>', esc_html__( 'Please Insert Your GooglePlus Profile URL', 'codexin' ) );
     }
 
 	public function li_url_callback() {
@@ -294,7 +270,7 @@ class CodexinAdminMenu {
             '<input type="text" class="regular-text" id="li_url" name="codexin_options_social[li_url]" value="%s" />',
             isset( $this->options_social['li_url'] ) ? esc_attr( $this->options_social['li_url']) : ''
         );
-        printf( '&nbsp;&nbsp;<span class="description">%s</span>', __( 'Please Insert Your LinkedIn Profile URL', 'codexin' ) );
+        printf( '&nbsp;&nbsp;<span class="description">%s</span>', esc_html__( 'Please Insert Your LinkedIn Profile URL', 'codexin' ) );
     }
 
 	public function yt_url_callback() {
@@ -302,7 +278,7 @@ class CodexinAdminMenu {
             '<input type="text" class="regular-text" id="yt_url" name="codexin_options_social[yt_url]" value="%s" />',
             isset( $this->options_social['yt_url'] ) ? esc_attr( $this->options_social['yt_url']) : ''
         );
-        printf( '&nbsp;&nbsp;<span class="description">%s</span>', __( 'Please Insert Your YouTube Profile URL', 'codexin' ) );
+        printf( '&nbsp;&nbsp;<span class="description">%s</span>', esc_html__( 'Please Insert Your YouTube Profile URL', 'codexin' ) );
     }
 
 	public function sk_url_callback() {
@@ -310,42 +286,16 @@ class CodexinAdminMenu {
             '<input type="text" class="regular-text" id="sk_url" name="codexin_options_social[sk_url]" value="%s" />',
             isset( $this->options_social['sk_url'] ) ? esc_attr( $this->options_social['sk_url']) : ''
         );
-        printf( '&nbsp;&nbsp;<span class="description">%s</span>', __( 'Please Insert Your Skype Profile URL', 'codexin' ) );
+        printf( '&nbsp;&nbsp;<span class="description">%s</span>', esc_html__( 'Please Insert Your Skype Profile URL', 'codexin' ) );
     }
 
-	public function in_name_callback() {
+	public function gmap_api_callback() {
         printf(
-            '<input type="text" class="regular-text" id="in_name" name="codexin_options_in_api[in_name]" value="%s" />',
-            isset( $this->options_in_api['in_name'] ) ? esc_attr( $this->options_in_api['in_name']) : ''
+            '<input type="text" class="regular-text" id="gmap_api" name="codexin_options_gmap_api[gmap_api]" value="%s" />',
+            isset( $this->options_in_api['gmap_api'] ) ? esc_attr( $this->options_in_api['gmap_api']) : ''
         );
-        printf( '&nbsp;&nbsp;<span class="description">%s</span>', __( 'Please Insert Your Instagram User Name', 'codexin' ) );
+        printf( '&nbsp;&nbsp;<span class="description">%1$s<a href="%2$s" target="_blank">%3$s</a></span>', esc_html__( 'Generate Your Google Map API Key from ', 'codexin' ), esc_url('https://developers.google.com/maps/documentation/javascript/get-api-key'), esc_html__('here'), 'codexin' );
     }
-
-	public function in_id_callback() {
-        printf(
-            '<input type="text" class="regular-text" id="in_id" name="codexin_options_in_api[in_id]" value="%s" />',
-            isset( $this->options_in_api['in_id'] ) ? esc_attr( $this->options_in_api['in_id']) : ''
-        );
-        printf( '&nbsp;&nbsp;<span class="description">%1$s<a href="%2$s" target="_blank">%3$s</a></span>', __( 'Lookup your User ID from ', 'codexin' ), esc_url( '//ershad7.com/InstagramUserID/' ), __( 'here', 'codexin' ) );
-    }
-
-	public function acc_token_callback() {
-        printf(
-            '<input type="text" class="regular-text" id="acc_token" name="codexin_options_in_api[acc_token]" value="%s" />',
-            isset( $this->options_in_api['acc_token'] ) ? esc_attr( $this->options_in_api['acc_token']) : ''
-        );
-        printf( '&nbsp;&nbsp;<span class="description">%1$s<a href="%2$s" target="_blank">%3$s</a></span>', __( 'Generate Your Access Token from ', 'codexin' ), esc_url( '//instagram.pixelunion.net/' ), __( 'here', 'codexin' ) );
-    }
-
-	public function cli_id_callback() {
-        printf(
-            '<input type="text" class="regular-text" id="cli_id" name="codexin_options_in_api[cli_id]" value="%s" />',
-            isset( $this->options_in_api['cli_id'] ) ? esc_attr( $this->options_in_api['cli_id']) : ''
-        );
-        printf( '&nbsp;&nbsp;<span class="description">%1$s<a href="%2$s" target="_blank">%3$s</a></span>', __( 'Register a new client from ', 'codexin' ), esc_url( '//instagram.com/developer/clients/manage/' ), __( 'here', 'codexin' ) );
-    }
-
-
 
 
     public function placeholder_callback() {
@@ -386,17 +336,8 @@ class CodexinAdminMenu {
         if( isset( $input['sk_url'] ) )
             $new_input['sk_url'] = sanitize_text_field( $input['sk_url'] );
 
-        if( isset( $input['in_name'] ) )
-            $new_input['in_name'] = sanitize_text_field( $input['in_name'] );
-
-        if( isset( $input['in_id'] ) )
-            $new_input['in_id'] = sanitize_text_field( $input['in_id'] );
-
-        if( isset( $input['acc_token'] ) )
-            $new_input['acc_token'] = sanitize_text_field( $input['acc_token'] );
-
-        if( isset( $input['cli_id'] ) )
-            $new_input['cli_id'] = sanitize_text_field( $input['cli_id'] );
+        if( isset( $input['gmap_api'] ) )
+            $new_input['gmap_api'] = sanitize_text_field( $input['gmap_api'] );
 
         return $new_input;
     }
