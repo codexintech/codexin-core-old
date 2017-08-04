@@ -1,0 +1,27 @@
+
+
+.widget-title {
+    text-transform: uppercase;
+    margin-top: 15px;
+    margin-bottom: 40px;
+}
+
+.reveal-widget .media {
+    margin-bottom: 30px;
+}
+
+.reveal-widget .media .media-body {
+    padding-top: 10px;
+}
+
+.reveal-widget .media .blog-info {
+    padding-top: 5px;
+}
+
+.instagram-images img {
+    width: 100%;
+}
+
+.media-object {
+    max-width: none;
+}
