@@ -1,11 +1,17 @@
 <?php
 	function cx_map_shortcode( $atts, $content = null ) {
 	   extract(shortcode_atts(array(
-	   		'img_alt'	=> '',
-	   		'map_color' => '',
-	   		'class'		=> ''
+	   		'img_alt'		 => '',
+	   		'gmap_color' 	 => '',
+	   		'gmap_latitude'  => '',
+	   		'gmap_longitude' => '',
+	   		'gmap_zoom_level' => '',
+	   		'gmap_marker' 	 => '',
+	   		'class'			 => ''
 	   ), $atts));
 
+	   $ret_full_img_url = retrieve_img_src( $gmap_marker, '' );
+	   //define kc-column classes
 	   $master_class = apply_filters( 'kc-el-class', $atts );
 	   $master_class[] = 'map-wrapper';
 	   $classes = array( 'reveal-map-wrapper' );
@@ -15,20 +21,25 @@
 
 	   ob_start(); 
 
-	   if(!empty(reveal_option('reveal-google-map-latitude'))):
-	   	$latitude = reveal_option('reveal-google-map-latitude');
+
+	   if(! empty ( $gmap_color ) ):
+	   	$map_color = $gmap_color;
 	   endif;
 
-	   if(!empty(reveal_option('reveal-google-map-longitude'))):
-	   	$longtitude = reveal_option('reveal-google-map-longitude');
+	   if( ! empty( $gmap_latitude ) ):
+	   	$latitude = $gmap_latitude;
 	   endif;
 
-	   if(!empty(reveal_option('reveal-google-map-zoom'))):
-	   	$c_zoom = reveal_option('reveal-google-map-zoom');
+	   if( ! empty ( $gmap_longitude ) ):
+	   	$longtitude = $gmap_longitude;
 	   endif;
 
-	   if(!empty(reveal_option('reveal-google-map-marker'))):
-	   	$gmap_marker = reveal_option('reveal-google-map-marker');
+	   if( ! empty( $gmap_zoom_level ) ):
+	   	$c_zoom = $gmap_zoom_level;
+	   endif;
+
+	   if(! empty ( $ret_full_img_url ) ):
+	   	$gmap_marker = $ret_full_img_url;
 	   endif;
 
 	   $codeopt = '';
@@ -36,7 +47,7 @@
 	   <script type="text/javascript">
 	   	var reveal_lat = "'. $latitude .'"; 
 	   	var reveal_long = "'. $longtitude .'"; 
-	   	var reveal_marker = "'. $gmap_marker['url'] .'"; 
+	   	var reveal_marker = "'. $gmap_marker .'"; 
 	   	var reveal_m_zoom = Number ("'. $c_zoom .'"); 
 	   	var reveal_map_color = "' . $map_color . '";
 	   </script>
@@ -90,21 +101,6 @@
 		               ), //End assets
 
 	 					'params' => array(
-	 						array(
-	 							'name' 			=> 'gmap_apikey',
-	 							'label' 		=> esc_html__( 'Google Map Api Key', 'codexin' ),
-	 							'type' 			=> 'text',
-	 							'description'	=> esc_html__( 'Enter Google Map Api Key Here', 'codexin' ),
-	 							'admin_label' 	=> false,
-	 							),
-
-	 						array(
-	 							'name' 			=> 'class',
-	 							'label' 		=> esc_html__( 'Extra Class', 'codexin' ),
-	 							'type' 			=> 'text',
-	 							'description'	=> esc_html__( 'If you wish to style a particular content element differently, please add a class name to this field and refer to it in your custom CSS.', 'codexin' ),
-	 							'admin_label' 	=> false,
-	 							),
 
 	 						array(
 	 							'name' 			=> 'map_color',
@@ -117,6 +113,60 @@
 	 												),
 	 							'value'			=> '#b4b4b4',
 	 							'description'	=> esc_html__( 'You can select the map color here', 'codexin' ),
+	 							'admin_label' 	=> false,
+	 							),
+
+	 						array(
+	 							'name' 			=> 'gmap_apikey',
+	 							'label' 		=> esc_html__( 'Google Map Api Key', 'codexin' ),
+	 							'type' 			=> 'text',
+	 							'description'	=> esc_html__( 'Enter Google Map Api Key Here', 'codexin' ),
+	 							'admin_label' 	=> false,
+	 							),
+
+	 						array(
+	 							'name' 			=> 'gmap_latitude',
+	 							'label' 		=> esc_html__( 'Map Latitude', 'codexin' ),
+	 							'type' 			=> 'text',
+	 							'description'	=> sprintf(__('You can find the <strong>Latitude</strong> and <strong>Longitude</strong> information by placing your address <a href="%s" target="_blank">Here</a>', 'reveal'), esc_url('//latlong.net/')),
+	 							'admin_label' 	=> false,
+	 							),
+
+	 						array(
+	 							'name' 			=> 'gmap_longitude',
+	 							'label' 		=> esc_html__( 'Map Longitude', 'codexin' ),
+	 							'type' 			=> 'text',
+	 							'description'	=> sprintf(__('You can find the <strong>Latitude</strong> and <strong>Longitude</strong> information by placing your address <a href="%s" target="_blank">Here</a>', 'reveal'), esc_url('//latlong.net/')),
+	 							'admin_label' 	=> false,
+	 							),
+
+	 						array(
+	 							'name' 			=> 'gmap_zoom_level',
+	 							'label' 		=> esc_html__( 'Map Zoom Level', 'codexin' ),
+	 							'type' 			=> 'number_slider',  // USAGE RADIO TYPE
+														'options' => array(    // REQUIRED
+															'min' => 8,
+															'max' => 20,
+															'unit' => '',
+															'show_input' => true
+														),
+	 							'description'	=> esc_html__( 'Enter Map Zoom Level Here', 'codexin' ),
+	 							'admin_label' 	=> false,
+	 							),
+
+	 						array(
+	 							'name' 			=> 'gmap_marker',
+	 							'label' 		=> esc_html__( 'Upload Map Marker', 'codexin' ),
+	 							'type' 			=> 'attach_image',
+	 							'description'	=> esc_html__( 'Upload Map Marker Here', 'codexin' ),
+	 							'admin_label' 	=> false,
+	 							),
+
+	 						array(
+	 							'name' 			=> 'class',
+	 							'label' 		=> esc_html__( 'Extra Class', 'codexin' ),
+	 							'type' 			=> 'text',
+	 							'description'	=> esc_html__( 'If you wish to style a particular content element differently, please add a class name to this field and refer to it in your custom CSS.', 'codexin' ),
 	 							'admin_label' 	=> false,
 	 							),
 

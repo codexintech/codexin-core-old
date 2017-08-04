@@ -1,4 +1,5 @@
 <?php
+
 	function cx_contact_form_shortcode( $atts, $content = null ) {
 	   extract(shortcode_atts(array(
 	   		'contact_title'	=> '',
@@ -23,9 +24,7 @@
 					<p><?php printf( '%s', $contact_desc ); ?></p>
 				</div>		
 				<div class="row form-element">
-						<?php echo $show_form_id; ?>
-					<?php echo do_shortcode( '[contact-form-7 id="'. $show_form_id .'" title="Contact form 1"]' ); ?>
-
+					<?php echo do_shortcode( '[contact-form-7 id="'. $show_form_id .'" title=""]' ); ?>
 				</div> <!-- end of col -->
 			</div> <!-- end of row -->
 		</div> <!-- end of col -->
@@ -42,54 +41,48 @@
 /*-------------------
 	Add Param Type 
 	------------------*/
- 
-		add_action('init', 'cx_add_contact_form_param', 99 );
- 		//The function add a new param-type in KC ..
-		function cx_add_contact_form_param(){
 		 
-		    global $kc;
-		    $kc->add_param_type( 'cx_form_title', 'cx_get_contact_form' );
+/**
+ * The function face the all data of created contact-form by contact-form-7 plugin
+ * develop by sazzad on 8/03/2017 
+ *
+ */  
+function cx_get_contact_form() {
 
-		}//End
-		 
-		/**
-		 * The function face the all data of created contact-form by contact-form-7 plugin
-		 * develop by sazzad on 8/03/2017 
-		 *
-		 */  
-		function cx_get_contact_form(){
-			$args = array( 
-				'post_type' 	 => 'wpcf7_contact_form', 
-				'posts_per_page' => -1
-			);
-			$rs = array();
-			if( $data = get_posts( $args ) ){ ?>
-			<select class="kc-param">
-				<?php
-					echo '<option value=""> Please Select...</option>';
-					foreach( $data as $v_form ){ 
-						$form_title = $v_form->post_title;
-						$form_id = $v_form->ID;
-						echo '<option value="'.$form_id.'">'. $form_id .'</option>';
-						return $form_id;
-					 } 
-				 ?>
-			</select>
-			<?php	
-			}else{
-				$rs['0'] = esc_html__( 'No Contact Form found', 'codexin' );
-			} //End else
-			
-		} //End cx_get_contact_form()..
+	$args = array( 
+		'post_type' => 'wpcf7_contact_form', 
+		'posts_per_page' => -1 
+	);
 
-	/*-------------------
-	End Param Type 
-	------------------*/
+	$cf7_list = get_posts( $args );
+
+	$cf7_val = array();
+	if ( $cf7_list ) {
+
+		$cf7_val[] = __( 'Select Contact Form..', 'codexin' );
+
+		foreach ( $cf7_list as $value ) {
+			$cf7_val[$value->ID] = $value->post_title;
+		}
+
+	} else {
+
+		$cf7_val[0] = __( 'No contact forms found', 'codexin' );
+
+	}
+
+	return $cf7_val;
 
 
+ } //End cx_get_contact_form()..
 
+/*-------------------
+End Param Type 
+------------------*/
 
 	 function cx_contact_form_kc() {
+
+	 	$contact_form = cx_get_contact_form();
 
 	 	if (function_exists('kc_add_map')) 
 	 	{ 
@@ -113,7 +106,8 @@
 		 						array(
 		 							'name' 			=> 'show_form_id',
 		 							'label' 		=> esc_html__( 'Select Form ', 'codexin' ),
-		 							'type' 			=> 'cx_form_title',
+		 							'type' 			=> 'select',
+		 							'options'		=> $contact_form,
 		 							'description'	=> esc_html__( 'Select Your Contact Form Here', 'codexin' ),
 		 							'admin_label' 	=> false,
 		 							),
