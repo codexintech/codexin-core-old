@@ -26,7 +26,6 @@ class Codexin_Core {
         define('CODEXIN_CORE_ASSET_DIR', plugin_dir_url( __FILE__ ) .'assets');
         define('CODEXIN_CORE_SC_DIR', plugin_dir_path( __FILE__ ) .'inc/shortcodes');
 
-
 		// Loading the core files
 		$this -> codexin_includes();
 
