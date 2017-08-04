@@ -161,18 +161,18 @@ class Codexin_Recent_Projects extends WP_Widget {
 						echo '<p>'. get_the_time( 'F j, Y' ) .'</p>';
 						}
 						if( $display_meta == $display_meta_a AND 'on' == $instance[ 'show_like' ] ) {
-						echo '<span>'. get_simple_likes_button( get_the_ID(), 0 ) .'</span>';
+						echo '<span>'. codexin_likes_button( get_the_ID(), 0 ) .'</span>';
 						}
 						if( $display_meta == $display_meta_d OR $display_meta == $display_meta_b OR $display_meta == $display_meta_c) {
 						echo '<div class="blog-info">';
 							if( $display_meta == $display_meta_d OR $display_meta == $display_meta_b ) {
-							echo '<span><i class="fa fa-eye"></i><i>' . reveal_get_post_views(get_the_ID()) . '</i></span>';
+							echo '<span><i class="fa fa-eye"></i><i>' . codexin_get_post_views(get_the_ID()) . '</i></span>';
 							}
 							if( $display_meta == $display_meta_d OR $display_meta == $display_meta_c ) {
 							echo '<span><i class="fa fa-comments"></i><i>' . ' ' . get_comments_number() . '</i></span>';
 							}
 							if( 'on' == $instance[ 'show_like' ] ) {
-							echo '<span>'. get_simple_likes_button( get_the_ID(), 0 ) .'</span>';
+							echo '<span>'. codexin_likes_button( get_the_ID(), 0 ) .'</span>';
 							}
 
 						echo '</div>';
