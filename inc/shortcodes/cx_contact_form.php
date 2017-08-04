@@ -49,14 +49,12 @@
  */  
 function cx_get_contact_form() {
 
-	global $wpdb;
-	$cf7_list = $wpdb->get_results(
-		"
-		SELECT ID, post_title, post_name
-		FROM $wpdb->posts
-		WHERE post_type = 'wpcf7_contact_form'
-		"
-		);
+	$args = array( 
+		'post_type' => 'wpcf7_contact_form', 
+		'posts_per_page' => -1 
+	);
+
+	$cf7_list = get_posts( $args );
 
 	$cf7_val = array();
 	if ( $cf7_list ) {
@@ -64,7 +62,7 @@ function cx_get_contact_form() {
 		$cf7_val[] = __( 'Select Contact Form..', 'codexin' );
 
 		foreach ( $cf7_list as $value ) {
-			echo $cf7_val[$value->ID] = $value->post_title;
+			$cf7_val[$value->ID] = $value->post_title;
 		}
 
 	} else {
