@@ -54,6 +54,9 @@ class Codexin_Core {
 		// Registering Admin Menu for plugin
 		require_once CODEXIN_CORE_INC_DIR . '/admin_menu.php';
 
+		// Adding Helper File
+		require_once CODEXIN_CORE_INC_DIR . '/helpers.php';
+
 		// Initalizing custom widgets
 		$cx_widgets = glob(CODEXIN_CORE_INC_DIR.'/widgets/*.php');
 		foreach ($cx_widgets as $cx_widget){
@@ -77,12 +80,24 @@ class Codexin_Core {
 	public function codexin_enqueque() {
 
 		add_action( 'wp_enqueue_scripts', array( $this, 'codexin_styles' ), 9 );
+		add_action( 'wp_enqueue_scripts', array( $this, 'codexin_script' ), 999 );
 
 	}
 
 	public function codexin_styles() {
 
 		wp_enqueue_style( 'codexin-shortcodes-stylesheet', CODEXIN_CORE_ASSET_DIR . '/css/shortcodes.css', false, '1.0','all');
+
+	}
+
+	public function codexin_script() {
+
+		wp_enqueue_script( 'codexin-post-like-script', CODEXIN_CORE_ASSET_DIR . '/js/codexin-post-like.js', array( 'jquery' ), '0.5', true );
+		wp_localize_script( 'codexin-post-like-script', 'postLikes', array(
+			'ajaxurl' => admin_url( 'admin-ajax.php' ),
+			'like' => esc_html__( 'Like', 'codexin' ),
+			'unlike' => esc_html__( 'Unlike', 'codexin' )
+		) );
 
 	}
 

@@ -24,7 +24,7 @@ class CodexinAdminMenu {
 	 
 	    add_menu_page(
 	        'Codexin Core Options',          		// The title to be displayed on the corresponding page for this menu
-	        'Codexin Options',                  	// The text to be displayed for this actual menu item
+	        'Codexin Core',                  		// The text to be displayed for this actual menu item
 	        'manage_options',            			// Which type of users can see this menu
 	        'codexin-options',                  	// The unique ID - that is, the slug - for this menu item
 	        array( $this, 'cx_settings_page_cb' ),	// The name of the function to call when rendering the menu for this page
