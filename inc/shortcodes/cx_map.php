@@ -117,17 +117,10 @@
 	 							),
 
 	 						array(
-	 							'name' 			=> 'gmap_apikey',
-	 							'label' 		=> esc_html__( 'Google Map Api Key', 'codexin' ),
-	 							'type' 			=> 'text',
-	 							'description'	=> esc_html__( 'Enter Google Map Api Key Here', 'codexin' ),
-	 							'admin_label' 	=> false,
-	 							),
-
-	 						array(
 	 							'name' 			=> 'gmap_latitude',
 	 							'label' 		=> esc_html__( 'Map Latitude', 'codexin' ),
 	 							'type' 			=> 'text',
+	 							'value'			=> '39.414269',
 	 							'description'	=> sprintf(__('You can find the <strong>Latitude</strong> and <strong>Longitude</strong> information by placing your address <a href="%s" target="_blank">Here</a>', 'reveal'), esc_url('//latlong.net/')),
 	 							'admin_label' 	=> false,
 	 							),
@@ -136,6 +129,7 @@
 	 							'name' 			=> 'gmap_longitude',
 	 							'label' 		=> esc_html__( 'Map Longitude', 'codexin' ),
 	 							'type' 			=> 'text',
+	 							'value'			=> '-77.410541',
 	 							'description'	=> sprintf(__('You can find the <strong>Latitude</strong> and <strong>Longitude</strong> information by placing your address <a href="%s" target="_blank">Here</a>', 'reveal'), esc_url('//latlong.net/')),
 	 							'admin_label' 	=> false,
 	 							),
@@ -150,6 +144,7 @@
 															'unit' => '',
 															'show_input' => true
 														),
+								'value'			=> 16,						
 	 							'description'	=> esc_html__( 'Enter Map Zoom Level Here', 'codexin' ),
 	 							'admin_label' 	=> false,
 	 							),
@@ -158,6 +153,7 @@
 	 							'name' 			=> 'gmap_marker',
 	 							'label' 		=> esc_html__( 'Upload Map Marker', 'codexin' ),
 	 							'type' 			=> 'attach_image',
+	 							'value'			=> CODEXIN_CORE_ASSET_DIR . '/images/map-marker-1.png',
 	 							'description'	=> esc_html__( 'Upload Map Marker Here', 'codexin' ),
 	 							'admin_label' 	=> false,
 	 							),
