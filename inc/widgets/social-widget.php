@@ -24,7 +24,7 @@ class Codexin_Social_Widget extends WP_Widget {
 	// back-end display of widget
 	public function form( $instance ) {
 
-		echo '<p>'. esc_html__('In Order To Use This Widget Please Fill Up The Social Profile Information In The "Social Media" Section of ', 'codexin') .'<strong><a href="'. esc_url(admin_url().'admin.php?page=codexin-options&action=social') .'" target="_blank">'. esc_html('Codexin Options.', 'codexin') .'</a></strong></p>';
+		echo '<p>'. esc_html__('In Order To Use This Widget Please Fill Up The Social Profile Information In The "Social Media" Section of ', 'codexin') .'<strong><a href="'. esc_url(admin_url().'admin.php?page=codexin-options&action=social') .'" target="_blank">'. esc_html('Codexin Core.', 'codexin') .'</a></strong></p>';
 
 		echo '<p>'. esc_html('Choose The Social Profiles to be Shown:', 'codexin') .'</p>';
 
@@ -106,7 +106,7 @@ class Codexin_Social_Widget extends WP_Widget {
 	//front-end display of widget
 	public function widget( $args, $instance ) {
 
-		// Retrieving values from theme options
+		// Retrieving values from plugin options
 		$cx_facebook 	= get_option( 'codexin_options_social' )['fb_url'];	
 		$cx_twitter 	= get_option( 'codexin_options_social' )['tw_url'];	
 		$cx_instagram 	= get_option( 'codexin_options_social' )['in_url'];	

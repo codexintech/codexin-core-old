@@ -31,25 +31,28 @@ class CodexinAdminMenu {
 	        ''
 	    );
 	 
-	} // end sandbox_create_menu_page
+	} // end codexin_admin_menu
 
 	function cx_settings_page_cb() {
 
 		$this->options_general = get_option( 'codexin_options_general' );
 		$this->options_social = get_option( 'codexin_options_social' );
-		$this->options_in_api = get_option( 'codexin_options_gmap_api' ); 
+        $this->options_gmap_api = get_option( 'codexin_options_gmap_api' ); 
+		$this->options_tw_api = get_option( 'codexin_options_twitter_api' ); 
 
 		$social_Screen = ( isset( $_GET['action'] ) && 'social' == $_GET['action'] ) ? true : false;
-		$gmap_api_Screen = ( isset( $_GET['action'] ) && 'api' == $_GET['action'] ) ? true : false;
+        $gmap_api_Screen = ( isset( $_GET['action'] ) && 'api' == $_GET['action'] ) ? true : false;
+		$twitter_api_Screen = ( isset( $_GET['action'] ) && 'twitter_api' == $_GET['action'] ) ? true : false;
 	     ?>
 	    <!-- Create a header in the default WordPress 'wrap' container -->
 	    <div class="wrap">    
-	        <h1>Codexin Core Options</h1>
-	        <p class="description">These settings showcases the core functionality of the <b> Codexin Core </b> Plugin.</p>
+	        <h1><?php esc_html_e( 'Codexin Core Options', 'codexin' ) ?></h1>
+	        <p class="description"><?php printf( '%1$s<b>%2$s</b>%3$s', esc_html__( 'These settings showcases the core functionality of the ', 'codexin' ), esc_html__( ' Codexin Core ' , 'codexin' ), esc_html( ' Plugin.', 'codexin' ) ) ?></p>
             <h2 class="nav-tab-wrapper">
-				<a href="<?php echo admin_url( 'admin.php?page=codexin-options' ); ?>" class="nav-tab<?php if ( ! isset( $_GET['action'] ) || isset( $_GET['action'] ) && 'social' != $_GET['action']  && 'api' != $_GET['action'] ) echo ' nav-tab-active'; ?>"><?php esc_html_e( 'General', 'codexin' ); ?></a>
+				<a href="<?php echo admin_url( 'admin.php?page=codexin-options' ); ?>" class="nav-tab<?php if ( ! isset( $_GET['action'] ) || isset( $_GET['action'] ) && 'social' != $_GET['action']  && 'api' != $_GET['action'] && 'twitter_api' != $_GET['action'] ) echo ' nav-tab-active'; ?>"><?php esc_html_e( 'General', 'codexin' ); ?></a>
 				<a href="<?php echo esc_url( add_query_arg( array( 'action' => 'social' ), admin_url( 'admin.php?page=codexin-options' ) ) ); ?>" class="nav-tab<?php if ( $social_Screen ) echo ' nav-tab-active'; ?>"><?php esc_html_e( 'Social Media', 'codexin' ); ?></a> 
-				<a href="<?php echo esc_url( add_query_arg( array( 'action' => 'api' ), admin_url( 'admin.php?page=codexin-options' ) ) ); ?>" class="nav-tab<?php if ( $gmap_api_Screen ) echo ' nav-tab-active'; ?>"><?php esc_html_e( 'Google Map API', 'codexin' ); ?></a>        
+				<a href="<?php echo esc_url( add_query_arg( array( 'action' => 'api' ), admin_url( 'admin.php?page=codexin-options' ) ) ); ?>" class="nav-tab<?php if ( $gmap_api_Screen ) echo ' nav-tab-active'; ?>"><?php esc_html_e( 'Google Map API', 'codexin' ); ?></a>  
+                <a href="<?php echo esc_url( add_query_arg( array( 'action' => 'twitter_api' ), admin_url( 'admin.php?page=codexin-options' ) ) ); ?>" class="nav-tab<?php if ( $twitter_api_Screen ) echo ' nav-tab-active'; ?>"><?php esc_html_e( 'Twitter API', 'codexin' ); ?></a>        
 			</h2>
 	        <?php settings_errors(); ?>
 
@@ -62,6 +65,10 @@ class CodexinAdminMenu {
 					settings_fields( 'codexin_options_gmap_api' );
 					do_settings_sections( 'codexin-setting-gmap' );
 					submit_button();
+                } elseif($twitter_api_Screen) {
+                    settings_fields( 'codexin_options_twitter_api' );
+                    do_settings_sections( 'codexin-setting-twitter' );
+                    submit_button();
 				}else { 
 					settings_fields( 'codexin_options_general' );
 					do_settings_sections( 'codexin-setting-admin' );
@@ -71,7 +78,7 @@ class CodexinAdminMenu {
         </div><!-- end wrap -->
 
 	     <?php
-	} // end sandbox_menu_page_display
+	} // end cx_settings_page_cb
 
 	
 	public function codexin_admin_init() {
@@ -201,22 +208,94 @@ class CodexinAdminMenu {
             'codexin-setting-gmap', // Page
             'setting_section_id' // Section      
         );	
+
+        register_setting(
+            'codexin_options_twitter_api', // Option group
+            'codexin_options_twitter_api', // Option name
+            array( $this, 'cx_sanitize' ) // Sanitize
+        );
+
+        add_settings_section(
+            'setting_section_id', // ID
+            esc_html__('Twitter OAuth Settings', 'codexin'), // Title
+            array( $this, 'twitter_section_info' ), // Callback
+            'codexin-setting-twitter' // Page
+        );         
+
+        add_settings_field(
+            'tw_username', // ID
+            esc_html__('Twitter UserName', 'codexin'), // Title 
+            array( $this, 'tw_username_callback' ), // Callback
+            'codexin-setting-twitter', // Page
+            'setting_section_id' // Section      
+        );  
+
+        add_settings_field(
+            'tw_acc_token', // ID
+            esc_html__('Access Token', 'codexin'), // Title 
+            array( $this, 'tw_acc_token_callback' ), // Callback
+            'codexin-setting-twitter', // Page
+            'setting_section_id' // Section      
+        );  
+
+        add_settings_field(
+            'tw_acc_token_sec', // ID
+            esc_html__('Access Token Secret', 'codexin'), // Title 
+            array( $this, 'tw_acc_token_sec_callback' ), // Callback
+            'codexin-setting-twitter', // Page
+            'setting_section_id' // Section      
+        );  
+
+        add_settings_field(
+            'tw_cons_key', // ID
+            esc_html__('Consumer Key', 'codexin'), // Title 
+            array( $this, 'tw_cons_key_callback' ), // Callback
+            'codexin-setting-twitter', // Page
+            'setting_section_id' // Section      
+        ); 
+
+        add_settings_field(
+            'tw_cons_secret', // ID
+            esc_html__('Consumer Secret', 'codexin'), // Title 
+            array( $this, 'tw_cons_secret_callback' ), // Callback
+            'codexin-setting-twitter', // Page
+            'setting_section_id' // Section      
+        ); 
 	     
 	} // end codexin_admin_init
 	 
 
+    /**
+     *
+     * Section information for the tabs
+     *
+    **/ 
+
+    // General section information
 	public function general_section_info() {
 		echo '<h1>Welcome to Codexin Core Options. </h1>';
 	}
 
+    // Social section information
 	public function social_section_info() {
 		printf( '<p>%s</p>', esc_html__( 'This Section Represents the Social Profile Input Section. Please Enter Your Valid Social Profile Information listed below:', 'codexin' ) );
 	}
 
+    // Google map api section information
 	public function gmap_section_info() {
 		printf( '<p>%s</p>', esc_html__( 'This Section Represents the Google Map API Input Section. Please Enter Required Valid Information listed below:', 'codexin' ) );
 	}
 
+    // Twitter api section information
+    public function twitter_section_info() {
+        printf( '<p>%1$s<a href="%2$s" target="_blank">%3$s</a></p>', esc_html__( 'This Section Represents the Twitter OAuth Input Section. If You Don\'t Have the Required Information, ', 'codexin'), esc_url( 'http://dev.twitter.com/apps' ), esc_html__( 'Please Create Your Twitter App From Here.', 'codexin' ) );
+    }
+
+    /**
+     *
+     * Callbacks for Social Section
+     *
+    **/ 
 	public function tw_url_callback() {
         printf(
             '<input type="text" class="regular-text" id="tw_url" name="codexin_options_social[tw_url]" value="%s" />',
@@ -289,15 +368,71 @@ class CodexinAdminMenu {
         printf( '&nbsp;&nbsp;<span class="description">%s</span>', esc_html__( 'Please Insert Your Skype Profile URL', 'codexin' ) );
     }
 
+
+    /**
+     *
+     * Callbacks for Google Map Section
+     *
+    **/
 	public function gmap_api_callback() {
         printf(
             '<input type="text" class="regular-text" id="gmap_api" name="codexin_options_gmap_api[gmap_api]" value="%s" />',
-            isset( $this->options_in_api['gmap_api'] ) ? esc_attr( $this->options_in_api['gmap_api']) : ''
+            isset( $this->options_gmap_api['gmap_api'] ) ? esc_attr( $this->options_gmap_api['gmap_api']) : ''
         );
         printf( '&nbsp;&nbsp;<span class="description">%1$s<a href="%2$s" target="_blank">%3$s</a></span>', esc_html__( 'Generate Your Google Map API Key from ', 'codexin' ), esc_url('https://developers.google.com/maps/documentation/javascript/get-api-key'), esc_html__('here'), 'codexin' );
     }
 
 
+    /**
+     *
+     * Callbacks for Twitter Section
+     *
+    **/
+    public function tw_username_callback() {
+        printf(
+            '<input type="text" class="regular-text" id="tw_username" name="codexin_options_twitter_api[tw_username]" value="%s" />',
+            isset( $this->options_tw_api['tw_username'] ) ? esc_attr( $this->options_tw_api['tw_username']) : ''
+        );
+        printf( '&nbsp;&nbsp;<span class="description">%s</span>', esc_html__( 'Please Insert Your Twitter User Name (without \'@\')', 'codexin' ) );
+    }
+
+    public function tw_acc_token_callback() {
+        printf(
+            '<input type="text" class="regular-text" id="tw_acc_token" name="codexin_options_twitter_api[tw_acc_token]" value="%s" />',
+            isset( $this->options_tw_api['tw_acc_token'] ) ? esc_attr( $this->options_tw_api['tw_acc_token']) : ''
+        );
+        printf( '&nbsp;&nbsp;<span class="description">%s</span>', esc_html__( 'Please Insert Your Twitter OAuth Access Token', 'codexin' ) );
+    }
+
+    public function tw_acc_token_sec_callback() {
+        printf(
+            '<input type="text" class="regular-text" id="tw_acc_token_sec" name="codexin_options_twitter_api[tw_acc_token_sec]" value="%s" />',
+            isset( $this->options_tw_api['tw_acc_token_sec'] ) ? esc_attr( $this->options_tw_api['tw_acc_token_sec']) : ''
+        );
+        printf( '&nbsp;&nbsp;<span class="description">%s</span>', esc_html__( 'Please Insert Your Twitter OAuth Access Token Secret', 'codexin' ) );
+    }
+
+    public function tw_cons_key_callback() {
+        printf(
+            '<input type="text" class="regular-text" id="tw_cons_key" name="codexin_options_twitter_api[tw_cons_key]" value="%s" />',
+            isset( $this->options_tw_api['tw_cons_key'] ) ? esc_attr( $this->options_tw_api['tw_cons_key']) : ''
+        );
+        printf( '&nbsp;&nbsp;<span class="description">%s</span>', esc_html__( 'Please Insert Your Twitter Consumer Key', 'codexin' ) );
+    }
+
+    public function tw_cons_secret_callback() {
+        printf(
+            '<input type="text" class="regular-text" id="tw_cons_secret" name="codexin_options_twitter_api[tw_cons_secret]" value="%s" />',
+            isset( $this->options_tw_api['tw_cons_secret'] ) ? esc_attr( $this->options_tw_api['tw_cons_secret']) : ''
+        );
+        printf( '&nbsp;&nbsp;<span class="description">%s</span>', esc_html__( 'Please Insert Your Twitter Consumer Secret', 'codexin' ) );
+    }
+
+    /**
+     *
+     * Callbacks for General Section
+     *
+    **/
     public function placeholder_callback() {
         // printf(
         //     '<input type="text" name="codexin_options_general[logo_image]" id="logo_image" value="%s"> <a href="#" id="logo_image_url" class="button" > Select </a>',
@@ -306,7 +441,12 @@ class CodexinAdminMenu {
 			echo '<p class="description">This is a General Placeholder section</p>';
     }
 
-   public function cx_sanitize( $input )  {
+    /**
+     *
+     * Sanitizing input values
+     *
+    **/
+    public function cx_sanitize( $input )  {
         $new_input = array();
 
         if( isset( $input['tw_url'] ) )
@@ -338,6 +478,21 @@ class CodexinAdminMenu {
 
         if( isset( $input['gmap_api'] ) )
             $new_input['gmap_api'] = sanitize_text_field( $input['gmap_api'] );
+
+        if( isset( $input['tw_username'] ) )
+            $new_input['tw_username'] = sanitize_text_field( $input['tw_username'] );
+
+        if( isset( $input['tw_acc_token'] ) )
+            $new_input['tw_acc_token'] = sanitize_text_field( $input['tw_acc_token'] );
+
+        if( isset( $input['tw_acc_token_sec'] ) )
+            $new_input['tw_acc_token_sec'] = sanitize_text_field( $input['tw_acc_token_sec'] );
+
+        if( isset( $input['tw_cons_key'] ) )
+            $new_input['tw_cons_key'] = sanitize_text_field( $input['tw_cons_key'] );
+
+        if( isset( $input['tw_cons_secret'] ) )
+            $new_input['tw_cons_secret'] = sanitize_text_field( $input['tw_cons_secret'] );
 
         return $new_input;
     }

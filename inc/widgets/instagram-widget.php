@@ -71,7 +71,7 @@ class Codexin_Instagram_Widget extends WP_Widget {
             <?php printf( '%s', $args['after_widget'] ); ?>
 
         <?php elseif( ( defined( 'WP_DEBUG' ) && true === WP_DEBUG ) && ( defined( 'WP_DEBUG_DISPLAY' ) && false !== WP_DEBUG_DISPLAY ) ): ?>
-            <div id="message" class="error"><p><?php esc_html_e( 'Error: We were unable to fetch your instagram feed.', 'codexin' ); ?></p></div>
+            <div class="error"><p><?php esc_html_e( 'Error: We were unable to fetch your instagram feed.', 'codexin' ); ?></p></div>
         <?php endif;
     }
 
@@ -147,7 +147,7 @@ class Codexin_Instagram_Widget extends WP_Widget {
                 'id'          => $this->get_field_id( 'count' ),
                 'type'        => 'number',
                 'value'       => $count,
-                // 'placeholder' => esc_html__('9', 'codexin')
+                'placeholder' => esc_html__('9', 'codexin')
             )
         );
 
@@ -207,7 +207,7 @@ class Codexin_Instagram_Widget extends WP_Widget {
 
         // Check if all the fields are filled up
         if ( empty( $client_id ) || empty( $user_id ) || empty( $accss_token ) ) {
-            echo esc_html__('Please Provide Valid Instagram User ID, Client ID and Access Token', 'codexin');
+            echo '<div class="error"><p>' . esc_html__('Error: Please Provide Valid Instagram User ID, Client ID and Access Token', 'codexin') . '</p></div>';
             return false;
         }
 
@@ -238,7 +238,7 @@ class Codexin_Instagram_Widget extends WP_Widget {
             $data = json_decode( wp_remote_retrieve_body( $ig_ping ), true );
 
             // Check the result whether its an array
-            if ( ! is_array( $data ) ) {
+            if ( $data && !is_array( $data ) ) {
                 return false;
             }
 
