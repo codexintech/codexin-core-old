@@ -21,8 +21,8 @@
 		?>
 		<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
 			<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
-				<?php if( $atts['social_title'] == 'yes' ) : ?>
-					<div class="socials-title"><h4>Follow Us</h4></div>
+				<?php if( $social_title ) : ?>
+					<div class="socials-title"><h4> <?php echo esc_html__( $social_title ); ?> </h4></div>
 				<?php endif; ?>
 				<?php 
 				if( ! empty( $fb ) ) :
