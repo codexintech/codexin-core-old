@@ -103,7 +103,7 @@
 	 					'params' => array(
 
 	 						array(
-	 							'name' 			=> 'map_color',
+	 							'name' 			=> 'gmap_color',
 	 							'label' 		=> esc_html__( 'Choose Color Scheme', 'codexin' ),
 	 							'type' 			=> 'select',
 	 							'options'		=> array(
