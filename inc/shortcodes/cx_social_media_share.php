@@ -21,7 +21,7 @@
 		?>
 		<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
 			<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
-				<?php if( ! empty( $social_title ) ) : ?>
+				<?php if( $atts['social_title'] == 'yes' ) : ?>
 					<div class="socials-title"><h4>Follow Us</h4></div>
 				<?php endif; ?>
 				<?php 
@@ -68,13 +68,23 @@
  					'category' => 'Codexin',
  					'params' => array(
  						'general' => array(
-	 						array(
-	 							'name' 			=> 'social_title',
-	 							'label' 		=> esc_html__( 'Title ', 'codexin' ),
-	 							'type' 			=> 'text',
-	 							'description'	=> esc_html__( 'Enter Your Title Here', 'codexin' ),
-	 							'admin_label' 	=> false,
-	 							),
+ 							array(
+ 								'name' 			=> 'show_title',
+ 								'label' 		=> esc_html__( 'Enable Social Media Title? ', 'codexin' ),
+ 								'type' 			=> 'toggle',
+ 								'value'			=> 'no'
+ 								),
+
+ 							array(
+ 								'name' 			=> 'social_title',
+ 								'label' 		=> esc_html__( 'Title', 'codexin' ),
+ 								'type' 			=> 'text',
+ 								'relation' 		=> array(
+ 									'parent'    => 'show_title',
+ 									'show_when' => 'yes',
+ 									),
+ 								'description'	=> esc_html__( 'Enter Title Here', 'codexin' ),
+ 								),
 	 						array(
 	 							'name' 			=> 'fb',
 	 							'label' 		=> esc_html__( 'Face Book Link ', 'codexin' ),
