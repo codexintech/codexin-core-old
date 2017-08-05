@@ -145,9 +145,9 @@ class Codexin_Instagram_Widget extends WP_Widget {
                 'label'       => esc_html__( 'Number of Photos to be Shown:', 'codexin'),
                 'name'        => $this->get_field_name( 'count' ),
                 'id'          => $this->get_field_id( 'count' ),
-                'type'        => 'text',
+                'type'        => 'number',
                 'value'       => $count,
-                'placeholder' => esc_html__('9', 'codexin')
+                // 'placeholder' => esc_html__('9', 'codexin')
             )
         );
 

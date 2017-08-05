@@ -141,18 +141,16 @@
 											</div> <!-- end of col -->
 										</div> <!-- end of row -->
 
-
-										<!-- Controls -->
-										<a class="left quote-carousel-control" href="#quote-carousel" role="button" data-slide="prev">
-											<i class="fa fa-angle-left"></i>
-										</a>
-										<a class="right quote-carousel-control" href="#quote-carousel" role="button" data-slide="next">
-											<i class="fa fa-angle-right"></i>
-										</a>
-									</div><!--#quote-carousel-->
-								</div><!--/.row-->
-							</div><!--/.testimonial-row-->
-						</div>  <!-- end of quote -->
+									<!-- Controls -->
+									<a class="left quote-carousel-control" href="#quote-carousel" role="button" data-slide="prev">
+										<i class="fa fa-angle-left"></i>
+									</a>
+									<a class="right quote-carousel-control" href="#quote-carousel" role="button" data-slide="next">
+										<i class="fa fa-angle-right"></i>
+									</a>
+								</div><!--#quote-carousel-->
+							</div><!--/.row-->
+					</div>  <!-- end of quote -->
 
 				<?php			
 					endif; //End layout-1
