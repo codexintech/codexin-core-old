@@ -9,6 +9,10 @@
 
 
 class Codexin_Popular_Project extends WP_Widget {
+
+	// Initializing meta property
+	private $client_name;
+	private $project_date;
 	
 	//setup the widget name, description, etc...
 	public function __construct() {
@@ -30,7 +34,6 @@ class Codexin_Popular_Project extends WP_Widget {
 		$show_thumb 		= ( !empty( $instance[ 'show_thumb' ] ) ? $instance[ 'show_thumb' ] : '' );
 		$display_meta 		= ( !empty( $instance[ 'display_meta' ] ) ? $instance[ 'display_meta' ] : '' );
 		$display_orderby 	= ( !empty( $instance[ 'display_orderby' ] ) ? $instance[ 'display_orderby' ] : '' );
-		$show_like	 		= ( !empty( $instance[ 'show_like' ] ) ? $instance[ 'show_like' ] : '' );
 		
 		?>
 
@@ -52,11 +55,6 @@ class Codexin_Popular_Project extends WP_Widget {
 		<p>
 		    <input class="checkbox" type="checkbox" <?php esc_attr( checked( $show_thumb, 'on' ) ); ?> id="<?php echo esc_attr ($this->get_field_id( 'show_thumb' ) ); ?>" name="<?php echo esc_attr($this->get_field_name( 'show_thumb' ) ); ?>" /> 
 		    <label for="<?php echo esc_attr($this->get_field_id( 'show_thumb' ) ); ?>"><?php echo esc_html__('Display Post Featured Image?', 'codexin'); ?></label>
-		</p>
-
-		<p>
-		    <input class="checkbox" type="checkbox" <?php esc_attr( checked( $show_like, 'on' ) ); ?> id="<?php echo esc_attr ($this->get_field_id( 'show_like' ) ); ?>" name="<?php echo esc_attr($this->get_field_name( 'show_like' ) ); ?>" /> 
-		    <label for="<?php echo esc_attr($this->get_field_id( 'show_like' ) ); ?>"><?php echo esc_html__('Display Like Button?', 'codexin'); ?></label>
 		</p>
 
 		<p>
@@ -104,7 +102,6 @@ class Codexin_Popular_Project extends WP_Widget {
 		$instance[ 'num_posts' ] 		= ( !empty( $new_instance[ 'num_posts' ] ) ? absint( strip_tags( $new_instance[ 'num_posts' ] ) ) : 0 );
 		$instance[ 'title_len' ] 		= ( !empty( $new_instance[ 'title_len' ] ) ? absint( strip_tags( $new_instance[ 'title_len' ] ) ) : 0 );
 		$instance[ 'show_thumb' ] 		= strip_tags( $new_instance[ 'show_thumb' ] );
-		$instance[ 'show_like' ] 		= strip_tags( $new_instance[ 'show_like' ] );
 		$instance[ 'display_meta' ] 	= ( !empty( $new_instance[ 'display_meta' ] ) ? strip_tags( $new_instance[ 'display_meta' ] ) : '' );
 		$instance[ 'display_orderby' ] 	= ( !empty( $new_instance[ 'display_orderby' ] ) ? strip_tags( $new_instance[ 'display_orderby' ] ) : '' );
 		
@@ -118,7 +115,6 @@ class Codexin_Popular_Project extends WP_Widget {
 		$num_posts 			= absint( $instance[ 'num_posts' ] );
 		$title_len 			= absint( $instance[ 'title_len' ] );
 		$show_thumb 		= $instance[ 'show_thumb' ];
-		$show_like 			= $instance[ 'show_like' ];
 		$display_meta 		= $instance[ 'display_meta' ];
 		$display_orderby 	= $instance[ 'display_orderby' ];
 		$display_meta_a 	= 'display-post-date';
@@ -161,11 +157,20 @@ class Codexin_Popular_Project extends WP_Widget {
 					}
 					echo '<div class="media-body">';
 						echo '<h4 class="media-heading">' . wp_trim_words( get_the_title(), $title_len, null ) . '</h4>';
+						//fetch custom-meta data
+						$c_name = $this->client_name = rwmb_meta( 'reveal_portfolio_client','type=text' );
+						$p_date = $this->project_date = rwmb_meta( 'reveal_portfolio_date','type=text' );
+						echo '<p>'. $c_name .'<p/>';
+						echo '<p>'. $p_date .'<p/>';
+						//End custom meta data
+
+						//get texonomy
+						$term_list = wp_get_post_terms( get_the_ID(), 'portfolio-category' ); 
+						foreach ($term_list as $sterm) {
+						 echo '<p>'. $sterm->name.'</p>'; 
+						}//End texonomy
 						if ( $display_meta == $display_meta_a ) {
 						echo '<p>'. get_the_time( 'F j, Y' ) .'</p>';
-						}
-						if( $display_meta == $display_meta_a AND 'on' == $instance[ 'show_like' ] ) {
-						echo '<span>'. codexin_likes_button( get_the_ID(), 0 ) .'</span>';
 						}
 						if( $display_meta == $display_meta_d || $display_meta == $display_meta_b || $display_meta == $display_meta_c) {
 

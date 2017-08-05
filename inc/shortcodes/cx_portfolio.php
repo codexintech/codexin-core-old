@@ -59,7 +59,7 @@
 									<div class="image-mask">
 										<div class="image-content">
 											<img src="<?php echo get_template_directory_uri(); ?>/assets/images/portfolio/hover-icon.png" alt="">
-											<h3> <a href="portfolio"> <?php echo esc_html( the_title() ); ?> </a></h3>
+											<h3> <a href="<?php the_permalink(); ?>"> <?php echo esc_html( the_title() ); ?> </a></h3>
 											<p>
 												<?php foreach ( $term_list as $sterm ) { echo $sterm->name . " "; } ?>
 											</p>
