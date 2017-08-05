@@ -44,7 +44,7 @@
 	Activating Magnific Pop Up
     ---------------------------------------------------------------- */
 
-    $('.img-pop-up').magnificPopup({
+    $('.portfolio-img-popup').magnificPopup({
         type: 'image',
         gallery: {
             enabled: true

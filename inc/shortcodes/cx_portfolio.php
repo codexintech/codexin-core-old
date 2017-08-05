@@ -15,7 +15,7 @@
 		?>
 		
 		<section id="portfolio" class="<?php echo esc_attr( implode( ' ', $master_class )); ?>">
-			<div class="portfolio-area">
+			<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>" >
 				<div class="container">
 					<div class="row">
 						<div class="col-xs-12">
@@ -55,7 +55,7 @@
 				 	?>
 							<div class="portfolio <?php foreach ($term_list as $sterm) { echo $sterm->slug.' '; } ?>">
 								<img src="<?php echo esc_url( the_post_thumbnail_url( 'portfolio-mini-image' ) ); ?>" alt="<?php echo esc_attr( $img_alt ); ?>">
-								<a href="<?php echo esc_url( the_post_thumbnail_url( 'full' ) ); ?>" class="img-pop-up">
+								<a href="<?php echo esc_url( the_post_thumbnail_url( 'full' ) ); ?>" class="portfolio-img-popup">
 									<div class="image-mask">
 										<div class="image-content">
 											<img src="<?php echo get_template_directory_uri(); ?>/assets/images/portfolio/hover-icon.png" alt="">
@@ -102,6 +102,7 @@
  							'imagesloaded-js' => CODEXIN_CORE_ASSET_DIR . '/js/imagesloaded.pkgd.min.js',
  							'isotope-js-script' => CODEXIN_CORE_ASSET_DIR . '/js/isotope.pkgd.min.js',
  							'portfolio-isotope-js' => CODEXIN_CORE_ASSET_DIR . '/js/shortcode-js/cx_portfolio-isotope.js',
+ 							'portfolio-popup-js' => CODEXIN_CORE_ASSET_DIR . '/js/shortcode-js/cx_portfolio-popup.js',
  							),
 
 	                ), //End assets
