@@ -22,67 +22,68 @@ class Codexin_Address_Box extends WP_Widget {
 	
 	//back-end display of widget
 	public function form( $instance ) {
-		$company_name 	= ( !empty( $instance[ 'company_name' ] ) ? $instance[ 'company_name' ]: esc_html__('Company Name', 'codexin') );
-		$small_description 	= ( !empty( $instance[ 'small_description' ] ) ? $instance[ 'small_description' ]: esc_html__('Small Description', 'codexin') );
-		$street_address 	= ( !empty( $instance[ 'street_address' ] ) ? $instance[ 'street_address' ] : esc_html__('3102 Highway 98', 'codexin'));
-		$locality_address 	= ( !empty( $instance[ 'locality_address' ] ) ? $instance[ 'locality_address' ] : esc_html__('Mexico Beach', 'codexin'));
-		$regional_address 	= ( !empty( $instance[ 'regional_address' ] ) ? $instance[ 'regional_address' ] : esc_html__('FL', 'codexin') );
-		$postal_code 		= ( !empty( $instance[ 'postal_code' ] ) ? $instance[ 'postal_code' ] : esc_html__('98052', 'codexin') );
-		$phone_no 			= ( !empty( $instance[ 'phone_no' ] ) ? $instance[ 'phone_no' ] : esc_html__('850-648-4200', 'codexin'));
-		$fax_no 			= ( !empty( $instance[ 'fax_no' ] ) ? $instance[ 'fax_no' ] : esc_html__('( 33 1) 42 68 53 01', 'codexin'));
-		$email 				= ( !empty( $instance[ 'email' ] ) ? $instance[ 'email' ] : esc_html__('test@example.com', 'codexin'));
+		$company_name 	= ( !empty( $instance[ 'company_name' ] ) ? $instance[ 'company_name' ]: esc_html__('', 'codexin') );
+		$small_description 	= ( !empty( $instance[ 'small_description' ] ) ? $instance[ 'small_description' ]: esc_html__('', 'codexin') );
+		$street_address 	= ( !empty( $instance[ 'street_address' ] ) ? $instance[ 'street_address' ] : esc_html__('', 'codexin'));
+		$locality_address 	= ( !empty( $instance[ 'locality_address' ] ) ? $instance[ 'locality_address' ] : esc_html__('', 'codexin'));
+		$regional_address 	= ( !empty( $instance[ 'regional_address' ] ) ? $instance[ 'regional_address' ] : esc_html__('', 'codexin') );
+		$postal_code 		= ( !empty( $instance[ 'postal_code' ] ) ? $instance[ 'postal_code' ] : esc_html__('', 'codexin') );
+		$phone_no 			= ( !empty( $instance[ 'phone_no' ] ) ? $instance[ 'phone_no' ] : esc_html__('', 'codexin'));
+		$fax_no 			= ( !empty( $instance[ 'fax_no' ] ) ? $instance[ 'fax_no' ] : esc_html__('', 'codexin'));
+		$email 				= ( !empty( $instance[ 'email' ] ) ? $instance[ 'email' ] : esc_html__('', 'codexin'));
 		$company_website 	= ( !empty( $instance[ 'company_website' ] ) ? $instance[ 'company_website' ] : esc_html__('http://www.janedoe.com', 'codexin'));
 
 		?>
 
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'company_name' ) ); ?>"><?php echo esc_html__('Company Name:', 'codexin') ?></label>
-			<input type="text" class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'company_name' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'company_name' ) ); ?>" value="<?php echo esc_attr( $company_name ); ?>">
+			<input type="text" class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'company_name' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'company_name' ) ); ?>" value="<?php echo esc_attr( $company_name ); ?>" placeholder="Ex: Company Name">
 		</p>
 
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'small_description' ) ); ?>"><?php echo esc_html__('Small Description: ', 'codexin') ?></label>
-			<textarea class="widefat"id="<?php echo esc_attr( $this->get_field_id( 'small_description' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'small_description' ) ); ?>" value="<?php echo esc_attr( $small_description ); ?>" rows="3"></textarea>
+			<textarea class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'small_description' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'small_description' ) ); ?>" value="<?php echo esc_attr( $small_description ); ?>" rows="3" placeholder="Ex: Small Description Here"> <?php echo esc_attr( $small_description ); ?> </textarea>
 		</p>
 
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'street_address' ) ); ?>"><?php echo esc_html__('Street Address: ', 'codexin') ?></label>
-			<input type="text" class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'street_address' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'street_address' ) ); ?>" value="<?php echo esc_attr( $street_address ); ?>">
+			<input type="text" class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'street_address' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'street_address' ) ); ?>" value="<?php echo esc_attr( $street_address ); ?>" placeholder="Ex: 3102 Highway 98">
 		</p>
 
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'locality_address' ) ); ?>"><?php echo esc_html__('Locality Address: ', 'codexin') ?></label>
-			<input type="text" class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'locality_address' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'locality_address' ) ); ?>" value="<?php echo esc_attr( $locality_address ); ?>">
+			<input type="text" class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'locality_address' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'locality_address' ) ); ?>" value="<?php echo esc_attr( $locality_address ); ?>"
+			 placeholder="Ex: Mexico Beach">
 		</p>
 
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'regional_address' ) ); ?>"><?php echo esc_html__('Regional Address: ', 'codexin') ?></label>
-			<input type="text" class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'regional_address' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'regional_address' ) ); ?>" value="<?php echo esc_attr( $regional_address ); ?>">
+			<input type="text" class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'regional_address' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'regional_address' ) ); ?>" value="<?php echo esc_attr( $regional_address ); ?>" placeholder="Ex: FL">
 		</p>
 
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'postal_code' ) ); ?>"><?php echo esc_html__('Postal Code: ', 'codexin') ?></label>
-			<input type="text" class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'postal_code' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'postal_code' ) ); ?>" value="<?php echo esc_attr( $postal_code ); ?>">
+			<input type="text" class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'postal_code' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'postal_code' ) ); ?>" value="<?php echo esc_attr( $postal_code ); ?>" placeholder="Ex: 98052">
 		</p>
 
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'phone_no' ) ); ?>"><?php echo esc_html__('Phone No: ', 'codexin') ?></label>
-			<input type="text" class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'phone_no' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'phone_no' ) ); ?>" value="<?php echo esc_attr( $phone_no ); ?>">
+			<input type="text" class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'phone_no' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'phone_no' ) ); ?>" value="<?php echo esc_attr( $phone_no ); ?>" placeholder="Ex: 850-648-4200">
 		</p>
 
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'fax_no' ) ); ?>"><?php echo esc_html__('Fax No: ', 'codexin') ?></label>
-			<input type="text" class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'fax_no' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'fax_no' ) ); ?>" value="<?php echo esc_attr( $fax_no ); ?>">
+			<input type="text" class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'fax_no' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'fax_no' ) ); ?>" value="<?php echo esc_attr( $fax_no ); ?>" placeholder="Ex: ( 33 1) 42 68 53 01">
 		</p>
 
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'email' ) ); ?>"><?php echo esc_html__('Email: ', 'codexin') ?></label>
-			<input type="text" class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'email' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'email' ) ); ?>" value="<?php echo esc_attr( $email ); ?>">
+			<input type="text" class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'email' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'email' ) ); ?>" value="<?php echo esc_attr( $email ); ?>" placeholder="Ex: test@example.com">
 		</p>
 
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'company_website' ) ); ?>"><?php echo esc_html__('Company Website: ', 'codexin') ?></label>
-			<input type="text" class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'company_website' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'company_website' ) ); ?>" value="<?php echo esc_attr( $company_website ); ?>">
+			<input type="text" class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'company_website' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'company_website' ) ); ?>" value="<?php echo esc_attr( $company_website ); ?>" placeholder="Ex: http://www.janedoe.com">
 		</p>
 
 		
@@ -129,7 +130,12 @@ class Codexin_Address_Box extends WP_Widget {
 		printf( '%s', $args[ 'before_widget' ] ); ?>
 		
 		<div itemscope itemtype="http://schema.org/LocalBusiness">
-			<h1><span itemprop="name"><?php if( !empty($company_name) ): echo esc_html__( $company_name ); endif; ?></span></h1>
+		
+			<h3><span itemprop="name"><?php if( !empty( $instance[ 'company_name' ] ) ):
+			
+			printf( '%s' . apply_filters( 'widget_title', $instance[ 'company_name' ] ) . '%s', $args[ 'before_title' ], $args[ 'after_title' ]);
+			
+		endif; ?></span></h3>
 			<span itemprop="description"><?php if( !empty($small_description) ): echo esc_html__( $small_description ); endif; ?></span>
 			<div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
 				<span itemprop="streetAddress"><?php if( !empty($street_address) ): echo esc_html__( $street_address ); endif; ?></span>
