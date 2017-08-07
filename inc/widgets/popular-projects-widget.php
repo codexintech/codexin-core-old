@@ -33,6 +33,7 @@ class Codexin_Popular_Project extends WP_Widget {
 		$title_len 			= ( !empty( $instance[ 'title_len' ] ) ? absint( $instance[ 'title_len' ] ) : esc_html__('7', 'codexin') );
 		$show_thumb 		= ( !empty( $instance[ 'show_thumb' ] ) ? $instance[ 'show_thumb' ] : '' );
 		$display_meta 		= ( !empty( $instance[ 'display_meta' ] ) ? $instance[ 'display_meta' ] : '' );
+		$show_like	 		= ( !empty( $instance[ 'show_like' ] ) ? $instance[ 'show_like' ] : '' );
 		$display_orderby 	= ( !empty( $instance[ 'display_orderby' ] ) ? $instance[ 'display_orderby' ] : '' );
 		
 		?>
@@ -58,12 +59,17 @@ class Codexin_Popular_Project extends WP_Widget {
 		</p>
 
 		<p>
+		    <input class="checkbox" type="checkbox" <?php esc_attr( checked( $show_like, 'on' ) ); ?> id="<?php echo esc_attr ($this->get_field_id( 'show_like' ) ); ?>" name="<?php echo esc_attr($this->get_field_name( 'show_like' ) ); ?>" /> 
+		    <label for="<?php echo esc_attr($this->get_field_id( 'show_like' ) ); ?>"><?php echo esc_html__('Display Like Button?', 'codexin'); ?></label>
+		</p>
+
+		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id('display_orderby') ); ?>"><?php echo esc_html__('Choose The Project Sorting Method:', 'codexin'); ?></label>
 			<select name="<?php echo esc_attr( $this->get_field_name('display_orderby') ); ?>" id="<?php echo esc_attr( $this->get_field_id('display_orderby') ); ?>" class="widefat">
 				<?php
 				$dispby_opt = array(
-						esc_html__('Sort By Views Count', 'codexin') => 'meta_value_num', 
-						esc_html__('Sort By Comments Count', 'codexin') => 'comment_count'
+						esc_html__('Sort By Completion Date', 'codexin') => 'date', 
+						esc_html__('Sort By View Count', 'codexin') => 'meta_value_num'
 						);
 				foreach ($dispby_opt as $opt => $value) {
 					echo '<option value="' . $value . '" id="' . $value . '"', $display_orderby == $value ? ' selected="selected"' : '', '>', $opt, '</option>';
@@ -72,23 +78,6 @@ class Codexin_Popular_Project extends WP_Widget {
 			</select>
 		</p>
 
-		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id('display_meta') ); ?>"><?php echo esc_html__('Select Post Meta to Display:', 'codexin'); ?></label>
-			<select name="<?php echo esc_attr( $this->get_field_name('display_meta') ); ?>" id="<?php echo esc_attr( $this->get_field_id('display_meta') ); ?>" class="widefat">
-				<?php
-				$options = array(
-						esc_html__('Display Post Date', 'codexin'), 
-						esc_html__('Display Post Views Count', 'codexin'), 
-						esc_html__('Display Comments Count', 'codexin'), 
-						esc_html__('Display Both Post Views and Comments Count', 'codexin')
-						);
-				foreach ($options as $option) {
-					$opt = strtolower( str_replace(" ","-", $option ) );
-					echo '<option value="' . $opt . '" id="' . $opt . '"', $display_meta == $opt ? ' selected="selected"' : '', '>', $option, '</option>';
-				}
-				?>
-			</select>
-		</p>
 
 		<?php
 		
@@ -102,7 +91,7 @@ class Codexin_Popular_Project extends WP_Widget {
 		$instance[ 'num_posts' ] 		= ( !empty( $new_instance[ 'num_posts' ] ) ? absint( strip_tags( $new_instance[ 'num_posts' ] ) ) : 0 );
 		$instance[ 'title_len' ] 		= ( !empty( $new_instance[ 'title_len' ] ) ? absint( strip_tags( $new_instance[ 'title_len' ] ) ) : 0 );
 		$instance[ 'show_thumb' ] 		= strip_tags( $new_instance[ 'show_thumb' ] );
-		$instance[ 'display_meta' ] 	= ( !empty( $new_instance[ 'display_meta' ] ) ? strip_tags( $new_instance[ 'display_meta' ] ) : '' );
+		$instance[ 'show_like' ] 		= strip_tags( $new_instance[ 'show_like' ] );
 		$instance[ 'display_orderby' ] 	= ( !empty( $new_instance[ 'display_orderby' ] ) ? strip_tags( $new_instance[ 'display_orderby' ] ) : '' );
 		
 		return $instance;
@@ -115,12 +104,10 @@ class Codexin_Popular_Project extends WP_Widget {
 		$num_posts 			= absint( $instance[ 'num_posts' ] );
 		$title_len 			= absint( $instance[ 'title_len' ] );
 		$show_thumb 		= $instance[ 'show_thumb' ];
-		$display_meta 		= $instance[ 'display_meta' ];
+		$show_like 			= $instance[ 'show_like' ];
 		$display_orderby 	= $instance[ 'display_orderby' ];
 		$display_meta_a 	= 'display-post-date';
 		$display_meta_b 	= 'display-post-views-count';
-		$display_meta_c 	= 'display-comments-count';
-		$display_meta_d 	= 'display-both-post-views-and-comments-count';
 		
 		$posts_args = array(
 			'post_type'				=> 'portfolio',
@@ -169,24 +156,16 @@ class Codexin_Popular_Project extends WP_Widget {
 						foreach ($term_list as $sterm) {
 						 echo '<p>'. $sterm->name.'</p>'; 
 						}//End texonomy
-						if ( $display_meta == $display_meta_a ) {
-						echo '<p>'. get_the_time( 'F j, Y' ) .'</p>';
-						}
-						if( $display_meta == $display_meta_d || $display_meta == $display_meta_b || $display_meta == $display_meta_c) {
+						
+						if( $display_meta ==  $display_meta || $display_meta_b ) {
 
 							echo '<div class="blog-info">';
 								if( $display_orderby == 'meta_value_num' ) {
-									if( $display_meta == $display_meta_d OR $display_meta == $display_meta_b ) {
+									if( $display_meta == $display_meta_a OR $display_meta == $display_meta_b ) {
 									echo '<span><i class="fa fa-eye"></i><i>' . codexin_get_post_views(get_the_ID()) . '</i></span>';
 									}
-									if( $display_meta == $display_meta_d OR $display_meta == $display_meta_c ) {
-									echo '<span><i class="fa fa-comments"></i><i>' . ' ' . get_comments_number() . '</i></span>';
-									}
-								} else {
-									if( $display_meta == $display_meta_d OR $display_meta == $display_meta_c ) {
-									echo '<span><i class="fa fa-comments"></i><i>' . ' ' . get_comments_number() . '</i></span>';
-									}
-									if( $display_meta == $display_meta_d OR $display_meta == $display_meta_b ) {
+									
+									if( $display_meta == $display_meta_b ) {
 									echo '<span><i class="fa fa-eye"></i><i>' . codexin_get_post_views(get_the_ID()) . '</i></span>';
 									}
 								}
