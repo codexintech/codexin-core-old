@@ -31,8 +31,7 @@ class Codexin_Recent_Projects extends WP_Widget {
 		$title_len 		= ( !empty( $instance[ 'title_len' ] ) ? absint( $instance[ 'title_len' ] ) : esc_html__('7', 'codexin') );
 		$show_thumb 	= ( !empty( $instance[ 'show_thumb' ] ) ? $instance[ 'show_thumb' ] : '' );
 		$show_client 	= ( !empty( $instance[ 'show_client' ] ) ? $instance[ 'show_client' ] : '' );
-		$display_meta 	= ( !empty( $instance[ 'display_meta' ] ) ? $instance[ 'display_meta' ] : '' );
-		$display_order 	= ( !empty( $instance[ 'display_order' ] ) ? $instance[ 'display_order' ] : '' );
+		$display_orderby 	= ( !empty( $instance[ 'display_orderby' ] ) ? $instance[ 'display_orderby' ] : '' );
 		$show_like	 	= ( !empty( $instance[ 'show_like' ] ) ? $instance[ 'show_like' ] : '' );
 
 		?>
@@ -68,15 +67,15 @@ class Codexin_Recent_Projects extends WP_Widget {
 		</p>
 
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id('display_order') ); ?>"><?php echo esc_html__('Choose The Order to Display Posts:', 'codexin'); ?></label>
-			<select name="<?php echo esc_attr( $this->get_field_name('display_order') ); ?>" id="<?php echo esc_attr( $this->get_field_id('display_order') ); ?>" class="widefat">
+			<label for="<?php echo esc_attr( $this->get_field_id('display_orderby') ); ?>"><?php echo esc_html__('Choose The Project Sorting Method:', 'codexin'); ?></label>
+			<select name="<?php echo esc_attr( $this->get_field_name('display_orderby') ); ?>" id="<?php echo esc_attr( $this->get_field_id('display_orderby') ); ?>" class="widefat">
 				<?php
-				$disp_opt = array(
-						esc_html__('Descending', 'codexin') => 'DESC', 
-						esc_html__('Ascending', 'codexin') => 'ASC'
+				$dispby_opt = array(
+						esc_html__('Sort By Completion Date', 'codexin') => 'date', 
+						esc_html__('Sort By View Count', 'codexin') => 'meta_value_num'
 						);
-				foreach ($disp_opt as $opt => $value) {
-					echo '<option value="' . $value . '" id="' . $value . '"', $display_order == $value ? ' selected="selected"' : '', '>', $opt, '</option>';
+				foreach ($dispby_opt as $opt => $value) {
+					echo '<option value="' . $value . '" id="' . $value . '"', $display_orderby == $value ? ' selected="selected"' : '', '>', $opt, '</option>';
 				}
 				?>
 			</select>
@@ -97,7 +96,7 @@ class Codexin_Recent_Projects extends WP_Widget {
 		$instance[ 'title_len' ] 		= ( !empty( $new_instance[ 'title_len' ] ) ? absint( strip_tags( $new_instance[ 'title_len' ] ) ) : 0 );
 		$instance[ 'show_thumb' ] 		= strip_tags( $new_instance[ 'show_thumb' ] );
 		$instance[ 'show_client' ] 		= strip_tags( $new_instance[ 'show_client' ] );
-		$instance[ 'display_order' ] 	= strip_tags( $new_instance[ 'display_order' ] );
+		$instance[ 'display_orderby' ] 	= ( !empty( $new_instance[ 'display_orderby' ] ) ? strip_tags( $new_instance[ 'display_orderby' ] ) : '' );
 		$instance[ 'show_like' ] 		= strip_tags( $new_instance[ 'show_like' ] );
 		
 		return $instance;
@@ -111,16 +110,18 @@ class Codexin_Recent_Projects extends WP_Widget {
 		$title_len 		= absint( $instance[ 'title_len' ] );
 		$show_thumb 	= $instance[ 'show_thumb' ];
 		$show_like 		= $instance[ 'show_like' ];
-		$display_order 	= $instance[ 'display_order' ];
-		$display_meta_a = 'display-project-date';
-		$display_meta_b = 'display-project-view-count';
+		$display_orderby = $instance[ 'display_orderby' ];
+		$display_meta_a = 'date';
+		$display_meta_b = 'meta_value_num';
 
 		
 		$posts_args = array(
-			'post_type'			=> 'portfolio',
-			'posts_per_page'	=> $num_posts,
-			'order'				=> $display_order,
-			'orderby'			=> $display_meta_a
+			'post_type'				=> 'portfolio',
+			'posts_per_page'		=> $num_posts,
+			'meta_key'				=> 'cx_post_views',
+			'orderby'				=> $display_orderby,
+			'order'					=> 'DESC',
+			'ignore_sticky_posts' 	=> 1
 		);
 		
 		$posts_query = new WP_Query( $posts_args );
@@ -165,17 +166,14 @@ class Codexin_Recent_Projects extends WP_Widget {
 						}//End texonomy
 
 						if( 'on' == $instance[ 'show_like' ] ) {
-						echo '<span>'. codexin_likes_button( get_the_ID(), 0 ) .'</span>';
+							echo '<span>'. codexin_likes_button( get_the_ID(), 0 ) .'</span>';
 						}
 
-						// if(  $display_meta == $display_meta_b ) {
-						// echo '<div class="blog-info">';
-						// 	if( $display_meta == $display_meta_b ) {
-						// 	echo '<span><i class="fa fa-eye"></i><i>' . codexin_get_post_views(get_the_ID()) . '</i></span>';
-						// 	}
-
-						// echo '</div>';
-						// }
+						if(  $display_orderby == $display_meta_b ) {
+							echo '<div class="blog-info">';
+							echo '<span><i class="fa fa-eye"></i><i>' . codexin_get_post_views(get_the_ID()) . '</i></span>';
+							echo '</div>';
+						}
 
 					echo '</div>';
 				echo '</div>';

@@ -156,17 +156,14 @@ class Codexin_Popular_Project extends WP_Widget {
 						 echo '<p>'. $sterm->name.'</p>'; 
 						}//End texonomy
 						
+						if( 'on' == $instance[ 'show_like' ] ) {
+							echo '<span>'. codexin_likes_button( get_the_ID(), 0 ) .'</span>';
+						}
+
 						if( $display_orderby == $display_meta_b ) {
 
 							echo '<div class="blog-info">';
-
-								if( $display_orderby == $display_meta_b ) {
-									echo '<span><i class="fa fa-eye"></i><i>' . codexin_get_post_views(get_the_ID()) . '</i></span>';
-								}
-								if( 'on' == $instance[ 'show_like' ] ) {
-									echo '<span>'. codexin_likes_button( get_the_ID(), 0 ) .'</span>';
-								}
-
+							echo '<span><i class="fa fa-eye"></i><i>' . codexin_get_post_views(get_the_ID()) . '</i></span>';
 							echo '</div>';
 
 						}
