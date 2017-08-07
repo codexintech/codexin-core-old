@@ -22,8 +22,16 @@ class Codexin_Social_Widget extends WP_Widget {
 	}
 	
 	// back-end display of widget
-	public function form( $instance ) {
+	public function form( $instance ) { 
+		$title 	= ( !empty( $instance[ 'title' ] ) ? $instance[ 'title' ] : esc_html__('Follow Us', 'codexin') );
+		?>
 
+		<p>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php echo esc_html__('Title:', 'codexin') ?></label>
+			<input type="text" class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" value="<?php echo esc_attr( $title ); ?>">
+		</p>
+		
+	<?php
 		echo '<p>'. esc_html__('In Order To Use This Widget Please Fill Up The Social Profile Information In The "Social Media" Section of ', 'codexin') .'<strong><a href="'. esc_url(admin_url().'admin.php?page=codexin-options&action=social') .'" target="_blank">'. esc_html('Codexin Core.', 'codexin') .'</a></strong></p>';
 
 		echo '<p>'. esc_html('Choose The Social Profiles to be Shown:', 'codexin') .'</p>';
@@ -95,6 +103,7 @@ class Codexin_Social_Widget extends WP_Widget {
 	public function update( $new_instance, $old_instance ) {
 		
 		$instance = $old_instance;
+		$instance[ 'title' ] 	= ( !empty( $new_instance[ 'title' ] ) ? strip_tags( $new_instance[ 'title' ] ) : '' );
 
         foreach ( array( 'facebook', 'twitter', 'instagram', 'pinterest', 'behance', 'google_plus', 'youtube', 'skype', 'linkedin' ) as $key => $value ) {
             $instance[$value] = ( !empty( $new_instance[ $value ] ) ? sanitize_text_field( $new_instance[ $value ] ) : '' );
@@ -120,7 +129,7 @@ class Codexin_Social_Widget extends WP_Widget {
 		printf( '%s', $args['before_widget'] ); ?>
 
 		<div class="footer-left">
-			<p><span class="italic"><?php echo esc_html__('Follow Us:', 'codexin') ?></span>
+			<p><span class="italic"><?php echo esc_html__($instance[ 'title' ] ); ?></span>
 
 				<?php if( !empty( $cx_facebook ) && ( 'on' == $instance[ 'facebook' ] ) ) : ?>
 				<a href="<?php echo esc_url($cx_facebook); ?>"><i class="fa fa-facebook"></i></a>

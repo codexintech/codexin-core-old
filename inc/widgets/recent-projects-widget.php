@@ -72,7 +72,8 @@ class Codexin_Recent_Projects extends WP_Widget {
 				<?php
 				$dispby_opt = array(
 						esc_html__('Sort By Completion Date', 'codexin') => 'date', 
-						esc_html__('Sort By View Count', 'codexin') => 'meta_value_num'
+						esc_html__('Sort By View Count', 'codexin') => 'meta_value_num',
+						esc_html__('Sort By Category', 'codexin') => 'category_project',
 						);
 				foreach ($dispby_opt as $opt => $value) {
 					echo '<option value="' . $value . '" id="' . $value . '"', $display_orderby == $value ? ' selected="selected"' : '', '>', $opt, '</option>';
@@ -113,7 +114,11 @@ class Codexin_Recent_Projects extends WP_Widget {
 		$display_orderby = $instance[ 'display_orderby' ];
 		$display_meta_a = 'date';
 		$display_meta_b = 'meta_value_num';
-
+		$display_meta_c = 'category_project';
+		//for texonomies query
+		if( $display_orderby == $display_meta_c ) :
+			$custom_taxterms = wp_get_object_terms( $post->ID, 'portfolio-category', array('fields' => 'ids') );
+		endif;
 		
 		$posts_args = array(
 			'post_type'				=> 'portfolio',
@@ -121,6 +126,13 @@ class Codexin_Recent_Projects extends WP_Widget {
 			'meta_key'				=> 'cx_post_views',
 			'orderby'				=> $display_orderby,
 			'order'					=> 'DESC',
+			'tax_query' => array(
+                    	array(
+                    		'taxonomy' => 'portfolio-category',
+                    		'field' => 'id',
+                    		'terms' => $custom_taxterms
+                    		)
+                    	),
 			'ignore_sticky_posts' 	=> 1
 		);
 		
@@ -160,10 +172,12 @@ class Codexin_Recent_Projects extends WP_Widget {
 						//End custom meta data
 
 						//get texonomy
-						$term_list = wp_get_post_terms( get_the_ID(), 'portfolio-category' ); 
-						foreach ($term_list as $sterm) {
-						 echo '<p>'. $sterm->name.'</p>'; 
-						}//End texonomy
+						if( $display_orderby == $display_meta_c ) {
+							$term_list = wp_get_post_terms( get_the_ID(), 'portfolio-category' ); 
+							foreach ($term_list as $sterm) {
+							 echo '<p>'. $sterm->name.'</p>'; 
+							}//End texonomy
+						}
 
 						if( 'on' == $instance[ 'show_like' ] ) {
 							echo '<span>'. codexin_likes_button( get_the_ID(), 0 ) .'</span>';
