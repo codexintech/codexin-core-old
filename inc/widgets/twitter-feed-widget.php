@@ -159,7 +159,7 @@ class Codexin_Twitter_Widget extends WP_Widget {
 						</p>
 						<?php
 						$twitterTime = strtotime($cx_tweet->created_at);
-						$cx_time = $this->creation_time($twitterTime);
+						$cx_time = $this->tweet_time($twitterTime);
 						?>
 						<p><a href="http://twitter.com/<?php echo $cx_tweet->user->screen_name; ?>/statuses/<?php echo $cx_tweet->id_str; ?>" target="_blank"><?php echo $cx_time; ?></a></p>
 					</div>
@@ -169,18 +169,17 @@ class Codexin_Twitter_Widget extends WP_Widget {
 		</div>
 		<?php 
 		} else {
-		echo '<p>' . esc_html__('Error: Please Provide Valid Twitter OAuth Information.', 'codexin') . '</p>';
-	}
+		echo '<div class="error"><p>' . esc_html__('Error: Please Provide Valid Twitter OAuth Information.', 'codexin') . '</p></div>';
+		}
 	} else {
-		echo '<p>' . esc_html__('Error: Please Provide Valid Twitter OAuth Information.', 'codexin') . '</p>';
+		echo '<div class="error"><p>' . esc_html__('Error: Please Provide Valid Twitter OAuth Information.', 'codexin') . '</p></div>';
 	}
 		
 		printf( '%s', $args[ 'after_widget' ] );
 
 	}
 
-	public function creation_time($time)
-		{
+	public function tweet_time($time) {
 		   $periods = array("second", "minute", "hour", "day", "week", "month", "year", "decade");
 		   $lengths = array("60","60","24","7","4.35","12","10");
 
