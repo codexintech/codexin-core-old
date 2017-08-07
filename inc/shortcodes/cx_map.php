@@ -92,11 +92,11 @@
 
  } //End cx_map
 
-	// Registering new param type
+	// Registering new param type to show info
 	add_action('init', 'info_param', 99 );
 	function info_param() {
-    global $kc;
-    $kc->add_param_type( 'cx_info', 'cx_info_cb' );
+	    global $kc;
+	    $kc->add_param_type( 'cx_info', 'cx_info_cb' );
 	}		
 	function cx_info_cb() {
 		echo '<p>'. esc_html__('Please Fill Up The Google Map API Information In The "Google Map API" Section of ', 'codexin') .'<strong><a href="'. esc_url(admin_url().'admin.php?page=codexin-options&action=api') .'" target="_blank">'. esc_html('Codexin Core.', 'codexin') .'</a></strong></p>';
@@ -238,7 +238,6 @@
 		    							'parent'    => 'map_advanced',
 		    							'show_when' => 'yes',
 		    							),
-		    						'value'			=> '',
 		 							'description'	=> esc_html__( 'Choose road color', 'codexin' ),
 		 							),
 		 						array(
@@ -249,7 +248,6 @@
 		    							'parent'    => 'map_advanced',
 		    							'show_when' => 'yes',
 		    							),
-		    						'value'			=> '',
 		 							'description'	=> esc_html__( 'Choose water color', 'codexin' ),
 		 							),
 		 						array(
@@ -260,7 +258,6 @@
 		    							'parent'    => 'map_advanced',
 		    							'show_when' => 'yes',
 		    							),
-		    						'value'			=> '',
 		 							'description'	=> esc_html__( 'Choose landscape color', 'codexin' ),
 		 							),
 		 						array(
@@ -271,7 +268,6 @@
 		    							'parent'    => 'map_advanced',
 		    							'show_when' => 'yes',
 		    							),
-		    						'value'			=> '',
 		 							'description'	=> esc_html__( 'Choose point of interest color', 'codexin' ),
 		 							),
 		 						array(
@@ -282,24 +278,16 @@
 		    							'parent'    => 'map_advanced',
 		    							'show_when' => 'yes',
 		    							),
-		    						'value'			=> '',
 		 							'description'	=> esc_html__( 'Choose label text color', 'codexin' ),
 		 							),
 
 		    				)
 	 						
 		                ) //End params array()..
-
 		            ),  // End of elemnt cx_blog....
-
-
 				) //end of  array 
-
-
-			);  //end of kc_add_map....
-
+			);  //end of kc_add_map
 		} //End if
-
 	} // end of cx_map_kc
 
 

@@ -17,7 +17,7 @@ class Codexin_Social_Widget extends WP_Widget {
 			'classname' => 'codexin-social-widget',
 			'description' => 'Displays All Your Social Media Profiles',
 		);
-		parent::__construct( 'codexin_social_widget', esc_html('Codexin: Social Media', 'codexin'), $widget_ops );
+		parent::__construct( 'codexin_social_widget', esc_html('Codexin: Social Media Follow', 'codexin'), $widget_ops );
 		
 	}
 	

@@ -37,12 +37,12 @@ class Codexin_Address_Box extends WP_Widget {
 
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'company_name' ) ); ?>"><?php echo esc_html__('Company Name:', 'codexin') ?></label>
-			<input type="text" class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'company_name' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'company_name' ) ); ?>" value="<?php echo esc_attr( $company_name ); ?>" placeholder="Ex: Company Name">
+			<input type="text" class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'company_name' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'company_name' ) ); ?>" value="<?php echo esc_attr( $company_name ); ?>" placeholder="Insert Company Name">
 		</p>
 
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'small_description' ) ); ?>"><?php echo esc_html__('Small Description: ', 'codexin') ?></label>
-			<textarea class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'small_description' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'small_description' ) ); ?>" value="<?php echo esc_attr( $small_description ); ?>" rows="3" placeholder="Ex: Small Description Here"> <?php echo esc_attr( $small_description ); ?> </textarea>
+			<textarea class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'small_description' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'small_description' ) ); ?>" value="<?php echo esc_attr( $small_description ); ?>" rows="3" placeholder="Small Description Here"> <?php echo esc_attr( $small_description ); ?> </textarea>
 		</p>
 
 		<p>
@@ -131,22 +131,25 @@ class Codexin_Address_Box extends WP_Widget {
 		
 		<div itemscope itemtype="http://schema.org/LocalBusiness">
 		
-			<h3><span itemprop="name"><?php if( !empty( $instance[ 'company_name' ] ) ):
+			<?php if( !empty( $instance[ 'company_name' ] ) ):
 			
-			printf( '%s' . apply_filters( 'widget_title', $instance[ 'company_name' ] ) . '%s', $args[ 'before_title' ], $args[ 'after_title' ]);
+			printf( '%s<span itemprop="name">' . apply_filters( 'widget_title', $instance[ 'company_name' ] ) . '</span>%s', $args[ 'before_title' ], $args[ 'after_title' ]);
 			
-		endif; ?></span></h3>
-			<span itemprop="description"><?php if( !empty($small_description) ): echo esc_html__( $small_description ); endif; ?></span>
+		endif; ?>
+			<p><span itemprop="description"><?php if( !empty($small_description) ): echo esc_html__( $small_description ); endif; ?></span></p>
 			<div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
-				<span itemprop="streetAddress"><?php if( !empty($street_address) ): echo esc_html__( $street_address ); endif; ?></span>
-				<span itemprop="addressLocality"><?php if( !empty($locality_address) ): echo esc_html__( $locality_address ); endif; ?></span>,
-				<span itemprop="addressRegion"><?php if( !empty($regional_address) ): echo esc_html__( $regional_address ); endif; ?></span>
-				<span itemprop="postalCode"><?php if( !empty($postal_code) ): echo esc_html__( $postal_code ); endif; ?></span>
+				<p>
+					<span itemprop="streetAddress"><?php if( !empty($street_address) ): echo esc_html__( $street_address ); endif; ?></span>
+					<span itemprop="addressLocality"><?php if( !empty($locality_address) ): echo esc_html__( $locality_address ); endif; ?></span>,
+				</p>
+				<p><span itemprop="addressRegion"><?php if( !empty($regional_address) ): echo esc_html__( $regional_address ); endif; ?></span> - 
+				<span itemprop="postalCode"><?php if( !empty($postal_code) ): echo esc_html__( $postal_code ); endif; ?></span></p>
+
 			</div>
 			<p>Phone: <span itemprop="telephone"><?php if( !empty($phone_no) ): echo esc_html__( $phone_no ); endif; ?></span></p>
 			<p>Fax:<span itemprop="faxNumber"><?php if( !empty($fax_no) ): echo esc_html__( $fax_no ); endif; ?></span></p>
 			<p>E-mail: <a href="mailto:test@example.com" itemprop="email"><?php if( !empty($email) ): echo esc_html__( $email ); endif; ?></a></p>
-			<p>Home page: <a href="<?php if( !empty($company_website) ): echo esc_html__( $small_description ); endif; ?>" itemprop="url"><?php echo $company_website; ?></a></p>
+			<p>Home page: <a href="<?php if( !empty($company_website) ): echo esc_url( $company_website ); endif; ?>" itemprop="url"><?php echo $company_website; ?></a></p>
 		</div>
 		
 		
