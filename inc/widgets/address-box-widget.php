@@ -22,16 +22,16 @@ class Codexin_Address_Box extends WP_Widget {
 	
 	//back-end display of widget
 	public function form( $instance ) {
-		$company_name 	= ( !empty( $instance[ 'company_name' ] ) ? $instance[ 'company_name' ]: esc_html__('', 'codexin') );
-		$small_description 	= ( !empty( $instance[ 'small_description' ] ) ? $instance[ 'small_description' ]: esc_html__('', 'codexin') );
-		$street_address 	= ( !empty( $instance[ 'street_address' ] ) ? $instance[ 'street_address' ] : esc_html__('', 'codexin'));
-		$locality_address 	= ( !empty( $instance[ 'locality_address' ] ) ? $instance[ 'locality_address' ] : esc_html__('', 'codexin'));
-		$regional_address 	= ( !empty( $instance[ 'regional_address' ] ) ? $instance[ 'regional_address' ] : esc_html__('', 'codexin') );
-		$postal_code 		= ( !empty( $instance[ 'postal_code' ] ) ? $instance[ 'postal_code' ] : esc_html__('', 'codexin') );
-		$phone_no 			= ( !empty( $instance[ 'phone_no' ] ) ? $instance[ 'phone_no' ] : esc_html__('', 'codexin'));
-		$fax_no 			= ( !empty( $instance[ 'fax_no' ] ) ? $instance[ 'fax_no' ] : esc_html__('', 'codexin'));
-		$email 				= ( !empty( $instance[ 'email' ] ) ? $instance[ 'email' ] : esc_html__('', 'codexin'));
-		$company_website 	= ( !empty( $instance[ 'company_website' ] ) ? $instance[ 'company_website' ] : esc_html__('http://www.janedoe.com', 'codexin'));
+		$company_name 	= ( !empty( $instance[ 'company_name' ] ) ? $instance[ 'company_name' ]: '' );
+		$small_description 	= ( !empty( $instance[ 'small_description' ] ) ? $instance[ 'small_description' ]: '' );
+		$street_address 	= ( !empty( $instance[ 'street_address' ] ) ? $instance[ 'street_address' ] : '' );
+		$locality_address 	= ( !empty( $instance[ 'locality_address' ] ) ? $instance[ 'locality_address' ] : '' );
+		$regional_address 	= ( !empty( $instance[ 'regional_address' ] ) ? $instance[ 'regional_address' ] : '' );
+		$postal_code 		= ( !empty( $instance[ 'postal_code' ] ) ? $instance[ 'postal_code' ] : '' );
+		$phone_no 			= ( !empty( $instance[ 'phone_no' ] ) ? $instance[ 'phone_no' ] : '' );
+		$fax_no 			= ( !empty( $instance[ 'fax_no' ] ) ? $instance[ 'fax_no' ] : '' );
+		$email 				= ( !empty( $instance[ 'email' ] ) ? $instance[ 'email' ] : '' );
+		$company_website 	= ( !empty( $instance[ 'company_website' ] ) ? $instance[ 'company_website' ] : '' );
 
 		?>
 
@@ -57,7 +57,7 @@ class Codexin_Address_Box extends WP_Widget {
 		</p>
 
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'regional_address' ) ); ?>"><?php echo esc_html__('Regional Address: ', 'codexin') ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'regional_address' ) ); ?>"><?php echo esc_html__('State: ', 'codexin') ?></label>
 			<input type="text" class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'regional_address' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'regional_address' ) ); ?>" value="<?php echo esc_attr( $regional_address ); ?>" placeholder="Ex: FL">
 		</p>
 
@@ -147,7 +147,7 @@ class Codexin_Address_Box extends WP_Widget {
 
 			</div>
 			<p>Phone: <span itemprop="telephone"><?php if( !empty($phone_no) ): echo esc_html__( $phone_no ); endif; ?></span></p>
-			<p>Fax:<span itemprop="faxNumber"><?php if( !empty($fax_no) ): echo esc_html__( $fax_no ); endif; ?></span></p>
+			<p>Fax: <span itemprop="faxNumber"><?php if( !empty($fax_no) ): echo esc_html__( $fax_no ); endif; ?></span></p>
 			<p>E-mail: <a href="mailto:test@example.com" itemprop="email"><?php if( !empty($email) ): echo esc_html__( $email ); endif; ?></a></p>
 			<p>Home page: <a href="<?php if( !empty($company_website) ): echo esc_url( $company_website ); endif; ?>" itemprop="url"><?php echo $company_website; ?></a></p>
 		</div>
