@@ -33,7 +33,8 @@ class Codexin_Popular_Project extends WP_Widget {
 		$title_len 			= ( !empty( $instance[ 'title_len' ] ) ? absint( $instance[ 'title_len' ] ) : esc_html__('7', 'codexin') );
 		$show_thumb 		= ( !empty( $instance[ 'show_thumb' ] ) ? $instance[ 'show_thumb' ] : '' );
 		$show_like	 		= ( !empty( $instance[ 'show_like' ] ) ? $instance[ 'show_like' ] : '' );
-		$display_orderby 	= ( !empty( $instance[ 'display_orderby' ] ) ? $instance[ 'display_orderby' ] : '' );
+		$display_meta 	= ( !empty( $instance[ 'display_meta' ] ) ? $instance[ 'display_meta' ] : '' );
+		$display_order 	= ( !empty( $instance[ 'display_order' ] ) ? $instance[ 'display_order' ] : '' );
 		
 		?>
 
@@ -63,15 +64,33 @@ class Codexin_Popular_Project extends WP_Widget {
 		</p>
 
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id('display_orderby') ); ?>"><?php echo esc_html__('Choose The Project Sorting Method:', 'codexin'); ?></label>
-			<select name="<?php echo esc_attr( $this->get_field_name('display_orderby') ); ?>" id="<?php echo esc_attr( $this->get_field_id('display_orderby') ); ?>" class="widefat">
+			<label for="<?php echo esc_attr( $this->get_field_id('display_order') ); ?>"><?php echo esc_html__('Choose The Order to Display Posts:', 'codexin'); ?></label>
+			<select name="<?php echo esc_attr( $this->get_field_name('display_order') ); ?>" id="<?php echo esc_attr( $this->get_field_id('display_order') ); ?>" class="widefat">
 				<?php
-				$dispby_opt = array(
-						esc_html__('Sort By Completion Date', 'codexin') => 'date', 
-						esc_html__('Sort By View Count', 'codexin') => 'meta_value_num'
+				$disp_opt = array(
+						esc_html__('Descending', 'codexin') => 'DESC', 
+						esc_html__('Ascending', 'codexin') => 'ASC'
 						);
-				foreach ($dispby_opt as $opt => $value) {
-					echo '<option value="' . $value . '" id="' . $value . '"', $display_orderby == $value ? ' selected="selected"' : '', '>', $opt, '</option>';
+				foreach ($disp_opt as $opt => $value) {
+					echo '<option value="' . $value . '" id="' . $value . '"', $display_order == $value ? ' selected="selected"' : '', '>', $opt, '</option>';
+				}
+				?>
+			</select>
+		</p>
+
+		<p>
+			<label for="<?php echo esc_attr( $this->get_field_id('display_meta') ); ?>"><?php echo esc_html__('Select Post Meta to Display :', 'codexin'); ?></label>
+			<select name="<?php echo esc_attr( $this->get_field_name('display_meta') ); ?>" id="<?php echo esc_attr( $this->get_field_id('display_meta') ); ?>" class="widefat">
+				<?php
+				$options = array(
+						esc_html__('Display Project Completion Date', 'codexin'), 
+						esc_html__('Display Project Client Name', 'codexin'),
+						esc_html__('Display Project Category', 'codexin'),
+						esc_html__('Display Project Date And Category', 'codexin'),
+						);
+				foreach ($options as $option) {
+					$opt = strtolower( str_replace(" ","-", $option ) );
+					echo '<option value="' . $opt . '" id="' . $opt . '"', $display_meta == $opt ? ' selected="selected"' : '', '>', $option, '</option>';
 				}
 				?>
 			</select>
@@ -91,7 +110,8 @@ class Codexin_Popular_Project extends WP_Widget {
 		$instance[ 'title_len' ] 		= ( !empty( $new_instance[ 'title_len' ] ) ? absint( strip_tags( $new_instance[ 'title_len' ] ) ) : 0 );
 		$instance[ 'show_thumb' ] 		= strip_tags( $new_instance[ 'show_thumb' ] );
 		$instance[ 'show_like' ] 		= strip_tags( $new_instance[ 'show_like' ] );
-		$instance[ 'display_orderby' ] 	= ( !empty( $new_instance[ 'display_orderby' ] ) ? strip_tags( $new_instance[ 'display_orderby' ] ) : '' );
+		$instance[ 'display_meta' ] 	= strip_tags( $new_instance[ 'display_meta' ] );
+		$instance[ 'display_order' ] 	= ( !empty( $new_instance[ 'display_order' ] ) ? strip_tags( $new_instance[ 'display_order' ] ) : '' );
 		
 		return $instance;
 		
@@ -104,16 +124,19 @@ class Codexin_Popular_Project extends WP_Widget {
 		$title_len 			= absint( $instance[ 'title_len' ] );
 		$show_thumb 		= $instance[ 'show_thumb' ];
 		$show_like 			= $instance[ 'show_like' ];
-		$display_orderby 	= $instance[ 'display_orderby' ];
-		$display_meta_a 	= 'date';
-		$display_meta_b 	= 'meta_value_num';
+		$display_meta 		= $instance[ 'display_meta' ];
+		$display_order 		= $instance[ 'display_order' ];
+		$display_meta_a 	= 'display-project-completion-date';
+		$display_meta_b 	= 'display-project-client-name';
+		$display_meta_c 	= 'display-project-category';
+		$display_meta_d 	= 'display-project-date-and-category';
 		
 		$posts_args = array(
 			'post_type'				=> 'portfolio',
 			'posts_per_page'		=> $num_posts,
 			'meta_key'				=> 'cx_post_views',
-			'orderby'				=> $display_orderby,
-			'order'					=> 'DESC',
+			'orderby'				=> 'meta_value_num',
+			'order'					=> $display_order,
 			'ignore_sticky_posts' 	=> 1
 		);
 		
@@ -146,15 +169,21 @@ class Codexin_Popular_Project extends WP_Widget {
 						//fetch custom-meta data
 						$c_name = $this->client_name = rwmb_meta( 'reveal_portfolio_client','type=text' );
 						$p_date = $this->project_date = rwmb_meta( 'reveal_portfolio_date','type=text' );
-						echo '<p>'. $c_name .'<p/>';
-						echo '<p>'. $p_date .'<p/>';
-						//End custom meta data
 
+						if( $display_meta == $display_meta_b ) {
+							echo '<p>'. $c_name .'<p/>';
+						}
+						if( $display_meta == $display_meta_a || $display_meta == $display_meta_d ) {
+							echo '<p>'. $p_date .'<p/>';
+						}
 						//get texonomy
-						$term_list = wp_get_post_terms( get_the_ID(), 'portfolio-category' ); 
-						foreach ($term_list as $sterm) {
-						 echo '<p>'. $sterm->name.'</p>'; 
-						}//End texonomy
+						if( $display_meta == $display_meta_c || $display_meta == $display_meta_d ) {
+							$term_list = wp_get_post_terms( get_the_ID(), 'portfolio-category' ); 
+							foreach ($term_list as $sterm) {
+								echo '<p>'. $sterm->name.'</p>'; 
+							}//end texonomy
+						}
+						//End custom meta data
 						
 						if( 'on' == $instance[ 'show_like' ] ) {
 							echo '<span>'. codexin_likes_button( get_the_ID(), 0 ) .'</span>';

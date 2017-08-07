@@ -30,8 +30,7 @@ class Codexin_Recent_Projects extends WP_Widget {
 		$num_posts 		= ( !empty( $instance[ 'num_posts' ] ) ? absint( $instance[ 'num_posts' ] ) : esc_html__('3', 'codexin') );
 		$title_len 		= ( !empty( $instance[ 'title_len' ] ) ? absint( $instance[ 'title_len' ] ) : esc_html__('7', 'codexin') );
 		$show_thumb 	= ( !empty( $instance[ 'show_thumb' ] ) ? $instance[ 'show_thumb' ] : '' );
-		$show_client 	= ( !empty( $instance[ 'show_client' ] ) ? $instance[ 'show_client' ] : '' );
-		$display_orderby 	= ( !empty( $instance[ 'display_orderby' ] ) ? $instance[ 'display_orderby' ] : '' );
+		$display_meta 	= ( !empty( $instance[ 'display_meta' ] ) ? $instance[ 'display_meta' ] : '' );
 		$show_like	 	= ( !empty( $instance[ 'show_like' ] ) ? $instance[ 'show_like' ] : '' );
 
 		?>
@@ -57,26 +56,22 @@ class Codexin_Recent_Projects extends WP_Widget {
 		</p>
 
 		<p>
-		    <input class="checkbox" type="checkbox" <?php esc_attr( checked( $show_client, 'on' ) ); ?> id="<?php echo esc_attr ($this->get_field_id( 'show_client' ) ); ?>" name="<?php echo esc_attr($this->get_field_name( 'show_client' ) ); ?>" /> 
-		    <label for="<?php echo esc_attr($this->get_field_id( 'show_client' ) ); ?>"><?php echo esc_html__('Display Client Name?', 'codexin'); ?></label>
-		</p>
-
-		<p>
 		    <input class="checkbox" type="checkbox" <?php esc_attr( checked( $show_like, 'on' ) ); ?> id="<?php echo esc_attr ($this->get_field_id( 'show_like' ) ); ?>" name="<?php echo esc_attr($this->get_field_name( 'show_like' ) ); ?>" /> 
 		    <label for="<?php echo esc_attr($this->get_field_id( 'show_like' ) ); ?>"><?php echo esc_html__('Display Like Button?', 'codexin'); ?></label>
 		</p>
 
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id('display_orderby') ); ?>"><?php echo esc_html__('Choose The Project Sorting Method:', 'codexin'); ?></label>
-			<select name="<?php echo esc_attr( $this->get_field_name('display_orderby') ); ?>" id="<?php echo esc_attr( $this->get_field_id('display_orderby') ); ?>" class="widefat">
+			<label for="<?php echo esc_attr( $this->get_field_id('display_meta') ); ?>"><?php echo esc_html__('Select Post Meta to Display :', 'codexin'); ?></label>
+			<select name="<?php echo esc_attr( $this->get_field_name('display_meta') ); ?>" id="<?php echo esc_attr( $this->get_field_id('display_meta') ); ?>" class="widefat">
 				<?php
-				$dispby_opt = array(
-						esc_html__('Sort By Completion Date', 'codexin') => 'date', 
-						esc_html__('Sort By View Count', 'codexin') => 'meta_value_num',
-						esc_html__('Sort By Category', 'codexin') => 'category_project',
+				$options = array(
+						esc_html__('Display Project Completion Date', 'codexin'), 
+						esc_html__('Display Project Client Name', 'codexin'),
+						esc_html__('Display Project Category', 'codexin'),
 						);
-				foreach ($dispby_opt as $opt => $value) {
-					echo '<option value="' . $value . '" id="' . $value . '"', $display_orderby == $value ? ' selected="selected"' : '', '>', $opt, '</option>';
+				foreach ($options as $option) {
+					$opt = strtolower( str_replace(" ","-", $option ) );
+					echo '<option value="' . $opt . '" id="' . $opt . '"', $display_meta == $opt ? ' selected="selected"' : '', '>', $option, '</option>';
 				}
 				?>
 			</select>
@@ -96,8 +91,7 @@ class Codexin_Recent_Projects extends WP_Widget {
 		$instance[ 'num_posts' ] 		= ( !empty( $new_instance[ 'num_posts' ] ) ? absint( strip_tags( $new_instance[ 'num_posts' ] ) ) : 0 );
 		$instance[ 'title_len' ] 		= ( !empty( $new_instance[ 'title_len' ] ) ? absint( strip_tags( $new_instance[ 'title_len' ] ) ) : 0 );
 		$instance[ 'show_thumb' ] 		= strip_tags( $new_instance[ 'show_thumb' ] );
-		$instance[ 'show_client' ] 		= strip_tags( $new_instance[ 'show_client' ] );
-		$instance[ 'display_orderby' ] 	= ( !empty( $new_instance[ 'display_orderby' ] ) ? strip_tags( $new_instance[ 'display_orderby' ] ) : '' );
+		$instance[ 'display_meta' ] 	= ( !empty( $new_instance[ 'display_meta' ] ) ? strip_tags( $new_instance[ 'display_meta' ] ) : '' );
 		$instance[ 'show_like' ] 		= strip_tags( $new_instance[ 'show_like' ] );
 		
 		return $instance;
@@ -111,28 +105,16 @@ class Codexin_Recent_Projects extends WP_Widget {
 		$title_len 		= absint( $instance[ 'title_len' ] );
 		$show_thumb 	= $instance[ 'show_thumb' ];
 		$show_like 		= $instance[ 'show_like' ];
-		$display_orderby = $instance[ 'display_orderby' ];
-		$display_meta_a = 'date';
-		$display_meta_b = 'meta_value_num';
-		$display_meta_c = 'category_project';
-		//for texonomies query
-		if( $display_orderby == $display_meta_c ) :
-			$custom_taxterms = wp_get_object_terms( $post->ID, 'portfolio-category', array('fields' => 'ids') );
-		endif;
-		
+		$display_meta = $instance[ 'display_meta' ];
+		$display_meta_a = 'display-project-completion-date';
+		$display_meta_b = 'display-project-client-name';
+		$display_meta_c = 'display-project-category';		
 		$posts_args = array(
 			'post_type'				=> 'portfolio',
 			'posts_per_page'		=> $num_posts,
 			'meta_key'				=> 'cx_post_views',
-			'orderby'				=> $display_orderby,
+			'orderby'				=> 'meta_value_num',
 			'order'					=> 'DESC',
-			'tax_query' => array(
-                    	array(
-                    		'taxonomy' => 'portfolio-category',
-                    		'field' => 'id',
-                    		'terms' => $custom_taxterms
-                    		)
-                    	),
 			'ignore_sticky_posts' 	=> 1
 		);
 		
@@ -165,29 +147,26 @@ class Codexin_Recent_Projects extends WP_Widget {
 						//fetch custom-meta data
 						$c_name = $this->client_name = rwmb_meta( 'reveal_portfolio_client','type=text' );
 						$p_date = $this->project_date = rwmb_meta( 'reveal_portfolio_date','type=text' );
-						if( 'on' == $instance[ 'show_client' ] ) {
+						if( $display_meta == $display_meta_a ) {
+							echo '<p>'. $p_date .'<p/>';
+						}elseif( $display_meta == $display_meta_b ){
 							echo '<p>'. $c_name .'<p/>';
-						}
-						echo '<p>'. $p_date .'<p/>';
-						//End custom meta data
-
-						//get texonomy
-						if( $display_orderby == $display_meta_c ) {
+						}elseif( $display_meta == $display_meta_c ) {
 							$term_list = wp_get_post_terms( get_the_ID(), 'portfolio-category' ); 
 							foreach ($term_list as $sterm) {
 							 echo '<p>'. $sterm->name.'</p>'; 
 							}//End texonomy
 						}
+						//End custom meta data
 
 						if( 'on' == $instance[ 'show_like' ] ) {
 							echo '<span>'. codexin_likes_button( get_the_ID(), 0 ) .'</span>';
 						}
 
-						if(  $display_orderby == $display_meta_b ) {
-							echo '<div class="blog-info">';
-							echo '<span><i class="fa fa-eye"></i><i>' . codexin_get_post_views(get_the_ID()) . '</i></span>';
-							echo '</div>';
-						}
+						echo '<div class="blog-info">';
+						echo '<span><i class="fa fa-eye"></i><i>' . codexin_get_post_views(get_the_ID()) . '</i></span>';
+						echo '</div>';
+						
 
 					echo '</div>';
 				echo '</div>';
