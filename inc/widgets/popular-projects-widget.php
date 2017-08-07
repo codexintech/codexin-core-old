@@ -32,7 +32,6 @@ class Codexin_Popular_Project extends WP_Widget {
 		$num_posts 			= ( !empty( $instance[ 'num_posts' ] ) ? absint( $instance[ 'num_posts' ] ) : esc_html__('3', 'codexin') );
 		$title_len 			= ( !empty( $instance[ 'title_len' ] ) ? absint( $instance[ 'title_len' ] ) : esc_html__('7', 'codexin') );
 		$show_thumb 		= ( !empty( $instance[ 'show_thumb' ] ) ? $instance[ 'show_thumb' ] : '' );
-		$display_meta 		= ( !empty( $instance[ 'display_meta' ] ) ? $instance[ 'display_meta' ] : '' );
 		$show_like	 		= ( !empty( $instance[ 'show_like' ] ) ? $instance[ 'show_like' ] : '' );
 		$display_orderby 	= ( !empty( $instance[ 'display_orderby' ] ) ? $instance[ 'display_orderby' ] : '' );
 		
@@ -106,8 +105,8 @@ class Codexin_Popular_Project extends WP_Widget {
 		$show_thumb 		= $instance[ 'show_thumb' ];
 		$show_like 			= $instance[ 'show_like' ];
 		$display_orderby 	= $instance[ 'display_orderby' ];
-		$display_meta_a 	= 'display-post-date';
-		$display_meta_b 	= 'display-post-views-count';
+		$display_meta_a 	= 'date';
+		$display_meta_b 	= 'meta_value_num';
 		
 		$posts_args = array(
 			'post_type'				=> 'portfolio',
@@ -157,17 +156,12 @@ class Codexin_Popular_Project extends WP_Widget {
 						 echo '<p>'. $sterm->name.'</p>'; 
 						}//End texonomy
 						
-						if( $display_meta ==  $display_meta || $display_meta_b ) {
+						if( $display_orderby == $display_meta_b ) {
 
 							echo '<div class="blog-info">';
-								if( $display_orderby == 'meta_value_num' ) {
-									if( $display_meta == $display_meta_a OR $display_meta == $display_meta_b ) {
+
+								if( $display_orderby == $display_meta_b ) {
 									echo '<span><i class="fa fa-eye"></i><i>' . codexin_get_post_views(get_the_ID()) . '</i></span>';
-									}
-									
-									if( $display_meta == $display_meta_b ) {
-									echo '<span><i class="fa fa-eye"></i><i>' . codexin_get_post_views(get_the_ID()) . '</i></span>';
-									}
 								}
 								if( 'on' == $instance[ 'show_like' ] ) {
 									echo '<span>'. codexin_likes_button( get_the_ID(), 0 ) .'</span>';
