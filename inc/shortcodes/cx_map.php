@@ -85,7 +85,6 @@ function cx_map_shortcode( $atts, $content = null ) {
 	endif;
 	echo $codeopt; ?>
 	<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
-	<!-- <h4>for validation</h4> -->
 		<div class="gmap-wrap">
 			<div id="gmap"></div>	 			
 		</div>
