@@ -1,130 +1,142 @@
 <?php
-	function cx_blog_shortcode( $atts, $content = null ) {
-	   extract(shortcode_atts(array(
-	   		'img_alt'			=> '',
-	   		'posts_per_page'	=> '',
-	   		'order'				=> '',
-	   		'orderby'			=> '',
-	   		'show_date'			=> '',
-	   		'title_length'		=> '',
-	   		'desc_length'		=> '',
-	   		'postview_comments'	=> '',
-	   		'readmore_text'		=> '',
-	   		'class'				=> ''
-	   ), $atts));
 
-	   $master_class = apply_filters( 'kc-el-class', $atts );
-	   $master_class[] = 'blog blog-shortcode';
-	   $classes = array( 'blog-row' );
-	   (!empty($class)) ? $classes[] = $class : '';
 
-	   $result = '';
+/*
+    ================================
+        CODEXIN BLOG SHORTCODE
+    ================================
+*/
 
-	   ob_start(); 
-		?>
-		<section id="blog" class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
-			<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
+// Registering Codexin Blog Shortcode
+function cx_blog_shortcode( $atts, $content = null ) {
+	extract(shortcode_atts(array(
+			'img_alt'			=> '',
+			'posts_per_page'	=> '',
+			'order'				=> '',
+			'orderby'			=> '',
+			'show_date'			=> '',
+			'title_length'		=> '',
+			'desc_length'		=> '',
+			'postview_comments'	=> '',
+			'readmore_text'		=> '',
+			'class'				=> ''
+	), $atts));
 
-				<?php 
-				//start query..
-				$args = array(
-						'post_type'			=> 'post',
-						'posts_per_page'	=> $posts_per_page,
-						'order'				=> $order,
-						'orderby'			=> $orderby,
-						'meta_key'			=> 'cx_post_views',
-					);
+	$result = '';
 
-				$data = new WP_Query( $args );
+	// Assigning a master css class and hooking into KC
+   $master_class = apply_filters( 'kc-el-class', $atts );
+   $master_class[] = 'blog blog-shortcode';
 
-					if( $data->have_posts() ) :
-						//Srat loop here..
-						while( $data->have_posts() ) : $data->the_post();
-					$column = 12/$posts_per_page;
-				 ?>
-					<div class="col-md-<?php echo $column ?> col-ss-12">
-						<div class="blog-wrapper">
-							<div class="img-thumb">
-								<div class="img-wrapper"><img src="<?php echo esc_url( the_post_thumbnail_url( 'blog-grid-image' ) ); ?>" alt="<?php echo esc_attr( $img_alt ); ?>" class="img-responsive"></div>
-								<?php if( $atts['show_date'] == 'yes') : ?>
-									<div class="meta">
-										<p><?php the_time( 'd' ); ?></p>
-										<p><?php the_time( 'M' ); ?></p>
-									</div>
-								<?php endif; ?>
-							</div>
+   // Retrieving user define classes
+   $classes = array( 'blog-row' );
+   (!empty($class)) ? $classes[] = $class : '';
 
-							<div class="blog-content">
-								<p class="blog-title">
-									<?php echo esc_html( wp_trim_words( get_the_title(), $title_length ) ); ?>
-								</p>
-								<p class="blog-desc"> 
-									<?php echo esc_html( wp_trim_words( get_the_excerpt(), $desc_length ) ); ?> 
-								</p>
-								<a class="read-more" href="<?php echo esc_url( get_the_permalink() ); ?>">
-									<?php echo esc_html( $readmore_text ); ?>
-								</a>
-							</div>
+   ob_start(); 
+	?>
+	<section id="blog" class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
+		<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
+
+			<?php 
+			//start query..
+			$args = array(
+					'post_type'			=> 'post',
+					'posts_per_page'	=> $posts_per_page,
+					'order'				=> $order,
+					'orderby'			=> $orderby,
+					'meta_key'			=> 'cx_post_views',
+				);
+
+			$data = new WP_Query( $args );
+
+				if( $data->have_posts() ) :
+					//Srat loop here..
+					while( $data->have_posts() ) : $data->the_post();
+				$column = 12/$posts_per_page;
+			 ?>
+				<div class="col-md-<?php echo $column ?> col-ss-12">
+					<div class="blog-wrapper">
+						<div class="img-thumb">
+							<div class="img-wrapper"><img src="<?php echo esc_url( the_post_thumbnail_url( 'blog-grid-image' ) ); ?>" alt="<?php echo esc_attr( $img_alt ); ?>" class="img-responsive"></div>
+							<?php if( $atts['show_date'] == 'yes') : ?>
+								<div class="meta">
+									<p><?php the_time( 'd' ); ?></p>
+									<p><?php the_time( 'M' ); ?></p>
+								</div>
+							<?php endif; ?>
+						</div>
+
+						<div class="blog-content">
+							<p class="blog-title">
+								<?php echo esc_html( wp_trim_words( get_the_title(), $title_length ) ); ?>
+							</p>
+							<p class="blog-desc"> 
+								<?php echo esc_html( wp_trim_words( get_the_excerpt(), $desc_length ) ); ?> 
+							</p>
+							<a class="read-more" href="<?php echo esc_url( get_the_permalink() ); ?>">
+								<?php echo esc_html( $readmore_text ); ?>
+							</a>
+						</div>
+					<?php
+						if( $atts['postview_comments'] == 'yes' ) : ?>
+						<div class="blog-info">
 						<?php
-							if( $atts['postview_comments'] == 'yes' ) : ?>
-							<div class="blog-info">
-							<?php
-							$order_cpv = 'meta_value_num';
-							$order_com = 'comment_count';
-							 if( $orderby == $order_cpv ) : 
-							?>
-								<span>
-									<i class="fa fa-eye"></i> <i>
-										<?php echo codexin_get_post_views(get_the_ID()); ?>
-									</i>
-								</span>
+						$order_cpv = 'meta_value_num';
+						$order_com = 'comment_count';
+						 if( $orderby == $order_cpv ) : 
+						?>
+							<span>
+								<i class="fa fa-eye"></i> <i>
+									<?php echo codexin_get_post_views(get_the_ID()); ?>
+								</i>
+							</span>
+							<span> 											
+								<i class="fa fa-comments"></i> <i>
+									<?php comments_number('No Comments', '1', '%'); ?>	
+								</i>
+							</span>
+						<?php elseif( $orderby == $order_com ) : ?>
 								<span> 											
-									<i class="fa fa-comments"></i> <i>
-										<?php comments_number('No Comments', '1', '%'); ?>	
-									</i>
-								</span>
-							<?php elseif( $orderby == $order_com ) : ?>
-									<span> 											
-									<i class="fa fa-comments"></i> <i>
-										<?php comments_number('No Comments', '1', '%'); ?>	
-									</i>
-								</span>
-								<span>
-									<i class="fa fa-eye"></i> <i>
-										<?php echo codexin_get_post_views(get_the_ID()); ?>
-									</i>
-								</span>
-							<?php else : ?>
-								<span>
-									<i class="fa fa-eye"></i> <i>
-										<?php echo codexin_get_post_views(get_the_ID()); ?>
-									</i>
-								</span>
-								<span> 											
-									<i class="fa fa-comments"></i> <i>
-										<?php comments_number('No Comments', '1', '%'); ?>	
-									</i>
-								</span>
-							<?php endif; ?>	
+								<i class="fa fa-comments"></i> <i>
+									<?php comments_number('No Comments', '1', '%'); ?>	
+								</i>
+							</span>
+							<span>
+								<i class="fa fa-eye"></i> <i>
+									<?php echo codexin_get_post_views(get_the_ID()); ?>
+								</i>
+							</span>
+						<?php else : ?>
+							<span>
+								<i class="fa fa-eye"></i> <i>
+									<?php echo codexin_get_post_views(get_the_ID()); ?>
+								</i>
+							</span>
+							<span> 											
+								<i class="fa fa-comments"></i> <i>
+									<?php comments_number('No Comments', '1', '%'); ?>	
+								</i>
+							</span>
+						<?php endif; ?>	
 
-							</div>
+						</div>
 
-						<?php endif; //End postview_comments if ?>
+					<?php endif; //End postview_comments if ?>
 
-						</div><!--/.blog-wrapper -->
-					</div> <!-- end of col -->
-				<?php
-					endwhile;
-				endif;
-				?>
-			</div> <!-- end of blog-row -->
-		</section> <!-- end of blog -->
+					</div><!--/.blog-wrapper -->
+				</div> <!-- end of col -->
+			<?php
+				endwhile;
+			endif;
+			?>
+		</div> <!-- end of blog-row -->
+	</section> <!-- end of blog -->
 
-		<div class="clearfix"></div>
+	<div class="clearfix"></div>
 
-		<?php
-		$result .= ob_get_clean();
-		return $result;
+	<?php
+	$result .= ob_get_clean();
+	return $result;
 
 } //End cx_blog
 
