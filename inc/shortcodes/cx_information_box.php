@@ -1,29 +1,6 @@
 <?php
 
-	// Custom function for retrieving Image URL
-	function retrieve_img_src ( $image, $image_size ) {
 
-	   $img_src = wp_get_attachment_image_src($image, $image_size);
-	   $img_source = $img_src[0];
-	   return $img_source;
-
-	}
-
-	// Custom function for retrieving page URL, title and target
-	function retrieve_url ( $href ) {
-
-		if ( !empty( $href ) ) {
-			$link_arr = explode( "|", $href );
-
-			( !empty( $link_arr[0] ) ) ? $link_url = $link_arr[0] : $link_url = '';
-			( !empty( $link_arr[1] ) ) ? $cx_link_title = $link_arr[1] : $cx_link_title = '';
-			( !empty( $link_arr[2] ) ) ? $link_target = $link_arr[2] : $link_target = '';
-
-			return array( $link_url, $cx_link_title, $link_target );
-
-		}
-
-	}
 
 	function cx_information_box_shortcode( $atts, $content = null ) {
 	   extract(shortcode_atts(array(

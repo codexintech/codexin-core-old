@@ -38,12 +38,15 @@ function cx_about_box_shortcode(  $atts, $content = null) {
 	$classes = array( 'img-thumb' );
 	(!empty($class)) ? $classes[] = $class : '';
 
+	$title = ($retrieve_link[1]) ? 'title='.esc_attr($retrieve_link[1]):'';
+	$target = ($retrieve_link[2]) ? 'target='.esc_attr($retrieve_link[2]):'';
+
    	ob_start(); ?>
 
 		<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
 			<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
 				<?php if ( $img_action == 'open_custom_link' ): ?>
-				<a href="<?php echo esc_url($retrieve_link[0]); ?>" title="<?php echo esc_attr($retrieve_link[1]); ?>" target="<?php echo esc_attr($retrieve_link[2]); ?>">
+				<a href="<?php echo esc_url($retrieve_link[0]); ?>" <?php echo $title; ?> <?php echo $target; ?>>
 				<?php elseif ( $img_action == 'img_pop' ): ?>
 				<a href="<?php echo $ret_full_img_url; ?>" class="event-image-popup">
 				<?php else: ?>

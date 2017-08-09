@@ -30,17 +30,17 @@ function cx_animated_counter_shortcode( $atts, $content = null ) {
    	ob_start(); 
 	?>
 
-		<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
-			<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
+    <div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
+        <div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
 
-				<?php if( $icon_toggle == 'yes' ): ?>
-				<i class="<?php echo esc_attr( $icon ); ?>"></i>
-				<?php endif; ?>
+            <?php if( $icon_toggle == 'yes' ): ?>
+            <i class="<?php echo esc_attr( $icon ); ?>"></i>
+            <?php endif; ?>
 
-				<span class="counter"><?php echo esc_html( $count_up ); ?></span>
-				<p><?php echo esc_html( $txt ); ?></p>
-			</div>
-		</div>
+            <span class="counter"><?php echo esc_html( $count_up ); ?></span>
+            <p><?php echo esc_html( $txt ); ?></p>
+        </div><!-- end of project -->
+    </div><!-- end of cx-animated-counter -->
 
 	<?php
 	$result .= ob_get_clean();
@@ -69,6 +69,7 @@ function cx_animated_counter_kc() {
                 	), //End assets
 
   	        		'params' => array(
+                        // General Params
   	        			'general' 	=> array(
 
   	        				array(
@@ -108,7 +109,7 @@ function cx_animated_counter_kc() {
   	        					),
 
   	        				),
-
+                        // Style Params
   	        			'styling' => array(
 
   	        				array(
@@ -119,59 +120,59 @@ function cx_animated_counter_kc() {
   	        							"screens" => "any,1199,991,767,479",
 
   	        							'Count Number' => array(
-  	        								array('property' => 'color', 'label' => 'Color', 'selector' => '.project .counter'),
-  	        								array('property' => 'font-family', 'label' => 'Font Family', 'selector' => '.project .counter'),
-  	        								array('property' => 'font-size', 'label' => 'Font Size', 'selector' => '.project .counter'),
-  	        								array('property' => 'line-height', 'label' => 'Line Height', 'selector' => '.project .counter'),
-  	        								array('property' => 'font-weight', 'label' => 'Font Weight', 'selector' => '.project .counter'),
-  	        								array('property' => 'text-align', 'label' => 'Text Align', 'selector' => '.project .counter'),
-  	        								array('property' => 'text-transform', 'label' => 'Text Transform', 'selector' => '.project .counter'),
-  	        								array('property' => 'padding', 'label' => 'Padding', 'selector' => '.project .counter'),
-  	        								array('property' => 'margin', 'label' => 'Margin', 'selector' => '.project .counter'),
+  	        								array('property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.project .counter'),
+  	        								array('property' => 'font-family', 'label' => esc_html__('Font Family', 'codexin'), 'selector' => '.project .counter'),
+  	        								array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.project .counter'),
+  	        								array('property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '.project .counter'),
+  	        								array('property' => 'font-weight', 'label' => esc_html__('Font Weight', 'codexin'), 'selector' => '.project .counter'),
+  	        								array('property' => 'text-align', 'label' => esc_html__('Text Align', 'codexin'), 'selector' => '.project .counter'),
+  	        								array('property' => 'text-transform', 'label' => esc_html__('Text Transform', 'codexin'), 'selector' => '.project .counter'),
+  	        								array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.project .counter'),
+  	        								array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.project .counter'),
         								),
 
   	        							'Count Text' => array(
-  	        								array('property' => 'color', 'label' => 'Color', 'selector' => '.project p'),
-  	        								array('property' => 'font-family', 'label' => 'Font Family', 'selector' => '.project p'),
-  	        								array('property' => 'font-size', 'label' => 'Font Size', 'selector' => '.project p'),
-  	        								array('property' => 'line-height', 'label' => 'Line Height', 'selector' => '.project p'),
-  	        								array('property' => 'font-weight', 'label' => 'Font Weight', 'selector' => '.project p'),
-  	        								array('property' => 'text-align', 'label' => 'Text Align', 'selector' => '.project p'),
-  	        								array('property' => 'text-transform', 'label' => 'Text Transform', 'selector' => '.project p'),
-  	        								array('property' => 'padding', 'label' => 'Padding', 'selector' => '.project p'),
-  	        								array('property' => 'margin', 'label' => 'Margin', 'selector' => '.project p'),
+  	        								array('property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.project p'),
+  	        								array('property' => 'font-family', 'label' => esc_html__('Font Family', 'codexin'), 'selector' => '.project p'),
+  	        								array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.project p'),
+  	        								array('property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '.project p'),
+  	        								array('property' => 'font-weight', 'label' => esc_html__('Font Weight', 'codexin'), 'selector' => '.project p'),
+  	        								array('property' => 'text-align', 'label' => esc_html__('Text Align', 'codexin'), 'selector' => '.project p'),
+  	        								array('property' => 'text-transform', 'label' => esc_html__('Text Transform', 'codexin'), 'selector' => '.project p'),
+  	        								array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.project p'),
+  	        								array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.project p'),
         								),
 
   	        							'Icon' => array(
-  	        								array('property' => 'color', 'label' => 'Label Color', 'selector' => '.project i'),
-  	        								array('property' => 'font-size', 'label' => 'Font Size', 'selector' => '.project i'),
-  	        								array('property' => 'display', 'label' => 'Display', 'selector' => '.project i'),
-  	        								array('property' => 'text-align', 'label' => 'Text Align', 'selector' => '.project i'),
-  	        								array('property' => 'width', 'label' => 'Width', 'selector' => '.project i'),
-  	        								array('property' => 'padding', 'label' => 'Padding', 'selector' => '.project i'),
-  	        								array('property' => 'margin', 'label' => 'Margin', 'selector' => '.project i')
+  	        								array('property' => 'color', 'label' => esc_html__('Label Color', 'codexin'), 'selector' => '.project i'),
+  	        								array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.project i'),
+  	        								array('property' => 'display', 'label' => esc_html__('Display', 'codexin'), 'selector' => '.project i'),
+  	        								array('property' => 'text-align', 'label' => esc_html__('Text Align', 'codexin'), 'selector' => '.project i'),
+  	        								array('property' => 'width', 'label' => esc_html__('Width', 'codexin'), 'selector' => '.project i'),
+  	        								array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.project i'),
+  	        								array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.project i')
         								),
 
   	        							'Box'	=> array(
   	        								array('property' => 'background'),
-  	        								array('property' => 'border', 'label' => 'Border'),
-  	        								array('property' => 'border-radius', 'label' => 'Border Radius'),
-  	        								array('property' => 'box-shadow', 'label' => 'Box Shadow', 'selector' => '+.cx-animated-counter'),
-  	        								array('property' => 'box-shadow', 'label' => 'Box Shadow on Hover', 'selector' => '+.cx-animated-counter:hover'),
-  	        								array('property' => 'transition', 'label' => 'Hover Transition Animation', 'selector' => '+.cx-animated-counter'),
-  	        								array('property' => 'margin', 'label' => 'Margin'),
-  	        								array('property' => 'padding', 'label' => 'Padding'),
+  	        								array('property' => 'border', 'label' => esc_html__('Border', 'codexin') ),
+  	        								array('property' => 'border-radius', 'label' => esc_html__('Border Radius', 'codexin') ),
+  	        								array('property' => 'box-shadow', 'label' => esc_html__('Box Shadow', 'codexin'), 'selector' => '+.cx-animated-counter'),
+  	        								array('property' => 'box-shadow', 'label' => esc_html__('Box Shadow on Hover', 'codexin'), 'selector' => '+.cx-animated-counter:hover'),
+  	        								array('property' => 'transition', 'label' => esc_html__('Hover Transition Animation', 'codexin'), 'selector' => '+.cx-animated-counter'),
+  	        								array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin') ),
+  	        								array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin') ),
         								)									
         							)
         						)
         					)
         				),
-
+                        // Animate Params
 						'animate' => array(
 							array(
 								'name'    		=> 'animate',
 								'type'    		=> 'animate'
-								)
+							)
 						),
 
 					)
