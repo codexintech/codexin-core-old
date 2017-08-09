@@ -1,6 +1,5 @@
 <?php
 
-
 /*
 	============================================
 		CODEXIN ADDRESS BOX WIDGET CLASS
