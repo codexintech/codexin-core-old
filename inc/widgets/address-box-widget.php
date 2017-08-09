@@ -136,24 +136,20 @@ class Codexin_Address_Box extends WP_Widget {
 			printf( '%s<span itemprop="name">' . apply_filters( 'widget_title', $instance[ 'company_name' ] ) . '</span>%s', $args[ 'before_title' ], $args[ 'after_title' ]);
 			
 		endif; ?>
-			<p><span itemprop="description"><?php if( !empty($small_description) ): echo esc_html__( $small_description ); endif; ?></span></p>
+			<p><span itemprop="description"><?php if( !empty($small_description) ): echo esc_html( $small_description ); endif; ?></span></p>
 			<div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
 				<p>
-					<span itemprop="streetAddress"><?php if( !empty($street_address) ): echo esc_html__( $street_address ); endif; ?></span>
-					<span itemprop="addressLocality"><?php if( !empty($locality_address) ): echo esc_html__( $locality_address ); endif; ?></span>,
+					<span itemprop="streetAddress"><?php if( !empty($street_address) ): echo esc_html( $street_address ); endif; ?></span>
+					<span itemprop="addressLocality"><?php if( !empty($locality_address) ): echo esc_html( $locality_address ); endif; ?></span>,
 				</p>
-				<p><span itemprop="addressRegion"><?php if( !empty($regional_address) ): echo esc_html__( $regional_address ); endif; ?></span> - 
-				<span itemprop="postalCode"><?php if( !empty($postal_code) ): echo esc_html__( $postal_code ); endif; ?></span></p>
+				<p><span itemprop="addressRegion"><?php if( !empty($regional_address) ): echo esc_html( $regional_address ); endif; ?></span> - 
+				<span itemprop="postalCode"><?php if( !empty($postal_code) ): echo esc_html( $postal_code ); endif; ?></span></p>
 
 			</div>
-			<p>Phone: <span itemprop="telephone"><?php if( !empty($phone_no) ): echo esc_html__( $phone_no ); endif; ?></span></p>
-			<p>Fax: <span itemprop="faxNumber"><?php if( !empty($fax_no) ): echo esc_html__( $fax_no ); endif; ?></span></p>
-			<p>E-mail: <a href="mailto:test@example.com" itemprop="email"><?php if( !empty($email) ): echo esc_html__( $email ); endif; ?></a></p>
-<<<<<<< HEAD
-			<p>Home page: <a href="<?php if( !empty($company_website) ): echo esc_url__( $company_website ); endif; ?>" itemprop="url"><?php echo esc_url__($company_website); ?></a></p>
-=======
->>>>>>> fcafcf696c10c926c046e262dfe5a53cc4511838
-			<p>Home page: <a href="<?php if( !empty($company_website) ): echo esc_url( $company_website ); endif; ?>" itemprop="url"><?php echo $company_website; ?></a></p>
+			<p>Phone: <span itemprop="telephone"><?php if( !empty($phone_no) ): echo esc_html( $phone_no ); endif; ?></span></p>
+			<p>Fax: <span itemprop="faxNumber"><?php if( !empty($fax_no) ): echo esc_html( $fax_no ); endif; ?></span></p>
+			<p>E-mail: <a href="mailto:test@example.com" itemprop="email"><?php if( !empty($email) ): echo esc_html( $email ); endif; ?></a></p>
+			<p>Home page: <a href="<?php if( !empty($company_website) ): echo esc_url( $company_website ); endif; ?>" itemprop="url"><?php echo esc_html($company_website); ?></a></p>
 		</div>
 		
 		
