@@ -603,8 +603,9 @@ section#portfolio {
 /**************************************
     cx_blog
 *************************************/
-section#blog {
+div.cx-blog {
     margin-top: 0;
+    margin-bottom: 40px;
 }
 
 .home .blog {
@@ -683,6 +684,7 @@ section#blog {
 
 .blog-content {
     padding-bottom: 10px; 
+    border-bottom: 1px solid #ddd;
 }
 
 .blog-content a.read-more {

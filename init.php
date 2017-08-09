@@ -116,10 +116,19 @@ class Codexin_Core {
 		 *
 		 * @since 1.0.0
 		 */
-
 		add_action( 'init', 'codexin_core_load_textdomain' );
 		function codexin_core_load_textdomain() {
 			load_plugin_textdomain( 'codexin-core', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' ); 
+		}
+
+		/**
+		 * Adding custom image sizes.
+		 *
+		 * @since 1.0.0
+		 */
+		add_action( 'init', 'codexin_add_image_sizes' );
+		function codexin_add_image_sizes() {
+		    add_image_size('blog-grid-image', 540, 341, true);
 		}
 
 	}

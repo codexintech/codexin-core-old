@@ -75,7 +75,7 @@ function cx_about_box_shortcode(  $atts, $content = null) {
 	$result .= ob_get_clean();
 	return $result;
 
-}
+} // end of cx_about_box
 
 // Integrating Shortcode with King Composer
 function cx_about_box_kc() {
@@ -222,6 +222,6 @@ function cx_about_box_kc() {
 			) //end of array
 	    );  //end of kc_add_map
 	} //End if
-} // end of cx_section_heading_kc
+} // end of cx_about_box_kc
 
 

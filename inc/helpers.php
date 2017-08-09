@@ -36,6 +36,21 @@ function retrieve_url ( $href ) {
 
 /**
 *
+* Helper Function for retrieving image alt tag
+*
+**/
+function retrieve_alt_tag() {
+
+    global $post;
+    $attachment_id = get_post_thumbnail_id( $post->ID );
+    $image = wp_prepare_attachment_for_js($attachment_id);
+    $alt = $image['alt'];
+    return $alt;
+
+}
+
+/**
+*
 * Helper Function to get the post views
 *
 **/
