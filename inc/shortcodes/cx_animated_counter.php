@@ -174,7 +174,6 @@ function cx_animated_counter_kc() {
 								'type'    		=> 'animate'
 							)
 						),
-
 					)
 		        ),  // End of cx_animated_counter_kc
 			) //end of  array

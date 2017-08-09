@@ -34,8 +34,6 @@ function retrieve_url ( $href ) {
 
 }
 
-
-
 /**
 *
 * Helper Function to get the post views
