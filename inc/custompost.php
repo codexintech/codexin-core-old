@@ -53,49 +53,6 @@
  		);
 
  	register_post_type( 'portfolio', $args );
-	
-
-	//Create a custom post for Team...
- 	$labels = array(
- 				'name'					=> 'Team Members',
- 				'singular_name'			=> 'Team',
- 				'add_new'				=> 'Add Team Members',
- 				'all_items'				=> 'All Team Members',
- 				'add_new_item'			=> 'Add Team Members',
- 				'edit_item'				=> 'Edit Team Members',
- 				'new_item'				=> 'New Team Members',
- 				'view_item'				=> 'View Team Members',
- 				'search_item'			=> 'Search Team Members Post',
- 				'not_found'				=> 'No Team Members Found',
- 				'not_found_in_trash' 	=> 'No Team Members In Trash',
- 				'parent_item_colon'		=> 'Parent Team Members'
-
- 			);
-
- 	// Create a Aruments Array that Store all argumens of posts..
- 	$args = array(
- 			'labels'				=> $labels,
- 			'menu_icon'				=> 'dashicons-location',
- 			'public'				=> true,
- 			'has_archive'			=> false,
- 			'publicly_queryable'	=> false,
- 			'query_var'				=> true,
- 			'rewrite'				=> true,
- 			'capability-type'		=> 'post',
- 			'hierarchical'			=> true,
- 			// $Supports Array Create Custome From Fiels In WP-Dashbord,Defults are (title,Editor)
- 			'supports'				=> array(
- 										'title',
- 										'editor',
- 										'excerpt',
- 										'thumbnail'
- 									),
- 			'taxonomies'			=> array(''),
- 			'menu_position'			=> 6,
- 			'exclude_from_search'	=> false
- 		);
-
- 	register_post_type( 'team', $args );
 
 
  	//Create a custom post for Testimonial...

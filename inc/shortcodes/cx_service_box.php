@@ -106,13 +106,23 @@ function cx_service_box_kc() {
   	        					'description'	=> esc_html__( 'Select Service Icon', 'codexin' ),
         					),
 
-  	        				array(
-  	        					'name' 			=> 'service_desc',
-  	        					'label' 		=> esc_html__( 'Service Description ', 'codexin' ),
-  	        					'type' 			=> 'textarea',
-  	        					'description'	=> esc_html__( 'Enter Service Description', 'codexin' ),
-        					),
+  	        			 array(
+                      'name'      => 'service_desc',
+                      'label'     => esc_html__( 'Service Description ', 'codexin' ),
+                      'type'      => 'textarea',
+                      'description' => esc_html__( 'Enter Service Description', 'codexin' ),
+                  ),
+
+                   array(
+                    'name'      => 'class',
+                    'label'     => __( 'Enter Class', 'codexin' ),
+                    'type'      => 'text',
+                    'description' => esc_html__( 'If you wish to style a particular content element differently, please add a class name to this field and refer to it in your custom CSS.', 'codexin' ),
+                    'admin_label'   => false,
+                  ),
+
         				), // end of general
+
   	        			// Styling params
   	        			'styling' => array(
 

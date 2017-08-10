@@ -10,85 +10,61 @@
 // Registering Team Shortcode
 function cx_team_shortcode( $atts, $content = null ) {
 	extract(shortcode_atts(array(
-			'img_alt'	=> '',
-			'class'		=> ''
+			'member_name'	=> '',
+			'designation' 	=> '',
+			'image'			=> '',
+			'img_alt'		=> '',
+			'fb' 			=> '',
+			'tr' 			=> '',
+			'ig' 			=> '',
+			'gp' 			=> '',
+			'class'			=> ''
 	), $atts));
 
 	// Assigning a master css class and hooking into KC
 	$master_class = apply_filters( 'kc-el-class', $atts );
-	$master_class[] = 'team';
-
+	$master_class[] = 'revel-team-wrapper';
 	// Retrieving user define classes
-	$classes = array( 'row' );
+	$classes = array( 'team-single-item' );
 	(!empty($class)) ? $classes[] = $class : '';
+
+	// Retrieving the image url
+	$retrive_img_url = retrieve_img_src( $image, 'team-mini-image' );
+	$ret_full_img_url = retrieve_img_src( $image, 'full' );
 
 	$result = '';
 
 	ob_start(); 
 	?>
-	
-		<div id="team" class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
-			<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">	
-				<?php 
-				//start new query..
-				$args = array(
-					'post_type'		 => 'team',
-					'order'			 => 'DESC',
-					'posts_per_page' => 4,
-					);
-
-				$data = new WP_Query( $args );
-				//check post..
-				if( $data->have_posts() ) :
-					//Start loop here..
-					while( $data->have_posts() ) :	$data->the_post();
-				?>
-						<div class="col-sm-3">
-							<div class="single-team">
-								<img src="<?php echo esc_url( the_post_thumbnail_url('team-mini-image') ); ?>" alt="<?php echo esc_attr( $img_alt ); ?>" class="img-responsive" />
-								<div class="single-team-wrapper">
-									<div class="team-social">
-										<?php 
-											$designation = rwmb_meta( 'reveal_team_designation', 'type=text' );
-											$fb = rwmb_meta( 'reveal_team_facebook', 'type=text' );
-											$tr = rwmb_meta( 'reveal_team_twitter', 'type=text' );
-											$ig = rwmb_meta( 'reveal_team_ig', 'type=text' );
-											$gp = rwmb_meta( 'reveal_team_gp', 'type=text' );
-
-											if( ! empty( $fb ) ) :
-										 ?>
-											<a href="<?php echo esc_url( $fb ); ?>"><i class="fa fa-facebook"></i></a>
-										<?php endif;
-											if( ! empty( $tr ) ) :
-										 ?>
-											<a href="<?php echo esc_url( $tr ); ?>"><i class="fa fa-twitter"></i></a>
-										<?php endif;
-											if( ! empty( $ig ) ) :
-										 ?>
-											<a href="<?php echo esc_url( $ig ); ?>"><i class="fa fa-instagram"></i></a>
-										<?php endif;
-											if( ! empty( $gp ) ) :
-									 	?>
-											<a href="<?php echo esc_url( $gp ); ?>"><i class="fa fa-google-plus"></i></a>
-										<?php endif; ?>
-									</div>
-								</div>
-							</div>
-							<div class="team-description text-center">
-								<p><?php echo esc_html( the_title() ); ?></p>
-								<p><?php echo esc_html( $designation ); ?></p>
-							</div>
-						</div><!--/.col-sm-3-->
-
-				<?php 
-						endwhile;
-					endif; //End check-post if()..
-					wp_reset_postdata();
-				 ?>
-			</div><!-- end of row -->
-		</div> <!-- end of team --> 
-		<div class="clearfix"></div>
-
+	<div class="revel-team-wrapper">
+		<div class="team-single-item">		
+			<div class="single-team">
+				<img src="<?php echo $ret_full_img_url; ?>" alt="<?php echo esc_attr( $img_alt ); ?>" class="img-responsive" />
+				<div class="single-team-wrapper">
+					<div class="team-social">
+						<?php
+						if( ! empty( $fb ) ) :?>
+						<a href="<?php echo esc_url( $fb ); ?>"><i class="fa fa-facebook"></i></a>
+						<?php endif;
+						if( ! empty( $tr ) ) : ?>
+						<a href="<?php echo esc_url( $tr ); ?>"><i class="fa fa-twitter"></i></a>
+						<?php endif;
+						if( ! empty( $ig ) ) :?>
+						<a href="<?php echo esc_url( $ig ); ?>"><i class="fa fa-instagram"></i></a>
+						<?php endif;
+						if( ! empty( $gp ) ) :?>
+						<a href="<?php echo esc_url( $gp ); ?>"><i class="fa fa-google-plus"></i></a>
+						<?php endif; ?>
+					</div>
+				</div>
+			</div><!-- end of single-team -->
+			<div class="team-description text-center">
+				<p><?php echo esc_html( $member_name ); ?></p>
+				<p><?php echo esc_html( $designation ); ?></p>
+			</div>
+		</div><!-- end of team-single-item -->
+	</div><!-- end of revel-team-wrapper -->
+				
 	<?php
 	$result .= ob_get_clean();
 	return $result;
@@ -98,7 +74,6 @@ function cx_team_shortcode( $atts, $content = null ) {
 
 // Integrating Shortcode with King Composer
 function cx_team_kc() {
-
 	if (function_exists('kc_add_map')) { 
 		kc_add_map(
 			array(
@@ -111,6 +86,30 @@ function cx_team_kc() {
 						//General params
 						'general'	=> array(
 							array(
+								'name' 			=> 'member_name',
+								'label' 		=> __( 'Name', 'codexin' ),
+								'type' 			=> 'text',
+								'description'	=> esc_html__( 'Enter Team Member Name Here', 'codexin' ),
+								'admin_label' 	=> false,
+							),
+
+							array(
+								'name' 			=> 'designation',
+								'label' 		=> __( 'Designation', 'codexin' ),
+								'type' 			=> 'text',
+								'description'	=> esc_html__( 'Enter Team Member Designation Here', 'codexin' ),
+								'admin_label' 	=> false,
+							),
+
+							array(
+								'name' 			=> 'image',
+								'label' 		=> __( 'Designation', 'codexin' ),
+								'type' 			=> 'attach_image',
+								'description'	=> esc_html__( 'Upload Team Member Image Here', 'codexin' ),
+								'admin_label' 	=> false,
+							),
+
+							array(
 								'name' 			=> 'class',
 								'label' 		=> __( 'Enter Class', 'codexin' ),
 								'type' 			=> 'text',
@@ -119,6 +118,42 @@ function cx_team_kc() {
 							),
 
                 		), //End general array..
+
+						//Social params
+                		'Social' => array(
+                			array(
+								'name' 			=> 'fb',
+								'label' 		=> __( 'Facebook Hendelar', 'codexin' ),
+								'type' 			=> 'text',
+								'description'	=> esc_html__( 'Enter Your Facebook Profile Url Here', 'codexin' ),
+								'admin_label' 	=> false,
+							),
+
+							array(
+								'name' 			=> 'tr',
+								'label' 		=> __( 'Twitter Hendelar', 'codexin' ),
+								'type' 			=> 'text',
+								'description'	=> esc_html__( 'Enter Your Twitter Profile Url Here', 'codexin' ),
+								'admin_label' 	=> false,
+							),
+
+							array(
+								'name' 			=> 'ig',
+								'label' 		=> __( 'Instagram Hendelar', 'codexin' ),
+								'type' 			=> 'text',
+								'description'	=> esc_html__( 'Enter Your Instagram Profile Url Here', 'codexin' ),
+								'admin_label' 	=> false,
+							),
+
+							array(
+								'name' 			=> 'gp',
+								'label' 		=> __( 'Google+ Hendelar', 'codexin' ),
+								'type' 			=> 'text',
+								'description'	=> esc_html__( 'Enter Your Google+ Profile Url Here', 'codexin' ),
+								'admin_label' 	=> false,
+							),
+
+                		),
 
 						//Styling params
 						'styling' => array(
@@ -129,7 +164,7 @@ function cx_team_kc() {
 									array(
 										"screens" => "any,1199,991,767,479",
 
-										'Title' => array(
+										'Name' => array(
 												array( 'property' => 'color', 'label' => 'Text Color', 'selector' => '.team-description p:first-child' ),
 												array( 'property' => 'font-size', 'label' => 'Font Size', 'selector' => '.team-description p:first-child' ),
 												array( 'property' => 'font-weight', 'label' => 'Font Weight', 'selector' => '.team-description p:first-child' ),
@@ -139,7 +174,7 @@ function cx_team_kc() {
 												array( 'property' => 'margin', 'label' => 'Margin', 'selector' => '.team-description p:first-child' ),
 										),
 
-										'Description' => array(
+										'Designation' => array(
 												array( 'property' => 'color', 'label' => 'Text Color', 'selector' => '.team-description p:last-child' ),
 												array( 'property' => 'font-style', 'label' => 'Text Style', 'selector' => '.team-description p:last-child' ),
 												array( 'property' => 'text-align', 'label' => 'Text Align', 'selector' => '.team-description p:last-child' ),
