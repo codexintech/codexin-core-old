@@ -275,7 +275,7 @@ function codexin_likes_button( $post_id, $is_comment = NULL ) {
     $icon_empty = codexin_unlike_icon();
     $icon_full = codexin_like_icon();
     // Loader
-    $loader = '<span id="cx-loader"></span>';
+    $loader = '<span class="cx-loader"></span>';
     // Liked/Unliked Variables
     if ( codexin_already_liked( $post_id, $is_comment ) ) {
         $class = esc_attr( ' liked' );
@@ -286,7 +286,7 @@ function codexin_likes_button( $post_id, $is_comment = NULL ) {
         $title = esc_html__( 'Like', 'codexin' );
         $icon = $icon_empty;
     }
-    $output = '<span id="cx_wrapper" class="cx-wrapper"><a rel="nofollow" href="' . admin_url( 'admin-ajax.php?action=codexin_post_like' . '&post_id=' . $post_id . '&nonce=' . $nonce . '&is_comment=' . $is_comment . '&disabled=true' ) . '" class="cx-button' . $post_id_class . $class . $comment_class . '" data-nonce="' . $nonce . '" data-post-id="' . $post_id . '" data-iscomment="' . $is_comment . '" title="' . $title . '">' . $icon . $count . '</a>' . $loader . '</span>';
+    $output = '<span class="cx-like-wrapper"><a rel="nofollow" href="' . admin_url( 'admin-ajax.php?action=codexin_post_like' . '&post_id=' . $post_id . '&nonce=' . $nonce . '&is_comment=' . $is_comment . '&disabled=true' ) . '" class="cx-button' . $post_id_class . $class . $comment_class . '" data-nonce="' . $nonce . '" data-post-id="' . $post_id . '" data-iscomment="' . $is_comment . '" title="' . $title . '">' . $icon . $count . '</a>' . $loader . '</span>';
     return $output;
 } // codexin_likes_button()
 
@@ -362,7 +362,7 @@ function codexin_get_ip() {
 **/
 function codexin_like_icon() {
     /* If already using Font Awesome with your theme, replace svg with: <i class="fa fa-heart"></i> */
-    $icon = '<span class="cx-icon"><i class="fa fa-heart"></i>';
+    $icon = '<span class="cx-icon"><i class="fa fa-heart"></i></span>';
     return $icon;
 } // codexin_like_icon()
 

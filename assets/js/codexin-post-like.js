@@ -11,7 +11,7 @@
 		} else {
 			allbuttons = $('.cx-button-'+post_id);
 		}
-		var loader = allbuttons.next('#cx-loader');
+		var loader = allbuttons.next('.cx-loader');
 		if (post_id !== '') {
 			$.ajax({
 				type: 'POST',
