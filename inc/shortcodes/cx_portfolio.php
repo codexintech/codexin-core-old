@@ -89,7 +89,7 @@ function cx_portfolio_shortcode( $atts, $content = null ) {
 
 				</div> <!-- end of portfolio-wrapper -->
 			</div><!-- end of portfolio-area -->
-		</section> <!-- end of portfolios -->
+		</div> <!-- end of portfolios -->
 
 	<?php
 	$result .= ob_get_clean();
