@@ -44,7 +44,7 @@ function cx_information_box_shortcode( $atts, $content = null ) {
 	   <div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
 	   		<img src="<?php echo esc_url( $retrive_img_url ); ?>" alt="<?php echo esc_attr( $img_alt ); ?>" class="img-responsive">
 		   	<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">	
-		   		<h2><?php echo esc_html( $info_title, 'codexin' ); ?></h2>
+		   		<h2><?php echo esc_html( $info_title ); ?></h2>
 		   		<p> <?php printf('%s', $info_desc ); ?> </p>
 		   		<?php if( $button_toggle == 'yes') : ?>
 		   			<a href="<?php echo esc_url($retrieve_link[0]); ?>" <?php echo $title; ?> <?php echo $target; ?>><?php echo esc_html( $info_button_text ); ?></a>

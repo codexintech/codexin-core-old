@@ -145,9 +145,9 @@ class Codexin_Address_Box extends WP_Widget {
 				<span itemprop="postalCode"><?php if( !empty($postal_code) ): echo esc_html( $postal_code ); endif; ?></span></p>
 
 			</div>
-			<p>Phone: <span itemprop="telephone"><?php if( !empty($phone_no) ): echo esc_html__( $phone_no ); endif; ?></span></p>
-			<p>Fax: <span itemprop="faxNumber"><?php if( !empty($fax_no) ): echo esc_html__( $fax_no ); endif; ?></span></p>
-			<p>E-mail: <a href="mailto:test@example.com" itemprop="email"><?php if( !empty($email) ): echo esc_html__( $email ); endif; ?></a></p>
+			<p>Phone: <span itemprop="telephone"><?php if( !empty($phone_no) ): echo esc_html( $phone_no ); endif; ?></span></p>
+			<p>Fax: <span itemprop="faxNumber"><?php if( !empty($fax_no) ): echo esc_html( $fax_no ); endif; ?></span></p>
+			<p>E-mail: <a href="mailto:test@example.com" itemprop="email"><?php if( !empty($email) ): echo esc_html( $email ); endif; ?></a></p>
 			<p>Home page: <a href="<?php if( !empty($company_website) ): echo esc_url( $company_website ); endif; ?>" itemprop="url"><?php echo esc_html($company_website); ?></a></p>
 		</div>
 		

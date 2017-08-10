@@ -129,7 +129,7 @@ class Codexin_Social_Widget extends WP_Widget {
 		printf( '%s', $args['before_widget'] ); ?>
 
 		<div class="footer-left">
-			<p><span class="italic"><?php echo esc_html__($instance[ 'title' ] ); ?></span>
+			<p><span class="italic"><?php echo esc_html($instance[ 'title' ] ); ?></span>
 
 				<?php if( !empty( $cx_facebook ) && ( 'on' == $instance[ 'facebook' ] ) ) : ?>
 				<a href="<?php echo esc_url($cx_facebook); ?>"><i class="fa fa-facebook"></i></a>

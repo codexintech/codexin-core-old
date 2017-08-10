@@ -34,7 +34,7 @@ function cx_social_media_share_shortcode( $atts, $content = null ) {
 	<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
 		<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
 			<?php if( $social_title ) : ?>
-				<div class="socials-title"><h4> <?php echo esc_html__( $social_title ); ?> </h4></div>
+				<div class="socials-title"><h4> <?php echo esc_html( $social_title ); ?> </h4></div>
 			<?php endif; ?>
 			<?php if( ! empty( $fb ) ) : ?>
 				<a href="<?php echo esc_url( $fb ); ?>"><i class="fa fa-facebook"></i></a>
@@ -149,28 +149,28 @@ function cx_social_media_share_kc() {
 										"screens" => "any,1199,991,767,479",
 
 										'Title' => array(
-											array('property' => 'color', 'label' => esc_html__( 'Color', 'copdexin'), 'selector' => '.socials-title h4'),
-											array('property' => 'font-family', 'label' => esc_html__( 'Font family', 'copdexin'), 'selector' => '.socials-title h4'),
-											array('property' => 'font-size', 'label' => esc_html__( 'Font Size', 'copdexin'), 'selector' => '.socials-title h4'),
-											array('property' => 'font-weight', 'label' => esc_html__( 'Font Weight', 'copdexin'), 'selector' => '.socials-title h4'),
-											array('property' => 'line-height', 'label' => esc_html__( 'Line Height', 'copdexin'), 'selector' => '.socials-title h4'),
-											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'copdexin'), 'selector' => '.socials-title h4'),
-											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'copdexin'), 'selector' => '.socials-title h4')
+											array('property' => 'color', 'label' => esc_html__( 'Color', 'codexin'), 'selector' => '.socials-title h4'),
+											array('property' => 'font-family', 'label' => esc_html__( 'Font family', 'codexin'), 'selector' => '.socials-title h4'),
+											array('property' => 'font-size', 'label' => esc_html__( 'Font Size', 'codexin'), 'selector' => '.socials-title h4'),
+											array('property' => 'font-weight', 'label' => esc_html__( 'Font Weight', 'codexin'), 'selector' => '.socials-title h4'),
+											array('property' => 'line-height', 'label' => esc_html__( 'Line Height', 'codexin'), 'selector' => '.socials-title h4'),
+											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin'), 'selector' => '.socials-title h4'),
+											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin'), 'selector' => '.socials-title h4')
 										),
 
  										'Icons' => array(
- 											array('property' => 'color', 'label' => esc_html__( 'Color', 'copdexin'), 'selector' => 'i'),
- 											array('property' => 'background-color', 'label' => esc_html__( 'Background Color', 'copdexin'), 'selector' => 'i'),
- 											array('property' => 'color', 'label' => esc_html__( 'Color Hover', 'copdexin'), 'selector' => 'i:hover'),
- 											array('property' => 'background-color', 'label' => esc_html__( 'Background Color Hover', 'copdexin'), 'selector' => 'i:hover'),
- 											array('property' => 'font-size', 'label' => esc_html__( 'Font Size', 'copdexin'), 'selector' => 'i'),
- 											array('property' => 'line-height', 'label' => esc_html__( 'Line Height', 'copdexin'), 'selector' => 'i'),
- 											array('property' => 'text-align', 'label' => esc_html__( 'Text Align', 'copdexin'), 'selector' => 'i'),
- 											array('property' => 'border', 'label' => esc_html__( 'Border', 'copdexin'), 'selector' => 'i'),
- 											array('property' => 'border-radius', 'label' => esc_html__( 'Border Radius', 'copdexin'), 'selector' => 'i'),
- 											array('property' => 'transition', 'label' => esc_html__( 'Transition Hover', 'copdexin'), 'selector' => 'i:hover'),
- 											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'copdexin'), 'selector' => 'i'),
- 											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'copdexin'), 'selector' => 'i')
+ 											array('property' => 'color', 'label' => esc_html__( 'Color', 'codexin'), 'selector' => 'i'),
+ 											array('property' => 'background-color', 'label' => esc_html__( 'Background Color', 'codexin'), 'selector' => 'i'),
+ 											array('property' => 'color', 'label' => esc_html__( 'Color Hover', 'codexin'), 'selector' => 'i:hover'),
+ 											array('property' => 'background-color', 'label' => esc_html__( 'Background Color Hover', 'codexin'), 'selector' => 'i:hover'),
+ 											array('property' => 'font-size', 'label' => esc_html__( 'Font Size', 'codexin'), 'selector' => 'i'),
+ 											array('property' => 'line-height', 'label' => esc_html__( 'Line Height', 'codexin'), 'selector' => 'i'),
+ 											array('property' => 'text-align', 'label' => esc_html__( 'Text Align', 'codexin'), 'selector' => 'i'),
+ 											array('property' => 'border', 'label' => esc_html__( 'Border', 'codexin'), 'selector' => 'i'),
+ 											array('property' => 'border-radius', 'label' => esc_html__( 'Border Radius', 'codexin'), 'selector' => 'i'),
+ 											array('property' => 'transition', 'label' => esc_html__( 'Transition Hover', 'codexin'), 'selector' => 'i:hover'),
+ 											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin'), 'selector' => 'i'),
+ 											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin'), 'selector' => 'i')
  										),
 
  										'Box'	=> array(

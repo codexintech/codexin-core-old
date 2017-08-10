@@ -379,7 +379,7 @@ class CodexinAdminMenu {
             '<input type="text" class="regular-text" id="gmap_api" name="codexin_options_gmap_api[gmap_api]" value="%s" />',
             isset( $this->options_gmap_api['gmap_api'] ) ? esc_attr( $this->options_gmap_api['gmap_api']) : ''
         );
-        printf( '&nbsp;&nbsp;<span class="description">%1$s<a href="%2$s" target="_blank">%3$s</a></span>', esc_html__( 'Generate Your Google Map API Key from ', 'codexin' ), esc_url('https://developers.google.com/maps/documentation/javascript/get-api-key'), esc_html__('here'), 'codexin' );
+        printf( '&nbsp;&nbsp;<span class="description">%1$s<a href="%2$s" target="_blank">%3$s</a></span>', esc_html__( 'Generate Your Google Map API Key from ', 'codexin' ), esc_url('https://developers.google.com/maps/documentation/javascript/get-api-key'), esc_html__('here', 'codexin' ) );
     }
 
 

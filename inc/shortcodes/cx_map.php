@@ -171,7 +171,7 @@ function cx_map_kc() {
 	 							'name' 			=> 'gmap_longitude',
 	 							'label' 		=> esc_html__( 'Map Longitude', 'codexin' ),
 	 							'type' 			=> 'text',
-	 							'description'	=> esc_html__( 'Enter your Map Longitude' ),
+	 							'description'	=> esc_html__( 'Enter your Map Longitude', 'codexin' ),
 	 						),
 
 	 						array(
