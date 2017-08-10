@@ -7,22 +7,27 @@
     ======================================
 */
 
+// Registering Section heading Shortcode
 function cx_section_heading_shortcode(  $atts, $content = null) {
-   extract(shortcode_atts(array(
-   			'title' 				=> '',
-   			'subtitle'	 			=> '',
-   			'description_toggle' 	=> '',
-   			'description'  			=> '',
-   			'class'		  			=> '',
-   ), $atts));
+	extract(shortcode_atts(array(
+				'title' 				=> '',
+				'subtitle'	 			=> '',
+				'description_toggle' 	=> '',
+				'description'  			=> '',
+				'class'		  			=> '',
+	), $atts));
 
-   $master_class = apply_filters( 'kc-el-class', $atts );
-   $master_class[] = 'section-heading';
-   $classes = array( 'cx-section-heading' );
-   (!empty($class)) ? $classes[] = $class : '';
+	// Assigning a master css class and hooking into KC
+	$master_class = apply_filters( 'kc-el-class', $atts );
+	$master_class[] = 'section-heading';
 
-   $result = '';
-   ob_start(); ?>
+	// Retrieving user define classes
+	$classes = array( 'cx-section-heading' );
+	(!empty($class)) ? $classes[] = $class : '';
+
+	$result = '';
+	ob_start(); ?>
+
 		<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
 			<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
 				<h3 class="primary-title"><?php echo esc_html( $title ); ?></h3>

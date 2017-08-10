@@ -64,7 +64,7 @@ function cx_animated_counter_kc() {
   	        				'waypoints-js-script' 	=> CODEXIN_CORE_ASSET_DIR . '/js/waypoints.min.js',
   	        				'counterup-js-script' 	=> CODEXIN_CORE_ASSET_DIR . '/js/jquery.counterup.min.js',         	            
   	        				'counter-js-script' 	=> CODEXIN_CORE_ASSET_DIR . '/js/shortcode-js/cx_animated_counter.js',         	            
-  	        				),
+        				),
 
                 	), //End assets
 
@@ -77,20 +77,20 @@ function cx_animated_counter_kc() {
   	        					'label' 		=> esc_html__( 'Input Numeric Value to Counter Up', 'codexin' ),
   	        					'type' 			=> 'text',
   	        					'admin_label' 	=> true,
-  	        					),
+        					),
 
   	        				array(
   	        					'name' 			=> 'txt',
   	        					'label' 		=> esc_html__( 'Enter Text', 'codexin' ),
   	        					'type' 			=> 'text',
   	        					'admin_label' 	=> true,
-  	        					),
+        					),
 
   	        				array(
   	        					'name' 			=> 'icon_toggle',
   	        					'label' 		=> esc_html__( 'Enable Icon? ', 'codexin' ),
   	        					'type' 			=> 'toggle',
-  	        					),
+        					),
 
   	        				array(
   	        					'name' 			=> 'icon',
@@ -99,16 +99,16 @@ function cx_animated_counter_kc() {
   	        					'relation' 		=> array(
   	        						'parent'    => 'icon_toggle',
   	        						'show_when' => 'yes',
-  	        						),
-  	        					),
+        						),
+        					),
 
   	        				array(
   	        					'name'			=> 'class',
   	        					'label' 		=> esc_html__(' Extra Class', 'codexin'),
   	        					'type'			=> 'text'
-  	        					),
+        					),
 
-  	        				),
+        				), //end of general
                         // Style Params
   	        			'styling' => array(
 
@@ -166,14 +166,14 @@ function cx_animated_counter_kc() {
         							)
         						)
         					)
-        				),
+        				), //end of styling
                         // Animate Params
 						'animate' => array(
 							array(
 								'name'    		=> 'animate',
 								'type'    		=> 'animate'
 							)
-						),
+						), // end of animate
 					)
 		        ),  // End of cx_animated_counter_kc
 			) //end of  array

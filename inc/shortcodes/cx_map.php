@@ -7,37 +7,40 @@
     ======================================
 */
 
+// Registering Map Shortcode
 function cx_map_shortcode( $atts, $content = null ) {
-   extract(shortcode_atts(array(
-   		'img_alt'		 	=> '',
-   		'gmap_color' 	 	=> '',
-   		'gmap_latitude'  	=> '',
-   		'gmap_longitude' 	=> '',
-   		'gmap_zoom_level' 	=> '',
-   		'gmap_marker' 	 	=> '',
-   		'map_scroll'		=> '',
-   		'map_type'			=> '',
-   		'map_zoom'			=> '',
-   		'map_street_view'	=> '',
-   		'map_fullscreen'	=> '',
-   		'map_advanced'		=> '',
-   		'road_color'		=> '',
-   		'water_color'		=> '',
-   		'landscape_color'	=> '',
-   		'poi_color'			=> '',
-   		'label_text_color'	=> '',
-   ), $atts));
+	extract(shortcode_atts(array(
+			'img_alt'		 	=> '',
+			'gmap_color' 	 	=> '',
+			'gmap_latitude'  	=> '',
+			'gmap_longitude' 	=> '',
+			'gmap_zoom_level' 	=> '',
+			'gmap_marker' 	 	=> '',
+			'map_scroll'		=> '',
+			'map_type'			=> '',
+			'map_zoom'			=> '',
+			'map_street_view'	=> '',
+			'map_fullscreen'	=> '',
+			'map_advanced'		=> '',
+			'road_color'		=> '',
+			'water_color'		=> '',
+			'landscape_color'	=> '',
+			'poi_color'			=> '',
+			'label_text_color'	=> '',
+	), $atts));
 
-   $ret_full_img_url = retrieve_img_src( $gmap_marker, '' );
-   //define kc-column classes
-   $master_class = apply_filters( 'kc-el-class', $atts );
-   $master_class[] = 'map-wrapper';
+	// Retrieving the image url
+	$ret_full_img_url = retrieve_img_src( $gmap_marker, '' );
 
-   $result = '';
+	// Assigning a master css class and hooking into KC
+	$master_class = apply_filters( 'kc-el-class', $atts );
+	$master_class[] = 'map-wrapper';
 
-   ob_start(); 
+	$result = '';
 
+	ob_start(); 
 
+	// Passing values to javascript
 	if( $map_advanced ):
 		$gmap_color = 'custom';
 	endif;
@@ -84,6 +87,7 @@ function cx_map_shortcode( $atts, $content = null ) {
 	</script>';
 	endif;
 	echo $codeopt; ?>
+
 	<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
 		<div class="gmap-wrap">
 			<div id="gmap"></div>	 			
@@ -106,7 +110,7 @@ function cx_info_cb() {
 	echo '<p>'. esc_html__('Please Fill Up The Google Map API Information In The "Google Map API" Section of ', 'codexin') .'<strong><a href="'. esc_url(admin_url().'admin.php?page=codexin-options&action=api') .'" target="_blank">'. esc_html('Codexin Core.', 'codexin') .'</a></strong></p>';
 }	
 
-
+// Integrating Shortcode with King Composer
 function cx_map_kc() {
 
  	if (function_exists('kc_add_map')) { 
@@ -127,9 +131,9 @@ function cx_map_kc() {
  							'google-js' => 'https://maps.googleapis.com/maps/api/js?key=' . $cx_api,
  							'gmap-js'		=> CODEXIN_CORE_ASSET_DIR . '/js/gmaps.js',
  							'cx-map-js'		=> CODEXIN_CORE_ASSET_DIR . '/js/shortcode-js/cx_map.js',
- 							),
+						),
 
-	               ), //End assets
+					), //End assets
 
  					'params' => array(
  						//General params
@@ -285,9 +289,7 @@ function cx_map_kc() {
 	    						),
 	 							'description'	=> esc_html__( 'Choose label text color', 'codexin' ),
 	 						),
-
-	    				)
- 						
+	    				) // end of advanced					
 	                ) //End params array()..
 	            ),  // End of elemnt cx_blog....
 			) //end of  array 

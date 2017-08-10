@@ -9,7 +9,7 @@
 
 // Registering About Box Shortcode
 function cx_information_box_shortcode( $atts, $content = null ) {
-   extract(shortcode_atts(array(
+	extract(shortcode_atts(array(
 		'info_title'	=> '',
 		'info_desc' 	=> '',
 		'info_image'	=> '',
@@ -19,21 +19,25 @@ function cx_information_box_shortcode( $atts, $content = null ) {
 		'href'			=> '',
 		'class'			=> ''
 
-   ), $atts));
+	), $atts));
 
-   $master_class = apply_filters( 'kc-el-class', $atts );
-   $master_class[] = 'contest-wrapper';
-   $classes = array( 'content-mask' );
-   (!empty($class)) ? $classes[] = $class : '';
+	$result = '';
 
-   $title = ($retrieve_link[1]) ? 'title='.esc_attr($retrieve_link[1]):'';
-   $target = ($retrieve_link[2]) ? 'target='.esc_attr($retrieve_link[2]):'';
+	// Assigning a master css class and hooking into KC
+	$master_class = apply_filters( 'kc-el-class', $atts );
+	$master_class[] = 'contest-wrapper';
 
-   $result = '';
+	// Retrieving user define classes
+	$classes = array( 'content-mask' );
+	(!empty($class)) ? $classes[] = $class : '';
 
-   $retrive_img_url = retrieve_img_src( $info_image, 'info-image' );
+	// Retrieving the url
+	$retrieve_link = retrieve_url( $href );
+	$title = ($retrieve_link[1]) ? 'title='.esc_attr($retrieve_link[1]):'';
+	$target = ($retrieve_link[2]) ? 'target='.esc_attr($retrieve_link[2]):'';
 
-   $retrieve_link = retrieve_url( $href );
+	// Retrieving the image url
+	$retrive_img_url = retrieve_img_src( $info_image, 'info-image' );
 
 	ob_start(); ?>
 
@@ -74,14 +78,14 @@ function cx_information_box_kc() {
 								'label' 		=> esc_html__( 'Information Title ', 'codexin' ),
 								'type' 			=> 'text',
 								'description'	=> esc_html__( 'Enter Information Title Here', 'codexin' ),
-								'admin_label' 	=> false,
+								'admin_label' 	=> true,
 							),
 
 							array(
 								'name' 			=> 'info_image',
 								'label' 		=> esc_html__( 'Upload Image', 'codexin' ),
 								'type' 			=> 'attach_image',
-								'admin_label' 	=> false,
+								'admin_label' 	=> true,
 							),
 
 							array(
@@ -89,7 +93,6 @@ function cx_information_box_kc() {
 								'label' 		=> esc_html__( 'Information Description ', 'codexin' ),
 								'type' 			=> 'textarea',
 								'description'	=> esc_html__( 'Enter Information Description Here', 'codexin' ),
-								'admin_label' 	=> false,
 							),
 
 							array(
@@ -108,7 +111,6 @@ function cx_information_box_kc() {
 									'show_when' => 'yes',
 								),
 								'description'	=> esc_html__( 'Enter Button Text Here', 'codexin' ),
-								'admin_label' 	=> false,
 							),
 
 							array(
@@ -120,7 +122,6 @@ function cx_information_box_kc() {
 									'show_when' => 'yes',
 								),
 								'description'	=> esc_html__( 'Enter Your Custom Link Here', 'codexin' ),
-								'admin_label' 	=> false,
 							),
 
 							array(
@@ -150,7 +151,7 @@ function cx_information_box_kc() {
 											array('property' => 'text-transform', 'label' => esc_html__( 'Text Transform', 'codexin' ),'selector' => '.content-mask h2'),
 											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin' ),'selector' => '.content-mask h2'),
 											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin' ),'selector' => '.content-mask h2'),
-											),
+										),
 
 										'Description' => array(
 											array('property' => 'color', 'label' => esc_html__( 'Color', 'codexin' ),'selector' => '.content-mask p'),
@@ -162,7 +163,7 @@ function cx_information_box_kc() {
 											array('property' => 'text-transform', 'label' => esc_html__( 'Text Transform', 'codexin' ),'selector' => '.content-mask p'),
 											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin' ),'selector' => '.content-mask p'),
 											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin' ),'selector' => '.content-mask p'),
-											),
+										),
 
 										'Button' => array(
 											array('property' => 'color', 'label' => esc_html__( 'Text Color', 'codexin' ),'selector' => '.content-mask a'),
@@ -174,7 +175,7 @@ function cx_information_box_kc() {
 											array('property' => 'border-radius', 'label' => esc_html__( 'Border Radius', 'codexin' ),'selector' => '.content-mask a'),
 											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin' ),'selector' => '.content-mask a'),
 											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin' ),'selector' => '.content-mask a'),
-											),
+										),
 
 										'Box'	=> array(
 											array('property' => 'background'),
@@ -186,29 +187,21 @@ function cx_information_box_kc() {
 											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin')),
 											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin')),
 										),
-
 								) //End inner-option array
-
 							) //End option array
-
 						) //End inner-styling array
-
-		    		), //End styling array..
-
+		    		), //End styling
+					// Animate param
 					'animate' => array(
 							array(
 								'name'    		=> 'animate',
 								'type'    		=> 'animate'
 							)
-
 						),//End animate
-
-		        	) //End params array()..
-
+		        	) //End params 
 		    	),  // End of elemnt cx_service_box
-
-			) //end of  array 
-		);  //end of kc_add_map....
+			) //end of array 
+		);  //end of kc_add_map
 	} //End if
 } // end of cx_section_heading_kc
 

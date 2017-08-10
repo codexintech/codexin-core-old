@@ -7,21 +7,25 @@
     ======================================
 */
 
+// Registering Portfolio Shortcode
 function cx_portfolio_shortcode( $atts, $content = null ) {
-   extract(shortcode_atts(array(
-   		'img_alt'	=> '',
-   ), $atts));
+	extract(shortcode_atts(array(
+			'img_alt'	=> '',
+	), $atts));
 
-   $master_class = apply_filters( 'kc-el-class', $atts );
-   $master_class[] = 'portfolios';
-   $classes = array( 'portfolio-area' );
-   (!empty($class)) ? $classes[] = $class : '';
+	// Assigning a master css class and hooking into KC
+	$master_class = apply_filters( 'kc-el-class', $atts );
+	$master_class[] = 'portfolios';
 
-   $result = '';
+	// Retrieving user define classes
+	$classes = array( 'portfolio-area' );
+	(!empty($class)) ? $classes[] = $class : '';
 
-   ob_start(); ?>
+	$result = '';
+
+	ob_start(); ?>
 	
-		<section id="portfolio" class="<?php echo esc_attr( implode( ' ', $master_class )); ?>">
+		<div class="<?php echo esc_attr( implode( ' ', $master_class )); ?>">
 			<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>" >
 				<div class="container">
 					<div class="row">
@@ -38,8 +42,8 @@ function cx_portfolio_shortcode( $atts, $content = null ) {
 										}
 									?>
 								</ul>
-							</div><!--/.portfolio-filter-->
-						</div><!--/.col-xs-12-->
+							</div><!--end of portfolio-filter-->
+						</div><!--end of col-xs-12-->
 					</div> <!-- end of row -->
 				</div> <!-- end of container -->
 
@@ -84,7 +88,7 @@ function cx_portfolio_shortcode( $atts, $content = null ) {
 					 ?>
 
 				</div> <!-- end of portfolio-wrapper -->
-			</div><!--end of portfolio-area -->
+			</div><!-- end of portfolio-area -->
 		</section> <!-- end of portfolios -->
 
 	<?php
@@ -109,9 +113,8 @@ function cx_portfolio_kc() {
 						'scripts' => array(
 							'imagesloaded-js' => CODEXIN_CORE_ASSET_DIR . '/js/imagesloaded.pkgd.min.js',
 							'isotope-js-script' => CODEXIN_CORE_ASSET_DIR . '/js/isotope.pkgd.min.js',
-							'portfolio-isotope-js' => CODEXIN_CORE_ASSET_DIR . '/js/shortcode-js/cx_portfolio-isotope.js',
-							'portfolio-popup-js' => CODEXIN_CORE_ASSET_DIR . '/js/shortcode-js/cx_portfolio-popup.js',
-							),
+							'portfolio-js' => CODEXIN_CORE_ASSET_DIR . '/js/shortcode-js/cx_portfolio.js',
+						),
 
                 	), //End assets
 
@@ -122,19 +125,11 @@ function cx_portfolio_kc() {
 							'type'	=> 'text',
 							'description' => esc_html__( 'If you wish to style a particular content element differently, please add a class name to this field and refer to it in your custom CSS.', 'codexin' ),
 						),
-
-                	) //End params array()..
-
+                	) //End params
             	),  // End of elemnt cx_portfolio
-
-
-			) //end of  array 
-
-
-		);  //end of kc_add_map....
-
+			) //end of array 
+		);  //end of kc_add_map
 	} //End if
-
 } // end of cx_team_kc
 
 

@@ -7,22 +7,26 @@
     ======================================
 */
 
+// Registering Contact Form Shortcode
 function cx_contact_form_shortcode( $atts, $content = null ) {
-   extract(shortcode_atts(array(
+	extract(shortcode_atts(array(
    		'contact_title'	=> '',
    		'show_form_id'	=> '',
    		'contact_desc'	=> '',
    		'class'			=> ''
-   ), $atts));
+	), $atts));
 
-   $master_class = apply_filters( 'kc-el-class', $atts );
-   $master_class[] = 'contact-form-wrapper reveal-contact-form';
-   $classes = array( 'contact-form' );
-   (!empty($class)) ? $classes[] = $class : '';
+	// Assigning a master css class and hooking into KC
+	$master_class = apply_filters( 'kc-el-class', $atts );
+	$master_class[] = 'contact-form-wrapper reveal-contact-form';
 
-   $result = '';
- 
-   ob_start(); ?>
+	// Retrieving user define classes
+	$classes = array( 'contact-form' );
+	(!empty($class)) ? $classes[] = $class : '';
+
+	$result = '';
+
+	ob_start(); ?>
 
 	<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
 		<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
@@ -32,7 +36,7 @@ function cx_contact_form_shortcode( $atts, $content = null ) {
 			</div>		
 			<div class="row form-element">
 				<?php echo do_shortcode( '[contact-form-7 id="'. $show_form_id .'" title=""]' ); ?>
-			</div> <!-- end of col -->
+			</div> <!-- end of form-element -->
 		</div> <!-- end of contact-form -->
 	</div> <!-- end of contact-form-wrapper -->
 
@@ -50,8 +54,8 @@ function cx_contact_form_shortcode( $atts, $content = null ) {
 	------------------*/
 		 
 /**
- * The function face the all data of created contact-form by contact-form-7 plugin
- * develop by sazzad on 8/03/2017 
+ *
+ * Helper function to fetch all the contact form data from contact form 7
  *
  */  
 function cx_get_contact_form() {
@@ -105,7 +109,7 @@ function cx_contact_form_kc() {
 	 							'label' 		=> esc_html__( 'Enter Title ', 'codexin' ),
 	 							'type' 			=> 'text',
 	 							'description'	=> esc_html__( 'Get In touch', 'codexin' ),
-	 							'admin_label' 	=> false,
+	 							'admin_label' 	=> true,
 	 						),
 
 	 						array(
@@ -114,14 +118,13 @@ function cx_contact_form_kc() {
 	 							'type' 			=> 'select',
 	 							'options'		=> $contact_form,
 	 							'description'	=> esc_html__( 'Select Your Contact Form Here', 'codexin' ),
-	 							'admin_label' 	=> false,
+	 							'admin_label' 	=> true,
 	 						),
 
 	 						array(
 	 							'name' 			=> 'description_toggle',
 	 							'label' 		=> esc_html__( 'Enable Description Field? ', 'codexin' ),
 	 							'type' 			=> 'toggle',
-	 							'admin_label' 	=> false,
 	 						),
 
 	 						array(
@@ -132,7 +135,6 @@ function cx_contact_form_kc() {
 	 								'parent'    => 'description_toggle',
 	 								'show_when' => 'yes',
 	 							),
-	 							'admin_label' 	=> false,
 	 						),
 
 	 						array(
@@ -140,7 +142,6 @@ function cx_contact_form_kc() {
 	 							'label' 		=> esc_html__( 'Extra Class', 'codexin' ),
 	 							'type' 			=> 'text',
 	 							'description'	=> esc_html__( 'If you wish to style a particular content element differently, please add a class name to this field and refer to it in your custom CSS.', 'codexin' ),
-	 							'admin_label' 	=> false,
 	 						),
 
 	 					),//End general array

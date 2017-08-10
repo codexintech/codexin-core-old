@@ -7,18 +7,19 @@
     ======================================
 */
 	
+// Registering Testimonial Shortcode
 function cx_testimonial_shortcode( $atts, $content = null ) {
-   extract(shortcode_atts(array(
-   		'img_alt'	=> '',
-   		'layout'	=> '',
-   		'class_layout_one' => '',
-   		'class_layout_two' => '',
-   		'testimonial_icon' => '',
-   ), $atts));
+	extract(shortcode_atts(array(
+			'img_alt'	=> '',
+			'layout'	=> '',
+			'class_layout_one' => '',
+			'class_layout_two' => '',
+			'testimonial_icon' => '',
+	), $atts));
 
-   $result = '';
+	$result = '';
 
-   ob_start(); 
+	ob_start(); 
 
    		if( ! empty( $layout ) ) :
    			if( $layout == 2 ) :
@@ -40,10 +41,8 @@ function cx_testimonial_shortcode( $atts, $content = null ) {
 
 					$data = new WP_Query( $args );
 					if( $data->have_posts() ) :
-										//Start loop here...
 						while( $data->have_posts() ) : $data->the_post();
-
-					?>
+						?>
 					<div class="col-sm-6 quote-wrapper">
 						<div class="media">
 							<div class="media-left">
@@ -65,7 +64,7 @@ function cx_testimonial_shortcode( $atts, $content = null ) {
 								 <p> <?php printf('%s', get_the_excerpt() ); ?> </p>
 							</div>
 						</div>
-					</div> <!--/.quote-wrapper -->
+					</div> <!--end of quote-wrapper -->
 
 					<?php 
 					endwhile;
@@ -169,7 +168,6 @@ function cx_testimonial_shortcode( $atts, $content = null ) {
 } //End cx_testimonial
 
 // Integrating Shortcode with King Composer
-
 function cx_testimonial_kc() {
 
 	if (function_exists('kc_add_map')) { 

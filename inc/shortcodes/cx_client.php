@@ -16,18 +16,19 @@ function cx_client_shortcode( $atts, $content = null ) {
    		'class'				=> '',
    ), $atts));
 
-   $result = '';
+	$result = '';
 
 	// Assigning a master css class and hooking into KC
-   $master_class = apply_filters( 'kc-el-class', $atts );
-   $master_class[] = 'clients';
+	$master_class = apply_filters( 'kc-el-class', $atts );
+	$master_class[] = 'clients';
 
-   // Retrieving user define classes
-   $classes = array( 'client' );
-   (!empty($class)) ? $classes[] = $class : '';
+	// Retrieving user define classes
+	$classes = array( 'client' );
+	(!empty($class)) ? $classes[] = $class : '';
 
-   ob_start(); 
+	ob_start(); 
 
+	// Passing values to javascript
 	$codeopt = '';
 	$num_slide = ( !empty( $number_of_slides ) ) ? $number_of_slides : '6';
 	$codeopt .= '
@@ -36,6 +37,7 @@ function cx_client_shortcode( $atts, $content = null ) {
 	</script>';
 	echo $codeopt;
 	?>
+
 	<div id="clients" class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
 		<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
 			<div class="owl-carousel">
@@ -70,7 +72,7 @@ function cx_client_shortcode( $atts, $content = null ) {
 				wp_reset_postdata();
 				?>
 			</div> <!--end of owl-carousel-->
-		</div>
+		</div> <!-- end of client -->
 	</div> <!-- end of clients -->
 
 	<?php
@@ -82,8 +84,7 @@ function cx_client_shortcode( $atts, $content = null ) {
 
  function cx_client_kc() {
 
- 	if (function_exists('kc_add_map')) 
- 	{ 
+ 	if (function_exists('kc_add_map')) { 
  		kc_add_map(
  			array(
  				'cx_client' => array(

@@ -7,6 +7,7 @@
     =========================================
 */
 
+// Registering Social Media Share Shortcode
 function cx_social_media_share_shortcode( $atts, $content = null ) {
 	extract(shortcode_atts(array(
 		'social_title' => '',
@@ -16,10 +17,13 @@ function cx_social_media_share_shortcode( $atts, $content = null ) {
 		'ig'	=> '',
 		'be'	=> '',
 		'class' => ''
-		), $atts));
+	), $atts));
 
+	// Assigning a master css class and hooking into KC
 	$master_class = apply_filters( 'kc-el-class', $atts );
 	$master_class[] = 'socials socials-share';
+
+	// Retrieving user define classes
 	$classes = array( 'social-content' );
 	(!empty($class)) ? $classes[] = $class : '';
 
@@ -48,7 +52,7 @@ function cx_social_media_share_shortcode( $atts, $content = null ) {
 				<a href="<?php echo esc_url( $be ); ?>"><i class="fa fa-behance"></i></a>
 			<?php endif; ?>
 		</div><!--end of social-content -->
-	</div><!--end of socials socials-share -->
+	</div><!--end of socials -->
 
 	<?php
 	$result .= ob_get_clean();
@@ -75,7 +79,9 @@ function cx_social_media_share_kc() {
  								'name' 			=> 'show_title',
  								'label' 		=> esc_html__( 'Enable Social Media Title? ', 'codexin' ),
  								'type' 			=> 'toggle',
- 								'value'			=> 'no'
+ 								'value'			=> 'no',
+ 								'admin_label' 	=> true
+
  							),
 
  							array(
@@ -87,6 +93,7 @@ function cx_social_media_share_kc() {
  									'show_when' => 'yes',
  								),
  								'description'	=> esc_html__( 'Enter Title Here', 'codexin' ),
+ 								'admin_label' 	=> true
  							),
 
 	 						array(
@@ -94,7 +101,6 @@ function cx_social_media_share_kc() {
 	 							'label' 		=> esc_html__( 'Face Book Link ', 'codexin' ),
 	 							'type' 			=> 'text',
 	 							'description'	=> esc_html__( 'Enter Your Face-Book URL Here', 'codexin' ),
-	 							'admin_label' 	=> false,
 	 						),
 
 	 						array(
@@ -102,7 +108,6 @@ function cx_social_media_share_kc() {
 	 							'label' 		=> esc_html__( 'Twitter Link ', 'codexin' ),
 	 							'type' 			=> 'text',
 	 							'description'	=> esc_html__( 'Enter Your Twitter URL Here', 'codexin' ),
-	 							'admin_label' 	=> false,
 	 						),
 
 	 						array(
@@ -110,7 +115,6 @@ function cx_social_media_share_kc() {
 	 							'label' 		=> esc_html__( 'Linkedin Link ', 'codexin' ),
 	 							'type' 			=> 'text',
 	 							'description'	=> esc_html__( 'Enter Your Linkedin URL Here', 'codexin' ),
-	 							'admin_label' 	=> false,
 	 						),
 
 	 						array(
@@ -118,7 +122,6 @@ function cx_social_media_share_kc() {
 	 							'label' 		=> esc_html__( 'Instagram Link ', 'codexin' ),
 	 							'type' 			=> 'text',
 	 							'description'	=> esc_html__( 'Enter Your Instagram URL Here', 'codexin' ),
-	 							'admin_label' 	=> false,
 	 						),
 
 	 						array(
@@ -126,14 +129,12 @@ function cx_social_media_share_kc() {
 	 							'label' 		=> esc_html__( 'Behance Link ', 'codexin' ),
 	 							'type' 			=> 'text',
 	 							'description'	=> esc_html__( 'Enter Your Behance URL Here', 'codexin' ),
-	 							'admin_label' 	=> false,
 	 						),
 	 						array(
 	 							'name' 			=> 'class',
 	 							'label' 		=> esc_html__( 'Extra Class ', 'codexin' ),
 	 							'type' 			=> 'text',
 	 							'description'	=> esc_html__( 'If you wish to style a particular content element differently, please add a class name to this field and refer to it in your custom CSS.', 'codexin' ),
-	 							'admin_label' 	=> false,
 	 						),
 
  						),//End general array
@@ -188,25 +189,18 @@ function cx_social_media_share_kc() {
 							) //End inner-styling array
 
 	                	), //End styling array..
-
+ 						// animate param
 						'animate' => array(
  							array(
  								'name'    		=> 'animate',
  								'type'    		=> 'animate'
  							)
-
 						),//End animate	
-
-	                ) //End params array()..
-
-	            ),  // End of elemnt cx_social_media_share...
-
-			) //end of  array 
-
-		);  //end of kc_add_map....
-
+	                ) //End params array
+	            ),  // End of elemnt cx_social_media_share
+			) //end of array 
+		);  //end of kc_add_map
 	} //End if
-
 } // end of cx_team_kc
 
 

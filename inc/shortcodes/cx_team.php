@@ -7,20 +7,24 @@
     ======================================
 */
 
+// Registering Team Shortcode
 function cx_team_shortcode( $atts, $content = null ) {
-   extract(shortcode_atts(array(
-   		'img_alt'	=> '',
-   		'class'		=> ''
-   ), $atts));
+	extract(shortcode_atts(array(
+			'img_alt'	=> '',
+			'class'		=> ''
+	), $atts));
 
-   $master_class = apply_filters( 'kc-el-class', $atts );
-   $master_class[] = 'team';
-   $classes = array( 'row' );
-   (!empty($class)) ? $classes[] = $class : '';
+	// Assigning a master css class and hooking into KC
+	$master_class = apply_filters( 'kc-el-class', $atts );
+	$master_class[] = 'team';
 
-   $result = '';
+	// Retrieving user define classes
+	$classes = array( 'row' );
+	(!empty($class)) ? $classes[] = $class : '';
 
-   ob_start(); 
+	$result = '';
+
+	ob_start(); 
 	?>
 	
 		<div id="team" class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
@@ -82,7 +86,7 @@ function cx_team_shortcode( $atts, $content = null ) {
 					wp_reset_postdata();
 				 ?>
 			</div><!-- end of row -->
-		</div> <!-- end of tem --> 
+		</div> <!-- end of team --> 
 		<div class="clearfix"></div>
 
 	<?php

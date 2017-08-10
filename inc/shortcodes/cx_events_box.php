@@ -7,22 +7,26 @@
     ======================================
 */
 
+// Registering Events Box Shortcode
 function cx_events_box_shortcode( $atts, $content = null ) {
-   extract(shortcode_atts(array(
+	extract(shortcode_atts(array(
 		'event_icon_one'	=> '',
 		'event_icon_two'	=> '',
 		'event_icon_three'	=> '',
 		'class'				=> '',
-   ), $atts));
+	), $atts));
 
-   $master_class = apply_filters( 'kc-el-class', $atts );
-   $master_class[] = 'events-description';
-   $classes = array( 'panel-group' );
-   (!empty($class)) ? $classes[] = $class : '';
+	// Assigning a master css class and hooking into KC
+	$master_class = apply_filters( 'kc-el-class', $atts );
+	$master_class[] = 'events-description';
 
-   $result = '';
+	// Retrieving user define classes
+	$classes = array( 'panel-group' );
+	(!empty($class)) ? $classes[] = $class : '';
 
-   ob_start(); ?>
+	$result = '';
+
+	ob_start(); ?>
 	
 		<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
 			<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>" id="accordion" role="tablist" aria-multiselectable="true">
@@ -32,7 +36,7 @@ function cx_events_box_shortcode( $atts, $content = null ) {
 						'post_type'		 => 'events',
 						'order' 		 => 'DESC',
 						'posts_per_page' => 3,
-					);
+						);
 
 				$data = new WP_Query( $args );
 
@@ -45,16 +49,16 @@ function cx_events_box_shortcode( $atts, $content = null ) {
 							$event_icon = $event_icon_one;
 							$heading_id = 'headingOne';
 							$collapse_id = 'collapseOne';
-						}elseif ( $i == 2 ) {
+						} elseif ( $i == 2 ) {
 							$event_icon = $event_icon_two;
 							$heading_id = 'headingTwo';
 							$collapse_id = 'collapseTwo';
-						}elseif ( $i == 3 ) {
+						} elseif ( $i == 3 ) {
 							$event_icon = $event_icon_three;
 							$heading_id = 'headingThree';
 							$collapse_id = 'collapseThree';
 						}
-			 ?>
+					?>
 
 				<div class="panel panel-default">
 				<?php
@@ -80,13 +84,12 @@ function cx_events_box_shortcode( $atts, $content = null ) {
 							<?php printf('%s', the_excerpt() ); ?> 
 						</div>
 					</div>
-				</div><!--/.panel- panel-defult-->
-				<?php 
-						endwhile;
-					endif; //End check-posts if()....
-					wp_reset_postdata(); 
-				?>
-			</div><!--/.panel-group-->
+				</div><!--end of panel-default-->
+					<?php 
+					endwhile;
+				endif; 
+				wp_reset_postdata();  ?>
+			</div><!--end of panel-group-->
 		</div>  <!-- end of events description -->
 
 	<?php
@@ -95,11 +98,10 @@ function cx_events_box_shortcode( $atts, $content = null ) {
 
 } //End cx_events_box
 
+// Integrating Shortcode with King Composer
+function cx_events_box_kc() {
 
- function cx_events_box_kc() {
-
- 	if (function_exists('kc_add_map')) 
- 	{ 
+	if (function_exists('kc_add_map')) { 
  		kc_add_map(
  			array(
  				'cx_events_box' => array(
@@ -113,10 +115,9 @@ function cx_events_box_shortcode( $atts, $content = null ) {
  						'general'	=> array(
  							array(
  								'name' 			=> 'event_icon_one',
- 								'label' 		=> __( 'Select First Icon', 'codexin' ),
+ 								'label' 		=> esc_html__( 'Select First Icon', 'codexin' ),
  								'type' 			=> 'icon_picker',
  								'description'	=> esc_html__( 'Select Event First Icon Here', 'codexin' ),
- 								'admin_label' 	=> false,
  							),
 
  							array(
@@ -124,23 +125,20 @@ function cx_events_box_shortcode( $atts, $content = null ) {
  								'label' 		=> __( 'Select Second Icon', 'codexin' ),
  								'type' 			=> 'icon_picker',
  								'description'	=> esc_html__( 'Select Event Second Icon Here', 'codexin' ),
- 								'admin_label' 	=> false,
  							),
 
  							array(
  								'name' 			=> 'event_icon_three',
- 								'label' 		=> __( 'Select Third Icon', 'codexin' ),
+ 								'label' 		=> esc_html__( 'Select Third Icon', 'codexin' ),
  								'type' 			=> 'icon_picker',
  								'description'	=> esc_html__( 'Select Event Third Icon Here', 'codexin' ),
- 								'admin_label' 	=> false,
  							),
 
  							array(
  								'name' 			=> 'class',
- 								'label' 		=> __( 'Enter Class', 'codexin' ),
+ 								'label' 		=> esc_html__( 'Enter Class', 'codexin' ),
  								'type' 			=> 'text',
  								'description'	=> esc_html__( 'If you wish to style a particular content element differently, please add a class name to this field and refer to it in your custom CSS.', 'codexin' ),
- 								'admin_label' 	=> false,
  							),
 
 					    ), //End general array
@@ -185,22 +183,13 @@ function cx_events_box_shortcode( $atts, $content = null ) {
  							array(
  								'name'    		=> 'animate',
  								'type'    		=> 'animate'
- 								)
-
+							)
 						),//End animate
-
-	                ) //End params array()..
-
-	            ),  // End of elemnt cx_events_box...
-
-
+	                ) //End params
+	            ),  // End of elemnt cx_events_box
 			) //end of  array 
-
-
-		);  //end of kc_add_map....
-
+		);  //end of kc_add_map
 	} //End if
-
 } // end of cx_events_box_shortcode_kc
 
 
