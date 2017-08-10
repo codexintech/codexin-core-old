@@ -51,13 +51,12 @@ function cx_blog_shortcode( $atts, $content = null ) {
 			$data = new WP_Query( $args );
 
 			if( $data->have_posts() ) :
-				$i = 0;
+
 				while( $data->have_posts() ) : $data->the_post();
-				$i++;
 				$column = 12/$number_of_posts;
+
+				// Retrieving Image alt tag
 				$image_alt = ( !empty( retrieve_alt_tag() ) ) ? retrieve_alt_tag() : get_the_title();
-
-
 
 			 ?>
 				<div class="col-md-<?php echo $column ?> col-sm-12">
@@ -131,14 +130,13 @@ function cx_blog_shortcode( $atts, $content = null ) {
 
 					<?php endif; //End postview_comments if ?>
 
-					</div><!--/.blog-wrapper -->
+					</div><!--end of blog-wrapper -->
 				</div> <!-- end of col -->
-			<?php
-				if( $i%$number_of_posts == 0 ):
-					echo '<div class="clearfix"></div>';
-				endif;
+				<?php
+
 				endwhile;
 			endif;
+			wp_reset_postdata();
 			?>
 		</div> <!-- end of blog-row -->
 	</div> <!-- end of cx-blog -->
@@ -149,7 +147,7 @@ function cx_blog_shortcode( $atts, $content = null ) {
 	$result .= ob_get_clean();
 	return $result;
 
-} //End cx_blog
+} //End of cx_blog
 
 // Integrating Shortcode with King Composer
 function cx_blog_kc() {
@@ -345,10 +343,10 @@ function cx_blog_kc() {
 								'type'    		=> 'animate'
 							)
 						),//End animate
-	                ) //End params array()..
-	            ),  // End of elemnt cx_blog....
+	                ) //End params array
+	            ),  // End of cx_blog array
 			) //end of  array 
-		);  //end of kc_add_map....
+		);  //end of kc_add_map
 	} //End if
 } // end of cx_blog_kc
 

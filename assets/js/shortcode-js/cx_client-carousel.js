@@ -6,12 +6,12 @@
     client carouel
     ---------------------------------------------------------------- */
 
-    $("#client-carousel").owlCarousel({
+    $(".owl-carousel").owlCarousel({
 
         autoPlay: 3000, //Set AutoPlay to 3 seconds
         navigation: false,
         pagination: false,
-        items: 6,
+        items: logo_slide.slide,
         itemsDesktop: [1199, 6],
         itemsDesktopSmall: [991, 5],
         itemsTablet: [767, 5],

@@ -218,7 +218,7 @@ function cx_about_box_kc() {
     						)
     					), // end of animate
     				)
-	            ),  // End of cx_about_box_kc
+	            ),  // End of cx_about_box array
 			) //end of array
 	    );  //end of kc_add_map
 	} //End if

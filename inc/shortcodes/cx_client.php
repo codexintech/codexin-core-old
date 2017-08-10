@@ -1,54 +1,83 @@
 <?php
-	function cx_client_shortcode( $atts, $content = null ) {
-	   extract(shortcode_atts(array(
-	   		'img_alt'	=> 'Portfolio Image',
-	   ), $atts));
 
-	   $result = '';
 
-	   ob_start(); 
-		?>
-		<div id="clients" class="clients">
-			<div class="container">
-				<div class="row">
-					<div class="col-xs-12">
-						<div id="client-carousel" class="owl-carousel">
-							<?php 
-								//start wp query..
-								$args = array(
-									'post_type'			=> 'clients',
-									'orderby'			=> 'data',
-									'order'				=> 'DESC',
-									'posts_per_page'	=> -1
-									);
-								$data = new WP_Query( $args );
-								//Check post
-								if( $data->have_posts() ) :
-									//startloop here..
-									while( $data->have_posts() ) : $data->the_post();
-										$client_url = rwmb_meta( 'reveal_clients_surl', 'type=text' );
-								?>
-											<div class="item">
-												<a href="<?php if( ! empty( $client_url ) ) : echo esc_url( $client_url ); endif; ?>"><img src="<?php echo esc_url( the_post_thumbnail_url( 'full' ) ); ?>" alt="<?php echo esc_attr( $img_alt ); ?>"/></a>
-											</div>
+/*
+    ==================================
+        CODEXIN CLIENT SHORTCODE
+    ==================================
+*/
 
-								<?php
-										endwhile;
-									endif;
-									wp_reset_postdata();
-								 ?>			
+// Registering Codexin Client Shortcode
+function cx_client_shortcode( $atts, $content = null ) {
+   extract(shortcode_atts(array(
+   		'number_of_clients'	=> '',
+   		'number_of_slides'	=> '',
+   		'link_client'		=> '',
+   		'class'				=> '',
+   ), $atts));
 
-						</div> <!--/#client-carousel-->				
-					</div> <!-- end of col -->
-				</div> <!-- end of row -->
-			</div> <!-- end of container -->
-		</div> <!-- end of clients -->
+   $result = '';
 
-		<?php
-		$result .= ob_get_clean();
-		return $result;
+	// Assigning a master css class and hooking into KC
+   $master_class = apply_filters( 'kc-el-class', $atts );
+   $master_class[] = 'clients';
 
- } //End cx_client
+   // Retrieving user define classes
+   $classes = array( 'client' );
+   (!empty($class)) ? $classes[] = $class : '';
+
+   ob_start(); 
+
+	$codeopt = '';
+	$num_slide = ( !empty( $number_of_slides ) ) ? $number_of_slides : '6';
+	$codeopt .= '
+	<script type="text/javascript">
+		var logo_slide = { slide:'. $num_slide .'}; 
+	</script>';
+	echo $codeopt;
+	?>
+	<div id="clients" class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
+		<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
+			<div class="owl-carousel">
+				<?php 
+				//start wp query..
+				$args = array(
+					'post_type'			=> 'clients',
+					'order'				=> 'DESC',
+					'posts_per_page'	=> $number_of_clients
+					);
+				$data = new WP_Query( $args );
+				//Check post
+				if( $data->have_posts() ) :
+					//startloop here..
+					while( $data->have_posts() ) : $data->the_post();
+						$client_url = rwmb_meta( 'reveal_clients_surl', 'type=text' );
+						// Retrieving Image alt tag
+						$image_alt = ( !empty( retrieve_alt_tag() ) ) ? retrieve_alt_tag() : get_the_title();  
+						?>
+
+						<div class="item">
+							<?php if( $link_client ): ?>
+							<a href="<?php if( ! empty( $client_url ) ) : echo esc_url( $client_url ); endif; ?>"><img src="<?php echo esc_url( the_post_thumbnail_url( 'full' ) ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>"/></a>
+							<?php else: ?>
+							<img src="<?php echo esc_url( the_post_thumbnail_url( 'full' ) ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>"/>
+							<?php endif; ?>
+						</div>
+
+					<?php
+					endwhile;
+				endif;
+				wp_reset_postdata();
+				?>
+			</div> <!--end of owl-carousel-->
+		</div>
+	</div> <!-- end of clients -->
+
+	<?php
+	$result .= ob_get_clean();
+	return $result;
+
+} //End cx_client
 
 
  function cx_client_kc() {
@@ -71,20 +100,56 @@
 
 	                ), //End assets
  					'params' => array(
-
-
-	                ) //End params array()..
-
+ 						// general params
+ 						'general'	=> array(
+	    					array(
+	    						'name'			=> 'number_of_clients',
+	    						'label' 		=> esc_html__( 'Number of Clients', 'codexin' ),
+	    						'type'			=> 'dropdown',
+	    						'description' 	=> esc_html__( 'Choose the number of client logo you want to show', 'codexin' ),
+	    						'options'		=> array(
+	    							'3'			=> '3',
+	    							'6'			=> '6',
+	    							'9'			=> '9',
+	    							'-1'		=> 'All',
+	    						),
+	    						'value'			=> '-1',
+	    						'admin_label'	=> true
+	    					),
+	    					array(
+	    						'name'			=> 'number_of_slides',
+	    						'label' 		=> esc_html__( 'Number of Slides', 'codexin' ),
+	    						'type'			=> 'text',
+	    						'description' 	=> esc_html__( 'Choose the number of client logo slides you want to show on screen', 'codexin' ),
+	    						'value'			=> '6',
+	    						'admin_label'	=> true
+	    					),
+	    					array(
+	    						'name'			=> 'link_client',
+	    						'label' 		=> esc_html__( 'Enable Client URL?', 'codexin' ),
+	    						'type'			=> 'toggle',
+	    						'description' 	=> esc_html__( 'Choose to enable/disable clients URL', 'codexin' ),
+	    						'value'			=> 'yes'
+	    					),
+	    					array(
+	    						'name'			=> 'class',
+	    						'label' 		=> esc_html__( 'Extra Class', 'codexin' ),
+	    						'type'			=> 'text',
+	    						'description' 	=> esc_html__( 'If you wish to style a particular content element differently, please add a class name to this field and refer to it in your custom CSS.', 'codexin' ),
+	    					)
+ 						), //end of general params
+						// Animate Params
+						'animate' => array(
+							array(
+								'name'    		=> 'animate',
+								'type'    		=> 'animate'
+							)
+						)//End animate
+	                ) //End params array
 	            ),  // End of elemnt cx_client
-
-
-				) //end of  array 
-
-
-			);  //end of kc_add_map....
-
-		} //End if
-
-	} // end of cx_team_kc
+			) //end of  array 
+		);  //end of kc_add_map....
+	} //End if
+} // end of cx_team_kc
 
 
