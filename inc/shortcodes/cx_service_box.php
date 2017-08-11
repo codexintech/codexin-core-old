@@ -145,7 +145,7 @@ function cx_service_box_kc() {
   	        								array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.single-service h4'),
         								),
 
-  	        							'Description' => array(
+  	        							'Designation' => array(
   	        								array('property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.single-service p'),
   	        								array('property' => 'font-family', 'label' => esc_html__('Font Family', 'codexin'), 'selector' => '.single-service p'),
   	        								array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.single-service p'),

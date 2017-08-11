@@ -36,8 +36,8 @@ function cx_team_shortcode( $atts, $content = null ) {
 
 	ob_start(); 
 	?>
-	<div class="revel-team-wrapper">
-		<div class="team-single-item">		
+	<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
+		<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">		
 			<div class="single-team">
 				<img src="<?php echo $ret_full_img_url; ?>" alt="<?php echo esc_attr( $img_alt ); ?>" class="img-responsive" />
 				<div class="single-team-wrapper">
@@ -155,57 +155,63 @@ function cx_team_kc() {
 
                 		),
 
-						//Styling params
-						'styling' => array(
-							array(
-								'name'    		=> 'codexin_css',
-								'type'    		=> 'css',
-								'options' 		=> array(
-									array(
-										"screens" => "any,1199,991,767,479",
+						// Styling params
+  	        			'styling' => array(
 
-										'Name' => array(
-												array( 'property' => 'color', 'label' => 'Text Color', 'selector' => '.team-description p:first-child' ),
-												array( 'property' => 'font-size', 'label' => 'Font Size', 'selector' => '.team-description p:first-child' ),
-												array( 'property' => 'font-weight', 'label' => 'Font Weight', 'selector' => '.team-description p:first-child' ),
-												array( 'property' => 'text-transform', 'label' => 'Text Transform', 'selector' => '.team-description p:first-child' ),
-												array( 'property' => 'text-align', 'label' => 'Text Align', 'selector' => '.team-description p:first-child' ),
-												array( 'property' => 'padding', 'label' => 'Padding', 'selector' => '.team-description p:first-child' ),
-												array( 'property' => 'margin', 'label' => 'Margin', 'selector' => '.team-description p:first-child' ),
-										),
+  	        				array(
+  	        					'name'    		=> 'codexin_css',
+  	        					'type'    		=> 'css',
+  	        					'options' 		=> array(
+  	        						array(
+  	        							"screens" => "any,1199,991,767,479",
 
-										'Designation' => array(
-												array( 'property' => 'color', 'label' => 'Text Color', 'selector' => '.team-description p:last-child' ),
-												array( 'property' => 'font-style', 'label' => 'Text Style', 'selector' => '.team-description p:last-child' ),
-												array( 'property' => 'text-align', 'label' => 'Text Align', 'selector' => '.team-description p:last-child' ),
-												array( 'property' => 'padding', 'label' => 'Padding', 'selector' => '.team-description p:last-child' ),
-												array( 'property' => 'margin', 'label' => 'Margin', 'selector' => '.team-description p:last-child' ),
-										),
+  	        							'Name' => array(
+  	        								array('property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.team-description p:first-child'),
+  	        								array('property' => 'font-family', 'label' => esc_html__('Font Family', 'codexin'), 'selector' => '.team-description p:first-child'),
+  	        								array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.team-description p:first-child'),
+  	        								array('property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '.team-description p:first-child'),
+  	        								array('property' => 'font-weight', 'label' => esc_html__('Font Weight', 'codexin'), 'selector' => '.team-description p:first-child'),
+  	        								array('property' => 'text-align', 'label' => esc_html__('Text Align', 'codexin'), 'selector' => '.team-description p:first-child'),
+  	        								array('property' => 'text-transform', 'label' => esc_html__('Text Transform', 'codexin'), 'selector' => '.team-description p:first-child'),
+  	        								array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.team-description p:first-child'),
+  	        								array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.team-description p:first-child'),
+        								),
 
-										'Social Icon' => array(
-												array( 'property' => 'color', 'label' => 'Icon Color', 'selector'=> '.team-social i' ),
-												array( 'property' => 'color', 'label' => 'Icon Color Hover', 'selector'=> '.team-social i:hover' ),
-												array( 'property' => 'background-color', 'label' => 'Icon Area BG Color', 'selector'=> '.team-social i' ),
-												array( 'property' => 'background-color', 'label' => 'BG Color Hover', 'selector'=> '.team-social i:hover' ),
+  	        							'Description' => array(
+  	        								array('property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.team-description p:last-child'),
+  	        								array('property' => 'font-family', 'label' => esc_html__('Font Family', 'codexin'), 'selector' => '.team-description p:last-child'),
+  	        								array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.team-description p:last-child'),
+  	        								array('property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '.team-description p:last-child'),
+  	        								array('property' => 'font-weight', 'label' => esc_html__('Font Weight', 'codexin'), 'selector' => '.team-description p:last-child'),
+  	        								array('property' => 'text-align', 'label' => esc_html__('Text Align', 'codexin'), 'selector' => '.team-description p:last-child'),
+  	        								array('property' => 'text-transform', 'label' => esc_html__('Text Transform', 'codexin'), 'selector' => '.team-description p:last-child'),
+  	        								array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.team-description p:last-child'),
+  	        								array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.team-description p:last-child'),
+        								),
 
-										),
+  	        							'Icon' => array(
+  	        								array('property' => 'color', 'label' => esc_html__('Text Color', 'codexin'), 'selector' => '.team-social i'),
+  	        								array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.team-social i'),
+  	        								array('property' => 'color', 'label' => esc_html__('Text Color Hover', 'codexin'), 'selector' => '.team-social i:hover'),
+  	        								array('property' => 'background-color', 'label' => esc_html__('BG Color Hover', 'codexin'), 'selector' => '.team-social i:hover'),
+  	        								array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.team-social i'),
+  	        								array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.team-social i')
+        								),
 
-										'Box'	=> array(
-											array('property' => 'background'),
-											array('property' => 'border', 'label' => 'Border'),
-											array('property' => 'border-radius', 'label' => 'Border Radius'),
-											array('property' => 'box-shadow', 'label' => 'Box Shadow'),
-											array('property' => 'margin', 'label' => 'Margin'),
-											array('property' => 'padding', 'label' => 'Padding'),
-										),
-
-									) //End inner-option array
-
-								) //End option array
-
-							) //End inner-styling array
-
-            			), //End styling array..
+  	        							'Box'	=> array(
+  	        								array('property' => 'background'),
+  	        								array('property' => 'border', 'label' => esc_html__('Border', 'codexin') ),
+  	        								array('property' => 'border-radius', 'label' => esc_html__('Border Radius', 'codexin') ),
+  	        								array('property' => 'box-shadow', 'label' => esc_html__('Box Shadow', 'codexin')),
+  	        								array('property' => 'box-shadow', 'label' => esc_html__('Box Shadow on Hover','codexin')),
+  	        								array('property' => 'transition', 'label' => esc_html__('Hover Transition Animation', 'codexin')),
+  	        								array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin') ),
+  	        								array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin') ),
+        								)									
+        							)
+        						)
+        					)
+        				), // end of styling
 
 						//Animate param	
 						'animate' => array(
