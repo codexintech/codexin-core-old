@@ -59,8 +59,8 @@ function cx_team_shortcode( $atts, $content = null ) {
 				</div>
 			</div><!-- end of single-team -->
 			<div class="team-description text-center">
-				<p><?php echo esc_html( $member_name ); ?></p>
-				<p><?php echo esc_html( $designation ); ?></p>
+				<p class="member-name"><?php echo esc_html( $member_name ); ?></p>
+				<p class="member-designation"><?php echo esc_html( $designation ); ?></p>
 			</div>
 		</div><!-- end of team-single-item -->
 	</div><!-- end of revel-team-wrapper -->
@@ -106,7 +106,7 @@ function cx_team_kc() {
 								'label' 		=> __( 'Designation', 'codexin' ),
 								'type' 			=> 'attach_image',
 								'description'	=> esc_html__( 'Upload Team Member Image Here', 'codexin' ),
-								'admin_label' 	=> false,
+								'admin_label' 	=> true,
 							),
 
 							array(
@@ -120,7 +120,7 @@ function cx_team_kc() {
                 		), //End general array..
 
 						//Social params
-                		'Social' => array(
+                		'Social Icon' => array(
                 			array(
 								'name' 			=> 'fb',
 								'label' 		=> __( 'Facebook Hendelar', 'codexin' ),

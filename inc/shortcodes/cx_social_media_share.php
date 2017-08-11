@@ -10,13 +10,17 @@
 // Registering Social Media Share Shortcode
 function cx_social_media_share_shortcode( $atts, $content = null ) {
 	extract(shortcode_atts(array(
-		'social_title' => '',
-		'fb'	=> '',
-		'tw'	=> '',
-		'ld'	=> '',
-		'ig'	=> '',
-		'be'	=> '',
-		'class' => ''
+		'social_title' 	=> '',
+		'show_fb'		=> '',
+		'show_tw'		=> '',
+		'show_in'		=> '',
+		'show_pin'		=> '',
+		'show_be'		=> '',
+		'show_pg'		=> '',
+		'show_yt'		=> '',
+		'show_sk'		=> '',
+		'show_li'		=> '',
+		'class'			=> ''
 	), $atts));
 
 	// Assigning a master css class and hooking into KC
@@ -26,7 +30,18 @@ function cx_social_media_share_shortcode( $atts, $content = null ) {
 	// Retrieving user define classes
 	$classes = array( 'social-content' );
 	(!empty($class)) ? $classes[] = $class : '';
-
+	// Retrieving values from plugin options
+	// Retrieving values from plugin options
+	$cx_facebook 	= get_option( 'codexin_options_social' )['fb_url'];	
+	$cx_twitter 	= get_option( 'codexin_options_social' )['tw_url'];	
+	$cx_instagram 	= get_option( 'codexin_options_social' )['in_url'];	
+	$cx_pinterest 	= get_option( 'codexin_options_social' )['pin_url'];	
+	$cx_behance 	= get_option( 'codexin_options_social' )['be_url'];	
+	$cx_gplus 		= get_option( 'codexin_options_social' )['gp_url'];	
+	$cx_youtube 	= get_option( 'codexin_options_social' )['yt_url'];	
+	$cx_skype 		= get_option( 'codexin_options_social' )['sk_url'];	
+	$cx_linkedin 	= get_option( 'codexin_options_social' )['li_url'];		
+		
 	$result = '';
 
 	ob_start(); ?>
@@ -36,21 +51,44 @@ function cx_social_media_share_shortcode( $atts, $content = null ) {
 			<?php if( $social_title ) : ?>
 				<div class="socials-title"><h4> <?php echo esc_html( $social_title ); ?> </h4></div>
 			<?php endif; ?>
-			<?php if( ! empty( $fb ) ) : ?>
-				<a href="<?php echo esc_url( $fb ); ?>"><i class="fa fa-facebook"></i></a>
-			<?php endif;
-			if( ! empty( $tw ) ) : ?>
-			<a href="<?php echo esc_url( $tw ); ?>"><i class="fa fa-twitter"></i></a>
-			<?php endif; 
-			if( ! empty( $ld ) ) : ?>
-				<a href="<?php echo esc_url( $ld ); ?>"><i class="fa fa-linkedin"></i></a>
-			<?php endif;
-			if( $ig ) : ?>
-				<a href="<?php echo esc_url( $ig ); ?>"><i class="fa fa-instagram"></i></a>
-			<?php endif;
-			if( $be ) : ?>
-				<a href="<?php echo esc_url( $be ); ?>"><i class="fa fa-behance"></i></a>
+
+			<?php if( !empty( $cx_facebook ) && ( $show_fb ) ) : ?>
+				<a href="<?php echo esc_url($cx_facebook); ?>"><i class="fa fa-facebook"></i></a>
+			<?php elseif( empty( $cx_facebook ) && ( $show_fb) ): echo '<i class="fa fa-exclamation-triangle" title="'. esc_html__('No Valid URL Found', 'codexin') .'"></i>'; ?>
 			<?php endif; ?>
+			<?php if( !empty( $cx_twitter ) && ( $show_tw ) ) : ?>
+				<a href="<?php echo esc_url($cx_twitter); ?>"><i class="fa fa-twitter"></i></a>
+			<?php elseif( empty( $cx_twitter ) && ( $show_tw ) ): echo '<i class="fa fa-exclamation-triangle" title="'. esc_html__('No Valid URL Found', 'codexin') .'"></i>'; ?>
+			<?php endif; ?>
+			<?php if( !empty( $cx_instagram ) && ( $show_in ) ) : ?>
+				<a href="<?php echo esc_url($cx_twitter); ?>"><i class="fa fa-instagram"></i></a>
+			<?php elseif( empty( $cx_instagram ) && ( $show_in ) ): echo '<i class="fa fa-exclamation-triangle" title="'. esc_html__('No Valid URL Found', 'codexin') .'"></i>'; ?>
+			<?php endif; ?>
+			<?php if( !empty( $cx_pinterest ) && ( $show_pin ) ) : ?>
+				<a href="<?php echo esc_url($cx_twitter); ?>"><i class="fa fa-pinterest"></i></a>
+			<?php elseif( empty( $cx_pinterest ) && ( $show_pin ) ): echo '<i class="fa fa-exclamation-triangle" title="'. esc_html__('No Valid URL Found', 'codexin') .'"></i>'; ?>
+			<?php endif; ?>
+			<?php if( !empty( $cx_behance ) && ( $show_be ) ) : ?>
+				<a href="<?php echo esc_url($cx_twitter); ?>"><i class="fa fa-behance"></i></a>
+			<?php elseif( empty( $cx_behance ) && ( $show_be ) ): echo '<i class="fa fa-exclamation-triangle" title="'. esc_html__('No Valid URL Found', 'codexin') .'"></i>'; ?>
+			<?php endif; ?>
+			<?php if( !empty( $cx_gplus ) && ( $show_gp ) ) : ?>
+				<a href="<?php echo esc_url($cx_twitter); ?>"><i class="fa fa-google-plus"></i></a>
+			<?php elseif( empty( $cx_gplus ) && ( $show_gp ) ): echo '<i class="fa fa-exclamation-triangle" title="'. esc_html__('No Valid URL Found', 'codexin') .'"></i>'; ?>
+			<?php endif; ?>
+			<?php if( !empty( $cx_youtube ) && ( $show_yt ) ) : ?>
+				<a href="<?php echo esc_url($cx_twitter); ?>"><i class="fa fa-youtube-play"></i></a>
+			<?php elseif( empty( $cx_youtube ) && ( $show_yt ) ): echo '<i class="fa fa-exclamation-triangle" title="'. esc_html__('No Valid URL Found', 'codexin') .'"></i>'; ?>
+			<?php endif; ?>
+			<?php if( !empty( $cx_skype ) && ( $show_sk ) ) : ?>
+				<a href="<?php echo esc_url($cx_twitter); ?>"><i class="fa fa-skype"></i></a>
+			<?php elseif( empty( $cx_skype ) && ( $show_sk ) ): echo '<i class="fa fa-exclamation-triangle" title="'. esc_html__('No Valid URL Found', 'codexin') .'"></i>'; ?>
+			<?php endif; ?>
+			<?php if( !empty( $cx_linkedin ) && ( $show_li ) ) : ?>
+				<a href="<?php echo esc_url($cx_twitter); ?>"><i class="fa fa-linkedin"></i></a>
+			<?php elseif( empty( $cx_linkedin ) && ( $show_li ) ): echo '<i class="fa fa-exclamation-triangle" title="'. esc_html__('No Valid URL Found', 'codexin') .'"></i>'; ?>
+			<?php endif; ?>
+
 		</div><!--end of social-content -->
 	</div><!--end of socials -->
 
@@ -96,40 +134,78 @@ function cx_social_media_share_kc() {
  								'admin_label' 	=> true
  							),
 
-	 						array(
-	 							'name' 			=> 'fb',
-	 							'label' 		=> esc_html__( 'Face Book Link ', 'codexin' ),
-	 							'type' 			=> 'text',
-	 							'description'	=> esc_html__( 'Enter Your Face-Book URL Here', 'codexin' ),
-	 						),
+ 							array(
+ 								'name' 			=> 'show_fb',
+ 								'label' 		=> esc_html__( 'Enable Facebook? ', 'codexin' ),
+ 								'type' 			=> 'toggle',
+ 								'value'			=> 'no',
+ 								'admin_label' 	=> true
+ 							),
 
-	 						array(
-	 							'name' 			=> 'tw',
-	 							'label' 		=> esc_html__( 'Twitter Link ', 'codexin' ),
-	 							'type' 			=> 'text',
-	 							'description'	=> esc_html__( 'Enter Your Twitter URL Here', 'codexin' ),
-	 						),
+ 							array(
+ 								'name' 			=> 'show_tw',
+ 								'label' 		=> esc_html__( 'Enable Twitter? ', 'codexin' ),
+ 								'type' 			=> 'toggle',
+ 								'value'			=> 'no',
+ 								'admin_label' 	=> true
+ 							),
 
-	 						array(
-	 							'name' 			=> 'ld',
-	 							'label' 		=> esc_html__( 'Linkedin Link ', 'codexin' ),
-	 							'type' 			=> 'text',
-	 							'description'	=> esc_html__( 'Enter Your Linkedin URL Here', 'codexin' ),
-	 						),
+ 							array(
+ 								'name' 			=> 'show_in',
+ 								'label' 		=> esc_html__( 'Enable Instagram? ', 'codexin' ),
+ 								'type' 			=> 'toggle',
+ 								'value'			=> 'no',
+ 								'admin_label' 	=> true
+ 							),
 
-	 						array(
-	 							'name' 			=> 'ig',
-	 							'label' 		=> esc_html__( 'Instagram Link ', 'codexin' ),
-	 							'type' 			=> 'text',
-	 							'description'	=> esc_html__( 'Enter Your Instagram URL Here', 'codexin' ),
-	 						),
+ 							array(
+ 								'name' 			=> 'show_pin',
+ 								'label' 		=> esc_html__( 'Enable Pinterest? ', 'codexin' ),
+ 								'type' 			=> 'toggle',
+ 								'value'			=> 'no',
+ 								'admin_label' 	=> true
+ 							),
 
-	 						array(
-	 							'name' 			=> 'be',
-	 							'label' 		=> esc_html__( 'Behance Link ', 'codexin' ),
-	 							'type' 			=> 'text',
-	 							'description'	=> esc_html__( 'Enter Your Behance URL Here', 'codexin' ),
-	 						),
+ 							array(
+ 								'name' 			=> 'show_be',
+ 								'label' 		=> esc_html__( 'Enable Behance? ', 'codexin' ),
+ 								'type' 			=> 'toggle',
+ 								'value'			=> 'no',
+ 								'admin_label' 	=> true
+ 							),
+
+ 							array(
+ 								'name' 			=> 'show_gp',
+ 								'label' 		=> esc_html__( 'Enable Google+? ', 'codexin' ),
+ 								'type' 			=> 'toggle',
+ 								'value'			=> 'no',
+ 								'admin_label' 	=> true
+ 							),
+
+ 							array(
+ 								'name' 			=> 'show_yt',
+ 								'label' 		=> esc_html__( 'Enable Youtube? ', 'codexin' ),
+ 								'type' 			=> 'toggle',
+ 								'value'			=> 'no',
+ 								'admin_label' 	=> true
+ 							),
+
+ 							array(
+ 								'name' 			=> 'show_sk',
+ 								'label' 		=> esc_html__( 'Enable Youtube? ', 'codexin' ),
+ 								'type' 			=> 'toggle',
+ 								'value'			=> 'no',
+ 								'admin_label' 	=> true
+ 							),
+
+ 							array(
+ 								'name' 			=> 'show_li',
+ 								'label' 		=> esc_html__( 'Enable Linkedin? ', 'codexin' ),
+ 								'type' 			=> 'toggle',
+ 								'value'			=> 'no',
+ 								'admin_label' 	=> true
+ 							),
+
 	 						array(
 	 							'name' 			=> 'class',
 	 							'label' 		=> esc_html__( 'Extra Class ', 'codexin' ),
