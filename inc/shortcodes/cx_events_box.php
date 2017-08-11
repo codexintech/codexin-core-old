@@ -109,6 +109,13 @@ function cx_events_box_kc() {
  					'description' => esc_html__('Events Section', 'codexin'),
  					'icon' => 'et-hazardous',
  					'category' => 'Codexin',
+                	//Only load assets when using this element
+					'assets' => array(
+						'scripts' => array(
+							'event-js' => CODEXIN_CORE_ASSET_DIR . '/js/shortcode-js/cx_event.js',
+						),
+
+                	), //End assets
  					'params' => array(
 
  						//General params

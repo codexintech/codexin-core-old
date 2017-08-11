@@ -21,6 +21,15 @@ class Codexin_Instagram_Widget extends WP_Widget {
         );
         parent::__construct( 'codexin_instagram_widget', esc_html__('Codexin: Instagram Widget', 'codexin'), $widget_ops );
 
+        // Enquequeing scripts
+        add_action( 'wp_enqueue_scripts', array( $this, 'widget_script' ) );
+
+    }
+
+    // Enquequeing instagram-script
+    public function widget_script() {
+
+        wp_enqueue_script( 'instagram-script', CODEXIN_CORE_ASSET_DIR . '/js/instagram.js', array( 'jquery' ), '1.0', true );
     }
     
     // front-end display of widget
