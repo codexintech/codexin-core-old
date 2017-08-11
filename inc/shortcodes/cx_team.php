@@ -103,7 +103,7 @@ function cx_team_kc() {
 
 							array(
 								'name' 			=> 'image',
-								'label' 		=> __( 'Designation', 'codexin' ),
+								'label' 		=> __( 'Image', 'codexin' ),
 								'type' 			=> 'attach_image',
 								'description'	=> esc_html__( 'Upload Team Member Image Here', 'codexin' ),
 								'admin_label' 	=> true,
