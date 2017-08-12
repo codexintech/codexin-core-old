@@ -24,6 +24,9 @@
     margin-top: 15px;
 }
 
+.secondary-title::after {
+    background: #295970;
+}
 
 /***********************************
     002 - cx_about_box
@@ -34,6 +37,7 @@
 }
 
 .img-thumb img {
+    display: block;
     width: 100%;
 }
 
@@ -97,6 +101,23 @@
     transform: scale(1);
 }
 
+.img-thumb .content-wrapper,:hover .single-content-wrapper,
+.img-thumb a:hover .single-content-wrapper {
+    background: #166f9a;
+    background: rgba(41, 89, 112, 0.75);
+}
+
+.img-thumb .content-wrapper::before, .img-thumb a::before {
+    border-top: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+}
+
+.img-thumb .content-wrapper::after,
+.img-thumb a::after {
+    border-right: 2px solid #fff;
+    border-left: 2px solid #fff;
+}
+
 .about-content {
     margin-top: 35px;
 }
@@ -147,8 +168,6 @@
 .achievement-counters {
     margin-top: 80px;
 }
-
-
 
 .project {
     width: 100%;
@@ -275,6 +294,18 @@
     -ms-transition: all .3s;
     -o-transition: all .3s;
     transition: all .3s;
+}
+
+.content-mask a {
+    background: #295970 none repeat scroll 0 0;
+    border: 2px solid #295970;
+    color: #fff;
+
+}
+
+.content-mask a:hover {
+    background: #fff;
+    color: #295970;
 }
 
 .contest-wrapper:hover .content-mask {
@@ -438,7 +469,15 @@
     height: 40px;
     text-align: center;
     margin: auto;  
+    color: #fff;
 }
+
+.single-team-wrapper {
+    background: rgb(41, 89, 112);
+    background: rgba(41, 89, 112, 0.75);
+    box-shadow: 5px 5px 5px 0 #295970;
+}
+
 .team-social a {
     display: inline-block;
     margin-right: -2px;
@@ -450,6 +489,8 @@
     height: 40px;
     line-height: 40px;
     text-align: center;
+    color: #295970;
+    background: #fff;
     margin: 0;
     padding: 0;
     overflow: hidden;
@@ -462,6 +503,11 @@
     transition: all .3s;
 }
 
+.team-social i:hover {
+    color: #fff;
+    font-size: 20px;
+    background: #295970;
+}
 
 .team-description {
     margin-top: 20px;
@@ -472,6 +518,11 @@
 }
 .team-description p:first-child {
     text-transform: uppercase;
+    font-weight: bold;
+}
+
+.team-description p:last-child {
+    font-style: italic;
 }
 
 
