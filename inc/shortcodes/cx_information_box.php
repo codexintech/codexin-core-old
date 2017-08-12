@@ -12,7 +12,7 @@ function cx_information_box_shortcode( $atts, $content = null ) {
 	extract(shortcode_atts(array(
 		'info_title'	=> '',
 		'info_desc' 	=> '',
-		'info_image'	=> '',
+		'image'	=> '',
 		'img_alt'		=> '',
 		'button_toggle'	=> '',
 		'info_button_text' => '',
@@ -37,7 +37,7 @@ function cx_information_box_shortcode( $atts, $content = null ) {
 	$target = ($retrieve_link[2]) ? 'target='.esc_attr($retrieve_link[2]):'';
 
 	// Retrieving the image url
-	$retrive_img_url = retrieve_img_src( $info_image, 'info-image' );
+	$retrive_img_url = retrieve_img_src( $image, 'info-image' );
 
 	ob_start(); ?>
 
@@ -47,7 +47,7 @@ function cx_information_box_shortcode( $atts, $content = null ) {
 		   		<h2><?php echo esc_html( $info_title ); ?></h2>
 		   		<p> <?php printf('%s', $info_desc ); ?> </p>
 		   		<?php if( $button_toggle == 'yes') : ?>
-		   			<a href="<?php echo esc_url($retrieve_link[0]); ?>" <?php echo $title; ?> <?php echo $target; ?>><?php echo esc_html( $info_button_text ); ?></a>
+	   			<a href="<?php echo esc_url($retrieve_link[0]); ?>" <?php echo $title; ?> <?php echo $target; ?>><?php echo esc_html( $info_button_text ); ?></a>
 		   		<?php endif; ?>
 		   	</div><!-- end of content-mask -->
 	   </div><!-- end of contest-wrapper -->
@@ -82,11 +82,17 @@ function cx_information_box_kc() {
 							),
 
 							array(
-								'name' 			=> 'info_image',
+								'name' 			=> 'image',
 								'label' 		=> esc_html__( 'Upload Image', 'codexin' ),
 								'type' 			=> 'attach_image',
 								'admin_label' 	=> true,
 							),
+
+	    					array(
+	    						'name' 			=> 'img_alt',
+	    						'label' 		=> esc_html__( 'Enter Image Alt Tag', 'codexin' ),
+	    						'type' 			=> 'text',
+    						),
 
 							array(
 								'name' 			=> 'info_desc',

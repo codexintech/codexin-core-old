@@ -2,13 +2,13 @@
 
 
 /*
-    ======================================
-        CODEXIN EVENTS BOX SHORTCODE
-    ======================================
+    ===========================================
+        CODEXIN EVENTS ACCORDION SHORTCODE
+    ===========================================
 */
 
 // Registering Events Box Shortcode
-function cx_events_box_shortcode( $atts, $content = null ) {
+function cx_events_accordion_shortcode( $atts, $content = null ) {
 	extract(shortcode_atts(array(
 		'event_icon_one'	=> '',
 		'event_icon_two'	=> '',
@@ -96,17 +96,17 @@ function cx_events_box_shortcode( $atts, $content = null ) {
 	$result .= ob_get_clean();
 	return $result;
 
-} //End cx_events_box
+} //End cx_events_accordion
 
 // Integrating Shortcode with King Composer
-function cx_events_box_kc() {
+function cx_events_accordion_kc() {
 
 	if (function_exists('kc_add_map')) { 
  		kc_add_map(
  			array(
- 				'cx_events_box' => array(
- 					'name' => esc_html__( 'Codexin Events Section', 'codexin' ),
- 					'description' => esc_html__('Events Section', 'codexin'),
+ 				'cx_events_accordion' => array(
+ 					'name' => esc_html__( 'Codexin Events Accordion', 'codexin' ),
+ 					'description' => esc_html__('Events Accordion', 'codexin'),
  					'icon' => 'et-hazardous',
  					'category' => 'Codexin',
                 	//Only load assets when using this element
@@ -193,10 +193,10 @@ function cx_events_box_kc() {
 							)
 						),//End animate
 	                ) //End params
-	            ),  // End of elemnt cx_events_box
+	            ),  // End of elemnt cx_events_accordion
 			) //end of  array 
 		);  //end of kc_add_map
 	} //End if
-} // end of cx_events_box_shortcode_kc
+} // end of cx_events_accordion_shortcode_kc
 
 
