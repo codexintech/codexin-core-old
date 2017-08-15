@@ -47,7 +47,8 @@ function cx_portfolio_shortcode( $atts, $content = null ) {
 					</div> <!-- end of row -->
 				</div> <!-- end of container -->
 
-				<div class="portfolio-wrapper">
+	            <div class="portfolio-wrapper image-pop-up" itemscope itemtype="http://schema.org/ImageGallery">
+
 				<?php 
 					//start wp query..
 					$args = array(
@@ -63,31 +64,36 @@ function cx_portfolio_shortcode( $atts, $content = null ) {
 						while( $data->have_posts() ) : $data->the_post(); 
 
 							$term_list = wp_get_post_terms( get_the_ID(), 'portfolio-category' ); 
+
+							global $post;
+				            $image      = wp_prepare_attachment_for_js( get_post_thumbnail_id( $post->ID ) );
+				            $data_size  = $image['width'] . 'x' . $image['height'];
+				            $image_alt  = ( !empty( $image['alt'] ) ) ? 'alt="' . esc_attr( $image['alt'] ) . '"' : 'alt="' .get_the_title() . '"';
+				            $image_cap  = $image['caption'];
+
 				 	?>
-							<div class="portfolio <?php foreach ($term_list as $sterm) { echo $sterm->slug.' '; } ?>">
-								<img src="<?php echo esc_url( the_post_thumbnail_url( 'portfolio-mini-image' ) ); ?>" alt="<?php echo esc_attr( $img_alt ); ?>">
+							<figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" class="portfolio <?php foreach ($term_list as $sterm) { echo $sterm->slug.' '; } ?>">
+							    <a href="<?php esc_url( the_post_thumbnail_url('full') ); ?>" itemprop="contentUrl" data-size="<?php echo esc_attr( $data_size ); ?>">
+							        <img src="<?php esc_url( the_post_thumbnail_url('portfolio-mini-image') ); ?>" itemprop="thumbnail" <?php echo $image_alt; ?> class="img-responsive" />
+							    </a>
+							    <figcaption itemprop="caption description"><?php echo esc_html( $image_cap ); ?></figcaption>
 								<div class="image-mask">
 									<div class="image-content">
-										<a href="<?php echo esc_url( the_post_thumbnail_url( 'full' ) ); ?>" class="portfolio-img-popup">
-											<img src="<?php echo get_template_directory_uri(); ?>/assets/images/portfolio/hover-icon.png" alt="<?php echo $img_alt; ?>">
+										<a href="<?php echo esc_url( the_post_thumbnail_url( 'full' ) ); ?>">
+											<img src="<?php echo get_template_directory_uri(); ?>/assets/images/portfolio/hover-icon.png" alt="Hover Icon">
 										</a>
-										<h3> 
-											<a href="<?php the_permalink(); ?>"> <?php echo esc_html( get_the_title() ); ?> </a>
-										</h3>
-										<p>
-											<?php foreach ( $term_list as $sterm ) { echo $sterm->name . " "; } ?>
-										</p>
+										<h3 class="portfolio-title"> <a href="<?php the_permalink(); ?>" class="clickable"> <?php echo esc_html( get_the_title() ); ?> </a></h3>
+										<p><?php foreach ( $term_list as $sterm ) { echo $sterm->name . " "; } ?></p>
 									</div>
 								</div>
-							</div>
+							</figure>
 
 					<?php 
 							endwhile;
 						endif;
 						wp_reset_postdata();
 					 ?>
-
-				</div> <!-- end of portfolio-wrapper -->
+	            </div><!-- end of portfolio-wrapper -->
 			</div><!-- end of portfolio-area -->
 		</div> <!-- end of portfolios -->
 
@@ -113,8 +119,13 @@ function cx_portfolio_kc() {
 						'scripts' => array(
 							'imagesloaded-js' => CODEXIN_CORE_ASSET_DIR . '/js/imagesloaded.pkgd.min.js',
 							'isotope-js-script' => CODEXIN_CORE_ASSET_DIR . '/js/isotope.pkgd.min.js',
-							'portfolio-js' => CODEXIN_CORE_ASSET_DIR . '/js/shortcode-js/cx_portfolio.js',
+							'portfolio-js' => CODEXIN_CORE_ASSET_DIR . '/js/shortcode-js/cx-portfolio-isotope.js',
+							'photswipe-js' => CODEXIN_CORE_ASSET_DIR . '/js/photoswipe.min.js',
+							'photswipe-main-js' => CODEXIN_CORE_ASSET_DIR . '/js/photoswipe-main.js',
 						),
+		                'styles' => array(
+		            	    'photoswipe-stylesheet' => CODEXIN_CORE_ASSET_DIR . '/css/photoswipe.css',
+		                )
 
                 	), //End assets
 
