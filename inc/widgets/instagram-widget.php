@@ -21,15 +21,6 @@ class Codexin_Instagram_Widget extends WP_Widget {
         );
         parent::__construct( 'codexin_instagram_widget', esc_html__('Codexin: Instagram Widget', 'codexin'), $widget_ops );
 
-        // Enquequeing scripts
-        add_action( 'wp_enqueue_scripts', array( $this, 'widget_script' ) );
-
-    }
-
-    // Enquequeing instagram-script
-    public function widget_script() {
-
-        wp_enqueue_script( 'instagram-script', CODEXIN_CORE_ASSET_DIR . '/js/instagram.js', array( 'jquery' ), '1.0', true );
     }
     
     // front-end display of widget
@@ -57,23 +48,26 @@ class Codexin_Instagram_Widget extends WP_Widget {
                 $ig_image_hi_res = apply_filters( 'codexin_hi_image_res', 'standard_resolution' );
             ?>
 
-            <div class="instagram-images">
+            <div class="instagram-images image-pop-up">
 
-            <?php 
+                <?php 
                 // Looping through the parameters
                 foreach( $cx_instagram['data'] as $key => $ig_image ) {
                     echo apply_filters( 'codexin_ig_image_html', sprintf( 
-                        '<a href="%1$s" class="cx-image-link">
-                            <img src="%2$s" alt="%3$s" title="%3$s" />
-                            <div class="hoverable"></div>
-                        </a>',
-                        // $ig_image['link'],
+                        '<figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+                            <a href="%1$s" itemprop="contentUrl" data-size="640x640">
+                                <img src="%2$s" itemprop="thumbnail" alt="Instagram Image" />
+                                <div class="hoverable"></div>
+                            </a>
+                            <figcaption itemprop="caption description">%3$s</figcaption>
+                        </figure>',
                         $ig_image['images'][ $ig_image_hi_res ]['url'],
                         $ig_image['images'][ $ig_image_lo_res ]['url'],
                         $ig_image['caption']['text']
                     ), $ig_image );
                 }
-            ?>
+                ?>
+
             </div>
             <a href="https://instagram.com/<?php echo esc_html( $username ); ?>" class='more' target='_blank'><i><?php printf( esc_html__( 'Follow %1$s on Instagram', 'codexin' ), esc_html( $username ) ); ?></i></a>
 
