@@ -1,3 +1,57 @@
+input[type="text"],
+input[type="url"],
+input[type="email"],
+input[type="button"],
+input[type="reset"],
+input[type="password"],
+input[type="search"],
+input[type="tel"] {
+    padding:8px 10px;
+    border: 1px solid #ddd;
+}
+
+input[type="submit"] {
+    border:1px solid #295970;
+}
+
+
+button,
+input[type="submit"],
+input[type="button"]{
+    background: #295970;
+    color: #fff;
+    font-size: 85%;
+    padding: 8px 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+input::-webkit-input-placeholder,
+input:-moz-placeholder ,
+input:-ms-input-placeholder ,
+input[placeholder]{
+    color: #ddd ;
+}
+input:focus,
+textarea:focus {
+    border-color: #95E1D3;
+}
+button:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover{
+    background: #333;
+}
+
+.btn-mailchimp {
+    background: #295970;
+    color: #fff;
+    font-size: 85%;
+    padding: 8px 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 10px;
+}
+
 /**********************************
     001 - cx_section_heading
 **********************************/

@@ -1,5 +1,4 @@
 
-
 .widget-title {
     text-transform: uppercase;
     margin-top: 15px;
@@ -24,4 +23,8 @@
 
 .media-object {
     max-width: none;
+}
+
+#mc_embed_signup_scroll {
+	margin-bottom: 15px;
 }
