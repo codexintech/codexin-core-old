@@ -109,3 +109,65 @@
 .codexin-address-box p {
     margin-bottom: 0;
 }
+
+.codexin-address-box .cx-address {
+    margin: 5px;
+}
+
+.codexin-address-box p.widget-title {
+    margin-bottom: 40px;
+}
+.codexin-address-box .cx-company-name,
+.codexin-address-box .cx-company-description {
+    margin-bottom: 10px;
+}
+
+.cx-phone,
+.cx-fax,
+.cx-email,
+.cx-email,
+.cx-address,
+.cx-website {
+    position: relative;
+    padding-left: 25px;
+}
+
+.cx-address::before {
+    content:"\f0f7";
+    font-family: FontAwesome;
+    position: absolute;
+    top:0;
+    left:0;
+}
+
+.cx-phone::before {
+    content:"\f2a0";
+    font-family: FontAwesome;
+    position: absolute;
+    top:0;
+    left:0;
+}
+
+.cx-fax::before {
+    content:"\f1ac";
+    font-family: FontAwesome;
+    position: absolute;
+    top:0;
+    left:0;
+}
+
+.cx-email::before {
+    content:"\f003";
+    font-family: FontAwesome;
+    position: absolute;
+    top:0;
+    left:0;
+}
+
+.cx-website::before {
+    content:"\f0ac";
+    font-family: FontAwesome;
+    position: absolute;
+    top:0;
+    left:0;
+}
