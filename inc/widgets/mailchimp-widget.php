@@ -209,7 +209,7 @@ class Codexin_Mailchimp_Widget extends WP_Widget {
 	    	if( 'on' == $instance[ 'opt_in' ] ) {
 	        	$msg_success = ( !empty( $this->options['mcd_success']) ? $this->options['mcd_success'] : esc_html__( 'Your sign-up request was successful! Please check your email inbox to confirm. Thank You.', 'codexin' ) );
 	        } else {
-	        	$msg_success = ( !empty( $this->options['mc_success']) ? $this->options['mc_success'] : esc_html__( 'You have been successfully subscribed. Thank You!', 'codexin' ) );
+	        	$msg_success = ( !empty( $this->options['mc_success']) ? $this->options['mc_success'] : esc_html__( 'You have been successfully subscribed. Thank You.', 'codexin' ) );
 	        }
 
 			$f_required = ( 'on' == $instance[ 'fst_req' ] ) ? 'required' : '';

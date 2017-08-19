@@ -8,9 +8,10 @@
 
 class Codexin_Address_Box extends WP_Widget {
 	
-	//setup the widget name, description, etc...
+	// Setup the widget name, description, etc...
 	public function __construct() {
 		
+		// Initializing the basic parameters
 		$widget_ops = array(
 			'classname' 	=> 'codexin-address-box',
 			'description' 	=> esc_html__('Display Address', 'codexin'),
@@ -19,9 +20,10 @@ class Codexin_Address_Box extends WP_Widget {
 		
 	}
 	
-	//back-end display of widget
+	// Back-end display of widget
 	public function form( $instance ) {
 
+		// Assigning or updating the values
 		$title 				= ( !empty( $instance[ 'title' ] ) ? $instance[ 'title' ] : esc_html__('Address Box', 'codexin') );
 		$company_name 		= ( !empty( $instance[ 'company_name' ] ) ? $instance[ 'company_name' ]: '' );
 		$small_description 	= ( !empty( $instance[ 'small_description' ] ) ? $instance[ 'small_description' ]: '' );
@@ -106,11 +108,12 @@ class Codexin_Address_Box extends WP_Widget {
 		
 	}
 
-	// update widget
+	// Updating the widget
 	public function update( $new_instance, $old_instance ) {
 		
 		$instance = $old_instance;
 
+		// Updating to the latest values
 		$instance[ 'title' ] 				= ( !empty( $new_instance[ 'title' ] ) ? strip_tags( $new_instance[ 'title' ] ) : '' );
 		$instance[ 'company_name' ]			= ( !empty( $new_instance[ 'company_name' ] ) ? strip_tags( $new_instance[ 'company_name' ] ) : '' );
 		$instance[ 'small_description' ]	= ( !empty( $new_instance[ 'small_description' ] ) ? strip_tags( $new_instance[ 'small_description' ] ) : '' );
@@ -128,9 +131,10 @@ class Codexin_Address_Box extends WP_Widget {
 		
 	}
 
-	//front-end display of widget
+	// Front-end display of widget
 	public function widget( $args, $instance ) {
 
+		// Retrieving the updated values
 		$company_name 		= $instance[ 'company_name' ];
 		$small_description 	= $instance[ 'small_description' ];
 		$street_address		= $instance[ 'street_address' ];
@@ -211,6 +215,7 @@ class Codexin_Address_Box extends WP_Widget {
 	
 }
 
+// Registering the widget
 add_action( 'widgets_init', function() {
 	register_widget( 'Codexin_Address_Box' );
 } );

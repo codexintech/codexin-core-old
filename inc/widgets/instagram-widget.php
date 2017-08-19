@@ -3,18 +3,19 @@
 
 
 /*
-    ============================================
+    ==========================================
         CODEXIN INSTAGRAM WIDGET CLASS
-    ============================================
+    ==========================================
 */
 
 
 
 class Codexin_Instagram_Widget extends WP_Widget {
     
-    //setup the widget name, description, etc...
+    // Setup the widget name, description, etc...
     public function __construct() {
 
+        // Initializing the basic parameters
         $widget_ops = array(
             'classname' => 'codexin-instagram-widget',
             'description' => esc_html('Displays Your Latest Instagrams', 'codexin'),
@@ -23,9 +24,10 @@ class Codexin_Instagram_Widget extends WP_Widget {
 
     }
     
-    // front-end display of widget
+    // Front-end display of widget
     public function widget( $args, $instance ) {
 
+        // Assigning or updating the values
         $title    = ( ! empty( $instance['title'] ) ) ? apply_filters( 'widget_title', $instance['title'] ) : '';
         $username = ( ! empty( $instance['username'] ) ) ? esc_attr( $instance['username'] ) : '';
 
@@ -78,10 +80,10 @@ class Codexin_Instagram_Widget extends WP_Widget {
         <?php endif;
     }
 
-    // back-end display of widget
+    // Back-end display of widget
     public function form( $instance ) {
 
-        // Get options or set defaults
+        // Assigning or updating the values
         $title       = ( ! empty( $instance['title'] ) ) ? $instance['title'] : '';
         $username    = ( ! empty( $instance['username'] ) ) ? $instance['username'] : '';
         $user_id     = ( ! empty( $instance['user_id'] ) ) ? $instance['user_id'] : '';
@@ -157,7 +159,7 @@ class Codexin_Instagram_Widget extends WP_Widget {
     }
 
 
-    // update widget
+    // Updating the widget
     public function update( $new_instance, $old_instance ) {
         $instance = $old_instance;
             foreach ( array( 'title', 'username', 'user_id', 'accss_token', 'client_id', 'count' ) as $key => $value ) {
@@ -252,7 +254,7 @@ class Codexin_Instagram_Widget extends WP_Widget {
             // Unserialize the results
             $data = maybe_unserialize( $data );
 
-            // Store Instagrams in a transient, and expire every hour
+            // Store Instagrams in a transient
             set_transient( $transient_key, $data, 60 * $cacheTime );
         }
 

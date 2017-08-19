@@ -2,17 +2,18 @@
 
 
 /*
-	============================================
+	======================================
 		CODEXIN SOCIAL WIDGET CLASS
-	============================================
+	======================================
 */
 
 
 class Codexin_Social_Widget extends WP_Widget {
 	
-	// setup the widget name, description, etc...
+	// Setup the widget name, description, etc...
 	public function __construct() {
 		
+		// Initializing the basic parameters
 		$widget_ops = array(
 			'classname' => 'codexin-social-widget',
 			'description' => 'Displays All Your Social Media Profiles to follow',
@@ -24,24 +25,22 @@ class Codexin_Social_Widget extends WP_Widget {
 		
 	}
 	
-	// back-end display of widget
+	// Back-end display of widget
 	public function form( $instance ) { 
-		
-		$title 	= ( !empty( $instance[ 'title' ] ) ? $instance[ 'title' ] : esc_html__('Follow Us', 'codexin') );
-		
-		echo '<p>'. esc_html__('In Order To Use This Widget Please Fill Up The Social Profile Information In The "Social Media" Section of ', 'codexin') .'<strong><a href="'. esc_url(admin_url().'admin.php?page=codexin-options&action=social') .'" target="_blank">'. esc_html('Codexin Core.', 'codexin') .'</a></strong></p>';
+			
+		echo '<p>'. esc_html__('In Order To Use This Widget Please Fill Up The Social Profile Information In The "Social Media" Section of ', 'codexin') .'<strong><a href="'. esc_url(admin_url().'admin.php?page=codexin-options&action=social') .'" target="_blank">'. esc_html('Codexin Core.', 'codexin') .'</a></strong> '. esc_html__( ' And Refresh This Page to select your desired social profiles.', 'codexin' ) .'</p>';
 
-		// echo '<p>'. esc_html('Choose The Social Profiles to be Shown:', 'codexin') .'</p>';
-
-		$facebook	 		= ( !empty( $instance[ 'facebook' ] ) ? $instance[ 'facebook' ] : '' );
-		$twitter	 		= ( !empty( $instance[ 'twitter' ] ) ? $instance[ 'twitter' ] : '' );
-		$instagram	 		= ( !empty( $instance[ 'instagram' ] ) ? $instance[ 'instagram' ] : '' );
-		$pinterest	 		= ( !empty( $instance[ 'pinterest' ] ) ? $instance[ 'pinterest' ] : '' );
-		$behance	 		= ( !empty( $instance[ 'behance' ] ) ? $instance[ 'behance' ] : '' );
-		$google_plus	 	= ( !empty( $instance[ 'google_plus' ] ) ? $instance[ 'google_plus' ] : '' );
-		$youtube	 		= ( !empty( $instance[ 'youtube' ] ) ? $instance[ 'youtube' ] : '' );
-		$skype	 			= ( !empty( $instance[ 'skype' ] ) ? $instance[ 'skype' ] : '' );
-		$linkedin	 		= ( !empty( $instance[ 'linkedin' ] ) ? $instance[ 'linkedin' ] : '' );
+		// Assigning or updating the values
+		$title 			= ( !empty( $instance[ 'title' ] ) ? $instance[ 'title' ] : esc_html__('Follow Us', 'codexin') );
+		$facebook	 	= ( !empty( $instance[ 'facebook' ] ) ? $instance[ 'facebook' ] : '' );
+		$twitter		= ( !empty( $instance[ 'twitter' ] ) ? $instance[ 'twitter' ] : '' );
+		$instagram	 	= ( !empty( $instance[ 'instagram' ] ) ? $instance[ 'instagram' ] : '' );
+		$pinterest	 	= ( !empty( $instance[ 'pinterest' ] ) ? $instance[ 'pinterest' ] : '' );
+		$behance		= ( !empty( $instance[ 'behance' ] ) ? $instance[ 'behance' ] : '' );
+		$google_plus	= ( !empty( $instance[ 'google_plus' ] ) ? $instance[ 'google_plus' ] : '' );
+		$youtube	 	= ( !empty( $instance[ 'youtube' ] ) ? $instance[ 'youtube' ] : '' );
+		$skype	 		= ( !empty( $instance[ 'skype' ] ) ? $instance[ 'skype' ] : '' );
+		$linkedin		= ( !empty( $instance[ 'linkedin' ] ) ? $instance[ 'linkedin' ] : '' );
 
 
 	?>
@@ -120,23 +119,25 @@ class Codexin_Social_Widget extends WP_Widget {
 
 	}
 
-	//Updating the widget
+	// Updating the widget
 	public function update( $new_instance, $old_instance ) {
 		
 		$instance = $old_instance;
-		$instance[ 'title' ] 	= ( !empty( $new_instance[ 'title' ] ) ? strip_tags( $new_instance[ 'title' ] ) : '' );
 
+		// Updating to the latest values
+		$instance[ 'title' ] 	= ( !empty( $new_instance[ 'title' ] ) ? strip_tags( $new_instance[ 'title' ] ) : '' );
         foreach ( array( 'facebook', 'twitter', 'instagram', 'pinterest', 'behance', 'google_plus', 'youtube', 'skype', 'linkedin' ) as $key => $value ) {
-            $instance[$value] = ( !empty( $new_instance[ $value ] ) ? sanitize_text_field( $new_instance[ $value ] ) : '' );
+            $instance[$value] 	= ( !empty( $new_instance[ $value ] ) ? sanitize_text_field( $new_instance[ $value ] ) : '' );
         }
+
 		return $instance;
 		
 	}
 	
-	//front-end display of widget
+	// Front-end display of widget
 	public function widget( $args, $instance ) {
 
-		// Retrieving values from plugin options
+		// Retrieving values from options page
 		$cx_facebook 	= $this->options['fb_url'];	
 		$cx_twitter 	= $this->options['tw_url'];	
 		$cx_instagram 	= $this->options['in_url'];	
@@ -154,47 +155,38 @@ class Codexin_Social_Widget extends WP_Widget {
 
 				<?php if( !empty( $cx_facebook ) && ( 'on' == $instance[ 'facebook' ] ) ) : ?>
 				<a href="<?php echo esc_url($cx_facebook); ?>"><i class="fa fa-facebook"></i></a>
-				<?php elseif( empty( $cx_facebook ) && ( 'on' == $instance[ 'facebook' ] ) ): echo '<i class="fa fa-exclamation-triangle" title="'. esc_html__('No Valid URL Found', 'codexin') .'"></i>'; ?>
 				<?php endif; ?>
 
 				<?php if( !empty( $cx_twitter ) && ( 'on' == $instance[ 'twitter' ] ) ) : ?>
 				<a href="<?php echo esc_url($cx_twitter); ?>"><i class="fa fa-twitter"></i></a>
-				<?php elseif( empty( $cx_twitter ) && ( 'on' == $instance[ 'twitter' ] ) ): echo '<i class="fa fa-exclamation-triangle" title="'. esc_html__('No Valid URL Found', 'codexin') .'"></i>'; ?>
 				<?php endif; ?>
 
 				<?php if( !empty( $cx_instagram ) && ( 'on' == $instance[ 'instagram' ] ) ) : ?>
 				<a href="<?php echo esc_url($cx_instagram); ?>"><i class="fa fa-instagram"></i></a>
-				<?php elseif( empty( $cx_instagram ) && ( 'on' == $instance[ 'instagram' ] ) ): echo '<i class="fa fa-exclamation-triangle" title="'. esc_html__('No Valid URL Found', 'codexin') .'"></i>'; ?>
 				<?php endif; ?>
 
 				<?php if( !empty( $cx_pinterest ) && ( 'on' == $instance[ 'pinterest' ] ) ) : ?>
 				<a href="<?php echo esc_url($cx_pinterest); ?>"><i class="fa fa-pinterest"></i></a>
-				<?php elseif( empty( $cx_pinterest ) && ( 'on' == $instance[ 'pinterest' ] ) ): echo '<i class="fa fa-exclamation-triangle" title="'. esc_html__('No Valid URL Found', 'codexin') .'"></i>'; ?>
 				<?php endif; ?>
 
 				<?php if( !empty( $cx_behance ) && ( 'on' == $instance[ 'behance' ] ) ) : ?>
 				<a href="<?php echo esc_url($cx_behance); ?>"><i class="fa fa-behance"></i></a>
-				<?php elseif( empty( $cx_behance ) && ( 'on' == $instance[ 'behance' ] ) ): echo '<i class="fa fa-exclamation-triangle" title="'. esc_html__('No Valid URL Found', 'codexin') .'"></i>'; ?>
 				<?php endif; ?>
 
 				<?php if( !empty( $cx_gplus ) && ( 'on' == $instance[ 'google_plus' ] ) ) : ?>
 				<a href="<?php echo esc_url($cx_gplus); ?>"><i class="fa fa-google-plus"></i></a>
-				<?php elseif( empty( $cx_google_plus ) && ( 'on' == $instance[ 'google_plus' ] ) ): echo '<i class="fa fa-exclamation-triangle" title="'. esc_html__('No Valid URL Found', 'codexin') .'"></i>'; ?>
 				<?php endif; ?>
 
 				<?php if( !empty( $cx_youtube ) && ( 'on' == $instance[ 'youtube' ] ) ) : ?>
 				<a href="<?php echo esc_url($cx_youtube); ?>"><i class="fa fa-youtube-play"></i></a>
-				<?php elseif( empty( $cx_youtube ) && ( 'on' == $instance[ 'youtube' ] ) ): echo '<i class="fa fa-exclamation-triangle" title="'. esc_html__('No Valid URL Found', 'codexin') .'"></i>'; ?>
 				<?php endif; ?>
 
 				<?php if( !empty( $cx_skype ) && ( 'on' == $instance[ 'skype' ] ) ) : ?>
 				<a href="<?php echo esc_url($cx_skype); ?>"><i class="fa fa-skype"></i></a>
-				<?php elseif( empty( $cx_skype ) && ( 'on' == $instance[ 'skype' ] ) ): echo '<i class="fa fa-exclamation-triangle" title="'. esc_html__('No Valid URL Found', 'codexin') .'"></i>'; ?>
 				<?php endif; ?>
 
 				<?php if( !empty( $cx_linkedin ) && ( 'on' == $instance[ 'linkedin' ] ) ) : ?>
 				<a href="<?php echo esc_url($cx_linkedin); ?>"><i class="fa fa-linkedin"></i></a>
-				<?php elseif( empty( $cx_linkedin ) && ( 'on' == $instance[ 'linkedin' ] ) ): echo '<i class="fa fa-exclamation-triangle" title="'. esc_html__('No Valid URL Found', 'codexin') .'"></i>'; ?>
 				<?php endif; ?>
 
 			</p>
@@ -207,6 +199,7 @@ class Codexin_Social_Widget extends WP_Widget {
 	
 }
 
+// Registering the widget
 add_action( 'widgets_init', function() {
 	register_widget( 'Codexin_Social_Widget' );
 } );

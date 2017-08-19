@@ -14,6 +14,7 @@ class Codexin_Twitter_Widget extends WP_Widget {
 	//setup the widget name, description, etc...
 	public function __construct() {
 		
+		// Initializing the basic parameters
 		$widget_ops = array(
 			'classname' => 'codexin-twitter-widget',
 			'description' => esc_html__('Displays Twitter Feeds', 'codexin'),
@@ -25,9 +26,10 @@ class Codexin_Twitter_Widget extends WP_Widget {
 		
 	}
 
-	//back-end display of widget
+	// Back-end display of widget
 	public function form( $instance ) {
 
+		// Assigning or updating the values
 		$title 			= ( !empty( $instance[ 'title' ] ) ? $instance[ 'title' ] : esc_html__('Twitter Feed', 'codexin') );
 		$count 			= ( !empty( $instance[ 'count' ] ) ? absint( $instance[ 'count' ] ) : esc_html__('3', 'codexin') );
 		$tw_profile 	= ( !empty( $instance[ 'tw_profile' ] ) ? $instance[ 'tw_profile' ] : '' );
@@ -72,22 +74,23 @@ class Codexin_Twitter_Widget extends WP_Widget {
 		endif;
 	}
 
-	// update widget
+	// Updating the widget
 	public function update( $new_instance, $old_instance ) {
 		
 		$instance = array();
+		
+		// Updating to the latest values
 		$instance[ 'title' ] 		= ( !empty( $new_instance[ 'title' ] ) ? strip_tags( $new_instance[ 'title' ] ) : '' );
 		$instance[ 'count' ] 		= ( !empty( $new_instance[ 'count' ] ) ? absint( strip_tags( $new_instance[ 'count' ] ) ) : 0 );
 		$instance[ 'tw_profile' ] 	= strip_tags( $new_instance[ 'tw_profile' ] );
 		$instance[ 'tw_name' ] 		= strip_tags( $new_instance[ 'tw_name' ] );
 		$instance[ 'tw_usr' ] 		= strip_tags( $new_instance[ 'tw_usr' ] );
-		
-		
+
 		return $instance;
 		
 	}
 
-	//front-end display of widget
+	// Front-end display of widget
 	public function widget( $args, $instance ) {
 				
 		printf( '%s', $args[ 'before_widget' ] );
@@ -96,29 +99,41 @@ class Codexin_Twitter_Widget extends WP_Widget {
 			printf( '%s' . apply_filters( 'widget_title', $instance[ 'title' ] ) . '%s', $args[ 'before_title' ], $args[ 'after_title' ]);			
 		endif;
 
+		// Retrieving values from options page
 		$twitter_id 			= $this->options[ 'tw_username' ];
 		$access_token 			= $this->options[ 'tw_acc_token' ];
 		$access_token_secret 	= $this->options[ 'tw_acc_token_sec' ];
 		$consumer_key 			= $this->options[ 'tw_cons_key' ];
 		$consumer_secret 		= $this->options[ 'tw_cons_secret' ];
+
+		// Retrieving the updated values
 		$count 					= absint( $instance['count'] );
 		$tw_name 				= $instance['tw_name'];
 		$tw_usr 				= $instance['tw_usr'];
 		$tw_profile 			= $instance['tw_profile'];
 
-		if($twitter_id && $consumer_key && $consumer_secret && $access_token && $access_token_secret && $count) { 
+		// Check if all the fields are filled up
+		if($twitter_id && $consumer_key && $consumer_secret && $access_token && $access_token_secret && $count) {
+
+		// Set transName 
 		$transName = 'list_tweets_'.$args['widget_id'];
+
+		// Set cache time
 		$cacheTime = 10;
 		delete_transient($transName);
+
+		// Check the transient condition
 		if(false === ($twitterData = get_transient($transName))) {
-		     // require the twitter auth class
-		     @require_once 'twitteroauth/twitteroauth.php';
-		     $twitterConnection = new TwitterOAuth(
+		    // require the twitter auth class
+		    @require_once 'twitteroauth/twitteroauth.php';
+		    $twitterConnection = new TwitterOAuth(
 							$consumer_key,			// Consumer Key
 							$consumer_secret,   	// Consumer secret
 							$access_token,       	// Access token
 							$access_token_secret    // Access token secret
 							);
+
+			// Attempting to fetch data
 		    $twitterData = $twitterConnection->get(
 							  'https://api.twitter.com/1.1/statuses/user_timeline.json',
 							  array(
@@ -127,15 +142,18 @@ class Codexin_Twitter_Widget extends WP_Widget {
 							    'exclude_replies' => false
 							  )
 							);
-		     if($twitterConnection->http_code != 200)
-		     {
-		          $twitterData = get_transient($transName);
-		     }
 
-		     // Save our new transient.
-		     set_transient($transName, $twitterData, 60 * $cacheTime);
+		    // Check if the API is up
+		    if($twitterConnection->http_code != 200) {
+				$twitterData = get_transient($transName);
+		    }
+
+		    // Save our new transient.
+		    set_transient($transName, $twitterData, 60 * $cacheTime);
+
 		};
 
+		// Passing the transient
 		$cx_twitter = get_transient($transName);
 		if($cx_twitter && is_array($cx_twitter)) {
 		?>
@@ -158,6 +176,8 @@ class Codexin_Twitter_Widget extends WP_Widget {
 						<?php endif; ?>
 						<p class="cx-tweet-text">
 						<?php
+
+						// Fetching tweet text and formatting
 						$latestTweet = $cx_tweet->text;
 						$latestTweet = preg_replace('/https:\/\/([a-z0-9_\.\-\+\&\!\#\~\/\,]+)/i', '&nbsp;<a href="//$1" target="_blank">https://$1</a>&nbsp;', $latestTweet);
 						$latestTweet = preg_replace('/@([a-z0-9_]+)/i', '&nbsp;<a href="//twitter.com/$1" target="_blank">@$1</a>&nbsp;', $latestTweet);
@@ -166,6 +186,7 @@ class Codexin_Twitter_Widget extends WP_Widget {
 						?>
 						</p>
 						<?php
+						// Fetching tweet time
 						$twitterTime = strtotime($cx_tweet->created_at);
 						$cx_time = $this->tweet_time($twitterTime);
 						?>
@@ -177,7 +198,7 @@ class Codexin_Twitter_Widget extends WP_Widget {
 		</div>
 		<?php 
 		} else {
-		echo '<div class="error"><p>' . esc_html__('Error: Please Provide Valid Twitter OAuth Information.', 'codexin') . '</p></div>';
+			echo '<div class="error"><p>' . esc_html__('Error: Please Provide Valid Twitter OAuth Information.', 'codexin') . '</p></div>';
 		}
 	} else {
 		echo '<div class="error"><p>' . esc_html__('Error: Please Provide Valid Twitter OAuth Information.', 'codexin') . '</p></div>';
@@ -187,30 +208,32 @@ class Codexin_Twitter_Widget extends WP_Widget {
 
 	}
 
+	// Calculating tweet time
 	public function tweet_time($time) {
-		   $periods = array("second", "minute", "hour", "day", "week", "month", "year", "decade");
-		   $lengths = array("60","60","24","7","4.35","12","10");
 
-		   $now = time();
+		    $periods = array("second", "minute", "hour", "day", "week", "month", "year", "decade");
+		    $lengths = array("60","60","24","7","4.35","12","10");
 
-		       $diff = $now - $time;
+		    $now = time();
+			$diff = $now - $time;
 
-		   for($j = 0; $diff >= $lengths[$j] && $j < count($lengths)-1; $j++) {
-		       $diff /= $lengths[$j];
-		   }
+		    for($j = 0; $diff >= $lengths[$j] && $j < count($lengths)-1; $j++) {
+				$diff /= $lengths[$j];
+		    }
 
-		   $diff = round($diff);
+		    $diff = round($diff);
 
-		   if($diff != 1) {
-		       $periods[$j].= "s";
-		   }
+		    if($diff != 1) {
+		        $periods[$j].= "s";
+		    }
 
-		   return "$diff $periods[$j] ago ";
+		    return "$diff $periods[$j] ago ";
+
 		}
 
 	}
 
-
+// Registering the widget
 add_action( 'widgets_init', function() {
 	register_widget( 'Codexin_Twitter_Widget' );
 } );
