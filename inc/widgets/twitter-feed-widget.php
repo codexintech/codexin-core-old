@@ -28,13 +28,18 @@ class Codexin_Twitter_Widget extends WP_Widget {
 	//back-end display of widget
 	public function form( $instance ) {
 
-		echo '<p>'. esc_html__('In Order To Use This Widget Please Fill Up The Twitter API Information In The "Twitter API" Section of ', 'codexin') .'<strong><a href="'. esc_url(admin_url().'admin.php?page=codexin-options&action=twitter_api') .'" target="_blank">'. esc_html('Codexin Core.', 'codexin') .'</a></strong></p>';
-
 		$title 			= ( !empty( $instance[ 'title' ] ) ? $instance[ 'title' ] : esc_html__('Twitter Feed', 'codexin') );
 		$count 			= ( !empty( $instance[ 'count' ] ) ? absint( $instance[ 'count' ] ) : esc_html__('3', 'codexin') );
 		$tw_profile 	= ( !empty( $instance[ 'tw_profile' ] ) ? $instance[ 'tw_profile' ] : '' );
 		$tw_name 		= ( !empty( $instance[ 'tw_name' ] ) ? $instance[ 'tw_name' ] : '' );
 		$tw_usr 		= ( !empty( $instance[ 'tw_usr' ] ) ? $instance[ 'tw_usr' ] : '' );
+
+		if ( empty ( $this->options['tw_username'] ) && $this->options['tw_acc_token'] && $this->options['tw_acc_token_sec'] && $this->options['tw_cons_key'] && $this->options['tw_cons_secret'] ):
+
+		echo '<p>'. esc_html__('In Order To Use This Widget Please Fill Up The Twitter API Information In The "Twitter API" Section of ', 'codexin') .'<strong><a href="'. esc_url(admin_url().'admin.php?page=codexin-options&action=twitter_api') .'" target="_blank">'. esc_html('Codexin Core.', 'codexin') .'</a></strong></p>';
+		echo '<p>'. esc_html__('Come back here when you have filled up all the required information.', 'codexin') .'</p>';
+
+		else:
 
 		?>
 
@@ -65,6 +70,7 @@ class Codexin_Twitter_Widget extends WP_Widget {
 
 
 	<?php
+		endif;
 	}
 
 	// update widget
