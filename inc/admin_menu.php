@@ -38,21 +38,24 @@ class CodexinAdminMenu {
 		$this->options_general = get_option( 'codexin_options_general' );
 		$this->options_social = get_option( 'codexin_options_social' );
         $this->options_gmap_api = get_option( 'codexin_options_gmap_api' ); 
-		$this->options_tw_api = get_option( 'codexin_options_twitter_api' ); 
+        $this->options_tw_api = get_option( 'codexin_options_twitter_api' ); 
+		$this->options_mc_opt = get_option( 'codexin_options_mailchimp_opt' ); 
 
 		$social_Screen = ( isset( $_GET['action'] ) && 'social' == $_GET['action'] ) ? true : false;
         $gmap_api_Screen = ( isset( $_GET['action'] ) && 'api' == $_GET['action'] ) ? true : false;
-		$twitter_api_Screen = ( isset( $_GET['action'] ) && 'twitter_api' == $_GET['action'] ) ? true : false;
+        $twitter_api_Screen = ( isset( $_GET['action'] ) && 'twitter_api' == $_GET['action'] ) ? true : false;
+		$mailchimp_opt_Screen = ( isset( $_GET['action'] ) && 'mailchimp_opt' == $_GET['action'] ) ? true : false;
 	     ?>
 	    <!-- Create a header in the default WordPress 'wrap' container -->
 	    <div class="wrap">    
 	        <h1><?php esc_html_e( 'Codexin Core Options', 'codexin' ) ?></h1>
 	        <p class="description"><?php printf( '%1$s<b>%2$s</b>%3$s', esc_html__( 'These settings showcases the core functionality of the ', 'codexin' ), esc_html__( ' Codexin Core ' , 'codexin' ), esc_html( ' Plugin.', 'codexin' ) ) ?></p>
             <h2 class="nav-tab-wrapper">
-				<a href="<?php echo admin_url( 'admin.php?page=codexin-options' ); ?>" class="nav-tab<?php if ( ! isset( $_GET['action'] ) || isset( $_GET['action'] ) && 'social' != $_GET['action']  && 'api' != $_GET['action'] && 'twitter_api' != $_GET['action'] ) echo ' nav-tab-active'; ?>"><?php esc_html_e( 'General', 'codexin' ); ?></a>
+				<a href="<?php echo admin_url( 'admin.php?page=codexin-options' ); ?>" class="nav-tab<?php if ( ! isset( $_GET['action'] ) || isset( $_GET['action'] ) && 'social' != $_GET['action']  && 'api' != $_GET['action'] && 'twitter_api' != $_GET['action'] && 'mailchimp_opt' != $_GET['action'] ) echo ' nav-tab-active'; ?>"><?php esc_html_e( 'General', 'codexin' ); ?></a>
 				<a href="<?php echo esc_url( add_query_arg( array( 'action' => 'social' ), admin_url( 'admin.php?page=codexin-options' ) ) ); ?>" class="nav-tab<?php if ( $social_Screen ) echo ' nav-tab-active'; ?>"><?php esc_html_e( 'Social Media', 'codexin' ); ?></a> 
 				<a href="<?php echo esc_url( add_query_arg( array( 'action' => 'api' ), admin_url( 'admin.php?page=codexin-options' ) ) ); ?>" class="nav-tab<?php if ( $gmap_api_Screen ) echo ' nav-tab-active'; ?>"><?php esc_html_e( 'Google Map API', 'codexin' ); ?></a>  
-                <a href="<?php echo esc_url( add_query_arg( array( 'action' => 'twitter_api' ), admin_url( 'admin.php?page=codexin-options' ) ) ); ?>" class="nav-tab<?php if ( $twitter_api_Screen ) echo ' nav-tab-active'; ?>"><?php esc_html_e( 'Twitter API', 'codexin' ); ?></a>        
+                <a href="<?php echo esc_url( add_query_arg( array( 'action' => 'twitter_api' ), admin_url( 'admin.php?page=codexin-options' ) ) ); ?>" class="nav-tab<?php if ( $twitter_api_Screen ) echo ' nav-tab-active'; ?>"><?php esc_html_e( 'Twitter API', 'codexin' ); ?></a>
+                <a href="<?php echo esc_url( add_query_arg( array( 'action' => 'mailchimp_opt' ), admin_url( 'admin.php?page=codexin-options' ) ) ); ?>" class="nav-tab<?php if ( $mailchimp_opt_Screen ) echo ' nav-tab-active'; ?>"><?php esc_html_e( 'MailChimp Settings', 'codexin' ); ?></a>      
 			</h2>
 	        <?php settings_errors(); ?>
 
@@ -69,7 +72,12 @@ class CodexinAdminMenu {
                     settings_fields( 'codexin_options_twitter_api' );
                     do_settings_sections( 'codexin-setting-twitter' );
                     submit_button();
-				}else { 
+				} 
+                elseif($mailchimp_opt_Screen) {
+                    settings_fields( 'codexin_options_mailchimp_opt' );
+                    do_settings_sections( 'codexin-setting-mailchimp' );
+                    submit_button();
+                } else { 
 					settings_fields( 'codexin_options_general' );
 					do_settings_sections( 'codexin-setting-admin' );
 					// submit_button(); 
@@ -261,6 +269,56 @@ class CodexinAdminMenu {
             'codexin-setting-twitter', // Page
             'setting_section_id' // Section      
         ); 
+
+        register_setting(
+            'codexin_options_mailchimp_opt', // Option group
+            'codexin_options_mailchimp_opt', // Option name
+            array( $this, 'cx_sanitize' ) // Sanitize
+        );
+
+        add_settings_section(
+            'setting_section_id', // ID
+            esc_html__('MailChimp Settings', 'codexin'), // Title
+            array( $this, 'mailchimp_section_info' ), // Callback
+            'codexin-setting-mailchimp' // Page
+        );         
+
+        add_settings_field(
+            'mc_api', // ID
+            esc_html__('MailChimp API Key', 'codexin'), // Title 
+            array( $this, 'mc_api_callback' ), // Callback
+            'codexin-setting-mailchimp', // Page
+            'setting_section_id' // Section      
+        );
+
+        $api_key = get_option( 'codexin_options_mailchimp_opt' )['mc_api'];
+        if ( isset ( $api_key ) && !empty ( $api_key ) ) {
+
+            add_settings_field(
+                'mc_lists', // ID
+                esc_html__('Your Email Lists', 'codexin'), // Title 
+                array( $this, 'mc_lists_callback' ), // Callback
+                'codexin-setting-mailchimp', // Page
+                'setting_section_id' // Section      
+            );
+
+            add_settings_field(
+                'mc_success', // ID
+                esc_html__('Success Message (Double Opt-In Disabled)', 'codexin'), // Title 
+                array( $this, 'mc_success_callback' ), // Callback
+                'codexin-setting-mailchimp', // Page
+                'setting_section_id' // Section      
+            );
+
+            add_settings_field(
+                'mcd_success', // ID
+                esc_html__('Success Message (Double Opt-In Enabled)', 'codexin'), // Title 
+                array( $this, 'mcd_success_callback' ), // Callback
+                'codexin-setting-mailchimp', // Page
+                'setting_section_id' // Section      
+            );
+
+        }
 	     
 	} // end codexin_admin_init
 	 
@@ -288,7 +346,12 @@ class CodexinAdminMenu {
 
     // Twitter api section information
     public function twitter_section_info() {
-        printf( '<p>%1$s<a href="%2$s" target="_blank">%3$s</a></p>', esc_html__( 'This Section Represents the Twitter OAuth Input Section. If You Don\'t Have the Required Information, ', 'codexin'), esc_url( 'http://dev.twitter.com/apps' ), esc_html__( 'Please Create Your Twitter App From Here.', 'codexin' ) );
+        printf( '<p>%1$s<a href="%2$s" target="_blank">%3$s</a></p>', esc_html__( 'This Section Represents the Twitter OAuth Input Section. If You Don\'t Have the Required Information, ', 'codexin'), esc_url( '//dev.twitter.com/apps' ), esc_html__( 'Please Create Your Twitter App From Here.', 'codexin' ) );
+    }
+
+    // Mailchimp settings section information
+    public function mailchimp_section_info() {
+        printf( '<p>%1$s<a href="%2$s" target="_blank">%3$s</a></p>', esc_html__( 'This Section Represents the Mailchimp Settings Section. If You Don\'t Have the Required Information, ', 'codexin'), esc_url( '//admin.mailchimp.com/account/api' ), esc_html__( 'Get your API Key from here.', 'codexin' ) );
     }
 
     /**
@@ -398,7 +461,7 @@ class CodexinAdminMenu {
 
     public function tw_acc_token_callback() {
         printf(
-            '<input type="text" class="regular-text" id="tw_acc_token" name="codexin_options_twitter_api[tw_acc_token]" value="%s" />',
+            '<input type="password" class="regular-text" id="tw_acc_token" name="codexin_options_twitter_api[tw_acc_token]" value="%s" />',
             isset( $this->options_tw_api['tw_acc_token'] ) ? esc_attr( $this->options_tw_api['tw_acc_token']) : ''
         );
         printf( '&nbsp;&nbsp;<span class="description">%s</span>', esc_html__( 'Please Insert Your Twitter OAuth Access Token', 'codexin' ) );
@@ -406,7 +469,7 @@ class CodexinAdminMenu {
 
     public function tw_acc_token_sec_callback() {
         printf(
-            '<input type="text" class="regular-text" id="tw_acc_token_sec" name="codexin_options_twitter_api[tw_acc_token_sec]" value="%s" />',
+            '<input type="password" class="regular-text" id="tw_acc_token_sec" name="codexin_options_twitter_api[tw_acc_token_sec]" value="%s" />',
             isset( $this->options_tw_api['tw_acc_token_sec'] ) ? esc_attr( $this->options_tw_api['tw_acc_token_sec']) : ''
         );
         printf( '&nbsp;&nbsp;<span class="description">%s</span>', esc_html__( 'Please Insert Your Twitter OAuth Access Token Secret', 'codexin' ) );
@@ -414,7 +477,7 @@ class CodexinAdminMenu {
 
     public function tw_cons_key_callback() {
         printf(
-            '<input type="text" class="regular-text" id="tw_cons_key" name="codexin_options_twitter_api[tw_cons_key]" value="%s" />',
+            '<input type="password" class="regular-text" id="tw_cons_key" name="codexin_options_twitter_api[tw_cons_key]" value="%s" />',
             isset( $this->options_tw_api['tw_cons_key'] ) ? esc_attr( $this->options_tw_api['tw_cons_key']) : ''
         );
         printf( '&nbsp;&nbsp;<span class="description">%s</span>', esc_html__( 'Please Insert Your Twitter Consumer Key', 'codexin' ) );
@@ -422,10 +485,72 @@ class CodexinAdminMenu {
 
     public function tw_cons_secret_callback() {
         printf(
-            '<input type="text" class="regular-text" id="tw_cons_secret" name="codexin_options_twitter_api[tw_cons_secret]" value="%s" />',
+            '<input type="password" class="regular-text" id="tw_cons_secret" name="codexin_options_twitter_api[tw_cons_secret]" value="%s" />',
             isset( $this->options_tw_api['tw_cons_secret'] ) ? esc_attr( $this->options_tw_api['tw_cons_secret']) : ''
         );
         printf( '&nbsp;&nbsp;<span class="description">%s</span>', esc_html__( 'Please Insert Your Twitter Consumer Secret', 'codexin' ) );
+    }
+
+
+    /**
+     *
+     * Callbacks for Mailchimp Settings Section
+     *
+    **/
+    public function mc_api_callback() {
+        printf(
+            '<input type="password" class="regular-text" id="mc_api" name="codexin_options_mailchimp_opt[mc_api]" value="%s" />',
+            isset( $this->options_mc_opt['mc_api'] ) ? esc_attr( $this->options_mc_opt['mc_api']) : ''
+        );
+        printf( '&nbsp;&nbsp;<span class="description">%s</span>', esc_html__( 'Please Insert Your MailChimp API Key', 'codexin' ) );
+    }
+
+    public function mc_lists_callback() {
+
+        $api_key = $this->options_mc_opt['mc_api'];
+        if ( isset ( $api_key ) && !empty ( $api_key ) ) {
+            $mcapi = new MCAPI($api_key);
+            $lists = $mcapi->lists();
+
+            if( !$lists['data'] ) {
+                echo '<p>Enter a valid MailChimp API Key</p>';
+            } else {
+
+                echo "<ul class='cx_mailchimp_lists' style='margin-top:7px'>";
+                $i = 1;
+
+                printf( '<li style="margin-bottom:15px;">%1$s ' . $lists['total'] . ' %2$s</li>', esc_html__( 'Following', 'codexin' ), esc_html__( 'lists are found with your MailChimp Account. You can use any of them in the Codexin MailChimp widget.', 'codexin' ));
+                foreach ($lists['data'] as $key => $value) {
+                    printf(
+                        '<li>'. $i .'.&nbsp;<b>%1$s</b> ( <b>List ID:</b> %2$s, <b>Subscribers:</b> %3$s )</li>',
+                        $value['name'],
+                        $value['id'],
+                        $value['stats']['member_count']
+                    );
+                    $i++;
+                }
+                echo "</ul>";
+            }
+        } else {
+            echo '<p>Enter a valid MailChimp API Key</p>';
+        }
+
+    }
+
+    public function mc_success_callback() {
+        printf(
+            '<input type="text" class="large-text" id="mc_success" name="codexin_options_mailchimp_opt[mc_success]" value="%s" />',
+            isset( $this->options_mc_opt['mc_success'] ) ? esc_attr( $this->options_mc_opt['mc_success']) : esc_html__( 'You have been successfully subscribed. Thank You.', 'codexin' )
+        );
+        printf( '<p class="description">%s</p>', esc_html__( 'The message that is shown when an email address is successfully subscribed (When double opt-In is disabled).', 'codexin' ) );
+    }
+
+    public function mcd_success_callback() {
+        printf(
+            '<input type="text" class="large-text" id="mcd_success" name="codexin_options_mailchimp_opt[mcd_success]" value="%s" />',
+            isset( $this->options_mc_opt['mcd_success'] ) ? esc_attr( $this->options_mc_opt['mcd_success']) : esc_html__( 'Your sign-up request was successful! Please check your email inbox to confirm. Thank You.', 'codexin' )
+        );
+        printf( '<p class="description">%s</p>', esc_html__( 'The message that is shown when an email address is successfully subscribed (When double opt-In is enabled).', 'codexin' ) );
     }
 
     /**
@@ -449,50 +574,81 @@ class CodexinAdminMenu {
     public function cx_sanitize( $input )  {
         $new_input = array();
 
-        if( isset( $input['tw_url'] ) )
+        if( isset( $input['tw_url'] ) ) {
             $new_input['tw_url'] = sanitize_text_field( $input['tw_url'] );
+        }
 
-        if( isset( $input['fb_url'] ) )
+        if( isset( $input['fb_url'] ) ) {
             $new_input['fb_url'] = sanitize_text_field( $input['fb_url'] );
+        }
 
-        if( isset( $input['in_url'] ) )
+        if( isset( $input['in_url'] ) ) {
             $new_input['in_url'] = sanitize_text_field( $input['in_url'] );
+        }
 
-        if( isset( $input['pin_url'] ) )
+        if( isset( $input['pin_url'] ) ) {
             $new_input['pin_url'] = sanitize_text_field( $input['pin_url'] );
+        }
 
-        if( isset( $input['be_url'] ) )
+        if( isset( $input['be_url'] ) ) {
             $new_input['be_url'] = sanitize_text_field( $input['be_url'] );
+        }
 
-        if( isset( $input['gp_url'] ) )
+        if( isset( $input['gp_url'] ) ) {
             $new_input['gp_url'] = sanitize_text_field( $input['gp_url'] );
+        }
 
-        if( isset( $input['li_url'] ) )
+        if( isset( $input['li_url'] ) ) {
             $new_input['li_url'] = sanitize_text_field( $input['li_url'] );
+        }
 
-        if( isset( $input['yt_url'] ) )
+        if( isset( $input['yt_url'] ) ) {
             $new_input['yt_url'] = sanitize_text_field( $input['yt_url'] );
+        }
 
-        if( isset( $input['sk_url'] ) )
+        if( isset( $input['sk_url'] ) ) {
             $new_input['sk_url'] = sanitize_text_field( $input['sk_url'] );
+        }
 
-        if( isset( $input['gmap_api'] ) )
+        if( isset( $input['gmap_api'] ) ) {
             $new_input['gmap_api'] = sanitize_text_field( $input['gmap_api'] );
+        }
 
-        if( isset( $input['tw_username'] ) )
+        if( isset( $input['tw_username'] ) ) {
             $new_input['tw_username'] = sanitize_text_field( $input['tw_username'] );
+        }
 
-        if( isset( $input['tw_acc_token'] ) )
+        if( isset( $input['tw_acc_token'] ) ) {
             $new_input['tw_acc_token'] = sanitize_text_field( $input['tw_acc_token'] );
+        }
 
-        if( isset( $input['tw_acc_token_sec'] ) )
+        if( isset( $input['tw_acc_token_sec'] ) ) {
             $new_input['tw_acc_token_sec'] = sanitize_text_field( $input['tw_acc_token_sec'] );
+        }
 
-        if( isset( $input['tw_cons_key'] ) )
+        if( isset( $input['tw_cons_key'] ) ) {
             $new_input['tw_cons_key'] = sanitize_text_field( $input['tw_cons_key'] );
+        }
 
-        if( isset( $input['tw_cons_secret'] ) )
+        if( isset( $input['tw_cons_secret'] ) ) {
             $new_input['tw_cons_secret'] = sanitize_text_field( $input['tw_cons_secret'] );
+        }
+
+        if( isset( $input['mc_api'] ) ) {
+            $new_input['mc_api'] = sanitize_text_field( $input['mc_api'] );
+        }
+
+        if( isset( $input['mc_lists'] ) ) {
+            $new_input['mc_lists'] = sanitize_text_field( $input['mc_lists'] );
+        }
+
+        if( isset( $input['mc_success'] ) ) {
+            $new_input['mc_success'] = sanitize_text_field( $input['mc_success'] );
+        }
+
+        if( isset( $input['mcd_success'] ) ) {
+            $new_input['mcd_success'] = sanitize_text_field( $input['mcd_success'] );
+        }
 
         return $new_input;
     }

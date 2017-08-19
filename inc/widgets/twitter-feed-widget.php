@@ -19,6 +19,9 @@ class Codexin_Twitter_Widget extends WP_Widget {
 			'description' => esc_html__('Displays Twitter Feeds', 'codexin'),
 		);
 		parent::__construct( 'cx_twitter_widget', esc_html__('Codexin: Twitter Feed Widget', 'codexin'), $widget_ops );
+
+        // Fetching data from options page
+        $this->options = get_option( 'codexin_options_twitter_api' );
 		
 	}
 
@@ -88,11 +91,11 @@ class Codexin_Twitter_Widget extends WP_Widget {
 			printf( '%s' . apply_filters( 'widget_title', $instance[ 'title' ] ) . '%s', $args[ 'before_title' ], $args[ 'after_title' ]);			
 		endif;
 
-		$twitter_id 			= get_option( 'codexin_options_twitter_api' )[ 'tw_username' ];
-		$access_token 			= get_option( 'codexin_options_twitter_api' )[ 'tw_acc_token' ];
-		$access_token_secret 	= get_option( 'codexin_options_twitter_api' )[ 'tw_acc_token_sec' ];
-		$consumer_key 			= get_option( 'codexin_options_twitter_api' )[ 'tw_cons_key' ];
-		$consumer_secret 		= get_option( 'codexin_options_twitter_api' )[ 'tw_cons_secret' ];
+		$twitter_id 			= $this->options[ 'tw_username' ];
+		$access_token 			= $this->options[ 'tw_acc_token' ];
+		$access_token_secret 	= $this->options[ 'tw_acc_token_sec' ];
+		$consumer_key 			= $this->options[ 'tw_cons_key' ];
+		$consumer_secret 		= $this->options[ 'tw_cons_secret' ];
 		$count 					= absint( $instance['count'] );
 		$tw_name 				= $instance['tw_name'];
 		$tw_usr 				= $instance['tw_usr'];

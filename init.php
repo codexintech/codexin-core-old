@@ -25,11 +25,12 @@ class Codexin_Core {
         define('CODEXIN_CORE_INC_DIR', plugin_dir_path( __FILE__ ) .'inc');
         define('CODEXIN_CORE_ASSET_DIR', plugin_dir_url( __FILE__ ) .'assets');
         define('CODEXIN_CORE_SC_DIR', plugin_dir_path( __FILE__ ) .'inc/shortcodes');
+        define('CODEXIN_CORE_WDGT_DIR', plugin_dir_path( __FILE__ ) .'inc/widgets');
 
 		// Loading the core files
 		$this -> codexin_includes();
 
-		// Enquequeing styles
+		// Enquequeing styles and scripts
 		$this -> codexin_enqueque();
 
 		// Register actions using add_actions() custom function.
@@ -51,13 +52,15 @@ class Codexin_Core {
 		require_once CODEXIN_CORE_INC_DIR . '/shortcode_loader.php';
 
 		// Registering Admin Menu for plugin
-		require_once CODEXIN_CORE_INC_DIR . '/admin_menu.php';
+		if(is_admin()){
+			require_once CODEXIN_CORE_INC_DIR . '/admin_menu.php';
+		}
 
 		// Adding Helper File
 		require_once CODEXIN_CORE_INC_DIR . '/helpers.php';
 
 		// Initalizing custom widgets
-		$cx_widgets = glob(CODEXIN_CORE_INC_DIR.'/widgets/*.php');
+		$cx_widgets = glob(CODEXIN_CORE_WDGT_DIR.'/*.php');
 		foreach ($cx_widgets as $cx_widget){
 		    require_once( sanitize_text_field( $cx_widget ) );    		    
 		}
@@ -71,7 +74,7 @@ class Codexin_Core {
 	}
 
 	/**
-	 * Enqueques styles
+	 * Enqueques styles and scripts
 	 * 
 	 * @since v1.0.0
 	 */

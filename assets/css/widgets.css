@@ -25,6 +25,73 @@
     max-width: none;
 }
 
-#mc_embed_signup_scroll {
-	margin-bottom: 15px;
+/* Mailchimp widget */
+
+.mailchimp-success {
+	display: none;
+    font-size: 90%;
+    padding-top: 10px;
+    text-align: center;
+    line-height: 20px;
+	color: #148a14;
+}
+
+.codexin-mailchimp-wrapper {
+    padding: 10px;
+    background: #eee;
+}
+
+.mailchimp-firstname,
+.mailchimp-lastname,
+.mailchimp-email {
+	width: 100%;
+    margin-bottom: 10px;
+}
+
+.mailchimp-firstname::-webkit-input-placeholder,
+.mailchimp-lastname::-webkit-input-placeholder,
+.mailchimp-email::-webkit-input-placeholder,
+.mailchimp-firstname:-ms-input-placeholder,
+.mailchimp-lastname:-ms-input-placeholder,
+.mailchimp-email:-ms-input-placeholder,
+.mailchimp-firstname::-moz-placeholder,
+.mailchimp-lastname::-moz-placeholder,
+.mailchimp-email::-moz-placeholder {
+	color: #777;
+	font-size: 85%;
+}
+
+.mailchimp-submit {
+    width: 100%;
+    border-radius: 0;
+    padding: 8px 10px;
+    outline: 0;
+    border: 0;
+    background: #295970;
+    color: #fff;
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -ms-transition: all .3s;
+    -o-transition: all .3s;
+    transition: all .3s;
+}
+
+.mailchimp-submit:hover {
+    background: #002037;
+}
+
+.mailchimp-desc p {
+    font-size: 85%;
+    margin-bottom: 15px;
+    font-style: italic;
+    color: #666;
+}
+
+.mailchimp-error {
+    color: #ec4b4b;
+    font-size: 90%;
+    padding-top: 10px;
+    display: none;
+    text-align: center;
+    line-height: 20px;
 }
