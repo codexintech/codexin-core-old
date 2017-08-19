@@ -163,7 +163,7 @@ class Codexin_Instagram_Widget extends WP_Widget {
             foreach ( array( 'title', 'username', 'user_id', 'accss_token', 'client_id', 'count' ) as $key => $value ) {
                 $instance[$value] = sanitize_text_field( $new_instance[$value] );
             }
-            delete_transient( $this->id );
+            
         return $instance;
     }
 
@@ -219,6 +219,10 @@ class Codexin_Instagram_Widget extends WP_Widget {
 
         // Set transient key
         $transient_key = $this->id;
+        delete_transient( $this->id );
+
+        // Set cache time
+        $cacheTime = 10;
 
         // Attempt to fetch from transient
         $data = get_transient( $transient_key );
@@ -249,7 +253,7 @@ class Codexin_Instagram_Widget extends WP_Widget {
             $data = maybe_unserialize( $data );
 
             // Store Instagrams in a transient, and expire every hour
-            set_transient( $transient_key, $data, apply_filters( 'codexin_instagram_cache', 1 * HOUR_IN_SECONDS ) );
+            set_transient( $transient_key, $data, 60 * $cacheTime );
         }
 
         return $data;

@@ -156,35 +156,46 @@ class Codexin_Address_Box extends WP_Widget {
 		?>
 		
 		<div itemscope itemtype="http://schema.org/LocalBusiness">
-			<p class="cx-company-name"><span itemprop="name"><?php if( !empty($company_name) ): echo esc_html( $company_name ); endif; ?></span></p>
+
+			<?php if( !empty( $company_name ) ): ?>
+			<p class="cx-company-name"><span itemprop="name"><?php echo esc_html( $company_name ); ?></span></p>
+			<?php endif; ?>
 
 			<?php if( !empty( $small_description ) ): ?>
 			<p class="cx-company-description"><span itemprop="description"><?php echo esc_html( $small_description ); ?></span></p>
 			<?php endif; ?>
 
+			<?php if( !empty( $locality_address ) && !empty( $regional_address ) && !empty( $postal_code ) && !empty( $street_address ) ): ?>
 			<div class="cx-address" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+				<?php if( !empty( $street_address ) ): ?>
 				<p class="cx-street-address"><span itemprop="streetAddress"><?php if( !empty($street_address) ): echo esc_html( $street_address ); endif; ?></span></p>
-					
+				<?php endif; ?>
+				<?php if( !empty( $locality_address ) && !empty( $regional_address ) && !empty( $postal_code ) ): ?>
 				<p class="cx-locality">
 					<span itemprop="addressLocality"><?php if( !empty($locality_address) ): echo esc_html( $locality_address ); endif; ?></span>,&nbsp;
 					<span itemprop="addressRegion"><?php if( !empty($regional_address) ): echo esc_html( $regional_address ); endif; ?></span>
 					<span itemprop="postalCode">&nbsp;<?php if( !empty($postal_code) ): echo esc_html( $postal_code ); endif; ?></span>
 				</p>
-
+				<?php endif; ?>
 			</div>
-
-			<?php if( !empty( $phone_code ) ): ?>
-			<p class="cx-phone"> <span itemprop="telephone"><a href="tel:<?php echo $phone_url; ?>" itemprop="url"><?php if( !empty($phone_no) ): echo esc_html( $phone_no ); endif; ?></a></span></p>
-
-			<?php else: ?>
-			<p class="cx-phone"> <span itemprop="telephone"><?php if( !empty($phone_no) ): echo esc_html( $phone_no ); endif; ?></span></p>
 			<?php endif; ?>
+			
+			<?php if( !empty( $phone_no ) ): ?>
+				<?php if( !empty( $phone_code ) ): ?>
+				<p class="cx-phone"> <span itemprop="telephone"><a href="tel:<?php echo esc_attr( $phone_url ); ?>" itemprop="url"><?php echo esc_html( $phone_no ); ?></a></span></p>
+
+				<?php else: ?>
+				<p class="cx-phone"> <span itemprop="telephone"><?php echo esc_html( $phone_no ); ?></span></p>
+				<?php endif; ?>
+			<?php endif; ?>			
 
 			<?php if( !empty( $fax_no ) ): ?>
 			<p class="cx-fax"> <span itemprop="faxNumber"><?php echo esc_html( $fax_no ); ?></span></p>
 			<?php endif; ?>
 
-			<p class="cx-email"> <a href="mailto:test@example.com" itemprop="email"><?php if( !empty($email) ): echo esc_html( $email ); endif; ?></a></p>
+			<?php if( !empty( $email ) ): ?>
+			<p class="cx-email"> <a href="mailto:<?php echo esc_url( $email ); ?>" itemprop="email"><?php echo esc_html( $email ); ?></a></p>
+			<?php endif; ?>
 
 			<?php if( !empty( $company_website ) ): ?>
 			<p class="cx-website"> <a href="<?php echo esc_url( $company_website ); ?>" itemprop="url" target="_blank"><?php echo esc_html($company_website); ?></a></p>
