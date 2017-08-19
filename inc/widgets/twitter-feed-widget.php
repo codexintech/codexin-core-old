@@ -36,8 +36,7 @@ class Codexin_Twitter_Widget extends WP_Widget {
 
 		if ( empty ( $this->options['tw_username'] ) && $this->options['tw_acc_token'] && $this->options['tw_acc_token_sec'] && $this->options['tw_cons_key'] && $this->options['tw_cons_secret'] ):
 
-		echo '<p>'. esc_html__('In Order To Use This Widget Please Fill Up The Twitter API Information In The "Twitter API" Section of ', 'codexin') .'<strong><a href="'. esc_url(admin_url().'admin.php?page=codexin-options&action=twitter_api') .'" target="_blank">'. esc_html('Codexin Core.', 'codexin') .'</a></strong></p>';
-		echo '<p>'. esc_html__('Come back here when you have filled up all the required information.', 'codexin') .'</p>';
+		echo '<p>'. esc_html__('In Order To Use This Widget Please Fill Up The Twitter API Information In The "Twitter API" Section of ', 'codexin') .'<strong><a href="'. esc_url(admin_url().'admin.php?page=codexin-options&action=twitter_api') .'" target="_blank">'. esc_html('Codexin Core,', 'codexin') .'</a></strong>'. esc_html__( ' And Refresh This Page.', 'codexin' ) .'</p>';
 
 		else:
 

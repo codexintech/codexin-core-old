@@ -21,7 +21,7 @@ class Codexin_Address_Box extends WP_Widget {
 	
 	//back-end display of widget
 	public function form( $instance ) {
-		$company_name 	= ( !empty( $instance[ 'company_name' ] ) ? $instance[ 'company_name' ]: '' );
+		$company_name 		= ( !empty( $instance[ 'company_name' ] ) ? $instance[ 'company_name' ]: '' );
 		$small_description 	= ( !empty( $instance[ 'small_description' ] ) ? $instance[ 'small_description' ]: '' );
 		$street_address 	= ( !empty( $instance[ 'street_address' ] ) ? $instance[ 'street_address' ] : '' );
 		$locality_address 	= ( !empty( $instance[ 'locality_address' ] ) ? $instance[ 'locality_address' ] : '' );
@@ -137,12 +137,13 @@ class Codexin_Address_Box extends WP_Widget {
 		endif; ?>
 			<p><span itemprop="description"><?php if( !empty($small_description) ): echo esc_html( $small_description ); endif; ?></span></p>
 			<div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+				<p><span itemprop="streetAddress"><?php if( !empty($street_address) ): echo esc_html( $street_address ); endif; ?></span></p>
+					
 				<p>
-					<span itemprop="streetAddress"><?php if( !empty($street_address) ): echo esc_html( $street_address ); endif; ?></span>
-					<span itemprop="addressLocality"><?php if( !empty($locality_address) ): echo esc_html( $locality_address ); endif; ?></span>,
+					<span itemprop="addressLocality"><?php if( !empty($locality_address) ): echo esc_html( $locality_address ); endif; ?></span>,&nbsp;
+					<span itemprop="addressRegion"><?php if( !empty($regional_address) ): echo esc_html( $regional_address ); endif; ?></span>
+					<span itemprop="postalCode">&nbsp;<?php if( !empty($postal_code) ): echo esc_html( $postal_code ); endif; ?></span>
 				</p>
-				<p><span itemprop="addressRegion"><?php if( !empty($regional_address) ): echo esc_html( $regional_address ); endif; ?></span> - 
-				<span itemprop="postalCode"><?php if( !empty($postal_code) ): echo esc_html( $postal_code ); endif; ?></span></p>
 
 			</div>
 			<p>Phone: <span itemprop="telephone"><?php if( !empty($phone_no) ): echo esc_html( $phone_no ); endif; ?></span></p>

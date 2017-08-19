@@ -76,6 +76,12 @@
     transition: all .3s;
 }
 
+.mailchimp-submit[disabled] {
+	cursor: not-allowed;
+	filter: alpha(opacity=65);
+	opacity: .65;
+}
+
 .mailchimp-submit:hover {
     background: #002037;
 }

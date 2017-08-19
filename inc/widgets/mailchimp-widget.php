@@ -64,8 +64,7 @@ class Codexin_Mailchimp_Widget extends WP_Widget {
 		$submit_txt	= ( !empty( $instance[ 'submit_txt' ] ) ? $instance[ 'submit_txt' ] : '' );
 
 		if ( empty ( $this->options['mc_api'] ) ):
-			echo '<p>'. esc_html__('In Order To Use This Widget Please Fill Up The Mailchimp API In The "Mailchimp Settings" Section of ', 'codexin') .'<strong><a href="'. esc_url(admin_url().'admin.php?page=codexin-options&action=mailchimp_opt') .'" target="_blank">'. esc_html('Codexin Core.', 'codexin') .'</a></strong></p>';
-			echo '<p>'. esc_html__('Come back here when you have filled up all the required information.', 'codexin') .'</p>';
+			echo '<p>'. esc_html__('In Order To Use This Widget Please Fill Up The Mailchimp API In The "Mailchimp Settings" Section of ', 'codexin') .'<strong><a href="'. esc_url(admin_url().'admin.php?page=codexin-options&action=mailchimp_opt') .'" target="_blank">'. esc_html('Codexin Core,', 'codexin') .'</a></strong> '. esc_html__( ' And Refresh This Page.', 'codexin' ) .'</p>';
 		else:
 
 		?>
@@ -110,7 +109,7 @@ class Codexin_Mailchimp_Widget extends WP_Widget {
 		    <br><small><?php echo esc_html__('(Requires Users to Confirm Their Subscription Through Email)', 'codexin') ?></small></p>
 		</p>
 
-		<p style="margin-bottom: 10px; margin-top: 20px;"><?php echo esc_html__('Choose from the following fields to add in the form (if you need full name, just choose the first name):', 'codexin'); ?></p>
+		<p style="margin-bottom: 10px; margin-top: 20px;"><?php echo esc_html__('Choose from the following fields to add in the form. Email field will be visible by default. If you need full name, just choose the first name:', 'codexin'); ?></p>
 
 		<p style="width: 33%; float:left; margin-top: 5px;">
 		    <input class="checkbox" type="checkbox" <?php esc_attr( checked( $fst_name, 'on' ) ); ?> id="<?php echo esc_attr ($this->get_field_id( 'fst_name' ) ); ?>" name="<?php echo esc_attr($this->get_field_name( 'fst_name' ) ); ?>" /> 
@@ -225,16 +224,16 @@ class Codexin_Mailchimp_Widget extends WP_Widget {
 		    <form class="mailchimp-form clearfix" action="#" method="post">
 		    	<?php if( 'on' == $instance[ 'fst_name' ] ): ?>
 		        <div class="mailchimp-input-fname">
-		            <input name="firstname" class="mailchimp-firstname" <?php echo $f_required; ?> type="text" placeholder="<?php echo esc_attr( $fname_ph ); if( !empty($f_required) ): echo ' *'; endif;?>">
+		            <input name="firstname" class="mailchimp-firstname" <?php echo $f_required; ?> type="text" placeholder="<?php echo esc_attr( $fname_ph ); if( !empty($f_required) ): echo '*'; endif;?>">
 		        </div>
 			    <?php endif; ?>
 			    <?php if( 'on' == $instance[ 'lst_name' ] ): ?>
 		        <div class="mailchimp-input-lname">
-		            <input name="lastname" class="mailchimp-lastname" <?php echo $l_required; ?> type="text" placeholder="<?php echo esc_attr( $lname_ph ); if( !empty($l_required) ): echo ' *'; endif; ?>">
+		            <input name="lastname" class="mailchimp-lastname" <?php echo $l_required; ?> type="text" placeholder="<?php echo esc_attr( $lname_ph ); if( !empty($l_required) ): echo '*'; endif; ?>">
 		        </div>
 			    <?php endif; ?>
 		        <div class="mailchimp-input-email">
-		            <input name="email" class="mailchimp-email" required type="email" placeholder="<?php echo esc_attr( $email_ph ); ?> *">
+		            <input name="email" class="mailchimp-email" required type="email" placeholder="<?php echo esc_attr( $email_ph ); ?>*">
 		        </div>
 		        <div class="mailchimp-input-button">
 		            <button data-loading="<?php echo esc_attr__('Loading', 'codexin'); ?>" data-text="<?php echo esc_attr( $submit_txt ); ?>" class="mailchimp-submit" type="submit"><?php echo esc_html( $submit_txt ); ?></button>
@@ -249,7 +248,7 @@ class Codexin_Mailchimp_Widget extends WP_Widget {
 
 
 	<?php
-	
+
 		printf( '%s', $args[ 'after_widget' ] );
 
 		} else {
