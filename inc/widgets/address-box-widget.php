@@ -151,7 +151,7 @@ class Codexin_Address_Box extends WP_Widget {
 			<p class="cx-company-description"><span itemprop="description"><?php echo esc_html( $small_description ); ?></span></p>
 			<?php endif; ?>
 
-			<div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+			<div class="cx-address" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
 				<p class="cx-street-address"><span itemprop="streetAddress"><?php if( !empty($street_address) ): echo esc_html( $street_address ); endif; ?></span></p>
 					
 				<p class="cx-locality">
