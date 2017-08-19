@@ -187,7 +187,7 @@ class Codexin_Address_Box extends WP_Widget {
 			<p class="cx-email"> <a href="mailto:test@example.com" itemprop="email"><?php if( !empty($email) ): echo esc_html( $email ); endif; ?></a></p>
 
 			<?php if( !empty( $company_website ) ): ?>
-			<p class="cx-website"> <a href="<?php echo esc_url( $company_website ); ?>" itemprop="url"><?php echo esc_html($company_website); ?></a></p>
+			<p class="cx-website"> <a href="<?php echo esc_url( $company_website ); ?>" itemprop="url" target="_blank"><?php echo esc_html($company_website); ?></a></p>
 			<?php endif; ?>
 
 		</div>
