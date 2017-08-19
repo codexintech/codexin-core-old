@@ -29,6 +29,7 @@ class Codexin_Address_Box extends WP_Widget {
 		$locality_address 	= ( !empty( $instance[ 'locality_address' ] ) ? $instance[ 'locality_address' ] : '' );
 		$regional_address 	= ( !empty( $instance[ 'regional_address' ] ) ? $instance[ 'regional_address' ] : '' );
 		$postal_code 		= ( !empty( $instance[ 'postal_code' ] ) ? $instance[ 'postal_code' ] : '' );
+		$phone_code 		= ( !empty( $instance[ 'phone_code' ] ) ? $instance[ 'phone_code' ] : '' );
 		$phone_no 			= ( !empty( $instance[ 'phone_no' ] ) ? $instance[ 'phone_no' ] : '' );
 		$fax_no 			= ( !empty( $instance[ 'fax_no' ] ) ? $instance[ 'fax_no' ] : '' );
 		$email 				= ( !empty( $instance[ 'email' ] ) ? $instance[ 'email' ] : '' );
@@ -72,10 +73,17 @@ class Codexin_Address_Box extends WP_Widget {
 			<input type="text" class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'postal_code' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'postal_code' ) ); ?>" value="<?php echo esc_attr( $postal_code ); ?>" placeholder="Ex: 98052">
 		</p>
 
-		<p>
+		<p style="width: 33%; float: left; margin-right: 20px;">
+			<label for="<?php echo esc_attr( $this->get_field_id( 'phone_code' ) ); ?>"><?php echo esc_html__('Phone Area Code: ', 'codexin') ?></label>
+			<input type="text" class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'phone_code' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'phone_code' ) ); ?>" value="<?php echo esc_attr( $phone_code ); ?>" placeholder="Ex: +1">
+		</p>
+
+		<p style="width: 60%; float: left;">
 			<label for="<?php echo esc_attr( $this->get_field_id( 'phone_no' ) ); ?>"><?php echo esc_html__('Phone No: ', 'codexin') ?></label>
 			<input type="text" class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'phone_no' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'phone_no' ) ); ?>" value="<?php echo esc_attr( $phone_no ); ?>" placeholder="Ex: 850-648-4200">
 		</p>
+
+		<hr style="clear: both; border: 0;">
 
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'fax_no' ) ); ?>"><?php echo esc_html__('Fax No: ', 'codexin') ?></label>
@@ -110,6 +118,7 @@ class Codexin_Address_Box extends WP_Widget {
 		$instance[ 'locality_address' ]		= ( !empty( $new_instance[ 'locality_address' ] ) ? strip_tags( $new_instance[ 'locality_address' ] ) : '' );
 		$instance[ 'regional_address' ]		= ( !empty( $new_instance[ 'regional_address' ] ) ? strip_tags( $new_instance[ 'regional_address' ] ) : '' );
 		$instance[ 'postal_code' ]			= ( !empty( $new_instance[ 'postal_code' ] ) ? strip_tags( $new_instance[ 'postal_code' ] ) : '' );
+		$instance[ 'phone_code' ]			= ( !empty( $new_instance[ 'phone_code' ] ) ? strip_tags( $new_instance[ 'phone_code' ] ) : '' );
 		$instance[ 'phone_no' ]				= ( !empty( $new_instance[ 'phone_no' ] ) ? strip_tags( $new_instance[ 'phone_no' ] ) : '' );
 		$instance[ 'fax_no' ]				= ( !empty( $new_instance[ 'fax_no' ] ) ? strip_tags( $new_instance[ 'fax_no' ] ) : '' );
 		$instance[ 'email' ]				= ( !empty( $new_instance[ 'email' ] ) ? strip_tags( $new_instance[ 'email' ] ) : '' );
@@ -128,12 +137,14 @@ class Codexin_Address_Box extends WP_Widget {
 		$locality_address 	= $instance[ 'locality_address' ];
 		$regional_address 	= $instance[ 'regional_address' ];
 		$postal_code 		= $instance[ 'postal_code' ];
+		$phone_code 		= $instance[ 'phone_code' ];
 		$phone_no 			= $instance[ 'phone_no' ];
 		$fax_no 			= $instance[ 'fax_no' ];
 		$email 				= $instance[ 'email' ];
 		$company_website 	= $instance[ 'company_website' ];
 
-		
+		$phone_url =  $phone_code . preg_replace('/[^0-9]/', '', $phone_no);
+
 		printf( '%s', $args[ 'before_widget' ] ); 
 
 		if( !empty( $instance[ 'title' ] ) ):
@@ -161,16 +172,22 @@ class Codexin_Address_Box extends WP_Widget {
 				</p>
 
 			</div>
-			<p class="cx-phone"><?php echo esc_html__( 'Phone: ', 'codexin' ) ?><span itemprop="telephone"><?php if( !empty($phone_no) ): echo esc_html( $phone_no ); endif; ?></span></p>
 
-			<?php if( !empty( $fax_no ) ): ?>
-			<p class="cx-fax"><?php echo esc_html__( 'Fax: ', 'codexin' ) ?><span itemprop="faxNumber"><?php echo esc_html( $fax_no ); ?></span></p>
+			<?php if( !empty( $phone_code ) ): ?>
+			<p class="cx-phone"> <span itemprop="telephone"><a href="tel:<?php echo $phone_url; ?>" itemprop="url"><?php if( !empty($phone_no) ): echo esc_html( $phone_no ); endif; ?></a></span></p>
+
+			<?php else: ?>
+			<p class="cx-phone"> <span itemprop="telephone"><?php if( !empty($phone_no) ): echo esc_html( $phone_no ); endif; ?></span></p>
 			<?php endif; ?>
 
-			<p class="cx-email"><?php echo esc_html__( 'E-mail: ', 'codexin' ); ?><a href="mailto:test@example.com" itemprop="email"><?php if( !empty($email) ): echo esc_html( $email ); endif; ?></a></p>
+			<?php if( !empty( $fax_no ) ): ?>
+			<p class="cx-fax"> <span itemprop="faxNumber"><?php echo esc_html( $fax_no ); ?></span></p>
+			<?php endif; ?>
+
+			<p class="cx-email"> <a href="mailto:test@example.com" itemprop="email"><?php if( !empty($email) ): echo esc_html( $email ); endif; ?></a></p>
 
 			<?php if( !empty( $company_website ) ): ?>
-			<p class="cx-website"><?php echo esc_html__( 'Website: ', 'codexin' ); ?><a href="<?php echo esc_url( $company_website ); ?>" itemprop="url"><?php echo esc_html($company_website); ?></a></p>
+			<p class="cx-website"> <a href="<?php echo esc_url( $company_website ); ?>" itemprop="url"><?php echo esc_html($company_website); ?></a></p>
 			<?php endif; ?>
 
 		</div>
