@@ -106,12 +106,21 @@
     Address Box
 *************************************************************/
 
+.codexin-address-box {
+    margin-bottom: 30px;
+}
+
 .codexin-address-box p {
     margin-bottom: 0;
 }
 
+.cx-company-name {
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
 .codexin-address-box .cx-address {
-    margin: 5px;
+    margin-bottom: 5px;
 }
 
 .codexin-address-box p.widget-title {
