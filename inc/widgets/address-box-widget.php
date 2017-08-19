@@ -169,12 +169,12 @@ class Codexin_Address_Box extends WP_Widget {
 			<p class="cx-company-description"><span itemprop="description"><?php echo esc_html( $small_description ); ?></span></p>
 			<?php endif; ?>
 
-			<?php if( !empty( $locality_address ) && !empty( $regional_address ) && !empty( $postal_code ) && !empty( $street_address ) ): ?>
+			<?php if( !empty( $locality_address ) || !empty( $regional_address ) || !empty( $postal_code ) && !empty( $street_address ) ): ?>
 			<div class="cx-address" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
 				<?php if( !empty( $street_address ) ): ?>
 				<p class="cx-street-address"><span itemprop="streetAddress"><?php if( !empty($street_address) ): echo esc_html( $street_address ); endif; ?></span></p>
 				<?php endif; ?>
-				<?php if( !empty( $locality_address ) && !empty( $regional_address ) && !empty( $postal_code ) ): ?>
+				<?php if( !empty( $locality_address ) || !empty( $regional_address ) || !empty( $postal_code ) ): ?>
 				<p class="cx-locality">
 					<span itemprop="addressLocality"><?php if( !empty($locality_address) ): echo esc_html( $locality_address ); endif; ?></span>,&nbsp;
 					<span itemprop="addressRegion"><?php if( !empty($regional_address) ): echo esc_html( $regional_address ); endif; ?></span>
