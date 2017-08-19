@@ -12,8 +12,8 @@ class Codexin_Address_Box extends WP_Widget {
 	public function __construct() {
 		
 		$widget_ops = array(
-			'classname' => 'codexin-address-box',
-			'description' => esc_html__('Display Address', 'codexin'),
+			'classname' 	=> 'codexin-address-box',
+			'description' 	=> esc_html__('Display Address', 'codexin'),
 		);
 		parent::__construct( 'cx_address_box', esc_html__('Codexin: Address Box', 'codexin'), $widget_ops );
 		
@@ -21,6 +21,8 @@ class Codexin_Address_Box extends WP_Widget {
 	
 	//back-end display of widget
 	public function form( $instance ) {
+
+		$title 				= ( !empty( $instance[ 'title' ] ) ? $instance[ 'title' ] : esc_html__('Address Box', 'codexin') );
 		$company_name 		= ( !empty( $instance[ 'company_name' ] ) ? $instance[ 'company_name' ]: '' );
 		$small_description 	= ( !empty( $instance[ 'small_description' ] ) ? $instance[ 'small_description' ]: '' );
 		$street_address 	= ( !empty( $instance[ 'street_address' ] ) ? $instance[ 'street_address' ] : '' );
@@ -33,6 +35,11 @@ class Codexin_Address_Box extends WP_Widget {
 		$company_website 	= ( !empty( $instance[ 'company_website' ] ) ? $instance[ 'company_website' ] : '' );
 
 		?>
+
+		<p>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php echo esc_html__('Title:', 'codexin') ?></label>
+			<input type="text" class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" value="<?php echo esc_attr( $title ); ?>">
+		</p>
 
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'company_name' ) ); ?>"><?php echo esc_html__('Company Name:', 'codexin') ?></label>
@@ -96,16 +103,17 @@ class Codexin_Address_Box extends WP_Widget {
 		
 		$instance = $old_instance;
 
-		$instance[ 'company_name' ]	= ( !empty( $new_instance[ 'company_name' ] ) ? strip_tags( $new_instance[ 'company_name' ] ) : '' );
+		$instance[ 'title' ] 				= ( !empty( $new_instance[ 'title' ] ) ? strip_tags( $new_instance[ 'title' ] ) : '' );
+		$instance[ 'company_name' ]			= ( !empty( $new_instance[ 'company_name' ] ) ? strip_tags( $new_instance[ 'company_name' ] ) : '' );
 		$instance[ 'small_description' ]	= ( !empty( $new_instance[ 'small_description' ] ) ? strip_tags( $new_instance[ 'small_description' ] ) : '' );
-		$instance[ 'street_address' ]	= ( !empty( $new_instance[ 'street_address' ] ) ? strip_tags( $new_instance[ 'street_address' ] ) : '' );
-		$instance[ 'locality_address' ]	= ( !empty( $new_instance[ 'locality_address' ] ) ? strip_tags( $new_instance[ 'locality_address' ] ) : '' );
-		$instance[ 'regional_address' ]	= ( !empty( $new_instance[ 'regional_address' ] ) ? strip_tags( $new_instance[ 'regional_address' ] ) : '' );
-		$instance[ 'postal_code' ]	= ( !empty( $new_instance[ 'postal_code' ] ) ? strip_tags( $new_instance[ 'postal_code' ] ) : '' );
-		$instance[ 'phone_no' ]	= ( !empty( $new_instance[ 'phone_no' ] ) ? strip_tags( $new_instance[ 'phone_no' ] ) : '' );
-		$instance[ 'fax_no' ]	= ( !empty( $new_instance[ 'fax_no' ] ) ? strip_tags( $new_instance[ 'fax_no' ] ) : '' );
-		$instance[ 'email' ]	= ( !empty( $new_instance[ 'email' ] ) ? strip_tags( $new_instance[ 'email' ] ) : '' );
-		$instance[ 'company_website' ]	= ( !empty( $new_instance[ 'company_website' ] ) ? strip_tags( $new_instance[ 'company_website' ] ) : '' );
+		$instance[ 'street_address' ]		= ( !empty( $new_instance[ 'street_address' ] ) ? strip_tags( $new_instance[ 'street_address' ] ) : '' );
+		$instance[ 'locality_address' ]		= ( !empty( $new_instance[ 'locality_address' ] ) ? strip_tags( $new_instance[ 'locality_address' ] ) : '' );
+		$instance[ 'regional_address' ]		= ( !empty( $new_instance[ 'regional_address' ] ) ? strip_tags( $new_instance[ 'regional_address' ] ) : '' );
+		$instance[ 'postal_code' ]			= ( !empty( $new_instance[ 'postal_code' ] ) ? strip_tags( $new_instance[ 'postal_code' ] ) : '' );
+		$instance[ 'phone_no' ]				= ( !empty( $new_instance[ 'phone_no' ] ) ? strip_tags( $new_instance[ 'phone_no' ] ) : '' );
+		$instance[ 'fax_no' ]				= ( !empty( $new_instance[ 'fax_no' ] ) ? strip_tags( $new_instance[ 'fax_no' ] ) : '' );
+		$instance[ 'email' ]				= ( !empty( $new_instance[ 'email' ] ) ? strip_tags( $new_instance[ 'email' ] ) : '' );
+		$instance[ 'company_website' ]		= ( !empty( $new_instance[ 'company_website' ] ) ? strip_tags( $new_instance[ 'company_website' ] ) : '' );
 		
 		return $instance;
 		
@@ -126,30 +134,45 @@ class Codexin_Address_Box extends WP_Widget {
 		$company_website 	= $instance[ 'company_website' ];
 
 		
-		printf( '%s', $args[ 'before_widget' ] ); ?>
+		printf( '%s', $args[ 'before_widget' ] ); 
+
+		if( !empty( $instance[ 'title' ] ) ):
+			
+			printf( '%s' . apply_filters( 'widget_title', $instance[ 'title' ] ) . '%s', $args[ 'before_title' ], $args[ 'after_title' ]);
+			
+		endif;
+
+		?>
 		
 		<div itemscope itemtype="http://schema.org/LocalBusiness">
-		
-			<?php if( !empty( $instance[ 'company_name' ] ) ):
-			
-			printf( '%s<span itemprop="name">' . apply_filters( 'widget_title', $instance[ 'company_name' ] ) . '</span>%s', $args[ 'before_title' ], $args[ 'after_title' ]);
-			
-		endif; ?>
-			<p><span itemprop="description"><?php if( !empty($small_description) ): echo esc_html( $small_description ); endif; ?></span></p>
+			<p class="cx-company-name"><span itemprop="name"><?php if( !empty($company_name) ): echo esc_html( $company_name ); endif; ?></span></p>
+
+			<?php if( !empty( $small_description ) ): ?>
+			<p class="cx-company-description"><span itemprop="description"><?php echo esc_html( $small_description ); ?></span></p>
+			<?php endif; ?>
+
 			<div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
-				<p><span itemprop="streetAddress"><?php if( !empty($street_address) ): echo esc_html( $street_address ); endif; ?></span></p>
+				<p class="cx-street-address"><span itemprop="streetAddress"><?php if( !empty($street_address) ): echo esc_html( $street_address ); endif; ?></span></p>
 					
-				<p>
+				<p class="cx-locality">
 					<span itemprop="addressLocality"><?php if( !empty($locality_address) ): echo esc_html( $locality_address ); endif; ?></span>,&nbsp;
 					<span itemprop="addressRegion"><?php if( !empty($regional_address) ): echo esc_html( $regional_address ); endif; ?></span>
 					<span itemprop="postalCode">&nbsp;<?php if( !empty($postal_code) ): echo esc_html( $postal_code ); endif; ?></span>
 				</p>
 
 			</div>
-			<p>Phone: <span itemprop="telephone"><?php if( !empty($phone_no) ): echo esc_html( $phone_no ); endif; ?></span></p>
-			<p>Fax: <span itemprop="faxNumber"><?php if( !empty($fax_no) ): echo esc_html( $fax_no ); endif; ?></span></p>
-			<p>E-mail: <a href="mailto:test@example.com" itemprop="email"><?php if( !empty($email) ): echo esc_html( $email ); endif; ?></a></p>
-			<p>Home page: <a href="<?php if( !empty($company_website) ): echo esc_url( $company_website ); endif; ?>" itemprop="url"><?php echo esc_html($company_website); ?></a></p>
+			<p class="cx-phone"><?php echo esc_html__( 'Phone: ', 'codexin' ) ?><span itemprop="telephone"><?php if( !empty($phone_no) ): echo esc_html( $phone_no ); endif; ?></span></p>
+
+			<?php if( !empty( $fax_no ) ): ?>
+			<p class="cx-fax"><?php echo esc_html__( 'Fax: ', 'codexin' ) ?><span itemprop="faxNumber"><?php echo esc_html( $fax_no ); ?></span></p>
+			<?php endif; ?>
+
+			<p class="cx-email"><?php echo esc_html__( 'E-mail: ', 'codexin' ); ?><a href="mailto:test@example.com" itemprop="email"><?php if( !empty($email) ): echo esc_html( $email ); endif; ?></a></p>
+
+			<?php if( !empty( $company_website ) ): ?>
+			<p class="cx-website"><?php echo esc_html__( 'Website: ', 'codexin' ); ?><a href="<?php echo esc_url( $company_website ); ?>" itemprop="url"><?php echo esc_html($company_website); ?></a></p>
+			<?php endif; ?>
+
 		</div>
 		
 		
