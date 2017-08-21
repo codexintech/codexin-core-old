@@ -162,7 +162,7 @@ class Codexin_Popular_Posts extends WP_Widget {
 						echo '</div>';
 					}
 					echo '<div class="posts-single-right">';
-						echo '<h4 class="media-heading"><a href="'. get_the_permalink() .'">' . wp_trim_words( get_the_title(), $title_len, null ) . '</a></h4>';
+						echo '<h4><a href="'. get_the_permalink() .'">' . wp_trim_words( get_the_title(), $title_len, null ) . '</a></h4>';
 						if ( $display_meta == $display_meta_a ) {
 						echo '<p>'. get_the_time( 'F j, Y' ) .'</p>';
 						}
