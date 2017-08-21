@@ -155,7 +155,7 @@ class Codexin_Popular_Posts extends WP_Widget {
 						if ( has_post_thumbnail() ) { 
 							esc_url( the_post_thumbnail_url('blog-widget-image') ); 
 						} else { 
-							echo esc_url('//placehold.it/120x80'); 
+							echo esc_url('//placehold.it/80x80'); 
 						}
 						echo '" alt="' . get_the_title() . '"/></a>';
 					}
