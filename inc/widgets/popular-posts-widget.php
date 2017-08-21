@@ -152,7 +152,7 @@ class Codexin_Popular_Posts extends WP_Widget {
 				echo '<div class="posts-single">';
 					if( 'on' == $instance[ 'show_thumb' ] ) {
 						echo '<div class="posts-single-left">';
-							echo '<a href="' . get_the_permalink() . '"><img class="media-object" src="';
+							echo '<a href="' . get_the_permalink() . '"><img src="';
 							if ( has_post_thumbnail() ) { 
 								esc_url( the_post_thumbnail_url('blog-widget-image') ); 
 							} else { 
