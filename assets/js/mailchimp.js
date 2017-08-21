@@ -27,4 +27,11 @@
         }, 'json');
     });
 
+
+    /************************************************************
+        Detecting mailchimp widget's position and re-style that for page contents
+    *************************************************************/
+
+    //$('.codexin-mailchimp-wrapper').parents('#primary').addClass('mailchimp-inside-page');
+
 })(jQuery);

@@ -69,6 +69,8 @@
     border: 0;
     background: #295970;
     color: #fff;
+    border-top:1px solid #295970;
+    border-bottom:1px solid #295970;
     -webkit-transition: all .3s;
     -moz-transition: all .3s;
     -ms-transition: all .3s;
@@ -100,6 +102,62 @@
     display: none;
     text-align: center;
     line-height: 20px;
+}
+
+.inside-page .mailchimp-submit {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.inside-page .codexin-mailchimp-wrapper {
+    padding:40px 15px 30px;
+}
+
+.inside-page form > div {
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.inside-page form.mailchimp-form,
+.inside-page .codexin-mailchimp-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media only screen and ( min-width: 768px ) {
+    .inside-page .mailchimp-desc {
+        width:40%;
+    }
+
+    .inside-page form.mailchimp-form {
+        width:60%;
+    }
+}
+
+.inside-page .mailchimp-desc p,
+.inside-page form.mailchimp-form .mailchimp-input-button {
+    margin-bottom: 10px;
+}
+
+
+.inside-page .mailchimp-success {
+    padding-top: 0;
+    margin-bottom: 10px;
+}
+
+.inside-page .codexin-mailchimp-wrapper {
+    background: transparent;
+}
+
+.inside-page .mailchimp-desc p {
+    color:inherit;
+    font-size: inherit;
+    font-style: inherit;
+}
+
+.inside-page .mailchimp-error {
+    padding-top: 0;
 }
 
 /************************************************************
@@ -184,3 +242,7 @@
     top:0;
     left:0;
 }
+
+/************************************************************
+    Popular Posts
+*************************************************************/
