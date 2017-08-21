@@ -149,7 +149,7 @@ class Codexin_Popular_Posts extends WP_Widget {
 				
 			while( $posts_query->have_posts() ): $posts_query->the_post();		
 
-				echo '<div class="posts-single">';
+				echo '<div class="posts-single clearfix">';
 					if( 'on' == $instance[ 'show_thumb' ] ) {
 						echo '<div class="posts-single-left">';
 							echo '<a href="' . get_the_permalink() . '"><img src="';
