@@ -28,13 +28,19 @@ class Codexin_Mailchimp_Widget extends WP_Widget {
         // Fetching data from options page
         $this->options = get_option( 'codexin_options_mailchimp_opt' );
 
-        // Enquequeing scripts
+		// Enquequeing scripts
+		$this -> codexin_mc_enqueque();
+
+		// Register actions using add_actions() custom function.
+		$this -> codexin_mc_add_actions();
+	
+	}
+
+    // Enquequeing scripts
+	public function codexin_mc_enqueque() {
+
         add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ));
 
-        // Adding ajax for frontend
-        add_action( 'wp_ajax_codexin_ajax_mc', array( $this, 'codexin_ajax_mc_cb') );
-        add_action( 'wp_ajax_nopriv_codexin_ajax_mc', array( $this, 'codexin_ajax_mc_cb') );
-		
 	}
 
 	// Enquequeing scripts and localize for js
@@ -46,6 +52,14 @@ class Codexin_Mailchimp_Widget extends WP_Widget {
         ) );
 
     }
+
+    // Adding ajax for frontend
+	public function codexin_mc_add_actions() {
+
+        add_action( 'wp_ajax_codexin_ajax_mc', array( $this, 'codexin_ajax_mc_cb') );
+        add_action( 'wp_ajax_nopriv_codexin_ajax_mc', array( $this, 'codexin_ajax_mc_cb') );
+
+	}
 	
 	//back-end display of widget
 	public function form( $instance ) {
@@ -55,9 +69,7 @@ class Codexin_Mailchimp_Widget extends WP_Widget {
 		$list 		= ( !empty( $instance[ 'list' ] ) ? $instance[ 'list' ] : '' );
 		$opt_in 	= ( !empty( $instance[ 'opt_in' ] ) ? $instance[ 'opt_in' ] : '' );
 		$fst_name 	= ( !empty( $instance[ 'fst_name' ] ) ? $instance[ 'fst_name' ] : '' );
-		$fst_req 	= ( !empty( $instance[ 'fst_req' ] ) ? $instance[ 'fst_req' ] : '' );
 		$lst_name 	= ( !empty( $instance[ 'lst_name' ] ) ? $instance[ 'lst_name' ] : '' );
-		$lst_req 	= ( !empty( $instance[ 'lst_req' ] ) ? $instance[ 'lst_req' ] : '' );
 		$fname_ph 	= ( !empty( $instance[ 'fname_ph' ] ) ? $instance[ 'fname_ph' ] : '' );
 		$lname_ph 	= ( !empty( $instance[ 'lname_ph' ] ) ? $instance[ 'lname_ph' ] : '' );
 		$email_ph 	= ( !empty( $instance[ 'email_ph' ] ) ? $instance[ 'email_ph' ] : '' );
@@ -109,50 +121,39 @@ class Codexin_Mailchimp_Widget extends WP_Widget {
 		    <br><small><?php echo esc_html__('(Requires Users to Confirm Their Subscription Through Email)', 'codexin') ?></small></p>
 		</p>
 
-		<p style="margin-bottom: 10px; margin-top: 20px;"><?php echo esc_html__('Choose from the following fields to add in the form. Email field will be visible by default. If you need full name, just choose the first name:', 'codexin'); ?></p>
+		<p style="margin-bottom: 10px; margin-top: 20px;"><?php echo esc_html__('Choose from the following fields to add in the form. Email field will be visible by default. The first field and second field is your MailChimp form field labels', 'codexin'); ?></p>
 
 		<p style="width: 33%; float:left; margin-top: 5px;">
 		    <input class="checkbox" type="checkbox" <?php esc_attr( checked( $fst_name, 'on' ) ); ?> id="<?php echo esc_attr ($this->get_field_id( 'fst_name' ) ); ?>" name="<?php echo esc_attr($this->get_field_name( 'fst_name' ) ); ?>" /> 
-		    <label for="<?php echo esc_attr($this->get_field_id( 'fst_name' ) ); ?>"><?php echo esc_html__('First Name', 'codexin'); ?></label>
+		    <label for="<?php echo esc_attr($this->get_field_id( 'fst_name' ) ); ?>"><?php echo esc_html__('First Field', 'codexin'); ?></label>
 		</p>
-
-		<p style="width: 50%; float:left; margin-top: 5px;">
-		    <input class="checkbox" type="checkbox" <?php esc_attr( checked( $fst_req, 'on' ) ); ?> id="<?php echo esc_attr ($this->get_field_id( 'fst_req' ) ); ?>" name="<?php echo esc_attr($this->get_field_name( 'fst_req' ) ); ?>" /> 
-		    <label for="<?php echo esc_attr($this->get_field_id( 'fst_req' ) ); ?>"><?php echo esc_html__('Required?', 'codexin'); ?></label>
-		</p>
-
-		<hr style="clear: both;">
 
 		<p style="width: 33%; float:left; margin-top: 5px;">
 		    <input class="checkbox" type="checkbox" <?php esc_attr( checked( $lst_name, 'on' ) ); ?> id="<?php echo esc_attr ($this->get_field_id( 'lst_name' ) ); ?>" name="<?php echo esc_attr($this->get_field_name( 'lst_name' ) ); ?>" /> 
-		    <label for="<?php echo esc_attr($this->get_field_id( 'lst_name' ) ); ?>"><?php echo esc_html__('Last Name', 'codexin'); ?></label>
+		    <label for="<?php echo esc_attr($this->get_field_id( 'lst_name' ) ); ?>"><?php echo esc_html__('Last Field', 'codexin'); ?></label>
 		</p>
 
-		<p style="width: 50%; float:left; margin-top: 5px;">
-		    <input class="checkbox" type="checkbox" <?php esc_attr( checked( $lst_req, 'on' ) ); ?> id="<?php echo esc_attr ($this->get_field_id( 'lst_req' ) ); ?>" name="<?php echo esc_attr($this->get_field_name( 'lst_req' ) ); ?>" /> 
-		    <label for="<?php echo esc_attr($this->get_field_id( 'lst_req' ) ); ?>"><?php echo esc_html__('Required?', 'codexin'); ?></label>
-		</p>
 
 		<hr style="clear: both; border: 0;">
 
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'fname_ph' ) ); ?>"><?php echo esc_html__('First Name Placeholder Text:', 'codexin') ?></label>
-			<input type="text" class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'fname_ph' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'fname_ph' ) ); ?>" value="<?php echo esc_attr( $fname_ph ); ?>">
+			<label for="<?php echo esc_attr( $this->get_field_id( 'fname_ph' ) ); ?>"><?php echo esc_html__('First Field Placeholder Text :', 'codexin') ?></label>
+			<input type="text" class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'fname_ph' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'fname_ph' ) ); ?>" value="<?php echo esc_attr( $fname_ph ); ?>" placeholder="<?php echo esc_html__('Ex: First Name', 'codexin') ?>">
 		</p>
 
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'lname_ph' ) ); ?>"><?php echo esc_html__('Last Name Placeholder Text:', 'codexin') ?></label>
-			<input type="text" class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'lname_ph' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'lname_ph' ) ); ?>" value="<?php echo esc_attr( $lname_ph ); ?>">
+			<label for="<?php echo esc_attr( $this->get_field_id( 'lname_ph' ) ); ?>"><?php echo esc_html__('Last Field Placeholder Text:', 'codexin') ?></label>
+			<input type="text" class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'lname_ph' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'lname_ph' ) ); ?>" value="<?php echo esc_attr( $lname_ph ); ?>" placeholder="<?php echo esc_html__('Ex: Last Name', 'codexin') ?>">
 		</p>
 
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'email_ph' ) ); ?>"><?php echo esc_html__('Email Placeholder Text:', 'codexin') ?></label>
-			<input type="text" class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'email_ph' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'email_ph' ) ); ?>" value="<?php echo esc_attr( $email_ph ); ?>">
+			<input type="text" class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'email_ph' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'email_ph' ) ); ?>" value="<?php echo esc_attr( $email_ph ); ?>" placeholder="<?php echo esc_html__('Ex: Email Address', 'codexin') ?>">
 		</p>
 
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'submit_txt' ) ); ?>"><?php echo esc_html__('Submit Button Text:', 'codexin') ?></label>
-			<input type="text" class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'submit_txt' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'submit_txt' ) ); ?>" value="<?php echo esc_attr( $submit_txt ); ?>">
+			<input type="text" class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'submit_txt' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'submit_txt' ) ); ?>" value="<?php echo esc_attr( $submit_txt ); ?>" placeholder="<?php echo esc_html__('Ex: Subscribe', 'codexin') ?>">
 		</p>
 
 <?php
@@ -169,9 +170,7 @@ class Codexin_Mailchimp_Widget extends WP_Widget {
 		$instance[ 'list' ] 		= strip_tags( $new_instance[ 'list' ] );
 		$instance[ 'opt_in' ] 		= strip_tags( $new_instance[ 'opt_in' ] );
 		$instance[ 'fst_name' ] 	= strip_tags( $new_instance[ 'fst_name' ] );
-		$instance[ 'fst_req' ] 		= strip_tags( $new_instance[ 'fst_req' ] );
 		$instance[ 'lst_name' ] 	= strip_tags( $new_instance[ 'lst_name' ] );
-		$instance[ 'lst_req' ] 		= strip_tags( $new_instance[ 'lst_req' ] );
 		$instance[ 'fname_ph' ] 	= ( !empty( $new_instance[ 'fname_ph' ] ) ? strip_tags( $new_instance[ 'fname_ph' ] ) : '' );
 		$instance[ 'lname_ph' ] 	= ( !empty( $new_instance[ 'lname_ph' ] ) ? strip_tags( $new_instance[ 'lname_ph' ] ) : '' );
 		$instance[ 'email_ph' ] 	= ( !empty( $new_instance[ 'email_ph' ] ) ? strip_tags( $new_instance[ 'email_ph' ] ) : '' );
@@ -188,12 +187,10 @@ class Codexin_Mailchimp_Widget extends WP_Widget {
 		$list 		=  $instance[ 'list' ];
 		$opt_in 	=  $instance[ 'opt_in' ];
 		$fst_name 	=  $instance[ 'fst_name' ];
-		$fst_req 	=  $instance[ 'fst_req' ];
 		$lst_name 	=  $instance[ 'lst_name' ];
-		$lst_req 	=  $instance[ 'lst_req' ];
-		$fname_ph 	=  ( !empty( $instance[ 'fname_ph' ] ) ? $instance[ 'fname_ph' ] : esc_html__( 'First Name', 'codexin' ) );
-		$lname_ph 	=  ( !empty( $instance[ 'lname_ph' ] ) ? $instance[ 'lname_ph' ] : esc_html__( 'Last Name', 'codexin' ) );
-		$email_ph 	=  ( !empty( $instance[ 'email_ph' ] ) ? $instance[ 'email_ph' ] : esc_html__( 'Email', 'codexin' ) );
+		$fname_ph 	=  ( !empty( $instance[ 'fname_ph' ] ) ? $instance[ 'fname_ph' ] : '' );
+		$lname_ph 	=  ( !empty( $instance[ 'lname_ph' ] ) ? $instance[ 'lname_ph' ] : '' );
+		$email_ph 	=  ( !empty( $instance[ 'email_ph' ] ) ? $instance[ 'email_ph' ] : esc_html__( 'Email Address', 'codexin' ) );
 		$submit_txt	=  ( !empty( $instance[ 'submit_txt' ] ) ? $instance[ 'submit_txt' ] : esc_html__( 'Subscribe', 'codexin' ) );;
 		
 		printf( '%s', $args[ 'before_widget' ] );
@@ -212,8 +209,6 @@ class Codexin_Mailchimp_Widget extends WP_Widget {
 	        	$msg_success = ( !empty( $this->options['mc_success']) ? $this->options['mc_success'] : esc_html__( 'You have been successfully subscribed. Thank You.', 'codexin' ) );
 	        }
 
-			$f_required = ( 'on' == $instance[ 'fst_req' ] ) ? 'required' : '';
-			$l_required = ( 'on' == $instance[ 'lst_req' ] ) ? 'required' : '';
 		?>
 		
 		<div class="codexin-mailchimp-wrapper" id="mailchimp-wrapper-<?php echo uniqid(); ?>">
@@ -224,12 +219,12 @@ class Codexin_Mailchimp_Widget extends WP_Widget {
 		    <form class="mailchimp-form clearfix" action="#" method="post">
 		    	<?php if( 'on' == $instance[ 'fst_name' ] ): ?>
 		        <div class="mailchimp-input-fname">
-		            <input name="firstname" class="mailchimp-firstname" <?php echo $f_required; ?> type="text" placeholder="<?php echo esc_attr( $fname_ph ); if( !empty($f_required) ): echo '*'; endif;?>">
+		            <input name="firstname" class="mailchimp-firstname" type="text" placeholder="<?php echo esc_attr( $fname_ph ); ?>">
 		        </div>
 			    <?php endif; ?>
 			    <?php if( 'on' == $instance[ 'lst_name' ] ): ?>
 		        <div class="mailchimp-input-lname">
-		            <input name="lastname" class="mailchimp-lastname" <?php echo $l_required; ?> type="text" placeholder="<?php echo esc_attr( $lname_ph ); if( !empty($l_required) ): echo '*'; endif; ?>">
+		            <input name="lastname" class="mailchimp-lastname" type="text" placeholder="<?php echo esc_attr( $lname_ph );  ?>">
 		        </div>
 			    <?php endif; ?>
 		        <div class="mailchimp-input-email">
@@ -263,9 +258,9 @@ class Codexin_Mailchimp_Widget extends WP_Widget {
         $output = array( 'error'=> 1, 'msg' => '');
         $error = '';
 
-        $email = strip_tags($_POST['email']);
-        $firstname = isset($_POST['firstname']) ? strip_tags($_POST['firstname']) : '';
-        $lastname = isset($_POST['lastname']) ? strip_tags($_POST['lastname']) : '';
+        $email 		= strip_tags($_POST['email']);
+        $firstname 	= isset($_POST['firstname']) ? strip_tags($_POST['firstname']) : '';
+        $lastname 	= isset($_POST['lastname']) ? strip_tags($_POST['lastname']) : '';
 
         if(strlen(trim($firstname)) <= 0) {
             $firstname = '';
@@ -277,6 +272,7 @@ class Codexin_Mailchimp_Widget extends WP_Widget {
 
         $merge_vars['FNAME'] = $merge_vars['MERGE1'] = $firstname;
         $merge_vars['LNAME'] = $merge_vars['MERGE2'] = $lastname;
+
 
         if (!$email) {
             $error = esc_html__('Email address is required.', 'codexin');
