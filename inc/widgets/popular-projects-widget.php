@@ -33,8 +33,8 @@ class Codexin_Popular_Project extends WP_Widget {
 		$title_len 			= ( !empty( $instance[ 'title_len' ] ) ? absint( $instance[ 'title_len' ] ) : esc_html__('7', 'codexin') );
 		$show_thumb 		= ( !empty( $instance[ 'show_thumb' ] ) ? $instance[ 'show_thumb' ] : '' );
 		$show_like	 		= ( !empty( $instance[ 'show_like' ] ) ? $instance[ 'show_like' ] : '' );
-		$display_meta 	= ( !empty( $instance[ 'display_meta' ] ) ? $instance[ 'display_meta' ] : '' );
-		$display_order 	= ( !empty( $instance[ 'display_order' ] ) ? $instance[ 'display_order' ] : '' );
+		$display_meta 		= ( !empty( $instance[ 'display_meta' ] ) ? $instance[ 'display_meta' ] : '' );
+		$display_order 		= ( !empty( $instance[ 'display_order' ] ) ? $instance[ 'display_order' ] : '' );
 		
 		?>
 
@@ -59,34 +59,14 @@ class Codexin_Popular_Project extends WP_Widget {
 		</p>
 
 		<p>
-		    <input class="checkbox" type="checkbox" <?php esc_attr( checked( $show_like, 'on' ) ); ?> id="<?php echo esc_attr ($this->get_field_id( 'show_like' ) ); ?>" name="<?php echo esc_attr($this->get_field_name( 'show_like' ) ); ?>" /> 
-		    <label for="<?php echo esc_attr($this->get_field_id( 'show_like' ) ); ?>"><?php echo esc_html__('Display Like Button?', 'codexin'); ?></label>
-		</p>
-
-		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id('display_order') ); ?>"><?php echo esc_html__('Choose The Order to Display Posts:', 'codexin'); ?></label>
-			<select name="<?php echo esc_attr( $this->get_field_name('display_order') ); ?>" id="<?php echo esc_attr( $this->get_field_id('display_order') ); ?>" class="widefat">
-				<?php
-				$disp_opt = array(
-						esc_html__('Descending', 'codexin') => 'DESC', 
-						esc_html__('Ascending', 'codexin') => 'ASC'
-						);
-				foreach ($disp_opt as $opt => $value) {
-					echo '<option value="' . $value . '" id="' . $value . '"', $display_order == $value ? ' selected="selected"' : '', '>', $opt, '</option>';
-				}
-				?>
-			</select>
-		</p>
-
-		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id('display_meta') ); ?>"><?php echo esc_html__('Select Post Meta to Display :', 'codexin'); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id('display_meta') ); ?>"><?php echo esc_html__('Select Project Meta to Display :', 'codexin'); ?></label>
 			<select name="<?php echo esc_attr( $this->get_field_name('display_meta') ); ?>" id="<?php echo esc_attr( $this->get_field_id('display_meta') ); ?>" class="widefat">
 				<?php
 				$options = array(
-						esc_html__('Display Project Completion Date', 'codexin'), 
-						esc_html__('Display Project Client Name', 'codexin'),
-						esc_html__('Display Project Category', 'codexin'),
-						esc_html__('Display Project Date And Category', 'codexin'),
+						esc_html__('Display Completion Date', 'codexin'), 
+						esc_html__('Display Client Name', 'codexin'),
+						esc_html__('Display Category', 'codexin'),
+						esc_html__('Display Completion Date And Category', 'codexin'),
 						);
 				foreach ($options as $option) {
 					$opt = strtolower( str_replace(" ","-", $option ) );
@@ -126,10 +106,10 @@ class Codexin_Popular_Project extends WP_Widget {
 		$show_like 			= $instance[ 'show_like' ];
 		$display_meta 		= $instance[ 'display_meta' ];
 		$display_order 		= $instance[ 'display_order' ];
-		$display_meta_a 	= 'display-project-completion-date';
-		$display_meta_b 	= 'display-project-client-name';
-		$display_meta_c 	= 'display-project-category';
-		$display_meta_d 	= 'display-project-date-and-category';
+		$display_meta_a 	= 'display-completion-date';
+		$display_meta_b 	= 'display-client-name';
+		$display_meta_c 	= 'display-category';
+		$display_meta_d 	= 'display-Completion-date-and-category';
 		
 		$posts_args = array(
 			'post_type'				=> 'portfolio',
@@ -152,26 +132,33 @@ class Codexin_Popular_Project extends WP_Widget {
 		
 		if( $posts_query->have_posts() ):
 				
-			while( $posts_query->have_posts() ): $posts_query->the_post();		
+			while( $posts_query->have_posts() ): $posts_query->the_post();
 
-				echo '<div class="media">';
+				global $post;
+            	$image      = wp_prepare_attachment_for_js( get_post_thumbnail_id( $post->ID ) );
+            	$image_alt  = ( !empty( $image['alt'] ) ) ? 'alt="' . esc_attr( $image['alt'] ) . '"' : 'alt="' .get_the_title() . '"';		
+
+				echo '<div class="posts-single clearfix">';
 					if( 'on' == $instance[ 'show_thumb' ] ) {
-						echo '<a href="' . get_the_permalink() . '" class="media-left"><img class="media-object" src="';
-						if ( has_post_thumbnail() ) { 
-							esc_url( the_post_thumbnail_url('blog-widget-image') ); 
-						} else { 
-							echo esc_url('//placehold.it/120x80'); 
-						}
-						echo '" alt="' . get_the_title() . '"/></a>';
+						echo '<div class="posts-single-left">';
+							echo '<a href="' . get_the_permalink() . '"><img src="';
+							if ( has_post_thumbnail() ) { 
+								esc_url( the_post_thumbnail_url('blog-widget-image') ); 
+							} else { 
+								echo esc_url('//placehold.it/80x80'); 
+							}
+							echo '" ' . $image_alt . '/></a>';
+						echo '</div>';
 					}
-					echo '<div class="media-body">';
-						echo '<h4 class="media-heading">' . wp_trim_words( get_the_title(), $title_len, null ) . '</h4>';
+					echo '<div class="posts-single-right">';
+						echo '<h4><a href="'. get_the_permalink() .'">' . wp_trim_words( get_the_title(), $title_len, null ) . '</a></h4>';
 						//fetch custom-meta data
 						$c_name = $this->client_name = rwmb_meta( 'reveal_portfolio_client','type=text' );
-						$p_date = $this->project_date = rwmb_meta( 'reveal_portfolio_date','type=text' );
+						$pr_date = $this->project_date = rwmb_meta( 'reveal_portfolio_date','type=date' );
+						$p_date = date("F j, Y", strtotime($pr_date));
 
 						if( $display_meta == $display_meta_b ) {
-							echo '<p>'. $c_name .'<p/>';
+							echo '<p><b>'. esc_html__('Client: ', 'codexin') . '</b>' . $c_name .'<p/>';
 						}
 						if( $display_meta == $display_meta_a || $display_meta == $display_meta_d ) {
 							echo '<p>'. $p_date .'<p/>';
@@ -185,17 +172,17 @@ class Codexin_Popular_Project extends WP_Widget {
 						}
 						//End custom meta data
 						
-						if( 'on' == $instance[ 'show_like' ] ) {
-							echo '<span>'. codexin_likes_button( get_the_ID(), 0 ) .'</span>';
-						}
+						// if( 'on' == $instance[ 'show_like' ] ) {
+						// 	echo '<span>'. codexin_likes_button( get_the_ID(), 0 ) .'</span>';
+						// }
 
-						if( $display_meta == $display_meta_b ) {
+						// if( $display_meta == $display_meta_b ) {
 
-							echo '<div class="blog-info">';
-							echo '<span><i class="fa fa-eye"></i><i>' . codexin_get_post_views(get_the_ID()) . '</i></span>';
-							echo '</div>';
+						// 	echo '<div class="blog-info">';
+						// 	echo '<span><i class="fa fa-eye"></i><i>' . codexin_get_post_views(get_the_ID()) . '</i></span>';
+						// 	echo '</div>';
 
-						}
+						// }
 
 					echo '</div>';
 				echo '</div>';

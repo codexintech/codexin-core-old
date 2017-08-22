@@ -146,19 +146,25 @@ class Codexin_Recent_Posts extends WP_Widget {
 		if( $posts_query->have_posts() ):
 				
 			while( $posts_query->have_posts() ): $posts_query->the_post();
+
+				global $post;
+            	$image      = wp_prepare_attachment_for_js( get_post_thumbnail_id( $post->ID ) );
+            	$image_alt  = ( !empty( $image['alt'] ) ) ? 'alt="' . esc_attr( $image['alt'] ) . '"' : 'alt="' .get_the_title() . '"';
 				
-				echo '<div class="media">';
+				echo '<div class="posts-single clearfix">';
 					if( 'on' == $instance[ 'show_thumb' ] ) {
-						echo '<a href="' . get_the_permalink() . '" class="media-left"><img class="media-object" src="';
-						if ( has_post_thumbnail() ) { 
-							esc_url( the_post_thumbnail_url('blog-widget-image') ); 
-						} else { 
-							echo esc_url('//placehold.it/120x80'); 
-						}
-						echo '" alt="' . get_the_title() . '"/></a>';
+						echo '<div class="posts-single-left">';
+							echo '<a href="' . get_the_permalink() . '"><img src="';
+							if ( has_post_thumbnail() ) { 
+								esc_url( the_post_thumbnail_url('blog-widget-image') ); 
+							} else { 
+								echo esc_url('//placehold.it/80x80'); 
+							}
+							echo '" ' . $image_alt . '/></a>';
+						echo '</div>';
 					}
-					echo '<div class="media-body">';
-						echo '<h4 class="media-heading">' . wp_trim_words( get_the_title(), $title_len, null ) . '</h4>';
+					echo '<div class="posts-single-right">';
+						echo '<h4><a href="'. get_the_permalink() .'">' . wp_trim_words( get_the_title(), $title_len, null ) . '</a></h4>';
 						if ( $display_meta == $display_meta_a ) {
 						echo '<p>'. get_the_time( 'F j, Y' ) .'</p>';
 						}

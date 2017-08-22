@@ -147,7 +147,11 @@ class Codexin_Popular_Posts extends WP_Widget {
 		
 		if( $posts_query->have_posts() ):
 				
-			while( $posts_query->have_posts() ): $posts_query->the_post();		
+			while( $posts_query->have_posts() ): $posts_query->the_post();
+
+				global $post;
+            	$image      = wp_prepare_attachment_for_js( get_post_thumbnail_id( $post->ID ) );
+            	$image_alt  = ( !empty( $image['alt'] ) ) ? 'alt="' . esc_attr( $image['alt'] ) . '"' : 'alt="' .get_the_title() . '"';
 
 				echo '<div class="posts-single clearfix">';
 					if( 'on' == $instance[ 'show_thumb' ] ) {
@@ -158,7 +162,7 @@ class Codexin_Popular_Posts extends WP_Widget {
 							} else { 
 								echo esc_url('//placehold.it/80x80'); 
 							}
-							echo '" alt="' . get_the_title() . '"/></a>';
+							echo '" ' . $image_alt . '/></a>';
 						echo '</div>';
 					}
 					echo '<div class="posts-single-right">';
