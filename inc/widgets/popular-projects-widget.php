@@ -106,7 +106,6 @@ class Codexin_Popular_Project extends WP_Widget {
 			'meta_key'				=> 'cx_post_views',
 			'orderby'				=> 'meta_value_num',
 			'order'					=> 'DESC',
-			'ignore_sticky_posts' 	=> 1
 		);
 		
 		$posts_query = new WP_Query( $posts_args );
