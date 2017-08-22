@@ -165,7 +165,7 @@ class Codexin_Recent_Posts extends WP_Widget {
 								echo esc_url('//placehold.it/80x80'); 
 							}
 							echo '" ' . $image_alt . '/></a>';
-						echo '</div>><!-- end of posts-single-left -->';
+						echo '</div><!-- end of posts-single-left -->';
 					}
 					echo '<div class="posts-single-right">';
 						echo '<h4><a href="'. get_the_permalink() .'">' . wp_trim_words( get_the_title(), $title_len, null ) . '</a></h4>';
