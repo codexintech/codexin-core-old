@@ -13,6 +13,7 @@ class Codexin_Popular_Posts extends WP_Widget {
 	//setup the widget name, description, etc...
 	public function __construct() {
 		
+		// Initializing the basic parameters
 		$widget_ops = array(
 			'classname' => 'codexin-popular-posts-widget',
 			'description' => esc_html('Displays Most Popular Posts' , 'codexin'),
@@ -21,9 +22,10 @@ class Codexin_Popular_Posts extends WP_Widget {
 		
 	}
 	
-	// back-end display of widget
+	// Back-end display of widget
 	public function form( $instance ) {
 		
+		// Assigning or updating the values
 		$title 				= ( !empty( $instance[ 'title' ] ) ? $instance[ 'title' ] : esc_html__('Popular Posts', 'codexin') );
 		$num_posts 			= ( !empty( $instance[ 'num_posts' ] ) ? absint( $instance[ 'num_posts' ] ) : esc_html__('3', 'codexin') );
 		$title_len 			= ( !empty( $instance[ 'title_len' ] ) ? absint( $instance[ 'title_len' ] ) : esc_html__('7', 'codexin') );
@@ -96,10 +98,12 @@ class Codexin_Popular_Posts extends WP_Widget {
 		
 	}
 	
-	// update widget
+	// Updating the widget
 	public function update( $new_instance, $old_instance ) {
 		
 		$instance = array();
+
+		// Updating to the latest values
 		$instance[ 'title' ] 			= ( !empty( $new_instance[ 'title' ] ) ? strip_tags( $new_instance[ 'title' ] ) : '' );
 		$instance[ 'num_posts' ] 		= ( !empty( $new_instance[ 'num_posts' ] ) ? absint( strip_tags( $new_instance[ 'num_posts' ] ) ) : 0 );
 		$instance[ 'title_len' ] 		= ( !empty( $new_instance[ 'title_len' ] ) ? absint( strip_tags( $new_instance[ 'title_len' ] ) ) : 0 );
@@ -112,7 +116,7 @@ class Codexin_Popular_Posts extends WP_Widget {
 		
 	}
 	
-	// front-end display of widget
+	// Front-end display of widget
 	public function widget( $args, $instance ) {
 		
 		$num_posts 			= absint( $instance[ 'num_posts' ] );
@@ -163,7 +167,7 @@ class Codexin_Popular_Posts extends WP_Widget {
 								echo esc_url('//placehold.it/80x80'); 
 							}
 							echo '" ' . $image_alt . '/></a>';
-						echo '</div>';
+						echo '</div><!-- end of posts-single-left -->';
 					}
 					echo '<div class="posts-single-right">';
 						echo '<h4><a href="'. get_the_permalink() .'">' . wp_trim_words( get_the_title(), $title_len, null ) . '</a></h4>';
@@ -199,8 +203,8 @@ class Codexin_Popular_Posts extends WP_Widget {
 
 						}
 
-					echo '</div>';
-				echo '</div>';
+					echo '</div><!-- end of posts-single-right -->';
+				echo '</div><!-- end of posts-single -->';
 			
 			endwhile;
 		
@@ -214,6 +218,7 @@ class Codexin_Popular_Posts extends WP_Widget {
 	
 }
 
+// Registering Widget
 add_action( 'widgets_init', function() {
 	register_widget( 'Codexin_Popular_Posts' );
 } );

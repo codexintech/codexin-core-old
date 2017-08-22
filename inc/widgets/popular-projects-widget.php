@@ -11,12 +11,12 @@
 class Codexin_Popular_Project extends WP_Widget {
 
 	// Initializing meta property
-	private $client_name;
 	private $project_date;
 	
 	//setup the widget name, description, etc...
 	public function __construct() {
 		
+		// Initializing the basic parameters
 		$widget_ops = array(
 			'classname' => 'codexin-popular-project-widget',
 			'description' => esc_html('Displays Most Popular Project' , 'codexin'),
@@ -25,16 +25,16 @@ class Codexin_Popular_Project extends WP_Widget {
 		
 	}
 	
-	// back-end display of widget
+	// Back-end display of widget
 	public function form( $instance ) {
 		
-		$title 				= ( !empty( $instance[ 'title' ] ) ? $instance[ 'title' ] : esc_html__('Popular Project', 'codexin') );
+		// Assigning or updating the values
+		$title 				= ( !empty( $instance[ 'title' ] ) ? $instance[ 'title' ] : esc_html__('Popular Projects', 'codexin') );
 		$num_posts 			= ( !empty( $instance[ 'num_posts' ] ) ? absint( $instance[ 'num_posts' ] ) : esc_html__('3', 'codexin') );
 		$title_len 			= ( !empty( $instance[ 'title_len' ] ) ? absint( $instance[ 'title_len' ] ) : esc_html__('7', 'codexin') );
 		$show_thumb 		= ( !empty( $instance[ 'show_thumb' ] ) ? $instance[ 'show_thumb' ] : '' );
-		$show_like	 		= ( !empty( $instance[ 'show_like' ] ) ? $instance[ 'show_like' ] : '' );
-		$display_meta 		= ( !empty( $instance[ 'display_meta' ] ) ? $instance[ 'display_meta' ] : '' );
-		$display_order 		= ( !empty( $instance[ 'display_order' ] ) ? $instance[ 'display_order' ] : '' );
+		$meta_date	 		= ( !empty( $instance[ 'meta_date' ] ) ? $instance[ 'meta_date' ] : '' );
+		$meta_cat	 		= ( !empty( $instance[ 'meta_cat' ] ) ? $instance[ 'meta_cat' ] : '' );
 		
 		?>
 
@@ -58,65 +58,54 @@ class Codexin_Popular_Project extends WP_Widget {
 		    <label for="<?php echo esc_attr($this->get_field_id( 'show_thumb' ) ); ?>"><?php echo esc_html__('Display Post Featured Image?', 'codexin'); ?></label>
 		</p>
 
+		<p style="margin-top: 20px"><?php echo esc_html__('Select Project Meta to Display :', 'codexin'); ?></p>
+
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id('display_meta') ); ?>"><?php echo esc_html__('Select Project Meta to Display :', 'codexin'); ?></label>
-			<select name="<?php echo esc_attr( $this->get_field_name('display_meta') ); ?>" id="<?php echo esc_attr( $this->get_field_id('display_meta') ); ?>" class="widefat">
-				<?php
-				$options = array(
-						esc_html__('Display Completion Date', 'codexin'), 
-						esc_html__('Display Client Name', 'codexin'),
-						esc_html__('Display Category', 'codexin'),
-						esc_html__('Display Completion Date And Category', 'codexin'),
-						);
-				foreach ($options as $option) {
-					$opt = strtolower( str_replace(" ","-", $option ) );
-					echo '<option value="' . $opt . '" id="' . $opt . '"', $display_meta == $opt ? ' selected="selected"' : '', '>', $option, '</option>';
-				}
-				?>
-			</select>
+		    <input class="checkbox" type="checkbox" <?php esc_attr( checked( $meta_date, 'on' ) ); ?> id="<?php echo esc_attr ($this->get_field_id( 'meta_date' ) ); ?>" name="<?php echo esc_attr($this->get_field_name( 'meta_date' ) ); ?>" /> 
+		    <label for="<?php echo esc_attr($this->get_field_id( 'meta_date' ) ); ?>"><?php echo esc_html__('Display Project Completion Date', 'codexin'); ?></label>
 		</p>
 
+		<p>
+		    <input class="checkbox" type="checkbox" <?php esc_attr( checked( $meta_cat, 'on' ) ); ?> id="<?php echo esc_attr ($this->get_field_id( 'meta_cat' ) ); ?>" name="<?php echo esc_attr($this->get_field_name( 'meta_cat' ) ); ?>" /> 
+		    <label for="<?php echo esc_attr($this->get_field_id( 'meta_cat' ) ); ?>"><?php echo esc_html__('Display Project Categories', 'codexin'); ?></label>
+		</p>
 
 		<?php
 		
 	}
 	
-	// update widget
+	// Updating the widget
 	public function update( $new_instance, $old_instance ) {
 		
 		$instance = array();
+
+		// Updating to the latest values
 		$instance[ 'title' ] 			= ( !empty( $new_instance[ 'title' ] ) ? strip_tags( $new_instance[ 'title' ] ) : '' );
 		$instance[ 'num_posts' ] 		= ( !empty( $new_instance[ 'num_posts' ] ) ? absint( strip_tags( $new_instance[ 'num_posts' ] ) ) : 0 );
 		$instance[ 'title_len' ] 		= ( !empty( $new_instance[ 'title_len' ] ) ? absint( strip_tags( $new_instance[ 'title_len' ] ) ) : 0 );
 		$instance[ 'show_thumb' ] 		= strip_tags( $new_instance[ 'show_thumb' ] );
-		$instance[ 'show_like' ] 		= strip_tags( $new_instance[ 'show_like' ] );
-		$instance[ 'display_meta' ] 	= strip_tags( $new_instance[ 'display_meta' ] );
-		$instance[ 'display_order' ] 	= ( !empty( $new_instance[ 'display_order' ] ) ? strip_tags( $new_instance[ 'display_order' ] ) : '' );
+		$instance[ 'meta_date' ] 		= strip_tags( $new_instance[ 'meta_date' ] );
+		$instance[ 'meta_cat' ] 		= strip_tags( $new_instance[ 'meta_cat' ] );
 		
 		return $instance;
 		
 	}
 	
-	// front-end display of widget
+	// Front-end display of widget
 	public function widget( $args, $instance ) {
 		
 		$num_posts 			= absint( $instance[ 'num_posts' ] );
 		$title_len 			= absint( $instance[ 'title_len' ] );
 		$show_thumb 		= $instance[ 'show_thumb' ];
-		$show_like 			= $instance[ 'show_like' ];
-		$display_meta 		= $instance[ 'display_meta' ];
-		$display_order 		= $instance[ 'display_order' ];
-		$display_meta_a 	= 'display-completion-date';
-		$display_meta_b 	= 'display-client-name';
-		$display_meta_c 	= 'display-category';
-		$display_meta_d 	= 'display-Completion-date-and-category';
+		$meta_date 			= $instance[ 'meta_date' ];
+		$meta_cat 			= $instance[ 'meta_cat' ];
 		
 		$posts_args = array(
 			'post_type'				=> 'portfolio',
 			'posts_per_page'		=> $num_posts,
 			'meta_key'				=> 'cx_post_views',
 			'orderby'				=> 'meta_value_num',
-			'order'					=> $display_order,
+			'order'					=> 'DESC',
 			'ignore_sticky_posts' 	=> 1
 		);
 		
@@ -148,44 +137,32 @@ class Codexin_Popular_Project extends WP_Widget {
 								echo esc_url('//placehold.it/80x80'); 
 							}
 							echo '" ' . $image_alt . '/></a>';
-						echo '</div>';
+						echo '</div><!-- end of posts-single-left -->';
 					}
 					echo '<div class="posts-single-right">';
 						echo '<h4><a href="'. get_the_permalink() .'">' . wp_trim_words( get_the_title(), $title_len, null ) . '</a></h4>';
+
 						//fetch custom-meta data
-						$c_name = $this->client_name = rwmb_meta( 'reveal_portfolio_client','type=text' );
 						$pr_date = $this->project_date = rwmb_meta( 'reveal_portfolio_date','type=date' );
 						$p_date = date("F j, Y", strtotime($pr_date));
 
-						if( $display_meta == $display_meta_b ) {
-							echo '<p><b>'. esc_html__('Client: ', 'codexin') . '</b>' . $c_name .'<p/>';
-						}
-						if( $display_meta == $display_meta_a || $display_meta == $display_meta_d ) {
-							echo '<p>'. $p_date .'<p/>';
+						if( 'on' == $instance[ 'meta_date' ] ) {
+							echo '<p>' . $p_date . '</p>';
 						}
 						//get texonomy
-						if( $display_meta == $display_meta_c || $display_meta == $display_meta_d ) {
+						if( 'on' == $instance[ 'meta_cat' ] ) {
 							$term_list = wp_get_post_terms( get_the_ID(), 'portfolio-category' ); 
+							$port_cat = array();
 							foreach ($term_list as $sterm) {
-								echo '<p>'. $sterm->name.'</p>'; 
-							}//end texonomy
+								$port_cat[] = ucfirst($sterm->name); 
+							}
+							echo '<p>' . implode( " ,", array_reverse( $port_cat ) ) . '</p>';
 						}
 						//End custom meta data
 						
-						// if( 'on' == $instance[ 'show_like' ] ) {
-						// 	echo '<span>'. codexin_likes_button( get_the_ID(), 0 ) .'</span>';
-						// }
 
-						// if( $display_meta == $display_meta_b ) {
-
-						// 	echo '<div class="blog-info">';
-						// 	echo '<span><i class="fa fa-eye"></i><i>' . codexin_get_post_views(get_the_ID()) . '</i></span>';
-						// 	echo '</div>';
-
-						// }
-
-					echo '</div>';
-				echo '</div>';
+					echo '</div><!-- end of posts-single-right -->';
+				echo '</div><!-- end of posts-single -->';
 			
 			endwhile;
 		
@@ -199,6 +176,7 @@ class Codexin_Popular_Project extends WP_Widget {
 	
 }
 
+// Registering the Widget
 add_action( 'widgets_init', function() {
 	register_widget( 'Codexin_Popular_Project' );
 } );
