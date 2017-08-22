@@ -19,6 +19,7 @@ class Codexin_Mailchimp_Widget extends WP_Widget {
 	//setup the widget name, description, etc...
 	public function __construct() {
 		
+		// Initializing the basic parameters
 		$widget_ops = array(
 			'classname' => 'codexin-mailchimp-widget',
 			'description' => esc_html__('MailChimp Newsletter Subscription', 'codexin'),
@@ -36,7 +37,7 @@ class Codexin_Mailchimp_Widget extends WP_Widget {
 	
 	}
 
-    // Enquequeing scripts
+    // Adding scripts
 	public function codexin_mc_enqueque() {
 
         add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ));
@@ -61,9 +62,10 @@ class Codexin_Mailchimp_Widget extends WP_Widget {
 
 	}
 	
-	//back-end display of widget
+	// Back-end display of widget
 	public function form( $instance ) {
 
+		// Assigning or updating the values
 		$title 		= ( !empty( $instance[ 'title' ] ) ? $instance[ 'title' ] : esc_html__('Newsletter Subscription', 'codexin') );
 		$desc 		= ( !empty( $instance[ 'desc' ] ) ? $instance[ 'desc' ] : '' );
 		$list 		= ( !empty( $instance[ 'list' ] ) ? $instance[ 'list' ] : '' );
@@ -130,7 +132,7 @@ class Codexin_Mailchimp_Widget extends WP_Widget {
 
 		<p style="width: 33%; float:left; margin-top: 5px;">
 		    <input class="checkbox" type="checkbox" <?php esc_attr( checked( $lst_name, 'on' ) ); ?> id="<?php echo esc_attr ($this->get_field_id( 'lst_name' ) ); ?>" name="<?php echo esc_attr($this->get_field_name( 'lst_name' ) ); ?>" /> 
-		    <label for="<?php echo esc_attr($this->get_field_id( 'lst_name' ) ); ?>"><?php echo esc_html__('Last Field', 'codexin'); ?></label>
+		    <label for="<?php echo esc_attr($this->get_field_id( 'lst_name' ) ); ?>"><?php echo esc_html__('Second Field', 'codexin'); ?></label>
 		</p>
 
 
@@ -142,7 +144,7 @@ class Codexin_Mailchimp_Widget extends WP_Widget {
 		</p>
 
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'lname_ph' ) ); ?>"><?php echo esc_html__('Last Field Placeholder Text:', 'codexin') ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'lname_ph' ) ); ?>"><?php echo esc_html__('Second Field Placeholder Text:', 'codexin') ?></label>
 			<input type="text" class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'lname_ph' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'lname_ph' ) ); ?>" value="<?php echo esc_attr( $lname_ph ); ?>" placeholder="<?php echo esc_html__('Ex: Last Name', 'codexin') ?>">
 		</p>
 
@@ -161,10 +163,12 @@ class Codexin_Mailchimp_Widget extends WP_Widget {
 		
 	}
 
-	// update widget
+	// Updating the widget
 	public function update( $new_instance, $old_instance ) {
 		
 		$instance = array();
+
+		// Updating to the latest values
 		$instance[ 'title' ] 		= ( !empty( $new_instance[ 'title' ] ) ? strip_tags( $new_instance[ 'title' ] ) : '' );
 		$instance[ 'desc' ] 		= ( !empty( $new_instance[ 'desc' ] ) ? strip_tags( $new_instance[ 'desc' ] ) : '' );
 		$instance[ 'list' ] 		= strip_tags( $new_instance[ 'list' ] );
@@ -180,7 +184,7 @@ class Codexin_Mailchimp_Widget extends WP_Widget {
 		
 	}
 
-	//front-end display of widget
+	// Front-end display of widget
 	public function widget( $args, $instance ) {
 		
 		$desc 		=  $instance[ 'desc' ];
@@ -305,6 +309,7 @@ class Codexin_Mailchimp_Widget extends WP_Widget {
 	
 }
 
+// Registering the Widget
 add_action( 'widgets_init', function() {
 	register_widget( 'Codexin_Mailchimp_Widget' );
 } );

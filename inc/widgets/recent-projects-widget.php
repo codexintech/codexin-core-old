@@ -27,6 +27,7 @@ class Codexin_Recent_Projects extends WP_Widget {
 	// Back-end display of widget
 	public function form( $instance ) {
 
+		// Assigning or updating the values
 		$title 			= ( !empty( $instance[ 'title' ] ) ? $instance[ 'title' ] : esc_html__('Recent Projects', 'codexin') );
 		$num_posts 		= ( !empty( $instance[ 'num_posts' ] ) ? absint( $instance[ 'num_posts' ] ) : esc_html__('3', 'codexin') );
 		$title_len 		= ( !empty( $instance[ 'title_len' ] ) ? absint( $instance[ 'title_len' ] ) : esc_html__('7', 'codexin') );
@@ -95,7 +96,7 @@ class Codexin_Recent_Projects extends WP_Widget {
 		
 		$instance = array();
 
-		// Front-end display of widget
+		// Updating to the latest values
 		$instance[ 'title' ] 			= ( !empty( $new_instance[ 'title' ] ) ? strip_tags( $new_instance[ 'title' ] ) : '' );
 		$instance[ 'num_posts' ] 		= ( !empty( $new_instance[ 'num_posts' ] ) ? absint( strip_tags( $new_instance[ 'num_posts' ] ) ) : 0 );
 		$instance[ 'title_len' ] 		= ( !empty( $new_instance[ 'title_len' ] ) ? absint( strip_tags( $new_instance[ 'title_len' ] ) ) : 0 );
