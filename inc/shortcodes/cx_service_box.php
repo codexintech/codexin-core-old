@@ -11,8 +11,6 @@ function cx_service_box_shortcode( $atts, $content = null ) {
 	extract(shortcode_atts(array(
 			'layout'    		=> '',
       'icon'          => '',
-      'image'         => '',
-			'img_alt'    	  => '',
 			'icon_toggle'		=> '',
 			'service_title'	=> '',
       'service_desc'  => '',
@@ -82,7 +80,7 @@ function cx_service_box_shortcode( $atts, $content = null ) {
   if( $layout == 3 ) :
 
     // Retrieving the image url
-    $retrive_img_url = retrieve_img_src( $image, 'about-mini-image' );
+    $retrive_img_url = retrieve_img_src( $image, 'service-3-icon' );
     $ret_full_img_url = retrieve_img_src( $image, 'full' );
 
     // Assigning a master css class and hooking into KC
@@ -94,15 +92,15 @@ function cx_service_box_shortcode( $atts, $content = null ) {
       (!empty($class)) ? $classes[] = $class : '';
 ?>
     <div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
-      <div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
-        <div class="service-icon">
-          <img src="<?php echo $retrive_img_url; ?>" alt="<?php echo $img_alt; ?>" />
+        <div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
+            <div class="service-icon">
+                <i class="<?php echo esc_attr( $icon ); ?>"> </i>
+            </div>
+            <div class="service-content">
+                <h4 class="title-3"><?php echo esc_html( $service_title ); ?></h4>
+                <p class="servicebox-3-desc"><?php printf( '%s', $service_desc ) ; ?></p>
+            </div>
         </div>
-        <div class="service-content">
-          <h4 class="title-3"><?php echo esc_html( $service_title ); ?></h4>
-          <p class="servicebox-3-desc"><?php printf( '%s', $service_desc ) ; ?></p>
-        </div>
-      </div>
     </div>
 
 <?php endif; ?>
@@ -132,12 +130,12 @@ function cx_service_box_kc() {
   	        					'label'			=> esc_html__( 'Select Service Box Template', 'codexin' ),
   	        					'name'			=> 'layout',
   	        					'options'		=> array(
-                        '1' => CODEXIN_CORE_ASSET_DIR . '/images/servicebox/layout-1.png',
-                        '2' => CODEXIN_CORE_ASSET_DIR . '/images/servicebox/layout-2.png',
-  	        						'3'	=> CODEXIN_CORE_ASSET_DIR . '/images/servicebox/layout-3.png',
-        						 ),
+                                    '1' => CODEXIN_CORE_ASSET_DIR . '/images/layout-img/servicebox/layout-1.png',
+                                    '2' => CODEXIN_CORE_ASSET_DIR . '/images/layout-img/servicebox/layout-2.png',
+                                    '3'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/servicebox/layout-3.png',
+                                    ),
   	        					'value'			=> '1'
-        					 ),
+                            ),
 
   	        				
   	        				array(
@@ -148,16 +146,12 @@ function cx_service_box_kc() {
   	        					'admin_label' 	=> true,
         					 ),
 
-  	        				array(
-  	        					'name' 			=> 'icon_toggle',
-  	        					'label' 		=> esc_html__( 'Enable Service Icon? ', 'codexin' ),
-  	        					'type' 			=> 'toggle',
-                      'relation'  => array(
-                        'parent'    => 'layout',
-                        'show_when' =>  '1, 2',
-                        ),
-  	        					'value'			=> 'no'
-        					 ),
+                            array(
+                                'name' 			=> 'icon_toggle',
+                                'label' 		=> esc_html__( 'Enable Service Icon? ', 'codexin' ),
+                                'type' 			=> 'toggle',
+                                'value'			=> 'no'
+                            ),
 
   	        				array(
   	        					'name' 			=> 'icon',
@@ -170,55 +164,34 @@ function cx_service_box_kc() {
   	        					'description'	=> esc_html__( 'Select Service Icon', 'codexin' ),
         					),
 
-                  array(
-                    'name'         => 'image',
-                    'label'        => esc_html__(' Upload Icon Image', 'codexin'),
-                    'type'         => 'attach_image',
-                    'relation'     => array(
-                      'parent'    => 'layout',
-                      'show_when' => '3',
-                      ),
-                    'admin_label'  => true,
-                  ),
+          	        		array(
+                              'name'      => 'service_desc',
+                              'label'     => esc_html__( 'Service Description ', 'codexin' ),
+                              'type'      => 'textarea',
+                              'description' => esc_html__( 'Enter Service Description', 'codexin' ),
+                          ),
 
-                  array(
-                  'name'      => 'img_alt',
-                  'label'     => esc_html__( 'Enter Image Alt Tag', 'codexin' ),
-                  'type'      => 'text',
-                  'relation'     => array(
-                      'parent'    => 'layout',
-                      'show_when' => '3',
-                      ),
-                  ),
+                           array(
+                              'name'      => 'item_selected',
+                              'label'     => esc_html__( 'Animation Delay Time', 'codexin' ),
+                              'type'      => 'checkbox',
+                              'options'   => array(
+                                  'on'  => 'Selected Box Item',
+                                ),
+                              'relation'  => array(
+                                  'parent'    => 'layout',
+                                  'show_when' => '2',
+                                ),
+                              'description' => esc_html__( 'If you wish to style the service-box as selected, please check this box', 'codexin' ),
+                           ),
 
-  	        			 array(
-                      'name'      => 'service_desc',
-                      'label'     => esc_html__( 'Service Description ', 'codexin' ),
-                      'type'      => 'textarea',
-                      'description' => esc_html__( 'Enter Service Description', 'codexin' ),
-                  ),
-
-                   array(
-                      'name'      => 'item_selected',
-                      'label'     => esc_html__( 'Animation Delay Time', 'codexin' ),
-                      'type'      => 'checkbox',
-                      'options'   => array(
-                          'on'  => 'Selected Box Item',
-                        ),
-                      'relation'  => array(
-                          'parent'    => 'layout',
-                          'show_when' => '2',
-                        ),
-                      'description' => esc_html__( 'If you wish to style the service-box as selected, please check this box', 'codexin' ),
-                   ),
-
-                   array(
-                    'name'      => 'class',
-                    'label'     => __( 'Enter Class', 'codexin' ),
-                    'type'      => 'text',
-                    'description' => esc_html__( 'If you wish to style a particular content element differently, please add a class name to this field and refer to it in your custom CSS.', 'codexin' ),
-                    'admin_label'   => false,
-                   ),
+                           array(
+                            'name'      => 'class',
+                            'label'     => __( 'Enter Class', 'codexin' ),
+                            'type'      => 'text',
+                            'description' => esc_html__( 'If you wish to style a particular content element differently, please add a class name to this field and refer to it in your custom CSS.', 'codexin' ),
+                            'admin_label'   => false,
+                           ),
 
         				 ), // end of general
 
@@ -245,15 +218,15 @@ function cx_service_box_kc() {
         								),
 
   	        							'Designation' => array(
-  	        								array('property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.single-service p,.servicebox-2-desc'),
-  	        								array('property' => 'font-family', 'label' => esc_html__('Font Family', 'codexin'), 'selector' => '.single-service p,.servicebox-2-desc'),
-  	        								array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.single-service p,.servicebox-2-desc'),
-  	        								array('property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '.single-service p,.servicebox-2-desc'),
-  	        								array('property' => 'font-weight', 'label' => esc_html__('Font Weight', 'codexin'), 'selector' => '.single-service p,.servicebox-2-desc'),
-  	        								array('property' => 'text-align', 'label' => esc_html__('Text Align', 'codexin'), 'selector' => '.single-service p,.servicebox-2-desc'),
-  	        								array('property' => 'text-transform', 'label' => esc_html__('Text Transform', 'codexin'), 'selector' => '.single-service p,.servicebox-2-desc'),
-  	        								array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.single-service p,.servicebox-2-desc'),
-  	        								array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.single-service p,.servicebox-2-desc'),
+  	        								array('property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.single-service p,.servicebox-2-desc, .service-item p'),
+  	        								array('property' => 'font-family', 'label' => esc_html__('Font Family', 'codexin'), 'selector' => '.single-service p,.servicebox-2-desc, .service-item p'),
+  	        								array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.single-service p,.servicebox-2-desc, .service-item p'),
+  	        								array('property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '.single-service p,.servicebox-2-desc, .service-item p'),
+  	        								array('property' => 'font-weight', 'label' => esc_html__('Font Weight', 'codexin'), 'selector' => '.single-service p,.servicebox-2-desc, .service-item p'),
+  	        								array('property' => 'text-align', 'label' => esc_html__('Text Align', 'codexin'), 'selector' => '.single-service p,.servicebox-2-desc, .service-item p'),
+  	        								array('property' => 'text-transform', 'label' => esc_html__('Text Transform', 'codexin'), 'selector' => '.single-service p,.servicebox-2-desc, .service-item p'),
+  	        								array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.single-service p,.servicebox-2-desc, .service-item p'),
+  	        								array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.single-service p,.servicebox-2-desc, .service-item p'),
         								),
 
   	        							'Icon' => array(
