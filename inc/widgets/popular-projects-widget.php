@@ -40,7 +40,7 @@ class Codexin_Popular_Project extends WP_Widget {
 
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php echo esc_html__('Title:', 'codexin') ?></label>
-			<input type="text" class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" value="<?php echo esc_attr( $title ); ?>" placeholder="<?php echo esc_html__('Ex: popular Projects', 'codexin') ?>">
+			<input type="text" class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" value="<?php echo esc_attr( $title ); ?>" placeholder="<?php echo esc_html__('Ex: Popular Projects', 'codexin') ?>">
 		</p>
 
 		<p>
@@ -155,7 +155,7 @@ class Codexin_Popular_Project extends WP_Widget {
 							foreach ($term_list as $sterm) {
 								$port_cat[] = ucfirst($sterm->name); 
 							}
-							echo '<p>' . implode( " ,", array_reverse( $port_cat ) ) . '</p>';
+							echo '<p>' . implode( ", ", array_reverse( $port_cat ) ) . '</p>';
 						}
 						//End custom meta data
 						
