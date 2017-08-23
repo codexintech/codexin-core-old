@@ -181,9 +181,9 @@ class Codexin_Twitter_Widget extends WP_Widget {
 
 						// Fetching tweet text and formatting
 						$latestTweet = $cx_tweet->text;
-						$latestTweet = preg_replace('/https:\/\/([a-z0-9_\.\-\+\&\!\#\~\/\,]+)/i', '&nbsp;<a href="//$1" target="_blank">https://$1</a>&nbsp;', $latestTweet);
-						$latestTweet = preg_replace('/@([a-z0-9_]+)/i', '&nbsp;<a href="//twitter.com/$1" target="_blank">@$1</a>&nbsp;', $latestTweet);
-						$latestTweet = preg_replace('/#(\w+)/', '&nbsp;<a href="//twitter.com/hashtag/$1?src=hash" target="_blank">#$1</a>&nbsp;', $latestTweet);
+						$latestTweet = preg_replace('/https:\/\/([a-z0-9_\.\-\+\&\!\#\~\/\,]+)/i', '&hellip;<a href="//$1" target="_blank">https://$1</a>', $latestTweet);
+						$latestTweet = preg_replace('/@([a-z0-9_]+)/i', '&hellip;<a href="//twitter.com/$1" target="_blank">@$1</a>', $latestTweet);
+						$latestTweet = preg_replace('/#(\w+)/', '&hellip;<a href="//twitter.com/hashtag/$1?src=hash" target="_blank">#$1</a>', $latestTweet);
 						echo $latestTweet;
 						?>
 						</p>
