@@ -379,3 +379,13 @@
     -o-transition: all .3s;
     transition: all .3s;
 }
+
+/************************************************************
+    Popular projects
+*************************************************************/
+
+.codexin-popular-project-widget  .posts-single-right p {
+    margin-right: 0;
+    display: block;
+    width:100%;
+}
