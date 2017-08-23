@@ -160,19 +160,21 @@ class Codexin_Twitter_Widget extends WP_Widget {
 		<div class="twitter-widget">
 			<div class="cx-tweets-container" id="twitter_<?php echo $args['widget_id']; ?>">
 				<?php foreach($cx_twitter as $cx_tweet): ?>
-				<div class="media">
-					<?php if( 'on' == $instance[ 'tw_profile' ] ): ?>
-					<a href="//twitter.com/<?php echo esc_html( $cx_tweet->user->screen_name ); ?>" class="media-left">
-						<img class="media-object" src="<?php echo esc_url( $cx_tweet->user->profile_image_url ); ?>" alt="twitter-user-profile">
-					</a>
+				<div class="twitter-feed-wrapper">
+					<?php if( 'on' == $instance[ 'tw_profile' ] ): ?>\
+					<div class="twitter-feed-left">
+						<a href="//twitter.com/<?php echo esc_html( $cx_tweet->user->screen_name ); ?>"">
+							<img class="media-object" src="<?php echo esc_url( $cx_tweet->user->profile_image_url ); ?>" alt="twitter-user-profile">
+						</a>
+					</div>
 					<?php endif; ?>
-					<div class="media-body">
+					<div class="twitter-feed-right">
 						<?php if( ('on' == $instance[ 'tw_name' ] ) && ( 'on' == $instance[ 'tw_usr' ] ) ): ?>
-						<h4 class="media-heading"><?php echo esc_html( $cx_tweet->user->name ); ?> <a href="//twitter.com/<?php echo esc_html( $cx_tweet->user->screen_name ); ?>" class="twitter-user" target="_blank"><em>@<?php echo esc_html( $cx_tweet->user->screen_name ); ?></em></a></h4>
+						<h4><?php echo esc_html( $cx_tweet->user->name ); ?> <a href="//twitter.com/<?php echo esc_html( $cx_tweet->user->screen_name ); ?>" class="twitter-user" target="_blank"><em>@<?php echo esc_html( $cx_tweet->user->screen_name ); ?></em></a></h4>
 						<?php elseif( 'on' == $instance[ 'tw_name' ] ): ?>
-						<h4 class="media-heading"><?php echo esc_html( $cx_tweet->user->name ); ?></h4>
+						<h4><?php echo esc_html( $cx_tweet->user->name ); ?></h4>
 						<?php elseif( 'on' == $instance[ 'tw_usr' ] ): ?>
-						<h4 class="media-heading"><a href="//twitter.com/<?php echo esc_html( $cx_tweet->user->screen_name ); ?>" class="twitter-user" target="_blank"><em>@<?php echo esc_html( $cx_tweet->user->screen_name ); ?></em></a></h4>
+						<h4><a href="//twitter.com/<?php echo esc_html( $cx_tweet->user->screen_name ); ?>" class="twitter-user" target="_blank"><em>@<?php echo esc_html( $cx_tweet->user->screen_name ); ?></em></a></h4>
 						<?php endif; ?>
 						<p class="cx-tweet-text">
 						<?php
