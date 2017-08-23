@@ -155,12 +155,14 @@ class Codexin_Twitter_Widget extends WP_Widget {
 
 		// Passing the transient
 		$cx_twitter = get_transient($transName);
+		echo '<pre>';
+		print_r($cx_twitter);
 		if($cx_twitter && is_array($cx_twitter)) {
 		?>
 		<div class="twitter-widget">
 			<div class="cx-tweets-container" id="twitter_<?php echo $args['widget_id']; ?>">
 				<?php foreach($cx_twitter as $cx_tweet): ?>
-				<div class="twitter-feed-wrapper">
+				<div class="twitter-feed-wrapper clearfix">
 					<?php if( 'on' == $instance[ 'tw_profile' ] ): ?>
 					<div class="twitter-feed-left">
 						<a href="//twitter.com/<?php echo esc_html( $cx_tweet->user->screen_name ); ?>"">
