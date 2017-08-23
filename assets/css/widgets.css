@@ -403,3 +403,49 @@
 .codexin-social-share-widget .socials i {
     margin-right: 5px;
 }
+
+/************************************************************
+    Twitter Feed
+*************************************************************/
+
+.twitter-feed-wrapper {
+    margin-bottom: 30px;
+}
+
+.twitter-feed-left {
+    float: left;
+    margin-right: 15px;
+    width: 48px;
+}
+
+.twitter-feed-right {
+    float: right;
+    width: calc(100% - 63px);
+}
+
+.twitter-feed-right h4 {
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+.twitter-feed-right h4 a {
+    font-weight: normal;
+}
+
+.twitter-feed-right p {
+    font-size: 14px;
+    line-height: 1.5em;
+    margin-bottom: 5px;
+}
+
+.twitter-feed-right a.feed-time {
+    font-size: 90%;
+}
+
+.twitter-feed-left img {
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    border-radius: 50%;
+}
