@@ -192,7 +192,7 @@ class Codexin_Twitter_Widget extends WP_Widget {
 						$twitterTime = strtotime($cx_tweet->created_at);
 						$cx_time = $this->tweet_time($twitterTime);
 						?>
-						<p><a href="http://twitter.com/<?php echo $cx_tweet->user->screen_name; ?>/statuses/<?php echo $cx_tweet->id_str; ?>" target="_blank"><?php echo $cx_time; ?></a></p>
+						<p><a href="http://twitter.com/<?php echo $cx_tweet->user->screen_name; ?>/statuses/<?php echo $cx_tweet->id_str; ?>" target="_blank" class="feed-time"><?php echo $cx_time; ?></a></p>
 					</div>
 				</div>
 				<?php endforeach; ?>
