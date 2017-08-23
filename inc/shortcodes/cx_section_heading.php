@@ -10,6 +10,7 @@
 // Registering Section heading Shortcode
 function cx_section_heading_shortcode(  $atts, $content = null) {
 	extract(shortcode_atts(array(
+				'layout'				=> '',
 				'title' 				=> '',
 				'subtitle'	 			=> '',
 				'description_toggle' 	=> '',
@@ -17,30 +18,56 @@ function cx_section_heading_shortcode(  $atts, $content = null) {
 				'class'		  			=> '',
 	), $atts));
 
-	// Assigning a master css class and hooking into KC
-	$master_class = apply_filters( 'kc-el-class', $atts );
-	$master_class[] = 'section-heading';
-
-	// Retrieving user define classes
-	$classes = array( 'cx-section-heading' );
-	(!empty($class)) ? $classes[] = $class : '';
-
 	$result = '';
-	ob_start(); ?>
 
-		<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
-			<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
-				<h3 class="primary-title"><?php echo esc_html( $title ); ?></h3>
-				<h2 class="secondary-title"><?php echo esc_html( $subtitle ); ?></h2>
-				<?php if( $description_toggle == 'yes' ): ?>
-				<div class="col-md-10 col-md-offset-1 cx-description">
-					<p><?php printf('%s', $description ); ?></p>		
+	ob_start(); 
+
+		if( ! empty( $layout ) ) :
+			if( $layout == 1 ) :
+				// Assigning a master css class and hooking into KC
+				$master_class = apply_filters( 'kc-el-class', $atts );
+				$master_class[] = 'section-heading';
+
+				// Retrieving user define classes
+				$classes = array( 'cx-section-heading' );
+				(!empty($class)) ? $classes[] = $class : ''; 
+		?>
+			<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
+				<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
+					<h3 class="primary-title"><?php echo esc_html( $title ); ?></h3>
+					<h2 class="secondary-title"><?php echo esc_html( $subtitle ); ?></h2>
+					<?php if( $description_toggle == 'yes' ): ?>
+					<div class="col-md-10 col-md-offset-1 cx-description">
+						<p><?php printf('%s', $description ); ?></p>		
+					</div>
+					<?php endif; ?>
+				</div><!-- end of cx-section-heading -->
+			</div><!-- end of section-heading -->
+		<?php 
+			endif; //end layout 1
+			if( $layout == 2 ) :
+		 
+			// Assigning a master css class and hooking into KC
+				$master_class = apply_filters( 'kc-el-class', $atts );
+				$master_class[] = 'rv2-title';
+
+				// Retrieving user define classes
+				$classes = array( 'rv2-title-inner' );
+				(!empty($class)) ? $classes[] = $class : ''; 
+			?>	
+
+			<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
+				<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
+					<h2 class="primary-title rv2"> <?php echo esc_html( $title ); ?> </h2>
+					<h4 class="secondary-title rv2"><?php echo esc_html( $subtitle ); ?></h4>
 				</div>
-				<?php endif; ?>
-			</div><!-- end of cx-section-heading -->
-		</div><!-- end of section-heading -->
+			</div>
+
+
+	<?php endif; //End layout 2 ?>
 
 	<?php
+		endif;
 	$result .= ob_get_clean();
 	return $result;
 
@@ -61,6 +88,18 @@ function cx_section_heading_kc() {
 	                'params' 		=> array(
 	                	//General params
 						'general' 	=> array(
+							array(
+								'type'			=> 'radio_image',
+								'label'			=> esc_html__( 'Select Section Header Template', 'codexin' ),
+								'name'			=> 'layout',
+								'admin_label'	=> true,
+								'options'		=> array(
+									'1'	=> CODEXIN_CORE_ASSET_DIR . '/images/section-header/layout-1.png',
+									'2'	=> CODEXIN_CORE_ASSET_DIR . '/images/section-header/layout-2.png',
+								),
+								'value'	=> '1'
+							),
+
 		                    array(
 		                        'name' 			=> 'title',
 		                        'label' 		=> esc_html__( 'Enter Title', 'codexin' ),
@@ -78,6 +117,10 @@ function cx_section_heading_kc() {
 		                        'name' 			=> 'description_toggle',
 		                        'label' 		=> esc_html__( 'Enable Description Field? ', 'codexin' ),
 		                        'type' 			=> 'toggle',
+		                        'relation'		=> array(
+		                        	'parent'	=> 'layout',
+		                        	'show_when'	=> '1'
+		                        ),
 		                    ),
 
 		                    array(
@@ -106,31 +149,31 @@ function cx_section_heading_kc() {
 									array(
 										"screens" => "any,1199,991,767,479",
 										'Title' => array(
-											array('property' => 'color', 'label' => esc_html__( 'Color', 'codexin'), 'selector' => '.primary-title'),
-											array('property' => 'font-family', 'label' => esc_html__( 'Font Family', 'codexin'), 'selector' => '.primary-title'),
-											array('property' => 'font-size', 'label' => esc_html__( 'Font Size', 'codexin'), 'selector' => '.primary-title'),
-											array('property' => 'line-height', 'label' => esc_html__( 'Line Height', 'codexin'), 'selector' => '.primary-title'),
-											array('property' => 'font-weight', 'label' => esc_html__( 'Font Weight', 'codexin'), 'selector' => '.primary-title'),
-											array('property' => 'text-align', 'label' => esc_html__( 'Text Align', 'codexin'), 'selector' => '.primary-title'),
-											array('property' => 'text-transform', 'label' => esc_html__( 'Text Transform', 'codexin'), 'selector' => '.primary-title'),
-											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin'), 'selector' => '.primary-title'),
-											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin'), 'selector' => '.primary-title')
+											array('property' => 'color', 'label' => esc_html__( 'Color', 'codexin'), 'selector' => '.primary-title, h2.primary-title.rv2'),
+											array('property' => 'font-family', 'label' => esc_html__( 'Font Family', 'codexin'), 'selector' => '.primary-title, h2.primary-title.rv2'),
+											array('property' => 'font-size', 'label' => esc_html__( 'Font Size', 'codexin'), 'selector' => '.primary-title, h2.primary-title.rv2'),
+											array('property' => 'line-height', 'label' => esc_html__( 'Line Height', 'codexin'), 'selector' => '.primary-title, h2.primary-title.rv2'),
+											array('property' => 'font-weight', 'label' => esc_html__( 'Font Weight', 'codexin'), 'selector' => '.primary-title, h2.primary-title.rv2'),
+											array('property' => 'text-align', 'label' => esc_html__( 'Text Align', 'codexin'), 'selector' => '.primary-title, h2.primary-title.rv2'),
+											array('property' => 'text-transform', 'label' => esc_html__( 'Text Transform', 'codexin'), 'selector' => '.primary-title, h2.primary-title.rv2'),
+											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin'), 'selector' => '.primary-title, h2.primary-title.rv2'),
+											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin'), 'selector' => '.primary-title, h2.primary-title.rv2')
 										),
 
 										'Subtitle' => array(
-											array('property' => 'color', 'label' => esc_html__( 'Color', 'codexin'), 'selector' => '.secondary-title'),
-											array('property' => 'font-family', 'label' => esc_html__( 'Font Family', 'codexin'), 'selector' => '.secondary-title'),
-											array('property' => 'font-size', 'label' => esc_html__( 'Font Size', 'codexin'), 'selector' => '.secondary-title'),
-											array('property' => 'line-height', 'label' => esc_html__( 'Line Height', 'codexin'), 'selector' => '.secondary-title'),
-											array('property' => 'font-weight', 'label' => esc_html__( 'Font Weight', 'codexin'), 'selector' => '.secondary-title'),
-											array('property' => 'text-align', 'label' => esc_html__( 'Text Align', 'codexin'), 'selector' => '.secondary-title'),
-											array('property' => 'text-transform', 'label' => esc_html__( 'Text Transform', 'codexin'), 'selector' => '.secondary-title'),
-											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin'), 'selector' => '.secondary-title'),
-											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin'), 'selector' => '.secondary-title'),
+											array('property' => 'color', 'label' => esc_html__( 'Color', 'codexin'), 'selector' => '.secondary-title, .secondary-title.rv2'),
+											array('property' => 'font-family', 'label' => esc_html__( 'Font Family', 'codexin'), 'selector' => '.secondary-title, .secondary-title.rv2'),
+											array('property' => 'font-size', 'label' => esc_html__( 'Font Size', 'codexin'), 'selector' => '.secondary-title, .secondary-title.rv2'),
+											array('property' => 'line-height', 'label' => esc_html__( 'Line Height', 'codexin'), 'selector' => '.secondary-title, .secondary-title.rv2'),
+											array('property' => 'font-weight', 'label' => esc_html__( 'Font Weight', 'codexin'), 'selector' => '.secondary-title, .secondary-title.rv2'),
+											array('property' => 'text-align', 'label' => esc_html__( 'Text Align', 'codexin'), 'selector' => '.secondary-title, .secondary-title.rv2'),
+											array('property' => 'text-transform', 'label' => esc_html__( 'Text Transform', 'codexin'), 'selector' => '.secondary-title, .secondary-title.rv2'),
+											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin'), 'selector' => '.secondary-title, .secondary-title.rv2'),
+											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin'), 'selector' => '.secondary-title, .secondary-title.rv2'),
 										),
 
 										'Divider' => array(
-											array('property' => 'background', 'label' => esc_html__( 'Color', 'codexin'), 'selector' => '.secondary-title::after'),
+											array('property' => 'background-color', 'label' => esc_html__( 'Color', 'codexin'), 'selector' => '.secondary-title::after' ),
 											array('property' => 'width', 'label' => esc_html__( 'Width', 'codexin'), 'selector' => '.secondary-title::after'),
 											array('property' => 'height', 'label' => esc_html__( 'Height', 'codexin'), 'selector' => '.secondary-title::after'),
 											array('property' => 'display', 'label' => esc_html__( 'Display', 'codexin'), 'selector' => '.secondary-title::after'),

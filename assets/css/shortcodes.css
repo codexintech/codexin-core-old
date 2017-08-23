@@ -1,3 +1,16 @@
+/**
+    ========================================================
+       Index :
+        001 - Home - v1 
+        002 - Home - v2
+    ========================================================
+ */
+
+
+/*----------------------------------
+    001 - Home - v1
+-----------------------------------*/
+
 input[type="text"],
 input[type="url"],
 input[type="email"],
@@ -1039,4 +1052,87 @@ h2 {
 @media only screen and (max-width: 767px)
 .project .counter {
     font-size: 32px;
+}
+
+
+
+
+/*======================================================
+    002 - Home - v2
+========================================================*/
+
+/*title default style */
+.rv2-title {
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    padding-top: 32px;
+    margin-bottom: 60px;
+}
+.rv2-title:before, .rv2-title:after {
+    position: absolute;
+    content: "";
+    height: 4px;
+    top: 0;
+    z-index: 1;
+}
+.rv2-title:before {
+    width: 60px;
+    background-color: #23dac9;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+.rv2-title:after {
+    width: 20px;
+    background: #000;
+    left: calc(50% + 10px);
+}
+.after-white.rv2-title:after {
+    background: #fff;
+}
+.rv2-title .secondary-title.rv2:after{
+    display: none;
+}
+h2.primary-title.rv2 {
+    font-size: 40px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 600 ;
+    color: #252525 ;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+.secondary-title.rv2{
+    color: #707070 ;
+    text-transform: initial;
+    font-size: 15px;
+    margin-bottom: 0;
+}
+
+/*title default style end*/
+
+/*--------Servive Box Style Featured-Section -------*/
+.featured {
+    position: relative;
+    z-index: 95;
+}
+.featured-item {
+    padding: 75px 45px 63px;
+    box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.15);
+    background: #fff;
+    position: relative;
+    transition: 0.3s ;
+    top: -80px;
+}
+.featured-icon i:before {
+    color: #707070 ;
+}
+
+.featured-item:hover i:before {
+    color: #23dac9 ;
+}
+
+.item-hover,
+.featured-item:hover{
+    box-shadow: 0px 15px 60px -22px rgba(0,0,0,0.5)
 }
