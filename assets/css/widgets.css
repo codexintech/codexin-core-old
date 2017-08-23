@@ -384,6 +384,7 @@
     Popular projects
 *************************************************************/
 
+.codexin-recent-projects-widget  .posts-single-right p,
 .codexin-popular-project-widget  .posts-single-right p {
     margin-right: 0;
     display: block;
