@@ -155,8 +155,6 @@ class Codexin_Twitter_Widget extends WP_Widget {
 
 		// Passing the transient
 		$cx_twitter = get_transient($transName);
-		echo '<pre>';
-		print_r($cx_twitter);
 		if($cx_twitter && is_array($cx_twitter)) {
 		?>
 		<div class="twitter-widget">
