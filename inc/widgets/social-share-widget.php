@@ -50,8 +50,6 @@ class Codexin_Social_Share_Widget extends WP_Widget {
 	//front-end display of widget
 	public function widget( $args, $instance ) {
 
-		// Retrieving values from plugin options
-		
 		printf( '%s', $args['before_widget'] ); 
 		$share_url = esc_url( get_the_permalink() );
 		if ( is_home() && !is_front_page() ):
