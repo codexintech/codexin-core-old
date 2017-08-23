@@ -31,7 +31,7 @@ class Codexin_Social_Widget extends WP_Widget {
 		echo '<p>'. esc_html__('In Order To Use This Widget Please Fill Up The Social Profile Information In The "Social Media" Section of ', 'codexin') .'<strong><a href="'. esc_url(admin_url().'admin.php?page=codexin-options&action=social') .'" target="_blank">'. esc_html('Codexin Core.', 'codexin') .'</a></strong> '. esc_html__( ' And Refresh This Page to select your desired social profiles.', 'codexin' ) .'</p>';
 
 		// Assigning or updating the values
-		$title 			= ( !empty( $instance[ 'title' ] ) ? $instance[ 'title' ] : esc_html__('Follow Us', 'codexin') );
+		$title 			= ( !empty( $instance[ 'title' ] ) ? $instance[ 'title' ] : '' );
 		$facebook	 	= ( !empty( $instance[ 'facebook' ] ) ? $instance[ 'facebook' ] : '' );
 		$twitter		= ( !empty( $instance[ 'twitter' ] ) ? $instance[ 'twitter' ] : '' );
 		$instagram	 	= ( !empty( $instance[ 'instagram' ] ) ? $instance[ 'instagram' ] : '' );
@@ -47,7 +47,7 @@ class Codexin_Social_Widget extends WP_Widget {
 
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php echo esc_html__('Title:', 'codexin') ?></label>
-			<input type="text" class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" value="<?php echo esc_attr( $title ); ?>">
+			<input type="text" class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" value="<?php echo esc_attr( $title ); ?>" placeholder="<?php echo esc_html__('Ex: Follow Us', 'codexin') ?>">
 		</p>
 		
 		<?php if( isset($this->options['fb_url']) && !empty( $this->options['fb_url'] ) ): ?>

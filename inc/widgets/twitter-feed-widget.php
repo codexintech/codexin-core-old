@@ -30,7 +30,7 @@ class Codexin_Twitter_Widget extends WP_Widget {
 	public function form( $instance ) {
 
 		// Assigning or updating the values
-		$title 			= ( !empty( $instance[ 'title' ] ) ? $instance[ 'title' ] : esc_html__('Twitter Feed', 'codexin') );
+		$title 			= ( !empty( $instance[ 'title' ] ) ? $instance[ 'title' ] : '' );
 		$count 			= ( !empty( $instance[ 'count' ] ) ? absint( $instance[ 'count' ] ) : esc_html__('3', 'codexin') );
 		$tw_profile 	= ( !empty( $instance[ 'tw_profile' ] ) ? $instance[ 'tw_profile' ] : '' );
 		$tw_name 		= ( !empty( $instance[ 'tw_name' ] ) ? $instance[ 'tw_name' ] : '' );
@@ -46,7 +46,7 @@ class Codexin_Twitter_Widget extends WP_Widget {
 
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php echo esc_html__('Title:', 'codexin') ?></label>
-			<input type="text" class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" value="<?php echo esc_attr( $title ); ?>">
+			<input type="text" class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" value="<?php echo esc_attr( $title ); ?>" placeholder="<?php echo esc_html__('Ex: Twitter Feed', 'codexin') ?>">
 		</p>
 
 		<p>

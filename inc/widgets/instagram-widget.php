@@ -99,7 +99,7 @@ class Codexin_Instagram_Widget extends WP_Widget {
                 'id'          => $this->get_field_id( 'title' ),
                 'type'        => 'text',
                 'value'       => $title,
-                'placeholder' => 'Instagram'
+                'placeholder' => 'Instagram Feed'
             )
         );
         $this->form_input(

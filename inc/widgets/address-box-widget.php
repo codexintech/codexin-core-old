@@ -24,7 +24,7 @@ class Codexin_Address_Box extends WP_Widget {
 	public function form( $instance ) {
 
 		// Assigning or updating the values
-		$title 				= ( !empty( $instance[ 'title' ] ) ? $instance[ 'title' ] : esc_html__('Address Box', 'codexin') );
+		$title 				= ( !empty( $instance[ 'title' ] ) ? $instance[ 'title' ] : '' );
 		$company_name 		= ( !empty( $instance[ 'company_name' ] ) ? $instance[ 'company_name' ]: '' );
 		$small_description 	= ( !empty( $instance[ 'small_description' ] ) ? $instance[ 'small_description' ]: '' );
 		$street_address 	= ( !empty( $instance[ 'street_address' ] ) ? $instance[ 'street_address' ] : '' );
@@ -41,7 +41,7 @@ class Codexin_Address_Box extends WP_Widget {
 
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php echo esc_html__('Title:', 'codexin') ?></label>
-			<input type="text" class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" value="<?php echo esc_attr( $title ); ?>">
+			<input type="text" class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" value="<?php echo esc_attr( $title ); ?>" placeholder="<?php echo esc_html__('Ex: Company Location', 'codexin') ?>">
 		</p>
 
 		<p>

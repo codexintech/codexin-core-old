@@ -66,7 +66,7 @@ class Codexin_Mailchimp_Widget extends WP_Widget {
 	public function form( $instance ) {
 
 		// Assigning or updating the values
-		$title 		= ( !empty( $instance[ 'title' ] ) ? $instance[ 'title' ] : esc_html__('Newsletter Subscription', 'codexin') );
+		$title 		= ( !empty( $instance[ 'title' ] ) ? $instance[ 'title' ] : '' );
 		$desc 		= ( !empty( $instance[ 'desc' ] ) ? $instance[ 'desc' ] : '' );
 		$list 		= ( !empty( $instance[ 'list' ] ) ? $instance[ 'list' ] : '' );
 		$opt_in 	= ( !empty( $instance[ 'opt_in' ] ) ? $instance[ 'opt_in' ] : '' );
@@ -85,7 +85,7 @@ class Codexin_Mailchimp_Widget extends WP_Widget {
 
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php echo esc_html__('Title:', 'codexin') ?></label>
-			<input type="text" class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" value="<?php echo esc_attr( $title ); ?>">
+			<input type="text" class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" value="<?php echo esc_attr( $title ); ?>" placeholder="<?php echo esc_html__('Ex: Newsletter Subscription', 'codexin') ?>">
 		</p>
 
 		<p>
