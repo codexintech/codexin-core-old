@@ -174,7 +174,7 @@ class Codexin_Recent_Projects extends WP_Widget {
 							foreach ($term_list as $sterm) {
 								$port_cat[] = ucfirst($sterm->name); 
 							}
-							echo '<p>' . implode( " ,", array_reverse( $port_cat ) ) . '</p>';
+							echo '<p>' . implode( ", ", array_reverse( $port_cat ) ) . '</p>';
 						}
 						//End custom meta data
 						
