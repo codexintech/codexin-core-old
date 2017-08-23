@@ -154,39 +154,39 @@ class Codexin_Social_Widget extends WP_Widget {
 			<p><span class="italic"><?php echo esc_html($instance[ 'title' ] ); ?></span>
 
 				<?php if( !empty( $cx_facebook ) && ( 'on' == $instance[ 'facebook' ] ) ) : ?>
-				<a href="<?php echo esc_url($cx_facebook); ?>"><i class="fa fa-facebook"></i></a>
+				<a href="<?php echo esc_url($cx_facebook); ?>" target="_blank"><i class="fa fa-facebook"></i></a>
 				<?php endif; ?>
 
 				<?php if( !empty( $cx_twitter ) && ( 'on' == $instance[ 'twitter' ] ) ) : ?>
-				<a href="<?php echo esc_url($cx_twitter); ?>"><i class="fa fa-twitter"></i></a>
+				<a href="<?php echo esc_url($cx_twitter); ?>" target="_blank"><i class="fa fa-twitter"></i></a>
 				<?php endif; ?>
 
 				<?php if( !empty( $cx_instagram ) && ( 'on' == $instance[ 'instagram' ] ) ) : ?>
-				<a href="<?php echo esc_url($cx_instagram); ?>"><i class="fa fa-instagram"></i></a>
+				<a href="<?php echo esc_url($cx_instagram); ?>" target="_blank"><i class="fa fa-instagram"></i></a>
 				<?php endif; ?>
 
 				<?php if( !empty( $cx_pinterest ) && ( 'on' == $instance[ 'pinterest' ] ) ) : ?>
-				<a href="<?php echo esc_url($cx_pinterest); ?>"><i class="fa fa-pinterest"></i></a>
+				<a href="<?php echo esc_url($cx_pinterest); ?>" target="_blank"><i class="fa fa-pinterest"></i></a>
 				<?php endif; ?>
 
 				<?php if( !empty( $cx_behance ) && ( 'on' == $instance[ 'behance' ] ) ) : ?>
-				<a href="<?php echo esc_url($cx_behance); ?>"><i class="fa fa-behance"></i></a>
+				<a href="<?php echo esc_url($cx_behance); ?>" target="_blank"><i class="fa fa-behance"></i></a>
 				<?php endif; ?>
 
 				<?php if( !empty( $cx_gplus ) && ( 'on' == $instance[ 'google_plus' ] ) ) : ?>
-				<a href="<?php echo esc_url($cx_gplus); ?>"><i class="fa fa-google-plus"></i></a>
+				<a href="<?php echo esc_url($cx_gplus); ?>" target="_blank"><i class="fa fa-google-plus"></i></a>
 				<?php endif; ?>
 
 				<?php if( !empty( $cx_youtube ) && ( 'on' == $instance[ 'youtube' ] ) ) : ?>
-				<a href="<?php echo esc_url($cx_youtube); ?>"><i class="fa fa-youtube-play"></i></a>
+				<a href="<?php echo esc_url($cx_youtube); ?>" target="_blank"><i class="fa fa-youtube-play"></i></a>
 				<?php endif; ?>
 
 				<?php if( !empty( $cx_skype ) && ( 'on' == $instance[ 'skype' ] ) ) : ?>
-				<a href="<?php echo esc_url($cx_skype); ?>"><i class="fa fa-skype"></i></a>
+				<a href="<?php echo esc_url($cx_skype); ?>" target="_blank"><i class="fa fa-skype"></i></a>
 				<?php endif; ?>
 
 				<?php if( !empty( $cx_linkedin ) && ( 'on' == $instance[ 'linkedin' ] ) ) : ?>
-				<a href="<?php echo esc_url($cx_linkedin); ?>"><i class="fa fa-linkedin"></i></a>
+				<a href="<?php echo esc_url($cx_linkedin); ?>" target="_blank"><i class="fa fa-linkedin"></i></a>
 				<?php endif; ?>
 
 			</p>
