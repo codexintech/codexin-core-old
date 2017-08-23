@@ -161,7 +161,7 @@ class Codexin_Twitter_Widget extends WP_Widget {
 			<div class="cx-tweets-container" id="twitter_<?php echo $args['widget_id']; ?>">
 				<?php foreach($cx_twitter as $cx_tweet): ?>
 				<div class="twitter-feed-wrapper">
-					<?php if( 'on' == $instance[ 'tw_profile' ] ): ?>\
+					<?php if( 'on' == $instance[ 'tw_profile' ] ): ?>
 					<div class="twitter-feed-left">
 						<a href="//twitter.com/<?php echo esc_html( $cx_tweet->user->screen_name ); ?>"">
 							<img class="media-object" src="<?php echo esc_url( $cx_tweet->user->profile_image_url ); ?>" alt="twitter-user-profile">
