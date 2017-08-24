@@ -1304,3 +1304,47 @@ section#feedback {
 .item{
     text-align: center;
 }
+
+
+/*------------------ CTA Section -------------------*/
+.btn-rv {
+    padding: 11px 25px;
+    overflow: hidden;
+    display: inline-block;
+    transition: 0.3s ;
+    text-transform: uppercase;
+    min-width: 123px;
+}
+
+.btn-white{
+    background: #fff ;
+    color: #606060 ;
+}
+
+.btn-white:hover{
+    background: #23dac9;
+    color: #fff ;
+}
+
+.btn-radius{
+    border-radius: 5px;
+}
+
+.cta-wrapper-rv2 {
+    background: none;
+    padding: 45px 0;
+}
+.cta-content {
+    display: table;
+    width: 100% ;
+}
+.cta-title {
+    display: table-cell;
+    color: #fff;
+    font-size: 25px;
+    margin: 0;
+    vertical-align: middle;
+}
+.cta-content a{
+    float: right;
+}
