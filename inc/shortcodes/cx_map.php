@@ -157,6 +157,7 @@ function cx_map_kc() {
 										'bw' 	=> 'Black & White',
 										'light' => 'Light',
 										'blue' 	=> 'Blue',
+										'DarkTurquoise' => 'Dark Turquoise',
 								),
 	 							'value'			=> '1',
 	 							'description'	=> esc_html__( 'You can select the map color here. Please note that if you enable "Advanced Map Color Customization" in the advanced tab, default color scheme will not work.', 'codexin' ),
