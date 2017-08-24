@@ -38,7 +38,7 @@ function cx_call_to_action_shortcode(  $atts, $content = null) {
    		<div class="cta-row">
    			<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
    				<h4 class="cta-title"><?php echo esc_html__( $cta_title ); ?></h4>
-   				<a href="#" class="btn-rv btn-white "><?php echo esc_html__( $button_text ); ?></a>
+   				<a href="<?php echo esc_url($retrieve_link[0]); ?>" <?php echo $title; ?> <?php echo $target; ?>" class="btn-rv btn-white "><?php echo esc_html__( $button_text ); ?></a>
    			</div>
    		</div>
    	</div><!--  end of cta-wrapper-rv2  -->

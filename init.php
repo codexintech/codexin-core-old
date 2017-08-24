@@ -131,7 +131,11 @@ class Codexin_Core {
 		 */
 		add_action( 'init', 'codexin_add_image_sizes' );
 		function codexin_add_image_sizes() {
-		    add_image_size('rectangle-one', 600, 400, true);
+			add_image_size('rectangle-one', 600, 400, true);
+		    add_image_size('blog-grid-image', 540, 341, true);
+		    add_image_size('event-v2-image', 570, 310, true);
+			add_image_size('first-portfolio-img-rv2', 370, 550, true);
+			add_image_size('portfolio-min-img-rv2', 370, 250, true);
 		}
 
 		/**
