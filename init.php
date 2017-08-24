@@ -134,6 +134,17 @@ class Codexin_Core {
 		    add_image_size('rectangle-one', 600, 400, true);
 		}
 
+		/**
+		 * Adding flaticons on front end for King Composer
+		 *
+		 */
+		add_action('init', 'codexin_flaticons');
+		function codexin_flaticons() {
+			if( function_exists( 'kc_add_icon' ) ) {
+				kc_add_icon( CODEXIN_CORE_ASSET_DIR.'/icofonts/flaticon.css' );
+			}
+		}
+
 	}
 
 }
