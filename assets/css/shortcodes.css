@@ -1218,3 +1218,89 @@ h2.primary-title.rv2 {
 .single-event ul i {
     margin-right: 10px;
 }
+
+/*----------------Client FeedBack------*/
+section#feedback {
+    margin-top: 0;
+    margin-bottom: 0;
+
+}
+.client-feedback{
+    /*background: url(../rev-2-img/Client-bg.jpg);*/
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    padding: 100px 0;
+}
+.client-comment,
+.client-name .title-3,
+.client-feedback .secondary-title.rv2 ,
+.client-feedback .primary-title.rv2{
+    color: #fff ;
+}
+.client-comment p{
+    color: #d2d2d2;
+}
+.client-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-right: 25px;
+    overflow: hidden;
+}
+.client-info{
+    display: table;
+    margin-bottom: 25px;
+}
+.client-img img{
+    width: 100% ;
+}
+.client-name{
+    width: calc(100% - 125px);
+    display: table-cell;
+    vertical-align: middle;
+}
+.flaticon-right-quotes-symbol:before{
+    margin: 0 ;
+}
+.client-name .flaticon-right-quotes-symbol:before{
+    color:#23dac9 ;
+    font-size: 25px;
+}
+.client-name .title-3{
+    margin: 0 ;
+}
+.client-feedback:before {
+    content: "";
+    background: #0a1632;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    opacity: .82;
+    transition: 0.3s;
+}
+.client-comment-curosel{
+    /*overflow: hidden;*/
+    width: 100% ;
+}
+.client-comment-curosel .col-sm-6{
+    width: 100%;
+}
+.client-comment-curosel.owl-theme .owl-nav.disabled+.owl-dots {
+    margin-top: 40px;
+    height: 20px;
+    overflow: hidden;
+}
+
+
+#client-carousel-rv2 .item img {
+    width: initial;
+    max-width: 100%;
+    max-height: 85px;
+    height: 100%;
+}
+.item{
+    text-align: center;
+}
