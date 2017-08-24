@@ -102,8 +102,10 @@ function cx_social_media_share_shortcode( $atts, $content = null ) {
 // Registering new param type to show info
 add_action('init', 'social_info_param', 99 );
 function social_info_param() {
-    global $kc;
-    $kc->add_param_type( 'cx_social_info', 'cx_social_info_cb' );
+	if ( isset( $GLOBALS['kc'] ) ) {
+	    global $kc;
+	    $kc->add_param_type( 'cx_social_info', 'cx_social_info_cb' );
+	}
 }		
 function cx_social_info_cb() {
 	echo '<p>'. esc_html__('In Order To Use This Widget Please Fill Up The Social Profile Information In The "Social Media" Section of ', 'codexin') . '<strong><a href="'. esc_url(admin_url().'admin.php?page=codexin-options&action=social') .'" target="_blank">'. esc_html('Codexin Core.', 'codexin') .'</a></strong></p>';

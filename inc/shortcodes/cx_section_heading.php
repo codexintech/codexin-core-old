@@ -94,8 +94,8 @@ function cx_section_heading_kc() {
 								'name'			=> 'layout',
 								'admin_label'	=> true,
 								'options'		=> array(
-									'1'	=> CODEXIN_CORE_ASSET_DIR . '/images/section-header/layout-1.png',
-									'2'	=> CODEXIN_CORE_ASSET_DIR . '/images/section-header/layout-2.png',
+									'1'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/section-header/layout-1.png',
+									'2'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/section-header/layout-2.png',
 								),
 								'value'	=> '1'
 							),
@@ -161,15 +161,15 @@ function cx_section_heading_kc() {
 										),
 
 										'Subtitle' => array(
-											array('property' => 'color', 'label' => esc_html__( 'Color', 'codexin'), 'selector' => '.secondary-title, .secondary-title.rv2'),
-											array('property' => 'font-family', 'label' => esc_html__( 'Font Family', 'codexin'), 'selector' => '.secondary-title, .secondary-title.rv2'),
-											array('property' => 'font-size', 'label' => esc_html__( 'Font Size', 'codexin'), 'selector' => '.secondary-title, .secondary-title.rv2'),
-											array('property' => 'line-height', 'label' => esc_html__( 'Line Height', 'codexin'), 'selector' => '.secondary-title, .secondary-title.rv2'),
-											array('property' => 'font-weight', 'label' => esc_html__( 'Font Weight', 'codexin'), 'selector' => '.secondary-title, .secondary-title.rv2'),
-											array('property' => 'text-align', 'label' => esc_html__( 'Text Align', 'codexin'), 'selector' => '.secondary-title, .secondary-title.rv2'),
-											array('property' => 'text-transform', 'label' => esc_html__( 'Text Transform', 'codexin'), 'selector' => '.secondary-title, .secondary-title.rv2'),
-											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin'), 'selector' => '.secondary-title, .secondary-title.rv2'),
-											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin'), 'selector' => '.secondary-title, .secondary-title.rv2'),
+											array('property' => 'color', 'label' => esc_html__( 'Color', 'codexin'), 'selector' => '.secondary-title, .secondary-title .rv2'),
+											array('property' => 'font-family', 'label' => esc_html__( 'Font Family', 'codexin'), 'selector' => '.secondary-title, .secondary-title .rv2'),
+											array('property' => 'font-size', 'label' => esc_html__( 'Font Size', 'codexin'), 'selector' => '.secondary-title, .secondary-title .rv2'),
+											array('property' => 'line-height', 'label' => esc_html__( 'Line Height', 'codexin'), 'selector' => '.secondary-title, .secondary-title .rv2'),
+											array('property' => 'font-weight', 'label' => esc_html__( 'Font Weight', 'codexin'), 'selector' => '.secondary-title, .secondary-title .rv2'),
+											array('property' => 'text-align', 'label' => esc_html__( 'Text Align', 'codexin'), 'selector' => '.secondary-title, .secondary-title .rv2'),
+											array('property' => 'text-transform', 'label' => esc_html__( 'Text Transform', 'codexin'), 'selector' => '.secondary-title, .secondary-title .rv2'),
+											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin'), 'selector' => '.secondary-title, .secondary-title .rv2'),
+											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin'), 'selector' => '.secondary-title, .secondary-title .rv2'),
 										),
 
 										'Divider' => array(

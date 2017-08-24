@@ -1080,9 +1080,15 @@ h2 {
 
 
 
+
+
 /*======================================================
     002 - Home - v2
 ========================================================*/
+.pad-50 {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
 
 /*title default style */
 .rv2-title {
@@ -1130,6 +1136,7 @@ h2.primary-title.rv2 {
     text-transform: initial;
     font-size: 15px;
     margin-bottom: 0;
+    font-weight: normal;
 }
 
 /*title default style end*/
@@ -1158,4 +1165,209 @@ h2.primary-title.rv2 {
 .item-hover,
 .featured-item:hover{
     box-shadow: 0px 15px 60px -22px rgba(0,0,0,0.5)
+}
+
+/*--Servicebox-3---*/
+.service-item {
+    padding-left: 40px;
+    padding-right: 40px;
+    background: #f7f7f7;
+}
+
+.service-icon i {
+    width: 50px;
+    height: 45px;
+    line-height: 45px;
+    text-align: left;
+    font-size: 40px;
+    color: rebeccapurple;
+}
+
+.service-icon {
+    margin-bottom: 35px;
+}
+.service-content .title-3 {
+    margin-bottom: 20px;
+}
+
+.service-item p{
+    margin: 0 ;
+}
+
+
+
+/*---------Events v2------------*/
+
+.wreapper-event-v2 {
+
+}
+
+.single-event .title-3{
+    font-size: 25px;
+    margin-bottom: 13px;
+    transition: 0.3s ;
+}
+.single-event ul{
+    list-style-type: none;
+    padding-left: 0 ;
+    margin-bottom: 24px;
+}
+.single-event ul li {
+    display: inline-block;
+    margin-right: 20px;
+}
+.single-event ul i,
+.single-event:hover h3{
+    color: #23dac9 ;
+}
+.event-img {
+    position: relative;
+    margin-bottom: 27px;
+}
+.event-img:before {
+    content: "";
+    background: #23dac9;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    opacity: 0;
+    transition: 0.3s ;
+}
+.single-event:hover .event-img:before {
+    opacity: 0.75 ;
+}
+.single-event ul i {
+    margin-right: 10px;
+}
+
+/*----------------Client FeedBack------*/
+section#feedback {
+    margin-top: 0;
+    margin-bottom: 0;
+
+}
+.client-feedback{
+    /*background: url(../rev-2-img/Client-bg.jpg);*/
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    padding: 100px 0;
+}
+.client-comment,
+.client-name .title-3,
+.client-feedback .secondary-title.rv2 ,
+.client-feedback .primary-title.rv2{
+    color: #fff ;
+}
+.client-comment p{
+    color: #d2d2d2;
+}
+.client-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-right: 25px;
+    overflow: hidden;
+}
+.client-info{
+    display: table;
+    margin-bottom: 25px;
+}
+.client-img img{
+    width: 100% ;
+}
+.client-name{
+    width: calc(100% - 125px);
+    display: table-cell;
+    vertical-align: middle;
+}
+.flaticon-right-quotes-symbol:before{
+    margin: 0 ;
+}
+.client-name .flaticon-right-quotes-symbol:before{
+    color:#23dac9 ;
+    font-size: 25px;
+}
+.client-name .title-3{
+    margin: 0 ;
+}
+.client-feedback:before {
+    content: "";
+    background: #0a1632;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    opacity: .82;
+    transition: 0.3s;
+}
+.client-comment-curosel{
+    /*overflow: hidden;*/
+    width: 100% ;
+}
+.client-comment-curosel .col-sm-6{
+    width: 100%;
+}
+.client-comment-curosel.owl-theme .owl-nav.disabled+.owl-dots {
+    margin-top: 40px;
+    height: 20px;
+    overflow: hidden;
+}
+
+
+#client-carousel-rv2 .item img {
+    width: initial;
+    max-width: 100%;
+    max-height: 85px;
+    height: 100%;
+}
+.item{
+    text-align: center;
+}
+
+
+/*------------------ CTA Section -------------------*/
+.btn-rv {
+    padding: 11px 25px;
+    overflow: hidden;
+    display: inline-block;
+    transition: 0.3s ;
+    text-transform: uppercase;
+    min-width: 123px;
+}
+
+.btn-white{
+    background: #fff ;
+    color: #606060 ;
+}
+
+.btn-white:hover{
+    background: #23dac9;
+    color: #fff ;
+}
+
+.btn-radius{
+    border-radius: 5px;
+}
+
+.cta-wrapper-rv2 {
+    background: none;
+    padding: 45px 0;
+}
+.cta-content {
+    display: table;
+    width: 100% ;
+}
+.cta-title {
+    display: table-cell;
+    color: #fff;
+    font-size: 25px;
+    margin: 0;
+    vertical-align: middle;
+}
+.cta-content a{
+    float: right;
 }
