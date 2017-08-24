@@ -8,7 +8,7 @@
 
 // Registering Animated Counter Shortcode
 function cx_animated_counter_shortcode( $atts, $content = null ) {
-   extract(shortcode_atts(array(
+    extract(shortcode_atts(array(
 		'icon_toggle' => '',
 		'icon'        => '',
 		'count_up'    => '',
@@ -126,7 +126,6 @@ function cx_animated_counter_kc() {
   	        								array('property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '.project .counter'),
   	        								array('property' => 'font-weight', 'label' => esc_html__('Font Weight', 'codexin'), 'selector' => '.project .counter'),
   	        								array('property' => 'text-align', 'label' => esc_html__('Text Align', 'codexin'), 'selector' => '.project .counter'),
-  	        								array('property' => 'text-transform', 'label' => esc_html__('Text Transform', 'codexin'), 'selector' => '.project .counter'),
   	        								array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.project .counter'),
   	        								array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.project .counter'),
         								),
@@ -148,7 +147,9 @@ function cx_animated_counter_kc() {
   	        								array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.project i'),
   	        								array('property' => 'display', 'label' => esc_html__('Display', 'codexin'), 'selector' => '.project i'),
   	        								array('property' => 'text-align', 'label' => esc_html__('Text Align', 'codexin'), 'selector' => '.project i'),
-  	        								array('property' => 'width', 'label' => esc_html__('Width', 'codexin'), 'selector' => '.project i'),
+                                            array('property' => 'width', 'label' => esc_html__('Width', 'codexin'), 'selector' => '.project i'),
+                                            array('property' => 'height', 'label' => esc_html__('Height', 'codexin'), 'selector' => '.project i'),
+  	        								array('property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '.project i'),
   	        								array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.project i'),
   	        								array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.project i')
         								),
