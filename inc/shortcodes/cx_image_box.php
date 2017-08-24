@@ -8,7 +8,7 @@
 */
 
 // Registering About Box Shortcode
-function cx_about_box_shortcode(  $atts, $content = null) {
+function cx_image_box_shortcode(  $atts, $content = null) {
    extract(shortcode_atts(array(
    			'image'	 			=> '',
    			'img_alt'		 	=> '',
@@ -78,13 +78,13 @@ function cx_about_box_shortcode(  $atts, $content = null) {
 } // end of cx_about_box
 
 // Integrating Shortcode with King Composer
-function cx_about_box_kc() {
+function cx_image_box_kc() {
 	if (function_exists('kc_add_map')) { 
 	    kc_add_map(
 	    	array(
 	    		'cx_about_box' 		=> array(
-	    			'name' 			=> esc_html__( 'Codexin About Box', 'codexin' ),
-	    			'description' 	=> esc_html__('Mini About Box', 'codexin'),
+	    			'name' 			=> esc_html__( 'Codexin Image Box', 'codexin' ),
+	    			'description' 	=> esc_html__('Mini Image Box', 'codexin'),
 	    			'icon' 			=> 'kc-icon-feature-box',
 	    			'category' 		=> 'Codexin',
 	    			'params' 		=> array(
@@ -186,6 +186,9 @@ function cx_about_box_kc() {
 	    									array('property' => 'display', 'label' => esc_html__('Display', 'codexin'), 'selector' => '.single-content i'),
 	    									array('property' => 'text-align', 'label' => esc_html__('Text Align', 'codexin'), 'selector' => '.single-content i'),
 	    									array('property' => 'width', 'label' => esc_html__('Width', 'codexin'), 'selector' => '.single-content i'),
+	    									array('property' => 'height', 'label' => esc_html__('Height', 'codexin'), 'selector' => '.single-content i'),
+	    									array('property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '.single-content i'),
+	    									array('property' => 'border-radius', 'label' => esc_html__('Border radius', 'codexin'), 'selector' => '.single-content i'),
 	    									array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.single-content i'),
 	    									array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.single-content i')
     									),
@@ -199,7 +202,6 @@ function cx_about_box_kc() {
 	    								'Box'	=> array(
 	    									array('property' => 'background', 'label' => esc_html__('Background', 'codexin'), 'selector' => '.img-thumb .content-wrapper, :hover .single-content-wrapper, .img-thumb a:hover .single-content-wrapper'),
 	    									array('property' => 'border', 'label' => esc_html__('Border', 'codexin')),
-	    									array('property' => 'border-radius', 'label' => esc_html__('Border Radius', 'codexin')),
 	    									array('property' => 'box-shadow', 'label' => esc_html__('Box Shadow', 'codexin'), 'selector' => '+.about-box'),
 	    									array('property' => 'box-shadow', 'label' => esc_html__('Box Shadow on Hover', 'codexin'), 'selector' => '+.about-box:hover'),
 	    									array('property' => 'transition', 'label' => esc_html__('Hover Transition Animation', 'codexin'), 'selector' => '+.about-box'),
