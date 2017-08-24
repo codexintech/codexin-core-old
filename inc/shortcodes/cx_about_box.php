@@ -24,7 +24,7 @@ function cx_about_box_shortcode(  $atts, $content = null) {
 	$result = '';
 
 	// Retrieving the image url
-	$retrive_img_url = retrieve_img_src( $image, 'about-mini-image' );
+	$retrive_img_url = retrieve_img_src( $image, 'rectangle-one' );
 	$ret_full_img_url = retrieve_img_src( $image, 'full' );
 
 	// Retrieving the url
@@ -46,9 +46,9 @@ function cx_about_box_shortcode(  $atts, $content = null) {
 		<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
 			<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
 				<?php if ( $img_action == 'open_custom_link' ): ?>
-				<a href="<?php echo esc_url($retrieve_link[0]); ?>" <?php echo $title; ?> <?php echo $target; ?>>
+						<a href="<?php echo esc_url($retrieve_link[0]); ?>" <?php echo $title; ?> <?php echo $target; ?>>
 				<?php elseif ( $img_action == 'img_pop' ): ?>
-				<a href="<?php echo $ret_full_img_url; ?>" class="event-image-popup">
+						<a href="<?php echo $ret_full_img_url; ?>" class="event-image-popup">
 				<?php else: ?>
 				<div class="content-wrapper">
 				<?php endif; ?>
@@ -168,7 +168,7 @@ function cx_about_box_kc() {
 	    								"screens" => "any,1199,991,767,479",
 
 	    								'Hover Text' => array(
-	    									array('property' => 'color', 'label' => esc_html__('Label Color', 'codexin'), 'selector' => '.single-content p'),
+	    									array('property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.single-content p'),
 	    									array('property' => 'font-family', 'label' => esc_html__('Font Family', 'codexin'), 'selector' => '.single-content p'),
 	    									array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.single-content p'),
 	    									array('property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '.single-content p'),
@@ -180,7 +180,7 @@ function cx_about_box_kc() {
     									),
 
 	    								'Icon' 	=> array(
-	    									array('property' => 'color', 'label' => esc_html__('Label Color', 'codexin'), 'selector' => '.single-content i'),
+	    									array('property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.single-content i'),
 	    									array('property' => 'background', 'label' => esc_html__('Label Color', 'codexin'), 'selector' => '.single-content i'),
 	    									array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.single-content i'),
 	    									array('property' => 'display', 'label' => esc_html__('Display', 'codexin'), 'selector' => '.single-content i'),
@@ -197,6 +197,7 @@ function cx_about_box_kc() {
     									),
 
 	    								'Box'	=> array(
+	    									array('property' => 'background', 'label' => esc_html__('Background', 'codexin'), 'selector' => '.img-thumb .content-wrapper, :hover .single-content-wrapper, .img-thumb a:hover .single-content-wrapper'),
 	    									array('property' => 'border', 'label' => esc_html__('Border', 'codexin')),
 	    									array('property' => 'border-radius', 'label' => esc_html__('Border Radius', 'codexin')),
 	    									array('property' => 'box-shadow', 'label' => esc_html__('Box Shadow', 'codexin'), 'selector' => '+.about-box'),

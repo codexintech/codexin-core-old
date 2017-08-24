@@ -131,7 +131,7 @@ class Codexin_Core {
 		 */
 		add_action( 'init', 'codexin_add_image_sizes' );
 		function codexin_add_image_sizes() {
-		    add_image_size('blog-grid-image', 540, 341, true);
+		    add_image_size('rectangle-one', 600, 400, true);
 		}
 
 	}

@@ -63,7 +63,7 @@ function cx_blog_shortcode( $atts, $content = null ) {
 					<div class="blog-wrapper">
 						<div class="img-thumb">
 							<div class="img-wrapper">
-								<img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'blog-grid-image' ) : '//placehold.it/540x341' ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" class="img-responsive">
+								<img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'rectangle-one' ) : '//placehold.it/540x341' ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" class="img-responsive">
 							</div>
 							<?php if( $show_date ) : ?>
 							<div class="meta">

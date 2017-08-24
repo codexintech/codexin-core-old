@@ -82,7 +82,7 @@ function cx_service_box_shortcode( $atts, $content = null ) {
   if( $layout == 3 ) :
 
     // Retrieving the image url
-    $retrive_img_url = retrieve_img_src( $image, 'about-mini-image' );
+    $retrive_img_url = retrieve_img_src( $image, 'rectangle-one' );
     $ret_full_img_url = retrieve_img_src( $image, 'full' );
 
     // Assigning a master css class and hooking into KC
