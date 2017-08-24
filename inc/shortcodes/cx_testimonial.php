@@ -200,7 +200,7 @@ function cx_testimonial_shortcode( $atts, $content = null ) {
    								<div class="client ">
    									<div class="client-info">
    										<div class="client-img">
-   											<img src="<?php echo esc_url( the_post_thumbnail_url( 'testimonial-mini-image' ) ); ?>" alt="<?php echo esc_attr( $img_alt ); ?>>
+   											<img src="<?php echo esc_url( the_post_thumbnail_url( 'testimonial-mini-image' ) ); ?>" alt="<?php echo esc_attr( $img_alt ); ?>">
    										</div>
    										<div class="client-name">
    											<i class="flaticon-right-quotes-symbol"></i>
