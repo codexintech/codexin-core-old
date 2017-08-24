@@ -1371,3 +1371,141 @@ section#feedback {
 .cta-content a{
     float: right;
 }
+
+
+/*------------------------------ Portfolio Section rv2 ---------------------*/
+.portfolio-area-rv2 {
+
+}
+
+.portfolio-rv2 .image-mask{
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    margin: auto;
+}
+
+.portfolio-rv2:hover:before {
+    visibility: visible;
+    background: #23dac9;
+    opacity: 0.85;
+}
+.portfolio-rv2:before {
+    position: absolute;
+    content: "";
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+}
+
+figure.portfolio-rv2 {
+    position: relative;
+}
+
+.portfolio-rv2:before, .portfolio-rv2 .image-mask a {
+    position: absolute;
+    content: "";
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+}
+
+figure.portfolio-rv2:hover .image-mask a {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+.portfolio-rv2 .image-content p a {
+    font-size: 20px;
+    text-transform: uppercase;
+    margin-top: 20px;
+    color: #fff;
+    font-weight: normal;
+    font-family: Poppins;
+}
+
+.portfolio-rv2 .image-content i {
+    font-size: 40px;
+    line-height: 40px;
+}
+
+
+.rv2 .portfolio-filter ul {
+    text-align: none;
+}
+.portfolio-filter.rv2 ul li{
+    float: left;
+}
+.portfolio-rv2{
+    position: relative;
+    margin-top: 30px;
+    transition: 0.3s ;
+}
+
+.portfolio-rv2 .image-content i {
+    font-size: 40px;
+    line-height: 40px;
+}
+.portfolio-filter.rv2  .rv2-title,
+.portfolio-filter.rv2 .list-inline {
+    margin: 0;
+}
+.portfolio_rv2-button {
+    display: table;
+    width: 100%;
+    margin-bottom: 30px;
+}
+.row-middle{
+    display: table-cell;
+    vertical-align: bottom;
+    float: none;
+}
+.portfolio-filter.rv2 ul li{
+    border: 0px solid;
+    font-size: 18px;
+    font-weight: 400;
+    transition: 0.3s ;
+}
+
+.portfolio-filter.rv2 ul li:hover,
+.portfolio-filter.rv2 ul li.view-all{
+    background: #23dac9 ;
+    color: #fff ;
+}
+.portfolio-filter.rv2 ul li.view-all{
+    margin-left: 30px;
+}
+.portfolio-filter.rv2 ul li.active{
+    color: #23dac9 ;
+    background: transparent;
+}
+
+.portfolio_rv2-button .rv2-title{
+    float: left;
+}
+.portfolio_rv2-button .rv2-title:before,
+.portfolio_rv2-button  .rv2-title:after{
+    right: inherit;
+    left: 0 ;
+}
+.portfolio_rv2-button  .rv2-title:after{
+    left: 40px;
+}
+.portfolio-rv2 img{
+    max-width: 100%;
+}
+#portfolio_rv2 .image-content {
+    top: 50%;
+    transform: translateY(-50%);
+}
