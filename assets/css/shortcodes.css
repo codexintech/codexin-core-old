@@ -69,19 +69,20 @@ input[type="button"]:hover{
     001 - cx_section_heading
 **********************************/
 
-.primary-title {
+.section-heading .primary-title {
     margin-top: 0;
     margin-bottom: 5px;
     text-align: center;
 }
 
-.secondary-title {
+.section-heading .secondary-title {
     margin-bottom: 35px;
     text-transform: uppercase;
     text-align: center;
+    margin-top: 0;
 }
 
-.secondary-title::after {
+.section-heading .secondary-title::after {
     content: "";
     width: 80px;
     height: 3px;
@@ -91,8 +92,12 @@ input[type="button"]:hover{
     margin-top: 15px;
 }
 
-.secondary-title::after {
+.section-heading .secondary-title::after {
     background: #295970;
+}
+
+.section-heading .cx-description {
+    text-align: center;
 }
 
 /***********************************
@@ -254,12 +259,14 @@ input[type="button"]:hover{
     003 - cx_animated_counter
 ***********************************/
 
+.cx-animated-counter {
+    padding: 100px 25px;
+    background: #f5f5f5;
+}
 
 .cx-animated-counter .project {
     width: 100%;
     text-align: center;
-    padding: 100px 25px;
-    background: #f5f5f5;
 }
 
 .cx-animated-counter .project:last-child {}
@@ -282,6 +289,10 @@ input[type="button"]:hover{
 
 .cx-animated-counter .project i {
     font-size: 60px;
+}
+
+.cx-animated-counter.with-icon  {
+    padding:48px 25px;
 }
 
 /***************************************

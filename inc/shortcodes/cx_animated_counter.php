@@ -162,7 +162,6 @@ function cx_animated_counter_kc() {
   	        							'Box'	=> array(
   	        								array('property' => 'background'),
   	        								array('property' => 'border', 'label' => esc_html__('Border', 'codexin') ),
-  	        								array('property' => 'border-radius', 'label' => esc_html__('Border Radius', 'codexin') ),
   	        								array('property' => 'box-shadow', 'label' => esc_html__('Box Shadow', 'codexin'), 'selector' => '+.cx-animated-counter'),
   	        								array('property' => 'box-shadow', 'label' => esc_html__('Box Shadow on Hover', 'codexin'), 'selector' => '+.cx-animated-counter:hover'),
   	        								array('property' => 'transition', 'label' => esc_html__('Hover Transition Animation', 'codexin'), 'selector' => '+.cx-animated-counter'),

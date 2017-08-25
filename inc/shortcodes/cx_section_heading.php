@@ -34,8 +34,8 @@ function cx_section_heading_shortcode(  $atts, $content = null) {
 		?>
 			<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
 				<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
-					<h3 class="primary-title"><?php echo esc_html( $title ); ?></h3>
-					<h2 class="secondary-title"><?php echo esc_html( $subtitle ); ?></h2>
+					<h3 class="primary-title"><?php echo esc_html( $subtitle ); ?></h3>
+					<h2 class="secondary-title"><?php echo esc_html( $title ); ?></h2>
 					<?php if( $description_toggle == 'yes' ): ?>
 					<div class="col-md-10 col-md-offset-1 cx-description">
 						<p><?php printf('%s', $description ); ?></p>		
@@ -58,8 +58,8 @@ function cx_section_heading_shortcode(  $atts, $content = null) {
 
 			<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
 				<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
-					<h2 class="primary-title rv2"> <?php echo esc_html( $title ); ?> </h2>
-					<h4 class="secondary-title rv2"><?php echo esc_html( $subtitle ); ?></h4>
+					<h2 class="primary-title rv2"> <?php echo esc_html( $subtitle ); ?> </h2>
+					<h4 class="secondary-title rv2"><?php echo esc_html( $title ); ?></h4>
 				</div>
 			</div>
 
@@ -101,15 +101,15 @@ function cx_section_heading_kc() {
 							),
 
 		                    array(
-		                        'name' 			=> 'title',
-		                        'label' 		=> esc_html__( 'Enter Title', 'codexin' ),
+		                        'name' 			=> 'subtitle',
+		                        'label' 		=> esc_html__( 'Enter Subtitle', 'codexin' ),
 		                        'type' 			=> 'text',
 		                        'admin_label'	=> true,
 		                    ),
 
 		                    array(
-		                        'name' 			=> 'subtitle',
-		                        'label' 		=> esc_html__( 'Enter Subtitle', 'codexin' ),
+		                        'name' 			=> 'title',
+		                        'label' 		=> esc_html__( 'Enter Title', 'codexin' ),
 		                        'type' 			=> 'text',
 		                    ),
 
@@ -148,7 +148,7 @@ function cx_section_heading_kc() {
 								'options' => array(
 									array(
 										"screens" => "any,1199,991,767,479",
-										'Title' => array(
+										'Subtitle' => array(
 											array('property' => 'color', 'label' => esc_html__( 'Color', 'codexin'), 'selector' => '.primary-title, h2.primary-title.rv2'),
 											array('property' => 'font-family', 'label' => esc_html__( 'Font Family', 'codexin'), 'selector' => '.primary-title, h2.primary-title.rv2'),
 											array('property' => 'font-size', 'label' => esc_html__( 'Font Size', 'codexin'), 'selector' => '.primary-title, h2.primary-title.rv2'),
@@ -160,7 +160,7 @@ function cx_section_heading_kc() {
 											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin'), 'selector' => '.primary-title, h2.primary-title.rv2')
 										),
 
-										'Subtitle' => array(
+										'Title' => array(
 											array('property' => 'color', 'label' => esc_html__( 'Color', 'codexin'), 'selector' => '.secondary-title, .secondary-title .rv2'),
 											array('property' => 'font-family', 'label' => esc_html__( 'Font Family', 'codexin'), 'selector' => '.secondary-title, .secondary-title .rv2'),
 											array('property' => 'font-size', 'label' => esc_html__( 'Font Size', 'codexin'), 'selector' => '.secondary-title, .secondary-title .rv2'),
@@ -195,9 +195,6 @@ function cx_section_heading_kc() {
 										'Box'	=> array(
 											array('property' => 'background'),
 											array('property' => 'border', 'label' => esc_html__( 'Border', 'codexin')),
-											array('property' => 'display', 'label' => esc_html__( 'Display', 'codexin')),
-											array('property' => 'border-radius', 'label' => esc_html__( 'Border Radius','codexin')),
-											array('property' => 'box-shadow', 'label' => esc_html__( 'Box Shadow','codexin'), 'selector' => '+.section-heading'),
 											array('property' => 'margin', 'label' => esc_html__( 'Margin','codexin')),
 											array('property' => 'padding', 'label' => esc_html__( 'Padding','codexin')),
 										)
