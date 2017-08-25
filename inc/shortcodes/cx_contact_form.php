@@ -10,37 +10,61 @@
 // Registering Contact Form Shortcode
 function cx_contact_form_shortcode( $atts, $content = null ) {
 	extract(shortcode_atts(array(
+		'layout'		=> '',
    		'contact_title'	=> '',
    		'show_form_id'	=> '',
    		'contact_desc'	=> '',
    		'class'			=> ''
 	), $atts));
 
-	// Assigning a master css class and hooking into KC
-	$master_class = apply_filters( 'kc-el-class', $atts );
-	$master_class[] = 'contact-form-wrapper reveal-contact-form';
-
-	// Retrieving user define classes
-	$classes = array( 'contact-form' );
-	(!empty($class)) ? $classes[] = $class : '';
-
 	$result = '';
 
-	ob_start(); ?>
+	ob_start(); 
 
-	<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
-		<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
-			<div class="contact-intro">
-				<h3><?php echo esc_html( $contact_title ); ?></h3>
-				<p><?php printf( '%s', $contact_desc ); ?></p>
-			</div>		
-			<div class="row form-element">
-				<?php echo do_shortcode( '[contact-form-7 id="'. $show_form_id .'" title=""]' ); ?>
-			</div> <!-- end of form-element -->
-		</div> <!-- end of contact-form -->
-	</div> <!-- end of contact-form-wrapper -->
+	if( ! empty( $layout ) ) :	
+		if( $layout == 1 ) :
+		// Assigning a master css class and hooking into KC
+		$master_class = apply_filters( 'kc-el-class', $atts );
+		$master_class[] = 'contact-form-wrapper reveal-contact-form';
+
+		// Retrieving user define classes
+		$classes = array( 'contact-form' );
+		(!empty($class)) ? $classes[] = $class : ''; 
+	?>
+
+		<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
+			<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
+				<div class="contact-intro">
+					<h3><?php echo esc_html( $contact_title ); ?></h3>
+					<p><?php printf( '%s', $contact_desc ); ?></p>
+				</div>		
+				<div class="row form-element">
+					<?php echo do_shortcode( '[contact-form-7 id="'. $show_form_id .'" title=""]' ); ?>
+				</div> <!-- end of form-element -->
+			</div> <!-- end of contact-form -->
+		</div> <!-- end of contact-form-wrapper -->
+
+	<?php endif;
+	if( $layout == 2 ) :
+		// Assigning a master css class and hooking into KC
+		$master_class = apply_filters( 'kc-el-class', $atts );
+	$master_class[] = 'contact-form-wrapper-rv2';
+
+		// Retrieving user define classes
+	$classes = array( 'contact-form-position' );
+	(!empty($class)) ? $classes[] = $class : '';	
+	?>
+		<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
+			<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">	
+				<div id="contact-form" class="contact-form form-validate">
+					<?php echo do_shortcode( '[contact-form-7 id="'. $show_form_id .'" title=""]' ); ?>
+				</div> 	
+			</div> <!-- end of contact-form-position -->
+		</div> <!-- end of contact-form-wrapper-rv2 -->	
+	<?php endif; ?>
 
 	<?php
+	endif;
 	$result .= ob_get_clean();
 	return $result;
 
@@ -101,13 +125,38 @@ function cx_contact_form_kc() {
  					'description' => esc_html__('Codexin Contact From', 'codexin'),
  					'icon' => 'et-hazardous',
  					'category' => 'Codexin',
+ 					//Only load assets when using this element
+					'assets' => array(
+						'scripts' => array(
+							'validate-js' 	=> CODEXIN_CORE_ASSET_DIR . '/js/jquery.validate.js',
+							'validation-js' => CODEXIN_CORE_ASSET_DIR . '/js/shortcode-js/form-validation.js',
+						),
+                	), //End assets
+
  					'params' => array(
  						//General params
  						'general' => array(
 	 						array(
+	 							'name' 			=> 'layout',
+	 							'label' 		=> esc_html__( 'Select Contact Form Template', 'codexin' ),
+	 							'type' 			=> 'radio_image',
+	 							'admin_label'	=> true,
+								'options'		=> array(
+									'1'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/contact-form/layout-1.png',
+									'2'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/contact-form/layout-2.png',
+								),
+								'value'	=> '1',
+	 							'admin_label' 	=> true,
+	 						),
+
+	 						array(
 	 							'name' 			=> 'contact_title',
 	 							'label' 		=> esc_html__( 'Enter Title ', 'codexin' ),
 	 							'type' 			=> 'text',
+	 							'relation'		=> array(
+	 								'parent'	=> 'layout',
+	 								'show_when'	=> '1',
+	 							),
 	 							'description'	=> esc_html__( 'Get In touch', 'codexin' ),
 	 							'admin_label' 	=> true,
 	 						),
@@ -124,6 +173,10 @@ function cx_contact_form_kc() {
 	 						array(
 	 							'name' 			=> 'description_toggle',
 	 							'label' 		=> esc_html__( 'Enable Description Field? ', 'codexin' ),
+	 							'relation'		=> array(
+	 								'parent'	=> 'layout',
+	 								'show_when'	=> '1',
+	 							),
 	 							'type' 			=> 'toggle',
 	 						),
 
