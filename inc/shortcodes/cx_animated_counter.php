@@ -21,15 +21,15 @@ function cx_animated_counter_shortcode( $atts, $content = null ) {
 
 	// Assigning a master css class and hooking into KC
 	$master_class = apply_filters( 'kc-el-class', $atts );
-	$master_class[] = 'cx-animated-counter';
+
+    if( $icon_toggle ):
+	$master_class[] = 'cx-animated-counter with-icon';
+    else:
+    $master_class[] = 'cx-animated-counter';
+    endif;
 	
 	// Retrieving user define classes
-    if( $icon_toggle ):
-	$classes = array( 'project with-icon' );
-    else:
     $classes = array( 'project' );
-    endif;
-    
 	(!empty($class)) ? $classes[] = $class : '';
 
    	ob_start(); 
