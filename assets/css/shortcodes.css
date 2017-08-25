@@ -65,6 +65,14 @@ input[type="button"]:hover{
     margin-top: 10px;
 }
 
+
+.clearfix::before, .clearfix::after {
+    content:"";
+    display:table;
+}
+.clearfix::after {clear:both;}
+
+
 /**********************************
     001 - cx_section_heading
 **********************************/
@@ -298,33 +306,44 @@ input[type="button"]:hover{
 /***************************************
     004 - cx_service_box
 ****************************************/
-.service {
-    margin-bottom: 60px;
-}
 
-.single-service {
+.cx-service-box .service-single {
     margin-bottom: 40px;
     margin-top: 50px;
 }
 
-.single-service .media-left {
+.cx-service-box .service-single .media-thumb {
     padding-right: 10px;
     padding-top: 7px;
+    width: 75px;
+    float: left;
+    display: block;
 }
 
-.single-service .media-heading {
+.cx-service-box .service-single .media-title {
+    font-size: 16px;
     text-transform: uppercase;
+    font-weight: bold;
     margin-bottom: 10px;
-    margin-top: 5px;
+    margin-top: 2px;
+    letter-spacing: normal;
 }
 
-.single-service .media-left i {
-    border-radius: 100px;
-    color: #295970;
+.cx-service-box .service-single .media-thumb i {
     font-size: 50px;
     padding: 5px;
     text-align: center;
+    line-height: 50px;
 }
+
+.cx-service-box .service-single .media-desc {
+    width: calc(100% - 75px);
+    float: right;
+    display: block;
+    padding-top:7px;
+}
+
+
 
 /**************************************
  005 - cx_information/events

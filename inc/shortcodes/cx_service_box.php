@@ -33,23 +33,23 @@ function cx_service_box_shortcode( $atts, $content = null ) {
       $master_class[] = 'cx-service-box';
 
       // Retrieving user define classes
-      $classes = array( 'single-service' );
+      $classes = array( 'service-single clearfix' );
       (!empty($class)) ? $classes[] = $class : '';
    ?>
   	<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
   		<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
-  			<div class="media">
+  			<div class="media-wrapper">
   				<?php if( $icon_toggle ): ?>
-  				<div class="media-left">
+  				<div class="media-thumb">
   					<i class="<?php echo esc_attr( $icon ); ?>"></i>
   				</div>
   				<?php endif; ?>
-  				<div class="media-body">
-  					<h4 class="media-heading"><?php echo esc_html( $service_title ); ?></h4>
-  					<p><?php printf( '%s', $service_desc ) ; ?></p>
+  				<div class="media-desc">
+  					<h4 class="media-title"><?php echo esc_html( $service_title ); ?></h4>
+  					<div class="media-texts"><?php printf( '%s', $service_desc ) ; ?></div>
   				</div>
-  			</div><!-- end of media -->
-  		</div><!-- end of single-service -->
+  			</div><!-- end of media-wrapper -->
+  		</div><!-- end of service-single -->
   	</div><!-- end of cx-service-box -->
 	<?php 
     endif;
@@ -148,12 +148,12 @@ function cx_service_box_kc() {
   	        					'admin_label' 	=> true,
         					 ),
 
-                            array(
-                                'name' 			=> 'icon_toggle',
-                                'label' 		=> esc_html__( 'Enable Service Icon? ', 'codexin' ),
-                                'type' 			=> 'toggle',
-                                'value'			=> 'no'
-                            ),
+                    array(
+                        'name' 			=> 'icon_toggle',
+                        'label' 		=> esc_html__( 'Enable Service Icon? ', 'codexin' ),
+                        'type' 			=> 'toggle',
+                        'value'			=> 'no'
+                    ),
 
   	        				array(
   	        					'name' 			=> 'icon',
@@ -208,35 +208,35 @@ function cx_service_box_kc() {
   	        							"screens" => "any,1199,991,767,479",
 
   	        							'Title' => array(
-  	        								array('property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.single-service h4,.title-3'),
-  	        								array('property' => 'font-family', 'label' => esc_html__('Font Family', 'codexin'), 'selector' => '.single-service h4,.title-3'),
-  	        								array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.single-service h4,.title-3'),
-  	        								array('property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '.single-service h4,.title-3'),
-  	        								array('property' => 'font-weight', 'label' => esc_html__('Font Weight', 'codexin'), 'selector' => '.single-service h4,.title-3'),
-  	        								array('property' => 'text-align', 'label' => esc_html__('Text Align', 'codexin'), 'selector' => '.single-service h4,.title-3'),
-  	        								array('property' => 'text-transform', 'label' => esc_html__('Text Transform', 'codexin'), 'selector' => '.single-service h4,.title-3'),
-  	        								array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.single-service h4,.title-3'),
-  	        								array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.single-service h4,.title-3'),
+  	        								array('property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.service-single h4,.title-3'),
+  	        								array('property' => 'font-family', 'label' => esc_html__('Font Family', 'codexin'), 'selector' => '.service-single h4,.title-3'),
+  	        								array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.service-single h4,.title-3'),
+  	        								array('property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '.service-single h4,.title-3'),
+  	        								array('property' => 'font-weight', 'label' => esc_html__('Font Weight', 'codexin'), 'selector' => '.service-single h4,.title-3'),
+  	        								array('property' => 'text-align', 'label' => esc_html__('Text Align', 'codexin'), 'selector' => '.service-single h4,.title-3'),
+  	        								array('property' => 'text-transform', 'label' => esc_html__('Text Transform', 'codexin'), 'selector' => '.service-single h4,.title-3'),
+  	        								array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.service-single h4,.title-3'),
+  	        								array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.service-single h4,.title-3'),
         								),
 
-  	        							'Designation' => array(
-  	        								array('property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.single-service p,.servicebox-2-desc, .service-item p'),
-  	        								array('property' => 'font-family', 'label' => esc_html__('Font Family', 'codexin'), 'selector' => '.single-service p,.servicebox-2-desc, .service-item p'),
-  	        								array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.single-service p,.servicebox-2-desc, .service-item p'),
-  	        								array('property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '.single-service p,.servicebox-2-desc, .service-item p'),
-  	        								array('property' => 'font-weight', 'label' => esc_html__('Font Weight', 'codexin'), 'selector' => '.single-service p,.servicebox-2-desc, .service-item p'),
-  	        								array('property' => 'text-align', 'label' => esc_html__('Text Align', 'codexin'), 'selector' => '.single-service p,.servicebox-2-desc, .service-item p'),
-  	        								array('property' => 'text-transform', 'label' => esc_html__('Text Transform', 'codexin'), 'selector' => '.single-service p,.servicebox-2-desc, .service-item p'),
-  	        								array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.single-service p,.servicebox-2-desc, .service-item p'),
-  	        								array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.single-service p,.servicebox-2-desc, .service-item p'),
+  	        							'Description' => array(
+  	        								array('property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.service-single .media-texts,.servicebox-2-desc, .service-item p'),
+  	        								array('property' => 'font-family', 'label' => esc_html__('Font Family', 'codexin'), 'selector' => '.service-single .media-texts,.servicebox-2-desc, .service-item p'),
+  	        								array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.service-single .media-texts,.servicebox-2-desc, .service-item p'),
+  	        								array('property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '.service-single .media-texts,.servicebox-2-desc, .service-item p'),
+  	        								array('property' => 'font-weight', 'label' => esc_html__('Font Weight', 'codexin'), 'selector' => '.service-single .media-texts,.servicebox-2-desc, .service-item p'),
+  	        								array('property' => 'text-align', 'label' => esc_html__('Text Align', 'codexin'), 'selector' => '.service-single .media-texts,.servicebox-2-desc, .service-item p'),
+  	        								array('property' => 'text-transform', 'label' => esc_html__('Text Transform', 'codexin'), 'selector' => '.service-single .media-texts,.servicebox-2-desc, .service-item p'),
+  	        								array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.service-single .media-texts,.servicebox-2-desc, .service-item p'),
+  	        								array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.service-single .media-texts,.servicebox-2-desc, .service-item p'),
         								),
 
   	        							'Icon' => array(
-  	        								array('property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.single-service i,.featured-icon i:before'),
+  	        								array('property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.service-single i,.featured-icon i:before'),
                             array('property' => 'color', 'label' => esc_html__('Color On Hover', 'codexin'), 'selector' => '.featured-item:hover i:before'),
-  	        								array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.single-service i,.rv2-icon-1 i:before'),
-  	        								array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.single-service i,.rv2-icon-1 i:before'),
-  	        								array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.single-service i,.rv2-icon-1 i:before')
+  	        								array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.service-single i,.rv2-icon-1 i:before'),
+  	        								array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.service-single i,.rv2-icon-1 i:before'),
+  	        								array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.service-single i,.rv2-icon-1 i:before')
         								),
 
   	        							'Box'	=> array(
