@@ -24,7 +24,12 @@ function cx_animated_counter_shortcode( $atts, $content = null ) {
 	$master_class[] = 'cx-animated-counter';
 	
 	// Retrieving user define classes
-	$classes = array( 'project' );
+    if( $icon_toggle ):
+	$classes = array( 'project with-icon' );
+    else:
+    $classes = array( 'project' );
+    endif;
+    
 	(!empty($class)) ? $classes[] = $class : '';
 
    	ob_start(); 
@@ -33,7 +38,7 @@ function cx_animated_counter_shortcode( $atts, $content = null ) {
     <div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
         <div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
 
-            <?php if( $icon_toggle == 'yes' ): ?>
+            <?php if( $icon_toggle ): ?>
             <i class="<?php echo esc_attr( $icon ); ?>"></i>
             <?php endif; ?>
 

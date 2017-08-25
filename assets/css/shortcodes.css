@@ -246,6 +246,10 @@ input[type="button"]:hover{
     text-align: center;
 }
 
+.about-box figcaption {
+    display: none;
+}
+
 /***********************************
     003 - cx_animated_counter
 ***********************************/
