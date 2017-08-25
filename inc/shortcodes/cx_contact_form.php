@@ -46,11 +46,11 @@ function cx_contact_form_shortcode( $atts, $content = null ) {
 
 	<?php endif;
 	if( $layout == 2 ) :
-		// Assigning a master css class and hooking into KC
-		$master_class = apply_filters( 'kc-el-class', $atts );
+	// Assigning a master css class and hooking into KC
+	$master_class = apply_filters( 'kc-el-class', $atts );
 	$master_class[] = 'contact-form-wrapper-rv2';
 
-		// Retrieving user define classes
+	// Retrieving user define classes
 	$classes = array( 'contact-form-position' );
 	(!empty($class)) ? $classes[] = $class : '';	
 	?>

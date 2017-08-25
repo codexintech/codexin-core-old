@@ -1670,3 +1670,113 @@ figure.portfolio-rv2:hover .image-mask a {
 #location.location-rv2 .wpcf7-response-output {
     color: #fff;
 }
+
+
+
+/*------------------------------------------------
+    rv2 letest-post section
+------------------------------------------------*/
+.rv2-blog-container {
+
+}
+
+.blog-row-rv2 {
+
+}
+
+.post-img{
+    position: relative;
+    margin-bottom: 30px;
+}
+.post-img img {
+    width: 100%;
+}
+.date-time{
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    width: 60px;
+    height: 60px;
+    background: #23dac9;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 15px;
+    text-align: center;
+    font-weight: 500;
+    padding: 5px;
+    transition: 0.3s;
+
+}
+.rv2-single-post:hover .date-time{
+    opacity: 0 ;
+    visibility: visible;
+}
+.post-img:before{
+    position: absolute;
+    content: "";
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    opacity: 0 ;
+    visibility: hidden;
+    transition: 0.3s ;
+    background:#23dac9 ;
+}
+.post-img a {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    left: 50%;
+    opacity: 0 ;
+    transition: 0.3s ;
+}
+.rv2-single-post {
+    margin-bottom: 50px;
+}
+.rv2-single-post:hover .post-img:before{
+    opacity: .7;
+    visibility: visible;
+}
+.rv2-single-post .post-info {
+    margin-bottom: 30px;
+}
+.rv2-single-post:hover .post-img a{
+    opacity: 1 ;
+}
+.rv2-single-post ul{
+    margin-bottom: 0px;
+    padding-left: 0 ;
+}
+.rv2-single-post ul li {
+    display: inline-block;
+    margin-right: 20px;
+}
+.rv2-single-post ul i {
+    color: #23dac9;
+    margin-right: 5px;
+}
+.rv2-single-post ul li a{
+    color: #707070;
+    font-size: 16px;
+}
+
+.title-3 {
+    color: #252525;
+    text-transform: uppercase;
+    font-size: 20px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+
+.rv2-single-post .title-3{
+    margin-bottom:10px ;
+}
+.rv2-single-post p{
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    line-height: 1.65em;
+    color: #707070;
+    margin-bottom: 10px;
+}

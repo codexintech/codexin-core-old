@@ -10,6 +10,7 @@
 // Registering Codexin Blog Shortcode
 function cx_blog_shortcode( $atts, $content = null ) {
 	extract(shortcode_atts(array(
+			'layout'			=> '',
 			'img_alt'			=> '',
 			'number_of_posts'	=> '',
 			'order'				=> '',
@@ -24,126 +25,206 @@ function cx_blog_shortcode( $atts, $content = null ) {
 
 	$result = '';
 
-	// Assigning a master css class and hooking into KC
-   $master_class = apply_filters( 'kc-el-class', $atts );
-   $master_class[] = 'cx-blog';
-
-   // Retrieving user define classes
-   $classes = array( 'blog-row' );
-   (!empty($class)) ? $classes[] = $class : '';
-
    ob_start(); 
+
+   if( ! empty( $layout ) ) :
+   		if( $layout == 1 ) :
+   		// Assigning a master css class and hooking into KC
+	   $master_class = apply_filters( 'kc-el-class', $atts );
+	   $master_class[] = 'cx-blog';
+
+	   // Retrieving user define classes
+	   $classes = array( 'blog-row' );
+   	   (!empty($class)) ? $classes[] = $class : '';		
 	?>
-	<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
-		<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
+		<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
+			<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
 
-			<?php 
-			//start query..
-			$args = array(
-					'post_type'				=> 'post',
-					'posts_per_page'		=> $number_of_posts,
-					'order'					=> $order,
-					'orderby'				=> $orderby,
-					'meta_key'				=> 'cx_post_views',
-					'ignore_sticky_posts' 	=> 1
-				);
+				<?php 
+				//start query..
+				$args = array(
+						'post_type'				=> 'post',
+						'posts_per_page'		=> $number_of_posts,
+						'order'					=> $order,
+						'orderby'				=> $orderby,
+						'meta_key'				=> 'cx_post_views',
+						'ignore_sticky_posts' 	=> 1
+					);
 
-			$data = new WP_Query( $args );
+				$data = new WP_Query( $args );
 
-			if( $data->have_posts() ) :
+				if( $data->have_posts() ) :
 
-				while( $data->have_posts() ) : $data->the_post();
-				$column = 12/$number_of_posts;
+					while( $data->have_posts() ) : $data->the_post();
+					$column = 12/$number_of_posts;
 
-				// Retrieving Image alt tag
-				$image_alt = ( !empty( retrieve_alt_tag() ) ) ? retrieve_alt_tag() : get_the_title();
+					// Retrieving Image alt tag
+					$image_alt = ( !empty( retrieve_alt_tag() ) ) ? retrieve_alt_tag() : get_the_title();
 
-			 ?>
-				<div class="col-md-<?php echo $column ?> col-sm-12">
-					<div class="blog-wrapper">
-						<div class="img-thumb">
-							<div class="img-wrapper">
-								<img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'rectangle-one' ) : '//placehold.it/540x341' ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" class="img-responsive">
+				 ?>
+					<div class="col-md-<?php echo $column ?> col-sm-12">
+						<div class="blog-wrapper">
+							<div class="img-thumb">
+								<div class="img-wrapper">
+									<img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'rectangle-one' ) : '//placehold.it/540x341' ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" class="img-responsive">
+								</div>
+								<?php if( $show_date ) : ?>
+								<div class="meta">
+									<p><?php echo get_the_time( 'd' ); ?></p>
+									<p><?php echo get_the_time( 'M' ); ?></p>
+								</div>
+								<?php endif; ?>
 							</div>
-							<?php if( $show_date ) : ?>
-							<div class="meta">
-								<p><?php echo get_the_time( 'd' ); ?></p>
-								<p><?php echo get_the_time( 'M' ); ?></p>
-							</div>
-							<?php endif; ?>
-						</div>
 
-						<div class="blog-content">
-							<p class="blog-title">
-								<?php echo esc_html( wp_trim_words( get_the_title(), $title_length ) ); ?>
-							</p>
-							<p class="blog-desc"> 
-								<?php echo esc_html( wp_trim_words( get_the_excerpt(), $desc_length ) ); ?> 
-							</p>
-							<a class="read-more" href="<?php echo esc_url( get_the_permalink() ); ?>">
-								<?php echo esc_html( !empty( $readmore_text ) ? $readmore_text : __('Read More', 'codexin') ); ?>
-							</a>
-						</div>
+							<div class="blog-content">
+								<p class="blog-title">
+									<?php echo esc_html( wp_trim_words( get_the_title(), $title_length ) ); ?>
+								</p>
+								<p class="blog-desc"> 
+									<?php echo esc_html( wp_trim_words( get_the_excerpt(), $desc_length ) ); ?> 
+								</p>
+								<a class="read-more" href="<?php echo esc_url( get_the_permalink() ); ?>">
+									<?php echo esc_html( !empty( $readmore_text ) ? $readmore_text : __('Read More', 'codexin') ); ?>
+								</a>
+							</div>
+						<?php
+							if( $postview_comments ) : ?>
+							<div class="blog-info">
+								<?php
+								$order_cpv = 'meta_value_num';
+								$order_com = 'comment_count';
+								if( $orderby == $order_cpv ) : 
+								?>
+								<span>
+									<i class="fa fa-eye"></i> <i>
+										<?php echo codexin_get_post_views(get_the_ID()); ?>
+									</i>
+								</span>
+								<span> 											
+									<i class="fa fa-comments"></i> <i>
+										<?php comments_number('0', '1', '%'); ?>	
+									</i>
+								</span>
+								<?php elseif( $orderby == $order_com ) : ?>
+								<span> 											
+									<i class="fa fa-comments"></i> <i>
+										<?php comments_number('0', '1', '%'); ?>	
+									</i>
+								</span>
+								<span>
+									<i class="fa fa-eye"></i> <i>
+										<?php echo codexin_get_post_views(get_the_ID()); ?>
+									</i>
+								</span>
+								<?php else : ?>
+								<span>
+									<i class="fa fa-eye"></i> <i>
+										<?php echo codexin_get_post_views(get_the_ID()); ?>
+									</i>
+								</span>
+								<span> 											
+									<i class="fa fa-comments"></i> <i>
+										<?php comments_number('0', '1', '%'); ?>	
+									</i>
+								</span>
+							<?php endif; ?>	
+
+							</div>
+
+						<?php endif; //End postview_comments if ?>
+
+						</div><!--end of blog-wrapper -->
+					</div> <!-- end of col -->
 					<?php
-						if( $postview_comments ) : ?>
-						<div class="blog-info">
-							<?php
-							$order_cpv = 'meta_value_num';
-							$order_com = 'comment_count';
-							if( $orderby == $order_cpv ) : 
-							?>
-							<span>
-								<i class="fa fa-eye"></i> <i>
-									<?php echo codexin_get_post_views(get_the_ID()); ?>
-								</i>
-							</span>
-							<span> 											
-								<i class="fa fa-comments"></i> <i>
-									<?php comments_number('0', '1', '%'); ?>	
-								</i>
-							</span>
-							<?php elseif( $orderby == $order_com ) : ?>
-							<span> 											
-								<i class="fa fa-comments"></i> <i>
-									<?php comments_number('0', '1', '%'); ?>	
-								</i>
-							</span>
-							<span>
-								<i class="fa fa-eye"></i> <i>
-									<?php echo codexin_get_post_views(get_the_ID()); ?>
-								</i>
-							</span>
-							<?php else : ?>
-							<span>
-								<i class="fa fa-eye"></i> <i>
-									<?php echo codexin_get_post_views(get_the_ID()); ?>
-								</i>
-							</span>
-							<span> 											
-								<i class="fa fa-comments"></i> <i>
-									<?php comments_number('0', '1', '%'); ?>	
-								</i>
-							</span>
-						<?php endif; ?>	
 
+					endwhile;
+				endif;
+				wp_reset_postdata();
+				?>
+			</div> <!-- end of blog-row -->
+		</div> <!-- end of cx-blog -->
+
+		<div class="clearfix"></div>
+
+	<?php endif; //End Layout - 1
+
+		 if( $layout == 2 ) :
+		 // Assigning a master css class and hooking into KC
+	     $master_class = apply_filters( 'kc-el-class', $atts );
+	     $master_class[] = 'letest-post mrg-t-50';
+
+	    // Retrieving user define classes
+	    $classes = array( 'rv2-blog-container' );
+   	    (!empty($class)) ? $classes[] = $class : '';		
+	?>
+			<div id="letest_post" class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
+				<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
+					<div class="blog-row-rv2">
+						<?php 
+						//start query..
+						$args = array(
+							'post_type'				=> 'post',
+							'posts_per_page'		=> $number_of_posts,
+							'order'					=> $order,
+							'orderby'				=> $orderby,
+							'meta_key'				=> 'cx_post_views',
+							'ignore_sticky_posts' 	=> 1
+							);
+
+						$data = new WP_Query( $args );
+
+						if( $data->have_posts() ) :
+
+							while( $data->have_posts() ) : $data->the_post();
+							$column = 12/$number_of_posts;
+
+							// Retrieving Image alt tag
+							$image_alt = ( !empty( retrieve_alt_tag() ) ) ? retrieve_alt_tag() : get_the_title();
+
+						?>
+						<div class="col-md-<?php echo $column ?> col-sm-12">
+							<div class="rv2-single-post">
+								<div class="post-img">
+									<img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'rv2-blog-mini-img' ) : '//placehold.it/360x282' ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" class="img-responsive">
+									<a href="<?php the_permalink(); ?>" class="btn-white btn-rv">
+										<?php echo esc_html( !empty( $readmore_text ) ? $readmore_text : __('Read More', 'codexin') ); ?>
+									</a>
+									<?php if( $show_date ) : ?>
+										<span class="date-time"> <?php the_time( 'd M' ); ?> </span>
+									<?php endif; ?>
+								</div>
+								<div class="post-info">
+									<h3 class="title-3">
+										<?php echo esc_html( wp_trim_words( get_the_title(), $title_length ) ); ?>
+									</h3>
+									<p> <?php the_category( ' ' ); ?> </p>
+									<ul>
+										<li><i class="fa fa-user" aria-hidden="true"></i> <a href="<?php echo esc_url(get_the_author_meta()); ?>"> <?php the_author(); ?> </a> </li>
+										<li><i class="fa fa-paper-plane" aria-hidden="true"></i> <a href=""> 
+										<?php comments_number('0', '1', '%'); ?> </a> </li>
+										<li><i class="fa fa-heart" aria-hidden="true"></i>  <a href=""> <?php // codexin_post_like( the_ID()); ?> </a></li>
+									</ul>
+								</div>
+								<p>
+								<?php echo esc_html( wp_trim_words( get_the_excerpt(), $desc_length ) ); ?> 
+								</p>
+							</div>
 						</div>
+						<?php
 
-					<?php endif; //End postview_comments if ?>
+						endwhile;
+						endif;
+						wp_reset_postdata();
+						?>
+					</div> <!-- end of blog-row-rv2 -->
+				</div> <!-- end of rv2-blog-container -->
+			</div> <!-- end of letest-post -->
+			<div class="clearfix"></div>
 
-					</div><!--end of blog-wrapper -->
-				</div> <!-- end of col -->
-				<?php
-
-				endwhile;
-			endif;
-			wp_reset_postdata();
-			?>
-		</div> <!-- end of blog-row -->
-	</div> <!-- end of cx-blog -->
-
-	<div class="clearfix"></div>
-
+	<?php endif; //End Layout - 2 ?>
+			
 	<?php
+	endif;
 	$result .= ob_get_clean();
 	return $result;
 
@@ -162,6 +243,18 @@ function cx_blog_kc() {
 					'params' => array(
 	    				// General Params
 						'general' => array(
+							array(
+								'name'	=> 'layout',
+								'lable'	=> esc_html__( 'Select Blog Post Template', 'codexin' ),
+								'type'	=> 'radio_image',
+								'options'	=> array(
+									'1'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/blog/layout-1.png',
+									'2'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/blog/layout-2.png',
+								),
+								'value'	=> '1',
+								'admin_label'	=> true,
+							),
+
 							array(
 	    						'name'        	=> 'number_of_posts',
 	    						'label'       	=> esc_html__('Number Of Post to Display', 'codexin'),
@@ -198,6 +291,10 @@ function cx_blog_kc() {
     								'meta_value_num' => 'Views Count',
     								'rand'			 => 'Randomize',
     							),
+    							'relation'	=> array(
+    								'parent' 	=> 'layout',
+    								'show_when'	=> '1',
+    							),
 	    						'value'			=> 'date',
 	    						'description'	=> esc_html__( 'Choose The Posts Sorting Method:', 'codexin' ),
 	    					),
@@ -232,7 +329,7 @@ function cx_blog_kc() {
 	    						'description'	=> esc_html__('Specify number of Words that you want to show in your excerpt', 'codexin'),
 	    						'options'		=> array(
 	    							'min'			=> 10,
-	    							'max'			=> 20,
+	    							'max'			=> 32,
 	    							'unit'			=> '',
 	    							'show_input'	=> false
     							)
@@ -243,6 +340,10 @@ function cx_blog_kc() {
 	    						'name'			=> 'postview_comments',
 	    						'label'			=> esc_html__( 'Show Posts View & Comments Number?', 'codexin' ),
 	    						'value'			=> 'yes',
+	    						'relation'	=> array(
+    								'parent' 	=> 'layout',
+    								'show_when'	=> '1',
+    							),
 	    						'description'	=> esc_html__('Displays the post views count and comments count', 'codexin'),
 	    						'admin_label' => true
 	    					),

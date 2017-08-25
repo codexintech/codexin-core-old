@@ -136,6 +136,7 @@ class Codexin_Core {
 		    add_image_size('event-v2-image', 570, 310, true);
 			add_image_size('first-portfolio-img-rv2', 370, 550, true);
 			add_image_size('portfolio-min-img-rv2', 370, 250, true);
+			add_image_size('rv2-blog-mini-img', 360, 282, true);
 		}
 
 		/**
