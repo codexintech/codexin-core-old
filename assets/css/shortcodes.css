@@ -1518,3 +1518,125 @@ figure.portfolio-rv2:hover .image-mask a {
     top: 50%;
     transform: translateY(-50%);
 }
+
+/***********************************    
+    rv2 location section
+***********************************/
+#location.location-rv2.mrg-50{
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+#gmap{
+    height: 550px;
+}
+#map2 {
+    position: relative;
+}
+#location.location-rv2 {
+    background: transparent;
+}
+#map2, 
+.contact-form-wrapper-rv2 {
+    height: 550px;
+}
+#location.location-rv2 .contact-form {
+    width: 520px;
+}
+
+#location.location-rv2 input {
+    padding: 14px 20px;
+}
+
+#contact-form form > div {
+    margin-right: 0;
+    margin-left: 0;
+}
+
+#location input, #location textarea {
+    border-radius: 0;
+    border: 1px solid #ddd;
+    box-shadow: none;
+}
+
+.contact-form-wrapper-rv2{
+    position: relative;
+    /*background: url(../rev-2-img/Contact-bg.jpg);*/
+}
+.contact-form-position{
+    position: absolute;
+}
+.contact-form-position {
+    position: absolute;
+    left: 50px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.contact-form-wrapper-rv2:before{
+    position: absolute;
+    content: "";
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: #000 ;
+    opacity: .7 ;
+}
+.contact-form-wrapper-rv2  .form-control{
+    background: transparent;
+    color: #fff ;
+}
+#location.location-rv2  input{
+    height: 50px;
+}
+#location.location-rv2 input[type="submit"] {
+    padding: 0 45px;
+    border: 1px solid transparent;
+    background: #23dac9;
+}
+#location.location-rv2 input[type="submit"]:hover{
+    background: transparent;
+    border: 1px solid #fff ;
+    color: #fff ;
+    padding: 0 45px;
+}
+#location.location-rv2 .form-group {
+    margin-bottom: 18px;
+}
+#location.location-rv2 .pad-name-rv2{
+    padding-left: 0;
+}
+#location.location-rv2 .pad-email-rv2{
+    padding-right: 0;
+}
+#location.location-rv2 textarea.form-control{
+    height: 140px;
+}
+#location.location-rv2 textarea::-webkit-input-placeholder,
+#location.location-rv2 input[type="email"]::-webkit-input-placeholder,
+#location.location-rv2 input[type="text"]::-webkit-input-placeholder {
+    color: #fff;
+}
+
+#location.location-rv2 textarea::-moz-placeholder,
+#location.location-rv2 input[type="email"]::-moz-placeholder,
+#location.location-rv2 input[type="text"]::-moz-placeholder {
+    color: #fff;
+}
+
+#location.location-rv2 textarea:-ms-input-placeholder,
+#location.location-rv2 input[type="email"]:-ms-input-placeholder,
+#location.location-rv2 input[type="text"]:-ms-input-placeholder {
+    color: #fff;
+}
+
+#location.location-rv2 textarea:-moz-placeholder,
+#location.location-rv2 input[type="text"]:-moz-placeholder,
+#location.location-rv2 input[type="text"]:-moz-placeholder { 
+    color:#fff;}
+.error{
+    color: red ;
+}
+
+#location.location-rv2 .wpcf7-response-output {
+    color: #fff;
+}
