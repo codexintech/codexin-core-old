@@ -3,11 +3,11 @@
 
 /*
     ======================================
-        CODEXIN ABOUT BOX SHORTCODE
+        CODEXIN IMAGE BOX SHORTCODE
     ======================================
 */
 
-// Registering About Box Shortcode
+// Registering Image Box Shortcode
 function cx_image_box_shortcode(  $atts, $content = null) {
    extract(shortcode_atts(array(
    			'image'	 			=> '',
@@ -41,52 +41,113 @@ function cx_image_box_shortcode(  $atts, $content = null) {
 	$title = ($retrieve_link[1]) ? 'title='.esc_attr($retrieve_link[1]):'';
 	$target = ($retrieve_link[2]) ? 'target='.esc_attr($retrieve_link[2]):'';
 
+	$image_size = getimagesize($ret_full_img_url);
+	$data_size = $image_size['0'] . 'x' . $image_size['1'];
+
    	ob_start(); ?>
 
 		<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
 			<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
-				<?php if ( $img_action == 'open_custom_link' ): ?>
-						<a href="<?php echo esc_url($retrieve_link[0]); ?>" <?php echo $title; ?> <?php echo $target; ?>>
-				<?php elseif ( $img_action == 'img_pop' ): ?>
-						<a href="<?php echo $ret_full_img_url; ?>" class="event-image-popup">
-				<?php else: ?>
+			<?php if ( $img_action == 'open_custom_link' ): ?>
+				<a href="<?php echo esc_url($retrieve_link[0]); ?>" <?php echo $title; ?> <?php echo $target; ?>>
+			<?php elseif ( $img_action == 'img_pop' ): ?>
+					<!-- <a href="<?php //echo $ret_full_img_url; ?>" class="event-image-popup"> -->
+	            <div class="image-pop-up item-img-wrap" itemscope itemtype="http://schema.org/ImageGallery">
+	                <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+	                    <a href="<?php echo esc_url( $ret_full_img_url ); ?>" itemprop="contentUrl" data-size="<?php echo esc_attr( $data_size ); ?>">
+			<?php else: ?>
 				<div class="content-wrapper">
-				<?php endif; ?>
-					<img src="<?php echo $retrive_img_url; ?>" alt="<?php echo $img_alt; ?>" />
-					<div class="single-content-wrapper">
-						<div class="single-content">
+			<?php endif; ?>
+							<img src="<?php echo esc_url( $retrive_img_url ); ?>" alt="<?php echo esc_html( $img_alt ); ?>" itemprop="image" />
+							<div class="single-content-wrapper">
+								<div class="single-content">
 
-							<?php if( $icon_toggle ): ?>
-							<i class="<?php echo esc_attr( $hover_icon ); ?>"></i>
-							<?php endif; ?>
-							
-							<p><?php echo esc_html( $hover ); ?></p>
-						</div>
-					</div>
-				<?php if ( $img_action == 'open_custom_link' || $img_action == 'img_pop' ): ?>
+									<?php if( $icon_toggle ): ?>
+									<i class="<?php echo esc_attr( $hover_icon ); ?>"></i>
+									<?php endif; ?>
+									
+									<p><?php echo esc_html( $hover ); ?></p>
+								</div>
+							</div>
+			<?php if ( $img_action == 'open_custom_link' ): ?>
 				</a>
-				<?php else: ?>
-				</div>
-				<?php endif; ?>
+			<?php elseif( $img_action == 'img_pop' ): ?>
+	                    </a>
+	                    <figcaption itemprop="caption description"><?php echo esc_html( $img_alt ); ?></figcaption>
+	                </figure>
+	            </div><!-- end of image-pop-up -->
+			<?php else: ?>
+				</div><!-- end of content-wrapper -->
+			<?php endif; ?>
 			</div><!-- end of img-thumb -->
 		</div><!-- end of about-box -->
+
+
+<!-- Initializing Photoswipe -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="pswp__bg"></div>
+    <div class="pswp__scroll-wrap">
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div><!-- end of pswp -->
 
 	<?php
 	$result .= ob_get_clean();
 	return $result;
 
-} // end of cx_about_box
+} // end of cx_image_box
 
 // Integrating Shortcode with King Composer
 function cx_image_box_kc() {
 	if (function_exists('kc_add_map')) { 
 	    kc_add_map(
 	    	array(
-	    		'cx_about_box' 		=> array(
+	    		'cx_image_box' 		=> array(
 	    			'name' 			=> esc_html__( 'Codexin Image Box', 'codexin' ),
 	    			'description' 	=> esc_html__('Mini Image Box', 'codexin'),
 	    			'icon' 			=> 'kc-icon-feature-box',
 	    			'category' 		=> 'Codexin',
+                	//Only load assets when using this element
+					'assets' => array(
+						'scripts' => array(
+							'photswipe-js' => CODEXIN_CORE_ASSET_DIR . '/js/photoswipe.min.js',
+							'photswipe-main-js' => CODEXIN_CORE_ASSET_DIR . '/js/photoswipe-main.js',
+						),
+		                'styles' => array(
+		            	    'photoswipe-stylesheet' => CODEXIN_CORE_ASSET_DIR . '/css/photoswipe.css',
+		                )
+                	), //End assets
+
 	    			'params' 		=> array(
 	    				// General Params
 	    				'general' 	=> array(
@@ -225,6 +286,6 @@ function cx_image_box_kc() {
 			) //end of array
 	    );  //end of kc_add_map
 	} //End if
-} // end of cx_about_box_kc
+} // end of cx_image_box_kc
 
 

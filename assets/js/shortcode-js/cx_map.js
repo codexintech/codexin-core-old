@@ -824,6 +824,44 @@
                 ]
             }
 
+            else if ( codexin_map_color == 'DarkTurquoise' ) {
+              var styles = [
+                    {
+                      "featureType": "road",
+                      "stylers": [
+                      { "color": "#ffffff" }
+                      ]
+                    },{
+                      "featureType": "water",
+                      "stylers": [
+                      { "color": "#7dcdce" }
+                      ]
+                    },{
+                      "featureType": "landscape",
+                      "stylers": [
+                      { "color": "#e9e5dc" }
+                      ]
+                    },{
+                      "elementType": "labels.text.fill",
+                      "stylers": [
+                      { "color": "#000000" }
+                      ]
+                    },{
+                      "featureType": "poi",
+                      "stylers": [
+                      { "color": "#d9d9d9" }
+                      ]
+                    },{
+                      "elementType": "labels.text",
+                      "stylers": [
+                      { "saturation": 1 },
+                      { "weight": 0.1 },
+                      { "color": "#000000" }
+                      ]
+                    }
+                ]
+            }
+
             else {
                 var styles = [
                     {
