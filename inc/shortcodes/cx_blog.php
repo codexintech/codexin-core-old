@@ -202,7 +202,7 @@ function cx_blog_shortcode( $atts, $content = null ) {
 										<li><i class="fa fa-user" aria-hidden="true"></i> <a href="<?php echo esc_url(get_the_author_meta()); ?>"> <?php the_author(); ?> </a> </li>
 										<li><i class="fa fa-paper-plane" aria-hidden="true"></i> <a href=""> 
 										<?php comments_number('0', '1', '%'); ?> </a> </li>
-										<li><i class="fa fa-heart" aria-hidden="true"></i>  <a href=""> <?php // codexin_post_like( the_ID()); ?> </a></li>
+										<li><?php if( function_exists( 'codexin_likes_button' ) ): echo codexin_likes_button( get_the_ID(), 0 ); endif; ?></li>
 									</ul>
 								</div>
 								<p>

@@ -148,7 +148,7 @@ function cx_testimonial_shortcode( $atts, $content = null ) {
 									echo esc_html( $desig );
 									?>
 								</p>
-								 <p> <?php printf('%s', get_the_excerpt() ); ?> </p>
+								 <p class="testimonial-description"> <?php printf('%s', get_the_excerpt() ); ?> </p>
 							</div>
 						</div>
 					</div> <!--end of quote-wrapper -->
@@ -367,7 +367,7 @@ function cx_testimonial_kc() {
 										'Description' => array(
 											array('property' => 'color', 'label' => 'Text Color', 'selector' => '.quote-text p,.media-heading,designation,p'),
 											array('property' => 'font-family', 'label' => 'Font Family', 'selector' => '.quote-text p'),
-											array('property' => 'text-align', 'label' => 'Text Align', 'selector' => '.quote-text p'),
+											array('property' => 'text-align', 'label' => 'Text Align', 'selector' => '.quote-text p, .testimonial-description'),
 										),
 
 										'Image' => array(
