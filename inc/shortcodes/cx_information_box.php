@@ -44,11 +44,19 @@ function cx_information_box_shortcode( $atts, $content = null ) {
 	   <div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
 	   		<img src="<?php echo esc_url( $retrive_img_url ); ?>" alt="<?php echo esc_attr( $img_alt ); ?>" class="img-responsive">
 		   	<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">	
-		   		<h2><?php echo esc_html( $info_title ); ?></h2>
-		   		<p> <?php printf('%s', $info_desc ); ?> </p>
-		   		<?php if( $button_toggle == 'yes') : ?>
-	   			<a href="<?php echo esc_url($retrieve_link[0]); ?>" <?php echo $title; ?> <?php echo $target; ?>><?php echo esc_html( $info_button_text ); ?></a>
-		   		<?php endif; ?>
+					<div class="info-wrapper">
+						<?php if(!empty($info_title)): ?>
+			   		<h2><?php echo esc_html( $info_title ); ?></h2>
+			   		<?php endif; ?>
+
+			   		<?php if(!empty($info_desc)): ?>
+			   		<p> <?php printf('%s', $info_desc ); ?> </p>
+			   		<?php endif; ?>
+
+			   		<?php if( $button_toggle == 'yes') : ?>
+		   			<a href="<?php echo esc_url($retrieve_link[0]); ?>" <?php echo $title; ?> <?php echo $target; ?>><?php echo esc_html( $info_button_text ); ?></a>
+			   		<?php endif; ?>
+					</div>
 		   	</div><!-- end of content-mask -->
 	   </div><!-- end of contest-wrapper -->
 
@@ -103,14 +111,14 @@ function cx_information_box_kc() {
 
 							array(
 								'name' 			=> 'button_toggle',
-								'label' 		=> esc_html__( 'Enable Link Button? ', 'codexin' ),
+								'label' 		=> esc_html__( 'Enable Button? ', 'codexin' ),
 								'type' 			=> 'toggle',
 								'value'			=> 'no'
 								),
 
 							array(
 								'name' 			=> 'info_button_text',
-								'label' 		=> esc_html__( 'Information Button Text ', 'codexin' ),
+								'label' 		=> esc_html__( 'Button Text ', 'codexin' ),
 								'type' 			=> 'text',
 								'relation' 		=> array(
 									'parent'    => 'button_toggle',
@@ -159,6 +167,16 @@ function cx_information_box_kc() {
 											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin' ),'selector' => '.content-mask h2'),
 										),
 
+
+										'Divider' => array(
+											array('property' => 'background', 'label' => esc_html__( 'Color', 'codexin' ),'selector' => '.content-mask .info-wrapper h2::after'),
+											array('property' => 'width', 'label' => esc_html__( 'Width', 'codexin' ),'selector' => '.content-mask .info-wrapper h2::after'),
+											array('property' => 'height', 'label' => esc_html__( 'Height', 'codexin' ),'selector' => '.content-mask .info-wrapper h2::after'),
+											array('property' => 'display', 'label' => esc_html__( 'Display', 'codexin' ),'selector' => '.content-mask .info-wrapper h2::after'),
+											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin' ),'selector' => '.content-mask .info-wrapper h2::after'),
+											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin' ),'selector' => '.content-mask .info-wrapper h2::after'),
+										),
+
 										'Description' => array(
 											array('property' => 'color', 'label' => esc_html__( 'Color', 'codexin' ),'selector' => '.content-mask p'),
 											array('property' => 'font-family', 'label' => esc_html__( 'Font Family', 'codexin' ),'selector' => '.content-mask p'),
@@ -173,8 +191,11 @@ function cx_information_box_kc() {
 
 										'Button' => array(
 											array('property' => 'color', 'label' => esc_html__( 'Text Color', 'codexin' ),'selector' => '.content-mask a'),
+											array('property' => 'font-family', 'label' => esc_html__( 'Font Family', 'codexin' ),'selector' => '.content-mask a'),
+											array('property' => 'font-size', 'label' => esc_html__( 'Font Size', 'codexin' ),'selector' => '.content-mask a'),
+											array('property' => 'line-height', 'label' => esc_html__( 'Line Height', 'codexin' ),'selector' => '.content-mask a'),
 											array('property' => 'background', 'label' => esc_html__( 'Background Color', 'codexin' ),'selector' => '.content-mask a'),
-											array('property' => 'color', 'label' => esc_html__( 'Hover Text Color', 'codexin' ),'selector' => '.content-mask a:hover'),	                						
+											array('property' => 'color', 'label' => esc_html__( 'Hover Text Color', 'codexin' ),'selector' => '.content-mask a:hover'),
 											array('property' => 'background-color', 'label' => esc_html__( 'Hover Background Color', 'codexin' ),'selector' => '.content-mask a:hover'),
 											array('property' => 'transition', 'label' => esc_html__( 'Hover Background Transition', 'codexin' ),'selector' => '.content-mask a:hover'),
 											array('property' => 'border', 'label' => esc_html__( 'Border', 'codexin' ),'selector' => '.content-mask a'),
@@ -184,7 +205,7 @@ function cx_information_box_kc() {
 										),
 
 										'Box'	=> array(
-											array('property' => 'background'),
+											array('property' => 'background', 'selector' => '.content-mask'),
 											array('property' => 'border', 'label' => esc_html__( 'Border', 'codexin' )),
 											array('property' => 'border-radius', 'label' => esc_html__( 'Border Radius', 'codexin' )),
 											array('property' => 'box-shadow', 'label' => esc_html__( 'Box Shadow', 'codexin'), 'selector' => '+.cx-service-box'),

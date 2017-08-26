@@ -470,11 +470,25 @@ input[type="button"]:hover{
 }
 
 .contest-wrapper img {
+    width:100%;
     -webkit-transition: all .3s;
     -moz-transition: all .3s;
     -ms-transition: all .3s;
     -o-transition: all .3s;
     transition: all .3s;
+}
+
+.contest-wrapper .info-wrapper {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }
 
 .content-mask {
@@ -484,7 +498,7 @@ input[type="button"]:hover{
     height: 100%;
     left: 0;
     top: 0;
-    background-image: url("../images/subtle-white-feathers.png") ! important;
+    background: url("../images/subtle-white-feathers.png");
     -webkit-transform: translateX(-100%);
     -moz-transform: translateX(-100%);
     -ms-transform: translateX(-100%);
@@ -497,17 +511,22 @@ input[type="button"]:hover{
     transition: all .3s;
 }
 
-.content-mask h2 {
+.content-mask .info-wrapper h2 {
     padding: 10px;
-    margin-top: 12%;
+    margin-top: 0;
+    margin-bottom: 15px;
+    line-height: 1.1em;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
-.content-mask h2::after {
+.content-mask .info-wrapper h2::after {
     content: "";
     width: 100px;
     height: 3px;
     display: block;
     margin: 20px auto 0;
+    background-color:#295970;
 }
 
 .content-mask p {
@@ -515,11 +534,10 @@ input[type="button"]:hover{
 }
 
 .content-mask a {
-    display: block;
-    width: 190px;
+    display: inline-block;
+    width: auto;
     margin: 0 auto;
     padding: 10px 15px;
-    border-radius: 3px;
     text-decoration: none;
     -webkit-transition: all .3s;
     -moz-transition: all .3s;
@@ -549,11 +567,11 @@ input[type="button"]:hover{
 }
 
 .contest-wrapper:hover > img {
-    -webkit-transform: translateX(100%);
-    -moz-transform: translateX(100%);
-    -ms-transform: translateX(100%);
-    -o-transform: translateX(100%);
-    transform: translateX(100%);
+    -webkit-transform: translateX(101%);
+    -moz-transform: translateX(101%);
+    -ms-transform: translateX(101%);
+    -o-transform: translateX(101%);
+    transform: translateX(101%);
 }
 
 .events-container {
