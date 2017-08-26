@@ -307,7 +307,7 @@ input[type="button"]:hover{
     004 - cx_service_box
 ****************************************/
 
-.cx-service-box .service-single {
+/*.cx-service-box .service-single {
     margin-bottom: 40px;
     margin-top: 50px;
 }
@@ -315,7 +315,7 @@ input[type="button"]:hover{
 .cx-service-box .service-single .media-thumb {
     padding-right: 10px;
     padding-top: 7px;
-    width: 75px;
+    min-width: 75px;
     float: left;
     display: block;
 }
@@ -337,10 +337,113 @@ input[type="button"]:hover{
 }
 
 .cx-service-box .service-single .media-desc {
+    max-width: calc(100% - 75px);
+    float: right;
+    display: block;
+    padding-top:7px;
+}
+*/
+
+/**
+ * Old browser support
+ *
+ */
+.no-flexbox .cx-service-box .service-single .media-thumb {
+    padding-right: 5px;
+    padding-top: 7px;
+    width: 65px;
+    float: left;
+    display: block;
+}
+
+.no-csscalc .cx-service-box .service-single .media-thumb {
+    padding-right: 10px;
+    padding-top: 7px;
+    width: 65px;
+    float: left;
+    display: block;
+}
+
+.no-flexbox .cx-service-box .service-single .media-thumb i {
+    font-size: 50px !important;
+    padding:0 !important;
+    margin: 0 !important;
+}
+
+.no-flexbox .cx-service-box .service-single .media-desc {
     width: calc(100% - 75px);
     float: right;
     display: block;
     padding-top:7px;
+}
+
+.no-csscalc .cx-service-box .service-single .media-desc {
+    width: 100%;
+    float: right;
+    display: block;
+    padding-top:15px;
+}
+
+
+
+/* old browser finished */
+
+.cx-service-box .service-single .media-wrapper {
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    -webkit-align-items: flex-start;
+    -moz-align-items: flex-start;
+    -ms-align-items: flex-start;
+    -o-align-items: flex-start;
+    align-items: flex-start;
+    -webkit-align-content: flex-start;
+    -moz-align-content: flex-start;
+    -ms-align-content: flex-start;
+    -o-align-content: flex-start;
+    align-content: flex-start;
+}
+
+.cx-service-box .service-single {
+    margin-bottom: 40px;
+    margin-top: 50px;
+}
+
+.cx-service-box .service-single .media-thumb {
+    padding-top: 7px;
+    -webkit-flex-grow: 1;
+    -moz-flex-grow: 1;
+    -ms-flex-grow: 1;
+    -o-flex-grow: 1;
+    flex-grow: 1;
+    padding-right: 10px;
+}
+
+.cx-service-box .service-single .media-title {
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-bottom: 10px;
+    margin-top: 2px;
+    letter-spacing: normal;
+}
+
+.cx-service-box .service-single .media-thumb i {
+    font-size: 50px;
+    padding: 5px;
+    text-align: center;
+    line-height: 1em;
+}
+
+.cx-service-box .service-single .media-desc {
+    padding-top: 7px;
+    -webkit-flex-grow: 1;
+    -moz-flex-grow: 1;
+    -ms-flex-grow: 1;
+    -o-flex-grow: 1;
+    flex-grow: 1;
 }
 
 
