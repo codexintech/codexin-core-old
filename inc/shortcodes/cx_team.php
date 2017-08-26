@@ -200,10 +200,11 @@ function cx_team_kc() {
 
   	        							'Box'	=> array(
   	        								array('property' => 'background'),
+  	        								array('property' => 'background-color', 'label' => 'Background Color On Hover ( Only RGBA )', 'selector' => '.single-team:hover .single-team-wrapper' ),
   	        								array('property' => 'border', 'label' => esc_html__('Border', 'codexin') ),
   	        								array('property' => 'border-radius', 'label' => esc_html__('Border Radius', 'codexin') ),
-  	        								array('property' => 'box-shadow', 'label' => esc_html__('Box Shadow', 'codexin')),
-  	        								array('property' => 'box-shadow', 'label' => esc_html__('Box Shadow on Hover','codexin')),
+  	        								array('property' => 'box-shadow', 'label' => esc_html__('Box Shadow', 'codexin'), 'selector' => '.single-team-wrapper'),
+  	        								array('property' => 'box-shadow', 'label' => esc_html__('Box Shadow on Hover','codexin'), 'selector' => '.single-team:hover .single-team-wrapper'),
   	        								array('property' => 'transition', 'label' => esc_html__('Hover Transition Animation', 'codexin')),
   	        								array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin') ),
   	        								array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin') ),
