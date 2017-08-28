@@ -231,7 +231,7 @@ function cx_contact_form_kc() {
  										'Fields' =>array(
  											array('property' => 'color', 'label' => esc_html__( 'Color', 'codexin' ), 'selector' => '.form-element input,textarea'),
  											array('property' => 'background-color', 'label' => esc_html__( 'Background Color', 'codexin' ), 'selector' => '.form-element input,textarea'),
- 											array('property' => 'border', 'label' => esc_html__( 'Border', 'codexin' ), 'selector' => '.form-element input,textarea'),
+ 											array('property' => 'border', 'label' => esc_html__( 'Border', 'codexin' ), 'selector' => '.form-element input,textarea' ),
  											array('property' => 'border-color', 'label' => esc_html__( 'Border Color Focus', 'codexin' ), 'selector' => '.form-element input,textarea:focus'),
  											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin' ), 'selector' => '.form-element input,textarea'),
  											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin' ), 'selector' => '.form-element input,textarea')

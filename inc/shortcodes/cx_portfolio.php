@@ -233,45 +233,47 @@ function cx_portfolio_kc() {
 							'portfolio-js' => CODEXIN_CORE_ASSET_DIR . '/js/shortcode-js/cx-portfolio-isotope.js',
 							'photswipe-js' => CODEXIN_CORE_ASSET_DIR . '/js/photoswipe.min.js',
 							'photswipe-main-js' => CODEXIN_CORE_ASSET_DIR . '/js/photoswipe-main.js',
-						),
-		                'styles' => array(
-		            	    'photoswipe-stylesheet' => CODEXIN_CORE_ASSET_DIR . '/css/photoswipe.css',
-		                )
+							),
+						'styles' => array(
+							'photoswipe-stylesheet' => CODEXIN_CORE_ASSET_DIR . '/css/photoswipe.css',
+							)
 
                 	), //End assets
 
 					'params' => array(
-						array(
-							'type'			=> 'radio_image',
-							'label'			=> esc_html__( 'Select Porifolio Template', 'codexin' ),
-							'name'			=> 'layout',
-							'admin_label'	=> true,
-							'options'		=> array(
-								'1'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/portfolio/layout-1.png',
-								'2'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/portfolio/layout-2.png',
+						'General' => array(
+							array(
+								'type'			=> 'radio_image',
+								'label'			=> esc_html__( 'Select Porifolio Template', 'codexin' ),
+								'name'			=> 'layout',
+								'admin_label'	=> true,
+								'options'		=> array(
+									'1'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/portfolio/layout-1.png',
+									'2'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/portfolio/layout-2.png',
+									),
+								'value'	=> '1'
 								),
-							'value'	=> '1'
-						),
 
-						array(
-							'name'	=> 'section_title',
-							'label' => esc_html__( 'Enter Title', 'codexin' ),
-							'type'	=> 'text',
-							'relation' => array(
-								'parent'	=> 'layout',
-								'show_when'	=> '2',
-							),
-							'description' => esc_html__( 'Enter Portfolio Section Title Here', 'codexin' ),
-						),
+							array(
+								'name'	=> 'section_title',
+								'label' => esc_html__( 'Enter Title', 'codexin' ),
+								'type'	=> 'text',
+								'relation' => array(
+									'parent'	=> 'layout',
+									'show_when'	=> '2',
+									),
+								'description' => esc_html__( 'Enter Portfolio Section Title Here', 'codexin' ),
+								),
 
-						array(
-							'name'	=> 'class',
-							'label' => esc_html__( 'Extra Class', 'codexin' ),
-							'type'	=> 'text',
-							'description' => esc_html__( 'If you wish to style a particular content element differently, please add a class name to this field and refer to it in your custom CSS.', 'codexin' ),
-						),
+							array(
+								'name'	=> 'class',
+								'label' => esc_html__( 'Extra Class', 'codexin' ),
+								'type'	=> 'text',
+								'description' => esc_html__( 'If you wish to style a particular content element differently, please add a class name to this field and refer to it in your custom CSS.', 'codexin' ),
+								),
 
-                	) //End params
+                		) //End params
+					), //End General
             	),  // End of elemnt cx_portfolio
 			) //end of array 
 		);  //end of kc_add_map

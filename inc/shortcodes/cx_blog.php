@@ -197,7 +197,7 @@ function cx_blog_shortcode( $atts, $content = null ) {
 									<h3 class="title-3">
 										<?php echo esc_html( wp_trim_words( get_the_title(), $title_length ) ); ?>
 									</h3>
-									<p> <?php the_category( ' ' ); ?> </p>
+									<p class="rv2-post-category"> <?php the_category( ' ' ); ?> </p>
 									<ul>
 										<li><i class="fa fa-user" aria-hidden="true"></i> <a href="<?php echo esc_url(get_the_author_meta()); ?>"> <?php the_author(); ?> </a> </li>
 										<li><i class="fa fa-paper-plane" aria-hidden="true"></i> <a href=""> 
@@ -376,56 +376,66 @@ function cx_blog_kc() {
  										"screens" => "any,1199,991,767,479",
 
  										'Title' => array(
- 											array('property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.blog-title'),
- 											array('property' => 'font-family', 'label' => esc_html__('Font family', 'codexin'), 'selector' => '.blog-title'),
- 											array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.blog-title'),
- 											array('property' => 'font-weight', 'label' => esc_html__('Font Weight', 'codexin'), 'selector' => '.blog-title'),
- 											array('property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '.blog-title'),
- 											array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.blog-title'),
- 											array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.blog-title')
+ 											array('property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.blog-title, .rv2-single-post .title-3'),
+ 											array('property' => 'font-family', 'label' => esc_html__('Font family', 'codexin'), 'selector' => '.blog-title, .rv2-single-post .title-3'),
+ 											array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.blog-title, .rv2-single-post .title-3'),
+ 											array('property' => 'font-weight', 'label' => esc_html__('Font Weight', 'codexin'), 'selector' => '.blog-title, .rv2-single-post .title-3'),
+ 											array('property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '.blog-title, .rv2-single-post .title-3'),
+ 											array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.blog-title, .rv2-single-post .title-3'),
+ 											array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.blog-title, .rv2-single-post .title-3')
 										),
 
  										'Post Meta' => array(
- 											array('property' => 'color', 'label' => esc_html__('Date Color', 'codexin'), 'selector' => '.meta'),
- 											array('property' => 'color', 'label' => esc_html__('Meta Text Color', 'codexin'), 'selector' => '.blog-info i'),
- 											array('property' => 'font-family', 'label' => esc_html__('Font family', 'codexin'), 'selector' => '.meta'),
- 											array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.meta'),
- 											array('property' => 'width', 'label' => esc_html__('Width', 'codexin'), 'selector' => '.meta'),
- 											array('property' => 'font-weight', 'label' => esc_html__('Font Weight', 'codexin'), 'selector' => '.meta'),
- 											array('property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '.meta'),
- 											array('property' => 'background', 'label' => esc_html__('Background', 'codexin'), 'selector' => '.meta'),
- 											array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.meta'),
- 											array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.meta')
+ 											array('property' => 'color', 'label' => esc_html__('Date Color', 'codexin'), 'selector' => '.meta, .date-time'),
+ 											array('property' => 'background-color', 'label' => esc_html__('Date BG', 'codexin'), 'selector' => '.meta, .date-time'),
+ 											array('property' => 'color', 'label' => esc_html__('Meta Text Color', 'codexin'), 'selector' => '.blog-info i, .rv2-single-post ul li a, .cx-count, .rv2-post-category a' ),
+ 											array('property' => 'font-family', 'label' => esc_html__('Font family', 'codexin'), 'selector' => '.meta, .rv2-single-post ul li a, .cx-count, .rv2-post-category a'),
+ 											array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.meta, .rv2-single-post ul li a, .cx-count, .rv2-post-category a'),
+ 											array('property' => 'width', 'label' => esc_html__('Width', 'codexin'), 'selector' => '.meta, .rv2-single-post ul li a, .cx-count, .rv2-post-category a'),
+ 											array('property' => 'font-weight', 'label' => esc_html__('Font Weight', 'codexin'), 'selector' => '.meta, .rv2-single-post ul li a, .cx-count, .rv2-post-category a'),
+ 											array('property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '.meta, .rv2-single-post ul li a, .cx-count, .rv2-post-category a'),
+ 											array('property' => 'background', 'label' => esc_html__('Background', 'codexin'), 'selector' => '.meta, .rv2-single-post ul li a, .cx-count, .rv2-post-category a'),
+ 											array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.meta, .rv2-single-post ul li a, .cx-count, .rv2-post-category a'),
+ 											array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.meta, .rv2-single-post ul li a, .cx-count, .rv2-post-category a')
+										),
+
+										'Meta Icon' => array(
+ 											array('property' => 'color', 'label' => esc_html__('Meta Icon Color', 'codexin'), 'selector' => '.rv2-single-post ul i' ),
+ 											array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.rv2-single-post ul i'),
+ 											array('property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '.rv2-single-post ul i'),
+ 											array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.rv2-single-post ul i'),
+ 											array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.rv2-single-post ul i')
 										),
 
  										'Description' => array(
- 											array('property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.blog-content, .blog-desc'),
- 											array('property' => 'font-family', 'label' => esc_html__('Font family', 'codexin'), 'selector' => '.blog-content, .blog-desc'),
- 											array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '..blog-content, .blog-desc'),
- 											array('property' => 'font-weight', 'label' => esc_html__('Font Weight', 'codexin'), 'selector' => '..blog-content, .blog-desc'),
- 											array('property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '..blog-content, .blog-desc'),
- 											array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '..blog-content, .blog-desc'),
- 											array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '..blog-content, .blog-desc')
+ 											array('property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.blog-content, .blog-desc, .rv2-single-post p'),
+ 											array('property' => 'font-family', 'label' => esc_html__('Font family', 'codexin'), 'selector' => '.blog-content, .blog-desc, .rv2-single-post p'),
+ 											array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '..blog-content, .blog-desc, .rv2-single-post p'),
+ 											array('property' => 'font-weight', 'label' => esc_html__('Font Weight', 'codexin'), 'selector' => '..blog-content, .blog-desc, .rv2-single-post p'),
+ 											array('property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '..blog-content, .blog-desc, .rv2-single-post p'),
+ 											array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '..blog-content, .blog-desc, .rv2-single-post p'),
+ 											array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '..blog-content, .blog-desc, .rv2-single-post p')
 										),
 
  										'Read More' => array(
- 											array('property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.blog-content a'),
- 											array('property' => 'background-color', 'label' => esc_html__('Background Color', 'codexin'), 'selector' => '.blog-content a'),
- 											array('property' => 'color', 'label' => esc_html__('Hover Color', 'codexin'), 'selector' => '.blog-content a:hover'),
- 											array('property' => 'background-color', 'label' => esc_html__('Backgroung Hover Color', 'codexin'), 'selector' => '.blog-content a:hover'),
- 											array('property' => 'border', 'label' => esc_html__('Border', 'codexin'), 'selector' => '.blog-content a:hover'),
- 											array('property' => 'border-color', 'label' => esc_html__('Border Hover Color', 'codexin'), 'selector' => '.blog-content a:hover'),
- 											array('property' => 'transition', 'label' => esc_html__('Hover Transition', 'codexin'), 'selector' => '.blog-content a:hover'),
- 											array('property' => 'font-family', 'label' => esc_html__('Font family', 'codexin'), 'selector' => '.blog-content a'),
- 											array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '..blog-content a'),
- 											array('property' => 'font-weight', 'label' => esc_html__('Font Weight', 'codexin'), 'selector' => '..blog-content a'),
- 											array('property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '..blog-content a'),
- 											array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '..blog-content a'),
- 											array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '..blog-content a')
+ 											array('property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.blog-content a, .btn-white'),
+ 											array('property' => 'background-color', 'label' => esc_html__('Background Color', 'codexin'), 'selector' => '.blog-content a, .btn-white'),
+ 											array('property' => 'color', 'label' => esc_html__('Hover Color', 'codexin'), 'selector' => '.blog-content a:hover, .btn-white:hover'),
+ 											array('property' => 'background-color', 'label' => esc_html__('Backgroung Hover Color', 'codexin'), 'selector' => '.blog-content a:hover, .btn-white:hover'),
+ 											array('property' => 'border', 'label' => esc_html__('Border', 'codexin'), 'selector' => '.blog-content a, .btn-white'),
+ 											array('property' => 'border-color', 'label' => esc_html__('Border Hover Color', 'codexin'), 'selector' => '.blog-content a:hover, .btn-white:hover'),
+ 											array('property' => 'transition', 'label' => esc_html__('Hover Transition', 'codexin'), 'selector' => '.blog-content a:hover, .btn-white:hover'),
+ 											array('property' => 'font-family', 'label' => esc_html__('Font family', 'codexin'), 'selector' => '.blog-content a, .btn-white'),
+ 											array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.blog-content a, .btn-white'),
+ 											array('property' => 'font-weight', 'label' => esc_html__('Font Weight', 'codexin'), 'selector' => '.blog-content a, .btn-white'),
+ 											array('property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '.blog-content a, .btn-white'),
+ 											array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.blog-content a, .btn-white'),
+ 											array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.blog-content a, .btn-white')
 										),
 
  										'Box'	=> array(
  											array('property' => 'background'),
+ 											array('property' => 'background-color', 'label' => esc_html__( 'BG Color On Hover' ), 'selector' => '.rv2-single-post:hover .post-img:before' ),
  											array('property' => 'border', 'label' => esc_html__('Border', 'codexin') ),
  											array('property' => 'border-radius', 'label' => esc_html__('Border Radius', 'codexin') ),
  											array('property' => 'box-shadow', 'label' => esc_html__('Box Shadow', 'codexin') ),

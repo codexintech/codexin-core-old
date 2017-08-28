@@ -1699,6 +1699,7 @@ figure.portfolio-rv2:hover .image-mask a {
 
 #location.location-rv2 input {
     padding: 14px 20px;
+    border: 1px solid #ddd;
 }
 
 #contact-form form > div {
@@ -1714,7 +1715,6 @@ figure.portfolio-rv2:hover .image-mask a {
 
 .contact-form-wrapper-rv2{
     position: relative;
-    /*background: url(../rev-2-img/Contact-bg.jpg);*/
 }
 .contact-form-position{
     position: absolute;
@@ -1897,6 +1897,11 @@ figure.portfolio-rv2:hover .image-mask a {
 .rv2-single-post .title-3{
     margin-bottom:10px ;
 }
+
+.rv2-post-category {
+    
+}
+
 .rv2-single-post p{
     font-family: 'Poppins', sans-serif;
     font-size: 15px;
