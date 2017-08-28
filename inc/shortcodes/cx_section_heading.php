@@ -148,7 +148,7 @@ function cx_section_heading_kc() {
 								'options' => array(
 									array(
 										"screens" => "any,1199,991,767,479",
-										'Subtitle' => array(
+										'Title' => array(
 											array('property' => 'color', 'label' => esc_html__( 'Color', 'codexin'), 'selector' => '.primary-title, h2.primary-title.rv2'),
 											array('property' => 'font-family', 'label' => esc_html__( 'Font Family', 'codexin'), 'selector' => '.primary-title, h2.primary-title.rv2'),
 											array('property' => 'font-size', 'label' => esc_html__( 'Font Size', 'codexin'), 'selector' => '.primary-title, h2.primary-title.rv2'),
@@ -160,7 +160,7 @@ function cx_section_heading_kc() {
 											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin'), 'selector' => '.primary-title, h2.primary-title.rv2')
 										),
 
-										'Title' => array(
+										'Subtitle' => array(
 											array('property' => 'color', 'label' => esc_html__( 'Color', 'codexin'), 'selector' => '.secondary-title, .secondary-title .rv2'),
 											array('property' => 'font-family', 'label' => esc_html__( 'Font Family', 'codexin'), 'selector' => '.secondary-title, .secondary-title .rv2'),
 											array('property' => 'font-size', 'label' => esc_html__( 'Font Size', 'codexin'), 'selector' => '.secondary-title, .secondary-title .rv2'),
@@ -173,11 +173,11 @@ function cx_section_heading_kc() {
 										),
 
 										'Divider' => array(
-											array('property' => 'background-color', 'label' => esc_html__( 'Color', 'codexin'), 'selector' => '.secondary-title::after' ),
-											array('property' => 'width', 'label' => esc_html__( 'Width', 'codexin'), 'selector' => '.secondary-title::after'),
-											array('property' => 'height', 'label' => esc_html__( 'Height', 'codexin'), 'selector' => '.secondary-title::after'),
-											array('property' => 'display', 'label' => esc_html__( 'Display', 'codexin'), 'selector' => '.secondary-title::after'),
-											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin'), 'selector' => '.secondary-title::after')
+											array('property' => 'background-color', 'label' => esc_html__( 'Color', 'codexin'), 'selector' => '.secondary-title::after,.rv2-title::before' ),
+											array('property' => 'width', 'label' => esc_html__( 'Width', 'codexin'), 'selector' => '.secondary-title::after,.rv2-title::before'),
+											array('property' => 'height', 'label' => esc_html__( 'Height', 'codexin'), 'selector' => '.secondary-title::after,.rv2-title::before'),
+											array('property' => 'display', 'label' => esc_html__( 'Display', 'codexin'), 'selector' => '.secondary-title::after,.rv2-title::before'),
+											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin'), 'selector' => '.secondary-title::after,.rv2-title::before')
 										),
 
 										'Desc' => array(

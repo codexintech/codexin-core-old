@@ -16,7 +16,7 @@ function cx_social_media_shortcode( $atts, $content = null ) {
 		'show_in'		=> '',
 		'show_pin'		=> '',
 		'show_be'		=> '',
-		'show_pg'		=> '',
+		'show_gp'		=> '',
 		'show_yt'		=> '',
 		'show_sk'		=> '',
 		'show_li'		=> '',
@@ -130,7 +130,6 @@ function cx_social_media_kc() {
  								'type' 			=> 'toggle',
  								'value'			=> 'no',
  								'admin_label' 	=> true
-
  							),
 
  							array(

@@ -1362,22 +1362,22 @@ h2.primary-title.rv2 {
 
 }
 
-.single-event .title-3{
+.rv2-single-event .title-3{
     font-size: 25px;
     margin-bottom: 13px;
     transition: 0.3s ;
 }
-.single-event ul{
+.rv2-single-event ul{
     list-style-type: none;
     padding-left: 0 ;
     margin-bottom: 24px;
 }
-.single-event ul li {
+.rv2-single-event ul li {
     display: inline-block;
     margin-right: 20px;
 }
-.single-event ul i,
-.single-event:hover h3{
+.rv2-single-event ul i,
+.rv2-single-event:hover h3{
     color: #23dac9 ;
 }
 .event-img {
@@ -1395,11 +1395,14 @@ h2.primary-title.rv2 {
     opacity: 0;
     transition: 0.3s ;
 }
-.single-event:hover .event-img:before {
+.rv2-single-event:hover .event-img:before {
     opacity: 0.75 ;
 }
-.single-event ul i {
+.rv2-single-event ul i {
     margin-right: 10px;
+}
+
+.rv2-event-desc {
 }
 
 /*----------------Client FeedBack------*/
