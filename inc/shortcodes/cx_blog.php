@@ -382,30 +382,28 @@ function cx_blog_kc() {
  											array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.blog-title, .rv2-single-post .title-3'),
  											array('property' => 'font-weight', 'label' => esc_html__('Font Weight', 'codexin'), 'selector' => '.blog-title, .rv2-single-post .title-3'),
  											array('property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '.blog-title, .rv2-single-post .title-3'),
+ 											array('property' => 'text-align', 'label' => esc_html__('Text Align', 'codexin'), 'selector' => '.blog-title, .rv2-single-post .title-3'),
+ 											array('property' => 'text-transform', 'label' => esc_html__('Text Transform', 'codexin'), 'selector' => '.blog-title, .rv2-single-post .title-3'),
  											array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.blog-title, .rv2-single-post .title-3'),
  											array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.blog-title, .rv2-single-post .title-3')
 										),
 
- 										'Post Meta' => array(
+ 										'Date' => array(
  											array('property' => 'color', 'label' => esc_html__('Date Color', 'codexin'), 'selector' => '.meta, .date-time'),
- 											array('property' => 'background-color', 'label' => esc_html__('Date BG', 'codexin'), 'selector' => '.meta, .date-time'),
- 											array('property' => 'color', 'label' => esc_html__('Meta Text Color', 'codexin'), 'selector' => '.blog-info i, .rv2-single-post ul li a, .cx-count, .rv2-post-category a' ),
- 											array('property' => 'font-family', 'label' => esc_html__('Font family', 'codexin'), 'selector' => '.meta, .rv2-single-post ul li a, .cx-count, .rv2-post-category a'),
- 											array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.meta, .rv2-single-post ul li a, .cx-count, .rv2-post-category a'),
- 											array('property' => 'width', 'label' => esc_html__('Width', 'codexin'), 'selector' => '.meta, .rv2-single-post ul li a, .cx-count, .rv2-post-category a'),
- 											array('property' => 'font-weight', 'label' => esc_html__('Font Weight', 'codexin'), 'selector' => '.meta, .rv2-single-post ul li a, .cx-count, .rv2-post-category a'),
- 											array('property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '.meta, .rv2-single-post ul li a, .cx-count, .rv2-post-category a'),
- 											array('property' => 'background', 'label' => esc_html__('Background', 'codexin'), 'selector' => '.meta, .rv2-single-post ul li a, .cx-count, .rv2-post-category a'),
+ 											array('property' => 'background-color', 'label' => esc_html__('Date Background', 'codexin'), 'selector' => '.meta, .date-time'),
+ 											// array('property' => 'color', 'label' => esc_html__('Post Meta Icon Color', 'codexin'), 'selector' => '.blog-info i, .rv2-single-post ul li a, .cx-count, .rv2-post-category a' ),
+ 											// array('property' => 'font-family', 'label' => esc_html__('Font family', 'codexin'), 'selector' => '.meta, .rv2-single-post ul li a, .cx-count, .rv2-post-category a'),
+ 											// array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.meta, .rv2-single-post ul li a, .cx-count, .rv2-post-category a'),
+ 											// array('property' => 'width', 'label' => esc_html__('Width', 'codexin'), 'selector' => '.meta, .rv2-single-post ul li a, .cx-count, .rv2-post-category a'),
+ 											// array('property' => 'font-weight', 'label' => esc_html__('Font Weight', 'codexin'), 'selector' => '.meta, .rv2-single-post ul li a, .cx-count, .rv2-post-category a'),
+ 											// array('property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '.meta, .rv2-single-post ul li a, .cx-count, .rv2-post-category a'),
+ 											// array('property' => 'background', 'label' => esc_html__('Background', 'codexin'), 'selector' => '.meta, .rv2-single-post ul li a, .cx-count, .rv2-post-category a'),
  											array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.meta, .rv2-single-post ul li a, .cx-count, .rv2-post-category a'),
  											array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.meta, .rv2-single-post ul li a, .cx-count, .rv2-post-category a')
 										),
 
-										'Meta Icon' => array(
- 											array('property' => 'color', 'label' => esc_html__('Meta Icon Color', 'codexin'), 'selector' => '.rv2-single-post ul i' ),
- 											array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.rv2-single-post ul i'),
- 											array('property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '.rv2-single-post ul i'),
- 											array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.rv2-single-post ul i'),
- 											array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.rv2-single-post ul i')
+										'Image Hover' => array(
+ 											array('property' => 'background', 'label' => esc_html__('Image Hover Color', 'codexin'), 'selector' => '.img-wrapper::before, .img-wrapper::after' )
 										),
 
  										'Description' => array(
@@ -434,15 +432,18 @@ function cx_blog_kc() {
  											array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.blog-content a, .btn-white')
 										),
 
- 										'Box'	=> array(
- 											array('property' => 'background'),
- 											array('property' => 'background-color', 'label' => esc_html__( 'BG Color On Hover' ), 'selector' => '.rv2-single-post:hover .post-img:before' ),
- 											array('property' => 'border', 'label' => esc_html__('Border', 'codexin') ),
- 											array('property' => 'border-radius', 'label' => esc_html__('Border Radius', 'codexin') ),
- 											array('property' => 'box-shadow', 'label' => esc_html__('Box Shadow', 'codexin') ),
- 											array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin') ),
- 											array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin') ),
-										),
+ 									// 	'Box'	=> array(
+ 									// 		array('property' => 'background'),
+ 									// 		array('property' => 'background-color', 'label' => esc_html__( 'BG Color On Hover' ), 'selector' => '.rv2-single-post:hover .post-img:before' ),
+ 									// 		array('property' => 'border', 'label' => esc_html__('Border', 'codexin') ),
+ 									// 		array('property' => 'border-radius', 'label' => esc_html__('Border Radius', 'codexin') ),
+ 									// 		array('property' => 'box-shadow', 'label' => esc_html__('Box Shadow', 'codexin') ),
+ 									// 		array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin') ),
+ 									// 		array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin') ),
+										// ),
+
+
+
 									) 
 								) 
 							) 

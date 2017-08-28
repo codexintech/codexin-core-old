@@ -974,7 +974,7 @@ div.cx-blog {
 .cx-blog .meta {
     position: absolute;
     padding: 15px 10px;
-    width: 60px;
+    min-width: 60px;
     height: auto;
     bottom: 10px;
     left: -10px;
