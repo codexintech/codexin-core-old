@@ -32,7 +32,7 @@ function cx_image_box_shortcode(  $atts, $content = null) {
 
 	// Assigning a master css class and hooking into KC
 	$master_class = apply_filters( 'kc-el-class', $atts );
-	$master_class[] = 'about-box';
+	$master_class[] = 'cx-image-box';
 
 	// Retrieving user define classes
 	$classes = array( 'img-thumb' );
@@ -80,7 +80,7 @@ function cx_image_box_shortcode(  $atts, $content = null) {
 				</div><!-- end of content-wrapper -->
 			<?php endif; ?>
 			</div><!-- end of img-thumb -->
-		</div><!-- end of about-box -->
+		</div><!-- end of cx-image-box -->
 
 
 <!-- Initializing Photoswipe -->
@@ -263,9 +263,9 @@ function cx_image_box_kc() {
 	    								'Box'	=> array(
 	    									array('property' => 'background', 'label' => esc_html__('Background', 'codexin'), 'selector' => '.img-thumb .content-wrapper, :hover .single-content-wrapper, .img-thumb a:hover .single-content-wrapper'),
 	    									array('property' => 'border', 'label' => esc_html__('Border', 'codexin')),
-	    									array('property' => 'box-shadow', 'label' => esc_html__('Box Shadow', 'codexin'), 'selector' => '+.about-box'),
-	    									array('property' => 'box-shadow', 'label' => esc_html__('Box Shadow on Hover', 'codexin'), 'selector' => '+.about-box:hover'),
-	    									array('property' => 'transition', 'label' => esc_html__('Hover Transition Animation', 'codexin'), 'selector' => '+.about-box'),
+	    									array('property' => 'box-shadow', 'label' => esc_html__('Box Shadow', 'codexin'), 'selector' => '+.cx-image-box'),
+	    									array('property' => 'box-shadow', 'label' => esc_html__('Box Shadow on Hover', 'codexin'), 'selector' => '+.cx-image-box:hover'),
+	    									array('property' => 'transition', 'label' => esc_html__('Hover Transition Animation', 'codexin'), 'selector' => '+.cx-image-box'),
 	    									array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin')),
 	    									array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin')),
     									)

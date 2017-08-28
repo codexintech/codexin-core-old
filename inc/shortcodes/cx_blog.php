@@ -11,7 +11,6 @@
 function cx_blog_shortcode( $atts, $content = null ) {
 	extract(shortcode_atts(array(
 			'layout'			=> '',
-			'img_alt'			=> '',
 			'number_of_posts'	=> '',
 			'order'				=> '',
 			'orderby'			=> '',
@@ -34,7 +33,7 @@ function cx_blog_shortcode( $atts, $content = null ) {
 	   $master_class[] = 'cx-blog';
 
 	   // Retrieving user define classes
-	   $classes = array( 'blog-row' );
+	   $classes = array( 'row' );
    	   (!empty($class)) ? $classes[] = $class : '';		
 	?>
 		<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
@@ -65,9 +64,11 @@ function cx_blog_shortcode( $atts, $content = null ) {
 					<div class="col-md-<?php echo $column ?> col-sm-12">
 						<div class="blog-wrapper">
 							<div class="img-thumb">
-								<div class="img-wrapper">
-									<img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'rectangle-one' ) : '//placehold.it/540x341' ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" class="img-responsive">
-								</div>
+								<a href="<?php the_permalink(); ?>">
+									<div class="img-wrapper">
+										<img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'rectangle-one' ) : '//placehold.it/600x400' ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" class="img-responsive">
+									</div>
+								</a>
 								<?php if( $show_date ) : ?>
 								<div class="meta">
 									<p><?php echo get_the_time( 'd' ); ?></p>
