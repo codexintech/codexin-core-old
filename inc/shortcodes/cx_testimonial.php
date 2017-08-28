@@ -358,6 +358,15 @@ function cx_testimonial_kc() {
 									array(
 										"screens" => "any,1199,991,767,479",
 
+										'Name'	=> array(
+											array( 'property' => 'color', 'label' => esc_html__( 'Color' ), 'selector' => '.client-name .title-3' ),
+											array( 'property' => 'font-size', 'label' => esc_html__( 'Font Size' ), 'selector' => '.client-name .title-3' ),
+											array( 'property' => 'font-family', 'label' => esc_html__( 'Font Family' ), 'selector' => '.client-name .title-3' ),
+											array( 'property' => 'font-weight', 'label' => esc_html__( 'Font Weight' ), 'selector' => '.client-name .title-3' ),
+											array( 'property' => 'margin', 'label' => esc_html__( 'Margin' ), 'selector' => '.client-name .title-3' ),
+											array( 'property' => 'padding', 'label' => esc_html__( 'Padding' ), 'selector' => '.client-name .title-3' ),
+										),
+
 										'Icon'	=> array(
 											array( 'property' => 'color', 'label' => 'Icon Color', 'selector' => '.quote-author-thumb i' ),
 											array( 'property' => 'border', 'label' => 'Icon Box Border', 'selector' => '.quote-author-thumb i' ),
@@ -365,9 +374,9 @@ function cx_testimonial_kc() {
 										),
 
 										'Description' => array(
-											array('property' => 'color', 'label' => 'Text Color', 'selector' => '.quote-text p,.media-heading,designation,p'),
-											array('property' => 'font-family', 'label' => 'Font Family', 'selector' => '.quote-text p'),
-											array('property' => 'text-align', 'label' => 'Text Align', 'selector' => '.quote-text p, .testimonial-description'),
+											array('property' => 'color', 'label' => esc_html__( 'Text Color' ), 'selector' => '.quote-text p,.media-heading,designation,p,.client-comment p'),
+											array('property' => 'font-family', 'label' => esc_html__( 'Font Family' ), 'selector' => '.quote-text p,.client-comment p'),
+											array('property' => 'text-align', 'label' => esc_html__( 'Text Align' ), 'selector' => '.quote-text p, .testimonial-description,.client-comment p'),
 										),
 
 										'Image' => array(
