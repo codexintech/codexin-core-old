@@ -14,6 +14,7 @@ function cx_blog_shortcode( $atts, $content = null ) {
 			'number_of_posts'	=> '',
 			'order'				=> '',
 			'orderby'			=> '',
+			'exclude'			=> '',
 			'show_date'			=> '',
 			'title_length'		=> '',
 			'desc_length'		=> '',
@@ -24,9 +25,9 @@ function cx_blog_shortcode( $atts, $content = null ) {
 
 	$result = '';
 
-   ob_start(); 
+	ob_start(); 
 
-   if( ! empty( $layout ) ) :
+	if( ! empty( $layout ) ) :
    		if( $layout == 1 ) :
    		// Assigning a master css class and hooking into KC
 	   $master_class = apply_filters( 'kc-el-class', $atts );
@@ -39,16 +40,32 @@ function cx_blog_shortcode( $atts, $content = null ) {
 		<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
 			<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
 
-				<?php 
+				<?php
+
+				// $cat_exclude = array();
+				$cat_exclude = str_replace(',', ' ', $exclude);
+				$cat_excludes = explode( " ", $cat_exclude );
+				// print_r($cat_excludes);
+
+				// implode()
+
+				// foreach ($exclude as $cat_ex) {
+				// 	$cat_exclude[] = $cat_ex;
+				// }
+
 				//start query..
 				$args = array(
 						'post_type'				=> 'post',
 						'posts_per_page'		=> $number_of_posts,
+						'post_status'			=> 'publish',
 						'order'					=> $order,
 						'orderby'				=> $orderby,
 						'meta_key'				=> 'cx_post_views',
+						'category__not_in' 		=> $cat_excludes,
 						'ignore_sticky_posts' 	=> 1
 					);
+
+				// var_dump($args);
 
 				$data = new WP_Query( $args );
 
@@ -64,7 +81,7 @@ function cx_blog_shortcode( $atts, $content = null ) {
 					<div class="col-md-<?php echo $column ?> col-sm-12">
 						<div class="blog-wrapper">
 							<div class="img-thumb">
-								<a href="<?php the_permalink(); ?>">
+								<a href="<?php esc_url( the_permalink() ); ?>">
 									<div class="img-wrapper">
 										<img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'rectangle-one' ) : '//placehold.it/600x400' ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" class="img-responsive">
 									</div>
@@ -75,7 +92,7 @@ function cx_blog_shortcode( $atts, $content = null ) {
 									<p><?php echo get_the_time( 'M' ); ?></p>
 								</div>
 								<?php endif; ?>
-							</div>
+							</div> <!-- End of img-thumb -->
 
 							<div class="blog-content">
 								<p class="blog-title">
@@ -130,7 +147,7 @@ function cx_blog_shortcode( $atts, $content = null ) {
 								</span>
 							<?php endif; ?>	
 
-							</div>
+							</div><!-- end of blog-info -->
 
 						<?php endif; //End postview_comments if ?>
 
@@ -142,7 +159,7 @@ function cx_blog_shortcode( $atts, $content = null ) {
 				endif;
 				wp_reset_postdata();
 				?>
-			</div> <!-- end of blog-row -->
+			</div> <!-- end of row -->
 		</div> <!-- end of cx-blog -->
 
 		<div class="clearfix"></div>
@@ -231,8 +248,41 @@ function cx_blog_shortcode( $atts, $content = null ) {
 
 } //End of cx_blog
 
+/**
+ *
+ * Helper function to fetch all post categories
+ *
+ */  
+function cx_get_post_categories() {
+
+	$categories = get_categories( array(
+	    'orderby' => 'name',
+	    'order'   => 'ASC'
+	) );
+
+	$post_cat = array();
+	if ( $categories ) {		
+
+		foreach ( $categories as $value ) {
+			$post_cat[$value->term_id] = ucfirst( $value->name ) . ' (Posts Count: '. $value->category_count .')';
+		}
+
+	} else {
+
+		$post_cat[0] = __( 'No Categories found', 'codexin' );
+
+	}
+
+	return $post_cat;
+
+
+} //End cx_get_contact_form()..
+
 // Integrating Shortcode with King Composer
 function cx_blog_kc() {
+
+	$cx_categories = cx_get_post_categories();
+
 	if (function_exists('kc_add_map')) { 
 		kc_add_map(
 			array(
@@ -300,12 +350,21 @@ function cx_blog_kc() {
 	    						'description'	=> esc_html__( 'Choose The Posts Sorting Method:', 'codexin' ),
 	    					),
 
+	 						array(
+	 							'name' 			=> 'exclude',
+	 							'label' 		=> esc_html__( 'Exclude Categories', 'codexin' ),
+	 							'type' 			=> 'multiple',
+	 							'options'		=> $cx_categories,
+	 							'description'	=> esc_html__( 'Choose if You Want to Exclude Any Post Category, Control + Click to Select Multiple Categories to Exclude (No Categories are Excluded by Default)', 'codexin' ),
+	 						),
+
 	    					array(
 	    						'type'			=> 'toggle',
 	    						'name'			=> 'show_date',
 	    						'label'			=> esc_html__( 'Show Post Pulbished Date?', 'codexin' ),
 	    						'value'			=> 'yes',
-	    						'description'	=> esc_html__('Choose to enable/disable post published date', 'codexin')
+	    						'description'	=> esc_html__('Choose to enable/disable post published date', 'codexin'),
+	    						'admin_label' => true
 	    					),
 
 	    					array(
@@ -346,7 +405,6 @@ function cx_blog_kc() {
     								'show_when'	=> '1',
     							),
 	    						'description'	=> esc_html__('Displays the post views count and comments count', 'codexin'),
-	    						'admin_label' => true
 	    					),
 
 	    					array(
@@ -355,7 +413,6 @@ function cx_blog_kc() {
 	    						'type'	=> 'text',
 	    						'value'	=> 'Read more',
 	    						'description' => esc_html__( 'Edit the text that appears on the "Read more" button.', 'codexin' ),
-	    						'admin_label' => true
 	    					),
 
 	    					array(
@@ -407,13 +464,13 @@ function cx_blog_kc() {
 										),
 
  										'Description' => array(
- 											array('property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.blog-content, .blog-desc, .rv2-single-post p'),
- 											array('property' => 'font-family', 'label' => esc_html__('Font family', 'codexin'), 'selector' => '.blog-content, .blog-desc, .rv2-single-post p'),
- 											array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '..blog-content, .blog-desc, .rv2-single-post p'),
- 											array('property' => 'font-weight', 'label' => esc_html__('Font Weight', 'codexin'), 'selector' => '..blog-content, .blog-desc, .rv2-single-post p'),
- 											array('property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '..blog-content, .blog-desc, .rv2-single-post p'),
- 											array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '..blog-content, .blog-desc, .rv2-single-post p'),
- 											array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '..blog-content, .blog-desc, .rv2-single-post p')
+ 											array('property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.blog-content .blog-desc, .rv2-single-post p'),
+ 											array('property' => 'font-family', 'label' => esc_html__('Font family', 'codexin'), 'selector' => '.blog-content .blog-desc, .rv2-single-post p'),
+ 											array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.blog-content .blog-desc, .rv2-single-post p'),
+ 											array('property' => 'font-weight', 'label' => esc_html__('Font Weight', 'codexin'), 'selector' => '.blog-content .blog-desc, .rv2-single-post p'),
+ 											array('property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '.blog-content .blog-desc, .rv2-single-post p'),
+ 											array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.blog-content .blog-desc, .rv2-single-post p'),
+ 											array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.blog-content .blog-desc, .rv2-single-post p')
 										),
 
  										'Read More' => array(
