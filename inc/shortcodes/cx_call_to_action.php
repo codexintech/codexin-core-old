@@ -11,6 +11,8 @@
 function cx_call_to_action_shortcode(  $atts, $content = null) {
    extract(shortcode_atts(array(
    			'cta_title'		=> '',
+   			'icon_toggle' => '',
+   			'icon'       => '',
    			'button_text'  	=> '',
    			'href'		  	=> '',
    			'class'			=> ''
@@ -23,7 +25,7 @@ function cx_call_to_action_shortcode(  $atts, $content = null) {
 
 	// Assigning a master css class and hooking into KC
 	$master_class = apply_filters( 'kc-el-class', $atts );
-	$master_class[] = 'cta-wrapper-rv2 mrg-b-50';
+	$master_class[] = 'cx-cta';
 
 	// Retrieving user define classes
 	$classes = array( 'cta-content' );
@@ -35,12 +37,15 @@ function cx_call_to_action_shortcode(  $atts, $content = null) {
    	ob_start(); ?>
 
    	<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
-   		<div class="cta-row">
    			<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
-   				<h4 class="cta-title"><?php echo esc_html__( $cta_title ); ?></h4>
+
+          <?php if( $icon_toggle ): ?>
+          <i class="<?php echo esc_attr( $icon ); ?>"></i>
+          <?php endif; ?>
+
+   				<div class="cta-title"><?php printf('%s', $cta_title); ?></div>
    				<a href="<?php echo esc_url($retrieve_link[0]); ?>" <?php echo $title; ?> <?php echo $target; ?>" class="btn-rv btn-white "><?php echo esc_html__( $button_text ); ?></a>
    			</div>
-   		</div>
    	</div><!--  end of cta-wrapper-rv2  -->
    	<div class="clearfix"></div>
 
@@ -66,10 +71,26 @@ function cx_call_to_action_kc() {
 	    					array(
 	    						'name'        => 'cta_title',
 	    						'label'       => esc_html__('CTA Title', 'codexin'),
-	    						'type'        => 'text',
+	    						'type'        => 'textarea',
 	    						'description' => esc_html__( 'Enter Call To Action Title Here', 'codexin' ),
 	    						'admin_label' => true,
     						),
+
+	        				array(
+	        					'name' 			=> 'icon_toggle',
+	        					'label' 		=> esc_html__( 'Enable Icon? ', 'codexin' ),
+	        					'type' 			=> 'toggle',
+      					),
+
+	        				array(
+	        					'name' 			=> 'icon',
+	        					'label' 		=> esc_html__( 'Choose Icon', 'codexin' ),
+	        					'type' 			=> 'icon_picker',
+	        					'relation' 		=> array(
+	        						'parent'    => 'icon_toggle',
+	        						'show_when' => 'yes',
+      						),
+      					),
 
 	    					array(
 	    						'name' 		=> 'button_text',
@@ -113,23 +134,36 @@ function cx_call_to_action_kc() {
 	    									array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.cta-title'),
     									),
 
+	    								'Icon' => array(
+	    									array('property' => 'color', 'label' => esc_html__('Icon Color', 'codexin'), 'selector' => '.cta-content i'),
+	    									array('property' => 'font-size', 'label' => esc_html__('Icon Font Size', 'codexin'), 'selector' => '.cta-content i'),
+	    									array('property' => 'font-weight', 'label' => esc_html__('Icon Font Size', 'codexin'), 'selector' => '.cta-content i'),
+	    									array('property' => 'font-weight', 'label' => esc_html__('Icon Font Weight', 'codexin'), 'selector' => '.cta-content i'),
+	    									array('property' => 'padding', 'label' => esc_html__('Icon Padding', 'codexin'), 'selector' => '.cta-content i'),
+	    									array('property' => 'margin', 'label' => esc_html__('Icon Margin', 'codexin'), 'selector' => '.cta-content i'),
+
+    									),
+
 	    								'Button' 	=> array(
 	    									array('property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.btn-white'),
 	    									array('property' => 'color', 'label' => esc_html__('Color On Hover', 'codexin'), 'selector' => '.btn-white:hover'),
-	    									array('property' => 'background', 'label' => esc_html__('BG Color', 'codexin'), 'selector' => '.btn-white'),
-	    									array('property' => 'background-color', 'label' => esc_html__('BG Color On Hover', 'codexin'), 'selector' => '.btn-white:hover'),
+	    									array('property' => 'background', 'label' => esc_html__('Background Color', 'codexin'), 'selector' => '.btn-white'),
+	    									array('property' => 'background-color', 'label' => esc_html__('Background Color On Hover', 'codexin'), 'selector' => '.btn-white:hover'),
+	    									array('property' => 'font-family', 'label' => esc_html__('Font Family', 'codexin'), 'selector' => '.btn-white'),
 	    									array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.btn-white'),
+	    									array('property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '.btn-white'),
 	    									array('property' => 'text-align', 'label' => esc_html__('Text Align', 'codexin'), 'selector' => '.btn-white'),
 	    									array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.btn-white'),
 	    									array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.btn-white')
     									),
 
 	    								'Box'	=> array(
+	    									array('property' => 'background'),
 	    									array('property' => 'border', 'label' => esc_html__('Border', 'codexin')),
 	    									array('property' => 'border-radius', 'label' => esc_html__('Border Radius', 'codexin')),
-	    									array('property' => 'box-shadow', 'label' => esc_html__('Box Shadow', 'codexin'), 'selector' => '+.about-box'),
-	    									array('property' => 'box-shadow', 'label' => esc_html__('Box Shadow on Hover', 'codexin'), 'selector' => '+.about-box:hover'),
-	    									array('property' => 'transition', 'label' => esc_html__('Hover Transition Animation', 'codexin'), 'selector' => '+.about-box'),
+	    									array('property' => 'box-shadow', 'label' => esc_html__('Box Shadow', 'codexin'), 'selector' => '+.cx-image-box'),
+	    									array('property' => 'box-shadow', 'label' => esc_html__('Box Shadow on Hover', 'codexin'), 'selector' => '+.cx-image-box:hover'),
+	    									array('property' => 'transition', 'label' => esc_html__('Hover Transition Animation', 'codexin'), 'selector' => '+.cx-image-box'),
 	    									array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin')),
 	    									array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin')),
     									)

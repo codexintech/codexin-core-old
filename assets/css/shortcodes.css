@@ -1522,48 +1522,98 @@ section#feedback {
 }
 
 
-/*------------------ CTA Section -------------------*/
-.btn-rv {
+/************************************************************
+    Codexin CTA Section
+*************************************************************/
+.cx-cta .btn-rv {
     padding: 11px 25px;
     overflow: hidden;
     display: inline-block;
-    transition: 0.3s ;
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    -ms-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
     text-transform: uppercase;
-    min-width: 123px;
+    text-align: center;
+    min-width:150px;
 }
 
-.btn-white{
+.cx-cta {
+    background: #23dac9;
+    padding: 40px 20px;
+    text-align: left;
+}
+
+.cx-cta .btn-white{
     background: #fff ;
     color: #606060 ;
 }
 
-.btn-white:hover{
-    background: #23dac9;
-    color: #fff ;
+.cx-cta .btn-white:hover{
+    background: #444;
+    color: #fff;
 }
 
-.btn-radius{
+.cx-cta .btn-radius{
     border-radius: 5px;
 }
 
-.cta-wrapper-rv2 {
+.cx-cta .cta-wrapper-rv2 {
     background: none;
     padding: 45px 0;
 }
-.cta-content {
-    display: table;
-    width: 100% ;
+
+.cx-cta .cta-content {
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    width: 100%;
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    -ms-align-items: center;
+    -o-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    -moz-justify-content: center;
+    -ms-justify-content: center;
+    -o-justify-content: center;
+    justify-content: center;
 }
-.cta-title {
-    display: table-cell;
+
+.no-flexbox .cx-cta .cta-content {
+    display:table;
+}
+
+
+.cx-cta  .cta-title {
     color: #fff;
     font-size: 25px;
     margin: 0;
+    margin-right: 60px;
+}
+
+
+.no-flexbox .cx-cta i,
+.no-flexbox .cx-cta  .cta-content a,
+.no-flexbox .cx-cta  .cta-title {
+    display: table-cell;
     vertical-align: middle;
 }
-.cta-content a{
-    float: right;
+.no-flexbox .cx-cta  .cta-title,
+.no-flexbox .cx-cta i {
+    padding-right: 20px;
 }
+
+.cx-cta i {
+    font-size: 36px;
+    color: #f5f5f5;
+    margin-right: 30px;
+    line-height: 1.1em;
+}
+
 
 
 /*------------------------------ Portfolio Section rv2 ---------------------*/
