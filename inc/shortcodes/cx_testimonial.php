@@ -46,7 +46,7 @@ function cx_testimonial_shortcode( $atts, $content = null ) {
 								<div class="col-sm-10 col-sm-offset-1">
 									<div class="cx-testimonial-1">
 										<?php 
-																		//start new query..
+										//start new query..
 										$args = array(
 											'post_type'		 => 'testimonial',
 											'order'			 => 'date',
@@ -95,16 +95,16 @@ function cx_testimonial_shortcode( $atts, $content = null ) {
 
 				// Assigning a master css class and hooking into KC
    				$master_class = apply_filters( 'kc-el-class', $atts );
-	   			$master_class[] = 'testimonials animated';
+	   			$master_class[] = 'cx-testimonials';
 
 	   			// Retrieving user define classes
-	   			$classes = array( 'testimonial-two-row' );
+	   			$classes = array( 'row' );
 	   			(!empty($class_layout_two)) ? $classes[] = $class_layout_two : '';
 	?>
-			<section id="testimonials" class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
+			<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
 				<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
 					<?php 
-									//start new query..
+					//start new query..
 					$args = array(
 						'post_type'		 => 'testimonial',
 						'order'			 => 'date',
@@ -117,24 +117,25 @@ function cx_testimonial_shortcode( $atts, $content = null ) {
 						while( $data->have_posts() ) : $data->the_post();
 						?>
 					<div class="col-sm-6 quote-wrapper">
-						<div class="media">
-							<div class="media-left">
-								<img class="media-object img-circle" src="<?php echo esc_url( the_post_thumbnail_url( 'testimonial-mini-image' ) ); ?>" alt="<?php echo esc_attr( $img_alt ); ?>">
+						<div class="media-wrapper">
+							<div class="media-thumb">
+								<img src="<?php echo esc_url( the_post_thumbnail_url( 'square-one' ) ); ?>" alt="<?php echo esc_attr( $img_alt ); ?>">
 							</div>
-							<div class="media-body">
-								<h3 class="media-heading">
+							<div class="media-desc">
+								<h3 class="media-title">
 									<?php 
 									$name = rwmb_meta( 'reveal_author_name', 'type=text' ); 
 									echo esc_html( $name );
 									?>
 								</h3>
-								<p class="designation">
+								<p class="media-designation">
 									<?php 
 									$desig = rwmb_meta( 'reveal_author_desig', 'type=text' ); 
-									echo esc_html( $desig );
+									$company = rwmb_meta( 'reveal_author_company', 'type=text' ); 
+									echo esc_html( $desig ) .', '. esc_html( $company );
 									?>
 								</p>
-								 <p class="testimonial-description"> <?php printf('%s', get_the_excerpt() ); ?> </p>
+								 <p class="media-texts"> <?php printf('%s', get_the_excerpt() ); ?> </p>
 							</div>
 						</div>
 					</div> <!--end of quote-wrapper -->
@@ -145,7 +146,7 @@ function cx_testimonial_shortcode( $atts, $content = null ) {
 				wp_reset_postdata(); ?>
 
 				</div><!--/.row -->
-			</section> <!-- end of testimonials -->
+			</div> <!-- end of testimonials -->
 
 		<?php			
 		endif; //End layout-2 
@@ -190,7 +191,7 @@ function cx_testimonial_shortcode( $atts, $content = null ) {
    								<div class="client ">
    									<div class="client-info">
    										<div class="client-img">
-   											<img src="<?php echo esc_url( the_post_thumbnail_url( 'testimonial-mini-image' ) ); ?>" alt="<?php echo esc_attr( $img_alt ); ?>">
+   											<img src="<?php echo esc_url( the_post_thumbnail_url( 'square-one' ) ); ?>" alt="<?php echo esc_attr( $img_alt ); ?>">
    										</div>
    										<div class="client-name">
    											<i class="flaticon-right-quotes-symbol"></i>
@@ -276,7 +277,6 @@ function cx_testimonial_kc() {
 									'show_when' => '1',
 								),
 								'description'	=> esc_html__( 'Select Your Icon Here', 'codexin' ),
-								'admin_label' 	=> false,
 							),
 
 							array(
@@ -288,7 +288,6 @@ function cx_testimonial_kc() {
 									'show_when' => '1',
 								),
 								'description'	=> esc_html__( 'If you wish to style a particular content element differently, please add a class name to this field and refer to it in your custom CSS.', 'codexin' ),
-								'admin_label' 	=> false,
 							),
 
 	                		//Layout Two
@@ -301,7 +300,6 @@ function cx_testimonial_kc() {
 									'show_when' => '2',
 								),
 								'description'	=> esc_html__( 'If you wish to style a particular content element differently, please add a class name to this field and refer to it in your custom CSS.', 'codexin' ),
-								'admin_label' 	=> false,
 							),
 
 							//Layout Three
@@ -336,12 +334,11 @@ function cx_testimonial_kc() {
 									'show_when' => '3',
 								),
 								'description'	=> esc_html__( 'If you wish to style a particular content element differently, please add a class name to this field and refer to it in your custom CSS.', 'codexin' ),
-								'admin_label' 	=> false,
 							),
 
 	                	), //End general array..
 
-	                	//Styling Layout One
+	                	//Styling Params
 						'styling' => array(
 							array(
 								'name'    		=> 'codexin_css',
@@ -351,13 +348,14 @@ function cx_testimonial_kc() {
 										"screens" => "any,1199,991,767,479",
 
 										'Name'	=> array(
-											array( 'property' => 'color', 'label' => esc_html__( 'Color' ), 'selector' => '.client-name .title-3, .quote-author-name' ),
-											array( 'property' => 'font-family', 'label' => esc_html__( 'Font Family' ), 'selector' => '.client-name .title-3, .quote-author-name' ),
-											array( 'property' => 'font-size', 'label' => esc_html__( 'Font Size' ), 'selector' => '.client-name .title-3, .quote-author-name' ),
-											array( 'property' => 'text-transform', 'label' => esc_html__( 'Text Transform' ), 'selector' => '.client-name .title-3, .quote-author-name' ),
-											array( 'property' => 'font-weight', 'label' => esc_html__( 'Font Weight' ), 'selector' => '.client-name .title-3, .quote-author-name' ),
-											array( 'property' => 'margin', 'label' => esc_html__( 'Margin' ), 'selector' => '.client-name .title-3, .quote-author-name' ),
-											array( 'property' => 'padding', 'label' => esc_html__( 'Padding' ), 'selector' => '.client-name .title-3, .quote-author-name' ),
+											array( 'property' => 'color', 'label' => esc_html__( 'Color' ), 'selector' => '.client-name .title-3, .quote-author-name, .media-title' ),
+											array( 'property' => 'font-family', 'label' => esc_html__( 'Font Family' ), 'selector' => '.client-name .title-3, .quote-author-name, .media-title' ),
+											array( 'property' => 'font-size', 'label' => esc_html__( 'Font Size' ), 'selector' => '.client-name .title-3, .quote-author-name, .media-title' ),
+											array( 'property' => 'text-transform', 'label' => esc_html__( 'Text Transform' ), 'selector' => '.client-name .title-3, .quote-author-name, .media-title' ),
+											array( 'property' => 'font-weight', 'label' => esc_html__( 'Font Weight' ), 'selector' => '.client-name .title-3, .quote-author-name, .media-title' ),
+											array( 'property' => 'line-height', 'label' => esc_html__( 'Line Height' ), 'selector' => '.client-name .title-3, .quote-author-name, .media-title' ),
+											array( 'property' => 'margin', 'label' => esc_html__( 'Margin' ), 'selector' => '.client-name .title-3, .quote-author-name, .media-title' ),
+											array( 'property' => 'padding', 'label' => esc_html__( 'Padding' ), 'selector' => '.client-name .title-3, .quote-author-name, .media-title' ),
 										),
 
 										'Icon'	=> array(
@@ -366,28 +364,38 @@ function cx_testimonial_kc() {
 											array( 'property' => 'border-radius', 'label' => 'Icon Box Border Radius', 'selector' => '.quote-author-thumb i' ),
 										),
 
+										'Designation' => array(
+											array('property' => 'color', 'label' => esc_html__( 'Text Color' ), 'selector' => '.media-designation'),
+											array('property' => 'font-family', 'label' => esc_html__( 'Font Family' ), 'selector' => '.media-designation'),
+											array('property' => 'font-size', 'label' => esc_html__( 'Font Size' ), 'selector' => '.media-designation'),
+											array('property' => 'line-height', 'label' => esc_html__( 'Line Height' ), 'selector' => '.media-designation'),
+											array('property' => 'text-align', 'label' => esc_html__( 'Text Align' ), 'selector' => '.media-designation'),
+											array('property' => 'margin', 'label' => esc_html__( 'Margin' ), 'selector' => '.media-designation'),
+											array('property' => 'padding', 'label' => esc_html__( 'Padding' ), 'selector' => '.media-designation'),
+										),
+
 										'Description' => array(
-											array('property' => 'color', 'label' => esc_html__( 'Text Color' ), 'selector' => '.quote-text p,.media-heading,designation,p,.client-comment p'),
-											array('property' => 'font-family', 'label' => esc_html__( 'Font Family' ), 'selector' => '.quote-text p,.client-comment p'),
-											array('property' => 'font-size', 'label' => esc_html__( 'Font Size' ), 'selector' => '.quote-text p, .testimonial-description,.client-comment p'),
-											array('property' => 'line-height', 'label' => esc_html__( 'Line Height' ), 'selector' => '.quote-text p, .testimonial-description,.client-comment p'),
-											array('property' => 'text-align', 'label' => esc_html__( 'Text Align' ), 'selector' => '.quote-text p, .testimonial-description,.client-comment p'),
-											array('property' => 'margin', 'label' => esc_html__( 'Margin' ), 'selector' => '.quote-text p, .testimonial-description,.client-comment p'),
-											array('property' => 'padding', 'label' => esc_html__( 'Padding' ), 'selector' => '.quote-text p, .testimonial-description,.client-comment p'),
+											array('property' => 'color', 'label' => esc_html__( 'Text Color' ), 'selector' => '.quote-text p, .media-texts, .client-comment p'),
+											array('property' => 'font-family', 'label' => esc_html__( 'Font Family' ), 'selector' => '.quote-text p, .media-texts,.client-comment p'),
+											array('property' => 'font-size', 'label' => esc_html__( 'Font Size' ), 'selector' => '.quote-text p, .media-texts, .client-comment p'),
+											array('property' => 'line-height', 'label' => esc_html__( 'Line Height' ), 'selector' => '.quote-text p, .media-texts, .client-comment p'),
+											array('property' => 'text-align', 'label' => esc_html__( 'Text Align' ), 'selector' => '.quote-text p, .media-texts, .client-comment p'),
+											array('property' => 'margin', 'label' => esc_html__( 'Margin' ), 'selector' => '.quote-text p, .media-texts, .client-comment p'),
+											array('property' => 'padding', 'label' => esc_html__( 'Padding' ), 'selector' => '.quote-text p, .media-texts, .client-comment p'),
 										),
 
 										'Image' => array(
 											
-											array('property' => 'border', 'label' => 'Image Box Border', 'selector' => '.img-circle'),
-											array('property' => 'border-radius', 'label' => 'Image Box Border Radius', 'selector' => '.img-circle'),
+											array('property' => 'border', 'label' => 'Image Box Border', 'selector' => '.media-thumb img'),
+											array('property' => 'border-radius', 'label' => 'Image Box Border Radius', 'selector' => '.media-thumb img'),
 										),
 
 										'Divider' => array(
-											array('property' => 'background', 'label' => 'Color', 'selector' => '.quote-author-name::before, .designation::after'),
-											array('property' => 'width', 'label' => 'Width', 'selector' => '.quote-author-name::before, .designation::after'),
-											array('property' => 'height', 'label' => 'Height', 'selector' => '.quote-author-name::before, .designation::after'),
-											array('property' => 'margin', 'label' => 'Margin', 'selector' => '.quote-author-name::before, .designation::after'),
-											array('property' => 'padding', 'label' => 'padding', 'selector' => '.quote-author-name::before, .designation::after')
+											array('property' => 'background', 'label' => 'Color', 'selector' => '.quote-author-name::before, .media-designation::after'),
+											array('property' => 'width', 'label' => 'Width', 'selector' => '.quote-author-name::before, .media-designation::after'),
+											array('property' => 'height', 'label' => 'Height', 'selector' => '.quote-author-name::before, .media-designation::after'),
+											array('property' => 'margin', 'label' => 'Margin', 'selector' => '.quote-author-name::before, .media-designation::after'),
+											array('property' => 'padding', 'label' => 'padding', 'selector' => '.quote-author-name::before, .media-designation::after')
 										),
 
 										'Box'	=> array(

@@ -74,7 +74,7 @@ input[type="button"]:hover{
 
 
 /**********************************
-    001 - cx_section_heading
+   001 - Codexin Section Heading
 **********************************/
 
 .section-heading .primary-title {
@@ -264,7 +264,7 @@ input[type="button"]:hover{
 }
 
 /***********************************
-    003 - cx_animated_counter
+    003 - Codexin Counter Box
 ***********************************/
 
 .cx-animated-counter {
@@ -303,9 +303,9 @@ input[type="button"]:hover{
     padding:48px 25px;
 }
 
-/***************************************
-    004 - cx_service_box
-****************************************/
+/**********************************************************
+    004 - Codexin Service Box/Codexin Testimonial Type 02
+***********************************************************/
 
 /*.cx-service-box .service-single {
     margin-bottom: 40px;
@@ -388,6 +388,7 @@ input[type="button"]:hover{
 
 /* old browser finished */
 
+.cx-testimonials .quote-wrapper .media-wrapper,
 .cx-service-box .service-single .media-wrapper {
     display: -webkit-flex;
     display: -moz-flex;
@@ -411,6 +412,7 @@ input[type="button"]:hover{
     margin-top: 50px;
 }
 
+.cx-testimonials .quote-wrapper .media-thumb,
 .cx-service-box .service-single .media-thumb {
     padding-top: 7px;
     -webkit-flex-grow: 1;
@@ -421,6 +423,7 @@ input[type="button"]:hover{
     padding-right: 10px;
 }
 
+.cx-testimonials .quote-wrapper .media-title,
 .cx-service-box .service-single .media-title {
     font-size: 16px;
     text-transform: uppercase;
@@ -437,6 +440,7 @@ input[type="button"]:hover{
     line-height: 1em;
 }
 
+.cx-testimonials .quote-wrapper .media-desc,
 .cx-service-box .service-single .media-desc {
     padding-top: 7px;
     -webkit-flex-grow: 1;
@@ -449,7 +453,7 @@ input[type="button"]:hover{
 
 
 /**************************************
- 005 - cx_information/events
+   005 - Codexin Information Box
 **************************************/
 
 .events-description .panel-group .panel {
@@ -640,7 +644,7 @@ input[type="button"]:hover{
 
 
 /************************************************************
-    COdexin Testimonial Type 01
+    006 - Codexin Testimonial Type 01
 *************************************************************/
 
 .cx-testimonial-1 .quote-author-thumb {
@@ -710,6 +714,46 @@ input[type="button"]:hover{
 .cx-testimonial-1 span.next {
     right:-95px;
 }
+
+/************************************************************
+    007 - Codexin Testimonial Type 02
+*************************************************************/
+
+.cx-testimonials .quote-wrapper {
+    margin-top: 35px;
+    margin-bottom: 35px;
+}
+
+.cx-testimonials .quote-wrapper .media-thumb {
+    padding-right: 25px;
+}
+
+.cx-testimonials .quote-wrapper .media-thumb img {
+    border-radius: 50%;
+    min-width: 110px;
+}
+
+.cx-testimonials .quote-wrapper .media-title {
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+.cx-testimonials .quote-wrapper .media-designation {
+    font-style: italic;
+    position: relative;
+}
+
+.cx-testimonials .quote-wrapper .media-designation::after {
+    content: "";
+    width: 70px;
+    height: 3px;
+    background: #295970;
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+
 
 
 /*************************************
@@ -896,45 +940,6 @@ input[type="button"]:hover{
     padding-top: 80px;
     padding-bottom: 80px;
     background: #fff;
-}
-
-/******************************************
-    cx_happy_client_testimonial
-******************************************/
-#testimonials {
-    /*background: url('images/happyclients/happy-quotes.jpg') no-repeat scroll;*/
-    background-position: center;
-    background-size: cover;
-    margin-top: 0;
-    padding-top: 0;
-    padding-bottom: 0;
-}
-
-.testimonials .media-left {
-    padding-right: 25px;
-}
-
-.testimonials .media-heading {
-    text-transform: uppercase; 
-}
-
-.testimonials .designation {
-    font-style: italic;
-    position: relative;
-}
-
-.testimonials .designation::after {
-    content: "";
-    width: 70px;
-    height: 3px;
-    display: block;
-    margin-top: 15px;
-    margin-bottom: 15px;
-}
-
-.quote-wrapper {
-    margin-top: 35px;
-    margin-bottom: 35px;
 }
 
 
@@ -1556,6 +1561,7 @@ section#feedback {
 }
 .item{
     text-align: center;
+    outline: 0;
 }
 
 
