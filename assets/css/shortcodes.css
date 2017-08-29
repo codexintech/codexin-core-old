@@ -636,37 +636,52 @@ input[type="button"]:hover{
     text-decoration: none;
 }
 
-/*-----quote----*/
-#quote {
-    padding-top: 60px;
-    padding-bottom: 60px;
-}
 
-.quote-carousel-control {
-    position: absolute;
-    top: 30%;
-    font-size: 40px;
-}
 
-.left.quote-carousel-control {
-    left: 8%;
-}
 
-.right.quote-carousel-control {
-    right: 8%;
-}
-.quote-author-thumb {
+/************************************************************
+    COdexin Testimonial Type 01
+*************************************************************/
+
+.cx-testimonial-1 .quote-author-thumb {
     float: left;
     margin-right: 40px;
+    width:106px;
 }
-.quote-author-thumb i {
+
+.cx-testimonial-1 .quote-text  {
+    width: calc(100% - 146px);
+    float: right;
+}
+
+
+.cx-testimonial-1 .quote-text p.quote-author-name::before  {
+    background: #295970;
+}
+
+.cx-testimonial-1 .quote-author-thumb i {
     padding: 20px;
+    border: 3px solid #295970;
+    color: #295970;
+    font-size: 60px;
+    padding: 20px;
+    margin-top: 5px;
 }
-.quote-text p.quote-author-name {
+
+.cx-testimonial-1 .quote-text p {
+    font-size: 18px;
+    font-style: italic;
+    color: #444;
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+
+.cx-testimonial-1 .quote-text p.quote-author-name {
     margin-bottom: 0;
 }
 
-.quote-text p.quote-author-name::before {
+.cx-testimonial-1 .quote-text p.quote-author-name::before {
     content: "";
     height: 2px;
     width: 50px;
@@ -674,6 +689,28 @@ input[type="button"]:hover{
     display: inline-block;
     vertical-align: middle;
 }
+
+.cx-testimonial-1 span {
+    position: absolute;
+    top:50%;
+    font-size:40px;
+    cursor: pointer;
+    width:40px;
+    height: auto;
+    display: inline-block;
+    text-align: center;
+    transform:translateY(-50%);
+}
+
+
+.cx-testimonial-1 span.prev {
+    left:-95px;
+}
+
+.cx-testimonial-1 span.next {
+    right:-95px;
+}
+
 
 /*************************************
     cx_team

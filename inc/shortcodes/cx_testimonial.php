@@ -34,24 +34,17 @@ function cx_testimonial_shortcode( $atts, $content = null ) {
 				$master_class[] = 'quote';
 
 				// Retrieving user define classes
-				$classes = array( 'testimonial-row' );
+				$classes = array( 'row' );
 				(!empty($class_layout_one)) ? $classes[] = $class_layout_one : ''; 
 
 				?>
 
 				<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
 					<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
-						<div id="quote-carousel" class="carousel slide" data-ride="carousel">
-							<!-- Indicators -->
-							<ol class="carousel-indicators hidden">
-								<li data-target="#quote-carousel" data-slide-to="0" class="active"></li>
-								<li data-target="#quote-carousel" data-slide-to="1"></li>
-							</ol>
 
 							<!-- Wrapper for slides -->
-							<div class="row">
-								<div class="col-sm-8 col-sm-offset-2">
-									<div class="carousel-inner" role="listbox">
+								<div class="col-sm-10 col-sm-offset-1">
+									<div class="cx-testimonial-1">
 										<?php 
 																		//start new query..
 										$args = array(
@@ -66,50 +59,31 @@ function cx_testimonial_shortcode( $atts, $content = null ) {
 										if( $data->have_posts() ) :
 																			//Start loop here...
 											while( $data->have_posts() ) : $data->the_post();
-										$i++;
-
-										if( $i == 1 ) :
-											?>
-										<div class="item active">
-											<?php 
-											else : ?>
-											<div class="item">
-												<?php
-												endif;
 												?>
-
-												<div class="quote-wrapper">
-													<div class="quote-author-thumb">
-														<i class="fa <?php echo $testimonial_icon; ?>"></i>
+											<div class="item">
+													<div class="quote-wrapper clearfix">
+														<div class="quote-author-thumb">
+															<i class="fa <?php echo $testimonial_icon; ?>"></i>
+														</div>
+														<div class="quote-text">
+															<p> <?php printf( '%s', get_the_excerpt() ); ?> </p>
+															<p class="quote-author-name">
+																<?php 
+																$aut_name = rwmb_meta( 'reveal_author_name','type=text' );
+																echo esc_html( $aut_name );
+																?>
+															</p>
+														</div>
 													</div>
-													<div class="quote-text">
-														<p> <?php printf( '%s', get_the_excerpt() ); ?> </p>
-														<p class="quote-author-name">
-															<?php 
-															$aut_name = rwmb_meta( 'reveal_author_name','type=text' );
-															echo esc_html( $aut_name );
-															?>
-														</p>
-													</div>
-												</div>
 											</div> <!--/item-->
 											<?php 
 											endwhile;
 											endif; //End check-posts if()....
 											wp_reset_postdata();
 											?>	
-										</div> <!-- end of carousel inner -->
+										</div> <!-- end of cx-testimonial-1 -->
 									</div> <!-- end of col -->
-								</div> <!-- end of row -->
 
-								<!-- Controls -->
-								<a class="left quote-carousel-control" href="#quote-carousel" role="button" data-slide="prev">
-									<i class="fa fa-angle-left"></i>
-								</a>
-								<a class="right quote-carousel-control" href="#quote-carousel" role="button" data-slide="next">
-									<i class="fa fa-angle-right"></i>
-								</a>
-							</div><!--#quote-carousel-->
 						</div><!--/.row-->
 					</div>  <!-- end of quote -->
    			
@@ -267,15 +241,16 @@ function cx_testimonial_kc() {
 					// Only load assets when using this element
   	        		'assets' 			=> array(
   	        			'scripts' 		=> array(
-  	        				'owl-js-script' 	=> CODEXIN_CORE_ASSET_DIR . '/js/owl.carousel.min.js',
-  	        				'owl-active-js' 	=> CODEXIN_CORE_ASSET_DIR . '/js/shortcode-js/cx_clientcarosel_layout_3.js',
+  	        				'slick-cx-main-script' 	=> CODEXIN_CORE_ASSET_DIR . '/js/slick.min.js',
+  	        				'slick-cx-user-script' 	=> CODEXIN_CORE_ASSET_DIR . '/js/slick-cx-user-script.js',
   	        				),
+
   	        			'styles'	=> array(
-  	        				'owl-style'	=> CODEXIN_CORE_ASSET_DIR . '/css/owl.carousel.min.css',
-  	        				'owl-theme-style'	=> CODEXIN_CORE_ASSET_DIR . '/css/owl.theme.default.min.css',
+  	        				'slick-cx-main-style'	=> CODEXIN_CORE_ASSET_DIR . '/css/slick.css',
   	        				),
 
                 	), //End assets
+
 					'params' => array(
 						'general' => array(
 							array(
@@ -376,12 +351,13 @@ function cx_testimonial_kc() {
 										"screens" => "any,1199,991,767,479",
 
 										'Name'	=> array(
-											array( 'property' => 'color', 'label' => esc_html__( 'Color' ), 'selector' => '.client-name .title-3' ),
-											array( 'property' => 'font-size', 'label' => esc_html__( 'Font Size' ), 'selector' => '.client-name .title-3' ),
-											array( 'property' => 'font-family', 'label' => esc_html__( 'Font Family' ), 'selector' => '.client-name .title-3' ),
-											array( 'property' => 'font-weight', 'label' => esc_html__( 'Font Weight' ), 'selector' => '.client-name .title-3' ),
-											array( 'property' => 'margin', 'label' => esc_html__( 'Margin' ), 'selector' => '.client-name .title-3' ),
-											array( 'property' => 'padding', 'label' => esc_html__( 'Padding' ), 'selector' => '.client-name .title-3' ),
+											array( 'property' => 'color', 'label' => esc_html__( 'Color' ), 'selector' => '.client-name .title-3, .quote-author-name' ),
+											array( 'property' => 'font-family', 'label' => esc_html__( 'Font Family' ), 'selector' => '.client-name .title-3, .quote-author-name' ),
+											array( 'property' => 'font-size', 'label' => esc_html__( 'Font Size' ), 'selector' => '.client-name .title-3, .quote-author-name' ),
+											array( 'property' => 'text-transform', 'label' => esc_html__( 'Text Transform' ), 'selector' => '.client-name .title-3, .quote-author-name' ),
+											array( 'property' => 'font-weight', 'label' => esc_html__( 'Font Weight' ), 'selector' => '.client-name .title-3, .quote-author-name' ),
+											array( 'property' => 'margin', 'label' => esc_html__( 'Margin' ), 'selector' => '.client-name .title-3, .quote-author-name' ),
+											array( 'property' => 'padding', 'label' => esc_html__( 'Padding' ), 'selector' => '.client-name .title-3, .quote-author-name' ),
 										),
 
 										'Icon'	=> array(
@@ -393,10 +369,15 @@ function cx_testimonial_kc() {
 										'Description' => array(
 											array('property' => 'color', 'label' => esc_html__( 'Text Color' ), 'selector' => '.quote-text p,.media-heading,designation,p,.client-comment p'),
 											array('property' => 'font-family', 'label' => esc_html__( 'Font Family' ), 'selector' => '.quote-text p,.client-comment p'),
+											array('property' => 'font-size', 'label' => esc_html__( 'Font Size' ), 'selector' => '.quote-text p, .testimonial-description,.client-comment p'),
+											array('property' => 'line-height', 'label' => esc_html__( 'Line Height' ), 'selector' => '.quote-text p, .testimonial-description,.client-comment p'),
 											array('property' => 'text-align', 'label' => esc_html__( 'Text Align' ), 'selector' => '.quote-text p, .testimonial-description,.client-comment p'),
+											array('property' => 'margin', 'label' => esc_html__( 'Margin' ), 'selector' => '.quote-text p, .testimonial-description,.client-comment p'),
+											array('property' => 'padding', 'label' => esc_html__( 'Padding' ), 'selector' => '.quote-text p, .testimonial-description,.client-comment p'),
 										),
 
 										'Image' => array(
+											
 											array('property' => 'border', 'label' => 'Image Box Border', 'selector' => '.img-circle'),
 											array('property' => 'border-radius', 'label' => 'Image Box Border Radius', 'selector' => '.img-circle'),
 										),
