@@ -10,7 +10,6 @@
 // Registering Testimonial Shortcode
 function cx_testimonial_shortcode( $atts, $content = null ) {
 	extract(shortcode_atts(array(
-			'img_alt'	=> '',
 			'layout'	=> '',
 			'class_layout_one' => '',
 			'class_layout_two' => '',
@@ -24,14 +23,23 @@ function cx_testimonial_shortcode( $atts, $content = null ) {
 
 	ob_start(); 
 
+	// Retrieving Image Alt Tags
+	$img_alt = ( !empty( retrieve_alt_tag() ) ) ? retrieve_alt_tag() : get_the_title();
+
    		if( ! empty( $layout ) ) :
    			if( $layout == 1 ) :
+
+   				// Assigning a master css class and hooking into KC
 				$master_class = apply_filters( 'kc-el-class', $atts );
 				$master_class[] = 'quote';
-				$classes = array( 'testimonial-row' );
-				(!empty($class_layout_one)) ? $classes[] = $class_layout_one : ''; ?>
 
-				<div id="quote" class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
+				// Retrieving user define classes
+				$classes = array( 'testimonial-row' );
+				(!empty($class_layout_one)) ? $classes[] = $class_layout_one : ''; 
+
+				?>
+
+				<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
 					<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
 						<div id="quote-carousel" class="carousel slide" data-ride="carousel">
 							<!-- Indicators -->
@@ -110,8 +118,12 @@ function cx_testimonial_shortcode( $atts, $content = null ) {
 			endif; //End layout - 1 ...
 
 			if( $layout == 2 ) :
+
+				// Assigning a master css class and hooking into KC
    				$master_class = apply_filters( 'kc-el-class', $atts );
 	   			$master_class[] = 'testimonials animated';
+
+	   			// Retrieving user define classes
 	   			$classes = array( 'testimonial-two-row' );
 	   			(!empty($class_layout_two)) ? $classes[] = $class_layout_two : '';
 	?>
@@ -165,8 +177,12 @@ function cx_testimonial_shortcode( $atts, $content = null ) {
 		endif; //End layout-2 
 
 		if( $layout == 3 ) :
+
+			// Assigning a master css class and hooking into KC
 			$master_class = apply_filters( 'kc-el-class', $atts );
    			$master_class[] = 'client-feedback';
+
+   			// Retrieving user define classes
    			$classes = array( 'container' );
    			(!empty($class_layout_three)) ? $classes[] = $class_layout_three : ''; ?>
 
@@ -274,19 +290,8 @@ function cx_testimonial_kc() {
 								),
 								'value'	=> '1'
 							),
+	                		
 	                		//layout One 
-							array(
-								'name' 			=> 'class_layout_one',
-								'label' 		=> __( 'Enter Class', 'codexin' ),
-								'type' 			=> 'text',
-								'relation'		=> array(
-									'parent'	=> 'layout',
-									'show_when' => '1',
-								),
-								'description'	=> esc_html__( 'If you wish to style a particular content element differently, please add a class name to this field and refer to it in your custom CSS.', 'codexin' ),
-								'admin_label' 	=> false,
-							),
-
 							array(
 								'name' 			=> 'testimonial_icon',
 								'label' 		=> __( 'Testimonial Icon', 'codexin' ),
@@ -296,6 +301,18 @@ function cx_testimonial_kc() {
 									'show_when' => '1',
 								),
 								'description'	=> esc_html__( 'Select Your Icon Here', 'codexin' ),
+								'admin_label' 	=> false,
+							),
+
+							array(
+								'name' 			=> 'class_layout_one',
+								'label' 		=> __( 'Enter Class', 'codexin' ),
+								'type' 			=> 'text',
+								'relation'		=> array(
+									'parent'	=> 'layout',
+									'show_when' => '1',
+								),
+								'description'	=> esc_html__( 'If you wish to style a particular content element differently, please add a class name to this field and refer to it in your custom CSS.', 'codexin' ),
 								'admin_label' 	=> false,
 							),
 
