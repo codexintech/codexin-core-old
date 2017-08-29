@@ -2032,3 +2032,20 @@ figure.portfolio-rv2:hover .image-mask a {
     color: #707070;
     margin-bottom: 10px;
 }
+
+
+/*****************************
+    011 - clients section
+******************************/
+.client-comment-curosel-rv3  .client-name p {
+    margin: 0;
+}
+.client-feedback .center-block{
+    float: none;
+}
+.client-comment-curosel-rv3.arrow-middle .slick-prev {
+    left: -100px;
+}
+.client-comment-curosel-rv3.arrow-middle .slick-next {
+    right:  -100px;
+}

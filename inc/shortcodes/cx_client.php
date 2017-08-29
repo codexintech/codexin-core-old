@@ -20,7 +20,7 @@ function cx_client_shortcode( $atts, $content = null ) {
 
 	// Assigning a master css class and hooking into KC
 	$master_class = apply_filters( 'kc-el-class', $atts );
-	$master_class[] = 'clients';
+	$master_class[] = 'clients mrg-50';
 
 	// Retrieving user define classes
 	$classes = array( 'client' );
@@ -33,47 +33,40 @@ function cx_client_shortcode( $atts, $content = null ) {
 	$num_slide = ( !empty( $number_of_slides ) ) ? $number_of_slides : '6';
 	$codeopt .= '
 	<script type="text/javascript">
-		var logo_slide = { slide:'. $num_slide .'}; 
+		var logo_slide = "' . $num_slide . '"; 
 	</script>';
 	echo $codeopt;
 	?>
 
-	<div id="clients" class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
-		<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
-			<div class="owl-carousel">
-				<?php 
-				//start wp query..
-				$args = array(
-					'post_type'			=> 'clients',
-					'order'				=> 'DESC',
-					'posts_per_page'	=> $number_of_clients
-					);
-				$data = new WP_Query( $args );
-				//Check post
-				if( $data->have_posts() ) :
-					//startloop here..
-					while( $data->have_posts() ) : $data->the_post();
-						$client_url = rwmb_meta( 'reveal_clients_surl', 'type=text' );
-						// Retrieving Image alt tag
-						$image_alt = ( !empty( retrieve_alt_tag() ) ) ? retrieve_alt_tag() : get_the_title();  
-						?>
-
-						<div class="item">
-							<?php if( $link_client ): ?>
-							<a href="<?php if( ! empty( $client_url ) ) : echo esc_url( $client_url ); endif; ?>"><img src="<?php echo esc_url( the_post_thumbnail_url( 'full' ) ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>"/></a>
-							<?php else: ?>
-							<img src="<?php echo esc_url( the_post_thumbnail_url( 'full' ) ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>"/>
-							<?php endif; ?>
-						</div>
-
-					<?php
-					endwhile;
-				endif;
-				wp_reset_postdata();
-				?>
-			</div> <!--end of owl-carousel-->
-		</div> <!-- end of client -->
+	<div id="clients-rv2" class="clients mrg-50">
+		<div id="client-carousel-rv2" class="">
+			<?php 
+			//start wp query..
+			$args = array(
+				'post_type'			=> 'clients',
+				'order'				=> 'DESC',
+				'posts_per_page'	=> $number_of_clients
+				);
+			$data = new WP_Query( $args );
+			//Check post
+			if( $data->have_posts() ) :
+				//startloop here..
+				while( $data->have_posts() ) : $data->the_post();
+			$client_url = rwmb_meta( 'reveal_clients_surl', 'type=text' );
+			// Retrieving Image alt tag
+			$image_alt = ( !empty( retrieve_alt_tag() ) ) ? retrieve_alt_tag() : get_the_title();  
+			?>
+			<div class="item">
+				<a href="<?php if( ! empty( $client_url ) ) : echo esc_url( $client_url ); endif; ?>"><img src="<?php echo esc_url( the_post_thumbnail_url( 'full' ) ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>"></a>
+			</div>
+			<?php
+			endwhile;
+			endif;
+			wp_reset_postdata();
+			?>
+		</div>
 	</div> <!-- end of clients -->
+	<div class="clearfix"></div>
 
 	<?php
 	$result .= ob_get_clean();
@@ -95,7 +88,7 @@ function cx_client_shortcode( $atts, $content = null ) {
 	                //Only load assets when using this element
  					'assets' => array(
  						'scripts' => array(
- 							'owl-carousel-js' => CODEXIN_CORE_ASSET_DIR . '/js/owl.carousel.min.js',
+ 							// 'slick-js' => CODEXIN_CORE_ASSET_DIR . '/js/slick.min.js',
  							'client-carousel-script' => CODEXIN_CORE_ASSET_DIR . '/js/shortcode-js/cx_client-carousel.js',
  							),
 

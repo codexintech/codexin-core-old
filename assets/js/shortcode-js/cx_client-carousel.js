@@ -6,17 +6,37 @@
     client carouel
     ---------------------------------------------------------------- */
 
-    $(".owl-carousel").owlCarousel({
-
-        autoPlay: 3000, //Set AutoPlay to 3 seconds
-        navigation: false,
-        pagination: false,
-        items: logo_slide.slide,
-        itemsDesktop: [1199, 6],
-        itemsDesktopSmall: [991, 5],
-        itemsTablet: [767, 5],
-        itemsTabletSmall: [599, 4],
-        itemsMobile: [420, 3]
+    $('#client-carousel-rv2').slick({
+        slidesToShow: logo_slide,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 2000,
+        dots:false,
+        arrows:false,
+        responsive: [
+            {
+              breakpoint: 1024,
+              settings: {
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                infinite: true,
+                dots: true
+              }
+            },
+            {
+              breakpoint: 600,
+              settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1
+              }
+            },
+            {
+              breakpoint: 480,
+              settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1
+              }
+            }]
 
     });
 
