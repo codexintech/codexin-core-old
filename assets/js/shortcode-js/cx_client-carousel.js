@@ -7,7 +7,7 @@
     ---------------------------------------------------------------- */
 
     $('#client-carousel-rv2').slick({
-        slidesToShow: 5,
+        slidesToShow: logo_slide,
         slidesToScroll: 1,
         autoplay: true,
         autoplaySpeed: 2000,

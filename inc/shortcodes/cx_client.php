@@ -33,7 +33,7 @@ function cx_client_shortcode( $atts, $content = null ) {
 	$num_slide = ( !empty( $number_of_slides ) ) ? $number_of_slides : '6';
 	$codeopt .= '
 	<script type="text/javascript">
-		var logo_slide = { slide:'. $num_slide .'}; 
+		var logo_slide = "' . $num_slide . '"; 
 	</script>';
 	echo $codeopt;
 	?>
@@ -88,7 +88,7 @@ function cx_client_shortcode( $atts, $content = null ) {
 	                //Only load assets when using this element
  					'assets' => array(
  						'scripts' => array(
- 							'slick-js' => CODEXIN_CORE_ASSET_DIR . '/js/slick.min.js',
+ 							// 'slick-js' => CODEXIN_CORE_ASSET_DIR . '/js/slick.min.js',
  							'client-carousel-script' => CODEXIN_CORE_ASSET_DIR . '/js/shortcode-js/cx_client-carousel.js',
  							),
 
