@@ -59,6 +59,9 @@ class Codexin_Core {
 		// Adding Helper File
 		require_once CODEXIN_CORE_INC_DIR . '/helpers.php';
 
+		// Adding metaboxes
+		require_once CODEXIN_CORE_INC_DIR . '/metaboxes.php';
+
 		// Initalizing custom widgets
 		$cx_widgets = glob(CODEXIN_CORE_WDGT_DIR.'/*.php');
 		foreach ($cx_widgets as $cx_widget){

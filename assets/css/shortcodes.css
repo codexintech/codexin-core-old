@@ -388,7 +388,7 @@ input[type="button"]:hover{
 
 /* old browser finished */
 
-.cx-testimonials .quote-wrapper .media-wrapper,
+.cx-testimonial-2 .quote-wrapper .media-wrapper,
 .cx-service-box .service-single .media-wrapper {
     display: -webkit-flex;
     display: -moz-flex;
@@ -412,7 +412,7 @@ input[type="button"]:hover{
     margin-top: 50px;
 }
 
-.cx-testimonials .quote-wrapper .media-thumb,
+.cx-testimonial-2 .quote-wrapper .media-thumb,
 .cx-service-box .service-single .media-thumb {
     padding-top: 7px;
     -webkit-flex-grow: 1;
@@ -423,7 +423,7 @@ input[type="button"]:hover{
     padding-right: 10px;
 }
 
-.cx-testimonials .quote-wrapper .media-title,
+.cx-testimonial-2 .quote-wrapper .media-title,
 .cx-service-box .service-single .media-title {
     font-size: 16px;
     text-transform: uppercase;
@@ -440,7 +440,7 @@ input[type="button"]:hover{
     line-height: 1em;
 }
 
-.cx-testimonials .quote-wrapper .media-desc,
+.cx-testimonial-2 .quote-wrapper .media-desc,
 .cx-service-box .service-single .media-desc {
     padding-top: 7px;
     -webkit-flex-grow: 1;
@@ -719,31 +719,37 @@ input[type="button"]:hover{
     007 - Codexin Testimonial Type 02
 *************************************************************/
 
-.cx-testimonials .quote-wrapper {
+.cx-testimonial-2 .quote-wrapper {
     margin-top: 35px;
     margin-bottom: 35px;
 }
 
-.cx-testimonials .quote-wrapper .media-thumb {
+.cx-testimonial-2 .quote-wrapper .media-thumb {
     padding-right: 25px;
 }
 
-.cx-testimonials .quote-wrapper .media-thumb img {
+.cx-testimonial-2 .quote-wrapper .media-thumb img {
     border-radius: 50%;
-    min-width: 110px;
+    width:110px;
 }
 
-.cx-testimonials .quote-wrapper .media-title {
+.cx-testimonial-2 .quote-wrapper .media-title {
     margin-top: 0;
     margin-bottom: 5px;
 }
 
-.cx-testimonials .quote-wrapper .media-designation {
+.cx-testimonial-2 .quote-wrapper .media-designation {
     font-style: italic;
     position: relative;
+    margin-bottom: 15px;
 }
 
-.cx-testimonials .quote-wrapper .media-designation::after {
+.cx-testimonial-2 .media-texts {
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.cx-testimonial-2 .media-texts::before {
     content: "";
     width: 70px;
     height: 3px;
@@ -754,7 +760,36 @@ input[type="button"]:hover{
 }
 
 
+.no-flexbox .cx-testimonial-2 .quote-wrapper .media-wrapper, .cx-service-box .service-single .media-wrapper {
+    display: block;
+}
 
+
+.no-flexbox .cx-testimonial-2 .media-thumb {
+    width:110px;
+    margin-right: 25px;
+    float:left;
+}
+
+
+.no-flexbox .cx-testimonial-2 .media-desc {
+    width: calc(100% - 135px);
+    float: left;
+}
+
+.no-flexbox.no-csscalc .cx-testimonial-2 .media-thumb img {
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.no-flexbox.no-csscalc .cx-testimonial-2 .media-desc  {
+    width:100%;
+    display: block;
+}
 
 /*************************************
     cx_team

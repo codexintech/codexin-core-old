@@ -95,7 +95,7 @@ function cx_testimonial_shortcode( $atts, $content = null ) {
 
 				// Assigning a master css class and hooking into KC
    				$master_class = apply_filters( 'kc-el-class', $atts );
-	   			$master_class[] = 'cx-testimonials';
+	   			$master_class[] = 'cx-testimonial-2';
 
 	   			// Retrieving user define classes
 	   			$classes = array( 'row' );
@@ -113,13 +113,15 @@ function cx_testimonial_shortcode( $atts, $content = null ) {
 						);
 
 					$data = new WP_Query( $args );
+					
 					if( $data->have_posts() ) :
+						$i = 0;
 						while( $data->have_posts() ) : $data->the_post();
 						?>
 					<div class="col-sm-6 quote-wrapper">
 						<div class="media-wrapper">
 							<div class="media-thumb">
-								<img src="<?php echo esc_url( the_post_thumbnail_url( 'square-one' ) ); ?>" alt="<?php echo esc_attr( $img_alt ); ?>">
+								<img src="<?php if(has_post_thumbnail()): echo esc_url( the_post_thumbnail_url( 'square-one' ) ); else: echo '//placehold.it/220X220'; endif; ?>" alt="<?php echo esc_attr( $img_alt ); ?>">
 							</div>
 							<div class="media-desc">
 								<h3 class="media-title">
@@ -128,17 +130,29 @@ function cx_testimonial_shortcode( $atts, $content = null ) {
 									echo esc_html( $name );
 									?>
 								</h3>
-								<p class="media-designation">
-									<?php 
-									$desig = rwmb_meta( 'reveal_author_desig', 'type=text' ); 
-									$company = rwmb_meta( 'reveal_author_company', 'type=text' ); 
-									echo esc_html( $desig ) .', '. esc_html( $company );
-									?>
-								</p>
-								 <p class="media-texts"> <?php printf('%s', get_the_excerpt() ); ?> </p>
+
+								<?php 
+								$desig = rwmb_meta( 'reveal_author_desig', 'type=text' ); 
+								$company = rwmb_meta( 'reveal_author_company', 'type=text' );  
+								if(!empty($desig) && !empty($company)):?>
+								<p class="media-designation"><?php echo esc_html( $desig ) .', '. esc_html( $company ); ?></p>
+								<?php elseif(!empty($desig) && empty($compnay)): ?>
+								<p class="media-designation"><?php echo esc_html( $desig ); ?></p>
+
+								<?php elseif(empty($desig) && !empty($company)): ?>
+								<p class="media-designation"><?php echo esc_html( $company ); ?></p>
+								<?php endif; ?>
+
+
+								<p class="media-texts"> <?php printf('%s', get_the_excerpt() ); ?> </p>
 							</div>
 						</div>
 					</div> <!--end of quote-wrapper -->
+					<?php $i++; 
+
+					if($i%2 == 0): echo '<div class="clearfix"></div>'; endif;
+
+					?>
 
 				<?php 
 				endwhile;
@@ -352,6 +366,7 @@ function cx_testimonial_kc() {
 											array( 'property' => 'font-family', 'label' => esc_html__( 'Font Family' ), 'selector' => '.client-name .title-3, .quote-author-name, .media-title' ),
 											array( 'property' => 'font-size', 'label' => esc_html__( 'Font Size' ), 'selector' => '.client-name .title-3, .quote-author-name, .media-title' ),
 											array( 'property' => 'text-transform', 'label' => esc_html__( 'Text Transform' ), 'selector' => '.client-name .title-3, .quote-author-name, .media-title' ),
+											array( 'property' => 'text-align', 'label' => esc_html__( 'Text Align' ), 'selector' => '.client-name .title-3, .quote-author-name, .media-title' ),
 											array( 'property' => 'font-weight', 'label' => esc_html__( 'Font Weight' ), 'selector' => '.client-name .title-3, .quote-author-name, .media-title' ),
 											array( 'property' => 'line-height', 'label' => esc_html__( 'Line Height' ), 'selector' => '.client-name .title-3, .quote-author-name, .media-title' ),
 											array( 'property' => 'margin', 'label' => esc_html__( 'Margin' ), 'selector' => '.client-name .title-3, .quote-author-name, .media-title' ),
@@ -388,14 +403,15 @@ function cx_testimonial_kc() {
 											
 											array('property' => 'border', 'label' => 'Image Box Border', 'selector' => '.media-thumb img'),
 											array('property' => 'border-radius', 'label' => 'Image Box Border Radius', 'selector' => '.media-thumb img'),
+											array('property' => 'display', 'label' => 'Image Box Border Radius', 'selector' => '.media-thumb'),
 										),
 
 										'Divider' => array(
-											array('property' => 'background', 'label' => 'Color', 'selector' => '.quote-author-name::before, .media-designation::after'),
-											array('property' => 'width', 'label' => 'Width', 'selector' => '.quote-author-name::before, .media-designation::after'),
-											array('property' => 'height', 'label' => 'Height', 'selector' => '.quote-author-name::before, .media-designation::after'),
-											array('property' => 'margin', 'label' => 'Margin', 'selector' => '.quote-author-name::before, .media-designation::after'),
-											array('property' => 'padding', 'label' => 'padding', 'selector' => '.quote-author-name::before, .media-designation::after')
+											array('property' => 'background', 'label' => 'Color', 'selector' => '.quote-author-name::before, .media-texts::before'),
+											array('property' => 'width', 'label' => 'Width', 'selector' => '.quote-author-name::before, .media-texts::before'),
+											array('property' => 'height', 'label' => 'Height', 'selector' => '.quote-author-name::before, .media-texts::before'),
+											array('property' => 'margin', 'label' => 'Margin', 'selector' => '.quote-author-name::before, .media-texts::before'),
+											array('property' => 'padding', 'label' => 'padding', 'selector' => '.quote-author-name::before, .media-texts::before')
 										),
 
 										'Box'	=> array(
