@@ -37,20 +37,20 @@ class CodexinAdminMenu {
 
 		$this->options_general = get_option( 'codexin_options_general' );
 		$this->options_social = get_option( 'codexin_options_social' );
-    $this->options_gmap_api = get_option( 'codexin_options_gmap_api' ); 
-    $this->options_tw_api = get_option( 'codexin_options_twitter_api' ); 
+        $this->options_gmap_api = get_option( 'codexin_options_gmap_api' ); 
+        $this->options_tw_api = get_option( 'codexin_options_twitter_api' ); 
 		$this->options_mc_opt = get_option( 'codexin_options_mailchimp_opt' ); 
 
 		$social_Screen = ( isset( $_GET['action'] ) && 'social' == $_GET['action'] ) ? true : false;
-    $gmap_api_Screen = ( isset( $_GET['action'] ) && 'api' == $_GET['action'] ) ? true : false;
-    $twitter_api_Screen = ( isset( $_GET['action'] ) && 'twitter_api' == $_GET['action'] ) ? true : false;
+        $gmap_api_Screen = ( isset( $_GET['action'] ) && 'api' == $_GET['action'] ) ? true : false;
+        $twitter_api_Screen = ( isset( $_GET['action'] ) && 'twitter_api' == $_GET['action'] ) ? true : false;
 		$mailchimp_opt_Screen = ( isset( $_GET['action'] ) && 'mailchimp_opt' == $_GET['action'] ) ? true : false;
 	     ?>
 	    <!-- Create a header in the default WordPress 'wrap' container -->
 	    <div class="wrap">    
-        <h1><?php esc_html_e( 'Codexin Core Options', 'codexin' ) ?></h1>
-        <p class="description"><?php printf( '%1$s<b>%2$s</b>%3$s', esc_html__( 'These settings showcases the core functionality of the ', 'codexin' ), esc_html__( ' Codexin Core ' , 'codexin' ), esc_html( ' Plugin.', 'codexin' ) ) ?></p>
-          <h2 class="nav-tab-wrapper">
+	        <h1><?php esc_html_e( 'Codexin Core Options', 'codexin' ) ?></h1>
+	        <p class="description"><?php printf( '%1$s<b>%2$s</b>%3$s', esc_html__( 'These settings showcases the core functionality of the ', 'codexin' ), esc_html__( ' Codexin Core ' , 'codexin' ), esc_html( ' Plugin.', 'codexin' ) ) ?></p>
+            <h2 class="nav-tab-wrapper">
 				<a href="<?php echo admin_url( 'admin.php?page=codexin-options' ); ?>" class="nav-tab<?php if ( ! isset( $_GET['action'] ) || isset( $_GET['action'] ) && 'social' != $_GET['action']  && 'api' != $_GET['action'] && 'twitter_api' != $_GET['action'] && 'mailchimp_opt' != $_GET['action'] ) echo ' nav-tab-active'; ?>"><?php esc_html_e( 'General', 'codexin' ); ?></a>
 				<a href="<?php echo esc_url( add_query_arg( array( 'action' => 'social' ), admin_url( 'admin.php?page=codexin-options' ) ) ); ?>" class="nav-tab<?php if ( $social_Screen ) echo ' nav-tab-active'; ?>"><?php esc_html_e( 'Social Media', 'codexin' ); ?></a> 
 				<a href="<?php echo esc_url( add_query_arg( array( 'action' => 'api' ), admin_url( 'admin.php?page=codexin-options' ) ) ); ?>" class="nav-tab<?php if ( $gmap_api_Screen ) echo ' nav-tab-active'; ?>"><?php esc_html_e( 'Google Map API', 'codexin' ); ?></a>  
