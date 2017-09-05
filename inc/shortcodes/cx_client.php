@@ -12,14 +12,14 @@ function cx_client_shortcode( $atts, $content = null ) {
    extract(shortcode_atts(array(
    		'number_of_clients'	=> '',
    		'number_of_slides'	=> '',
-   		'continous_p'	      => '',
-   		'link_client'		    => '',
-   		'class'				      => '',
-   		'arrow'         	  => '',
-   		'dots'         	  => '',
+   		'continous_p'	    => '',
+   		'link_client'	    => '',
+   		'class'	    	    => '',
+   		'arrow'         	=> '',
+   		'dots'         	  	=> '',
    		'play'         	    => '',
-   		'speed'         	  => '',
-   		'pl_speed'     	  => ''
+   		'speed'             => '',
+   		'pl_speed'     	  	=> ''
    ), $atts));
 
 	$result = '';
@@ -36,13 +36,13 @@ function cx_client_shortcode( $atts, $content = null ) {
 
 	// Passing values to javascript
 	$codeopt = '';
-	$num_slide = ( !empty( $number_of_slides ) ) ? $number_of_slides : '6';
-	$cont_p = ( !empty( $continous_p ) ) ? $continous_p : false;
-	$slick_arrow = ( !empty( $arrow ) ) ? $arrow : false;
-	$en_dots = ( !empty( $dots ) ) ? $dots : false;
-	$auto_play = ( !empty( $play ) ) ? $play : true;
-	$atp_speed = ( !empty( $speed ) ) ? $speed : '2000';
-	$con_speed = ( !empty( $pl_speed ) ) ? $pl_speed : '2500';
+	$num_slide 		= ( !empty( $number_of_slides ) ) ? $number_of_slides : '6';
+	$cont_p 		= ( $continous_p ) ? true : 0;
+	$slick_arrow 	= ( $arrow ) ? true : 0;
+	$en_dots 		= ( $dots ) ? true : 0;
+	$auto_play 		= ( $play ) ? true : 0;
+	$atp_speed 		= ( !empty( $speed ) ) ? $speed : '2000';
+	$con_speed 		= ( !empty( $pl_speed ) ) ? $pl_speed : '2500';
 	$codeopt .= '
 	<script type="text/javascript">
 		var logo_slide = "' . $num_slide . '"; 
@@ -50,8 +50,8 @@ function cx_client_shortcode( $atts, $content = null ) {
 		var show_dot = ' . $en_dots . '; 
 		var aut_play = ' . $auto_play . '; 
 		var ap_speed = "' . $atp_speed . '"; 
-		var con_play = ' . $cont_p . '; 
-		var play_speed = "' . $con_speed . '"; 
+		var con_play = "' . $cont_p . '"; 
+		var play_speed = ' . $con_speed . '; 
 
 	</script>';
 	echo $codeopt;
@@ -151,58 +151,46 @@ function cx_client_shortcode( $atts, $content = null ) {
 	    					array(
 	    						'name'			=> 'continous_p',
 	    						'label' 		=> esc_html__( 'Enable Continous Play?', 'codexin' ),
-	    						'type'			=> 'dropdown',
-	    						'options'		=> array(
-	    							'true'			=> 'Yes',
-	    							'false'			=> 'No',
-	    						),
-	    						'value'			=> 'false',
+	    						'description' 	=> esc_html__( 'Choose Enable/Disable Continous Autoplay', 'codexin' ),
+	    						'type'			=> 'toggle',
+	    						'value'			=> 'no',
 	    					),
 
 
 	    					array(
 	    						'name'			=> 'arrow',
 	    						'label' 		=> esc_html__( 'Show Arrow?', 'codexin' ),
-	    						'type'			=> 'dropdown',
-									'relation' => array(
-										'parent'	=> 'continous_p',
-										'show_when' => 'false',
-									),
-	    						'options'		=> array(
-	    							'true'			=> 'Yes',
-	    							'false'			=> 'No',
-	    						),
-	    						'value'			=> 'false',
+	    						'description' 	=> esc_html__( 'Choose Enable/Disable Navigation Arrow', 'codexin' ),
+	    						'type'			=> 'toggle',
+								'relation' => array(
+									'parent'	=> 'continous_p',
+									'hide_when' => 'yes',
+								),
+	    						'value'			=> 'no',
 	    					),
 
 	    					array(
 	    						'name'			=> 'dots',
 	    						'label' 		=> esc_html__( 'Show Paginations?', 'codexin' ),
-	    						'type'			=> 'dropdown',
-									'relation' => array(
-										'parent'	=> 'continous_p',
-										'show_when' => 'false',
-									),
-	    						'options'		=> array(
-	    							'true'			=> 'Yes',
-	    							'false'			=> 'No',
-	    						),
-	    						'value'			=> 'false',
+	    						'description' 	=> esc_html__( 'Choose Enable/Disable Pagination', 'codexin' ),
+	    						'type'			=> 'toggle',
+								'relation' => array(
+									'parent'	=> 'continous_p',
+									'hide_when' => 'yes',
+								),
+	    						'value'			=> 'no',
 	    					),
 
 	    					array(
 	    						'name'			=> 'play',
 	    						'label' 		=> esc_html__( 'Enable Autoplay?', 'codexin' ),
-	    						'type'			=> 'dropdown',
-									'relation' => array(
-										'parent'	=> 'continous_p',
-										'show_when' => 'false',
-									),
-	    						'options'		=> array(
-	    							'true'			=> 'Yes',
-	    							'false'			=> 'No',
-	    						),
-	    						'value'			=> 'true',
+	    						'description' 	=> esc_html__( 'Choose Enable/Disable AutoPlay', 'codexin' ),
+	    						'type'			=> 'toggle',
+								'relation' => array(
+									'parent'	=> 'continous_p',
+									'hide_when' => 'yes',
+								),
+	    						'value'			=> 'yes',
 	    					),
 
 
@@ -210,11 +198,11 @@ function cx_client_shortcode( $atts, $content = null ) {
 	    						'name'			=> 'pl_speed',
 	    						'label' 		=> esc_html__( 'Continous Play Duration', 'codexin' ),
 	    						'type'			=> 'text',
-									'relation' => array(
-										'parent'	=> 'continous_p',
-										'show_when' => 'true',
-									),
-	    						'description' 	=> esc_html__( 'Choose the duration of continous play speed in milisecond. For example: 2500', 'codexin' ),
+								'relation' => array(
+									'parent'	=> 'continous_p',
+									'show_when' => 'yes',
+								),
+	    						'description' 	=> esc_html__( 'Insert the duration of continous play speed in milisecond. For example: 2500', 'codexin' ),
 	    						'value'			=> '2500',
 	    					),
 
@@ -222,10 +210,10 @@ function cx_client_shortcode( $atts, $content = null ) {
 	    						'name'			=> 'speed',
 	    						'label' 		=> esc_html__( 'Autoplay Duration', 'codexin' ),
 	    						'type'			=> 'text',
-									'relation' => array(
-										'parent'	=> 'play',
-										'show_when' => 'true',
-									),
+								'relation' => array(
+									'parent'	=> 'play',
+									'show_when' => 'yes',
+								),
 	    						'description' 	=> esc_html__( 'Choose the duration of autoplay speed in milisecond. For example: 4000', 'codexin' ),
 	    						'value'			=> '2000',
 	    					),

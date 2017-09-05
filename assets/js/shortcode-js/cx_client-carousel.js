@@ -6,7 +6,11 @@
     client carouel
     ---------------------------------------------------------------- */
 
-    if(con_play == true) {
+    var cx_autoplay = (aut_play == 1) ? true : false;
+    var cx_nav = (show_dot == 1) ? true : false;
+    var cx_arrow = (show_arrow == 1) ? true : false;
+
+    if(con_play == 1) {
       $('.cx-client-carousel-01').slick({
           slidesToShow: logo_slide,
           slidesToScroll: 1,
@@ -48,10 +52,10 @@
         $('.cx-client-carousel-01').slick({
             slidesToShow: logo_slide,
             slidesToScroll: 1,
-            autoplay: aut_play,
+            autoplay: cx_autoplay,
             autoplaySpeed: ap_speed,
-            dots:show_dot,
-            arrows:show_arrow,
+            dots:cx_nav,
+            arrows:cx_arrow,
             prevArrow: '<span class="prev"><i class="fa fa-angle-left"></i></span>',
             nextArrow: '<span class="next"><i class="fa fa-angle-right"></i></span>',
             responsive: [
