@@ -42,16 +42,8 @@ function cx_blog_shortcode( $atts, $content = null ) {
 
 				<?php
 
-				// $cat_exclude = array();
 				$cat_exclude = str_replace(',', ' ', $exclude);
 				$cat_excludes = explode( " ", $cat_exclude );
-				// print_r($cat_excludes);
-
-				// implode()
-
-				// foreach ($exclude as $cat_ex) {
-				// 	$cat_exclude[] = $cat_ex;
-				// }
 
 				//start query..
 				$args = array(
@@ -276,7 +268,7 @@ function cx_get_post_categories() {
 	return $post_cat;
 
 
-} //End cx_get_contact_form()..
+} //End cx_get_post_categories()..
 
 // Integrating Shortcode with King Composer
 function cx_blog_kc() {

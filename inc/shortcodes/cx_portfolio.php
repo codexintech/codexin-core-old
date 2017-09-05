@@ -10,9 +10,11 @@
 // Registering Portfolio Shortcode
 function cx_portfolio_shortcode( $atts, $content = null ) {
 	extract(shortcode_atts(array(
-			'section_title' => '',
-			'layout'	=> '',
-			'class'		=> '',
+			'section_title' 		=> '',
+			'number_of_portfolios'	=> '',
+			'order'					=> '',
+			'layout'				=> '',
+			'class'					=> '',
 	), $atts));
 
 	$result = '';
@@ -23,7 +25,7 @@ function cx_portfolio_shortcode( $atts, $content = null ) {
 			if( $layout == 1 ) :
 			// Assigning a master css class and hooking into KC
 			$master_class = apply_filters( 'kc-el-class', $atts );
-			$master_class[] = 'portfolios';
+			$master_class[] = 'cx-portfolios';
 
 			// Retrieving user define classes
 			$classes = array( 'portfolio-area' );
@@ -57,9 +59,9 @@ function cx_portfolio_shortcode( $atts, $content = null ) {
 						//start wp query..
 						$args = array(
 							'post_type'			=> 'portfolio',
-							'orderby'			=> 'data',
-							'order'				=> 'DESC',
-							'posts_per_page'	=> -1
+							'orderby'			=> 'date',
+							'order'				=> $order,
+							'posts_per_page'	=> $number_of_portfolios
 							);
 						$data = new WP_Query( $args );
 						//Check post
@@ -76,21 +78,21 @@ function cx_portfolio_shortcode( $atts, $content = null ) {
 					            $image_cap  = $image['caption']; 
 						?>
 
-								<figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" class="portfolio <?php foreach ($term_list as $sterm) { echo $sterm->slug.' '; } ?>">
+								<figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" class="cx-portfolio <?php foreach ($term_list as $sterm) { echo $sterm->slug.' '; } ?>">
 								    <a href="<?php esc_url( the_post_thumbnail_url('full') ); ?>" itemprop="contentUrl" data-size="<?php echo esc_attr( $data_size ); ?>">
-								        <img src="<?php esc_url( the_post_thumbnail_url('portfolio-mini-image') ); ?>" itemprop="thumbnail" <?php echo $image_alt; ?> class="img-responsive" />
+								        <img src="<?php esc_url( the_post_thumbnail_url('rectangle-two') ); ?>" itemprop="thumbnail" <?php echo $image_alt; ?> class="img-responsive" />
 								    </a>
 								    <figcaption itemprop="caption description"><?php echo esc_html( $image_cap ); ?></figcaption>
 									<div class="image-mask">
 										<div class="image-content">
 											<a href="<?php echo esc_url( the_post_thumbnail_url( 'full' ) ); ?>">
-												<img src="<?php echo get_template_directory_uri(); ?>/assets/images/portfolio/hover-icon.png" alt="Hover Icon">
+												<img src="<?php echo CODEXIN_CORE_ASSET_DIR; ?>/images/hover-icon.png" alt="Hover Icon">
 											</a>
 											<h3 class="portfolio-title"> <a href="<?php the_permalink(); ?>" class="clickable"> <?php echo esc_html( get_the_title() ); ?> </a></h3>
 											<p><?php foreach ( $term_list as $sterm ) { echo $sterm->name . " "; } ?></p>
 										</div>
 									</div>
-								</figure>
+								</figure> <!-- end of cx-portfolio -->
 
 						<?php 
 								endwhile;
@@ -99,7 +101,7 @@ function cx_portfolio_shortcode( $atts, $content = null ) {
 						 ?>
 		            </div><!-- end of portfolio-wrapper -->
 				</div><!-- end of portfolio-area -->
-			</div> <!-- end of portfolios -->
+			</div> <!-- end of cx-portfolios -->
 
 	<?php endif; 
 
@@ -207,8 +209,47 @@ function cx_portfolio_shortcode( $atts, $content = null ) {
 
 	<?php endif; ?>
 
+	<?php endif; ?>
+
+	<!-- Initializing Photoswipe -->
+	<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+	    <div class="pswp__bg"></div>
+	    <div class="pswp__scroll-wrap">
+	        <div class="pswp__container">
+	            <div class="pswp__item"></div>
+	            <div class="pswp__item"></div>
+	            <div class="pswp__item"></div>
+	        </div>
+	        <div class="pswp__ui pswp__ui--hidden">
+	            <div class="pswp__top-bar">
+	                <div class="pswp__counter"></div>
+	                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+	                <button class="pswp__button pswp__button--share" title="Share"></button>
+	                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+	                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+	                <div class="pswp__preloader">
+	                    <div class="pswp__preloader__icn">
+	                        <div class="pswp__preloader__cut">
+	                            <div class="pswp__preloader__donut"></div>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+	                <div class="pswp__share-tooltip"></div>
+	            </div>
+	            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+	            </button>
+	            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+	            </button>
+	            <div class="pswp__caption">
+	                <div class="pswp__caption__center"></div>
+	            </div>
+	        </div>
+	    </div>
+	</div><!-- end of pswp -->
+
 	<?php
-	endif;
 	$result .= ob_get_clean();
 	return $result;
 
@@ -230,7 +271,7 @@ function cx_portfolio_kc() {
 						'scripts' => array(
 							'imagesloaded-js' => CODEXIN_CORE_ASSET_DIR . '/js/imagesloaded.pkgd.min.js',
 							'isotope-js-script' => CODEXIN_CORE_ASSET_DIR . '/js/isotope.pkgd.min.js',
-							'portfolio-js' => CODEXIN_CORE_ASSET_DIR . '/js/shortcode-js/cx-portfolio-isotope.js',
+							'portfolio-js' => CODEXIN_CORE_ASSET_DIR . '/js/shortcode-js/cx-portfolio.js',
 							'photswipe-js' => CODEXIN_CORE_ASSET_DIR . '/js/photoswipe.min.js',
 							'photswipe-main-js' => CODEXIN_CORE_ASSET_DIR . '/js/photoswipe-main.js',
 							),
@@ -251,8 +292,35 @@ function cx_portfolio_kc() {
 									'1'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/portfolio/layout-1.png',
 									'2'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/portfolio/layout-2.png',
 									),
-								'value'	=> '1'
+								'value'			=> '1',
+								'admin_label' 	=> true,
 								),
+
+							array(
+	    						'name'        	=> 'number_of_portfolios',
+	    						'label'       	=> esc_html__('Number Of Portfolios to Display', 'codexin'),
+	    						'type'        	=> 'select',
+	    						'options'		=> array(
+    								'4'		=> '4',
+    								'8'		=> '8',
+    								'-1'	=> 'All',
+    							),
+	    						'value'			=> '8',
+	    						'description'	=> esc_html__( 'Choose the number of portfolios you want to show.', 'codexin' ),
+	    						'admin_label' 	=> true,
+	    					),
+
+	    					array(
+	    						'name'        	=> 'order',
+	    						'label'       	=> esc_html__('Display Order', 'codexin'),
+	    						'type'        	=> 'select',
+	    						'options'		=> array(
+    								'ASC'	=> 'Ascending',
+    								'DESC'	=> 'Descending',
+    							),
+	    						'value'			=> 'DESC',
+	    						'description'	=> esc_html__( 'Choose The Order to Display Portfolios.', 'codexin' ),
+	    					),
 
 							array(
 								'name'	=> 'section_title',
@@ -261,7 +329,7 @@ function cx_portfolio_kc() {
 								'relation' => array(
 									'parent'	=> 'layout',
 									'show_when'	=> '2',
-									),
+								),
 								'description' => esc_html__( 'Enter Portfolio Section Title Here', 'codexin' ),
 								),
 
