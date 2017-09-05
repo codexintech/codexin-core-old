@@ -1588,15 +1588,45 @@ section#feedback {
 }
 
 
-#client-carousel-rv2 .item img {
+.cx-client-carousel-01 .item img {
     width: initial;
     max-width: 100%;
     max-height: 85px;
     height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
 }
-.item{
+
+.cx-client-carousel-01 .item{
     text-align: center;
     outline: 0;
+}
+
+
+.cx-client-carousel-01 span {
+    position: absolute;
+    top: 50%;
+    font-size: 26px;
+    cursor: pointer;
+    width: 40px;
+    height: auto;
+    display: inline-block;
+    text-align: center;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+    color: #999;
+}
+
+.cx-client-carousel-01 span.prev {
+    left: -50px;
+}
+
+.cx-client-carousel-01 span.next {
+    right: -50px;
 }
 
 

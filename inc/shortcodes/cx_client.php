@@ -12,18 +12,23 @@ function cx_client_shortcode( $atts, $content = null ) {
    extract(shortcode_atts(array(
    		'number_of_clients'	=> '',
    		'number_of_slides'	=> '',
-   		'link_client'		=> '',
-   		'class'				=> '',
+   		'continous_p'	      => '',
+   		'link_client'		    => '',
+   		'class'				      => '',
+   		'arrow'         	  => '',
+   		'play'         	    => '',
+   		'speed'         	  => '',
+   		'pl_speed'     	  => ''
    ), $atts));
 
 	$result = '';
 
 	// Assigning a master css class and hooking into KC
 	$master_class = apply_filters( 'kc-el-class', $atts );
-	$master_class[] = 'cx-clients';
+	$master_class[] = 'cx-clients-wrapper';
 
 	// Retrieving user define classes
-	$classes = array( 'client' );
+	$classes = array( 'cx-client-carousel-01' );
 	(!empty($class)) ? $classes[] = $class : '';
 
 	ob_start(); 
@@ -31,15 +36,26 @@ function cx_client_shortcode( $atts, $content = null ) {
 	// Passing values to javascript
 	$codeopt = '';
 	$num_slide = ( !empty( $number_of_slides ) ) ? $number_of_slides : '6';
+	$cont_p = ( !empty( $continous_p ) ) ? $continous_p : false;
+	$slick_arrow = ( !empty( $arrow ) ) ? $arrow : false;
+	$auto_play = ( !empty( $play ) ) ? $play : true;
+	$atp_speed = ( !empty( $speed ) ) ? $speed : '2000';
+	$con_speed = ( !empty( $pl_speed ) ) ? $pl_speed : '2500';
 	$codeopt .= '
 	<script type="text/javascript">
 		var logo_slide = "' . $num_slide . '"; 
+		var show_arrow = ' . $slick_arrow . '; 
+		var aut_play = ' . $auto_play . '; 
+		var ap_speed = "' . $atp_speed . '"; 
+		var con_play = ' . $cont_p . '; 
+		var play_speed = "' . $con_speed . '"; 
+
 	</script>';
 	echo $codeopt;
 	?>
 
-	<div id="clients-rv2" class="clients mrg-50">
-		<div id="client-carousel-rv2" class="">
+	<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
+		<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
 			<?php 
 			//start wp query..
 			$args = array(
@@ -57,15 +73,21 @@ function cx_client_shortcode( $atts, $content = null ) {
 			$image_alt = ( !empty( retrieve_alt_tag() ) ) ? retrieve_alt_tag() : get_the_title();  
 			?>
 			<div class="item">
-				<a href="<?php if( ! empty( $client_url ) ) : echo esc_url( $client_url ); endif; ?>"><img src="<?php echo esc_url( the_post_thumbnail_url( 'full' ) ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>"></a>
+				<?php if($link_client): ?>
+				<a href="<?php if( ! empty( $client_url ) ) : echo esc_url( $client_url ); endif; ?>" target="_blank">
+			  <?php endif; ?>
+					<img src="<?php echo esc_url( the_post_thumbnail_url( 'full' ) ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>">
+				<?php if($link_client): ?>
+				</a>
+			 <?php endif; ?>
 			</div>
 			<?php
 			endwhile;
 			endif;
 			wp_reset_postdata();
 			?>
-		</div>
-	</div> <!-- end of clients -->
+		</div> <!-- end of cx-client-carousel-01 -->
+	</div> <!-- end of cx-clients-wrapper -->
 	<div class="clearfix"></div>
 
 	<?php
@@ -91,6 +113,10 @@ function cx_client_shortcode( $atts, $content = null ) {
  							 'slick-cx-main-script' => CODEXIN_CORE_ASSET_DIR . '/js/slick.min.js',
  							 'slick-cx-user-client-script' => CODEXIN_CORE_ASSET_DIR . '/js/shortcode-js/cx_client-carousel.js',
  							),
+
+      			'styles'	=> array(
+      				'slick-cx-main-style'	=> CODEXIN_CORE_ASSET_DIR . '/css/slick.css',
+      				),
 
 	                ), //End assets
  					'params' => array(
@@ -118,6 +144,74 @@ function cx_client_shortcode( $atts, $content = null ) {
 	    						'value'			=> '6',
 	    						'admin_label'	=> true
 	    					),
+
+	    					array(
+	    						'name'			=> 'continous_p',
+	    						'label' 		=> esc_html__( 'Enable Continous Play?', 'codexin' ),
+	    						'type'			=> 'dropdown',
+	    						'options'		=> array(
+	    							'true'			=> 'Yes',
+	    							'false'			=> 'No',
+	    						),
+	    						'value'			=> 'false',
+	    					),
+
+
+	    					array(
+	    						'name'			=> 'arrow',
+	    						'label' 		=> esc_html__( 'Show Arrow?', 'codexin' ),
+	    						'type'			=> 'dropdown',
+									'relation' => array(
+										'parent'	=> 'continous_p',
+										'show_when' => 'false',
+									),
+	    						'options'		=> array(
+	    							'true'			=> 'Yes',
+	    							'false'			=> 'No',
+	    						),
+	    						'value'			=> 'false',
+	    					),
+
+	    					array(
+	    						'name'			=> 'play',
+	    						'label' 		=> esc_html__( 'Enable Autoplay?', 'codexin' ),
+	    						'type'			=> 'dropdown',
+									'relation' => array(
+										'parent'	=> 'continous_p',
+										'show_when' => 'false',
+									),
+	    						'options'		=> array(
+	    							'true'			=> 'Yes',
+	    							'false'			=> 'No',
+	    						),
+	    						'value'			=> 'true',
+	    					),
+
+
+	    					array(
+	    						'name'			=> 'pl_speed',
+	    						'label' 		=> esc_html__( 'Continous Play Duration', 'codexin' ),
+	    						'type'			=> 'text',
+									'relation' => array(
+										'parent'	=> 'continous_p',
+										'show_when' => 'true',
+									),
+	    						'description' 	=> esc_html__( 'Choose the duration of continous play speed in milisecond. For example: 2500', 'codexin' ),
+	    						'value'			=> '2500',
+	    					),
+
+	    					array(
+	    						'name'			=> 'speed',
+	    						'label' 		=> esc_html__( 'Autoplay Duration', 'codexin' ),
+	    						'type'			=> 'text',
+									'relation' => array(
+										'parent'	=> 'play',
+										'show_when' => 'true',
+									),
+	    						'description' 	=> esc_html__( 'Choose the duration of autoplay speed in milisecond. For example: 4000', 'codexin' ),
+	    						'value'			=> '2000',
+	    					),
+
 	    					array(
 	    						'name'			=> 'link_client',
 	    						'label' 		=> esc_html__( 'Enable Client URL?', 'codexin' ),
