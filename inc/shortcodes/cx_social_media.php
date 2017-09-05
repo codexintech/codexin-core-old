@@ -35,7 +35,7 @@ function cx_social_media_shortcode( $atts, $content = null ) {
 
 	// Assigning a master css class and hooking into KC
 	$master_class = apply_filters( 'kc-el-class', $atts );
-	$master_class[] = 'socials socials-share';
+	$master_class[] = 'cx-social-media';
 
 	// Retrieving user define classes
 	$classes = array( 'social-content' );
@@ -339,6 +339,8 @@ function cx_social_media_kc() {
 											array('property' => 'font-family', 'label' => esc_html__( 'Font family', 'codexin'), 'selector' => '.socials-title h4'),
 											array('property' => 'font-size', 'label' => esc_html__( 'Font Size', 'codexin'), 'selector' => '.socials-title h4'),
 											array('property' => 'font-weight', 'label' => esc_html__( 'Font Weight', 'codexin'), 'selector' => '.socials-title h4'),
+											array('property' => 'font-style', 'label' => esc_html__( 'Font Style', 'codexin'), 'selector' => '.socials-title h4'),
+											array('property' => 'text-transform', 'label' => esc_html__( 'Text Transform', 'codexin'), 'selector' => '.socials-title h4'),
 											array('property' => 'line-height', 'label' => esc_html__( 'Line Height', 'codexin'), 'selector' => '.socials-title h4'),
 											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin'), 'selector' => '.socials-title h4'),
 											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin'), 'selector' => '.socials-title h4')
@@ -355,6 +357,8 @@ function cx_social_media_kc() {
  											array('property' => 'border', 'label' => esc_html__( 'Border', 'codexin'), 'selector' => 'i'),
  											array('property' => 'border-radius', 'label' => esc_html__( 'Border Radius', 'codexin'), 'selector' => 'i'),
  											array('property' => 'transition', 'label' => esc_html__( 'Transition Hover', 'codexin'), 'selector' => 'i:hover'),
+ 											array('property' => 'width', 'label' => esc_html__( 'Width', 'codexin'), 'selector' => 'i'),
+ 											array('property' => 'height', 'label' => esc_html__( 'Height', 'codexin'), 'selector' => 'i'),
  											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin'), 'selector' => 'i'),
  											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin'), 'selector' => 'i')
  										),

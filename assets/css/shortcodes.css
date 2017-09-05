@@ -1281,32 +1281,51 @@ section#location {
 
 }
 
-/***---Social media--**/
-.socials-share {
-    width: 100%;
-    padding-left: 37px;
-    margin-top: -25px;
+/************************************************************
+    Codexin Social Share
+*************************************************************/
+.cx-social-media {
     display: inline-block;
     overflow: hidden;
 }
 
-.socials-share .socials-title h4 {
+.cx-social-media .socials-title h4 {
     float: left;
     padding-right: 25px;
-    margin-top: 19px;
+    margin-top: 0;
     margin-left: 0;
+    font-size: 22px;
+    margin-bottom: 0;
+    line-height: 44px;
 }
 
-.socials i {
-    width: 30px;
-    height: 30px;
-    margin-right: 10px;
-    margin-top: 15px;
+.cx-social-media i {
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    font-size: 15px;
+    border-radius: 50%;
+    border: 1px solid #ccc;
     -webkit-transition: all .3s;
     -moz-transition: all .3s;
     -ms-transition: all .3s;
     -o-transition: all .3s;
     transition: all .3s;
+}
+
+.cx-social-media a {
+    display: inline-block;
+    text-align: center;
+    padding: 2px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    margin: 2px;
+}
+
+.cx-social-media .social-content {
+    padding:7px 0;
 }
 
 #location a,
