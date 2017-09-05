@@ -806,7 +806,7 @@ input[type="button"]:hover{
 }
 
 /*************************************
-    cx_team
+    008 - Codexin Team
 *************************************/
 #team {
     padding-bottom: 0;
@@ -907,44 +907,55 @@ input[type="button"]:hover{
 
 
 /**************************************
- cx_portfolio
+  0009 - Codexin Portfolio
 **************************************/
 
-.portfolios {
+.cx-portfolios {
     overflow: hidden;
     margin-bottom: 0;
     margin-top: 0;
 }
 
-.portfolio-filter ul {
+.cx-portfolios figure {
+    margin: 0;
+}
+
+.cx-portfolios figcaption {
+    display: none;
+}
+
+.cx-portfolios .portfolio-filter ul {
     text-align: center;
     margin-top: 25px;
     margin-bottom: 25px;
 }
 
-.portfolio-filter ul li {
+.cx-portfolios .portfolio-filter ul li {
     cursor: pointer;
     text-transform: uppercase;
     position: relative;
     padding: 7px 15px;
     letter-spacing: 1px;
     margin: 2px;
+    border: 1px solid #333;
+    font-size: 12px;
+    font-weight: bold;
 }
 
 
-.home .portfolio {
+.cx-portfolio {
     width: 25%;
     position: relative;
     overflow: hidden;
 }
 
 
-.portfolio img {
+.cx-portfolio img {
     width: 100%;
     display: block;
 }
 
-.portfolio .image-mask {
+.cx-portfolio .image-mask {
     background-size: cover;
     background-position: center;
     position: absolute;
@@ -960,20 +971,21 @@ input[type="button"]:hover{
     transition: all .3s;
 }
 
-.image-content {
+.cx-portfolios .image-content {
     position: relative;
     top: 34%;
     text-align: center;
+    color: #fff;
 }
 
-.image-content img {
+.cx-portfolios .image-content img {
     display: block;
     margin: 0 auto;
     width: 30px;
     height: 30px;
 }
 
-.image-content h3 {
+.cx-portfolios .image-content h3 {
     text-transform: uppercase;
     font-size: 20px;
     margin-bottom: 0;
@@ -981,20 +993,29 @@ input[type="button"]:hover{
     color: #fff;
 }
 
-.portfolio:hover .image-mask {
+.cx-portfolio:hover .image-mask {
     opacity: 1;
 }
 
-#clients .clients {
-    padding-top: 80px;
-    padding-bottom: 80px;
-    background: #fff;
+.cx-portfolios .portfolio-filter ul li.active {
+    color: #fff;
+    background: #295970;
+    border-color: #295970;
+}
+.cx-portfolio a,
+.cx-portfolio a:visited {
+    color: #fff;
+}
+
+.cx-portfolio .image-mask {
+    background: rgb(41, 89, 112);
+    background: rgba(41, 89, 112, 0.75);
 }
 
 
 
 /**************************************
-    cx_blog
+    0010 - Codexin Blog
 *************************************/
 div.cx-blog {
     margin-top: 0;
