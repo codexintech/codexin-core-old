@@ -109,7 +109,7 @@ function info_param() {
 	}
 }		
 function cx_info_cb() {
-	echo '<p>'. esc_html__('Please Fill Up The Google Map API Information In The "Google Map API" Section of ', 'codexin') .'<strong><a href="'. esc_url(admin_url().'admin.php?page=codexin-options&action=api') .'" target="_blank">'. esc_html('Codexin Core.', 'codexin') .'</a></strong></p>';
+	echo '<p>'. esc_html__('Please Fill Up The Google Map API Information In The "Google Map API" Section of ', 'codexin') .'<strong><a href="'. esc_url(admin_url().'admin.php?page=codexin-options&action=api') .'" target="_blank">'. esc_html('Codexin Core', 'codexin') .'</a></strong> if not filled yet.</p>';
 }
 
 
@@ -151,6 +151,7 @@ function cx_map_kc() {
 	 							'label' 		=> esc_html__( 'Choose Default Color Scheme', 'codexin' ),
 	 							'type' 			=> 'select',
 	 							'options'		=> array(
+	 									'original' => 'Original',
 										'grey' 	=> 'Grey',
 										'retro' => 'Retro',
 										'dark'	=> 'Dark',
@@ -159,7 +160,7 @@ function cx_map_kc() {
 										'blue' 	=> 'Blue',
 										'DarkTurquoise' => 'Dark Turquoise',
 								),
-	 							'value'			=> '1',
+	 							'value'			=> 'default',
 	 							'description'	=> esc_html__( 'You can select the map color here. Please note that if you enable "Advanced Map Color Customization" in the advanced tab, default color scheme will not work.', 'codexin' ),
 	 							'admin_label' 	=> true,
 	 						),
@@ -235,12 +236,14 @@ function cx_map_kc() {
 	 							'label' 		=> esc_html__( 'Display Map Fullscreen Control?', 'codexin' ),
 	 							'type' 			=> 'toggle',
 	 							'description'	=> esc_html__( 'Choose to enable/disable to display map fullscreen control', 'codexin' ),
+	 							'value'     => 'yes'
 	 						),
 	 						array(
 	 							'name' 			=> 'map_advanced',
 	 							'label' 		=> esc_html__( 'Advanced Map Color Customization?', 'codexin' ),
 	 							'type' 			=> 'toggle',
-	 							'description'	=> esc_html__( 'Do you want to enable advanced map customization? Warning: Enabling this will override default color scheme.', 'codexin' ),
+	 							'description'	=> esc_html__( 'Do you want to enable advanced map customization?) Warning: Enabling this will override default color scheme.', 'codexin' ),
+	 							'description'	=> sprintf(__('Do you want to enable advanced map customization? <strong style="color:#d9534f">%s</strong>', 'codexin'), esc_html('Warning: Enabling this will override the existing color scheme setup.')),
 								'admin_label' 	=> true,
 	 						),
 	 						array(
@@ -293,9 +296,31 @@ function cx_map_kc() {
 	    						),
 	 							'description'	=> esc_html__( 'Choose label text color', 'codexin' ),
 	 						),
-	    				) // end of advanced					
-	                ) //End params array()..
-	            ),  // End of elemnt cx_blog....
+	    				), // end of advanced		
+
+						// Style based Params
+	    				'styling' => array(
+	    					array(
+	    						'name'    		=> 'codexin_css',
+	    						'type'    		=> 'css',
+	    						'options' 		=> array(
+	    							array(
+	    								"screens" => "any,1199,991,767,479",
+
+	    								'Box'	=> array(
+	    									array('property' => 'width', 'label' => esc_html__('Width', 'codexin'), 'selector' => '#gmap'),
+	    									array('property' => 'height', 'label' => esc_html__('Height', 'codexin'), 'selector' => '#gmap'),
+	    									array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '#gmap'),
+	    									array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '#gmap'),
+    									)
+    								)
+    							)
+    						)
+    					), // end of styling
+
+
+            ) //End params array()..
+        ),  // End of elemnt cx_blog....
 			) //end of  array 
 		);  //end of kc_add_map
 	} //End if

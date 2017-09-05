@@ -37,6 +37,7 @@
 
             // var $color_scheme = codexin_map_color;
 
+
             if ( codexin_map_color == 'grey' ) {
                 var styles = [ 
                 {
@@ -79,6 +80,13 @@
                 }
 
                 ];
+            } 
+
+
+            else if ( codexin_map_color == 'original' ) {
+                var styles = [
+
+                  ];
             } 
 
             else if ( codexin_map_color == 'custom' ) {
