@@ -16,6 +16,7 @@ function cx_client_shortcode( $atts, $content = null ) {
    		'link_client'		    => '',
    		'class'				      => '',
    		'arrow'         	  => '',
+   		'dots'         	  => '',
    		'play'         	    => '',
    		'speed'         	  => '',
    		'pl_speed'     	  => ''
@@ -38,6 +39,7 @@ function cx_client_shortcode( $atts, $content = null ) {
 	$num_slide = ( !empty( $number_of_slides ) ) ? $number_of_slides : '6';
 	$cont_p = ( !empty( $continous_p ) ) ? $continous_p : false;
 	$slick_arrow = ( !empty( $arrow ) ) ? $arrow : false;
+	$en_dots = ( !empty( $dots ) ) ? $dots : false;
 	$auto_play = ( !empty( $play ) ) ? $play : true;
 	$atp_speed = ( !empty( $speed ) ) ? $speed : '2000';
 	$con_speed = ( !empty( $pl_speed ) ) ? $pl_speed : '2500';
@@ -45,6 +47,7 @@ function cx_client_shortcode( $atts, $content = null ) {
 	<script type="text/javascript">
 		var logo_slide = "' . $num_slide . '"; 
 		var show_arrow = ' . $slick_arrow . '; 
+		var show_dot = ' . $en_dots . '; 
 		var aut_play = ' . $auto_play . '; 
 		var ap_speed = "' . $atp_speed . '"; 
 		var con_play = ' . $cont_p . '; 
@@ -160,6 +163,21 @@ function cx_client_shortcode( $atts, $content = null ) {
 	    					array(
 	    						'name'			=> 'arrow',
 	    						'label' 		=> esc_html__( 'Show Arrow?', 'codexin' ),
+	    						'type'			=> 'dropdown',
+									'relation' => array(
+										'parent'	=> 'continous_p',
+										'show_when' => 'false',
+									),
+	    						'options'		=> array(
+	    							'true'			=> 'Yes',
+	    							'false'			=> 'No',
+	    						),
+	    						'value'			=> 'false',
+	    					),
+
+	    					array(
+	    						'name'			=> 'dots',
+	    						'label' 		=> esc_html__( 'Show Paginations?', 'codexin' ),
 	    						'type'			=> 'dropdown',
 									'relation' => array(
 										'parent'	=> 'continous_p',

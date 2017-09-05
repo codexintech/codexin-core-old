@@ -1629,6 +1629,17 @@ section#feedback {
     right: -50px;
 }
 
+.cx-client-carousel-01 .slick-dots {
+    bottom: -50px;
+}
+
+.cx-client-carousel-01 .slick-dots li {
+    margin:0;
+}
+
+.cx-client-carousel-01 .slick-dots li button:before {
+    font-size: 10px;
+}
 
 /************************************************************
     Codexin CTA Section
