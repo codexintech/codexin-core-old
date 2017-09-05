@@ -2,13 +2,13 @@
 
 
 /*
-    ===========================================
-        CODEXIN EVENTS ACCORDION SHORTCODE
-    ===========================================
+    =================================
+        CODEXIN EVENTS SHORTCODE
+    =================================
 */
 
 // Registering Events Box Shortcode
-function cx_events_accordion_shortcode( $atts, $content = null ) {
+function cx_events_shortcode( $atts, $content = null ) {
 	extract(shortcode_atts(array(
 		'layout'			=> '',
 		'event_icon_one'	=> '',
@@ -19,7 +19,7 @@ function cx_events_accordion_shortcode( $atts, $content = null ) {
 
 	// Assigning a master css class and hooking into KC
 	$master_class = apply_filters( 'kc-el-class', $atts );
-	$master_class[] = 'events-description';
+	$master_class[] = 'cx-events-description';
 
 	// Retrieving user define classes
 	$classes = array( 'panel-group' );
@@ -170,17 +170,17 @@ function cx_events_accordion_shortcode( $atts, $content = null ) {
 	$result .= ob_get_clean();
 	return $result;
 
-} //End cx_events_accordion
+} //End cx_events
 
 // Integrating Shortcode with King Composer
-function cx_events_accordion_kc() {
+function cx_events_kc() {
 
 	if (function_exists('kc_add_map')) { 
  		kc_add_map(
  			array(
- 				'cx_events_accordion' => array(
- 					'name' => esc_html__( 'Codexin Events Accordion', 'codexin' ),
- 					'description' => esc_html__('Events Accordion', 'codexin'),
+ 				'cx_events' => array(
+ 					'name' => esc_html__( 'Codexin Events', 'codexin' ),
+ 					'description' => esc_html__('Events', 'codexin'),
  					'icon' => 'et-hazardous',
  					'category' => 'Codexin',
                 	//Only load assets when using this element
@@ -259,14 +259,15 @@ function cx_events_accordion_kc() {
  										"screens" => "any,1199,991,767,479",
 
  										'Title' => array(
- 											array('property' => 'color', 'label' => esc_html__( 'Color', 'codexin'), 'selector' => '.rv2-single-event .title-3'),
- 											array('property' => 'color', 'label' => esc_html__( 'Color On Hover' ), 'selector' => '.rv2-single-event:hover h3'),
- 											array('property' => 'font-family', 'label' => esc_html__( 'Font Family', 'codexin'), 'selector' => '.rv2-single-event .title-3'),
- 											array('property' => 'font-size', 'label' => esc_html__( 'Font Size', 'codexin'), 'selector' => '.rv2-single-event .title-3'),
- 											array('property' => 'text-transform', 'label' => esc_html__( 'Text Transform', 'codexin'), 'selector' => '.rv2-single-event .title-3'),
- 											array('property' => 'font-weight', 'label' => esc_html__( 'Font Weight', 'codexin'), 'selector' => '.rv2-single-event .title-3'),
- 											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin'), 'selector' => '.rv2-single-event .title-3'),
- 											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin'), 'selector' => '.rv2-single-event .title-3')
+ 											array('property' => 'color', 'label' => esc_html__( 'Color', 'codexin'), 'selector' => '.panel-title, .rv2-single-event .title-3'),
+ 											array('property' => 'color', 'label' => esc_html__( 'Color On Hover' ), 'selector' => '.panel-title, .rv2-single-event:hover h3'),
+ 											array('property' => 'font-family', 'label' => esc_html__( 'Font Family', 'codexin'), 'selector' => '.panel-title, gle-event .title-3'),
+ 											array('property' => 'font-size', 'label' => esc_html__( 'Font Size', 'codexin'), 'selector' => '.panel-title, gle-event .title-3'),
+ 											array('property' => 'line-height', 'label' => esc_html__( 'Line Height', 'codexin'), 'selector' => '.panel-title, gle-event .title-3'),
+ 											array('property' => 'text-transform', 'label' => esc_html__( 'Text Transform', 'codexin'), 'selector' => '.panel-title, gle-event .title-3'),
+ 											array('property' => 'font-weight', 'label' => esc_html__( 'Font Weight', 'codexin'), 'selector' => '.panel-title, gle-event .title-3'),
+ 											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin'), 'selector' => '.panel-title, gle-event .title-3'),
+ 											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin'), 'selector' => '.panel-title, gle-event .title-3')
  										),
 
  										'Meta Text' => array(
@@ -280,32 +281,26 @@ function cx_events_accordion_kc() {
  										),
 
  										'Description' => array(
- 											array('property' => 'color', 'label' => esc_html__( 'Color', 'codexin'), 'selector' => '.rv2-event-desc'),
- 											array('property' => 'font-size', 'label' => esc_html__( 'Font Size', 'codexin'), 'selector' => '.rv2-event-desc'),
- 											array('property' => 'font-family', 'label' => esc_html__( 'Font Family', 'codexin'), 'selector' => '.rv2-event-desc'),
- 											array('property' => 'font-weight', 'label' => esc_html__( 'Font Weight', 'codexin'), 'selector' => '.rv2-event-desc'),
- 											array('property' => 'text-align', 'label' => esc_html__( 'Text Align', 'codexin'), 'selector' => '.rv2-event-desc'),
- 											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin'), 'selector' => '.rv2-event-desc'),
- 											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin'), 'selector' => '.rv2-event-desc')
+ 											array('property' => 'color', 'label' => esc_html__( 'Color', 'codexin'), 'selector' => '.panel-body p, .rv2-event-desc'),
+ 											array('property' => 'font-size', 'label' => esc_html__( 'Font Size', 'codexin'), 'selector' => '.panel-body p, .rv2-event-desc'),
+ 											array('property' => 'font-family', 'label' => esc_html__( 'Font Family', 'codexin'), 'selector' => '.panel-body p, .rv2-event-desc'),
+ 											array('property' => 'font-weight', 'label' => esc_html__( 'Font Weight', 'codexin'), 'selector' => '.panel-body p, .rv2-event-desc'),
+ 											array('property' => 'text-align', 'label' => esc_html__( 'Text Align', 'codexin'), 'selector' => '.panel-body p, .rv2-event-desc'),
+ 											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin'), 'selector' => '.panel-body p, .rv2-event-desc'),
+ 											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin'), 'selector' => '.panel-body p, .rv2-event-desc')
  										),
 
  										'Icon' => array(
- 											array('property' => 'color', 'label' => esc_html__( 'Color', 'codexin'), 'selector' => '.panel-title i, .rv2-single-event ul i'),
+ 											array('property' => 'color', 'label' => esc_html__( 'Color', 'codexin'), 'selector' => '.panel-title i,, .panel-title a::after, .rv2-single-event ul i'),
  											array('property' => 'font-size', 'label' => esc_html__( 'Font Size', 'codexin'), 'selector' => '.panel-title i, .rv2-single-event ul i'),
  											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin'), 'selector' => '.panel-title i, .rv2-single-event ul i'),
  											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin'), 'selector' => '.panel-title i, .rv2-single-event ul i')
  										),
 
- 										'Box'	=> array(
- 											array('property' => 'background'),
- 											array('property' => 'background-color', 'label' => esc_html__( 'Background Color On Hover' ), 'selector' => '.event-img:before'),
- 											array('property' => 'border', 'label' => esc_html__( 'Border', 'codexin')),
- 											array('property' => 'border-radius', 'label' => esc_html__( 'Border Radius', 'codexin')),
- 											array('property' => 'box-shadow', 'label' => esc_html__( 'Box Shadow', 'codexin')),
- 											array('property' => 'box-shadow', 'label' => esc_html__( 'Box Shadow on Hover', 'codexin')),
- 											array('property' => 'transition', 'label' => esc_html__( 'Hover Transition Animation', 'codexin')),
- 											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin')),
- 											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin')),
+ 										'Tabs'	=> array(
+ 											array('property' => 'background-color', 'label' => esc_html__( 'Title Tab Background', 'codexin'), 'selector' => '.panel-heading'),
+ 											array('property' => 'background-color', 'label' => esc_html__( 'Title Tab Background on Hover', 'codexin'), 'selector' => '.panel-heading:hover'),
+ 											array('property' => 'background-color', 'label' => esc_html__( 'Description Tab Background Color', 'codexin'), 'selector' => '.panel-body'),
  										),
 
 									) //End inner-option array
@@ -327,6 +322,6 @@ function cx_events_accordion_kc() {
 			) //end of  array 
 		);  //end of kc_add_map
 	} //End if
-} // end of cx_events_accordion_shortcode_kc
+} // end of cx_events_kc
 
 

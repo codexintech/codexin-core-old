@@ -453,10 +453,10 @@ input[type="button"]:hover{
 
 
 /**************************************
-   005 - Codexin Information Box
+   005 - Codexin Events
 **************************************/
 
-.events-description .panel-group .panel {
+.cx-events-description .panel-group .panel {
     border-radius: 0;
 }
 
@@ -465,11 +465,11 @@ input[type="button"]:hover{
     overflow: hidden;
 }
 
-.events-description .panel-body p {
+.cx-events-description .panel-body p {
     margin-bottom: 0;
 }
 
-.events-description .panel-body {
+.cx-events-description .panel-body {
     padding: 18px 15px;
 }
 
@@ -586,27 +586,37 @@ input[type="button"]:hover{
     margin-bottom: 50px;
 }
 
-.events-description .panel-heading {
+.cx-events-description .panel-heading {
     padding-top: 0;
     padding-bottom: 0;
 }
 
-.events-description .panel-title .accordion-toggle {
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-
-.events-description .panel-title {
+.cx-events-description .panel-title {
     text-transform: uppercase;
     overflow: hidden;
+    display: block;
+    border: 0;
+    letter-spacing: normal;
+    padding: 0;
 }
 
-.events-description .panel-title i {
+.cx-events-description .panel-title i {
+    color: #295970;
+    font-size: 16px;
     margin-right: 10px;
     float: left;
 }
 
-.events-description .panel-title a {
+.cx-events-description .panel-heading:hover, .cx-events-description .panel-heading.active {
+    background: #f8f8f8;
+}
+
+.cx-events-description .panel-title i {
+    margin-right: 10px;
+    float: left;
+}
+
+.cx-events-description .panel-title a {
     position: relative;
     width: 100%;
     display: block;
@@ -621,22 +631,26 @@ input[type="button"]:hover{
     box-sizing: border-box;
 }
 
-.events-description .panel-title a::after {
+.cx-events-description .panel-title a::after {
     content: "\f078";
     position: absolute;
     right: 1px;
+    font-family: FontAwesome;
+    color: #295970;
 }
 
-.events-description .panel-title a.collapsed::after {
+.cx-events-description .panel-title a.collapsed::after {
     content: "\f077";
     position: absolute;
     right: 0;
+    font-family: FontAwesome;
+    color: #295970;
 }
 
 
-.events-description .panel-title a:hover,
-.events-description .panel-title a:focus,
-.events-description .panel-title a:active {
+.cx-events-description .panel-title a:hover,
+.cx-events-description .panel-title a:focus,
+.cx-events-description .panel-title a:active {
     text-decoration: none;
 }
 
