@@ -20,7 +20,7 @@ function cx_client_shortcode( $atts, $content = null ) {
 
 	// Assigning a master css class and hooking into KC
 	$master_class = apply_filters( 'kc-el-class', $atts );
-	$master_class[] = 'clients mrg-50';
+	$master_class[] = 'cx-clients';
 
 	// Retrieving user define classes
 	$classes = array( 'client' );
@@ -88,8 +88,8 @@ function cx_client_shortcode( $atts, $content = null ) {
 	                //Only load assets when using this element
  					'assets' => array(
  						'scripts' => array(
- 							// 'slick-js' => CODEXIN_CORE_ASSET_DIR . '/js/slick.min.js',
- 							'client-carousel-script' => CODEXIN_CORE_ASSET_DIR . '/js/shortcode-js/cx_client-carousel.js',
+ 							 'slick-cx-main-script' => CODEXIN_CORE_ASSET_DIR . '/js/slick.min.js',
+ 							 'slick-cx-user-client-script' => CODEXIN_CORE_ASSET_DIR . '/js/shortcode-js/cx_client-carousel.js',
  							),
 
 	                ), //End assets

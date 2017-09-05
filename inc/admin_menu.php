@@ -48,7 +48,7 @@ class CodexinAdminMenu {
 	     ?>
 	    <!-- Create a header in the default WordPress 'wrap' container -->
 	    <div class="wrap">    
-	        <h1><?php esc_html_e( 'Codexin Core Options', 'codexin' ) ?></h1>
+	        <h1><?php esc_html_e( 'SMN Core Options', 'codexin' ) ?></h1>
 	        <p class="description"><?php printf( '%1$s<b>%2$s</b>%3$s', esc_html__( 'These settings showcases the core functionality of the ', 'codexin' ), esc_html__( ' Codexin Core ' , 'codexin' ), esc_html( ' Plugin.', 'codexin' ) ) ?></p>
             <h2 class="nav-tab-wrapper">
 				<a href="<?php echo admin_url( 'admin.php?page=codexin-options' ); ?>" class="nav-tab<?php if ( ! isset( $_GET['action'] ) || isset( $_GET['action'] ) && 'social' != $_GET['action']  && 'api' != $_GET['action'] && 'twitter_api' != $_GET['action'] && 'mailchimp_opt' != $_GET['action'] ) echo ' nav-tab-active'; ?>"><?php esc_html_e( 'General', 'codexin' ); ?></a>
