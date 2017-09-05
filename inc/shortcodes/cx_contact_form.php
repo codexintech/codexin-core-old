@@ -10,7 +10,6 @@
 // Registering Contact Form Shortcode
 function cx_contact_form_shortcode( $atts, $content = null ) {
 	extract(shortcode_atts(array(
-		'layout'		=> '',
    		'contact_title'	=> '',
    		'show_form_id'	=> '',
    		'contact_desc'	=> '',
@@ -20,12 +19,9 @@ function cx_contact_form_shortcode( $atts, $content = null ) {
 	$result = '';
 
 	ob_start(); 
-
-	if( ! empty( $layout ) ) :	
-		if( $layout == 1 ) :
 		// Assigning a master css class and hooking into KC
 		$master_class = apply_filters( 'kc-el-class', $atts );
-		$master_class[] = 'contact-form-wrapper reveal-contact-form';
+		$master_class[] = 'cx-form-wrapper';
 
 		// Retrieving user define classes
 		$classes = array( 'contact-form' );
@@ -38,33 +34,14 @@ function cx_contact_form_shortcode( $atts, $content = null ) {
 					<h3><?php echo esc_html( $contact_title ); ?></h3>
 					<p><?php printf( '%s', $contact_desc ); ?></p>
 				</div>		
-				<div class="row form-element">
+				<div class="form-element">
 					<?php echo do_shortcode( '[contact-form-7 id="'. $show_form_id .'" title=""]' ); ?>
 				</div> <!-- end of form-element -->
 			</div> <!-- end of contact-form -->
 		</div> <!-- end of contact-form-wrapper -->
 
-	<?php endif;
-	if( $layout == 2 ) :
-	// Assigning a master css class and hooking into KC
-	$master_class = apply_filters( 'kc-el-class', $atts );
-	$master_class[] = 'contact-form-wrapper-rv2';
-
-	// Retrieving user define classes
-	$classes = array( 'contact-form-position' );
-	(!empty($class)) ? $classes[] = $class : '';	
-	?>
-		<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
-			<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">	
-				<div id="contact-form" class="contact-form form-validate">
-					<?php echo do_shortcode( '[contact-form-7 id="'. $show_form_id .'" title=""]' ); ?>
-				</div> 	
-			</div> <!-- end of contact-form-position -->
-		</div> <!-- end of contact-form-wrapper-rv2 -->	
-	<?php endif; ?>
 
 	<?php
-	endif;
 	$result .= ob_get_clean();
 	return $result;
 
@@ -125,29 +102,10 @@ function cx_contact_form_kc() {
  					'description' => esc_html__('Codexin Contact From', 'codexin'),
  					'icon' => 'et-hazardous',
  					'category' => 'Codexin',
- 					//Only load assets when using this element
-					'assets' => array(
-						'scripts' => array(
-							'validate-js' 	=> CODEXIN_CORE_ASSET_DIR . '/js/jquery.validate.js',
-							'validation-js' => CODEXIN_CORE_ASSET_DIR . '/js/shortcode-js/form-validation.js',
-						),
-                	), //End assets
 
  					'params' => array(
  						//General params
  						'general' => array(
-	 						array(
-	 							'name' 			=> 'layout',
-	 							'label' 		=> esc_html__( 'Select Contact Form Template', 'codexin' ),
-	 							'type' 			=> 'radio_image',
-	 							'admin_label'	=> true,
-								'options'		=> array(
-									'1'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/contact-form/layout-1.png',
-									'2'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/contact-form/layout-2.png',
-								),
-								'value'	=> '1',
-	 							'admin_label' 	=> true,
-	 						),
 
 	 						array(
 	 							'name' 			=> 'contact_title',
@@ -214,6 +172,7 @@ function cx_contact_form_kc() {
  											array('property' => 'font-size', 'label' => esc_html__( 'Font Size', 'codexin' ), 'selector' => '.contact-intro h3'),
  											array('property' => 'font-weight', 'label' => esc_html__( 'Font Weight', 'codexin' ), 'selector' => '.contact-intro h3'),
  											array('property' => 'line-height', 'label' => esc_html__( 'Line Height', 'codexin' ), 'selector' => '.contact-intro h3'),
+ 											array('property' => 'text-transform', 'label' => esc_html__( 'Text Transform', 'codexin' ), 'selector' => '.contact-intro h3'),
  											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin' ), 'selector' => '.contact-intro h3'),
  											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin' ), 'selector' => '.contact-intro h3')
  										),
@@ -226,31 +185,6 @@ function cx_contact_form_kc() {
  											array('property' => 'line-height', 'label' => esc_html__( 'Line Height', 'codexin' ), 'selector' => '.contact-intro p'),
  											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin' ), 'selector' => '.contact-intro p'),
  											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin' ), 'selector' => '.contact-intro p')
- 										),
-
- 										'Fields' =>array(
- 											array('property' => 'color', 'label' => esc_html__( 'Color', 'codexin' ), 'selector' => '.form-element input,textarea'),
- 											array('property' => 'background-color', 'label' => esc_html__( 'Background Color', 'codexin' ), 'selector' => '.form-element input,textarea'),
- 											array('property' => 'border', 'label' => esc_html__( 'Border', 'codexin' ), 'selector' => '.form-element input,textarea' ),
- 											array('property' => 'border-color', 'label' => esc_html__( 'Border Color Focus', 'codexin' ), 'selector' => '.form-element input,textarea:focus'),
- 											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin' ), 'selector' => '.form-element input,textarea'),
- 											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin' ), 'selector' => '.form-element input,textarea')
- 										),
-
- 										'Submit' => array(
- 											array('property' => 'color', 'label' => esc_html__( 'Color', 'codexin' ), 'selector' => '.form-element submit'),
- 											array('property' => 'background-color', 'label' => esc_html__( 'Background Color', 'codexin' ), 'selector' => '.form-element submit'),
- 											array('property' => 'color', 'label' => esc_html__( 'Hover Color', 'codexin' ), 'selector' => '.form-element submit:hover'),
- 											array('property' => 'background-color', 'label' => esc_html__( 'Backgroung Hover Color', 'codexin' ), 'selector' => '.form-element submit:hover'),
- 											array('property' => 'border', 'label' => esc_html__( 'Border', 'codexin' ), 'selector' => '.form-element submit:hover'),
- 											array('property' => 'border-color', 'label' => esc_html__( 'Border Hover Color', 'codexin' ), 'selector' => '.form-element submit:hover'),
- 											array('property' => 'transition', 'label' => esc_html__( 'Hover Transition', 'codexin' ), 'selector' => '.form-element submit:hover'),
- 											array('property' => 'font-family', 'label' => esc_html__( 'Font family', 'codexin' ), 'selector' => '.form-element submit'),
- 											array('property' => 'font-size', 'label' => esc_html__( 'Font Size', 'codexin' ), 'selector' => '.form-element submit'),
- 											array('property' => 'font-weight', 'label' => esc_html__( 'Font Weight', 'codexin' ), 'selector' => '.form-element submit'),
- 											array('property' => 'line-height', 'label' => esc_html__( 'Line Height', 'codexin' ), 'selector' => '.form-element submit'),
- 											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin' ), 'selector' => '.form-element submit'),
- 											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin' ), 'selector' => '.form-element submit')
  										),
 
  										'Box'	=> array(
