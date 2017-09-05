@@ -96,7 +96,7 @@ function cx_events_shortcode( $atts, $content = null ) {
 						endif; 
 						wp_reset_postdata();  ?>
 					</div><!--end of panel-group-->
-				</div>  <!-- end of events description -->
+				</div>  <!-- end of cx-events-description -->
 
 		<?php endif;
 			if( $layout == 2 ) :
@@ -270,21 +270,12 @@ function cx_events_kc() {
  											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin'), 'selector' => '.panel-title, gle-event .title-3')
  										),
 
- 										'Meta Text' => array(
- 											array('property' => 'color', 'label' => esc_html__( 'Color', 'codexin'), 'selector' => '.rv2-single-event ul li'),
- 											array('property' => 'font-family', 'label' => esc_html__( 'Font Family', 'codexin'), 'selector' => '.rv2-single-event ul li'),
- 											array('property' => 'font-size', 'label' => esc_html__( 'Font Size', 'codexin'), 'selector' => '.rv2-single-event ul li'),
- 											array('property' => 'text-transform', 'label' => esc_html__( 'Text Transform', 'codexin'), 'selector' => '.rv2-single-event ul li'),
- 											array('property' => 'font-weight', 'label' => esc_html__( 'Font Weight', 'codexin'), 'selector' => '.rv2-single-event ul li'),
- 											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin'), 'selector' => '.rv2-single-event ul li'),
- 											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin'), 'selector' => '.rv2-single-event ul li')
- 										),
-
  										'Description' => array(
  											array('property' => 'color', 'label' => esc_html__( 'Color', 'codexin'), 'selector' => '.panel-body p, .rv2-event-desc'),
  											array('property' => 'font-size', 'label' => esc_html__( 'Font Size', 'codexin'), 'selector' => '.panel-body p, .rv2-event-desc'),
  											array('property' => 'font-family', 'label' => esc_html__( 'Font Family', 'codexin'), 'selector' => '.panel-body p, .rv2-event-desc'),
  											array('property' => 'font-weight', 'label' => esc_html__( 'Font Weight', 'codexin'), 'selector' => '.panel-body p, .rv2-event-desc'),
+ 											array('property' => 'line-height', 'label' => esc_html__( 'Line Height', 'codexin'), 'selector' => '.panel-body p, .rv2-event-desc'),
  											array('property' => 'text-align', 'label' => esc_html__( 'Text Align', 'codexin'), 'selector' => '.panel-body p, .rv2-event-desc'),
  											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin'), 'selector' => '.panel-body p, .rv2-event-desc'),
  											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin'), 'selector' => '.panel-body p, .rv2-event-desc')
@@ -301,6 +292,16 @@ function cx_events_kc() {
  											array('property' => 'background-color', 'label' => esc_html__( 'Title Tab Background', 'codexin'), 'selector' => '.panel-heading'),
  											array('property' => 'background-color', 'label' => esc_html__( 'Title Tab Background on Hover', 'codexin'), 'selector' => '.panel-heading:hover'),
  											array('property' => 'background-color', 'label' => esc_html__( 'Description Tab Background Color', 'codexin'), 'selector' => '.panel-body'),
+ 										),
+
+ 										'Meta Text' => array(
+ 											array('property' => 'color', 'label' => esc_html__( 'Color', 'codexin'), 'selector' => '.rv2-single-event ul li'),
+ 											array('property' => 'font-family', 'label' => esc_html__( 'Font Family', 'codexin'), 'selector' => '.rv2-single-event ul li'),
+ 											array('property' => 'font-size', 'label' => esc_html__( 'Font Size', 'codexin'), 'selector' => '.rv2-single-event ul li'),
+ 											array('property' => 'text-transform', 'label' => esc_html__( 'Text Transform', 'codexin'), 'selector' => '.rv2-single-event ul li'),
+ 											array('property' => 'font-weight', 'label' => esc_html__( 'Font Weight', 'codexin'), 'selector' => '.rv2-single-event ul li'),
+ 											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin'), 'selector' => '.rv2-single-event ul li'),
+ 											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin'), 'selector' => '.rv2-single-event ul li')
  										),
 
 									) //End inner-option array
