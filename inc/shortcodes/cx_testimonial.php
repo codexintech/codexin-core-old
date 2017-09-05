@@ -257,7 +257,7 @@ function cx_testimonial_kc() {
   	        		'assets' 			=> array(
   	        			'scripts' 		=> array(
   	        				'slick-cx-main-script' 	=> CODEXIN_CORE_ASSET_DIR . '/js/slick.min.js',
-  	        				'slick-cx-user-script' 	=> CODEXIN_CORE_ASSET_DIR . '/js/slick-cx-user-script.js',
+  	        				'slick-cx-user-script' 	=> CODEXIN_CORE_ASSET_DIR . '/js/shortcode-js/cx_testimonial.js',
   	        				),
 
   	        			'styles'	=> array(
