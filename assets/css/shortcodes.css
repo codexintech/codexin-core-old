@@ -586,9 +586,10 @@ input[type="button"]:hover{
     margin-bottom: 50px;
 }
 
-.cx-events-description .panel-heading {
+.cx-events-description .panel-default > .panel-heading {
     padding-top: 0;
     padding-bottom: 0;
+    background: transparent;
 }
 
 .cx-events-description .panel-title {
@@ -774,7 +775,8 @@ input[type="button"]:hover{
 }
 
 
-.no-flexbox .cx-testimonial-2 .quote-wrapper .media-wrapper, .cx-service-box .service-single .media-wrapper {
+.no-flexbox .cx-testimonial-2 .quote-wrapper .media-wrapper,
+.no-flexbox .cx-service-box .service-single .media-wrapper {
     display: block;
 }
 

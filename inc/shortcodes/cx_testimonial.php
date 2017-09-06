@@ -66,7 +66,7 @@ function cx_testimonial_shortcode( $atts, $content = null ) {
 															<i class="fa <?php echo $testimonial_icon; ?>"></i>
 														</div>
 														<div class="quote-text">
-															<p> <?php printf( '%s', get_the_excerpt() ); ?> </p>
+															<p> "<?php printf( '%s', get_the_excerpt() ); ?>" </p>
 															<p class="quote-author-name">
 																<?php 
 																$aut_name = rwmb_meta( 'reveal_author_name','type=text' );
