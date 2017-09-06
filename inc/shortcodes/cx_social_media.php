@@ -129,7 +129,6 @@ function cx_social_media_kc() {
  								'label' 		=> esc_html__( 'Enable Social Media Title? ', 'codexin' ),
  								'type' 			=> 'toggle',
  								'value'			=> 'no',
- 								'admin_label' 	=> true
  							),
 
  							array(
@@ -149,7 +148,6 @@ function cx_social_media_kc() {
  								'label' 		=> esc_html__( 'Enable Facebook? ', 'codexin' ),
  								'type' 			=> 'toggle',
  								'value'			=> 'no',
- 								'admin_label' 	=> true
  							),
 
  							array(
@@ -161,7 +159,6 @@ function cx_social_media_kc() {
  									'show_when' => 'yes',
  								),
  								'description'	=> esc_html__( 'Please Insert Your Facebook Profile URL', 'codexin' ),
- 								'admin_label' 	=> true
  							),
 
  							array(
@@ -169,7 +166,6 @@ function cx_social_media_kc() {
  								'label' 		=> esc_html__( 'Enable Twitter? ', 'codexin' ),
  								'type' 			=> 'toggle',
  								'value'			=> 'no',
- 								'admin_label' 	=> true
  							),
  							array(
  								'name' 			=> 'cx_twitter',
@@ -180,7 +176,6 @@ function cx_social_media_kc() {
  									'show_when' => 'yes',
  								),
  								'description'	=> esc_html__( 'Please Insert Your Twitter Profile URL', 'codexin' ),
- 								'admin_label' 	=> true
  							),
 
  							array(
@@ -188,7 +183,6 @@ function cx_social_media_kc() {
  								'label' 		=> esc_html__( 'Enable Instagram? ', 'codexin' ),
  								'type' 			=> 'toggle',
  								'value'			=> 'no',
- 								'admin_label' 	=> true
  							),
  							array(
  								'name' 			=> 'cx_instagram',
@@ -199,7 +193,6 @@ function cx_social_media_kc() {
  									'show_when' => 'yes',
  								),
  								'description'	=> esc_html__( 'Please Insert Your Instagram Profile URL', 'codexin' ),
- 								'admin_label' 	=> true
  							),
 
  							array(
@@ -207,7 +200,6 @@ function cx_social_media_kc() {
  								'label' 		=> esc_html__( 'Enable Pinterest? ', 'codexin' ),
  								'type' 			=> 'toggle',
  								'value'			=> 'no',
- 								'admin_label' 	=> true
  							),
  							array(
  								'name' 			=> 'cx_pinterest',
@@ -218,7 +210,6 @@ function cx_social_media_kc() {
  									'show_when' => 'yes',
  								),
  								'description'	=> esc_html__( 'Please Insert Your Pinterest Profile URL', 'codexin' ),
- 								'admin_label' 	=> true
  							),
 
  							array(
@@ -226,7 +217,6 @@ function cx_social_media_kc() {
  								'label' 		=> esc_html__( 'Enable Behance? ', 'codexin' ),
  								'type' 			=> 'toggle',
  								'value'			=> 'no',
- 								'admin_label' 	=> true
  							),
  							array(
  								'name' 			=> 'cx_behance',
@@ -237,7 +227,6 @@ function cx_social_media_kc() {
  									'show_when' => 'yes',
  								),
  								'description'	=> esc_html__( 'Please Insert Your Behance Profile URL', 'codexin' ),
- 								'admin_label' 	=> true
  							),
 
  							array(
@@ -245,7 +234,6 @@ function cx_social_media_kc() {
  								'label' 		=> esc_html__( 'Enable Google+? ', 'codexin' ),
  								'type' 			=> 'toggle',
  								'value'			=> 'no',
- 								'admin_label' 	=> true
  							),
  							array(
  								'name' 			=> 'cx_gplus',
@@ -256,7 +244,6 @@ function cx_social_media_kc() {
  									'show_when' => 'yes',
  								),
  								'description'	=> esc_html__( 'Please Insert Your Google+ Profile URL', 'codexin' ),
- 								'admin_label' 	=> true
  							),
 
  							array(
@@ -264,7 +251,6 @@ function cx_social_media_kc() {
  								'label' 		=> esc_html__( 'Enable Youtube? ', 'codexin' ),
  								'type' 			=> 'toggle',
  								'value'			=> 'no',
- 								'admin_label' 	=> true
  							),
  							array(
  								'name' 			=> 'cx_youtube',
@@ -275,7 +261,6 @@ function cx_social_media_kc() {
  									'show_when' => 'yes',
  								),
  								'description'	=> esc_html__( 'Please Insert Your Youtube Profile URL', 'codexin' ),
- 								'admin_label' 	=> true
  							),
 
  							array(
@@ -283,7 +268,6 @@ function cx_social_media_kc() {
  								'label' 		=> esc_html__( 'Enable Skype? ', 'codexin' ),
  								'type' 			=> 'toggle',
  								'value'			=> 'no',
- 								'admin_label' 	=> true
  							),
  							array(
  								'name' 			=> 'cx_skype',
@@ -294,7 +278,6 @@ function cx_social_media_kc() {
  									'show_when' => 'yes',
  								),
  								'description'	=> esc_html__( 'Please Insert Your Skype Profile URL', 'codexin' ),
- 								'admin_label' 	=> true
  							),
 
  							array(
@@ -302,7 +285,6 @@ function cx_social_media_kc() {
  								'label' 		=> esc_html__( 'Enable Linkedin? ', 'codexin' ),
  								'type' 			=> 'toggle',
  								'value'			=> 'no',
- 								'admin_label' 	=> true
  							),
  							array(
  								'name' 			=> 'cx_linkedin',
@@ -313,7 +295,6 @@ function cx_social_media_kc() {
  									'show_when' => 'yes',
  								),
  								'description'	=> esc_html__( 'Please Insert Your Linkedin Profile URL', 'codexin' ),
- 								'admin_label' 	=> true
  							),
 
 	 						array(
