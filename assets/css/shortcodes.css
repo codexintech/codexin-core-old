@@ -586,7 +586,7 @@ input[type="button"]:hover{
     margin-bottom: 50px;
 }
 
-.cx-events-description .cx-events-description .panel-default > .panel-heading {
+.cx-events-description .cx-events-description .panel-default .panel-heading {
     padding-top: 0;
     padding-bottom: 0;
     background: transparent;
