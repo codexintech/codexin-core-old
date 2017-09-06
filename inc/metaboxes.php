@@ -175,8 +175,8 @@ function reveal_register_meta_boxes( $meta_boxes ) {
         'fields' => array(
 
             array(
-                'name'      => esc_html__( 'Background Image', 'reveal' ),
-                'desc'      => esc_html__('Upload Page Header Background Image', 'reveal'),
+                'name'      => esc_html__( 'Page Title Background Image', 'reveal' ),
+                'desc'      => esc_html__('Upload Page Header Background Image. The Image will be functional for all page templates except \'Page - Home\'. This image will override the page title background image set from theme options ', 'reveal'),
                 'id'        => $prefix . 'page_background',
                 //'type'      => 'image_advanced',
                 'type'      => 'image_advanced',
@@ -186,7 +186,7 @@ function reveal_register_meta_boxes( $meta_boxes ) {
             ),
 
             array(
-                'name'      => esc_html__( 'Page Slider', 'reveal' ),
+                'name'      => esc_html__( 'Select a Page Slider', 'reveal' ),
                 'desc'      => esc_html__('Select Slider Name to show on Page header, Please note that, Slider will be functional for \'Page - Home\' template only  ', 'reveal'),
                 'id'        => $prefix . 'page_slider',
                 //'type'      => 'image_advanced',
