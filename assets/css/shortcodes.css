@@ -589,6 +589,7 @@ input[type="button"]:hover{
 .cx-events-description .panel-heading {
     padding-top: 0;
     padding-bottom: 0;
+    background: transparent;
 }
 
 .cx-events-description .panel-title {
