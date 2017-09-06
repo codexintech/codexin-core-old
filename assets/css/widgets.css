@@ -147,7 +147,7 @@
     padding:40px 15px 30px;
 }
 
-.inside-page form > div {
+.inside-page form.mailchimp-form > div {
     margin-right: 10px;
     margin-left: 10px;
 }
