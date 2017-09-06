@@ -132,7 +132,7 @@ function cx_team_kc() {
                 		'Social Icon' => array(
                 			array(
 								'name' 			=> 'fb',
-								'label' 		=> __( 'Facebook Hendelar', 'codexin' ),
+								'label' 		=> __( 'Facebook URL', 'codexin' ),
 								'type' 			=> 'text',
 								'description'	=> esc_html__( 'Enter Your Facebook Profile Url Here', 'codexin' ),
 								'admin_label' 	=> false,
@@ -140,7 +140,7 @@ function cx_team_kc() {
 
 							array(
 								'name' 			=> 'tr',
-								'label' 		=> __( 'Twitter Hendelar', 'codexin' ),
+								'label' 		=> __( 'Twitter URL', 'codexin' ),
 								'type' 			=> 'text',
 								'description'	=> esc_html__( 'Enter Your Twitter Profile Url Here', 'codexin' ),
 								'admin_label' 	=> false,
@@ -148,7 +148,7 @@ function cx_team_kc() {
 
 							array(
 								'name' 			=> 'ig',
-								'label' 		=> __( 'Instagram Hendelar', 'codexin' ),
+								'label' 		=> __( 'Instagram URL', 'codexin' ),
 								'type' 			=> 'text',
 								'description'	=> esc_html__( 'Enter Your Instagram Profile Url Here', 'codexin' ),
 								'admin_label' 	=> false,
@@ -156,7 +156,7 @@ function cx_team_kc() {
 
 							array(
 								'name' 			=> 'gp',
-								'label' 		=> __( 'Google+ Hendelar', 'codexin' ),
+								'label' 		=> __( 'Google Plus URL', 'codexin' ),
 								'type' 			=> 'text',
 								'description'	=> esc_html__( 'Enter Your Google+ Profile Url Here', 'codexin' ),
 								'admin_label' 	=> false,
