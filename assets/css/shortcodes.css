@@ -808,18 +808,20 @@ input[type="button"]:hover{
 /*************************************
     008 - Codexin Team
 *************************************/
-#team {
-    padding-bottom: 0;
-    margin-bottom: 0;
-    margin-top: 0;
+.cx-team-wrapper {
+    margin-bottom: 30px;
 }
 
-.single-team {
-    margin-top: 35px;
+.cx-team-wrapper img {
+    width:100%;
+}
+
+
+.cx-team-wrapper .team-single {
     position: relative;
 }
 
-.single-team-wrapper {
+.cx-team-wrapper .team-single-wrapper {
     position: absolute;
     left: 0;
     top: 0;
@@ -835,39 +837,44 @@ input[type="button"]:hover{
     transition: all .3s;
 }
 
-.single-team:hover .single-team-wrapper {
+.cx-team-wrapper .team-single:hover .team-single-wrapper {
     opacity: 1;
 }
 
-.team-social {
+.cx-team-wrapper .team-social {
     position: absolute;
+    width: 100%;
     top: 50%;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0; 
+    left: 50%;
     height: 40px;
     text-align: center;
-    margin: auto;  
     color: #fff;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }
 
-.single-team-wrapper {
+.cx-team-wrapper .team-single-wrapper {
     background: rgb(41, 89, 112);
     background: rgba(41, 89, 112, 0.75);
     box-shadow: 5px 5px 5px 0 #295970;
 }
 
-.team-social a {
+.cx-team-wrapper .team-social a {
     display: inline-block;
-    margin-right: -2px;
-    margin-left: -2px;
+    margin-right: -3px;
+    margin-left: -3px;
+    width:20%;
 }
 
-.team-social i {
-    width: 40px;
-    height: 40px;
-    line-height: 40px;
+.cx-team-wrapper .team-social i {
+    /*width: 44px;*/
+    width:100%;
+    height: 42px;
+    line-height: 42px;
+    font-size: 16px;
     text-align: center;
     color: #295970;
     background: #fff;
@@ -883,25 +890,25 @@ input[type="button"]:hover{
     transition: all .3s;
 }
 
-.team-social i:hover {
+.cx-team-wrapper .team-social i:hover {
     color: #fff;
-    font-size: 20px;
     background: #295970;
 }
 
-.team-description {
-    margin-top: 20px;
+.cx-team-wrapper .team-description {
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
-.team-description p {
+.cx-team-wrapper .team-description p {
     margin: 0;
 }
-.team-description p:first-child {
+.cx-team-wrapper .team-description p:first-child {
     text-transform: uppercase;
     font-weight: bold;
 }
 
-.team-description p:last-child {
+.cx-team-wrapper .team-description p:last-child {
     font-style: italic;
 }
 

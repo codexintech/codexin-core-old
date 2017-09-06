@@ -23,9 +23,9 @@ function cx_team_shortcode( $atts, $content = null ) {
 
 	// Assigning a master css class and hooking into KC
 	$master_class = apply_filters( 'kc-el-class', $atts );
-	$master_class[] = 'revel-team-wrapper';
+	$master_class[] = 'cx-team-wrapper';
 	// Retrieving user define classes
-	$classes = array( 'team-single-item' );
+	$classes = array( 'cx-team-single' );
 	(!empty($class)) ? $classes[] = $class : '';
 
 	// Retrieving the image url
@@ -38,9 +38,9 @@ function cx_team_shortcode( $atts, $content = null ) {
 	?>
 	<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
 		<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">		
-			<div class="single-team">
+			<div class="team-single">
 				<img src="<?php echo $ret_full_img_url; ?>" alt="<?php echo esc_attr( $img_alt ); ?>" class="img-responsive" />
-				<div class="single-team-wrapper">
+				<div class="team-single-wrapper">
 					<div class="team-social">
 						<?php
 						if( ! empty( $fb ) ) :?>
@@ -57,7 +57,7 @@ function cx_team_shortcode( $atts, $content = null ) {
 						<?php endif; ?>
 					</div>
 				</div>
-			</div><!-- end of single-team -->
+			</div><!-- end of team-single -->
 			<div class="team-description text-center">
 				<p class="member-name"><?php echo esc_html( $member_name ); ?></p>
 				<p class="member-designation"><?php echo esc_html( $designation ); ?></p>
@@ -177,7 +177,7 @@ function cx_team_kc() {
   	        								array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.team-description p:first-child'),
         								),
 
-  	        							'Description' => array(
+  	        							'Designation' => array(
   	        								array('property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.team-description p:last-child'),
   	        								array('property' => 'font-family', 'label' => esc_html__('Font Family', 'codexin'), 'selector' => '.team-description p:last-child'),
   	        								array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.team-description p:last-child'),
@@ -190,23 +190,20 @@ function cx_team_kc() {
         								),
 
   	        							'Icon' => array(
-  	        								array('property' => 'color', 'label' => esc_html__('Text Color', 'codexin'), 'selector' => '.team-social i'),
-  	        								array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.team-social i'),
-  	        								array('property' => 'color', 'label' => esc_html__('Text Color Hover', 'codexin'), 'selector' => '.team-social i:hover'),
-  	        								array('property' => 'background-color', 'label' => esc_html__('BG Color Hover', 'codexin'), 'selector' => '.team-social i:hover'),
-  	        								array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.team-social i'),
-  	        								array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.team-social i')
+  	        								array('property' => 'color', 'label' => esc_html__('Icon Color', 'codexin'), 'selector' => '.team-social i'),
+  	        								array('property' => 'color', 'label' => esc_html__('Icon Color Hover', 'codexin'), 'selector' => '.team-social i:hover'),
+  	        								array('property' => 'font-size', 'label' => esc_html__('Icon Font Size', 'codexin'), 'selector' => '.team-social i'),
+  	        								array('property' => 'background-color', 'label' => esc_html__('Icon BG Color', 'codexin'), 'selector' => '.team-social i'),
+  	        								array('property' => 'background-color', 'label' => esc_html__('Icon BG Color on Hover', 'codexin'), 'selector' => '.team-social i:hover'),
         								),
 
   	        							'Box'	=> array(
-  	        								array('property' => 'background'),
-  	        								array('property' => 'background-color', 'label' => 'Background Color On Hover ( Only RGBA )', 'selector' => '.single-team:hover .single-team-wrapper' ),
+  	        								array('property' => 'background-color', 'label' => esc_html__('Background Color for Whole Wrapper', 'codexin')),
+  	        								array('property' => 'background-color', 'label' => esc_html__('Team Image Background Color on Hover', 'codexin'), 'selector' => '.team-single-wrapper'),
   	        								array('property' => 'border', 'label' => esc_html__('Border', 'codexin') ),
-  	        								array('property' => 'border-radius', 'label' => esc_html__('Border Radius', 'codexin') ),
-  	        								array('property' => 'box-shadow', 'label' => esc_html__('Box Shadow', 'codexin'), 'selector' => '.single-team-wrapper'),
-  	        								array('property' => 'box-shadow', 'label' => esc_html__('Box Shadow on Hover','codexin'), 'selector' => '.single-team:hover .single-team-wrapper'),
+  	        								array('property' => 'box-shadow', 'label' => esc_html__('Box Shadow for Team Image', 'codexin'), 'selector' => '.team-single-wrapper'),
+  	        								array('property' => 'box-shadow', 'label' => esc_html__('Box Shadow on Hover for Team Image','codexin'), 'selector' => '.team-single:hover .team-single-wrapper'),
   	        								array('property' => 'transition', 'label' => esc_html__('Hover Transition Animation', 'codexin')),
-  	        								array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin') ),
   	        								array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin') ),
         								)									
         							)
