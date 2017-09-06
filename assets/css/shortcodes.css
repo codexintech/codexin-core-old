@@ -1270,9 +1270,9 @@ div.cx-blog {
 */
 
 
-/***************************************
-    cx_map_shortcode / social-media
-***************************************/
+/*********************************************
+   0011 - Codexin Map
+*********************************************/
 section#location {
     margin-top: 0;
 }
@@ -1299,11 +1299,12 @@ section#location {
     height: 480px;
 }
 
-.contact-form-wrapper {
 
-}
+/*********************************************
+   0012 - Codexin Contact Form
+*********************************************/
 
-.contact-intro {
+.cx-form-wrapper .contact-intro {
     margin-bottom: 25px;
 }
 
@@ -1311,21 +1312,60 @@ section#location {
     width: 66px;
 }
 
-.contact-intro h3 {
+.cx-form-wrapper .contact-intro h3 {
     margin-top: 20px;
     margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 20px;
 }
 
-.contact-intro p {
+.cx-form-wrapper .contact-intro p {
     margin-bottom: 0;
 }
 
-.reveal-contact-form {
-
+.cx-form-wrapper form {
+    padding-right: 0;
 }
 
+.cx-form-wrapper input {
+    height: 35px;
+}
+
+.cx-form-wrapper input,
+.cx-form-wrapper textarea {
+    border-radius: 0;
+    border: 1px solid #ddd;
+    box-shadow: none;
+}
+
+.cx-form-wrapper input[type="submit"] {
+    background: #295970;
+    color: #fff;
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -ms-transition: all .3s;
+    -o-transition: all .3s;
+    transition: all .3s;
+}
+
+.cx-form-wrapper input[type="submit"]:hover {
+    background: #333;
+}
+
+.cx-form-wrapper input:focus,
+.cx-form-wrapper textarea:focus {
+    border-color: #95E1D3;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    -ms-box-shadow: none;
+    -o-box-shadow: none;
+    box-shadow: none;
+}
+
+
+
 /************************************************************
-    Codexin Social Share
+  0013 - Codexin Social Share
 *************************************************************/
 .cx-social-media {
     display: inline-block;
@@ -1402,7 +1442,6 @@ section#location {
     -o-transition: all .3s;
     transition: all .3s;
 }
-
 
 
 /*--------------------------------------
