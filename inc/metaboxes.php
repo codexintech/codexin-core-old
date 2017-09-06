@@ -3,6 +3,11 @@ add_filter( 'rwmb_meta_boxes', 'reveal_register_meta_boxes' );
 
 function reveal_register_meta_boxes( $meta_boxes ) {
     $prefix = 'reveal_';
+    if ( defined('MSWP_AVERTA_VERSION') ) { 
+        $sliders = get_masterslider_names( $id_as_key = true );
+     } else {
+        $sliders = array();
+     }
     
     //1st meta box
     $meta_boxes[] = array(
@@ -163,7 +168,7 @@ function reveal_register_meta_boxes( $meta_boxes ) {
 
     $meta_boxes[] = array(
         'id'         => 'reveal-page-background-meta',
-        'title'      => esc_html__( 'Page Header Background Image', 'reveal' ),
+        'title'      => esc_html__( 'Page Header Settings', 'reveal' ),
         'post_types' => array( 'page' ),
         'context'    => 'normal',
         'priority'   => 'high',
@@ -177,6 +182,17 @@ function reveal_register_meta_boxes( $meta_boxes ) {
                 'type'      => 'image_advanced',
                 'max_file_uploads' => 1,
                 'max_status'       => true,
+                'clone'     => false,
+            ),
+
+            array(
+                'name'      => esc_html__( 'Page Slider', 'reveal' ),
+                'desc'      => esc_html__('Select Slider Name to show on Page header, Please note that, Slider will be functional for \'Page - Home\' template only  ', 'reveal'),
+                'id'        => $prefix . 'page_slider',
+                //'type'      => 'image_advanced',
+                'type'    => 'select',
+                'options' => $sliders,
+                'placeholder' => __( 'Select a Slider', 'reveal' ),
                 'clone'     => false,
             ),
         )
