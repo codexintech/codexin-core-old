@@ -101,12 +101,21 @@ function cx_team_kc() {
 								'admin_label' 	=> false,
 							),
 
+
 							array(
 								'name' 			=> 'image',
 								'label' 		=> __( 'Image', 'codexin' ),
 								'type' 			=> 'attach_image',
 								'description'	=> esc_html__( 'Upload Team Member Image Here', 'codexin' ),
 								'admin_label' 	=> true,
+							),
+
+							array(
+								'name' 			=> 'img_alt',
+								'label' 		=> __( 'Image Alt Tag', 'codexin' ),
+								'type' 			=> 'text',
+								'description'	=> esc_html__( 'Enter Image Alt tag Here', 'codexin' ),
+								'admin_label' 	=> false,
 							),
 
 							array(
