@@ -774,7 +774,8 @@ input[type="button"]:hover{
 }
 
 
-.no-flexbox .cx-testimonial-2 .quote-wrapper .media-wrapper, .cx-service-box .service-single .media-wrapper {
+.no-flexbox .cx-testimonial-2 .quote-wrapper .media-wrapper,
+.no-flexbox .cx-service-box .service-single .media-wrapper {
     display: block;
 }
 
