@@ -1041,7 +1041,7 @@ input[type="button"]:hover{
 *************************************/
 div.cx-blog {
     margin-top: 0;
-    margin-bottom: 40px;
+    margin-bottom: 0;
     word-wrap: break-word;
 }
 
