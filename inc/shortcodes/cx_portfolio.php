@@ -299,11 +299,13 @@ function cx_portfolio_kc() {
 							array(
 	    						'name'        	=> 'number_of_portfolios',
 	    						'label'       	=> esc_html__('Number Of Portfolios to Display', 'codexin'),
-	    						'type'        	=> 'select',
+	    						'type'        	=> 'number_slider',
 	    						'options'		=> array(
-    								'4'		=> '4',
-    								'8'		=> '8',
-    								'-1'	=> 'All',
+	    							'min'			=> 4,
+	    							'max'			=> 20,
+	    							'unit'			=> '',
+	    							'step'			=> 4,
+	    							'show_input'	=> false
     							),
 	    						'value'			=> '8',
 	    						'description'	=> esc_html__( 'Choose the number of portfolios you want to show.', 'codexin' ),
@@ -340,8 +342,57 @@ function cx_portfolio_kc() {
 								'description' => esc_html__( 'If you wish to style a particular content element differently, please add a class name to this field and refer to it in your custom CSS.', 'codexin' ),
 								),
 
-                		) //End params
-					), //End General
+                		), //End general
+
+						// Style based Params
+						'styling' => array(
+ 							array(
+ 								'name'    		=> 'codexin_css',
+ 								'type'    		=> 'css',
+ 								'options' 		=> array(
+ 									array(
+ 										"screens" => "any,1199,991,767,479",
+
+ 										'Title' => array(
+ 											array('property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.portfolio-title a'),
+ 											array('property' => 'font-family', 'label' => esc_html__('Font family', 'codexin'), 'selector' => '.portfolio-title'),
+ 											array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.portfolio-title'),
+ 											array('property' => 'font-weight', 'label' => esc_html__('Font Weight', 'codexin'), 'selector' => '.portfolio-title'),
+ 											array('property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '.portfolio-title'),
+ 											array('property' => 'text-align', 'label' => esc_html__('Text Align', 'codexin'), 'selector' => '.portfolio-title'),
+ 											array('property' => 'text-transform', 'label' => esc_html__('Text Transform', 'codexin'), 'selector' => '.portfolio-title'),
+ 											array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.portfolio-title'),
+ 											array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.portfolio-title')
+										),
+
+ 										'Categories' => array(
+ 											array('property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.portfolio-title + p'),
+ 											array('property' => 'font-family', 'label' => esc_html__('Font family', 'codexin'), 'selector' => '.portfolio-title + p'),
+ 											array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.portfolio-title + p'),
+ 											array('property' => 'font-weight', 'label' => esc_html__('Font Weight', 'codexin'), 'selector' => '.portfolio-title + p'),
+ 											array('property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '.portfolio-title + p'),
+ 											array('property' => 'text-align', 'label' => esc_html__('Text Align', 'codexin'), 'selector' => '.portfolio-title + p'),
+ 											array('property' => 'text-transform', 'label' => esc_html__('Text Transform', 'codexin'), 'selector' => '.portfolio-title + p'),
+ 											array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.portfolio-title + p'),
+ 											array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.portfolio-title + p')
+										),
+
+										'Image Hover' => array(
+ 											array('property' => 'background', 'label' => esc_html__('Image Hover Color', 'codexin'), 'selector' => '.image-mask' )
+										),
+									) 
+								) 
+							) 
+                		), //End styling array..
+
+						// Animate Params
+						'animate' => array(
+							array(
+								'name'    		=> 'animate',
+								'type'    		=> 'animate'
+							)
+						),//End animate
+					), //End Params
             	),  // End of elemnt cx_portfolio
 			) //end of array 
 		);  //end of kc_add_map
