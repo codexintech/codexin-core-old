@@ -52,39 +52,39 @@ function cx_social_media_shortcode( $atts, $content = null ) {
 			<?php endif; ?>
 
 			<?php if( !empty( $cx_facebook ) && ( $show_fb ) ) : ?>
-				<a href="<?php echo esc_url($cx_facebook); ?>"><i class="fa fa-facebook" target="_blank"></i></a>
+				<a href="<?php echo esc_url($cx_facebook); ?>" target="_blank"><i class="fa fa-facebook"></i></a>
 			<?php elseif( empty( $cx_facebook ) && ( $show_fb) ): echo '<i class="fa fa-exclamation-triangle" title="'. esc_html__('No Valid URL Found', 'codexin') .'"></i>'; ?>
 			<?php endif; ?>
 			<?php if( !empty( $cx_twitter ) && ( $show_tw ) ) : ?>
-				<a href="<?php echo esc_url($cx_twitter); ?>"><i class="fa fa-twitter" target="_blank"></i></a>
+				<a href="<?php echo esc_url($cx_twitter); ?>" target="_blank"><i class="fa fa-twitter"></i></a>
 			<?php elseif( empty( $cx_twitter ) && ( $show_tw ) ): echo '<i class="fa fa-exclamation-triangle" title="'. esc_html__('No Valid URL Found', 'codexin') .'"></i>'; ?>
 			<?php endif; ?>
 			<?php if( !empty( $cx_instagram ) && ( $show_in ) ) : ?>
-				<a href="<?php echo esc_url($cx_instagram); ?>"><i class="fa fa-instagram" target="_blank"></i></a>
+				<a href="<?php echo esc_url($cx_instagram); ?>" target="_blank"><i class="fa fa-instagram"></i></a>
 			<?php elseif( empty( $cx_instagram ) && ( $show_in ) ): echo '<i class="fa fa-exclamation-triangle" title="'. esc_html__('No Valid URL Found', 'codexin') .'"></i>'; ?>
 			<?php endif; ?>
 			<?php if( !empty( $cx_pinterest ) && ( $show_pin ) ) : ?>
-				<a href="<?php echo esc_url($cx_pinterest); ?>"><i class="fa fa-pinterest" target="_blank"></i></a>
+				<a href="<?php echo esc_url($cx_pinterest); ?>" target="_blank"><i class="fa fa-pinterest"></i></a>
 			<?php elseif( empty( $cx_pinterest ) && ( $show_pin ) ): echo '<i class="fa fa-exclamation-triangle" title="'. esc_html__('No Valid URL Found', 'codexin') .'"></i>'; ?>
 			<?php endif; ?>
 			<?php if( !empty( $cx_behance ) && ( $show_be ) ) : ?>
-				<a href="<?php echo esc_url($cx_behance); ?>"><i class="fa fa-behance" target="_blank"></i></a>
+				<a href="<?php echo esc_url($cx_behance); ?>" target="_blank"><i class="fa fa-behance"></i></a>
 			<?php elseif( empty( $cx_behance ) && ( $show_be ) ): echo '<i class="fa fa-exclamation-triangle" title="'. esc_html__('No Valid URL Found', 'codexin') .'"></i>'; ?>
 			<?php endif; ?>
 			<?php if( !empty( $cx_gplus ) && ( $show_gp ) ) : ?>
-				<a href="<?php echo esc_url($cx_gplus); ?>"><i class="fa fa-google-plus" target="_blank"></i></a>
+				<a href="<?php echo esc_url($cx_gplus); ?>" target="_blank"><i class="fa fa-google-plus"></i></a>
 			<?php elseif( empty( $cx_gplus ) && ( $show_gp ) ): echo '<i class="fa fa-exclamation-triangle" title="'. esc_html__('No Valid URL Found', 'codexin') .'"></i>'; ?>
 			<?php endif; ?>
 			<?php if( !empty( $cx_youtube ) && ( $show_yt ) ) : ?>
-				<a href="<?php echo esc_url($cx_youtube); ?>"><i class="fa fa-youtube-play" target="_blank"></i></a>
+				<a href="<?php echo esc_url($cx_youtube); ?>" target="_blank"><i class="fa fa-youtube-play"></i></a>
 			<?php elseif( empty( $cx_youtube ) && ( $show_yt ) ): echo '<i class="fa fa-exclamation-triangle" title="'. esc_html__('No Valid URL Found', 'codexin') .'"></i>'; ?>
 			<?php endif; ?>
 			<?php if( !empty( $cx_skype ) && ( $show_sk ) ) : ?>
-				<a href="<?php echo esc_url($cx_skype); ?>"><i class="fa fa-skype" target="_blank"></i></a>
+				<a href="<?php echo esc_url($cx_skype); ?>" target="_blank"><i class="fa fa-skype"></i></a>
 			<?php elseif( empty( $cx_skype ) && ( $show_sk ) ): echo '<i class="fa fa-exclamation-triangle" title="'. esc_html__('No Valid URL Found', 'codexin') .'"></i>'; ?>
 			<?php endif; ?>
 			<?php if( !empty( $cx_linkedin ) && ( $show_li ) ) : ?>
-				<a href="<?php echo esc_url($cx_linkedin); ?>"><i class="fa fa-linkedin" target="_blank"></i></a>
+				<a href="<?php echo esc_url($cx_linkedin); ?>" target="_blank"><i class="fa fa-linkedin"></i></a>
 			<?php elseif( empty( $cx_linkedin ) && ( $show_li ) ): echo '<i class="fa fa-exclamation-triangle" title="'. esc_html__('No Valid URL Found', 'codexin') .'"></i>'; ?>
 			<?php endif; ?>
 
