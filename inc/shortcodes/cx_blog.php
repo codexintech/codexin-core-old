@@ -52,7 +52,6 @@ function cx_blog_shortcode( $atts, $content = null ) {
 						'post_status'			=> 'publish',
 						'order'					=> $order,
 						'orderby'				=> $orderby,
-						'meta_key'				=> 'cx_post_views',
 						'category__not_in' 		=> $cat_excludes,
 						'ignore_sticky_posts' 	=> 1
 					);
