@@ -68,6 +68,8 @@
     text-align: center;
     line-height: 20px;
 	color: #148a14;
+    float: none;
+    clear: both;
 }
 
 .codexin-mailchimp-wrapper {
