@@ -745,7 +745,7 @@ input[type="button"]:hover{
 
 .cx-testimonial-2 .quote-wrapper .media-thumb img {
     border-radius: 50%;
-    width:110px;
+    min-width:110px;
 }
 
 .cx-testimonial-2 .quote-wrapper .media-title {
