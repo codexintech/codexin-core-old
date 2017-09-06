@@ -136,6 +136,8 @@
     display: none;
     text-align: center;
     line-height: 20px;
+    float: none;
+    clear: both;
 }
 
 .inside-page .mailchimp-submit {
