@@ -13,6 +13,7 @@ function cx_portfolio_shortcode( $atts, $content = null ) {
 			'section_title' 		=> '',
 			'number_of_portfolios'	=> '',
 			'order'					=> '',
+			'icon'					=> '',
 			'layout'				=> '',
 			'class'					=> '',
 	), $atts));
@@ -86,7 +87,8 @@ function cx_portfolio_shortcode( $atts, $content = null ) {
 									<div class="image-mask">
 										<div class="image-content">
 											<a href="<?php echo esc_url( the_post_thumbnail_url( 'full' ) ); ?>">
-												<img src="<?php echo CODEXIN_CORE_ASSET_DIR; ?>/images/hover-icon.png" alt="Hover Icon">
+												<!-- <img src="<?php //echo CODEXIN_CORE_ASSET_DIR; ?>/images/hover-icon.png" alt="Hover Icon"> -->
+												<i class="<?php echo $icon; ?>"></i>
 											</a>
 											<h3 class="portfolio-title"> <a href="<?php the_permalink(); ?>" class="clickable"> <?php echo esc_html( get_the_title() ); ?> </a></h3>
 											<p><?php foreach ( $term_list as $sterm ) { echo $sterm->name . " "; } ?></p>
@@ -324,6 +326,18 @@ function cx_portfolio_kc() {
 	    						'description'	=> esc_html__( 'Choose The Order to Display Portfolios.', 'codexin' ),
 	    					),
 
+	    					array(
+	    						'name'        	=> 'icon',
+	    						'label'       	=> esc_html__('Select Hover Icon', 'codexin'),
+	    						'type'        	=> 'icon_picker',
+	    						'options'		=> array(
+    								'ASC'	=> 'Ascending',
+    								'DESC'	=> 'Descending',
+    							),
+	    						'value'			=> 'et-focus',
+	    						'description'	=> esc_html__( 'Choose Icon to show on hover.', 'codexin' ),
+	    					),
+
 							array(
 								'name'	=> 'section_title',
 								'label' => esc_html__( 'Enter Title', 'codexin' ),
@@ -375,6 +389,18 @@ function cx_portfolio_kc() {
  											array('property' => 'text-transform', 'label' => esc_html__('Text Transform', 'codexin'), 'selector' => '.portfolio-title + p'),
  											array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.portfolio-title + p'),
  											array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.portfolio-title + p')
+										),
+
+ 										'Icon' => array(
+ 											array('property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.image-content i'),
+ 											array('property' => 'color', 'label' => esc_html__('Hover Color', 'codexin'), 'selector' => '.image-content a:hover i'),
+ 											array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.image-content i'),
+ 											array('property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '.image-content i'),
+ 											array('property' => 'display', 'label' => esc_html__('Display', 'codexin'), 'selector' => '.image-content i'),
+ 											array('property' => 'text-align', 'label' => esc_html__('Text Align', 'codexin'), 'selector' => '.image-content i'),
+ 											array('property' => 'transition', 'label' => esc_html__('Transition', 'codexin'), 'selector' => '.image-content i'),
+ 											array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.image-content i'),
+ 											array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.image-content i')
 										),
 
 										'Image Hover' => array(

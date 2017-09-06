@@ -985,6 +985,17 @@ input[type="button"]:hover{
     color: #fff;
 }
 
+.cx-portfolios .image-content i {
+    font-size: 26px;
+}
+
+.cx-portfolios .image-content i,
+.cx-portfolios .image-content a:hover i {
+    color: #fff;
+}
+
+.cx-portfolios .image-content i
+
 .cx-portfolios .image-content img {
     display: block;
     margin: 0 auto;
