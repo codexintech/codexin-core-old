@@ -1023,7 +1023,9 @@ input[type="button"]:hover{
     border-color: #295970;
 }
 .cx-portfolio a,
-.cx-portfolio a:visited {
+.cx-portfolio a:visited,
+.cx-portfolio a:focus,
+.cx-portfolio a:hover {
     color: #fff;
 }
 
