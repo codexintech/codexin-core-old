@@ -198,7 +198,8 @@
     padding-top: 0;
 }
 
-.codexin-mailchimp-wrapper input:focus, .codexin-mailchimp-wrapper textarea:focus {
+.codexin-mailchimp-wrapper input:focus, 
+.codexin-mailchimp-wrapper textarea:focus {
     border-color: #95E1D3;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
