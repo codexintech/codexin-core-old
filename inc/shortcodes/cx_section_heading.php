@@ -173,7 +173,7 @@ function cx_section_heading_kc() {
 										),
 
 										'Divider' => array(
-											array('property' => 'background-color', 'label' => esc_html__( 'Color', 'codexin'), 'selector' => '.secondary-title::after,.rv2-title::before' ),
+											array('property' => 'background', 'label' => esc_html__( 'Color', 'codexin'), 'selector' => '.secondary-title::after,.rv2-title::before' ),
 											array('property' => 'width', 'label' => esc_html__( 'Width', 'codexin'), 'selector' => '.secondary-title::after,.rv2-title::before'),
 											array('property' => 'height', 'label' => esc_html__( 'Height', 'codexin'), 'selector' => '.secondary-title::after,.rv2-title::before'),
 											array('property' => 'display', 'label' => esc_html__( 'Display', 'codexin'), 'selector' => '.secondary-title::after,.rv2-title::before'),
