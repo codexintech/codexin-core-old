@@ -62,7 +62,7 @@ class Codexin_Social_Share_Widget extends WP_Widget {
 		?>
 
             <div class="share socials">
-                <div class="caption"><span class="flaticon-technology"></span> <?php echo $instance[ 'title' ] ; ?></div>    
+                <div class="caption"><span class="flaticon-share-1"></span> <?php echo $instance[ 'title' ] ; ?></div>    
                 <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $share_url;?>"><i class="fa fa-facebook"></i></a>
                 <a target="_blank" href="https://twitter.com/home?status=<?php echo $share_url; ?>"><i class="fa fa-twitter"></i></a>
                 <a target="_blank" href="https://plus.google.com/share?url=<?php echo $share_url; ?>"><i class="fa fa-google-plus"></i></a>

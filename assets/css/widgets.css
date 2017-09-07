@@ -416,6 +416,22 @@
 
 .codexin-social-share-widget .socials i {
     margin-right: 5px;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    margin-right: 10px;
+    margin-top: 15px;
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -ms-transition: all .3s;
+    -o-transition: all .3s;
+    transition: all .3s;
+}
+
+.codexin-social-share-widget .socials .caption span {
+    font-weight: bold;
+    margin-right: 5px;
 }
 
 /************************************************************
