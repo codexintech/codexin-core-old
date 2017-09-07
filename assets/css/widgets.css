@@ -84,7 +84,7 @@
     margin-bottom: 10px;
 }
 
-/*.mailchimp-firstname::-webkit-input-placeholder,
+.mailchimp-firstname::-webkit-input-placeholder,
 .mailchimp-lastname::-webkit-input-placeholder,
 .mailchimp-email::-webkit-input-placeholder,
 .mailchimp-firstname:-ms-input-placeholder,
@@ -93,9 +93,9 @@
 .mailchimp-firstname::-moz-placeholder,
 .mailchimp-lastname::-moz-placeholder,
 .mailchimp-email::-moz-placeholder {
-	color: #777;
+	color: #ddd;
 	font-size: 85%;
-}*/
+}
 
 .mailchimp-submit {
     width: 100%;
