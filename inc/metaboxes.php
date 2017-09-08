@@ -15,7 +15,7 @@ function reveal_register_meta_boxes( $meta_boxes ) {
         $sliders = array_combine($a, $b);
 
     else: 
-        $sliders = arra();
+        $sliders = array();
     endif;
     
     //1st meta box
