@@ -3,13 +3,20 @@ add_filter( 'rwmb_meta_boxes', 'reveal_register_meta_boxes' );
 
 function reveal_register_meta_boxes( $meta_boxes ) {
     $prefix = 'reveal_';
-    global $wpdb; 
-    $smartsliders = $wpdb->get_results("SELECT id, title FROM ".$wpdb->prefix."nextend2_smartslider3_sliders");
-    foreach ($smartsliders as $slide) {
-        $a[] = $slide->id;
-        $b[] = $slide->title;
-    }
-    $sliders = array_combine($a, $b);
+    if ( is_plugin_active( 'nextend-smart-slider3-pro/nextend-smart-slider3-pro.php' ) ):
+        global $wpdb; 
+        $a = array();
+        $b = array();
+        $smartsliders = $wpdb->get_results("SELECT id, title FROM ".$wpdb->prefix."nextend2_smartslider3_sliders");
+        foreach ($smartsliders as $slide) {
+            $a[] = $slide->id;
+            $b[] = $slide->title;
+        }
+        $sliders = array_combine($a, $b);
+
+    else: 
+        $sliders = arra();
+    endif;
     
     //1st meta box
     $meta_boxes[] = array(
