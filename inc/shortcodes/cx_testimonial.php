@@ -377,6 +377,7 @@ function cx_testimonial_kc() {
 											array( 'property' => 'color', 'label' => 'Icon Color', 'selector' => '.quote-author-thumb i' ),
 											array( 'property' => 'border', 'label' => 'Icon Box Border', 'selector' => '.quote-author-thumb i' ),
 											array( 'property' => 'border-radius', 'label' => 'Icon Box Border Radius', 'selector' => '.quote-author-thumb i' ),
+											array( 'property' => 'display', 'label' => 'Display', 'selector' => '.quote-author-thumb i' ),
 										),
 
 										'Designation' => array(
@@ -451,6 +452,6 @@ function cx_testimonial_kc() {
 
 	} //End if
 
-} // end of cx_team_kc
+} // end of cx_testimonial
 
 
