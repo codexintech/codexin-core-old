@@ -3,11 +3,13 @@ add_filter( 'rwmb_meta_boxes', 'reveal_register_meta_boxes' );
 
 function reveal_register_meta_boxes( $meta_boxes ) {
     $prefix = 'reveal_';
-    if ( defined('MSWP_AVERTA_VERSION') ) { 
-        $sliders = get_masterslider_names( $id_as_key = true );
-     } else {
-        $sliders = array();
-     }
+    global $wpdb; 
+    $smartsliders = $wpdb->get_results("SELECT id, title FROM ".$wpdb->prefix."nextend2_smartslider3_sliders");
+    foreach ($smartsliders as $slide) {
+        $a[] = $slide->id;
+        $b[] = $slide->title;
+    }
+    $sliders = array_combine($a, $b);
     
     //1st meta box
     $meta_boxes[] = array(
