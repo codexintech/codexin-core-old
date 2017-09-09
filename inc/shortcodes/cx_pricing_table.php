@@ -286,6 +286,7 @@ function cx_pricing_table_kc() {
 	    									array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.featured-ribbon'),
 	    									array('property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '.featured-ribbon'),
 	    									array('property' => 'font-weight', 'label' => esc_html__('Font Weight', 'codexin'), 'selector' => '.featured-ribbon'),
+	    									array('property' => 'text-transform', 'label' => esc_html__('Text Transform', 'codexin'), 'selector' => '.featured-ribbon'),
 	    									array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.featured-ribbon'),
 	    									array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.featured-ribbon'),
 										),
