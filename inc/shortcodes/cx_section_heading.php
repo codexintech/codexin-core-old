@@ -13,6 +13,11 @@ function cx_section_heading_shortcode(  $atts, $content = null) {
 				'layout'				=> '',
 				'title' 				=> '',
 				'subtitle'	 			=> '',
+				'divider'	 			=> '',
+				'div_type'	 			=> '',
+				'div_icon'	 			=> '',
+				'icon'		 			=> '',
+				'text'		 			=> '',
 				'description_toggle' 	=> '',
 				'description'  			=> '',
 				'class'		  			=> '',
@@ -34,8 +39,21 @@ function cx_section_heading_shortcode(  $atts, $content = null) {
 		?>
 			<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
 				<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
+					<?php if( !empty( $title ) ): ?>
 					<h3 class="primary-title"><?php echo esc_html( $title ); ?></h3>
+					<?php endif; ?>
+					<?php if( !empty( $subtitle ) ): ?>
 					<h2 class="secondary-title"><?php echo esc_html( $subtitle ); ?></h2>
+					<?php endif; ?>
+					<?php if( $divider ): 
+						if( $div_type == 'div_icon' ): ?>
+						<div class="cx-divider"><i class="<?php echo $icon; ?>"></i></div>
+						<?php elseif( $div_type == 'div_text' ): ?>
+						<div class="cx-divider"><span><?php echo $text; ?></span></div>
+						<?php else: ?>
+						<div class="cx-divider"></div>
+					<?php endif; ?>
+					<?php endif; ?>
 					<?php if( $description_toggle == 'yes' ): ?>
 					<div class="col-md-10 col-md-offset-1 cx-description">
 						<p><?php printf('%s', $description ); ?></p>		
@@ -114,6 +132,51 @@ function cx_section_heading_kc() {
 		                    ),
 
 		                    array(
+		                        'name' 			=> 'divider',
+		                        'label' 		=> esc_html__( 'Enable Divider? ', 'codexin' ),
+		                        'type' 			=> 'toggle',
+		                        'relation'		=> array(
+		                        	'parent'	=> 'layout',
+		                        	'show_when'	=> '1'
+		                        ),
+		                    ),
+
+		                    array(
+		                    	'name' 			=> 'div_type',
+		                    	'label' 		=> esc_html__( 'Choose Divider Type', 'codexin' ),
+		                    	'type' 			=> 'dropdown',
+		                    	'options'		=> array(
+		                    			'line'		=> 'Simple Line',
+		                    			'div_icon'	=> 'Line with Icon',
+		                    			'div_text'	=> 'Line with Text'
+		                    	),
+		                    	'relation' 		=> array(
+		                    		'parent'    => 'divider',
+		                    		'show_when' => 'yes',
+		                    	),
+		                    ),
+
+		                    array(
+		                        'name' 			=> 'icon',
+		                        'label' 		=> esc_html__( 'Choose Icon ', 'codexin' ),
+		                        'type' 			=> 'icon_picker',
+		                        'relation'		=> array(
+		                        	'parent'	=> 'div_type',
+		                        	'show_when'	=> 'div_icon'
+		                        ),
+		                    ),
+
+		                    array(
+		                        'name' 			=> 'text',
+		                        'label' 		=> esc_html__( 'Enter Text ', 'codexin' ),
+		                        'type' 			=> 'text',
+		                        'relation'		=> array(
+		                        	'parent'	=> 'div_type',
+		                        	'show_when'	=> 'div_text'
+		                        ),
+		                    ),
+
+		                    array(
 		                        'name' 			=> 'description_toggle',
 		                        'label' 		=> esc_html__( 'Enable Description Field? ', 'codexin' ),
 		                        'type' 			=> 'toggle',
@@ -173,11 +236,41 @@ function cx_section_heading_kc() {
 										),
 
 										'Divider' => array(
-											array('property' => 'background', 'label' => esc_html__( 'Color', 'codexin'), 'selector' => '.secondary-title::after,.rv2-title::before' ),
-											array('property' => 'width', 'label' => esc_html__( 'Width', 'codexin'), 'selector' => '.secondary-title::after,.rv2-title::before'),
-											array('property' => 'height', 'label' => esc_html__( 'Height', 'codexin'), 'selector' => '.secondary-title::after,.rv2-title::before'),
-											array('property' => 'display', 'label' => esc_html__( 'Display', 'codexin'), 'selector' => '.secondary-title::after,.rv2-title::before'),
-											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin'), 'selector' => '.secondary-title::after,.rv2-title::before')
+											array('property' => 'background', 'label' => esc_html__( 'Color', 'codexin'), 'selector' => '.cx-divider::after,.rv2-title::before' ),
+											array('property' => 'width', 'label' => esc_html__( 'Width', 'codexin'), 'selector' => '.cx-divider::after,.rv2-title::before'),
+											array('property' => 'height', 'label' => esc_html__( 'Height', 'codexin'), 'selector' => '.cx-divider::after,.rv2-title::before'),
+											array('property' => 'display', 'label' => esc_html__( 'Display', 'codexin'), 'selector' => '.cx-divider::after,.rv2-title::before'),
+											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin'), 'selector' => '.cx-divider::after,.rv2-title::before')
+										),
+
+										'Line-Icon' => array(
+											array('property' => 'color', 'label' => esc_html__( 'Color', 'codexin'), 'selector' => '.cx-divider i' ),
+											array('property' => 'background', 'label' => esc_html__( 'Background', 'codexin'), 'selector' => '.cx-divider i' ),
+											array('property' => 'font-size', 'label' => esc_html__( 'Font Size', 'codexin'), 'selector' => '.cx-divider i'),
+											array('property' => 'line-height', 'label' => esc_html__( 'Line Height', 'codexin'), 'selector' => '.cx-divider i'),
+											array('property' => 'font-weight', 'label' => esc_html__( 'Font Weight', 'codexin'), 'selector' => '.cx-divider i'),
+											array('property' => 'text-align', 'label' => esc_html__( 'text-align', 'codexin'), 'selector' => '.cx-divider i'),
+											array('property' => 'width', 'label' => esc_html__( 'Width', 'codexin'), 'selector' => '.cx-divider i'),
+											array('property' => 'height', 'label' => esc_html__( 'Height', 'codexin'), 'selector' => '.cx-divider i'),
+											array('property' => 'border', 'label' => esc_html__( 'Border', 'codexin'), 'selector' => '.cx-divider i'),
+											array('property' => 'border-radius', 'label' => esc_html__( 'Border Radius', 'codexin'), 'selector' => '.cx-divider i'),
+											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin'), 'selector' => '.cx-divider i'),
+											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin'), 'selector' => '.cx-divider i')
+										),
+
+										'Line-Text' => array(
+											array('property' => 'color', 'label' => esc_html__( 'Color', 'codexin'), 'selector' => '.cx-divider span' ),
+											array('property' => 'background', 'label' => esc_html__( 'Background', 'codexin'), 'selector' => '.cx-divider span' ),
+											array('property' => 'font-family', 'label' => esc_html__( 'Font Family', 'codexin'), 'selector' => '.cx-divider span'),
+											array('property' => 'font-size', 'label' => esc_html__( 'Font Size', 'codexin'), 'selector' => '.cx-divider span'),
+											array('property' => 'line-height', 'label' => esc_html__( 'Line Height', 'codexin'), 'selector' => '.cx-divider span'),
+											array('property' => 'font-weight', 'label' => esc_html__( 'Font Weight', 'codexin'), 'selector' => '.cx-divider span'),
+											array('property' => 'text-align', 'label' => esc_html__( 'text Align', 'codexin'), 'selector' => '.cx-divider span'),
+											array('property' => 'text-transform', 'label' => esc_html__( 'text Transform', 'codexin'), 'selector' => '.cx-divider span'),
+											array('property' => 'border', 'label' => esc_html__( 'Border', 'codexin'), 'selector' => '.cx-divider span'),
+											array('property' => 'border-radius', 'label' => esc_html__( 'Border Radius', 'codexin'), 'selector' => '.cx-divider span'),
+											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin'), 'selector' => '.cx-divider span'),
+											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin'), 'selector' => '.cx-divider span')
 										),
 
 										'Desc' => array(
