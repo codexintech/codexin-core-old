@@ -174,6 +174,7 @@ function cx_section_heading_kc() {
 		                        	'parent'	=> 'div_type',
 		                        	'show_when'	=> 'div_text'
 		                        ),
+		                        'value'			=> 'Sample Text'
 		                    ),
 
 		                    array(
