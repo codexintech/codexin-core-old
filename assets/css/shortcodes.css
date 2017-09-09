@@ -846,6 +846,14 @@ input[type="button"]:hover{
     position: relative;
 }
 
+.cx-team-wrapper .team-single:hover {
+    -webkit-box-shadow: 5px 5px 5px 0 #295970;
+    -moz-box-shadow: 5px 5px 5px 0 #295970;
+    -ms-box-shadow: 5px 5px 5px 0 #295970;
+    -o-box-shadow: 5px 5px 5px 0 #295970;
+    box-shadow: 5px 5px 5px 0 #295970;
+}
+
 .cx-team-wrapper .team-single-wrapper {
     position: absolute;
     left: 0;
@@ -884,7 +892,6 @@ input[type="button"]:hover{
 .cx-team-wrapper .team-single-wrapper {
     background: rgb(41, 89, 112);
     background: rgba(41, 89, 112, 0.75);
-    box-shadow: 5px 5px 5px 0 #295970;
 }
 
 .cx-team-wrapper .team-social a {
