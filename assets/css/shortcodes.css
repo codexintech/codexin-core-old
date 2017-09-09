@@ -982,9 +982,10 @@ input[type="button"]:hover{
 
 .cx-portfolios .image-content {
     position: relative;
-    top: 34%;
+    top: 50%;
     text-align: center;
     color: #fff;
+    transform: translateY(-50%);
 }
 
 .cx-portfolios .image-content i {
@@ -1441,6 +1442,182 @@ section#location {
     -ms-transition: all .3s;
     -o-transition: all .3s;
     transition: all .3s;
+}
+
+
+/**********************************
+   014 - Codexin Pricing Table
+**********************************/
+
+.cx-pricing-tables {
+    -webkit-box-shadow: 0 1px 21px rgba(0,0,0,0.21);
+    -moz-box-shadow: 0 1px 21px rgba(0,0,0,0.21);
+    -ms-box-shadow: 0 1px 21px rgba(0,0,0,0.21);
+    -o-box-shadow: 0 1px 21px rgba(0,0,0,0.21);
+    box-shadow: 0 1px 21px rgba(0,0,0,0.21);
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
+.cx-pricing-tables:hover {
+    -webkit-box-shadow: 0 1px 5px rgba(0,0,0,0.21);
+    -moz-box-shadow: 0 1px 5px rgba(0,0,0,0.21);
+    -ms-box-shadow: 0 1px 5px rgba(0,0,0,0.21);
+    -o-box-shadow: 0 1px 5px rgba(0,0,0,0.21);
+    box-shadow: 0 1px 5px rgba(0,0,0,0.21);
+}
+
+.cx-pricing-tables .pricing-table-single {
+    position: relative;
+    overflow: hidden;
+}
+
+.cx-pricing-tables .featured-ribbon {
+    background-color: #f9d576;
+    color: #7b683c;
+    width: 120px;
+    line-height: 12px;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 4px 0;
+    display: inline-block;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+    position: absolute;
+    right: -33px;
+    top: 16px;
+    text-shadow: 0 1px 0 rgba(255,255,255,.5);
+    -webkit-box-shadow: 0 3px 0 0 rgba(0,0,0,.1);
+    -moz-box-shadow: 0 3px 0 0 rgba(0,0,0,.1);
+    -ms-box-shadow: 0 3px 0 0 rgba(0,0,0,.1);
+    -o-box-shadow: 0 3px 0 0 rgba(0,0,0,.1);
+    box-shadow: 0 3px 0 0 rgba(0,0,0,.1);
+    text-align: center;
+}
+
+.cx-pricing-tables .pricing-header {
+    width: 100%;
+    line-height: 1.4;
+    background: -webkit-linear-gradient(to bottom right,#3a98fe 0%, #3edbd9 100%);
+    background: -moz-linear-gradient(to bottom right,#3a98fe 0%, #3edbd9 100%);
+    background: -ms-linear-gradient(to bottom right,#3a98fe 0%, #3edbd9 100%);
+    background: -o-linear-gradient(to bottom right,#3a98fe 0%, #3edbd9 100%);
+    background: linear-gradient(to bottom right,#3a98fe 0%, #3edbd9 100%);
+    padding: 55px 30px;
+}
+
+.cx-pricing-tables .pricing-title {
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 30px;
+    font-weight: 400;
+    color: #fff;
+    margin-bottom: 30px;
+}
+
+.cx-pricing-tables .pricing-amount-wrapper{
+    font-size: 30px;
+    font-weight: 500;
+    color: #111;
+    background-color: #f9f9f9;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    border-radius: 50%;
+    width: 110px;
+    height: 110px;
+    display: inline-block;
+    position: absolute;
+    left: 50%;
+    margin-left: -55px;
+    line-height: 1.3;
+    padding: 28px 15px;
+    -webkit-box-shadow: 0px 0px 5px 2px rgba(14, 16, 9, 0.1);
+    -moz-box-shadow: 0px 0px 5px 2px rgba(14, 16, 9, 0.1);
+    -ms-box-shadow: 0px 0px 5px 2px rgba(14, 16, 9, 0.1);
+    -o-box-shadow: 0px 0px 5px 2px rgba(14, 16, 9, 0.1);
+    box-shadow: 0px 0px 5px 2px rgba(14, 16, 9, 0.1);
+    text-align: center;
+}
+
+.cx-pricing-tables .pricing-duration {
+    font-size: 13px;
+    display: block;
+    text-transform: capitalize;
+}
+
+.cx-pricing-tables .pricing-features {
+    padding: 80px 40px 30px;
+    background-color: #fafafa;
+    min-height: 345px;
+    float: left;
+    width: 100%;
+    list-style: none;
+    margin: 0;
+    text-align: center;
+    font-weight: 400;
+}
+
+.cx-pricing-tables .pricing-features li {
+    background-color: #fafafa;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-left: 0 !important;
+    border-right: 0 !important;
+    list-style: none;
+    float: left;
+    width: 100%;
+    padding: 8px 0;
+    font-size: 14px;
+    border-bottom: 1px solid #ddd;
+}
+
+.cx-pricing-tables .pricing-features li:last-child {
+    border-bottom: 0 !important;
+}
+
+.cx-pricing-tables .pricing-features li:first-child {
+    margin-left: 0 !important;
+    margin-bottom: 0 !important;
+    margin-right: 0 !important;
+}
+
+.cx-pricing-tables .pricing-button {
+    float: left;
+    width: 100%;
+    text-align: center;
+    background: #42BCE2;
+}
+
+.cx-pricing-tables .pricing-button a {
+    display: inline-block;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    background: rgba(0, 0, 0,0.1);
+    color: #fff;
+    -webkit-transition: all 0.3s ease 0s;
+    -moz-transition: all 0.3s ease 0s;
+    -ms-transition: all 0.3s ease 0s;
+    -o-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
+    display: inline-block;
+    padding: 7px 20px;
+    text-transform: uppercase;
+    background: #eee;
+    color: #666;
+    font-size: 12px;
+}
+
+.cx-pricing-tables .pricing-button a:hover {
+    background: #fff;
+    color: #42BCE2;
 }
 
 

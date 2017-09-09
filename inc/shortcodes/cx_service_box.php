@@ -234,7 +234,8 @@ function cx_service_box_kc() {
   	        							'Icon' => array(
   	        								array('property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.service-single i,.featured-icon i:before'),
                             array('property' => 'color', 'label' => esc_html__('Color On Hover', 'codexin'), 'selector' => '.featured-item:hover i:before'),
-  	        								array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.service-single i,.rv2-icon-1 i:before'),
+                            array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.service-single i,.rv2-icon-1 i:before'),
+  	        								array('property' => 'transition', 'label' => esc_html__('Transition', 'codexin'), 'selector' => '.service-single i,.rv2-icon-1 i:before'),
   	        								array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.service-single i,.rv2-icon-1 i:before'),
   	        								array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.service-single i,.rv2-icon-1 i:before')
         								),
