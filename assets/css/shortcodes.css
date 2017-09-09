@@ -930,6 +930,7 @@ input[type="button"]:hover{
 .cx-team-wrapper .team-description {
     padding-top: 20px;
     padding-bottom: 20px;
+    text-align: center;
 }
 
 .cx-team-wrapper .team-description p {

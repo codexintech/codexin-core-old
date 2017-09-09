@@ -57,7 +57,7 @@ function cx_team_shortcode( $atts, $content = null ) {
 					</div>
 				</div>
 			</div><!-- end of team-single -->
-			<div class="team-description text-center">
+			<div class="team-description">
 				<p class="member-name"><?php echo esc_html( $member_name ); ?></p>
 				<p class="member-designation"><?php echo esc_html( $designation ); ?></p>
 			</div>
@@ -197,6 +197,15 @@ function cx_team_kc() {
   	        								array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.team-description p:last-child'),
         								),
 
+  	        							'Name Wrapper' => array(
+  	        								array('property' => 'background', 'label' => esc_html__('Background', 'codexin'), 'selector' => '.team-description'),
+  	        								array('property' => 'text-align', 'label' => esc_html__('Text Align', 'codexin'), 'selector' => '.team-description'),
+  	        								array('property' => 'border', 'label' => esc_html__('Border', 'codexin'), 'selector' => '.team-description'),
+  	        								array('property' => 'border-radius', 'label' => esc_html__('Border Radius', 'codexin'), 'selector' => '.team-description'),
+  	        								array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.team-description'),
+  	        								array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.team-description'),
+        								),
+
   	        							'Icon' => array(
   	        								array('property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.team-social i'),
   	        								array('property' => 'background-color', 'label' => esc_html__('Background Color', 'codexin'), 'selector' => '.team-social i'),
@@ -216,6 +225,7 @@ function cx_team_kc() {
   	        								array('property' => 'background-color', 'label' => esc_html__('Background Color for Whole Wrapper', 'codexin')),
   	        								array('property' => 'background', 'label' => esc_html__('Team Image Background Color on Hover', 'codexin'), 'selector' => '.team-single-wrapper'),
   	        								array('property' => 'border', 'label' => esc_html__('Border', 'codexin') ),
+  	        								array('property' => 'box-shadow', 'label' => esc_html__('Box Shadow', 'codexin')),
   	        								array('property' => 'box-shadow', 'label' => esc_html__('Box Shadow for Team Image', 'codexin'), 'selector' => '.team-single'),
   	        								array('property' => 'box-shadow', 'label' => esc_html__('Box Shadow on Hover for Team Image','codexin'), 'selector' => '.team-single:hover'),
   	        								array('property' => 'transition', 'label' => esc_html__('Hover Transition Animation', 'codexin'), 'selector' => '.team-single:hover'),
