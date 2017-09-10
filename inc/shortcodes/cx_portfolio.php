@@ -13,6 +13,7 @@ function cx_portfolio_shortcode( $atts, $content = null ) {
 			'section_title' 		=> '',
 			'number_of_portfolios'	=> '',
 			'type_mode'      => '',
+			'column'      => '',
 			'order'					=> '',
 			'icon'					=> '',
 			'layout'				=> '',
@@ -78,9 +79,30 @@ function cx_portfolio_shortcode( $atts, $content = null ) {
 					            $data_size  = $image['width'] . 'x' . $image['height'];
 					            $image_alt  = ( !empty( $image['alt'] ) ) ? 'alt="' . esc_attr( $image['alt'] ) . '"' : 'alt="' .get_the_title() . '"';
 					            $image_cap  = $image['caption']; 
+
+					     //        switch ($column) {
+										//     case "2":
+										//         $column = '50%';
+										//         break;
+										//     case "3":
+										//         $column = '33.33%';
+										//         break;
+										//     case "4":
+										//         $column = '25%';
+										//         break;
+										//     case "5":
+										//         $column = '20%';
+										//         break;
+
+										//     case "6":
+										//         $column = '16.66%';
+										//         break;
+										//     default:
+										//         $column = '25%';
+										// }
 						?>
 
-								<figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" class="cx-portfolio <?php foreach ($term_list as $sterm) { echo $sterm->slug.' '; } ?>">
+								<figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" class="cx-portfolio <?php foreach ($term_list as $sterm) { echo $sterm->slug.' '; } ?>" <?php if(!empty($column)): echo 'style="width:' . $column . '";'; endif; ?>>
 								    <a href="<?php esc_url( the_post_thumbnail_url('full') ); ?>" itemprop="contentUrl" data-size="<?php echo esc_attr( $data_size ); ?>">
 											<?php if($type_mode == '2'): ?>
 								        <img src="<?php esc_url( the_post_thumbnail_url('full') ); ?>" itemprop="thumbnail" <?php echo $image_alt; ?> class="img-responsive" />
@@ -316,9 +338,8 @@ function cx_portfolio_kc() {
 	    						// 	'step'			=> 4,
 	    						// 	'show_input'	=> false
     							// ),
-	    						'value'			=> '8',
-	    						'description'	=> esc_html__( 'Choose the number of portfolios you want to show.', 'codexin' ),
-	    						'admin_label' 	=> true,
+	    						'value'			=> '-1',
+	    						'description'	=> esc_html__( 'Choose the number of portfolios you want to show. By Default, All portfolios will be shown', 'codexin' ),
 	    					),
 
 							array(
@@ -331,6 +352,21 @@ function cx_portfolio_kc() {
     							),
 	    						'value'			=> '1',
 	    						'description'	=> esc_html__( 'Choose Portfolio Layout Mode ', 'codexin' ),
+	    					),
+
+							array(
+	    						'name'        	=> 'column',
+	    						'label'       	=> esc_html__('No of Column', 'codexin'),
+	    						'type'        	=> 'select',
+	    						'options'		=> array(
+    								'50%'	=> '2 Column',
+    								'33.33%'	=> '3 Column',
+    								'25%'	=> '4 Column',
+    								'20%'	=> '5 Column',
+    								'16.66%'	=> '6 Column',
+    							),
+	    						'value'			=> '25%',
+	    						'description'	=> esc_html__( 'Choose No. of Column ', 'codexin' ),
 	    					),
 
 	    					array(
