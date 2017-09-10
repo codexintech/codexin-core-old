@@ -12,6 +12,7 @@ function cx_portfolio_shortcode( $atts, $content = null ) {
 	extract(shortcode_atts(array(
 			'section_title' 		=> '',
 			'number_of_portfolios'	=> '',
+			'type_mode'      => '',
 			'order'					=> '',
 			'icon'					=> '',
 			'layout'				=> '',
@@ -81,7 +82,13 @@ function cx_portfolio_shortcode( $atts, $content = null ) {
 
 								<figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" class="cx-portfolio <?php foreach ($term_list as $sterm) { echo $sterm->slug.' '; } ?>">
 								    <a href="<?php esc_url( the_post_thumbnail_url('full') ); ?>" itemprop="contentUrl" data-size="<?php echo esc_attr( $data_size ); ?>">
+											<?php if($type_mode == '2'): ?>
+								        <img src="<?php esc_url( the_post_thumbnail_url('full') ); ?>" itemprop="thumbnail" <?php echo $image_alt; ?> class="img-responsive" />
+
+								      <?php else: ?>  
 								        <img src="<?php esc_url( the_post_thumbnail_url('rectangle-two') ); ?>" itemprop="thumbnail" <?php echo $image_alt; ?> class="img-responsive" />
+								      <?php endif; ?> 
+
 								    </a>
 								    <figcaption itemprop="caption description"><?php echo esc_html( $image_cap ); ?></figcaption>
 									<div class="image-mask">
@@ -301,17 +308,29 @@ function cx_portfolio_kc() {
 							array(
 	    						'name'        	=> 'number_of_portfolios',
 	    						'label'       	=> esc_html__('Number Of Portfolios to Display', 'codexin'),
-	    						'type'        	=> 'number_slider',
-	    						'options'		=> array(
-	    							'min'			=> 4,
-	    							'max'			=> 20,
-	    							'unit'			=> '',
-	    							'step'			=> 4,
-	    							'show_input'	=> false
-    							),
+	    						'type'        	=> 'number',
+	    						// 'options'		=> array(
+	    						// 	'min'			=> 4,
+	    						// 	'max'			=> 20,
+	    						// 	'unit'			=> '',
+	    						// 	'step'			=> 4,
+	    						// 	'show_input'	=> false
+    							// ),
 	    						'value'			=> '8',
 	    						'description'	=> esc_html__( 'Choose the number of portfolios you want to show.', 'codexin' ),
 	    						'admin_label' 	=> true,
+	    					),
+
+							array(
+	    						'name'        	=> 'type_mode',
+	    						'label'       	=> esc_html__('Portfolio Layout Mode', 'codexin'),
+	    						'type'        	=> 'select',
+	    						'options'		=> array(
+    								'1'	=> 'Grid',
+    								'2'	=> 'Masonry',
+    							),
+	    						'value'			=> '1',
+	    						'description'	=> esc_html__( 'Choose Portfolio Layout Mode ', 'codexin' ),
 	    					),
 
 	    					array(

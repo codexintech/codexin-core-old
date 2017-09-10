@@ -978,12 +978,13 @@ input[type="button"]:hover{
 .cx-portfolio {
     width: 25%;
     position: relative;
-    overflow: hidden;
+    /*overflow: hidden;*/
 }
 
 
 .cx-portfolio img {
     width: 100%;
+    max-width:100%;
     display: block;
 }
 
@@ -1020,8 +1021,6 @@ input[type="button"]:hover{
     color: #fff;
 }
 
-.cx-portfolios .image-content i
-
 .cx-portfolios .image-content img {
     display: block;
     margin: 0 auto;
@@ -1046,6 +1045,7 @@ input[type="button"]:hover{
     background: #295970;
     border-color: #295970;
 }
+
 .cx-portfolio a,
 .cx-portfolio a:visited,
 .cx-portfolio a:focus,
