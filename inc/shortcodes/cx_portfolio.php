@@ -331,13 +331,6 @@ function cx_portfolio_kc() {
 	    						'name'        	=> 'number_of_portfolios',
 	    						'label'       	=> esc_html__('Number Of Portfolios to Display', 'codexin'),
 	    						'type'        	=> 'number',
-	    						// 'options'		=> array(
-	    						// 	'min'			=> 4,
-	    						// 	'max'			=> 20,
-	    						// 	'unit'			=> '',
-	    						// 	'step'			=> 4,
-	    						// 	'show_input'	=> false
-    							// ),
 	    						'value'			=> '-1',
 	    						'description'	=> esc_html__( 'Choose the number of portfolios you want to show. By Default, All portfolios will be shown', 'codexin' ),
 	    					),
