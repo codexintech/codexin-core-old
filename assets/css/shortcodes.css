@@ -1998,6 +1998,11 @@ section#feedback {
 
 .cx-client-carousel-2 .client-image-single img {
     max-height: 100px;
+    opacity: .65;
+}
+
+.cx-client-carousel-2 .client-image-single img:hover {
+    opacity: 1;
 }
 
 .cx-client-carousel-2 .client-image-single:last-child {
