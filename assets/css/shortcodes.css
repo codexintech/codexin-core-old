@@ -1999,6 +1999,11 @@ section#feedback {
 .cx-client-carousel-2 .client-image-single img {
     max-height: 100px;
     opacity: .65;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
 }
 
 .cx-client-carousel-2 .client-image-single img:hover {
