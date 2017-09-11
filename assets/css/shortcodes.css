@@ -1657,6 +1657,12 @@ section#location {
 }
 
 
+
+/************************************************************
+    006 - Codexin Testimonial Type 01
+*************************************************************/
+
+
 /*--------------------------------------
     Responsive CSS
 --------------------------------------*/
@@ -1916,7 +1922,11 @@ section#feedback {
 }
 
 
-.cx-client-carousel-01 .item img {
+/************************************************************
+    Codexin Clients  Type 01
+*************************************************************/
+
+.cx-clients-wrapper img {
     width: initial;
     max-width: 100%;
     max-height: 85px;
@@ -1924,15 +1934,20 @@ section#feedback {
     margin-left: auto;
     margin-right: auto;
     display: block;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
 }
 
-.cx-client-carousel-01 .item{
+.cx-client-carousel-1 .item{
     text-align: center;
     outline: 0;
 }
 
 
-.cx-client-carousel-01 span {
+.cx-client-carousel-1 span {
     position: absolute;
     top: 50%;
     font-size: 26px;
@@ -1949,24 +1964,48 @@ section#feedback {
     color: #999;
 }
 
-.cx-client-carousel-01 span.prev {
+.cx-client-carousel-1 span.prev {
     left: -50px;
 }
 
-.cx-client-carousel-01 span.next {
+.cx-client-carousel-1 span.next {
     right: -50px;
 }
 
-.cx-client-carousel-01 .slick-dots {
+.cx-client-carousel-1 .slick-dots {
     bottom: -50px;
 }
 
-.cx-client-carousel-01 .slick-dots li {
+.cx-client-carousel-1 .slick-dots li {
     margin:0;
 }
 
-.cx-client-carousel-01 .slick-dots li button:before {
+.cx-client-carousel-1 .slick-dots li button:before {
     font-size: 10px;
+}
+
+/************************************************************
+    Codexin Clients  Type 02
+*************************************************************/
+
+.cx-client-carousel-2 .client-image-single {
+    border-bottom: 1px solid #dedede;
+    border-right: 1px solid #dedede;
+    text-align: center;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.cx-client-carousel-2 .client-image-single img {
+    max-height: 100px;
+}
+
+.cx-client-carousel-2 .client-image-single:last-child {
+    border-right: none;
+}
+
+.cx-client-carousel-2 .clients-second-row .client-image-single {
+    border-bottom: none;
 }
 
 /************************************************************

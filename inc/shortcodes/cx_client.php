@@ -10,7 +10,9 @@
 // Registering Codexin Client Shortcode
 function cx_client_shortcode( $atts, $content = null ) {
    extract(shortcode_atts(array(
+   		'layout'			=> '',
    		'number_of_clients'	=> '',
+   		'no_of_clients'		=> '',
    		'number_of_slides'	=> '',
    		'continous_p'	    => '',
    		'link_client'	    => '',
@@ -28,11 +30,7 @@ function cx_client_shortcode( $atts, $content = null ) {
 	$master_class = apply_filters( 'kc-el-class', $atts );
 	$master_class[] = 'cx-clients-wrapper';
 
-	// Retrieving user define classes
-	$classes = array( 'cx-client-carousel-01' );
-	(!empty($class)) ? $classes[] = $class : '';
-
-	ob_start(); 
+	ob_start();
 
 	// Passing values to javascript
 	$codeopt = '';
@@ -45,64 +43,128 @@ function cx_client_shortcode( $atts, $content = null ) {
 	$con_speed 		= ( !empty( $pl_speed ) ) ? $pl_speed : '2500';
 	$codeopt .= '
 	<script type="text/javascript">
-		var logo_slide = "' . $num_slide . '"; 
-		var show_arrow = ' . $slick_arrow . '; 
-		var show_dot = ' . $en_dots . '; 
-		var aut_play = ' . $auto_play . '; 
-		var ap_speed = "' . $atp_speed . '"; 
-		var con_play = "' . $cont_p . '"; 
-		var play_speed = ' . $con_speed . '; 
-
+		var logo_slide = "' . $num_slide . '";
+		var show_arrow = ' . $slick_arrow . ';
+		var show_dot = ' . $en_dots . ';
+		var aut_play = ' . $auto_play . ';
+		var ap_speed = "' . $atp_speed . '";
+		var con_play = "' . $cont_p . '";
+		var play_speed = ' . $con_speed . ';
 	</script>';
 	echo $codeopt;
-	?>
 
-	<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
-		<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
-			<?php 
-			//start wp query..
-			$args = array(
-				'post_type'			=> 'clients',
-				'order'				=> 'DESC',
-				'posts_per_page'	=> $number_of_clients
-				);
-			$data = new WP_Query( $args );
-			//Check post
-			if( $data->have_posts() ) :
-				//startloop here..
-				while( $data->have_posts() ) : $data->the_post();
-			$client_url = rwmb_meta( 'reveal_clients_surl', 'type=text' );
-			// Retrieving Image alt tag
-			$image_alt = ( !empty( retrieve_alt_tag() ) ) ? retrieve_alt_tag() : get_the_title();  
-			?>
-			<div class="item">
-				<?php if($link_client): ?>
-				<a href="<?php if( ! empty( $client_url ) ) : echo esc_url( $client_url ); endif; ?>" target="_blank">
-			  <?php endif; ?>
-					<img src="<?php echo esc_url( the_post_thumbnail_url( 'full' ) ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>">
-				<?php if($link_client): ?>
-				</a>
-			 <?php endif; ?>
-			</div>
-			<?php
-			endwhile;
-			endif;
-			wp_reset_postdata();
-			?>
-		</div> <!-- end of cx-client-carousel-01 -->
-	</div> <!-- end of cx-clients-wrapper -->
-	<div class="clearfix"></div>
+	if( ! empty( $layout ) ) :
 
-	<?php
+		if( $layout == 1 ) :
+
+		// Retrieving user define classes
+		$classes = array( 'cx-client-carousel-1' );
+		(!empty($class)) ? $classes[] = $class : '';
+		?>
+
+		<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
+			<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
+				<?php 
+				//start wp query..
+				$args = array(
+					'post_type'			=> 'clients',
+					'order'				=> 'DESC',
+					'posts_per_page'	=> $number_of_clients
+					);
+				$data = new WP_Query( $args );
+				//Check post
+				if( $data->have_posts() ) :
+					//startloop here..
+					while( $data->have_posts() ) : $data->the_post();
+				$client_url = rwmb_meta( 'reveal_clients_surl', 'type=text' );
+				// Retrieving Image alt tag
+				$image_alt = ( !empty( retrieve_alt_tag() ) ) ? retrieve_alt_tag() : get_the_title();  
+				?>
+				<div class="item">
+					<?php if($link_client): ?>
+					<a href="<?php if( ! empty( $client_url ) ) : echo esc_url( $client_url ); endif; ?>" target="_blank">
+					<?php endif; ?>
+						<img src="<?php echo esc_url( the_post_thumbnail_url( 'full' ) ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>">
+					<?php if($link_client): ?>
+					</a>
+				 <?php endif; ?>
+				</div>
+				<?php
+				endwhile;
+				endif;
+				wp_reset_postdata();
+				?>
+			</div> <!-- end of cx-client-carousel-1 -->
+		</div> <!-- end of cx-clients-wrapper -->
+		<div class="clearfix"></div>
+
+		<?php
+
+
+		elseif( $layout == 2 ) :
+
+		// Retrieving user define classes
+		$classes = array( 'cx-client-carousel-2' );
+		(!empty($class)) ? $classes[] = $class : '';
+
+		$grid_columns = 12 / ( $no_of_clients / 2 );
+
+		?>
+
+		<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
+			<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
+				<div class="clients-first-row">
+					<?php 
+					//start wp query..
+					$args = array(
+						'post_type'			=> 'clients',
+						'order'				=> 'DESC',
+						'posts_per_page'	=> $no_of_clients
+						);
+					$data = new WP_Query( $args );
+					//Check post
+					if( $data->have_posts() ) :
+						$i = 0;
+						//startloop here..
+						while( $data->have_posts() ) : $data->the_post();
+
+							$i++;
+							$client_url = rwmb_meta( 'reveal_clients_surl', 'type=text' );
+							// Retrieving Image alt tag
+							$image_alt = ( !empty( retrieve_alt_tag() ) ) ? retrieve_alt_tag() : get_the_title();  
+							?>
+						<div class="col-lg-<?php echo esc_html( $grid_columns ); ?> client-image-single">
+							<?php if( $link_client ): ?>
+							<a href="<?php echo esc_url( $client_url ); ?>" target="_blank">
+							<?php endif; ?>
+								<img src="<?php esc_url( the_post_thumbnail_url( 'full' ) ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>">
+							<?php if( $link_client ): ?>
+							</a>
+							<?php endif; ?>
+						</div>
+						<?php if( $i == ( $no_of_clients / 2 ) ): echo '</div><div class="clients-second-row">'; endif;
+						endwhile;
+					endif;
+					wp_reset_postdata();
+					?>
+				</div>
+			</div> <!-- end of cx-client-carousel-2 -->
+		</div> <!-- end of cx-clients-wrapper -->
+
+		<?php
+
+		endif;
+	endif;
 	$result .= ob_get_clean();
 	return $result;
 
 } //End cx_client
 
 
- function cx_client_kc() {
+// Integrating Shortcode with King Composer
+function cx_client_kc() {
 
- 	if (function_exists('kc_add_map')) { 
+ 	if (function_exists('kc_add_map')) {
  		kc_add_map(
  			array(
  				'cx_client' => array(
@@ -115,16 +177,29 @@ function cx_client_shortcode( $atts, $content = null ) {
  						'scripts' => array(
  							 'slick-cx-main-script' => CODEXIN_CORE_ASSET_DIR . '/js/slick.min.js',
  							 'slick-cx-user-client-script' => CODEXIN_CORE_ASSET_DIR . '/js/shortcode-js/cx_client-carousel.js',
- 							),
+						),
 
-      			'styles'	=> array(
-      				'slick-cx-main-style'	=> CODEXIN_CORE_ASSET_DIR . '/css/slick.css',
-      				),
+		      			'styles'	=> array(
+		      				'slick-cx-main-style'	=> CODEXIN_CORE_ASSET_DIR . '/css/slick.css',
+	      				),
 
 	                ), //End assets
  					'params' => array(
  						// general params
  						'general'	=> array(
+
+							array(
+								'name'	=> 'layout',
+								'lable'	=> esc_html__( 'Select Testimonial Template', 'codexin' ),
+								'type'	=> 'radio_image',
+								'options'	=> array(
+									'1'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/blog/layout-1.png',
+									'2'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/blog/layout-2.png',
+								),
+								'value'	=> '1',
+								'admin_label'	=> true,
+							),
+
 	    					array(
 	    						'name'			=> 'number_of_clients',
 	    						'label' 		=> esc_html__( 'Number of Clients', 'codexin' ),
@@ -136,13 +211,42 @@ function cx_client_shortcode( $atts, $content = null ) {
 	    							'9'			=> '9',
 	    							'-1'		=> 'All',
 	    						),
+								'relation' => array(
+									'parent'	=> 'layout',
+									'show_when' => '1',
+								),
 	    						'value'			=> '-1',
 	    						'admin_label'	=> true
 	    					),
+
+	    					array(
+	    						'name'			=> 'no_of_clients',
+	    						'label' 		=> esc_html__( 'Number of Clients', 'codexin' ),
+	    						'type'			=> 'number_slider',
+	    						'description' 	=> esc_html__( 'Choose the number of client logo you want to show', 'codexin' ),
+	    						'options'		=> array(
+	    							'min'			=> 4,
+	    							'max'			=> 8,
+	    							'unit'			=> '',
+	    							'step'			=> '2',
+	    							'show_input'	=> true
+    							),
+								'relation' => array(
+									'parent'	=> 'layout',
+									'show_when' => '2',
+								),
+	    						'value'			=> '8',
+	    						'admin_label'	=> true
+	    					),
+
 	    					array(
 	    						'name'			=> 'number_of_slides',
 	    						'label' 		=> esc_html__( 'Number of Slides', 'codexin' ),
 	    						'type'			=> 'text',
+								'relation' => array(
+									'parent'	=> 'layout',
+									'show_when' => '1',
+								),
 	    						'description' 	=> esc_html__( 'Choose the number of client logo slides you want to show on screen', 'codexin' ),
 	    						'value'			=> '6',
 	    						'admin_label'	=> true
@@ -153,6 +257,10 @@ function cx_client_shortcode( $atts, $content = null ) {
 	    						'label' 		=> esc_html__( 'Enable Continous Play?', 'codexin' ),
 	    						'description' 	=> esc_html__( 'Choose Enable/Disable Continous Autoplay', 'codexin' ),
 	    						'type'			=> 'toggle',
+								'relation' => array(
+									'parent'	=> 'layout',
+									'show_when' => '1',
+								),
 	    						'value'			=> 'no',
 	    					),
 
@@ -232,6 +340,37 @@ function cx_client_shortcode( $atts, $content = null ) {
 	    						'description' 	=> esc_html__( 'If you wish to style a particular content element differently, please add a class name to this field and refer to it in your custom CSS.', 'codexin' ),
 	    					)
  						), //end of general params
+
+						// Styling Params
+						'styling' => array(
+ 							array(
+ 								'name'    		=> 'codexin_css',
+ 								'type'    		=> 'css',
+ 								'options' 		=> array(
+ 									array(
+ 										"screens" => "any,1199,991,767,479",
+
+ 										'Logo' => array(
+ 											array('property' => 'background-color', 'label' => esc_html__('Background', 'codexin'), 'selector' => 'img' ),
+ 											array('property' => 'background-color', 'label' => esc_html__('Background on Hover', 'codexin'), 'selector' => 'img:hover' ),
+ 											array('property' => 'border', 'label' => esc_html__('Border', 'codexin'), 'selector' => 'img' ),
+ 											array('property' => 'max-width', 'label' => esc_html__('Max Width', 'codexin'), 'selector' => 'img' ),
+ 											array('property' => 'max-height', 'label' => esc_html__('Max Height', 'codexin'), 'selector' => 'img' ),
+ 											array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => 'img'),
+ 											array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => 'img')
+ 										),
+ 										'Logo Wrapper Layout-2' => array(
+ 											array('property' => 'background-color', 'label' => esc_html__('Background', 'codexin'), 'selector' => '.client-image-single' ),
+ 											array('property' => 'background-color', 'label' => esc_html__('Background on Hover', 'codexin'), 'selector' => '.client-image-single:hover' ),
+ 											array('property' => 'border-color', 'label' => esc_html__('Border Color', 'codexin'), 'selector' => '.client-image-single' ),
+ 											array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.client-image-single'),
+ 											array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.client-image-single')
+ 										)
+ 									)
+ 								)
+ 							)
+						), //End Styling
+
 						// Animate Params
 						'animate' => array(
 							array(

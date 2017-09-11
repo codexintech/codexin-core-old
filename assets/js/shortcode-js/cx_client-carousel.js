@@ -11,7 +11,7 @@
     var cx_arrow = (show_arrow == 1) ? true : false;
 
     if(con_play == 1) {
-      $('.cx-client-carousel-01').slick({
+      $('.cx-client-carousel-1').slick({
           slidesToShow: logo_slide,
           slidesToScroll: 1,
           autoplay: true,
@@ -49,7 +49,7 @@
 
     } else {
 
-        $('.cx-client-carousel-01').slick({
+        $('.cx-client-carousel-1').slick({
             slidesToShow: logo_slide,
             slidesToScroll: 1,
             autoplay: cx_autoplay,
