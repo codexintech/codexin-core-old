@@ -15,7 +15,10 @@ function cx_portfolio_shortcode( $atts, $content = null ) {
 			'type_mode'      => '',
 			'column'      => '',
 			'order'					=> '',
+			'show_icon'					=> '',
 			'icon'					=> '',
+			'read_more'     => '',
+			'read_more_text' => '',
 			'layout'				=> '',
 			'class'					=> '',
 	), $atts));
@@ -64,7 +67,7 @@ function cx_portfolio_shortcode( $atts, $content = null ) {
 							'post_type'			=> 'portfolio',
 							'orderby'			=> 'date',
 							'order'				=> $order,
-							'posts_per_page'	=> $number_of_portfolios
+							'posts_per_page'	=> !empty($number_of_portfolios) ? $number_of_portfolios : -1
 							);
 						$data = new WP_Query( $args );
 						//Check post
@@ -96,11 +99,14 @@ function cx_portfolio_shortcode( $atts, $content = null ) {
 									<div class="image-mask">
 										<div class="image-content">
 											<a href="<?php echo esc_url( the_post_thumbnail_url( 'full' ) ); ?>">
-												<!-- <img src="<?php //echo CODEXIN_CORE_ASSET_DIR; ?>/images/hover-icon.png" alt="Hover Icon"> -->
+												<?php if(($show_icon == 'yes') && !empty('icon')): ?>
 												<i class="<?php echo $icon; ?>"></i>
+												<?php endif; ?>
 											</a>
 											<h3 class="portfolio-title"> <a href="<?php the_permalink(); ?>" class="clickable"> <?php echo esc_html( get_the_title() ); ?> </a></h3>
-											<p class="portfolio-readmore"><a href="<?php the_permalink(); ?>" class="clickable"><?php printf('%s', 'Read More'); ?></a></p>
+											<?php if(($read_more == 'yes') && !empty('read_more_text')): ?>
+											<p class="portfolio-readmore"><a href="<?php the_permalink(); ?>" class="clickable"><?php printf('%s', $read_more_text); ?></a></p>
+											<?php endif; ?>
 										</div>
 									</div>
 								</figure> <!-- end of cx-portfolio -->
@@ -164,7 +170,7 @@ function cx_portfolio_shortcode( $atts, $content = null ) {
 							'post_type'			=> 'portfolio',
 							'orderby'			=> 'data',
 							'order'				=> 'DESC',
-							'posts_per_page'	=> -1
+							'posts_per_page'	=> !empty($number_of_portfolios) ? $number_of_portfolios : -1
 							);
 						$data = new WP_Query( $args );
 						$i = 0;
@@ -202,6 +208,9 @@ function cx_portfolio_shortcode( $atts, $content = null ) {
 												<i class="flaticon-plus-sign-to-add"></i>
 											</a>
 											<p class="portfolio-title"> <a href="<?php the_permalink(); ?>" class="clickable"> <?php echo esc_html( get_the_title() ); ?> </a></p>
+											<?php if(($read_more == 'yes') && !empty('read_more_text')): ?>
+											<p class="portfolio-readmore"><a href="<?php the_permalink(); ?>" class="clickable"><?php printf('%s', $read_more_text); ?></a></p>
+											<?php endif; ?>
 										</div>
 									</div>
 								</figure>
@@ -435,8 +444,8 @@ function cx_portfolio_kc() {
 	    						'name'        	=> 'number_of_portfolios',
 	    						'label'       	=> esc_html__('Number Of Portfolios to Display', 'codexin'),
 	    						'type'        	=> 'number',
-	    						'value'			=> '-1',
-	    						'description'	=> esc_html__( 'Choose the number of portfolios you want to show. By Default, All portfolios will be shown', 'codexin' ),
+	    						'value'			=> '',
+	    						'description'	=> esc_html__( 'Choose the number of portfolios you want to show. To show all portfolio, leave the field blank', 'codexin' ),
 	    					),
 
 							array(
@@ -478,14 +487,20 @@ function cx_portfolio_kc() {
 	    						'description'	=> esc_html__( 'Choose The Order to Display Portfolios.', 'codexin' ),
 	    					),
 
+              array(
+                  'name' 			=> 'show_icon',
+                  'label' 		=> esc_html__( 'Enable Icon? ', 'codexin' ),
+                  'type' 			=> 'toggle',
+              ),
+
 	    					array(
 	    						'name'        	=> 'icon',
 	    						'label'       	=> esc_html__('Select Hover Icon', 'codexin'),
 	    						'type'        	=> 'icon_picker',
-	    						'options'		=> array(
-    								'ASC'	=> 'Ascending',
-    								'DESC'	=> 'Descending',
-    							),
+	                'relation'		=> array(
+	                	'parent'	=> 'show_icon',
+	                	'show_when'	=> 'yes'
+	                ),
 	    						'value'			=> 'et-focus',
 	    						'description'	=> esc_html__( 'Choose Icon to show on hover.', 'codexin' ),
 	    					),
@@ -499,6 +514,25 @@ function cx_portfolio_kc() {
 									'show_when'	=> '2',
 								),
 								'description' => esc_html__( 'Enter Portfolio Section Title Here', 'codexin' ),
+								),
+
+              array(
+                  'name' 			=> 'read_more',
+                  'label' 		=> esc_html__( 'Enable \'Read More\' Button? ', 'codexin' ),
+                  'type' 			=> 'toggle',
+              ),
+
+
+							array(
+								'name'	=> 'read_more_text',
+								'label' => esc_html__( 'Text For \'Read More\' Button', 'codexin' ),
+								'type'	=> 'text',
+                'relation'		=> array(
+                	'parent'	=> 'read_more',
+                	'show_when'	=> 'yes'
+                ),
+                'value' => 'Read More',
+								'description' => esc_html__( 'Default Text is "Read More"', 'codexin' ),
 								),
 
 							array(
@@ -531,16 +565,18 @@ function cx_portfolio_kc() {
  											array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.portfolio-title')
 										),
 
- 										'Categories' => array(
- 											array('property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.portfolio-title + p'),
- 											array('property' => 'font-family', 'label' => esc_html__('Font family', 'codexin'), 'selector' => '.portfolio-title + p'),
- 											array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.portfolio-title + p'),
- 											array('property' => 'font-weight', 'label' => esc_html__('Font Weight', 'codexin'), 'selector' => '.portfolio-title + p'),
- 											array('property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '.portfolio-title + p'),
- 											array('property' => 'text-align', 'label' => esc_html__('Text Align', 'codexin'), 'selector' => '.portfolio-title + p'),
- 											array('property' => 'text-transform', 'label' => esc_html__('Text Transform', 'codexin'), 'selector' => '.portfolio-title + p'),
- 											array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.portfolio-title + p'),
- 											array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.portfolio-title + p')
+ 										'Button' => array(
+ 											array('property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.portfolio-readmore a'),
+ 											array('property' => 'font-family', 'label' => esc_html__('Font family', 'codexin'), 'selector' => '.portfolio-readmore a'),
+ 											array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.portfolio-readmore a'),
+ 											array('property' => 'font-weight', 'label' => esc_html__('Font Weight', 'codexin'), 'selector' => '.portfolio-readmore a'),
+ 											array('property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '.portfolio-readmore a'),
+ 											array('property' => 'text-align', 'label' => esc_html__('Text Align', 'codexin'), 'selector' => '.portfolio-readmore a'),
+ 											array('property' => 'text-transform', 'label' => esc_html__('Text Transform', 'codexin'), 'selector' => '.portfolio-readmore a'),
+ 											array('property' => 'display', 'label' => esc_html__('Display', 'codexin'), 'selector' => '.portfolio-readmore a'),
+ 											array('property' => 'background-color', 'label' => esc_html__('Background Color', 'codexin'), 'selector' => '.portfolio-readmore a'),
+ 											array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.portfolio-readmore a'),
+ 											array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.portfolio-readmore a')
 										),
 
  										'Icon' => array(
