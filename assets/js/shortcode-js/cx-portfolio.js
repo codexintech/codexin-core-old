@@ -33,11 +33,11 @@
     Targeting Portfolio a tag for click event
     ---------------------------------------------------------------- */
 
-    $(".portfolio-title").click(function (e) {
+    $(".portfolio-title, .portfolio-readmore").click(function (e) {
         $(this).find("a.clickable").first().click();
     });
 
-    $(".portfolio-title a.clickable").click(function (e) {
+    $(".portfolio-title a.clickable, .portfolio-readmore a.clickable").click(function (e) {
         e.stopPropagation();
     });
 
