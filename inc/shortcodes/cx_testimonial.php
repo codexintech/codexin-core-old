@@ -233,7 +233,79 @@ function cx_testimonial_shortcode( $atts, $content = null ) {
    			<div class="clearfix"></div>
 
 
-	<?php endif; ?>
+	<?php endif; // End layout - 3 
+
+		if( $layout == 4 ) : 
+	 	// Assigning a master css class and hooking into KC
+		$master_class = apply_filters( 'kc-el-class', $atts );
+		$master_class[] = 'client-feedback';
+
+		// Retrieving user define classes
+		$classes = array( 'container' );
+		(!empty($class_layout_three)) ? $classes[] = $class_layout_three : ''; ?>
+			
+		<div id="feedback" class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
+			<div class="<?php echo esc_attr( implode( '', $classes ) ); ?>">
+				<div class="row">
+					<!-- section title  -->
+					<div class="col-sm-12">
+						<div class=" rv3 rv2-title after-white center-block">
+							<h2 class="primary-title rv2"><?php echo esc_html( $section_title ); ?></h2>
+							<h4 class="secondary-title rv2"><?php echo esc_html( $sub_title ); ?></h4>
+						</div>
+					</div>  <!-- end of col-sm-12 -->
+					<div class="clearfix"></div>
+					<div class="col-sm-9 center-block">
+						<div class="client-comment-curosel-rv3 arrow-middle">
+						<?php 
+							//start new query..
+							$args = array(
+								'post_type'		 => 'testimonial',
+								'order'			 => 'date',
+								'orderby'		 => 'DESC',
+								'posts_per_page' => -1,
+								);
+
+							$data = new WP_Query( $args );
+							if( $data->have_posts() ) :
+								while( $data->have_posts() ) : $data->the_post(); 
+							?>
+							<div class="client rv3 ">
+								<div class="client-comment">
+									<p><?php printf('%s', get_the_excerpt() ); ?></p>
+									</div>
+									<div class="client-info center-block">
+										<div class="client-img">
+											<img src="<?php echo esc_url( the_post_thumbnail_url( 'square-one' ) ); ?>" alt="<?php echo esc_attr( $img_alt ); ?>">
+										</div>
+										<div class="client-name">
+											<h3 class="title-3">
+												<?php 
+   												$name = rwmb_meta( 'reveal_author_name', 'type=text' ); 
+   												echo esc_html( $name );
+   												?>
+											</h3>
+											<p>
+												<?php 
+	   												$company_name = rwmb_meta( 'reveal_author_company', 'type=text' ); 
+	   												echo esc_html( $company_name );
+	   											?>
+   											</p>
+										</div>
+									</div>
+								</div> <!-- end of client --> 
+							<?php 
+   							endwhile;
+   							endif;
+   							wp_reset_postdata(); ?>	
+							</div> <!-- end of client-comment-curosel-rv3 -->
+						</div> <!-- end of col-sm-9 -->
+					</div> <!-- end of row -->
+				</div> <!-- end of container -->
+			</div> <!-- end of section -->
+			<div class="clearfix"></div>
+
+	<?php endif; //End layout - 4 ?>
 
 	<?php
 		endif;
@@ -277,6 +349,7 @@ function cx_testimonial_kc() {
 									'1'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/testimonial/layout-1.png',
 									'2'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/testimonial/layout-2.png',
 									'3'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/testimonial/layout-3.png',
+									'4'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/testimonial/layout-4.png',
 								),
 								'value'	=> '1'
 							),
@@ -323,7 +396,7 @@ function cx_testimonial_kc() {
 								'type'	=> 'text',
 								'relation' => array(
 									'parent'	=> 'layout',
-									'show_when' => '3',
+									'show_when' => '3,4',
 								),
 								'description'	=> __( 'Enter Section Title Here', 'codexin' ),
 							),
@@ -334,7 +407,7 @@ function cx_testimonial_kc() {
 								'type'	=> 'text',
 								'relation' => array(
 									'parent'	=> 'layout',
-									'show_when' => '3',
+									'show_when' => '3,4',
 								),
 								'description'	=> __( 'Enter Section Sub Title Here', 'codexin'),
 							),
@@ -345,7 +418,7 @@ function cx_testimonial_kc() {
 								'type' 			=> 'text',
 								'relation'		=> array(
 									'parent'	=> 'layout',
-									'show_when' => '3',
+									'show_when' => '3,4',
 								),
 								'description'	=> esc_html__( 'If you wish to style a particular content element differently, please add a class name to this field and refer to it in your custom CSS.', 'codexin' ),
 							),
