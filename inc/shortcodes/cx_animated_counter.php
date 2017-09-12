@@ -9,12 +9,12 @@
 // Registering Animated Counter Shortcode
 function cx_animated_counter_shortcode( $atts, $content = null ) {
     extract(shortcode_atts(array(
-		'icon_toggle' => '',
-		'icon'        => '',
-    'text_divider' => '',
-		'count_up'    => '',
-		'txt' 		  => '',
-		'class'		  => ''
+		'icon_toggle'     => '',
+		'icon'            => '',
+        'text_divider'    => '',
+		'count_up'        => '',
+		'txt' 		      => '',
+		'class'		      => ''
 
    	), $atts));
 
@@ -24,9 +24,9 @@ function cx_animated_counter_shortcode( $atts, $content = null ) {
 	$master_class = apply_filters( 'kc-el-class', $atts );
 
     if( $icon_toggle ):
-	$master_class[] = 'cx-animated-counter with-icon';
+    	$master_class[] = 'cx-animated-counter with-icon';
     else:
-    $master_class[] = 'cx-animated-counter';
+        $master_class[] = 'cx-animated-counter';
     endif;
 	
 	// Retrieving user define classes
@@ -44,9 +44,11 @@ function cx_animated_counter_shortcode( $atts, $content = null ) {
             <?php endif; ?>
 
             <span class="counter"><?php echo esc_html( $count_up ); ?></span>
+
             <?php if( $text_divider ) : ?>
               <h2 class=" rv3 rv2-title title-top-style"></h2>
             <?php endif; ?>
+            
             <p><?php echo esc_html( $txt ); ?></p>
         </div><!-- end of project -->
     </div><!-- end of cx-animated-counter -->
@@ -54,6 +56,19 @@ function cx_animated_counter_shortcode( $atts, $content = null ) {
 	<?php
 	$result .= ob_get_clean();
 	return $result;
+}
+
+
+// Registering new param type[text] to support with special characters
+add_action('init', 'cx_text_inpute_field', 99 );
+function cx_text_inpute_field() {
+    if ( isset( $GLOBALS['kc'] ) ) {
+        global $kc;
+        $kc->add_param_type( 'cx_text', 'cx_text_field_cb' );
+        }
+    }   
+function cx_text_field_cb() {
+    echo '<input name="{{data.name}}" class="kc-param" value="{{data.value}}" type="text" pattern = "[-+ \d()]*" />';
 }
 
 
@@ -84,7 +99,7 @@ function cx_animated_counter_kc() {
   	        				array(
   	        					'name' 			=> 'count_up',
   	        					'label' 		=> esc_html__( 'Input Numeric Value to Counter Up', 'codexin' ),
-  	        					'type' 			=> 'text',
+  	        					'type'          => 'cx_text',
   	        					'admin_label' 	=> true,
         					),
 
