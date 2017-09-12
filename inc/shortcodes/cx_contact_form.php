@@ -170,6 +170,7 @@ function cx_contact_form_kc() {
  											array('property' => 'color', 'label' => esc_html__( 'Color', 'codexin' ), 'selector' => '.contact-intro h3'),
  											array('property' => 'font-family', 'label' => esc_html__( 'Font family', 'codexin' ), 'selector' => '.contact-intro h3'),
  											array('property' => 'font-size', 'label' => esc_html__( 'Font Size', 'codexin' ), 'selector' => '.contact-intro h3'),
+ 											array('property' => 'text-align', 'label' => esc_html__( 'Text Align', 'codexin' ), 'selector' => '.contact-intro h3'),
  											array('property' => 'font-weight', 'label' => esc_html__( 'Font Weight', 'codexin' ), 'selector' => '.contact-intro h3'),
  											array('property' => 'line-height', 'label' => esc_html__( 'Line Height', 'codexin' ), 'selector' => '.contact-intro h3'),
  											array('property' => 'text-transform', 'label' => esc_html__( 'Text Transform', 'codexin' ), 'selector' => '.contact-intro h3'),
@@ -185,6 +186,51 @@ function cx_contact_form_kc() {
  											array('property' => 'line-height', 'label' => esc_html__( 'Line Height', 'codexin' ), 'selector' => '.contact-intro p'),
  											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin' ), 'selector' => '.contact-intro p'),
  											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin' ), 'selector' => '.contact-intro p')
+ 										),
+
+ 										'Inputs' => array(
+ 											array('property' => 'background', 'label' => esc_html__( 'Background', 'codexin' ), 'selector' => 'input.wpcf7-text, .wpcf7-textarea'),
+ 											array('property' => 'color', 'label' => esc_html__( 'Placeholder Color', 'codexin' ), 'selector' => 'input.wpcf7-text::placeholder, .wpcf7-textarea::placeholder'),
+ 											array('property' => 'border', 'label' => esc_html__( 'Border', 'codexin' ), 'selector' => 'input.wpcf7-text, .wpcf7-textarea'),
+ 											array('property' => 'border-radius', 'label' => esc_html__( 'Border Radius', 'codexin' ), 'selector' => 'input.wpcf7-text, .wpcf7-textarea'),
+ 											array('property' => 'width', 'label' => esc_html__( 'Width', 'codexin' ), 'selector' => 'input.wpcf7-text, .wpcf7-textarea'),
+ 											array('property' => 'height', 'label' => esc_html__( 'Height for Inputs', 'codexin' ), 'selector' => 'input.wpcf7-text'),
+ 											array('property' => 'height', 'label' => esc_html__( 'Height for Textarea', 'codexin' ), 'selector' => '.wpcf7-textarea'),
+ 											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin' ), 'selector' => 'input.wpcf7-text, .wpcf7-textarea'),
+ 											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin' ), 'selector' => 'input.wpcf7-text, .wpcf7-textarea')
+ 										),
+
+ 										'Labels' => array(
+ 											array('property' => 'color', 'label' => esc_html__( 'Color', 'codexin' ), 'selector' => 'label'),
+ 											array('property' => 'font-family', 'label' => esc_html__( 'Font family', 'codexin' ), 'selector' => 'label'),
+ 											array('property' => 'font-size', 'label' => esc_html__( 'Font Size', 'codexin' ), 'selector' => 'label'),
+ 											array('property' => 'text-align', 'label' => esc_html__( 'Text-Align', 'codexin' ), 'selector' => 'label'),
+ 											array('property' => 'font-weight', 'label' => esc_html__( 'Font Weight', 'codexin' ), 'selector' => 'label'),
+ 											array('property' => 'line-height', 'label' => esc_html__( 'Line Height', 'codexin' ), 'selector' => 'label'),
+ 											array('property' => 'text-transform', 'label' => esc_html__( 'Text Transform', 'codexin' ), 'selector' => 'label'),
+ 											array('property' => 'display', 'label' => esc_html__( 'Display', 'codexin' ), 'selector' => 'label'),
+ 											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin' ), 'selector' => 'label'),
+ 											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin' ), 'selector' => 'label')
+ 										),
+
+ 										'Button' => array(
+ 											array('property' => 'color', 'label' => esc_html__( 'Color', 'codexin' ), 'selector' => '.wpcf7-submit'),
+ 											array('property' => 'color', 'label' => esc_html__( 'Color on Hover', 'codexin' ), 'selector' => '.wpcf7-submit:hover'),
+ 											array('property' => 'background-color', 'label' => esc_html__( 'Background', 'codexin' ), 'selector' => '.wpcf7-submit'),
+ 											array('property' => 'background-color', 'label' => esc_html__( 'Background on Hover', 'codexin' ), 'selector' => '.wpcf7-submit:hover'),
+ 											array('property' => 'font-family', 'label' => esc_html__( 'Font family', 'codexin' ), 'selector' => '.wpcf7-submit'),
+ 											array('property' => 'font-size', 'label' => esc_html__( 'Font Size', 'codexin' ), 'selector' => '.wpcf7-submit'),
+ 											array('property' => 'text-align', 'label' => esc_html__( 'Text-Align', 'codexin' ), 'selector' => '.wpcf7-submit'),
+ 											array('property' => 'font-weight', 'label' => esc_html__( 'Font Weight', 'codexin' ), 'selector' => '.wpcf7-submit'),
+ 											array('property' => 'line-height', 'label' => esc_html__( 'Line Height', 'codexin' ), 'selector' => '.wpcf7-submit'),
+ 											array('property' => 'text-transform', 'label' => esc_html__( 'Text Transform', 'codexin' ), 'selector' => '.wpcf7-submit'),
+ 											array('property' => 'border', 'label' => esc_html__( 'Border', 'codexin' ), 'selector' => '.wpcf7-submit'),
+ 											array('property' => 'border', 'label' => esc_html__( 'Border on Hover', 'codexin' ), 'selector' => '.wpcf7-submit:hover'),
+ 											array('property' => 'border-radius', 'label' => esc_html__( 'Border Radius', 'codexin' ), 'selector' => '.wpcf7-submit'),
+ 											array('property' => 'width', 'label' => esc_html__( 'Width', 'codexin' ), 'selector' => '.wpcf7-submit'),
+ 											array('property' => 'height', 'label' => esc_html__( 'Height', 'codexin' ), 'selector' => '.wpcf7-submit'),
+ 											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin' ), 'selector' => '.wpcf7-submit'),
+ 											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin' ), 'selector' => '.wpcf7-submit')
  										),
 
  										'Box'	=> array(
