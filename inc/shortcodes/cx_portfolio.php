@@ -269,7 +269,7 @@ function cx_portfolio_shortcode( $atts, $content = null ) {
 		  		</div> <!-- end of container -->
 		  		<div class="portfolio-area-3">
 
-		  			<div class="portfolio-wrapper responsive-class" itemscope itemtype="http://schema.org/ImageGallery">
+		  			<div class="portfolio-wrapper image-pop-up responsive-class" itemscope itemtype="http://schema.org/ImageGallery">
 		  				<?php 
 						//start wp query..
 	  					$args = array(

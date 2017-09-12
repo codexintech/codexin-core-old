@@ -205,6 +205,6 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
 };
 
 // execute above function
-initPhotoSwipeFromDOM('.image-pop-up, .portfolio-wrapper');
+initPhotoSwipeFromDOM('.image-pop-up');
 
 
