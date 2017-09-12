@@ -24,5 +24,19 @@
     arrows:false
   });
 
+  /*-----------------------------------------------------
+    Client Feedback - 4
+  -------------------------------------------------------*/  
+  $('.client-comment-curosel-rv3').slick({
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: false,
+    autoplaySpeed: 2000,
+    dots:false,
+    arrows:true,
+    prevArrow:'<button type="button" class="slick-prev"><i class="fa fa-angle-left"></i></button>',
+      nextArrow:'<button type="button" class="slick-next"><i class="fa fa-angle-right"></i></button>',
+
+  });  
 
  })(jQuery);
