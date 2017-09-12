@@ -114,7 +114,7 @@ function cx_portfolio_shortcode( $atts, $content = null ) {
 				</div><!-- end of portfolio-area -->
 			</div> <!-- end of cx-portfolios -->
 
-	<?php endif; 
+	<?php endif; // End layout - 1
 
 			if( $layout == 2 ) :
 			// Assigning a master css class and hooking into KC
@@ -218,7 +218,130 @@ function cx_portfolio_shortcode( $atts, $content = null ) {
 			</div> <!-- end of  -->
 			<div class="clearfix"></div>
 
-	<?php endif; ?>
+	<?php endif; // End Layout - 2
+
+		if( $layout == 3 ) :
+		  // Assigning a master css class and hooking into KC
+		  $master_class = apply_filters( 'kc-el-class', $atts );
+		  $master_class[] = 'portfolios rv3';
+
+		  // Retrieving user define classes
+		  $classes = array( 'wrapper-portfolio-3' );
+		  (!empty($class)) ? $classes[] = $class : ''; ?> 
+		  <div id="portfolio_rv3" class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
+		  	<div class="wrapper-portfolio">
+		  		<div class="container">
+		  			<div class="row">
+		  				<div class="portfolio_rv2-button">
+		  					<!-- section title  -->
+		  					<div class="row-middle col-sm-3">
+		  						<div class=" rv3 rv2-title mrg-0">
+		  							<h2 class="primary-title mrg-0 rv2">OUR WORK</h2>
+		  						</div>
+		  					</div>  <!-- end of col-sm-12 -->
+		  					<div class="row-middle col-sm-8">
+		  						<div class="portfolio-filter rv2 rv3 pull-right">
+		  							<ul class="list-inline">
+		  								<li class="active" data-filter="*">All</li>
+		  								<?php 
+		  								$taxonomy = 'portfolio-category';
+		  								$taxonomies = get_terms($taxonomy); 
+		  								foreach ( $taxonomies as $tax ) {
+		  									echo '<li data-filter=".' .strtolower($tax->slug) .'" >' . $tax->name . '</li>';
+
+		  								}
+		  								?>
+		  								<li class="view-all"> view all </li>
+		  							</ul>
+		  						</div>
+		  					</div>
+		  				</div>
+		  			</div> <!-- end of row -->
+		  		</div> <!-- end of container -->
+		  		<div class="portfolio-area-3">
+
+		  			<div class="portfolio-wrapper responsive-class" itemscope itemtype="http://schema.org/ImageGallery">
+		  				<?php 
+						//start wp query..
+	  					$args = array(
+	  					'post_type'			=> 'portfolio',
+	  					'orderby'			=> 'data',
+	  					'order'				=> 'DESC',
+	  					'posts_per_page'	=> -1
+	  					);
+		  				$data = new WP_Query( $args );
+		  				$i = 0;
+						//Check post
+		  				if( $data->have_posts() ) :
+							//startloop here..
+		  					while( $data->have_posts() ) : $data->the_post(); 
+		  					$i++;
+
+		  				$term_list = wp_get_post_terms( get_the_ID(), 'portfolio-category' ); 
+
+		  				global $post;
+		  				$image      = wp_prepare_attachment_for_js( get_post_thumbnail_id( $post->ID ) );
+		  				$data_size  = $image['width'] . 'x' . $image['height'];
+		  				$image_alt  = ( !empty( $image['alt'] ) ) ? 'alt="' . esc_attr( $image['alt'] ) . '"' : 'alt="' .get_the_title() . '"';
+		  				$image_cap  = $image['caption']; ?>
+
+		  				<?php if( $i != 2 ) : ?>
+		  					<div class="portfolio col-sm-3 col-xs-12 pad-0 javascript">
+		  						<figure  itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" >
+		  							<a href="<?php esc_url( the_post_thumbnail_url('full') ); ?>" itemprop="contentUrl" data-size="<?php echo esc_attr( $data_size ); ?>">
+		  								<img src="<?php esc_url( the_post_thumbnail_url('rv2-blog-mini-img') ); ?>" itemprop="thumbnail" <?php echo $image_alt; ?> class="img-responsive" />
+		  							</a>  
+		  							<figcaption itemprop="caption description"></figcaption>
+		  							<div class="image-mask">
+		  								<div class="image-content">
+		  									<a href="<?php echo esc_url( the_post_thumbnail_url( 'full' ) ); ?>">
+		  										<i class="fa fa-search" aria-hidden="true"></i>
+		  									</a>
+		  									<h3 class="portfolio-title"> 
+		  										<a href="#" class="clickable"> <?php echo esc_html( get_the_title() ); ?> </a>
+		  									</h3>
+
+		  								</div>
+		  							</div>
+		  						</figure>
+		  					</div> 
+		  				<?php endif; 
+		  					 if( $i == 2 ) : ?>
+
+		  					<div class="portfolio col-sm-6 col-xs-12 pad-0 laravel python">
+		  						<figure  itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" >
+		  							<a href="<?php esc_url( the_post_thumbnail_url('full') ); ?>" itemprop="contentUrl" data-size="<?php echo esc_attr( $data_size ); ?>">
+		  								<img src="<?php esc_url( the_post_thumbnail_url('rectangle-three') ); ?>" itemprop="thumbnail" <?php echo $image_alt; ?> class="img-responsive" />
+		  							</a>  
+		  							<figcaption itemprop="caption description"></figcaption>
+		  							<div class="image-mask">
+		  								<div class="image-content">
+		  									<a href="<?php echo esc_url( the_post_thumbnail_url( 'full' ) ); ?>">
+		  										<i class="fa fa-search" aria-hidden="true"></i>
+		  									</a>
+		  									<h3 class="portfolio-title"> 
+		  										<a href="" class="clickable"> <?php echo esc_html( get_the_title() ); ?> </a>
+		  									</h3>
+		  								</div>
+		  							</div>
+
+		  						</figure>
+		  					</div>
+		  				<?php endif; ?>
+
+		  				<?php 
+		  				endwhile;
+		  				endif;
+		  				wp_reset_postdata();
+		  				?>
+
+		  			</div><!-- end of portfolio-wrapper -->
+		  		</div> <!-- end of portfolio-area-3 -->
+		  	</div> <!-- end of wrapper-portfolio -->
+		  </div> <!-- end of section -->
+		  <div class="clearfix"></div>
+			
+	<?php endif; //End layout - 3 ?>
 
 	<?php endif; ?>
 
@@ -302,6 +425,7 @@ function cx_portfolio_kc() {
 								'options'		=> array(
 									'1'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/portfolio/layout-1.png',
 									'2'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/portfolio/layout-2.png',
+									'3'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/portfolio/layout-3.png',
 									),
 								'value'			=> '1',
 								'admin_label' 	=> true,
