@@ -80,26 +80,6 @@ function cx_portfolio_shortcode( $atts, $content = null ) {
 					            $image_alt  = ( !empty( $image['alt'] ) ) ? 'alt="' . esc_attr( $image['alt'] ) . '"' : 'alt="' .get_the_title() . '"';
 					            $image_cap  = $image['caption']; 
 
-					     //        switch ($column) {
-										//     case "2":
-										//         $column = '50%';
-										//         break;
-										//     case "3":
-										//         $column = '33.33%';
-										//         break;
-										//     case "4":
-										//         $column = '25%';
-										//         break;
-										//     case "5":
-										//         $column = '20%';
-										//         break;
-
-										//     case "6":
-										//         $column = '16.66%';
-										//         break;
-										//     default:
-										//         $column = '25%';
-										// }
 						?>
 
 								<figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" class="cx-portfolio <?php foreach ($term_list as $sterm) { echo $sterm->slug.' '; } ?>" <?php if(!empty($column)): echo 'style="width:' . $column . '";'; endif; ?>>
@@ -120,7 +100,7 @@ function cx_portfolio_shortcode( $atts, $content = null ) {
 												<i class="<?php echo $icon; ?>"></i>
 											</a>
 											<h3 class="portfolio-title"> <a href="<?php the_permalink(); ?>" class="clickable"> <?php echo esc_html( get_the_title() ); ?> </a></h3>
-											<p><?php foreach ( $term_list as $sterm ) { echo $sterm->name . " "; } ?></p>
+											<p class="portfolio-readmore"><a href="<?php the_permalink(); ?>" class="clickable"><?php printf('%s', 'Read More'); ?></a></p>
 										</div>
 									</div>
 								</figure> <!-- end of cx-portfolio -->
