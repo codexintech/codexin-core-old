@@ -105,7 +105,35 @@ function cx_service_box_shortcode( $atts, $content = null ) {
         </div>
     </div>
 
-<?php endif; ?>
+<?php endif; // End Layout - 3
+
+    if( $layout == 4 ) :
+      // Assigning a master css class and hooking into KC
+      $master_class = apply_filters( 'kc-el-class', $atts );
+      $master_class[] = 'cx-services layout-3';
+
+      // Retrieving user define classes
+      $classes = array( 'services-wrapper' );
+      (!empty($class)) ? $classes[] = $class : ''; ?>
+      
+      <div id="services" class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
+        <div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
+          <div class="inner-service-item">
+            <div class="service-item layout-3 pad-50">
+              <div class="service-icon">
+                <i class="<?php echo esc_attr( $icon ); ?>"> </i>
+              </div>
+              <div class="service-content">
+                <h4 class="title-3"><?php echo esc_html( $service_title ); ?></h4>
+                <p><?php printf( '%s', $service_desc ) ; ?></p>
+              </div>
+            </div> <!-- end of service-item -->
+          </div> <!-- end of inner-service-item -->
+        </div> <!-- end of cx-services -->
+      </div> <!-- end of service -->
+      <div class="clearfix"></div>
+
+<?php endif; //End layout - 4 ?>
 
 	<?php
   endif;
@@ -135,6 +163,7 @@ function cx_service_box_kc() {
                                     '1' => CODEXIN_CORE_ASSET_DIR . '/images/layout-img/servicebox/layout-1.png',
                                     '2' => CODEXIN_CORE_ASSET_DIR . '/images/layout-img/servicebox/layout-2.png',
                                     '3'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/servicebox/layout-3.png',
+                                    '4' => CODEXIN_CORE_ASSET_DIR . '/images/layout-img/servicebox/layout-4.png',
                                     ),
   	        					'value'			=> '1'
                             ),
