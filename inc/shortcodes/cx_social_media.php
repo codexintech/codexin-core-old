@@ -347,6 +347,7 @@ function cx_social_media_kc() {
  											array('property' => 'line-height', 'label' => esc_html__( 'Line Height', 'codexin'), 'selector' => 'i'),
  											array('property' => 'text-align', 'label' => esc_html__( 'Text Align', 'codexin'), 'selector' => 'i'),
  											array('property' => 'border', 'label' => esc_html__( 'Border', 'codexin'), 'selector' => 'i'),
+ 											array('property' => 'border', 'label' => esc_html__( 'Border on Hover', 'codexin'), 'selector' => 'i:hover'),
  											array('property' => 'border-radius', 'label' => esc_html__( 'Border Radius', 'codexin'), 'selector' => 'i'),
  											array('property' => 'transition', 'label' => esc_html__( 'Transition Hover', 'codexin'), 'selector' => 'i:hover'),
  											array('property' => 'width', 'label' => esc_html__( 'Width', 'codexin'), 'selector' => 'i'),
