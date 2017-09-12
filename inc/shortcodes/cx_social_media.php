@@ -323,6 +323,8 @@ function cx_social_media_kc() {
 											array('property' => 'font-style', 'label' => esc_html__( 'Font Style', 'codexin'), 'selector' => '.socials-title h4'),
 											array('property' => 'text-transform', 'label' => esc_html__( 'Text Transform', 'codexin'), 'selector' => '.socials-title h4'),
 											array('property' => 'line-height', 'label' => esc_html__( 'Line Height', 'codexin'), 'selector' => '.socials-title h4'),
+											array('property' => 'width', 'label' => esc_html__( 'Width', 'codexin'), 'selector' => '.socials-title h4'),
+											array('property' => 'display', 'label' => esc_html__( 'Display', 'codexin'), 'selector' => '.socials-title h4'),
 											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin'), 'selector' => '.socials-title h4'),
 											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin'), 'selector' => '.socials-title h4')
 										),
