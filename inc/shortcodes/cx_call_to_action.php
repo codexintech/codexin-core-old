@@ -44,9 +44,9 @@ function cx_call_to_action_shortcode(  $atts, $content = null) {
    	<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
    			<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
 
-          <?php if( $icon_toggle ): ?>
-          <i class="<?php echo esc_attr( $icon ); ?>"></i>
-          <?php endif; ?>
+				<?php if( $icon_toggle ): ?>
+				<i class="<?php echo esc_attr( $icon ); ?>"></i>
+				<?php endif; ?>
 
    				<div class="cta-title"><?php printf('%s', $cta_title); ?></div>
    				<a href="<?php echo esc_url($retrieve_link[0]); ?>" <?php echo $title; ?> <?php echo $target; ?>" class="btn-rv btn-white "><?php echo esc_html__( $button_text ); ?></a>
@@ -116,7 +116,7 @@ function cx_call_to_action_kc() {
 	    kc_add_map(
 	    	array(
 	    		'cx_call_to_action' => array(
-	    			'name' 			=> esc_html__( 'Codexin CTA', 'codexin' ),
+	    			'name' 			=> esc_html__( 'Codexin Call to Action', 'codexin' ),
 	    			'description' 	=> esc_html__('Call To Action Box', 'codexin'),
 	    			'icon' 			=> 'et-hazardous',
 	    			'category' 		=> 'Codexin',
@@ -134,13 +134,14 @@ function cx_call_to_action_kc() {
 									'2'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/cta/layout-2.png',
 									'3'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/cta/layout-3.png',
 								),
-								'value'	=> '1'
+								'value'	=> '1',
+								'admin_label' => true,
 							),
 
 	    					array(
 	    						'name'        => 'cta_title',
 	    						'label'       => esc_html__('CTA Title', 'codexin'),
-	    						'type'        => 'text',
+	    						'type'        => 'textarea',
 	    						'description' => esc_html__( 'Enter Call To Action Title Here', 'codexin' ),
 	    						'relation'	  => array(
 	    							'parent' 	=> 'layout',
@@ -259,8 +260,11 @@ function cx_call_to_action_kc() {
 	    									array('property' => 'background-color', 'label' => esc_html__('Background Color On Hover', 'codexin'), 'selector' => '.btn-white:hover'),
 	    									array('property' => 'font-family', 'label' => esc_html__('Font Family', 'codexin'), 'selector' => '.btn-white'),
 	    									array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.btn-white'),
+	    									array('property' => 'font-weight', 'label' => esc_html__('Font Weight', 'codexin'), 'selector' => '.btn-white'),
 	    									array('property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '.btn-white'),
 	    									array('property' => 'text-align', 'label' => esc_html__('Text Align', 'codexin'), 'selector' => '.btn-white'),
+											array('property' => 'border', 'label' => esc_html__('Border', 'codexin'), 'selector' => '.btn-white'),
+	    									array('property' => 'border', 'label' => esc_html__('Border on Hover', 'codexin'), 'selector' => '.btn-white:hover'),
 	    									array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.btn-white'),
 	    									array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.btn-white')
     									),
