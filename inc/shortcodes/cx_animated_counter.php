@@ -11,6 +11,7 @@ function cx_animated_counter_shortcode( $atts, $content = null ) {
     extract(shortcode_atts(array(
 		'icon_toggle' => '',
 		'icon'        => '',
+    'text_divider' => '',
 		'count_up'    => '',
 		'txt' 		  => '',
 		'class'		  => ''
@@ -43,6 +44,9 @@ function cx_animated_counter_shortcode( $atts, $content = null ) {
             <?php endif; ?>
 
             <span class="counter"><?php echo esc_html( $count_up ); ?></span>
+            <?php if( $text_divider ) : ?>
+              <h2 class=" rv3 rv2-title title-top-style"></h2>
+            <?php endif; ?>
             <p><?php echo esc_html( $txt ); ?></p>
         </div><!-- end of project -->
     </div><!-- end of cx-animated-counter -->
@@ -106,6 +110,13 @@ function cx_animated_counter_kc() {
   	        						'show_when' => 'yes',
         						),
         					),
+
+                  array(
+                      'name'  => 'text_divider',
+                      'label' => esc_html__( 'Enable Text Divider?', 'codexin' ),
+                      'type'  => 'toggle',
+                      'value' => 'no'
+                    ),   
 
   	        				array(
   	        					'name'			=> 'class',
