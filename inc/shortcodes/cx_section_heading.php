@@ -66,13 +66,12 @@ function cx_section_heading_shortcode(  $atts, $content = null) {
 			if( $layout == 2 ) :
 		 
 			// Assigning a master css class and hooking into KC
-				$master_class = apply_filters( 'kc-el-class', $atts );
-				$master_class[] = 'rv2-title';
+			$master_class = apply_filters( 'kc-el-class', $atts );
+			$master_class[] = 'cx-section-heading-2';
 
-				// Retrieving user define classes
-				$classes = array( 'rv2-title-inner' );
-				(!empty($class)) ? $classes[] = $class : ''; 
-			?>	
+			// Retrieving user define classes
+			$classes = array( 'rv2-title' );
+			(!empty($class)) ? $classes[] = $class : ''; ?>	
 
 			<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
 				<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
@@ -242,6 +241,14 @@ function cx_section_heading_kc() {
 											array('property' => 'height', 'label' => esc_html__( 'Height', 'codexin'), 'selector' => '.cx-divider::after,.rv2-title::before'),
 											array('property' => 'display', 'label' => esc_html__( 'Display', 'codexin'), 'selector' => '.cx-divider::after,.rv2-title::before'),
 											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin'), 'selector' => '.cx-divider::after,.rv2-title::before')
+										),
+
+										'Divider-2' => array(
+											array('property' => 'background-color', 'label' => esc_html__( 'BG Color Left', 'codexin'), 'selector' => '.rv2-title::before' ),
+											array('property' => 'background-color', 'label' => esc_html__( 'BG Color Right', 'codexin'), 'selector' => '.rv2-title::after' ),
+											array('property' => 'width', 'label' => esc_html__( 'Width Left', 'codexin'), 'selector' => '.rv2-title::before'),
+											array('property' => 'width', 'label' => esc_html__( 'Width Right', 'codexin'), 'selector' => '.rv2-title::after'),
+											array('property' => 'height', 'label' => esc_html__( 'Height', 'codexin'), 'selector' => '.rv2-title::before, .rv2-title::after'),
 										),
 
 										'Line-Icon' => array(
