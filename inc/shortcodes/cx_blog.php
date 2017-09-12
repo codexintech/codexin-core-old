@@ -230,7 +230,106 @@ function cx_blog_shortcode( $atts, $content = null ) {
 			</div> <!-- end of letest-post -->
 			<div class="clearfix"></div>
 
-	<?php endif; //End Layout - 2 ?>
+	<?php endif; //End Layout - 2 
+	
+	if( $layout == 3 ) : 
+		// Assigning a master css class and hooking into KC
+	     $master_class = apply_filters( 'kc-el-class', $atts );
+	     $master_class[] = 'letest-post';
+
+	    // Retrieving user define classes
+	    $classes = array( 'wrapper-posts-3' );
+   	    (!empty($class)) ? $classes[] = $class : ''; ?>
+			
+		<div id="letest_post" class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
+			<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
+			<?php 
+			//start query..
+			$args = array(
+			'post_type'				=> 'post',
+			'posts_per_page'		=> $number_of_posts,
+			'order'					=> $order,
+			'orderby'				=> $orderby,
+			//'meta_key'				=> 'cx_post_views',
+			'ignore_sticky_posts' 	=> 1
+			);
+
+			$data = new WP_Query( $args );
+
+			if( $data->have_posts() ) :
+				$i = 1;
+
+				while( $data->have_posts() ) : $data->the_post();
+				// Retrieving Image alt tag
+				$image_alt = ( !empty( retrieve_alt_tag() ) ) ? retrieve_alt_tag() : get_the_title(); ?>
+				<?php if($i == 1): ?>
+					<div id="post-<?php the_ID(); ?>" <?php post_class('col-sm-6'); ?>>
+						<div class="rv3-single-post rv3">
+							<div class="post-img">
+								<img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'event-v2-image' ) : '//placehold.it/553x218' ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" class="img-responsive">
+								<a href="<?php the_permalink(); ?>" class="btn-white btn-rv">
+									<?php echo esc_html( !empty( $readmore_text ) ? $readmore_text : __('Read More', 'codexin') ); ?>
+								</a>
+								<span class="date-time"> <?php the_time( 'd M' ); ?></span>
+							</div>
+							<div class="rv3-single-event-info">
+								<div class="post-info">
+									<h3 class="title-3"><?php echo esc_html( wp_trim_words( get_the_title(), $title_length ) ); ?></h3>
+									<p class="recent-post-cat-3"><?php the_category( ' ' ); ?></p>
+									<ul class="recent-post-info">
+										<li><i class="fa fa-user" aria-hidden="true"></i> <a href=""> <?php the_author() ?> </a> </li>
+										<li><i class="fa fa-paper-plane" aria-hidden="true"></i> <a href=""> <?php comments_number('0', '1', '%'); ?></a> </li>
+										<li><?php if( function_exists( 'codexin_likes_button' ) ): echo codexin_likes_button( get_the_ID(), 0 ); endif; ?></li>
+									</ul>
+
+								</div>
+								<p class="recent-post-excerpt-3"> <?php echo esc_html( wp_trim_words( get_the_excerpt(), $desc_length ) ); ?> </p>
+							</div> <!-- end of rv3-single-event-info -->
+						</div> <!-- end of rv3-single-post rv3 -->
+					</div> <!--End The Most Recent Posts of col-sm-6 -->
+
+					<!-- Integrate Only For Post Lists-->
+					<div class="col-sm-6 wrapper-post-list-3">
+						<ul class="post-list">
+					<?php else : ?>
+							<li id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+								<div class="rv3-single-post">
+									<div class="image-left">
+										<a href="<?php the_permalink(); ?>"><img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'square-one' ) : '//placehold.it/161x150' ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" class="img-responsive"></a>
+									</div>
+									<div class="post-list-info">
+										<div class="post-info">
+											<a href="<?php the_permalink(); ?>"><h3 class="title-3"><?php echo esc_html( wp_trim_words( get_the_title(), $title_length ) ); ?></h3></a>
+											<ul>
+												<li><i class="fa fa-user" aria-hidden="true"></i> <a href=""> <?php the_author() ?> </a> </li>
+												<li><i class="fa fa-paper-plane" aria-hidden="true"></i> <a href=""> <?php comments_number('0', '1', '%'); ?></a> </li>
+												<li><?php if( function_exists( 'codexin_likes_button' ) ): echo codexin_likes_button( get_the_ID(), 0 ); endif; ?></li>
+											</ul>
+										</div> <!-- end of post-info -->
+										<p><?php echo esc_html( wp_trim_words( get_the_excerpt(), $desc_length ) ); ?></p>
+									</div> <!-- end of post-list-info -->
+								</div> <!-- end of rv3-single-post -->
+							</li>
+						<?php 
+						endif; //End if($i == 1)
+
+					//Integrate Only Post Lists	
+					if( $number_of_posts == $i ) : ?>
+						</ul>
+					</div> <!-- End Post Lists of col-sm-6 -->	
+					<?php endif; //End if($number_of_posts) ?>
+
+					<?php 
+						$i++;
+					endwhile;
+					endif;
+					wp_reset_postdata();
+					?>
+				</div> <!-- end of wrapper-posts -->
+			</div> <!-- end of section -->
+			<div class="clearfix"></div>
+
+	<?php endif; //End layout - 3 ?>
 			
 	<?php
 	endif;
@@ -292,6 +391,7 @@ function cx_blog_kc() {
 								'options'	=> array(
 									'1'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/blog/layout-1.png',
 									'2'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/blog/layout-2.png',
+									'3'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/blog/layout-3.png',
 								),
 								'value'	=> '1',
 								'admin_label'	=> true,

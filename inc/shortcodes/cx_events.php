@@ -14,6 +14,7 @@ function cx_events_shortcode( $atts, $content = null ) {
 		'event_icon_one'	=> '',
 		'event_icon_two'	=> '',
 		'event_icon_three'	=> '',
+		'button_text'		=> '',
 		'class'				=> '',
 	), $atts));
 
@@ -163,8 +164,73 @@ function cx_events_shortcode( $atts, $content = null ) {
 
 		</div><!-- end of wrapper-event-v2 -->
 
+	<?php endif; //end layout-2
 
-	<?php endif; //end layout-2 ?>
+		 if( $layout == 3 ) : 
+	 	 // Assigning a master css class and hooking into KC
+		 $master_class = apply_filters( 'kc-el-class', $atts );
+		 $master_class[] = 'cx-events-3';
+
+		 // Retrieving user define classes
+		 $classes = array( 'wrapper-events-3' );
+		 (!empty($class)) ? $classes[] = $class : ''; ?>
+
+		 <div id="events_rv2" class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
+		 	<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
+		 		<?php 
+		 		//start new query..
+		 		$args = array(
+		 			'post_type'		 => 'events',
+		 			'order' 		 => 'DESC',
+		 			'posts_per_page' => 2,
+		 			);
+
+		 		$data = new WP_Query( $args ); 
+				if( $data->have_posts() ) :
+					while( $data->have_posts() ) : $data->the_post(); ?>
+
+			 		<div class="col-sm-6">
+			 			<div class="rv3-single-event rv3 mrg-b-50">
+			 				<div class="event-img"><img src="<?php echo get_the_post_thumbnail_url('','rectangle-two' ); ?>" alt=""></div>
+			 				<div class="rv3-single-event-info">
+			 					<a href="#"><h3 class="title-3"><?php echo esc_html( get_the_title() ); ?></h3></a>
+
+			 					<ul>
+			 						<li><i class="fa fa-clock-o" aria-hidden="true"></i>
+			 							<?php 
+			 							$start_time = rwmb_meta( 'reveal_event_start_time' );
+			 							$end_time 	= rwmb_meta( 'reveal_event_end_time' );
+			 							echo $start_time . ' - ' . $end_time;
+			 							?> 
+			 						</li>
+			 						<li>
+			 							<i class="fa fa-map-marker" aria-hidden="true"></i> 
+			 							<?php echo rwmb_meta( 'reveal_event_address' ); ?>
+			 						</li>
+			 						<li>
+			 							<i class="fa fa-calendar" aria-hidden="true"></i>
+			 							<?php 
+											$date = strtotime( rwmb_meta( 'reveal_event_start_date' ) ); 
+											$new_date = date( 'd/m/Y', $date );
+											echo $new_date;
+										?>
+			 						</li>
+			 					</ul>
+
+			 					<p><?php printf('%s', the_excerpt() ); ?></p>
+			 					<a href="#" class="btn-rv btn-white "><?php echo esc_html( $button_text ); ?></a>
+			 				</div>
+			 			</div>
+			 		</div> <!-- end of col-sm-6 -->
+		 		<?php 
+		 		endwhile;
+		 		endif; 
+		 		wp_reset_postdata(); ?>
+		 	</div> <!-- end of wrapper-events-3 -->
+		 </div> <!-- end of section -->
+		 <div class="clearfix"></div>
+	<?php endif; ?>
+
 	<?php
 		endif;
 	$result .= ob_get_clean();
@@ -202,6 +268,7 @@ function cx_events_kc() {
 								'options'		=> array(
 									'1'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/events/layout-1.png',
 									'2'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/events/layout-2.png',
+									'3'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/events/layout-3.png',
 								),
 								'value'	=> '1'
 							),
@@ -237,6 +304,17 @@ function cx_events_kc() {
  									'show_when' => '1',
  								),
  								'description'	=> esc_html__( 'Select Event Third Icon Here', 'codexin' ),
+ 							),
+
+ 							array(
+ 								'name' 			=> 'button_text',
+ 								'label' 		=> esc_html__( 'button Text', 'codexin' ),
+ 								'type' 			=> 'text',
+ 								'relation'		=> array(
+ 									'parent'	=> 'layout',
+ 									'show_when' => '3',
+ 								),
+ 								'description'	=> esc_html__( 'Enter Your Button Text Here', 'codexin' ),
  							),
 
  							array(

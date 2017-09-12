@@ -50,43 +50,45 @@ function cx_social_media_shortcode( $atts, $content = null ) {
 			<?php if( $social_title ) : ?>
 				<div class="socials-title"><h4> <?php echo esc_html( $social_title ); ?> </h4></div>
 			<?php endif; ?>
-
-			<?php if( !empty( $cx_facebook ) && ( $show_fb ) ) : ?>
-				<a href="<?php echo esc_url($cx_facebook); ?>" target="_blank"><i class="fa fa-facebook"></i></a>
-			<?php elseif( empty( $cx_facebook ) && ( $show_fb) ): echo '<i class="fa fa-exclamation-triangle" title="'. esc_html__('No Valid URL Found', 'codexin') .'"></i>'; ?>
-			<?php endif; ?>
-			<?php if( !empty( $cx_twitter ) && ( $show_tw ) ) : ?>
-				<a href="<?php echo esc_url($cx_twitter); ?>" target="_blank"><i class="fa fa-twitter"></i></a>
-			<?php elseif( empty( $cx_twitter ) && ( $show_tw ) ): echo '<i class="fa fa-exclamation-triangle" title="'. esc_html__('No Valid URL Found', 'codexin') .'"></i>'; ?>
-			<?php endif; ?>
-			<?php if( !empty( $cx_instagram ) && ( $show_in ) ) : ?>
-				<a href="<?php echo esc_url($cx_instagram); ?>" target="_blank"><i class="fa fa-instagram"></i></a>
-			<?php elseif( empty( $cx_instagram ) && ( $show_in ) ): echo '<i class="fa fa-exclamation-triangle" title="'. esc_html__('No Valid URL Found', 'codexin') .'"></i>'; ?>
-			<?php endif; ?>
-			<?php if( !empty( $cx_pinterest ) && ( $show_pin ) ) : ?>
-				<a href="<?php echo esc_url($cx_pinterest); ?>" target="_blank"><i class="fa fa-pinterest"></i></a>
-			<?php elseif( empty( $cx_pinterest ) && ( $show_pin ) ): echo '<i class="fa fa-exclamation-triangle" title="'. esc_html__('No Valid URL Found', 'codexin') .'"></i>'; ?>
-			<?php endif; ?>
-			<?php if( !empty( $cx_behance ) && ( $show_be ) ) : ?>
-				<a href="<?php echo esc_url($cx_behance); ?>" target="_blank"><i class="fa fa-behance"></i></a>
-			<?php elseif( empty( $cx_behance ) && ( $show_be ) ): echo '<i class="fa fa-exclamation-triangle" title="'. esc_html__('No Valid URL Found', 'codexin') .'"></i>'; ?>
-			<?php endif; ?>
-			<?php if( !empty( $cx_gplus ) && ( $show_gp ) ) : ?>
-				<a href="<?php echo esc_url($cx_gplus); ?>" target="_blank"><i class="fa fa-google-plus"></i></a>
-			<?php elseif( empty( $cx_gplus ) && ( $show_gp ) ): echo '<i class="fa fa-exclamation-triangle" title="'. esc_html__('No Valid URL Found', 'codexin') .'"></i>'; ?>
-			<?php endif; ?>
-			<?php if( !empty( $cx_youtube ) && ( $show_yt ) ) : ?>
-				<a href="<?php echo esc_url($cx_youtube); ?>" target="_blank"><i class="fa fa-youtube-play"></i></a>
-			<?php elseif( empty( $cx_youtube ) && ( $show_yt ) ): echo '<i class="fa fa-exclamation-triangle" title="'. esc_html__('No Valid URL Found', 'codexin') .'"></i>'; ?>
-			<?php endif; ?>
-			<?php if( !empty( $cx_skype ) && ( $show_sk ) ) : ?>
-				<a href="<?php echo esc_url($cx_skype); ?>" target="_blank"><i class="fa fa-skype"></i></a>
-			<?php elseif( empty( $cx_skype ) && ( $show_sk ) ): echo '<i class="fa fa-exclamation-triangle" title="'. esc_html__('No Valid URL Found', 'codexin') .'"></i>'; ?>
-			<?php endif; ?>
-			<?php if( !empty( $cx_linkedin ) && ( $show_li ) ) : ?>
-				<a href="<?php echo esc_url($cx_linkedin); ?>" target="_blank"><i class="fa fa-linkedin"></i></a>
-			<?php elseif( empty( $cx_linkedin ) && ( $show_li ) ): echo '<i class="fa fa-exclamation-triangle" title="'. esc_html__('No Valid URL Found', 'codexin') .'"></i>'; ?>
-			<?php endif; ?>
+			
+			<div class="cx-socials-wrapper">
+				<?php if( !empty( $cx_facebook ) && ( $show_fb ) ) : ?>
+					<a href="<?php echo esc_url($cx_facebook); ?>" target="_blank"><i class="fa fa-facebook"></i></a>
+				<?php elseif( empty( $cx_facebook ) && ( $show_fb) ): echo '<i class="fa fa-exclamation-triangle" title="'. esc_html__('No Valid URL Found', 'codexin') .'"></i>'; ?>
+				<?php endif; ?>
+				<?php if( !empty( $cx_twitter ) && ( $show_tw ) ) : ?>
+					<a href="<?php echo esc_url($cx_twitter); ?>" target="_blank"><i class="fa fa-twitter"></i></a>
+				<?php elseif( empty( $cx_twitter ) && ( $show_tw ) ): echo '<i class="fa fa-exclamation-triangle" title="'. esc_html__('No Valid URL Found', 'codexin') .'"></i>'; ?>
+				<?php endif; ?>
+				<?php if( !empty( $cx_instagram ) && ( $show_in ) ) : ?>
+					<a href="<?php echo esc_url($cx_instagram); ?>" target="_blank"><i class="fa fa-instagram"></i></a>
+				<?php elseif( empty( $cx_instagram ) && ( $show_in ) ): echo '<i class="fa fa-exclamation-triangle" title="'. esc_html__('No Valid URL Found', 'codexin') .'"></i>'; ?>
+				<?php endif; ?>
+				<?php if( !empty( $cx_pinterest ) && ( $show_pin ) ) : ?>
+					<a href="<?php echo esc_url($cx_pinterest); ?>" target="_blank"><i class="fa fa-pinterest"></i></a>
+				<?php elseif( empty( $cx_pinterest ) && ( $show_pin ) ): echo '<i class="fa fa-exclamation-triangle" title="'. esc_html__('No Valid URL Found', 'codexin') .'"></i>'; ?>
+				<?php endif; ?>
+				<?php if( !empty( $cx_behance ) && ( $show_be ) ) : ?>
+					<a href="<?php echo esc_url($cx_behance); ?>" target="_blank"><i class="fa fa-behance"></i></a>
+				<?php elseif( empty( $cx_behance ) && ( $show_be ) ): echo '<i class="fa fa-exclamation-triangle" title="'. esc_html__('No Valid URL Found', 'codexin') .'"></i>'; ?>
+				<?php endif; ?>
+				<?php if( !empty( $cx_gplus ) && ( $show_gp ) ) : ?>
+					<a href="<?php echo esc_url($cx_gplus); ?>" target="_blank"><i class="fa fa-google-plus"></i></a>
+				<?php elseif( empty( $cx_gplus ) && ( $show_gp ) ): echo '<i class="fa fa-exclamation-triangle" title="'. esc_html__('No Valid URL Found', 'codexin') .'"></i>'; ?>
+				<?php endif; ?>
+				<?php if( !empty( $cx_youtube ) && ( $show_yt ) ) : ?>
+					<a href="<?php echo esc_url($cx_youtube); ?>" target="_blank"><i class="fa fa-youtube-play"></i></a>
+				<?php elseif( empty( $cx_youtube ) && ( $show_yt ) ): echo '<i class="fa fa-exclamation-triangle" title="'. esc_html__('No Valid URL Found', 'codexin') .'"></i>'; ?>
+				<?php endif; ?>
+				<?php if( !empty( $cx_skype ) && ( $show_sk ) ) : ?>
+					<a href="<?php echo esc_url($cx_skype); ?>" target="_blank"><i class="fa fa-skype"></i></a>
+				<?php elseif( empty( $cx_skype ) && ( $show_sk ) ): echo '<i class="fa fa-exclamation-triangle" title="'. esc_html__('No Valid URL Found', 'codexin') .'"></i>'; ?>
+				<?php endif; ?>
+				<?php if( !empty( $cx_linkedin ) && ( $show_li ) ) : ?>
+					<a href="<?php echo esc_url($cx_linkedin); ?>" target="_blank"><i class="fa fa-linkedin"></i></a>
+				<?php elseif( empty( $cx_linkedin ) && ( $show_li ) ): echo '<i class="fa fa-exclamation-triangle" title="'. esc_html__('No Valid URL Found', 'codexin') .'"></i>'; ?>
+				<?php endif; ?>
+			</div>
 
 		</div><!--end of social-content -->
 	</div><!--end of socials -->
@@ -325,8 +327,15 @@ function cx_social_media_kc() {
 											array('property' => 'line-height', 'label' => esc_html__( 'Line Height', 'codexin'), 'selector' => '.socials-title h4'),
 											array('property' => 'width', 'label' => esc_html__( 'Width', 'codexin'), 'selector' => '.socials-title h4'),
 											array('property' => 'display', 'label' => esc_html__( 'Display', 'codexin'), 'selector' => '.socials-title h4'),
+											array('property' => 'float', 'label' => esc_html__( 'Float', 'codexin'), 'selector' => '.socials-title h4'),
 											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin'), 'selector' => '.socials-title h4'),
 											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin'), 'selector' => '.socials-title h4')
+										),
+
+										'Icon Wrapper' => array(
+											array('property' => 'background', 'label' => esc_html__( 'Background', 'codexin'), 'selector' => '.cx-socials-wrapper'),
+											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin'), 'selector' => '.cx-socials-wrapper'),
+											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin'), 'selector' => '.cx-socials-wrapper')
 										),
 
  										'Icons' => array(
@@ -338,6 +347,7 @@ function cx_social_media_kc() {
  											array('property' => 'line-height', 'label' => esc_html__( 'Line Height', 'codexin'), 'selector' => 'i'),
  											array('property' => 'text-align', 'label' => esc_html__( 'Text Align', 'codexin'), 'selector' => 'i'),
  											array('property' => 'border', 'label' => esc_html__( 'Border', 'codexin'), 'selector' => 'i'),
+ 											array('property' => 'border', 'label' => esc_html__( 'Border on Hover', 'codexin'), 'selector' => 'i:hover'),
  											array('property' => 'border-radius', 'label' => esc_html__( 'Border Radius', 'codexin'), 'selector' => 'i'),
  											array('property' => 'transition', 'label' => esc_html__( 'Transition Hover', 'codexin'), 'selector' => 'i:hover'),
  											array('property' => 'width', 'label' => esc_html__( 'Width', 'codexin'), 'selector' => 'i'),
