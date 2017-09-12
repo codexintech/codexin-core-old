@@ -183,13 +183,13 @@ function cx_contact_form_kc() {
  											array('property' => 'font-size', 'label' => esc_html__( 'Font Size', 'codexin' ), 'selector' => '.contact-intro p'),
  											array('property' => 'font-weight', 'label' => esc_html__( 'Font Weight', 'codexin' ), 'selector' => '.contact-intro p'),
  											array('property' => 'line-height', 'label' => esc_html__( 'Line Height', 'codexin' ), 'selector' => '.contact-intro p'),
- 											array('property' => 'width', 'label' => esc_html__( 'Width', 'codexin' ), 'selector' => '.contact-intro p'),
  											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin' ), 'selector' => '.contact-intro p'),
  											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin' ), 'selector' => '.contact-intro p')
  										),
 
  										'Box'	=> array(
  											array('property' => 'background'),
+ 											array('property' => 'width', 'label' => esc_html__( 'Width', 'codexin') ),
  											array('property' => 'border', 'label' => esc_html__( 'Border', 'codexin') ),
  											array('property' => 'border-radius', 'label' => esc_html__( 'Border Radius', 'codexin')),
  											array('property' => 'box-shadow', 'label' => esc_html__( 'Box Shadow', 'codexin')),
