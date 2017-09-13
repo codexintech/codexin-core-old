@@ -78,21 +78,26 @@ input[type="button"]:hover{
    001 - Codexin Section Heading
 **********************************/
 
-.section-heading .primary-title {
+.section-heading .secondary-title {
     margin-top: 0;
     margin-bottom: 5px;
     text-align: center;
 }
 
-.section-heading .secondary-title {
+.section-heading .primary-title {
     text-transform: uppercase;
     text-align: center;
     margin-top: 0;
     position: relative;
 }
 
-.section-heading .cx-divider {
+.section-heading .cx-divider,
+.section-heading .cx-divider-2 {
     position: relative;
+}
+
+.section-heading .cx-divider:first-child {
+    margin-bottom: 25px;
 }
 
 .section-heading .cx-divider::after {
@@ -102,7 +107,6 @@ input[type="button"]:hover{
     display: block;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 15px;
     background: #295970;
 }
 
@@ -121,7 +125,7 @@ input[type="button"]:hover{
     text-align: center;
 }
 
-.section-heading .secondary-title i {
+/*.section-heading .secondary-title i {
     position: absolute;
     top: -9px;
     left: 50%;
@@ -130,6 +134,29 @@ input[type="button"]:hover{
     padding-right: 10px;
     font-size: 20px;
     background: #fff;
+}*/
+
+.section-heading .cx-divider-2:first-child {
+    padding-bottom: 25px;
+}
+.cx-divider-2:before, .cx-divider-2:after {
+    position: absolute;
+    content: "";
+    height: 4px;
+    top: 0;
+    z-index: 1;
+}
+.cx-divider-2:before {
+    width: 60px;
+    background-color: #23dac9;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+.cx-divider-2:after {
+    width: 20px;
+    background: #000;
+    left: calc(50% + 10px);
 }
 
 /***********************************
@@ -1707,12 +1734,12 @@ h2 {
 }
 
 /*title default style */
-.rv2-title {
-    text-align: center;
+/*.cx-section-heading .rv2-title {
     position: relative;
-    overflow: hidden;
-    padding-top: 32px;
-    margin-bottom: 60px;
+}
+
+.cx-section-heading .rv2-title:first-child {
+    padding-top: 25px;
 }
 .rv2-title:before, .rv2-title:after {
     position: absolute;
@@ -1753,7 +1780,7 @@ h2.primary-title.rv2 {
     font-size: 15px;
     margin-bottom: 0;
     font-weight: normal;
-}
+}*/
 
 /*title default style end*/
 

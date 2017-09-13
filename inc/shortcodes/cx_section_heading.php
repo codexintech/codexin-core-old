@@ -15,7 +15,9 @@ function cx_section_heading_shortcode(  $atts, $content = null) {
 				'subtitle'	 			=> '',
 				'divider'	 			=> '',
 				'div_type'	 			=> '',
+				'div_pos'	 			=> '',
 				'div_icon'	 			=> '',
+				'div_text'	 			=> '',
 				'icon'		 			=> '',
 				'text'		 			=> '',
 				'description_toggle' 	=> '',
@@ -27,64 +29,47 @@ function cx_section_heading_shortcode(  $atts, $content = null) {
 
 	ob_start(); 
 
-		if( ! empty( $layout ) ) :
-			if( $layout == 1 ) :
-				// Assigning a master css class and hooking into KC
-				$master_class = apply_filters( 'kc-el-class', $atts );
-				$master_class[] = 'section-heading';
+	// Assigning a master css class and hooking into KC
+	$master_class = apply_filters( 'kc-el-class', $atts );
+	$master_class[] = 'section-heading';
 
-				// Retrieving user define classes
-				$classes = array( 'cx-section-heading' );
-				(!empty($class)) ? $classes[] = $class : ''; 
-		?>
-			<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
-				<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
-					<?php if( !empty( $title ) ): ?>
-					<h3 class="primary-title"><?php echo esc_html( $title ); ?></h3>
-					<?php endif; ?>
-					<?php if( !empty( $subtitle ) ): ?>
-					<h2 class="secondary-title"><?php echo esc_html( $subtitle ); ?></h2>
-					<?php endif; ?>
-					<?php if( $divider ): 
-						if( $div_type == 'div_icon' ): ?>
-						<div class="cx-divider"><i class="<?php echo $icon; ?>"></i></div>
-						<?php elseif( $div_type == 'div_text' ): ?>
-						<div class="cx-divider"><span><?php echo $text; ?></span></div>
-						<?php else: ?>
-						<div class="cx-divider"></div>
-					<?php endif; ?>
-					<?php endif; ?>
-					<?php if( $description_toggle == 'yes' ): ?>
-					<div class="col-md-10 col-md-offset-1 cx-description">
-						<p><?php printf('%s', $description ); ?></p>		
-					</div>
-					<?php endif; ?>
-				</div><!-- end of cx-section-heading -->
-			</div><!-- end of section-heading -->
-		<?php 
-			endif; //end layout 1
-			if( $layout == 2 ) :
-		 
-			// Assigning a master css class and hooking into KC
-			$master_class = apply_filters( 'kc-el-class', $atts );
-			$master_class[] = 'cx-section-heading-2';
+	// Retrieving user define classes
+	$classes = array( 'cx-section-heading' );
+	(!empty($class)) ? $classes[] = $class : ''; 
 
-			// Retrieving user define classes
-			$classes = array( 'rv2-title' );
-			(!empty($class)) ? $classes[] = $class : ''; ?>	
-
-			<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
-				<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
-					<h2 class="primary-title rv2"> <?php echo esc_html( $title ); ?> </h2>
-					<h4 class="secondary-title rv2"><?php echo esc_html( $subtitle ); ?></h4>
-				</div>
-			</div>
-
-
-	<?php endif; //End layout 2 ?>
-
-	<?php
+	// Divider
+	if( $divider ):
+		if( $div_type == 'div_icon' ):
+			$divider_line = '<div class="cx-divider"><i class="'. $icon .'"></i></div>';
+		elseif( $div_type == 'div_text' ):
+			$divider_line = '<div class="cx-divider"><span>' . $text . '</span></div>';
+		elseif( $div_type == 'dc_line' ):
+			$divider_line = '<div class="cx-divider-2"></div>';
+		else:
+			$divider_line = '<div class="cx-divider"></div>';
 		endif;
+	endif;
+
+	?>
+		<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
+			<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
+				<?php if( $div_pos == 'top' ): printf( '%s', $divider_line ); endif; ?>
+				<?php if( !empty( $title ) ): ?>
+				<h3 class="secondary-title"><?php echo esc_html( $subtitle ); ?></h3>
+				<?php endif; ?>
+				<?php if( !empty( $subtitle ) ): ?>
+				<h2 class="primary-title"><?php echo esc_html( $title ); ?></h2>
+				<?php endif; ?>
+				<?php if( $div_pos == 'bottom' ): printf( '%s', $divider_line ); endif; ?>
+				<?php if( $description_toggle == 'yes' ): ?>
+				<div class="col-md-10 col-md-offset-1 cx-description">
+					<p><?php printf('%s', $description ); ?></p>		
+				</div>
+				<?php endif; ?>
+			</div><!-- end of cx-section-heading -->
+		</div><!-- end of section-heading -->
+	<?php 
+
 	$result .= ob_get_clean();
 	return $result;
 
@@ -105,17 +90,6 @@ function cx_section_heading_kc() {
 	                'params' 		=> array(
 	                	//General params
 						'general' 	=> array(
-							array(
-								'type'			=> 'radio_image',
-								'label'			=> esc_html__( 'Select Section Header Template', 'codexin' ),
-								'name'			=> 'layout',
-								'admin_label'	=> true,
-								'options'		=> array(
-									'1'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/section-header/layout-1.png',
-									'2'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/section-header/layout-2.png',
-								),
-								'value'	=> '1'
-							),
 
 		                    array(
 		                        'name' 			=> 'subtitle',
@@ -145,7 +119,8 @@ function cx_section_heading_kc() {
 		                    	'label' 		=> esc_html__( 'Choose Divider Type', 'codexin' ),
 		                    	'type' 			=> 'dropdown',
 		                    	'options'		=> array(
-		                    			'line'		=> 'Simple Line',
+		                    			'line'		=> 'Simple Divider 1',
+		                    			'dc_line'	=> 'Simple Divider 2',
 		                    			'div_icon'	=> 'Line with Icon',
 		                    			'div_text'	=> 'Line with Text'
 		                    	),
@@ -173,7 +148,21 @@ function cx_section_heading_kc() {
 		                        	'parent'	=> 'div_type',
 		                        	'show_when'	=> 'div_text'
 		                        ),
-		                        'value'			=> 'Sample Text'
+		                        'value'			=> 'Text'
+		                    ),
+
+		                    array(
+		                    	'name' 			=> 'div_pos',
+		                    	'label' 		=> esc_html__( 'Divider Position', 'codexin' ),
+		                    	'type' 			=> 'dropdown',
+		                    	'options'		=> array(
+		                    			'top'		=> 'Top of Title',
+		                    			'bottom'	=> 'Bottom of Title',
+		                    	),
+		                    	'relation' 		=> array(
+		                    		'parent'    => 'divider',
+		                    		'show_when' => 'yes',
+		                    	),
 		                    ),
 
 		                    array(
@@ -212,43 +201,45 @@ function cx_section_heading_kc() {
 									array(
 										"screens" => "any,1199,991,767,479",
 										'Title' => array(
-											array('property' => 'color', 'label' => esc_html__( 'Color', 'codexin'), 'selector' => '.primary-title, h2.primary-title.rv2'),
-											array('property' => 'font-family', 'label' => esc_html__( 'Font Family', 'codexin'), 'selector' => '.primary-title, h2.primary-title.rv2'),
-											array('property' => 'font-size', 'label' => esc_html__( 'Font Size', 'codexin'), 'selector' => '.primary-title, h2.primary-title.rv2'),
-											array('property' => 'line-height', 'label' => esc_html__( 'Line Height', 'codexin'), 'selector' => '.primary-title, h2.primary-title.rv2'),
-											array('property' => 'font-weight', 'label' => esc_html__( 'Font Weight', 'codexin'), 'selector' => '.primary-title, h2.primary-title.rv2'),
-											array('property' => 'text-align', 'label' => esc_html__( 'Text Align', 'codexin'), 'selector' => '.primary-title, h2.primary-title.rv2'),
-											array('property' => 'text-transform', 'label' => esc_html__( 'Text Transform', 'codexin'), 'selector' => '.primary-title, h2.primary-title.rv2'),
-											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin'), 'selector' => '.primary-title, h2.primary-title.rv2'),
-											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin'), 'selector' => '.primary-title, h2.primary-title.rv2')
+											array('property' => 'color', 'label' => esc_html__( 'Color', 'codexin'), 'selector' => '.primary-title'),
+											array('property' => 'font-family', 'label' => esc_html__( 'Font Family', 'codexin'), 'selector' => '.primary-title'),
+											array('property' => 'font-size', 'label' => esc_html__( 'Font Size', 'codexin'), 'selector' => '.primary-title'),
+											array('property' => 'line-height', 'label' => esc_html__( 'Line Height', 'codexin'), 'selector' => '.primary-title'),
+											array('property' => 'font-weight', 'label' => esc_html__( 'Font Weight', 'codexin'), 'selector' => '.primary-title'),
+											array('property' => 'text-align', 'label' => esc_html__( 'Text Align', 'codexin'), 'selector' => '.primary-title'),
+											array('property' => 'text-transform', 'label' => esc_html__( 'Text Transform', 'codexin'), 'selector' => '.primary-title'),
+											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin'), 'selector' => '.primary-title'),
+											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin'), 'selector' => '.primary-title')
 										),
 
 										'Subtitle' => array(
-											array('property' => 'color', 'label' => esc_html__( 'Color', 'codexin'), 'selector' => '.secondary-title, .secondary-title .rv2'),
-											array('property' => 'font-family', 'label' => esc_html__( 'Font Family', 'codexin'), 'selector' => '.secondary-title, .secondary-title .rv2'),
-											array('property' => 'font-size', 'label' => esc_html__( 'Font Size', 'codexin'), 'selector' => '.secondary-title, .secondary-title .rv2'),
-											array('property' => 'line-height', 'label' => esc_html__( 'Line Height', 'codexin'), 'selector' => '.secondary-title, .secondary-title .rv2'),
-											array('property' => 'font-weight', 'label' => esc_html__( 'Font Weight', 'codexin'), 'selector' => '.secondary-title, .secondary-title .rv2'),
-											array('property' => 'text-align', 'label' => esc_html__( 'Text Align', 'codexin'), 'selector' => '.secondary-title, .secondary-title .rv2'),
-											array('property' => 'text-transform', 'label' => esc_html__( 'Text Transform', 'codexin'), 'selector' => '.secondary-title, .secondary-title .rv2'),
-											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin'), 'selector' => '.secondary-title, .secondary-title .rv2'),
-											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin'), 'selector' => '.secondary-title, .secondary-title .rv2'),
+											array('property' => 'color', 'label' => esc_html__( 'Color', 'codexin'), 'selector' => '.secondary-title'),
+											array('property' => 'font-family', 'label' => esc_html__( 'Font Family', 'codexin'), 'selector' => '.secondary-title'),
+											array('property' => 'font-size', 'label' => esc_html__( 'Font Size', 'codexin'), 'selector' => '.secondary-title'),
+											array('property' => 'line-height', 'label' => esc_html__( 'Line Height', 'codexin'), 'selector' => '.secondary-title'),
+											array('property' => 'font-weight', 'label' => esc_html__( 'Font Weight', 'codexin'), 'selector' => '.secondary-title'),
+											array('property' => 'text-align', 'label' => esc_html__( 'Text Align', 'codexin'), 'selector' => '.secondary-title'),
+											array('property' => 'text-transform', 'label' => esc_html__( 'Text Transform', 'codexin'), 'selector' => '.secondary-title'),
+											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin'), 'selector' => '.secondary-title'),
+											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin'), 'selector' => '.secondary-title'),
 										),
 
-										'Divider' => array(
-											array('property' => 'background', 'label' => esc_html__( 'Color', 'codexin'), 'selector' => '.cx-divider::after,.rv2-title::before' ),
-											array('property' => 'width', 'label' => esc_html__( 'Width', 'codexin'), 'selector' => '.cx-divider::after,.rv2-title::before'),
-											array('property' => 'height', 'label' => esc_html__( 'Height', 'codexin'), 'selector' => '.cx-divider::after,.rv2-title::before'),
-											array('property' => 'display', 'label' => esc_html__( 'Display', 'codexin'), 'selector' => '.cx-divider::after,.rv2-title::before'),
-											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin'), 'selector' => '.cx-divider::after,.rv2-title::before')
+										'Divider-1' => array(
+											array('property' => 'background', 'label' => esc_html__( 'Color', 'codexin'), 'selector' => '.cx-divider::after' ),
+											array('property' => 'width', 'label' => esc_html__( 'Width', 'codexin'), 'selector' => '.cx-divider::after'),
+											array('property' => 'height', 'label' => esc_html__( 'Height', 'codexin'), 'selector' => '.cx-divider::after'),
+											array('property' => 'display', 'label' => esc_html__( 'Display', 'codexin'), 'selector' => '.cx-divider::after'),
+											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin'), 'selector' => '.cx-divider'),
+											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin'), 'selector' => '.cx-divider::after')
 										),
 
 										'Divider-2' => array(
-											array('property' => 'background-color', 'label' => esc_html__( 'BG Color Left', 'codexin'), 'selector' => '.rv2-title::before' ),
-											array('property' => 'background-color', 'label' => esc_html__( 'BG Color Right', 'codexin'), 'selector' => '.rv2-title::after' ),
-											array('property' => 'width', 'label' => esc_html__( 'Width Left', 'codexin'), 'selector' => '.rv2-title::before'),
-											array('property' => 'width', 'label' => esc_html__( 'Width Right', 'codexin'), 'selector' => '.rv2-title::after'),
-											array('property' => 'height', 'label' => esc_html__( 'Height', 'codexin'), 'selector' => '.rv2-title::before, .rv2-title::after'),
+											array('property' => 'background-color', 'label' => esc_html__( 'Color of Left Line', 'codexin'), 'selector' => '.cx-divider-2::before' ),
+											array('property' => 'background-color', 'label' => esc_html__( 'Color of Right Line', 'codexin'), 'selector' => '.cx-divider-2::after' ),
+											array('property' => 'width', 'label' => esc_html__( 'Width of Left Line', 'codexin'), 'selector' => '.cx-divider-2::before'),
+											array('property' => 'width', 'label' => esc_html__( 'Width of Right Line', 'codexin'), 'selector' => '.cx-divider-2::after'),
+											array('property' => 'height', 'label' => esc_html__( 'Height', 'codexin'), 'selector' => '.cx-divider-2::before, .cx-divider-2::after'),
+											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin'), 'selector' => '.cx-divider-2'),
 										),
 
 										'Line-Icon' => array(
