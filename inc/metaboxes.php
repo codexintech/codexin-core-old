@@ -117,7 +117,7 @@ function reveal_register_meta_boxes( $meta_boxes ) {
 
     $meta_boxes[] = array(
         'id'         => 'reveal-portfolio-meta',
-        'title'      => esc_html__( 'Portfolio Information', 'reveal' ),
+        'title'      => esc_html__( 'Portfolio', 'reveal' ),
         'post_types' => array( 'portfolio' ),
         'context'    => 'normal',
         'priority'   => 'high',
@@ -179,6 +179,15 @@ function reveal_register_meta_boxes( $meta_boxes ) {
         'context'    => 'normal',
         'priority'   => 'high',
         'fields' => array(
+
+            array(
+                'name'      => esc_html__( 'Disable Page Title Area?', 'reveal' ),
+                'desc'      => esc_html__('Checking this will disable the Page Title Section', 'reveal'),
+                'id'        => $prefix . 'disable_page_title',
+                //'type'      => 'image_advanced',
+                'type'      => 'checkbox',
+                'clone'     => false,
+            ),
 
             array(
                 'name'      => esc_html__( 'Page Title Background Image', 'reveal' ),
