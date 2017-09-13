@@ -133,25 +133,6 @@ function reveal_register_meta_boxes( $meta_boxes ) {
             ),
 
             array(
-                'name'  => esc_html__( 'Project Date', 'reveal' ),
-                'desc'  => esc_html__('Enter project date. Example: 14-Apr-17', 'reveal' ),
-                'id'    => $prefix . 'portfolio_date',
-                'type'  => 'date',
-                'clone' => false,
-                'size'  => 95
-            ),
-
-            array(
-                'name'  => esc_html__( 'Project Skills', 'reveal' ),
-                'desc'  => esc_html__('Enter project skills', 'reveal' ),
-                'id'    => $prefix . 'portfolio_skills',
-                'type'  => 'text',
-                'clone' => false,
-                'size'  => 95
-            ),
-
-
-            array(
                 'name'  => esc_html__( 'Project Site Name', 'reveal' ),
                 'desc'  => esc_html__('Enter project site name', 'reveal' ),
                 'id'    => $prefix . 'portfolio_sname',
@@ -169,11 +150,27 @@ function reveal_register_meta_boxes( $meta_boxes ) {
                 'size'  => 95
             ),
 
+            array(
+                'name'  => esc_html__( 'Project Date', 'reveal' ),
+                'desc'  => esc_html__('Enter project date. Example: 14-Apr-17', 'reveal' ),
+                'id'    => $prefix . 'portfolio_date',
+                'type'  => 'date',
+                'clone' => false,
+                'size'  => 95
+            ),
 
-
+            array(
+                'name'  => esc_html__( 'Project Skills', 'reveal' ),
+                'desc'  => esc_html__('Enter project skills', 'reveal' ),
+                'id'    => $prefix . 'portfolio_skills',
+                'type'  => 'text',
+                'clone' => false,
+                'size'  => 95
+            ),
 
         )
     );
+
 
     $meta_boxes[] = array(
         'id'         => 'reveal-page-background-meta',
