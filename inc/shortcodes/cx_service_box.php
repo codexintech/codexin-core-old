@@ -52,7 +52,7 @@ function cx_service_box_shortcode( $atts, $content = null ) {
                             <?php if( $s_media == 's_icon' ): ?>
               					<i class="<?php echo esc_attr( $icon ); ?>"></i>
                             <?php else: ?>
-                                <img src="<?php echo $ret_full_img_url; ?>" alt="<?php echo $image_alt; ?>">
+                                <img src="<?php echo esc_url( $ret_full_img_url ); ?>" alt="<?php if( !empty( $image_alt ) ): echo esc_html( $image_alt ); else: echo esc_html( $service_title ); endif; ?>">
                             <?php endif; ?>
           				</div>
           				<?php endif; ?>
@@ -80,7 +80,7 @@ function cx_service_box_shortcode( $atts, $content = null ) {
                             <?php if( $s_media == 's_icon' ): ?>
                                 <i class="<?php echo esc_attr( $icon ); ?>"></i>
                             <?php else: ?>
-                                <img src="<?php echo $ret_full_img_url; ?>" alt="<?php echo $image_alt; ?>">
+                                <img src="<?php echo esc_url( $ret_full_img_url ); ?>" alt="<?php if( !empty( $image_alt ) ): echo esc_html( $image_alt ); else: echo esc_html( $service_title ); endif; ?>">
                             <?php endif; ?>
                         </div>
                         <div class="media-desc">
@@ -108,7 +108,7 @@ function cx_service_box_shortcode( $atts, $content = null ) {
                             <?php if( $s_media == 's_icon' ): ?>
                                 <i class="<?php echo esc_attr( $icon ); ?>"></i>
                             <?php else: ?>
-                                <img src="<?php echo $ret_full_img_url; ?>" alt="<?php echo $image_alt; ?>">
+                                <img src="<?php echo esc_url( $ret_full_img_url ); ?>" alt="<?php if( !empty( $image_alt ) ): echo esc_html( $image_alt ); else: echo esc_html( $service_title ); endif; ?>">
                             <?php endif; ?>
                         </div>
                         <div class="media-desc">
@@ -147,9 +147,9 @@ function cx_service_box_kc() {
   	        					'label'			=> esc_html__( 'Select Service Box Template', 'codexin' ),
   	        					'name'			=> 'layout',
   	        					'options'		=> array(
-                                    '1' => CODEXIN_CORE_ASSET_DIR . '/images/layout-img/servicebox/layout-1.png',
-                                    '2' => CODEXIN_CORE_ASSET_DIR . '/images/layout-img/servicebox/layout-2.png',
-                                    '3' => CODEXIN_CORE_ASSET_DIR . '/images/layout-img/servicebox/layout-4.png',
+                                    '1' => CODEXIN_CORE_ASSET_DIR . '/images/layout-img/servicebox/service-layout-1.jpg',
+                                    '2' => CODEXIN_CORE_ASSET_DIR . '/images/layout-img/servicebox/service-layout-2.jpg',
+                                    '3' => CODEXIN_CORE_ASSET_DIR . '/images/layout-img/servicebox/service-layout-3.jpg',
                                     ),
   	        					'value'			=> '1'
                             ),
@@ -205,7 +205,6 @@ function cx_service_box_kc() {
                                     'parent'    => 's_media',
                                     'show_when' => 's_image',
                                 ),
-                                'description'   => esc_html__( 'Recommended Image Icon size 50x50 px.', 'codexin' ),
                             ),
 
   	        				array(
@@ -225,20 +224,6 @@ function cx_service_box_kc() {
                               'type'      => 'textarea',
                               'description' => esc_html__( 'Enter Service Description', 'codexin' ),
                           ),
-
-                           // array(
-                           //    'name'      => 'item_selected',
-                           //    'label'     => esc_html__( 'Animation Delay Time', 'codexin' ),
-                           //    'type'      => 'checkbox',
-                           //    'options'   => array(
-                           //        'on'  => 'Selected Box Item',
-                           //      ),
-                           //    'relation'  => array(
-                           //        'parent'    => 'layout',
-                           //        'show_when' => '2',
-                           //      ),
-                           //    'description' => esc_html__( 'If you wish to style the service-box as selected, please check this box', 'codexin' ),
-                           // ),
 
                            array(
                             'name'      => 'class',
@@ -286,7 +271,7 @@ function cx_service_box_kc() {
 
   	        							'Icon' => array(
   	        								array('property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.media-thumb i'),
-                                            array('property' => 'color', 'label' => esc_html__('Color On Hover', 'codexin'), 'selector' => '.service-single:hover i, .service-single-2:hover i'),
+                                            array('property' => 'color', 'label' => esc_html__('Color On Hover', 'codexin'), 'selector' => '.service-single:hover i, .service-single-2:hover i, .service-single-3:hover i'),
                                             array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.media-thumb i'),
                                             array('property' => 'display', 'label' => esc_html__('Display', 'codexin'), 'selector' => '.media-wrapper'),
                                             array('property' => 'width', 'label' => esc_html__('Width', 'codexin'), 'selector' => '.media-thumb'),
@@ -305,15 +290,15 @@ function cx_service_box_kc() {
                                         ),
 
   	        							'Box'	=> array(
-  	        								array('property' => 'background', 'selector' => '.service-single, .service-single-2'),
-                                            array('property' => 'border', 'label' => esc_html__('Border', 'codexin'), 'selector' => '.service-single, .service-single-2' ),
-  	        								array('property' => 'border', 'label' => esc_html__('Border on Hover', 'codexin'), 'selector' => '.service-single:hover, .service-single-2:hover' ),
-  	        								array('property' => 'border-radius', 'label' => esc_html__('Border Radius', 'codexin'), 'selector' => '.service-single, .service-single-2' ),
-  	        								array('property' => 'box-shadow', 'label' => esc_html__('Box Shadow', 'codexin'), 'selector' => '.service-single, .service-single-2'),
-  	        								array('property' => 'box-shadow', 'label' => esc_html__('Box Shadow on Hover', 'codexin'), 'selector' => '.service-single:hover, .service-single-2:hover'),
-  	        								array('property' => 'transition', 'label' => esc_html__('Hover Transition Animation', 'codexin'), 'selector' => '.service-single, .service-single-2'),
-  	        								array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.service-single, .service-single-2' ),
-  	        								array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.service-single, .service-single-2' ),
+  	        								array('property' => 'background', 'selector' => '.service-single, .service-single-2, .service-single-3'),
+                                            array('property' => 'border', 'label' => esc_html__('Border', 'codexin'), 'selector' => '.service-single, .service-single-2, .service-single-3' ),
+  	        								array('property' => 'border', 'label' => esc_html__('Border on Hover', 'codexin'), 'selector' => '.service-single:hover, .service-single-2:hover, .service-single-3:hover' ),
+  	        								array('property' => 'border-radius', 'label' => esc_html__('Border Radius', 'codexin'), 'selector' => '.service-single, .service-single-2, .service-single-3' ),
+  	        								array('property' => 'box-shadow', 'label' => esc_html__('Box Shadow', 'codexin'), 'selector' => '.service-single, .service-single-2, .service-single-3'),
+  	        								array('property' => 'box-shadow', 'label' => esc_html__('Box Shadow on Hover', 'codexin'), 'selector' => '.service-single:hover, .service-single-2:hover, .service-single-3:hover'),
+  	        								array('property' => 'transition', 'label' => esc_html__('Hover Transition Animation', 'codexin'), 'selector' => '.service-single, .service-single-2, .service-single-3'),
+  	        								array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.service-single, .service-single-2, .service-single-3' ),
+  	        								array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.service-single, .service-single-2, .service-single-3' ),
         								)									
         							)
         						)

@@ -432,10 +432,15 @@ INDEX:
 .cx-service-box .service-single .media-thumb i {
     font-size: 50px;
     padding: 5px;
-    text-align: center;
     line-height: 1em;
     display: block;
     text-align: left;
+    color: #295970;
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    -ms-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
 }
 
 .cx-testimonial-2 .quote-wrapper .media-desc,
