@@ -15,7 +15,8 @@ function cx_service_box_shortcode( $atts, $content = null ) {
             's_media'       => '',
             's_icon'        => '',
             's_image'       => '',
-            'media_image' 	=> '',
+            'media_image'   => '',
+            'image_alt' 	=> '',
             'service_title'	=> '',
             'service_desc'  => '',
             'class'         => '',
@@ -27,6 +28,10 @@ function cx_service_box_shortcode( $atts, $content = null ) {
     // Assigning a master css class and hooking into KC
     $master_class = apply_filters( 'kc-el-class', $atts );
     $master_class[] = 'cx-service-box';
+
+    // Retrieving the image url
+    $ret_full_img_url = retrieve_img_src( $media_image, 'full' );
+
 
 	ob_start(); 
 	?>
@@ -47,7 +52,7 @@ function cx_service_box_shortcode( $atts, $content = null ) {
                             <?php if( $s_media == 's_icon' ): ?>
               					<i class="<?php echo esc_attr( $icon ); ?>"></i>
                             <?php else: ?>
-                                <img src="rev-2-img/11.jpg" alt="">
+                                <img src="<?php echo $ret_full_img_url; ?>" alt="<?php echo $image_alt; ?>">
                             <?php endif; ?>
           				</div>
           				<?php endif; ?>
@@ -72,7 +77,11 @@ function cx_service_box_shortcode( $atts, $content = null ) {
                 <div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
                     <div class="media-wrapper">
                         <div class="media-thumb">
-                            <i class="<?php echo esc_attr( $icon ); ?>"></i>
+                            <?php if( $s_media == 's_icon' ): ?>
+                                <i class="<?php echo esc_attr( $icon ); ?>"></i>
+                            <?php else: ?>
+                                <img src="<?php echo $ret_full_img_url; ?>" alt="<?php echo $image_alt; ?>">
+                            <?php endif; ?>
                         </div>
                         <div class="media-desc">
                             <h4 class="media-title"><?php echo esc_html( $service_title ); ?></h4>
@@ -96,7 +105,11 @@ function cx_service_box_shortcode( $atts, $content = null ) {
                 <div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
                     <div class="media-wrapper">
                         <div class="media-thumb">
-                            <i class="<?php echo esc_attr( $icon ); ?>"></i>
+                            <?php if( $s_media == 's_icon' ): ?>
+                                <i class="<?php echo esc_attr( $icon ); ?>"></i>
+                            <?php else: ?>
+                                <img src="<?php echo $ret_full_img_url; ?>" alt="<?php echo $image_alt; ?>">
+                            <?php endif; ?>
                         </div>
                         <div class="media-desc">
                             <h4 class="media-title"><?php echo esc_html( $service_title ); ?></h4>
@@ -169,13 +182,25 @@ function cx_service_box_kc() {
                                     'parent'    => 'icon_toggle',
                                     'show_when' => 'yes',
                                 ),
+                                'value'         => 's_icon',
                                 'description'   => esc_html__( 'Choose what media you want to show', 'codexin' ),
                             ),
 
                             array(
-                                'name'          => 'media_img',
+                                'name'          => 'media_image',
                                 'label'         => esc_html__( 'Upload Service Image Icon', 'codexin' ),
                                 'type'          => 'attach_image',
+                                'relation'      => array(
+                                    'parent'    => 's_media',
+                                    'show_when' => 's_image',
+                                ),
+                                'description'   => esc_html__( 'Recommended Image Icon size 50x50 px.', 'codexin' ),
+                            ),
+
+                            array(
+                                'name'          => 'image_alt',
+                                'label'         => esc_html__( 'Enter Image Alt Tag', 'codexin' ),
+                                'type'          => 'text',
                                 'relation'      => array(
                                     'parent'    => 's_media',
                                     'show_when' => 's_image',

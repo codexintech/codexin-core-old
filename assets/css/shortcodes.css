@@ -379,6 +379,9 @@ INDEX:
 
 /* old browser finished */
 
+.cx-service-box .media-thumb img {
+    max-width: 60px;
+}
 
 .cx-testimonial-2 .quote-wrapper .media-wrapper,
 .cx-service-box .service-single .media-wrapper {
