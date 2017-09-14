@@ -54,10 +54,10 @@ function cx_section_heading_shortcode(  $atts, $content = null) {
 		<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
 			<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
 				<?php if( $div_pos == 'top' ): printf( '%s', $divider_line ); endif; ?>
-				<?php if( !empty( $title ) ): ?>
+				<?php if( !empty( $subtitle ) ): ?>
 				<h3 class="secondary-title"><?php echo esc_html( $subtitle ); ?></h3>
 				<?php endif; ?>
-				<?php if( !empty( $subtitle ) ): ?>
+				<?php if( !empty( $title ) ): ?>
 				<h2 class="primary-title"><?php echo esc_html( $title ); ?></h2>
 				<?php endif; ?>
 				<?php if( $div_pos == 'bottom' ): printf( '%s', $divider_line ); endif; ?>
