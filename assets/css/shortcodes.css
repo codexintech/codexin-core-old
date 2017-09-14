@@ -1,77 +1,25 @@
-/**
-    ========================================================
-       Index :
-        001 - Home - v1 
-        002 - Home - v2
-        003 - Home - v3
-    ========================================================
- */
 
 
-/*----------------------------------
-    001 - Home - v1
------------------------------------*/
+/******************************
 
-input[type="text"],
-input[type="url"],
-input[type="email"],
-input[type="button"],
-input[type="reset"],
-input[type="password"],
-input[type="search"],
-input[type="tel"] {
-    padding:8px 10px;
-    border: 1px solid #ddd;
-}
-
-input[type="submit"] {
-    border:1px solid #295970;
-}
+INDEX:
+    001 - Codexin Section Heading
+    002 - Codexin Image Box
+    003 - Codexin Counter Box
+    004 - Codexin Service Box
+    005 - Codexin Events
+    006 - Codexin Testimonial Type 01
+    007 - Codexin Team
+    008 - Codexin Portfolio
+    009 - Codexin Blog
+    010 - Codexin Map
+    011 - Codexin Contact Form
+    012 - Codexin Social Share
+    013 - Codexin Pricing Table
+    050 - Responsive CSS
 
 
-button,
-input[type="submit"],
-input[type="button"]{
-    background: #295970;
-    color: #fff;
-    font-size: 85%;
-    padding: 8px 20px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-input::-webkit-input-placeholder,
-input:-moz-placeholder ,
-input:-ms-input-placeholder ,
-input[placeholder]{
-    color: #ddd ;
-}
-input:focus,
-textarea:focus {
-    border-color: #95E1D3;
-}
-button:hover,
-input[type="submit"]:hover,
-input[type="button"]:hover{
-    background: #333;
-}
-
-.btn-mailchimp {
-    background: #295970;
-    color: #fff;
-    font-size: 85%;
-    padding: 8px 20px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-top: 10px;
-}
-
-
-.clearfix::before, .clearfix::after {
-    content:"";
-    display:table;
-}
-.clearfix::after {clear:both;}
+******************************/
 
 
 /**********************************
@@ -124,17 +72,6 @@ input[type="button"]:hover{
     margin-top: 35px;
     text-align: center;
 }
-
-/*.section-heading .secondary-title i {
-    position: absolute;
-    top: -9px;
-    left: 50%;
-    transform: translateX(-50%);
-    padding-left: 10px;
-    padding-right: 10px;
-    font-size: 20px;
-    background: #fff;
-}*/
 
 .section-heading .cx-divider-2:first-child {
     padding-bottom: 25px;
@@ -354,9 +291,9 @@ input[type="button"]:hover{
     padding:48px 25px;
 }
 
-/**********************************************************
-    004 - Codexin Service Box/Codexin Testimonial Type 02
-***********************************************************/
+/**************************************
+    004 - Codexin Service Box
+***************************************
 
 /*.cx-service-box .service-single {
     margin-bottom: 40px;
@@ -396,9 +333,12 @@ input[type="button"]:hover{
 */
 
 /**
- * Old browser support
+ * Codexin Service Box Type 01
  *
  */
+
+/* Old browser support */
+
 .no-flexbox .cx-service-box .service-single .media-thumb {
     padding-right: 5px;
     padding-top: 7px;
@@ -438,6 +378,7 @@ input[type="button"]:hover{
 
 
 /* old browser finished */
+
 
 .cx-testimonial-2 .quote-wrapper .media-wrapper,
 .cx-service-box .service-single .media-wrapper {
@@ -482,6 +423,7 @@ input[type="button"]:hover{
     margin-bottom: 10px;
     margin-top: 2px;
     letter-spacing: normal;
+    line-height: 1em;
 }
 
 .cx-service-box .service-single .media-thumb i {
@@ -489,6 +431,8 @@ input[type="button"]:hover{
     padding: 5px;
     text-align: center;
     line-height: 1em;
+    display: block;
+    text-align: left;
 }
 
 .cx-testimonial-2 .quote-wrapper .media-desc,
@@ -501,6 +445,106 @@ input[type="button"]:hover{
     flex-grow: 1;
 }
 
+
+/**
+ * Codexin Service Box Type 02
+ *
+ */
+
+.cx-service-box .service-single-2 {
+    padding: 60px 40px 40px;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    -ms-box-shadow: none;
+    -o-box-shadow: none;
+    box-shadow: none;
+    background: #fff;
+    position: relative;
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    -ms-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+    text-align: center;
+    border: 1px solid #ebebeb;
+}
+
+.cx-service-box .service-single-2:hover {
+    -webkit-box-shadow: -5px 15px 60px -22px rgba(0,0,0,0.5);
+    -moz-box-shadow: -5px 15px 60px -22px rgba(0,0,0,0.5);
+    -ms-box-shadow: -5px 15px 60px -22px rgba(0,0,0,0.5);
+    -o-box-shadow: -5px 15px 60px -22px rgba(0,0,0,0.5);
+    box-shadow: -5px 15px 60px -22px rgba(0,0,0,0.5);
+}
+
+.cx-service-box .service-single-2 .media-thumb,
+.cx-service-box .service-single-3 .media-thumb {
+    margin-bottom: 40px;
+}
+
+.cx-service-box .service-single-2 .media-thumb i,
+.cx-service-box .service-single-3 .media-thumb i {
+    margin: 0;
+    font-size: 60px;
+    color: #707070;
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    -ms-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+}
+
+.cx-service-box .service-single-2:hover .media-thumb i,
+.cx-service-box .service-single-3:hover .media-thumb i {
+    color: #82c400;
+}
+
+.cx-service-box .service-single-2 .media-title,
+.cx-service-box .service-single-3 .media-title {
+    text-transform: uppercase;
+    font-weight: 500;
+    line-height: 1em;
+}
+
+.cx-service-box .service-single-3 .media-texts,
+.cx-service-box .service-single-2 .media-texts {
+    margin-bottom: 0;
+}
+
+
+/**
+ * Codexin Service Box Type 03
+ *
+ */
+
+
+.cx-service-box .service-single-3 {
+    background: -webkit-linear-gradient( to left,#e1e1e1 0,#e1e1e1 30%,#fff 30%,#fff 70%,#e1e1e1 70%,#e1e1e1)top no-repeat, linear-gradient( to right, #e1e1e1 0,#e1e1e1 30%,#fff 30%,#fff 70%,#e1e1e1 70%,#e1e1e1) bottom no-repeat;
+    background: -moz-linear-gradient( to left,#e1e1e1 0,#e1e1e1 30%,#fff 30%,#fff 70%,#e1e1e1 70%,#e1e1e1)top no-repeat, linear-gradient( to right, #e1e1e1 0,#e1e1e1 30%,#fff 30%,#fff 70%,#e1e1e1 70%,#e1e1e1) bottom no-repeat;
+    background: -ms-linear-gradient( to left,#e1e1e1 0,#e1e1e1 30%,#fff 30%,#fff 70%,#e1e1e1 70%,#e1e1e1)top no-repeat, linear-gradient( to right, #e1e1e1 0,#e1e1e1 30%,#fff 30%,#fff 70%,#e1e1e1 70%,#e1e1e1) bottom no-repeat;
+    background: -o-linear-gradient( to left,#e1e1e1 0,#e1e1e1 30%,#fff 30%,#fff 70%,#e1e1e1 70%,#e1e1e1)top no-repeat, linear-gradient( to right, #e1e1e1 0,#e1e1e1 30%,#fff 30%,#fff 70%,#e1e1e1 70%,#e1e1e1) bottom no-repeat;
+    background: linear-gradient( to left,#e1e1e1 0,#e1e1e1 30%,#fff 30%,#fff 70%,#e1e1e1 70%,#e1e1e1)top no-repeat, linear-gradient( to right, #e1e1e1 0,#e1e1e1 30%,#fff 30%,#fff 70%,#e1e1e1 70%,#e1e1e1) bottom no-repeat;
+    -webkit-background-size: 100% 1px, 100% 1px;
+    -moz-background-size: 100% 1px, 100% 1px;
+    -ms-background-size: 100% 1px, 100% 1px;
+    -o-background-size: 100% 1px, 100% 1px;
+    background-size: 100% 1px, 100% 1px;
+    text-align: center;
+    border: 1px solid transparent;
+    border-left: 1px solid #e1e1e1;
+    border-right: 1px solid #e1e1e1;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    padding: 60px 40px 40px;
+}
+
+.cx-service-box .service-single-3:hover {
+    border: 1px solid #82c400;
+    background: initial;
+}
 
 
 /**************************************
@@ -710,8 +754,13 @@ input[type="button"]:hover{
 
 
 /************************************************************
-    006 - Codexin Testimonial Type 01
+    006 - Codexin Testimonial
 *************************************************************/
+
+/**
+ * Codexin Testimonial Type 01
+ *
+ */
 
 .cx-testimonial-1 .quote-author-thumb {
     float: left;
@@ -781,9 +830,10 @@ input[type="button"]:hover{
     right:-95px;
 }
 
-/************************************************************
-    007 - Codexin Testimonial Type 02
-*************************************************************/
+/**
+ * Codexin Testimonial Type 02
+ *
+ */
 
 .cx-testimonial-2 .quote-wrapper {
     margin-top: 35px;
@@ -859,7 +909,7 @@ input[type="button"]:hover{
 }
 
 /*************************************
-    008 - Codexin Team
+    007 - Codexin Team
 *************************************/
 .cx-team-wrapper {
     margin-bottom: 30px;
@@ -975,7 +1025,7 @@ input[type="button"]:hover{
 
 
 /**************************************
-  0009 - Codexin Portfolio
+    008 - Codexin Portfolio
 **************************************/
 
 .cx-portfolios {
@@ -1116,7 +1166,7 @@ input[type="button"]:hover{
 
 
 /**************************************
-    0010 - Codexin Blog
+    009 - Codexin Blog
 *************************************/
 div.cx-blog {
     margin-top: 0;
@@ -1350,7 +1400,7 @@ div.cx-blog {
 
 
 /*********************************************
-   0011 - Codexin Map
+   0010 - Codexin Map
 *********************************************/
 section#location {
     margin-top: 0;
@@ -1380,7 +1430,7 @@ section#location {
 
 
 /*********************************************
-   0012 - Codexin Contact Form
+   0011 - Codexin Contact Form
 *********************************************/
 
 .cx-form-wrapper .contact-intro {
@@ -1444,7 +1494,7 @@ section#location {
 
 
 /************************************************************
-  0013 - Codexin Social Share
+  0012 - Codexin Social Share
 *************************************************************/
 .cx-social-media {
     display: inline-block;
@@ -1524,7 +1574,7 @@ section#location {
 
 
 /**********************************
-   014 - Codexin Pricing Table
+   013 - Codexin Pricing Table
 **********************************/
 
 .cx-pricing-tables {
@@ -1700,13 +1750,10 @@ section#location {
 
 
 
-/************************************************************
-    006 - Codexin Testimonial Type 01
-*************************************************************/
 
 
 /*--------------------------------------
-    Responsive CSS
+    050 - Responsive CSS
 --------------------------------------*/
 /*---For Heaader ---*/
 @media only screen and (max-width: 479px)
@@ -1785,7 +1832,7 @@ h2.primary-title.rv2 {
 /*title default style end*/
 
 /*--------Servive Box Style Featured-Section -------*/
-.featured {
+/*.featured {
     position: relative;
     z-index: 95;
 }
@@ -1808,10 +1855,10 @@ h2.primary-title.rv2 {
 .item-hover,
 .featured-item:hover{
     box-shadow: 0px 15px 60px -22px rgba(0,0,0,0.5)
-}
+}*/
 
 /*--Servicebox-3---*/
-.service-item {
+/*.service-item {
     padding-left: 40px;
     padding-right: 40px;
     background: #f7f7f7;
@@ -1835,7 +1882,7 @@ h2.primary-title.rv2 {
 
 .service-item p{
     margin: 0 ;
-}
+}*/
 
 
 
@@ -2859,7 +2906,7 @@ section#portfolio_rv3 {
     border-color: #295970;
 }
 
-.portfolio {
+/*.portfolio {
     
     position: relative; 
     overflow: hidden;
@@ -2867,7 +2914,7 @@ section#portfolio_rv3 {
 
 .portfolio a {
     color: #fff;
-}
+}*/
 
 .portfolio img {
     width:100%;
