@@ -102,6 +102,7 @@ function cx_section_heading_kc() {
 		                        'name' 			=> 'title',
 		                        'label' 		=> esc_html__( 'Enter Title', 'codexin' ),
 		                        'type' 			=> 'text',
+		                        'admin_label'	=> true,
 		                    ),
 
 		                    array(
