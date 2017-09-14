@@ -295,6 +295,15 @@ function cx_service_box_kc() {
   	        								array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.media-thumb i')
         								),
 
+                                        'Image' => array(
+                                            array('property' => 'width', 'label' => esc_html__('Width', 'codexin'), 'selector' => '.media-thumb img'),
+                                            array('property' => 'max-width', 'label' => esc_html__('Max Width', 'codexin'), 'selector' => '.media-thumb img'),
+                                            array('property' => 'height', 'label' => esc_html__('Height', 'codexin'), 'selector' => '.media-thumb img'),
+                                            array('property' => 'border', 'label' => esc_html__('Border', 'codexin'), 'selector' => '.media-thumb img'),
+                                            array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.media-thumb img'),
+                                            array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.media-thumb img')
+                                        ),
+
   	        							'Box'	=> array(
   	        								array('property' => 'background', 'selector' => '.service-single, .service-single-2'),
                                             array('property' => 'border', 'label' => esc_html__('Border', 'codexin'), 'selector' => '.service-single, .service-single-2' ),
