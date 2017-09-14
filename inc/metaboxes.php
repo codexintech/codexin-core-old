@@ -173,9 +173,9 @@ function reveal_register_meta_boxes( $meta_boxes ) {
 
 
     $meta_boxes[] = array(
-        'id'         => 'reveal-page-background-meta',
+        'id'         => 'reveal-page-background-meta-common',
         'title'      => esc_html__( 'Page Header Settings', 'reveal' ),
-        'post_types' => array( 'page' ),
+        'post_types' => array( 'page', 'portfolio' ),
         'context'    => 'normal',
         'priority'   => 'high',
         'fields' => array(
@@ -199,6 +199,17 @@ function reveal_register_meta_boxes( $meta_boxes ) {
                 'max_status'       => true,
                 'clone'     => false,
             ),
+        )
+    );
+
+
+    $meta_boxes[] = array(
+        'id'         => 'reveal-page-background-meta',
+        'title'      => esc_html__( 'Page Slider Settings', 'reveal' ),
+        'post_types' => array( 'page' ),
+        'context'    => 'normal',
+        'priority'   => 'high',
+        'fields' => array(
 
             array(
                 'name'      => esc_html__( 'Select a Page Slider', 'reveal' ),
