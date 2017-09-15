@@ -16,6 +16,7 @@ INDEX:
     011 - Codexin Contact Form
     012 - Codexin Social Share
     013 - Codexin Pricing Table
+    014 - Codexin Call to Action
     050 - Responsive CSS
 
 
@@ -1761,8 +1762,153 @@ section#location {
 }
 
 
+/************************************************************
+    014 - Codexin Call to Action
+*************************************************************/
+
+/**
+ * Codexin CTA Type 01
+ *
+ */
+
+.cx-cta .cx-cta-btn {
+    padding: 11px 20px;
+    overflow: hidden;
+    display: inline-block;
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    -ms-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+    text-transform: uppercase;
+    text-align: center;
+    min-width: 185px;
+    background: #fff ;
+    color: #606060 ;
+}
+
+.cx-cta .cx-cta-btn:hover {
+    background: #444;
+    color: #fff;
+}
+
+.cx-cta {
+    background: #23dac9;
+}
+
+.cx-cta .cta-content {
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    width: 100%;
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    -ms-align-items: center;
+    -o-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    -moz-justify-content: center;
+    -ms-justify-content: center;
+    -o-justify-content: center;
+    justify-content: center;
+    padding: 40px 20px;
+    text-align: left;
+}
+
+.cx-cta .cta-content .cta-details {
+    margin: 0;
+    margin-right: 60px;
+}
+
+.cx-cta .cta-content .cta-title {
+    color: #fff;
+    font-size: 25px;
+}
+
+.cx-cta .cta-content .cta-details p {
+    margin-bottom: 0;
+    color: #fff;
+}
+
+.cx-cta .cta-content i {
+    font-size: 36px;
+    color: #f5f5f5;
+    margin-right: 30px;
+    line-height: 1.1em;
+}
 
 
+
+/*  Old browser support */
+
+.no-flexbox .cx-cta .cta-content {
+    display:table;
+}
+
+.no-flexbox .cx-cta i,
+.no-flexbox .cx-cta  .cta-content a,
+.no-flexbox .cx-cta  .cta-title {
+    display: table-cell;
+    vertical-align: middle;
+}
+.no-flexbox .cx-cta  .cta-title,
+.no-flexbox .cx-cta i {
+    padding-right: 20px;
+}
+
+/* Old browser end */
+
+
+/**
+ * Codexin CTA Type 02
+ *
+ */
+
+.cx-cta-2 {
+    height: 400px;
+}
+
+.cx-cta-2 .cta-content {
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+    width: 80%;
+    height: 75%;
+    margin: auto auto;
+    padding: 15px 15px;
+    border: 10px solid rgb(255, 255, 255);
+    border: 10px solid rgba(255, 255, 255, 0.8);
+}
+
+.cx-cta-2 .cta-details {
+    text-align: center;
+    background: #fff;
+    width: 100%;
+    height: 100%;
+    opacity: 0.9;
+}
+
+.cx-cta-2 .cx-content {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 42px;
+    padding: 0px 15%;
+    line-height: 1.4em;
+}
+
+.cx-cta-2 .cx-content a {
+    font-weight: bold;
+    text-decoration: underline;
+    color: green;
+    text-transform: capitalize;
+}
 
 /*--------------------------------------
     050 - Responsive CSS
@@ -2120,97 +2266,7 @@ section#feedback {
     border-bottom: none;
 }
 
-/************************************************************
-    Codexin CTA Section
-*************************************************************/
-.cx-cta .btn-rv {
-    padding: 11px 20px;
-    overflow: hidden;
-    display: inline-block;
-    -webkit-transition: 0.3s;
-    -moz-transition: 0.3s;
-    -ms-transition: 0.3s;
-    -o-transition: 0.3s;
-    transition: 0.3s;
-    text-transform: uppercase;
-    text-align: center;
-    min-width: 185px;
-}
 
-.cx-cta {
-    background: #23dac9;
-    padding: 40px 20px;
-    text-align: left;
-}
-
-.cx-cta .btn-white{
-    background: #fff ;
-    color: #606060 ;
-}
-
-.cx-cta .btn-white:hover{
-    background: #444;
-    color: #fff;
-}
-
-.cx-cta .btn-radius{
-    border-radius: 5px;
-}
-
-.cx-cta .cta-wrapper-rv2 {
-    background: none;
-    padding: 45px 0;
-}
-
-.cx-cta .cta-content {
-    display: -webkit-flex;
-    display: -moz-flex;
-    display: -ms-flex;
-    display: -o-flex;
-    display: flex;
-    width: 100%;
-    -webkit-align-items: center;
-    -moz-align-items: center;
-    -ms-align-items: center;
-    -o-align-items: center;
-    align-items: center;
-    -webkit-justify-content: center;
-    -moz-justify-content: center;
-    -ms-justify-content: center;
-    -o-justify-content: center;
-    justify-content: center;
-}
-
-.no-flexbox .cx-cta .cta-content {
-    display:table;
-}
-
-
-.cx-cta  .cta-title {
-    color: #fff;
-    font-size: 25px;
-    margin: 0;
-    margin-right: 60px;
-}
-
-
-.no-flexbox .cx-cta i,
-.no-flexbox .cx-cta  .cta-content a,
-.no-flexbox .cx-cta  .cta-title {
-    display: table-cell;
-    vertical-align: middle;
-}
-.no-flexbox .cx-cta  .cta-title,
-.no-flexbox .cx-cta i {
-    padding-right: 20px;
-}
-
-.cx-cta i {
-    font-size: 36px;
-    color: #f5f5f5;
-    margin-right: 30px;
-    line-height: 1.1em;
-}
 
 
 
@@ -2358,9 +2414,9 @@ figure.portfolio-rv2:hover .image-mask a {
     margin-top: 50px;
     margin-bottom: 50px;
 }
-#gmap{
+/*#gmap{
     height: 550px;
-}
+}*/
 #map2 {
     position: relative;
 }
@@ -3076,7 +3132,7 @@ section#portfolio_rv3 {
     color: #606060 ;
 }
 
-.cta-content {
+/*.cta-content {
     display: table;
     width: 100% ;
 }
@@ -3089,7 +3145,7 @@ section#portfolio_rv3 {
 }
 .cta-content a{
     float: right;
-}
+}*/
 
 /*****************************
     007 - events section
