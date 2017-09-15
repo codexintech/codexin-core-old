@@ -25,7 +25,6 @@ function cx_call_to_action_shortcode(  $atts, $content = null) {
 
 	// Retrieving the url
 	$retrieve_link = retrieve_url( $href );
-
 	$title = ($retrieve_link[1]) ? 'title='.esc_attr($retrieve_link[1]):'';
 	$target = ($retrieve_link[2]) ? 'target='.esc_attr($retrieve_link[2]):'';
 
@@ -33,84 +32,86 @@ function cx_call_to_action_shortcode(  $atts, $content = null) {
 
    	if( ! empty( $layout ) ) :
    		if( $layout == 1 ) :
-		// Assigning a master css class and hooking into KC
-		$master_class = apply_filters( 'kc-el-class', $atts );
-   		$master_class[] = 'cx-cta';
+			// Assigning a master css class and hooking into KC
+			$master_class = apply_filters( 'kc-el-class', $atts );
+	   		$master_class[] = 'cx-cta';
 
-		// Retrieving user define classes
-   		$classes = array( 'cta-content' );
-   		(!empty($class)) ? $classes[] = $class : '';
-   	?>
+			// Retrieving user define classes
+	   		$classes = array( 'cta-content' );
+	   		(!empty($class)) ? $classes[] = $class : '';
+		?>
 
-   	<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
-   			<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
+		   	<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
+	   			<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
+					<?php if( $icon_toggle ): ?>
+					<i class="<?php echo esc_attr( $icon ); ?>"></i>
+					<?php endif; ?>
+	   				<div class="cta-details">
+	   					<?php if( !empty( $cta_title ) ): ?>
+		   					<h4 class="cta-title"><?php printf('%s', $cta_title); ?></h4>
+		   				<?php endif; ?>
+		   				<?php if( !empty( $cta_desc ) ): ?>
+		   					<p><?php printf('%s', $cta_desc); ?></p>
+		   				<?php endif; ?>
+	   				</div>
+	   				<a href="<?php echo esc_url($retrieve_link[0]); ?>" <?php echo $title; ?> <?php echo $target; ?>" class="cx-cta-btn"><?php echo esc_html( $button_text ); ?></a>
+	   			</div><!-- end of cta-content -->
+		   	</div><!-- end of cx-cta -->
 
-				<?php if( $icon_toggle ): ?>
-				<i class="<?php echo esc_attr( $icon ); ?>"></i>
-				<?php endif; ?>
+	   	<?php 
+		endif; //End Layout - 1 
 
-   				<div class="cta-details">
-   					<?php if( !empty( $cta_title ) ): ?>
-	   					<h4 class="cta-title"><?php printf('%s', $cta_title); ?></h4>
-	   				<?php endif; ?>
-	   				<?php if( !empty( $cta_desc ) ): ?>
-	   					<p><?php printf('%s', $cta_desc); ?></p>
-	   				<?php endif; ?>
-   				</div>
-   				<a href="<?php echo esc_url($retrieve_link[0]); ?>" <?php echo $title; ?> <?php echo $target; ?>" class="cx-cta-btn"><?php echo esc_html__( $button_text ); ?></a>
-   			</div>
-   	</div><!--  end of cx-cta  -->
+		if( $layout == 2 ) :
+		   	// Assigning a master css class and hooking into KC
+			$master_class = apply_filters( 'kc-el-class', $atts );
+			$master_class[] = 'cx-cta-2';
 
+			// Retrieving user define classes
+			$classes = array( 'cta-content' );
+			(!empty($class)) ? $classes[] = $class : ''; 
+		?>
+			
+			<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">	
+				<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
+					<div class="cta-details">
+						<div class="cx-content">
+							<p><?php printf( '%s', $cta_content ); ?></p>
+						</div>
+					</div> <!-- end of cta-details -->
+				</div> <!-- end of cta-cta-content-2 -->
+			</div> <!-- end of cx-cta -->
 
-   <?php 
-   endif; //End Layout - 1 
+		<?php endif; //End Layout - 2 
 
-   if( $layout == 2 ) :
-   	// Assigning a master css class and hooking into KC
-	$master_class = apply_filters( 'kc-el-class', $atts );
-	$master_class[] = 'cx-cta-2';
+		if( $layout == 3 ) :
+			// Assigning a master css class and hooking into KC
+			$master_class = apply_filters( 'kc-el-class', $atts );
+			$master_class[] = 'cx-cta-3';
 
-	// Retrieving user define classes
-	$classes = array( 'cta-content' );
-	(!empty($class)) ? $classes[] = $class : ''; ?>
-	
-	<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">	
-		<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
+			// Retrieving user define classes
+			$classes = array( 'cta-content' );
+			(!empty($class)) ? $classes[] = $class : ''; 
+		?>
 
-				<div class="cta-details">
-					<div class="cx-content">
-						<p><?php printf( '%s', $cta_content ); ?></p>
-					</div>
-				</div> <!-- end of cta-details -->		        
+			<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
+			  	<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
+			  		<div class="cta-details">
+			  			<?php if( !empty( $cta_title ) ): ?>
+				  			<h4 class="cta-title"><?php printf('%s', $cta_title); ?></h4>
+				  		<?php endif; ?>
+				  		<?php if( !empty( $cta_desc ) ): ?>
+				  			<p> <?php printf( '%s', $cta_desc ); ?> </p>
+				  		<?php endif; ?>
+			  			<a href="<?php echo esc_url($retrieve_link[0]); ?>" <?php echo $title; ?> <?php echo $target; ?>" class="cx-cta-btn"><?php echo esc_html( $button_text ); ?></a>
+			  		</div>
+	   			</div><!-- end of cta-content -->
+		   	</div><!-- end of cx-cta -->
 
-		</div> <!-- end of cta-cta-content-2 -->
-	</div> <!-- end of cx-cta -->
-
-<?php endif; //End Layout - 2 
-
-	  if( $layout == 3 ) :
-	  // Assigning a master css class and hooking into KC
-	  $master_class = apply_filters( 'kc-el-class', $atts );
-	  $master_class[] = 'cx-cta-button-3';
-
-	  // Retrieving user define classes
-	  $classes = array( 'wrapper-cta-3' );
-	  (!empty($class)) ? $classes[] = $class : ''; ?>
-	  <div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
-	  	<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
-	  		<div class="rv3-cta-content">
-	  			<h4 class="cta-title"><?php printf('%s', $cta_title); ?></h4>
-	  			<p> <?php printf( '%s', $cta_desc ); ?> </p>
-	  			<a href="<?php echo esc_url($retrieve_link[0]); ?>" <?php echo $title; ?> <?php echo $target; ?>" class="btn-rv btn-white "><?php echo esc_html__( $button_text ); ?></a>
-	  		</div>
-	  	</div>
-	  </div><!--  cta section end  -->
-	  <div class="clearfix"></div>
-
-	<?php endif; //End Layout - 3 ?>  
+		<?php endif; //End Layout - 3 ?>  
 
 	<?php
 	endif;
+
 	$result .= ob_get_clean();
 	return $result;
 
@@ -126,7 +127,6 @@ function cx_call_to_action_kc() {
 	    			'description' 	=> esc_html__('Call To Action Box', 'codexin'),
 	    			'icon' 			=> 'et-hazardous',
 	    			'category' 		=> 'Codexin',
-	    			'is_container'  => true,
 	    			'params' 		=> array(
 	    				// General Params
 	    				'general' 	=> array(
@@ -134,11 +134,10 @@ function cx_call_to_action_kc() {
 								'type'			=> 'radio_image',
 								'label'			=> esc_html__( 'Select CTA Template', 'codexin' ),
 								'name'			=> 'layout',
-								'admin_label'	=> true,
 								'options'		=> array(
-									'1'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/cta/layout-1.png',
-									'2'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/cta/layout-2.png',
-									'3'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/cta/layout-3.png',
+									'1'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/cta/cta-1.jpg',
+									'2'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/cta/cta-2.jpg',
+									'3'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/cta/cta-3.jpg',
 								),
 								'value'	=> '1',
 								'admin_label' => true,
@@ -249,7 +248,7 @@ function cx_call_to_action_kc() {
 	    								"screens" => "any,1199,991,767,479",
 
 	    								'Title' => array(
-	    									array('property' => 'color', 'label' => esc_html__('Label Color', 'codexin'), 'selector' => '.cta-title'),
+	    									array('property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.cta-title'),
 	    									array('property' => 'font-family', 'label' => esc_html__('Font Family', 'codexin'), 'selector' => '.cta-title'),
 	    									array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.cta-title'),
 	    									array('property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '.cta-title'),
@@ -261,12 +260,17 @@ function cx_call_to_action_kc() {
     									),
 
     									'Content' => array(
-	    									array('property' => 'color', 'label' => esc_html__('Label Color', 'codexin'), 'selector' => '.cx-content p'),
-	    									array('property' => 'font-family', 'label' => esc_html__('Font Family', 'codexin'), 'selector' => '.cx-content p'),
-	    									array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.cx-content p'),
-	    									array('property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '.cx-content p'),
-	    									array('property' => 'font-weight', 'label' => esc_html__('Font Weight', 'codexin'), 'selector' => '.cx-content p'),
-	    									array('property' => 'text-transform', 'label' => esc_html__('Text Transform', 'codexin'), 'selector' => '.cx-content p'),
+	    									array('property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.cta-details p, .cx-content p'),
+	    									array('property' => 'color', 'label' => esc_html__('Content Link Color (If any)', 'codexin'), 'selector' => '.cta-details p a, .cx-content p a'),
+	    									array('property' => 'color', 'label' => esc_html__('Content Link Color on Hover (If any)', 'codexin'), 'selector' => '.cta-details p a:hover, .cx-content p a:hover'),
+	    									array('property' => 'font-family', 'label' => esc_html__('Font Family', 'codexin'), 'selector' => '.cta-details p, .cx-content p'),
+	    									array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.cta-details p, .cx-content p'),
+	    									array('property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '.cta-details p, .cx-content p'),
+	    									array('property' => 'font-weight', 'label' => esc_html__('Font Weight', 'codexin'), 'selector' => '.cta-details p, .cx-content p'),
+	    									array('property' => 'text-align', 'label' => esc_html__('Text Align', 'codexin'), 'selector' => '.cta-details p, .cx-content p'),
+	    									array('property' => 'text-transform', 'label' => esc_html__('Text Transform', 'codexin'), 'selector' => '.cta-details p, .cx-content p'),
+	    									array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.cta-details p, .cx-content p'),
+	    									array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.cta-details p, .cx-content p'),
     									),
 
 	    								'Icon' => array(
@@ -279,7 +283,7 @@ function cx_call_to_action_kc() {
 
     									),
 
-	    								'Button' 	=> array(
+	    								'Button' => array(
 	    									array('property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.cx-cta-btn'),
 	    									array('property' => 'color', 'label' => esc_html__('Color On Hover', 'codexin'), 'selector' => '.cx-cta-btn:hover'),
 	    									array('property' => 'background', 'label' => esc_html__('Background Color', 'codexin'), 'selector' => '.cx-cta-btn'),
@@ -294,6 +298,15 @@ function cx_call_to_action_kc() {
 	    									array('property' => 'border', 'label' => esc_html__('Border on Hover', 'codexin'), 'selector' => '.cx-cta-btn:hover'),
 	    									array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.cx-cta-btn'),
 	    									array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.cx-cta-btn')
+    									),
+
+	    								'Content Wrapper' => array(
+	    									array('property' => 'background-color', 'label' => esc_html__('Background', 'codexin'), 'selector' => '.cta-details'),
+	    									array('property' => 'width', 'label' => esc_html__('Width', 'codexin'), 'selector' => '.cta-content'),
+	    									array('property' => 'height', 'label' => esc_html__('Height', 'codexin'), 'selector' => '.cta-content'),
+	    									array('property' => 'border', 'label' => esc_html__('Border', 'codexin'), 'selector' => '.cta-content'),
+	    									array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.cta-content'),
+	    									array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.cta-content'),
     									),
 
 	    								'Box'	=> array(
@@ -321,6 +334,6 @@ function cx_call_to_action_kc() {
 			) //end of array
 	    );  //end of kc_add_map
 	} //End if
-} // end of cx_about_box_kc
+} // end of cx_call_to_action
 
 

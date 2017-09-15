@@ -8,7 +8,7 @@ INDEX:
     003 - Codexin Counter Box
     004 - Codexin Service Box
     005 - Codexin Events
-    006 - Codexin Testimonial Type 01
+    006 - Codexin Testimonial
     007 - Codexin Team
     008 - Codexin Portfolio
     009 - Codexin Blog
@@ -1771,6 +1771,7 @@ section#location {
  *
  */
 
+.cx-cta-3 .cx-cta-btn,
 .cx-cta .cx-cta-btn {
     padding: 11px 20px;
     overflow: hidden;
@@ -1787,6 +1788,7 @@ section#location {
     color: #606060 ;
 }
 
+.cx-cta-3 .cx-cta-btn:hover,
 .cx-cta .cx-cta-btn:hover {
     background: #444;
     color: #fff;
@@ -1822,7 +1824,8 @@ section#location {
     margin-right: 60px;
 }
 
-.cx-cta .cta-content .cta-title {
+.cx-cta .cta-content .cta-title,
+.cx-cta-3 .cta-content .cta-title {
     color: #fff;
     font-size: 25px;
 }
@@ -1878,7 +1881,6 @@ section#location {
     -ms-transform: translateY(-50%);
     -o-transform: translateY(-50%);
     transform: translateY(-50%);
-    width: 80%;
     height: 75%;
     margin: auto auto;
     padding: 15px 15px;
@@ -1903,12 +1905,33 @@ section#location {
     line-height: 1.4em;
 }
 
+.cx-cta-2 .cx-content p {
+    margin-bottom: 0;
+}
+
 .cx-cta-2 .cx-content a {
     font-weight: bold;
     text-decoration: underline;
     color: green;
     text-transform: capitalize;
 }
+
+
+/**
+ * Codexin CTA Type 03
+ *
+ */
+
+.cx-cta-3 .cta-content {
+    text-align: center;
+}
+
+.cx-cta-3 .cta-content .cta-details p {
+    color: #fff;
+    margin-bottom: 30px;
+}
+
+
 
 /*--------------------------------------
     050 - Responsive CSS
