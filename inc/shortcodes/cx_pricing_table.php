@@ -31,8 +31,8 @@ function cx_pricing_table_shortcode( $atts, $content = null ) {
 
 	// Retrieving the url
 	$retrieve_link = retrieve_url( $href );
-	$title = ($retrieve_link[1]) ? 'title='.esc_attr($retrieve_link[1]):'';
-	$target = ($retrieve_link[2]) ? 'target='.esc_attr($retrieve_link[2]):'';
+	$title = ($retrieve_link[1]) ? 'title="'.esc_attr($retrieve_link[1]).'"':'';
+	$target = ($retrieve_link[2]) ? 'target="'.esc_attr($retrieve_link[2]).'"':'';
 
 	// Assigning a master css class and hooking into KC
 	$master_class = apply_filters( 'kc-el-class', $atts );

@@ -25,8 +25,8 @@ function cx_call_to_action_shortcode(  $atts, $content = null) {
 
 	// Retrieving the url
 	$retrieve_link = retrieve_url( $href );
-	$title = ($retrieve_link[1]) ? 'title='.esc_attr($retrieve_link[1]):'';
-	$target = ($retrieve_link[2]) ? 'target='.esc_attr($retrieve_link[2]):'';
+	$title = ($retrieve_link[1]) ? 'title="'.esc_attr($retrieve_link[1]).'"':'';
+	$target = ($retrieve_link[2]) ? 'target="'.esc_attr($retrieve_link[2]).'"':'';
 
    	ob_start(); 
 
@@ -54,7 +54,7 @@ function cx_call_to_action_shortcode(  $atts, $content = null) {
 		   					<p><?php printf('%s', $cta_desc); ?></p>
 		   				<?php endif; ?>
 	   				</div>
-	   				<a href="<?php echo esc_url($retrieve_link[0]); ?>" <?php echo $title; ?> <?php echo $target; ?>" class="cx-cta-btn"><?php echo esc_html( $button_text ); ?></a>
+	   				<a href="<?php echo esc_url($retrieve_link[0]); ?>" <?php echo $title; ?> <?php echo $target; ?> class="cx-cta-btn"><?php echo esc_html( $button_text ); ?></a>
 	   			</div><!-- end of cta-content -->
 		   	</div><!-- end of cx-cta -->
 
@@ -102,7 +102,7 @@ function cx_call_to_action_shortcode(  $atts, $content = null) {
 				  		<?php if( !empty( $cta_desc ) ): ?>
 				  			<p> <?php printf( '%s', $cta_desc ); ?> </p>
 				  		<?php endif; ?>
-			  			<a href="<?php echo esc_url($retrieve_link[0]); ?>" <?php echo $title; ?> <?php echo $target; ?>" class="cx-cta-btn"><?php echo esc_html( $button_text ); ?></a>
+			  			<a href="<?php echo esc_url($retrieve_link[0]); ?>" <?php echo $title; ?> <?php echo $target; ?> class="cx-cta-btn"><?php echo esc_html( $button_text ); ?></a>
 			  		</div>
 	   			</div><!-- end of cta-content -->
 		   	</div><!-- end of cx-cta -->
@@ -144,15 +144,16 @@ function cx_call_to_action_kc() {
 							),
 
 	    					array(
-	    						'name'        => 'cta_title',
-	    						'label'       => esc_html__('CTA Title', 'codexin'),
-	    						'type'        => 'textarea',
-	    						'description' => esc_html__( 'Enter Call To Action Title Here', 'codexin' ),
-	    						'relation'	  => array(
+	    						'name'        	=> 'cta_title',
+	    						'label'       	=> esc_html__('CTA Title', 'codexin'),
+	    						'type'        	=> 'textarea',
+	    						'description' 	=> esc_html__( 'Enter Call To Action Title Here', 'codexin' ),
+	    						'relation'	  	=> array(
 	    							'parent' 	=> 'layout',
 	    							'show_when'	=> '1,3',
 	    						),
-	    						'admin_label' => true,
+	    						'admin_label' 	=> true,
+	    						'value'		  	=> 'Sample CTA Title'
     						),
 
 	    					array(
@@ -160,11 +161,11 @@ function cx_call_to_action_kc() {
 	    						'label' 		=> esc_html__(' CTA Content', 'codexin'),
 	    						'type'			=> 'textarea',
 	    						'relation'		=> array(
-	    							'parent' => 'layout',
+	    							'parent' 	=> 'layout',
 	    							'show_when' => '2',
 	    						),
 	    						'description'	=> esc_html__( 'Your Call to Action Description Here', 'codexin' ),
-	    						'admin_label' => true,
+	    						'admin_label' 	=> true,
     						),
 
 	        				array(
@@ -217,6 +218,7 @@ function cx_call_to_action_kc() {
 	    							'show_when'	=> '1,3',
 	    						),
 	    						'description' => esc_html__( 'Enter Call to Action Button Text Here', 'codexin' ),
+	    						'value'		  	=> 'Read More'
     						),
 
 	    					array(
@@ -227,7 +229,8 @@ function cx_call_to_action_kc() {
 	    							'parent' 	=> 'layout',
 	    							'show_when'	=> '1,3',
 	    						),
-	    						'description' 	=> esc_html__(' The URL which this box assigned to. You can select page/post or other post type', 'codexin')
+	    						'description' 	=> esc_html__(' The URL which this box assigned to. You can select page/post or other post type', 'codexin'),
+	    						'value'		  	=> '#'
     						),
 
     						array(

@@ -38,8 +38,8 @@ function cx_image_box_shortcode(  $atts, $content = null) {
 	$classes = array( 'img-thumb' );
 	(!empty($class)) ? $classes[] = $class : '';
 
-	$title = ($retrieve_link[1]) ? 'title='.esc_attr($retrieve_link[1]):'';
-	$target = ($retrieve_link[2]) ? 'target='.esc_attr($retrieve_link[2]):'';
+	$title = ($retrieve_link[1]) ? 'title="'.esc_attr($retrieve_link[1]).'"':'';
+	$target = ($retrieve_link[2]) ? 'target="'.esc_attr($retrieve_link[2]).'"':'';
 
 	$image_size = getimagesize($ret_full_img_url);
 	$data_size = $image_size['0'] . 'x' . $image_size['1'];

@@ -1830,7 +1830,12 @@ section#location {
     font-size: 25px;
 }
 
+.cx-cta .cta-content .cta-title {
+    margin-bottom: 0;
+}
+
 .cx-cta .cta-content .cta-details p {
+    margin-top: 25px;
     margin-bottom: 0;
     color: #fff;
 }

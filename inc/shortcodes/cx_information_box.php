@@ -33,8 +33,8 @@ function cx_information_box_shortcode( $atts, $content = null ) {
 
 	// Retrieving the url
 	$retrieve_link = retrieve_url( $href );
-	$title = ($retrieve_link[1]) ? 'title='.esc_attr($retrieve_link[1]):'';
-	$target = ($retrieve_link[2]) ? 'target='.esc_attr($retrieve_link[2]):'';
+	$title = ($retrieve_link[1]) ? 'title="'.esc_attr($retrieve_link[1]).'"':'';
+	$target = ($retrieve_link[2]) ? 'target="'.esc_attr($retrieve_link[2]).'"':'';
 
 	// Retrieving the image url
 	$retrive_img_url = retrieve_img_src( $image, 'rectangle-one' );
