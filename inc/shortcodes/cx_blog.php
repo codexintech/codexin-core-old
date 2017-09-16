@@ -19,11 +19,16 @@ function cx_blog_shortcode( $atts, $content = null ) {
 			'title_length'		=> '',
 			'desc_length'		=> '',
 			'postview_comments'	=> '',
+			'post_meta'			=> '',
 			'readmore_text'		=> '',
 			'class'				=> ''
 	), $atts));
 
 	$result = '';
+
+	// Extracting user excluded categories
+	$cat_exclude = str_replace(',', ' ', $exclude);
+	$cat_excludes = explode( " ", $cat_exclude );
 
 	ob_start(); 
 
@@ -42,21 +47,18 @@ function cx_blog_shortcode( $atts, $content = null ) {
 
 				<?php
 
-				$cat_exclude = str_replace(',', ' ', $exclude);
-				$cat_excludes = explode( " ", $cat_exclude );
-
 				//start query..
 				$args = array(
-						'post_type'				=> 'post',
-						'posts_per_page'		=> $number_of_posts,
-						'post_status'			=> 'publish',
-						'order'					=> $order,
-						'orderby'				=> $orderby,
-						'category__not_in' 		=> $cat_excludes,
-						'ignore_sticky_posts' 	=> 1
-					);
+					'post_type'				=> 'post',
+					'posts_per_page'		=> $number_of_posts,
+					'post_status'			=> 'publish',
+					'meta_key'				=> ( $orderby == 'meta_value_num' ) ? 'cx_post_views' : '',
+					'order'					=> $order,
+					'orderby'				=> $orderby,
+					'category__not_in' 		=> $cat_excludes,
+					'ignore_sticky_posts' 	=> 1
+				);
 
-				// var_dump($args);
 
 				$data = new WP_Query( $args );
 
@@ -87,7 +89,7 @@ function cx_blog_shortcode( $atts, $content = null ) {
 
 							<div class="blog-content">
 								<p class="blog-title">
-									<?php echo esc_html( wp_trim_words( get_the_title(), $title_length ) ); ?>
+									<a href="<?php the_permalink(); ?>"><?php echo esc_html( wp_trim_words( get_the_title(), $title_length ) ); ?></a>
 								</p>
 								<p class="blog-desc"> 
 									<?php echo esc_html( wp_trim_words( get_the_excerpt(), $desc_length ) ); ?> 
@@ -95,7 +97,7 @@ function cx_blog_shortcode( $atts, $content = null ) {
 								<a class="read-more" href="<?php echo esc_url( get_the_permalink() ); ?>">
 									<?php echo esc_html( !empty( $readmore_text ) ? $readmore_text : __('Read More', 'codexin') ); ?>
 								</a>
-							</div>
+							</div> <!-- end of blog-content -->
 						<?php
 							if( $postview_comments ) : ?>
 							<div class="blog-info">
@@ -140,7 +142,7 @@ function cx_blog_shortcode( $atts, $content = null ) {
 
 							</div><!-- end of blog-info -->
 
-						<?php endif; //End postview_comments if ?>
+						<?php endif; ?>
 
 						</div><!--end of blog-wrapper -->
 					</div> <!-- end of col -->
@@ -160,98 +162,108 @@ function cx_blog_shortcode( $atts, $content = null ) {
 		 if( $layout == 2 ) :
 		 // Assigning a master css class and hooking into KC
 	     $master_class = apply_filters( 'kc-el-class', $atts );
-	     $master_class[] = 'letest-post mrg-t-50';
+	     $master_class[] = 'cx-blog-2';
 
 	    // Retrieving user define classes
-	    $classes = array( 'rv2-blog-container' );
+	    $classes = array( 'row' );
    	    (!empty($class)) ? $classes[] = $class : '';		
 	?>
-			<div id="letest_post" class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
-				<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
-					<div class="blog-row-rv2">
-						<?php 
-						//start query..
-						$args = array(
-							'post_type'				=> 'post',
-							'posts_per_page'		=> $number_of_posts,
-							'order'					=> $order,
-							'orderby'				=> $orderby,
-							'meta_key'				=> 'cx_post_views',
-							'ignore_sticky_posts' 	=> 1
-							);
+		<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
+			<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
 
-						$data = new WP_Query( $args );
+				<?php 
+				//start query..
+				$args = array(
+					'post_type'				=> 'post',
+					'posts_per_page'		=> $number_of_posts,
+					'post_status'			=> 'publish',
+					'meta_key'				=> ( $orderby == 'meta_value_num' ) ? 'cx_post_views' : '',
+					'order'					=> $order,
+					'orderby'				=> $orderby,
+					'category__not_in' 		=> $cat_excludes,
+					'ignore_sticky_posts' 	=> 1
+				);
 
-						if( $data->have_posts() ) :
+				$data = new WP_Query( $args );
 
-							while( $data->have_posts() ) : $data->the_post();
-							$column = 12/$number_of_posts;
+				if( $data->have_posts() ) :
 
-							// Retrieving Image alt tag
-							$image_alt = ( !empty( retrieve_alt_tag() ) ) ? retrieve_alt_tag() : get_the_title();
+					while( $data->have_posts() ) : $data->the_post();
+					$column = 12/$number_of_posts;
 
-						?>
-						<div class="col-md-<?php echo $column ?> col-sm-12">
-							<div class="rv2-single-post">
-								<div class="post-img">
-									<img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'rv2-blog-mini-img' ) : '//placehold.it/360x282' ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" class="img-responsive">
-									<a href="<?php the_permalink(); ?>" class="btn-white btn-rv">
-										<?php echo esc_html( !empty( $readmore_text ) ? $readmore_text : __('Read More', 'codexin') ); ?>
-									</a>
-									<?php if( $show_date ) : ?>
-										<span class="date-time"> <?php the_time( 'd M' ); ?> </span>
+					// Retrieving Image alt tag
+					$image_alt = ( !empty( retrieve_alt_tag() ) ) ? retrieve_alt_tag() : get_the_title();
+
+					?>
+					<div class="col-md-<?php echo $column ?> col-sm-12">
+						<div class="blog-wrapper">
+							<div class="img-thumb">
+								<img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'rectangle-one' ) : '//placehold.it/600x400' ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" class="img-responsive">
+								<a href="<?php the_permalink(); ?>" class="cx-blog-btn">
+									<?php echo esc_html( !empty( $readmore_text ) ? $readmore_text : __('Read More', 'codexin') ); ?>
+								</a>
+								<?php if( $show_date ) : ?>
+									<div class="date-time"> 
+										<p><?php echo get_the_time( 'd' ); ?></p>
+										<p><?php echo get_the_time( 'M' ); ?></p>
+									</div>
+								<?php endif; ?>
+							</div> <!-- End of img-thumb -->
+
+							<div class="blog-content">
+								<h3 class="blog-title">
+									<a href="<?php the_permalink(); ?>"><?php echo esc_html( wp_trim_words( get_the_title(), $title_length ) ); ?></a>
+								</h3>
+								<p class="blog-category"> <?php the_category( '  ' ); ?> </p>
+								<ul class="meta">
+									<li><i class="fa fa-user"></i> <a href="<?php echo esc_url(get_author_posts_url( get_the_author_meta( 'ID' ), get_the_author_meta( 'user_nicename' ) )); ?>"> <?php the_author(); ?> </a> </li>
+									<?php if( $post_meta == 'comment' ): ?>
+										<li><i class="fa fa-paper-plane"></i> <?php comments_number('0', '1', '%'); ?> </li>
+									<?php else: ?>
+										<li><i class="fa fa-eye"></i> <?php echo codexin_get_post_views(get_the_ID()); ?> </li>
 									<?php endif; ?>
-								</div>
-								<div class="post-info">
-									<h3 class="title-3">
-										<?php echo esc_html( wp_trim_words( get_the_title(), $title_length ) ); ?>
-									</h3>
-									<p class="rv2-post-category"> <?php the_category( ' ' ); ?> </p>
-									<ul>
-										<li><i class="fa fa-user" aria-hidden="true"></i> <a href="<?php echo esc_url(get_the_author_meta()); ?>"> <?php the_author(); ?> </a> </li>
-										<li><i class="fa fa-paper-plane" aria-hidden="true"></i> <a href=""> 
-										<?php comments_number('0', '1', '%'); ?> </a> </li>
-										<li><?php if( function_exists( 'codexin_likes_button' ) ): echo codexin_likes_button( get_the_ID(), 0 ); endif; ?></li>
-									</ul>
-								</div>
-								<p>
-								<?php echo esc_html( wp_trim_words( get_the_excerpt(), $desc_length ) ); ?> 
+									<li><?php if( function_exists( 'codexin_likes_button' ) ): echo codexin_likes_button( get_the_ID(), 0 ); endif; ?></li>
+								</ul>
+								<p class="blog-desc">
+									<?php echo esc_html( wp_trim_words( get_the_excerpt(), $desc_length ) ); ?> 
 								</p>
-							</div>
-						</div>
-						<?php
+							</div> <!-- end of blog-content -->
+						</div> <!-- end of blog-wrapper -->
+					</div> <!-- end of col -->
+					<?php
 
-						endwhile;
-						endif;
-						wp_reset_postdata();
-						?>
-					</div> <!-- end of blog-row-rv2 -->
-				</div> <!-- end of rv2-blog-container -->
-			</div> <!-- end of letest-post -->
-			<div class="clearfix"></div>
+					endwhile;
+				endif;
+				wp_reset_postdata();
+				?>
+			</div> <!-- end of row -->
+		</div> <!-- end of cx-blog-2 -->
+		<div class="clearfix"></div>
 
 	<?php endif; //End Layout - 2 
 	
 	if( $layout == 3 ) : 
 		// Assigning a master css class and hooking into KC
 	     $master_class = apply_filters( 'kc-el-class', $atts );
-	     $master_class[] = 'letest-post';
+	     $master_class[] = 'cx-blog-3';
 
 	    // Retrieving user define classes
-	    $classes = array( 'wrapper-posts-3' );
+	    $classes = array( 'row' );
    	    (!empty($class)) ? $classes[] = $class : ''; ?>
 			
-		<div id="letest_post" class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
+		<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
 			<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
 			<?php 
 			//start query..
 			$args = array(
-			'post_type'				=> 'post',
-			'posts_per_page'		=> $number_of_posts,
-			'order'					=> $order,
-			'orderby'				=> $orderby,
-			//'meta_key'				=> 'cx_post_views',
-			'ignore_sticky_posts' 	=> 1
+					'post_type'				=> 'post',
+					'posts_per_page'		=> $number_of_posts,
+					'post_status'			=> 'publish',
+					'meta_key'				=> ( $orderby == 'meta_value_num' ) ? 'cx_post_views' : '',
+					'order'					=> $order,
+					'orderby'				=> $orderby,
+					'category__not_in' 		=> $cat_excludes,
+					'ignore_sticky_posts' 	=> 1
 			);
 
 			$data = new WP_Query( $args );
@@ -260,64 +272,73 @@ function cx_blog_shortcode( $atts, $content = null ) {
 				$i = 1;
 
 				while( $data->have_posts() ) : $data->the_post();
+
 				// Retrieving Image alt tag
-				$image_alt = ( !empty( retrieve_alt_tag() ) ) ? retrieve_alt_tag() : get_the_title(); ?>
-				<?php if($i == 1): ?>
-					<div id="post-<?php the_ID(); ?>" <?php post_class('col-sm-6'); ?>>
-						<div class="rv3-single-post rv3">
-							<div class="post-img">
-								<img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'event-v2-image' ) : '//placehold.it/553x218' ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" class="img-responsive">
-								<a href="<?php the_permalink(); ?>" class="btn-white btn-rv">
+				$image_alt = ( !empty( retrieve_alt_tag() ) ) ? retrieve_alt_tag() : get_the_title();
+				if($i == 1): 
+				?>
+					<!-- Left column post -->
+					<div class="col-md-6 col-sm-12">
+						<div class="blog-wrapper-left">
+							<div class="img-thumb">
+								<a href="<?php esc_url( the_permalink() ); ?>">
+									<img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'rectangle-one' ) : '//placehold.it/600x400' ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" class="img-responsive">
+								</a>
+							</div> <!-- End of img-thumb -->
+							<div class="blog-content">
+								<h3 class="blog-title">
+									<a href="<?php the_permalink(); ?>"><?php echo esc_html( wp_trim_words( get_the_title(), $title_length ) ); ?></a>
+								</h3>
+								<ul class="meta">
+									<li><?php echo esc_html__('By', 'reveal'); ?> <a href="<?php echo esc_url(get_author_posts_url( get_the_author_meta( 'ID' ), get_the_author_meta( 'user_nicename' ) )); ?>"> <?php the_author(); ?> </a> </li>
+									<li><?php echo esc_html__('On', 'reveal'); ?> <a href="<?php echo get_day_link(get_post_time('Y'), get_post_time('m'), get_post_time('j'));  ?>" class="entry-date"><?php echo get_the_time( 'd M, Y' ); ?></a> </li>
+									<li><?php echo esc_html__('In', 'reveal'); ?> <?php the_category( ', ' ); ?> </li>
+								</ul>
+								<p class="blog-desc">
+									<?php echo esc_html( wp_trim_words( get_the_excerpt(), $desc_length ) ); ?> 
+								</p>
+							</div> <!-- end of blog-content -->
+							<div class="blog-footer">
+								<div class="blog-footer-item"><i class="fa fa-comments"></i> <?php comments_number('0', '1', '%'); ?> </div>
+								<div class="blog-footer-item"><i class="fa fa-eye"></i> <?php echo codexin_get_post_views(get_the_ID()); ?> </div>
+								<a href="<?php the_permalink(); ?>" class="cx-blog-btn">
 									<?php echo esc_html( !empty( $readmore_text ) ? $readmore_text : __('Read More', 'codexin') ); ?>
 								</a>
-								<span class="date-time"> <?php the_time( 'd M' ); ?></span>
+								<div class="clearfix"></div>
 							</div>
-							<div class="rv3-single-event-info">
-								<div class="post-info">
-									<h3 class="title-3"><?php echo esc_html( wp_trim_words( get_the_title(), $title_length ) ); ?></h3>
-									<p class="recent-post-cat-3"><?php the_category( ' ' ); ?></p>
-									<ul class="recent-post-info">
-										<li><i class="fa fa-user" aria-hidden="true"></i> <a href=""> <?php the_author() ?> </a> </li>
-										<li><i class="fa fa-paper-plane" aria-hidden="true"></i> <a href=""> <?php comments_number('0', '1', '%'); ?></a> </li>
-										<li><?php if( function_exists( 'codexin_likes_button' ) ): echo codexin_likes_button( get_the_ID(), 0 ); endif; ?></li>
-									</ul>
+						</div> <!-- end blog-wrapper-left -->
+					</div> <!--end The col -->
 
+					<!-- Right column posts -->
+					<div class="col-sm-6">
+						<ul class="blog-wrapper-right">
+				<?php else : ?>
+							<li>
+								<div class="img-thumb">
+									<a href="<?php the_permalink(); ?>"><img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'square-one' ) : '//placehold.it/220x220' ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" class="img-responsive"></a>
 								</div>
-								<p class="recent-post-excerpt-3"> <?php echo esc_html( wp_trim_words( get_the_excerpt(), $desc_length ) ); ?> </p>
-							</div> <!-- end of rv3-single-event-info -->
-						</div> <!-- end of rv3-single-post rv3 -->
-					</div> <!--End The Most Recent Posts of col-sm-6 -->
-
-					<!-- Integrate Only For Post Lists-->
-					<div class="col-sm-6 wrapper-post-list-3">
-						<ul class="post-list">
-					<?php else : ?>
-							<li id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-								<div class="rv3-single-post">
-									<div class="image-left">
-										<a href="<?php the_permalink(); ?>"><img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'square-one' ) : '//placehold.it/161x150' ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" class="img-responsive"></a>
-									</div>
-									<div class="post-list-info">
-										<div class="post-info">
-											<a href="<?php the_permalink(); ?>"><h3 class="title-3"><?php echo esc_html( wp_trim_words( get_the_title(), $title_length ) ); ?></h3></a>
-											<ul>
-												<li><i class="fa fa-user" aria-hidden="true"></i> <a href=""> <?php the_author() ?> </a> </li>
-												<li><i class="fa fa-paper-plane" aria-hidden="true"></i> <a href=""> <?php comments_number('0', '1', '%'); ?></a> </li>
-												<li><?php if( function_exists( 'codexin_likes_button' ) ): echo codexin_likes_button( get_the_ID(), 0 ); endif; ?></li>
-											</ul>
-										</div> <!-- end of post-info -->
-										<p><?php echo esc_html( wp_trim_words( get_the_excerpt(), $desc_length ) ); ?></p>
-									</div> <!-- end of post-list-info -->
-								</div> <!-- end of rv3-single-post -->
+								<div class="blog-content">
+									<h3 class="blog-title">
+										<a href="<?php the_permalink(); ?>"><?php echo esc_html( wp_trim_words( get_the_title(), $title_length ) ); ?></a>
+									</h3>
+									<ul class="meta">
+										<li><?php echo esc_html__('By', 'reveal'); ?> <a href="<?php echo esc_url(get_author_posts_url( get_the_author_meta( 'ID' ), get_the_author_meta( 'user_nicename' ) )); ?>"> <?php the_author(); ?> </a> </li>
+										<li><?php echo esc_html__('On', 'reveal'); ?> <a href="<?php echo get_day_link(get_post_time('Y'), get_post_time('m'), get_post_time('j'));  ?>" class="entry-date"><?php echo get_the_time( 'd M, Y' ); ?></a> </li>
+										<li><i class="fa fa-eye"></i> <?php echo codexin_get_post_views(get_the_ID()); ?> </li>
+										<li><i class="fa fa-comments"></i> <?php comments_number('0', '1', '%'); ?> </li>
+									</ul>
+									<p class="blog-desc">
+										<?php echo esc_html( wp_trim_words( get_the_excerpt(), $desc_length ) ); ?> 
+									</p>
+								</div> <!-- end of blog-content -->
 							</li>
 						<?php 
 						endif; //End if($i == 1)
 
-					//Integrate Only Post Lists	
 					if( $number_of_posts == $i ) : ?>
-						</ul>
-					</div> <!-- End Post Lists of col-sm-6 -->	
-					<?php endif; //End if($number_of_posts) ?>
+						</ul> <!-- End Post blog-wrapper-right-->	
+					</div> <!-- end of col -->	
+					<?php endif; ?>
 
 					<?php 
 						$i++;
@@ -325,8 +346,8 @@ function cx_blog_shortcode( $atts, $content = null ) {
 					endif;
 					wp_reset_postdata();
 					?>
-				</div> <!-- end of wrapper-posts -->
-			</div> <!-- end of section -->
+				</div> <!-- end of row -->
+			</div> <!-- end of cx-blog-3 -->
 			<div class="clearfix"></div>
 
 	<?php endif; //End layout - 3 ?>
@@ -433,12 +454,28 @@ function cx_blog_kc() {
     								'meta_value_num' => 'Views Count',
     								'rand'			 => 'Randomize',
     							),
+    							// 'relation'	=> array(
+    							// 	'parent' 	=> 'layout',
+    							// 	'show_when'	=> '1',
+    							// ),
+	    						'value'			=> 'date',
+	    						'description'	=> esc_html__( 'Choose The Posts Sorting Method', 'codexin' ),
+	    					),
+
+	    					array(
+	    						'name'        	=> 'post_meta',
+	    						'label'       	=> esc_html__('Post Meta to Show', 'codexin'),
+	    						'type'        	=> 'select',
+	    						'options'		=> array(
+    								'view'		 => 'Number of Post Views',
+    								'comment'	 => 'Number Of Comments',
+    							),
     							'relation'	=> array(
     								'parent' 	=> 'layout',
-    								'show_when'	=> '1',
+    								'show_when'	=> '2',
     							),
-	    						'value'			=> 'date',
-	    						'description'	=> esc_html__( 'Choose The Posts Sorting Method:', 'codexin' ),
+	    						'value'			=> 'comment',
+	    						'description'	=> esc_html__( 'Choose The Post Meta to Display', 'codexin' ),
 	    					),
 
 	 						array(
@@ -525,59 +562,63 @@ function cx_blog_kc() {
  										"screens" => "any,1199,991,767,479",
 
  										'Title' => array(
- 											array('property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.blog-title, .rv2-single-post .title-3'),
- 											array('property' => 'font-family', 'label' => esc_html__('Font family', 'codexin'), 'selector' => '.blog-title, .rv2-single-post .title-3'),
- 											array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.blog-title, .rv2-single-post .title-3'),
- 											array('property' => 'font-weight', 'label' => esc_html__('Font Weight', 'codexin'), 'selector' => '.blog-title, .rv2-single-post .title-3'),
- 											array('property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '.blog-title, .rv2-single-post .title-3'),
- 											array('property' => 'text-align', 'label' => esc_html__('Text Align', 'codexin'), 'selector' => '.blog-title, .rv2-single-post .title-3'),
- 											array('property' => 'text-transform', 'label' => esc_html__('Text Transform', 'codexin'), 'selector' => '.blog-title, .rv2-single-post .title-3'),
- 											array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.blog-title, .rv2-single-post .title-3'),
- 											array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.blog-title, .rv2-single-post .title-3')
+ 											array('property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.blog-title a'),
+ 											array('property' => 'color', 'label' => esc_html__('Color on Hover', 'codexin'), 'selector' => '.blog-title a:hover'),
+ 											array('property' => 'font-family', 'label' => esc_html__('Font family', 'codexin'), 'selector' => '.blog-title'),
+ 											array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.blog-title'),
+ 											array('property' => 'font-weight', 'label' => esc_html__('Font Weight', 'codexin'), 'selector' => '.blog-title'),
+ 											array('property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '.blog-title'),
+ 											array('property' => 'text-align', 'label' => esc_html__('Text Align', 'codexin'), 'selector' => '.blog-title'),
+ 											array('property' => 'text-transform', 'label' => esc_html__('Text Transform', 'codexin'), 'selector' => '.blog-title'),
+ 											array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.blog-title'),
+ 											array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.blog-title')
 										),
 
  										'Date' => array(
- 											array('property' => 'color', 'label' => esc_html__('Date Color', 'codexin'), 'selector' => '.meta, .date-time'),
- 											array('property' => 'background-color', 'label' => esc_html__('Date Background', 'codexin'), 'selector' => '.meta, .date-time'),
- 											// array('property' => 'color', 'label' => esc_html__('Post Meta Icon Color', 'codexin'), 'selector' => '.blog-info i, .rv2-single-post ul li a, .cx-count, .rv2-post-category a' ),
- 											// array('property' => 'font-family', 'label' => esc_html__('Font family', 'codexin'), 'selector' => '.meta, .rv2-single-post ul li a, .cx-count, .rv2-post-category a'),
- 											// array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.meta, .rv2-single-post ul li a, .cx-count, .rv2-post-category a'),
- 											// array('property' => 'width', 'label' => esc_html__('Width', 'codexin'), 'selector' => '.meta, .rv2-single-post ul li a, .cx-count, .rv2-post-category a'),
- 											// array('property' => 'font-weight', 'label' => esc_html__('Font Weight', 'codexin'), 'selector' => '.meta, .rv2-single-post ul li a, .cx-count, .rv2-post-category a'),
- 											// array('property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '.meta, .rv2-single-post ul li a, .cx-count, .rv2-post-category a'),
- 											// array('property' => 'background', 'label' => esc_html__('Background', 'codexin'), 'selector' => '.meta, .rv2-single-post ul li a, .cx-count, .rv2-post-category a'),
- 											array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.meta, .rv2-single-post ul li a, .cx-count, .rv2-post-category a'),
- 											array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.meta, .rv2-single-post ul li a, .cx-count, .rv2-post-category a')
+ 											array('property' => 'color', 'label' => esc_html__('Date Color', 'codexin'), 'selector' => 'div.meta, .date-time'),
+ 											array('property' => 'background-color', 'label' => esc_html__('Date Background', 'codexin'), 'selector' => 'div.meta, .date-time'),
+ 											array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => 'div.meta, .date-time'),
+ 											array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => 'div.meta, .date-time')
+										),
+
+ 										'Icon' => array(
+ 											array('property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.blog-info i, ul.meta i, ul.meta .cx-icon'),
+ 											array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.blog-info i, ul.meta i, ul.meta .cx-icon'),
+ 											array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.blog-info i, ul.meta i, ul.meta .cx-icon'),
+ 											array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.blog-info i, ul.meta i, ul.meta .cx-icon')
 										),
 
 										'Image Hover' => array(
- 											array('property' => 'background', 'label' => esc_html__('Image Hover Color', 'codexin'), 'selector' => '.img-wrapper::before, .img-wrapper::after' )
+ 											array('property' => 'background', 'label' => esc_html__('Image Hover Color', 'codexin'), 'selector' => '.img-wrapper::before, .img-wrapper::after, .img-thumb:before' )
 										),
 
  										'Description' => array(
- 											array('property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.blog-content .blog-desc, .rv2-single-post p'),
- 											array('property' => 'font-family', 'label' => esc_html__('Font family', 'codexin'), 'selector' => '.blog-content .blog-desc, .rv2-single-post p'),
- 											array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.blog-content .blog-desc, .rv2-single-post p'),
- 											array('property' => 'font-weight', 'label' => esc_html__('Font Weight', 'codexin'), 'selector' => '.blog-content .blog-desc, .rv2-single-post p'),
- 											array('property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '.blog-content .blog-desc, .rv2-single-post p'),
- 											array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.blog-content .blog-desc, .rv2-single-post p'),
- 											array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.blog-content .blog-desc, .rv2-single-post p')
+ 											array('property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.blog-content .blog-desc, .blog-content .blog-category a, .blog-content .meta li, .blog-content .meta li a, .cx-count'),
+ 											array('property' => 'font-family', 'label' => esc_html__('Font family', 'codexin'), 'selector' => '.blog-content .blog-desc'),
+ 											array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.blog-content .blog-desc'),
+ 											array('property' => 'font-weight', 'label' => esc_html__('Font Weight', 'codexin'), 'selector' => '.blog-content .blog-desc'),
+ 											array('property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '.blog-content .blog-desc'),
+ 											array('property' => 'text-align', 'label' => esc_html__('Text Align', 'codexin'), 'selector' => '.blog-content .blog-desc'),
+ 											array('property' => 'text-transform', 'label' => esc_html__('Text Transform', 'codexin'), 'selector' => '.blog-content .blog-desc'),
+ 											array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.blog-content .blog-desc'),
+ 											array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.blog-content .blog-desc')
 										),
 
- 										'Read More' => array(
- 											array('property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.blog-content a, .btn-white'),
- 											array('property' => 'background-color', 'label' => esc_html__('Background Color', 'codexin'), 'selector' => '.blog-content a, .btn-white'),
- 											array('property' => 'color', 'label' => esc_html__('Hover Color', 'codexin'), 'selector' => '.blog-content a:hover, .btn-white:hover'),
- 											array('property' => 'background-color', 'label' => esc_html__('Backgroung Hover Color', 'codexin'), 'selector' => '.blog-content a:hover, .btn-white:hover'),
- 											array('property' => 'border', 'label' => esc_html__('Border', 'codexin'), 'selector' => '.blog-content a, .btn-white'),
- 											array('property' => 'border-color', 'label' => esc_html__('Border Hover Color', 'codexin'), 'selector' => '.blog-content a:hover, .btn-white:hover'),
- 											array('property' => 'transition', 'label' => esc_html__('Hover Transition', 'codexin'), 'selector' => '.blog-content a:hover, .btn-white:hover'),
- 											array('property' => 'font-family', 'label' => esc_html__('Font family', 'codexin'), 'selector' => '.blog-content a, .btn-white'),
- 											array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.blog-content a, .btn-white'),
- 											array('property' => 'font-weight', 'label' => esc_html__('Font Weight', 'codexin'), 'selector' => '.blog-content a, .btn-white'),
- 											array('property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '.blog-content a, .btn-white'),
- 											array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.blog-content a, .btn-white'),
- 											array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.blog-content a, .btn-white')
+ 										'Button' => array(
+ 											array('property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.blog-content .read-more, .img-thumb .cx-blog-btn'),
+ 											array('property' => 'background-color', 'label' => esc_html__('Background Color', 'codexin'), 'selector' => '.blog-content .read-more, .img-thumb .cx-blog-btn'),
+ 											array('property' => 'color', 'label' => esc_html__('Hover Color', 'codexin'), 'selector' => '.blog-content .read-more:hover, .img-thumb .cx-blog-btn:hover'),
+ 											array('property' => 'background-color', 'label' => esc_html__('Backgroung Hover Color', 'codexin'), 'selector' => '.blog-content .read-more:hover, .img-thumb .cx-blog-btn:hover'),
+ 											array('property' => 'border', 'label' => esc_html__('Border', 'codexin'), 'selector' => '.blog-content .read-more, .img-thumb .cx-blog-btn'),
+ 											array('property' => 'border-color', 'label' => esc_html__('Border Hover Color', 'codexin'), 'selector' => '.blog-content .read-more:hover, .img-thumb .cx-blog-btn:hover'),
+ 											array('property' => 'transition', 'label' => esc_html__('Hover Transition', 'codexin'), 'selector' => '.blog-content .read-more:hover, .img-thumb .cx-blog-btn:hover'),
+ 											array('property' => 'font-family', 'label' => esc_html__('Font family', 'codexin'), 'selector' => '.blog-content .read-more, .img-thumb .cx-blog-btn'),
+ 											array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.blog-content .read-more, .img-thumb .cx-blog-btn'),
+ 											array('property' => 'font-weight', 'label' => esc_html__('Font Weight', 'codexin'), 'selector' => '.blog-content .read-more, .img-thumb .cx-blog-btn'),
+ 											array('property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '.blog-content .read-more, .img-thumb .cx-blog-btn'),
+ 											array('property' => 'text-transform', 'label' => esc_html__('Text Transform', 'codexin'), 'selector' => '.blog-content .read-more, .img-thumb .cx-blog-btn'),
+ 											array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.blog-content .read-more, .img-thumb .cx-blog-btn'),
+ 											array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.blog-content .read-more, .img-thumb .cx-blog-btn')
 										),
 
  									// 	'Box'	=> array(
