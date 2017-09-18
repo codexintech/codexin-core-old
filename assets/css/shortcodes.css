@@ -17,6 +17,7 @@ INDEX:
     012 - Codexin Social Share
     013 - Codexin Pricing Table
     014 - Codexin Call to Action
+    015 - Codexin Clients
     050 - Responsive CSS
 
 
@@ -2427,6 +2428,116 @@ section#location {
 
 
 
+/******************************************
+    014 - Codexin Clients
+******************************************/
+
+/**
+ * Codexin Clients Type 01
+ *
+ */
+
+.cx-clients-wrapper img {
+    width: initial;
+    max-width: 100%;
+    max-height: 85px;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
+.cx-client-carousel-1 .item{
+    text-align: center;
+    outline: 0;
+}
+
+
+.cx-client-carousel-1 span {
+    position: absolute;
+    top: 50%;
+    font-size: 26px;
+    cursor: pointer;
+    width: 40px;
+    height: auto;
+    display: inline-block;
+    text-align: center;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+    color: #999;
+}
+
+.cx-client-carousel-1 span.prev {
+    left: -50px;
+}
+
+.cx-client-carousel-1 span.next {
+    right: -50px;
+}
+
+.cx-client-carousel-1 .slick-dots {
+    bottom: -50px;
+}
+
+.cx-client-carousel-1 .slick-dots li {
+    margin:0;
+}
+
+.cx-client-carousel-1 .slick-dots li button:before {
+    font-size: 10px;
+}
+
+
+/**
+ * Codexin Clients Type 02
+ *
+ */
+
+.cx-client-carousel-2 .client-image-single {
+    border-bottom: 1px solid #dedede;
+    border-right: 1px solid #dedede;
+    text-align: center;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.cx-client-carousel-2 .client-image-single img {
+    max-height: 100px;
+    opacity: .65;
+}
+
+.cx-client-carousel-2 .client-image-single,
+.cx-client-carousel-2 .client-image-single img {
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+.cx-client-carousel-2 .client-image-single img:hover {
+    opacity: 1;
+}
+
+.cx-client-carousel-2 .client-image-single:last-child {
+    border-right: none;
+}
+
+.cx-client-carousel-2 .clients-second-row .client-image-single {
+    border-bottom: none;
+}
+
+
+
+
 /*--------------------------------------
     050 - Responsive CSS
 --------------------------------------*/
@@ -2691,7 +2802,7 @@ section#feedback {
     Codexin Clients  Type 01
 *************************************************************/
 
-.cx-clients-wrapper img {
+/*.cx-clients-wrapper img {
     width: initial;
     max-width: 100%;
     max-height: 85px;
@@ -2747,12 +2858,12 @@ section#feedback {
 
 .cx-client-carousel-1 .slick-dots li button:before {
     font-size: 10px;
-}
+}*/
 
 /************************************************************
     Codexin Clients  Type 02
 *************************************************************/
-
+/*
 .cx-client-carousel-2 .client-image-single {
     border-bottom: 1px solid #dedede;
     border-right: 1px solid #dedede;
@@ -2782,7 +2893,7 @@ section#feedback {
 .cx-client-carousel-2 .clients-second-row .client-image-single {
     border-bottom: none;
 }
-
+*/
 
 
 

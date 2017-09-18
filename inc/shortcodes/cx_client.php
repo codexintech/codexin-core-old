@@ -193,8 +193,8 @@ function cx_client_kc() {
 								'lable'	=> esc_html__( 'Select Testimonial Template', 'codexin' ),
 								'type'	=> 'radio_image',
 								'options'	=> array(
-									'1'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/blog/layout-1.png',
-									'2'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/blog/layout-2.png',
+									'1'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/clients/clients-1.jpg',
+									'2'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/clients/clients-2.jpg',
 								),
 								'value'	=> '1',
 								'admin_label'	=> true,
@@ -242,13 +242,19 @@ function cx_client_kc() {
 	    					array(
 	    						'name'			=> 'number_of_slides',
 	    						'label' 		=> esc_html__( 'Number of Slides', 'codexin' ),
-	    						'type'			=> 'text',
+	    						'type'			=> 'number_slider',
 								'relation' => array(
 									'parent'	=> 'layout',
 									'show_when' => '1',
 								),
+	    						'options'		=> array(
+	    							'min'			=> 4,
+	    							'max'			=> 8,
+	    							'unit'			=> '',
+	    							'show_input'	=> false
+    							),
 	    						'description' 	=> esc_html__( 'Choose the number of client logo slides you want to show on screen', 'codexin' ),
-	    						'value'			=> '6',
+	    						'value'			=> 6,
 	    						'admin_label'	=> true
 	    					),
 
