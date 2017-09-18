@@ -40,8 +40,8 @@ INDEX:
     position: relative;
 }
 
-.section-heading .cx-divider,
-.section-heading .cx-divider-2 {
+.cx-divider,
+.cx-divider-2 {
     position: relative;
 }
 
@@ -49,7 +49,7 @@ INDEX:
     margin-bottom: 25px;
 }
 
-.section-heading .cx-divider::after {
+.cx-divider::after {
     content: "";
     width: 80px;
     height: 3px;
@@ -81,20 +81,24 @@ INDEX:
 .section-heading .cx-divider-2:first-child {
     padding-bottom: 25px;
 }
-.cx-divider-2:before, .cx-divider-2:after {
+
+.cx-divider-2:before,
+.cx-divider-2:after {
     position: absolute;
     content: "";
     height: 4px;
     top: 0;
     z-index: 1;
 }
+
 .cx-divider-2:before {
     width: 60px;
-    background-color: #23dac9;
+    background-color: #295970;
     left: 0;
     right: 0;
     margin: auto;
 }
+
 .cx-divider-2:after {
     width: 20px;
     background: #000;
@@ -270,8 +274,6 @@ INDEX:
     text-align: center;
 }
 
-.cx-animated-counter .project:last-child {}
-
 .cx-animated-counter .project .counter {
     display: block;
     clear: both;
@@ -286,15 +288,54 @@ INDEX:
     text-transform: uppercase;
     font-weight: 400;
     font-size: 14px;
+    margin-bottom: 0;
 }
 
 .cx-animated-counter .project i {
     font-size: 60px;
+    line-height: 1em;
+    margin-bottom: 15px;
+    display: block;
 }
 
 .cx-animated-counter.with-icon  {
     padding:48px 25px;
 }
+
+.cx-animated-counter .cx-divider,
+.cx-animated-counter .cx-divider-2 {
+    padding-bottom: 25px;
+}
+
+.cx-animated-counter .counter-wrapper {
+    display: table;
+}
+
+.cx-animated-counter .counter-wrapper .content-left,
+.cx-animated-counter .counter-wrapper .content-right {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: left;
+}
+
+.cx-animated-counter .counter-wrapper .content-left i {
+    margin-right: 20px;
+    margin-bottom: 0;
+    width: 60px;
+    height: auto;
+}
+
+.cx-animated-counter .counter-wrapper .content-right .counter {
+    font-size: 50px;
+    margin-bottom: 0;
+    line-height: 1em;
+}
+
+.cx-animated-counter .counter-wrapper .content-right p {
+    text-transform: inherit;
+    font-size: 18px;
+}
+
 
 /**************************************
     004 - Codexin Service Box
