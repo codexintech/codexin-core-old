@@ -19,6 +19,7 @@ function cx_blog_shortcode( $atts, $content = null ) {
 			'title_length'		=> '',
 			'desc_length'		=> '',
 			'postview_comments'	=> '',
+			'sticky_post'		=> '',
 			'post_meta'			=> '',
 			'readmore_text'		=> '',
 			'class'				=> ''
@@ -159,10 +160,10 @@ function cx_blog_shortcode( $atts, $content = null ) {
 
 	<?php endif; //End Layout - 1
 
-		 if( $layout == 2 ) :
-		 // Assigning a master css class and hooking into KC
-	     $master_class = apply_filters( 'kc-el-class', $atts );
-	     $master_class[] = 'cx-blog-2';
+		if( $layout == 2 ) :
+		// Assigning a master css class and hooking into KC
+		$master_class = apply_filters( 'kc-el-class', $atts );
+		$master_class[] = 'cx-blog-2';
 
 	    // Retrieving user define classes
 	    $classes = array( 'row' );
@@ -244,8 +245,10 @@ function cx_blog_shortcode( $atts, $content = null ) {
 	
 	if( $layout == 3 ) : 
 		// Assigning a master css class and hooking into KC
-	     $master_class = apply_filters( 'kc-el-class', $atts );
-	     $master_class[] = 'cx-blog-3';
+		$master_class = apply_filters( 'kc-el-class', $atts );
+		$master_class[] = 'cx-blog-3';
+
+		$number_of_posts = 4;
 
 	    // Retrieving user define classes
 	    $classes = array( 'row' );
@@ -263,7 +266,7 @@ function cx_blog_shortcode( $atts, $content = null ) {
 					'order'					=> $order,
 					'orderby'				=> $orderby,
 					'category__not_in' 		=> $cat_excludes,
-					'ignore_sticky_posts' 	=> 1
+					'ignore_sticky_posts' 	=> ( $sticky_post ) ? '' : 1
 			);
 
 			$data = new WP_Query( $args );
@@ -314,9 +317,11 @@ function cx_blog_shortcode( $atts, $content = null ) {
 						<ul class="blog-wrapper-right">
 				<?php else : ?>
 							<li>
-								<div class="img-thumb">
-									<a href="<?php the_permalink(); ?>"><img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'square-one' ) : '//placehold.it/220x220' ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" class="img-responsive"></a>
-								</div>
+								<div class="media-wrapper-right">
+									<div class="img-thumb">
+										<a href="<?php the_permalink(); ?>"><img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'square-one' ) : '//placehold.it/220x220' ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" class="img-responsive"></a>
+									</div> <!-- End of img-thumb -->
+								</div> <!-- End of media-wraper-right -->
 								<div class="blog-content">
 									<h3 class="blog-title">
 										<a href="<?php the_permalink(); ?>"><?php echo esc_html( wp_trim_words( get_the_title(), $title_length ) ); ?></a>
@@ -428,6 +433,10 @@ function cx_blog_kc() {
     								'4'	=> '4',
     							),
 	    						'value'			=> '3',
+    							'relation'	=> array(
+    								'parent' 	=> 'layout',
+    								'show_when'	=> '1,2',
+    							),
 	    						'description'	=> esc_html__( 'Choose the number of posts you want to show.', 'codexin' ),
 	    						'admin_label' 	=> true,
 	    					),
@@ -478,6 +487,18 @@ function cx_blog_kc() {
 	    						'description'	=> esc_html__( 'Choose The Post Meta to Display', 'codexin' ),
 	    					),
 
+	    					array(
+	    						'name'        	=> 'sticky_post',
+	    						'label'       	=> esc_html__('Show Sticky Post? ', 'codexin'),
+	    						'type'        	=> 'toggle',
+    							'relation'	=> array(
+    								'parent' 	=> 'layout',
+    								'show_when'	=> '3',
+    							),
+	    						'value'			=> 'no',
+	    						'description'	=> esc_html__( 'Enable this if you want to show sticky post first.', 'codexin' ),
+	    					),
+
 	 						array(
 	 							'name' 			=> 'exclude',
 	 							'label' 		=> esc_html__( 'Exclude Categories', 'codexin' ),
@@ -491,6 +512,10 @@ function cx_blog_kc() {
 	    						'name'			=> 'show_date',
 	    						'label'			=> esc_html__( 'Show Post Pulbished Date?', 'codexin' ),
 	    						'value'			=> 'yes',
+    							'relation'	=> array(
+    								'parent' 	=> 'layout',
+    								'show_when'	=> '1,2',
+    							),
 	    						'description'	=> esc_html__('Choose to enable/disable post published date', 'codexin'),
 	    						'admin_label' => true
 	    					),
@@ -584,6 +609,9 @@ function cx_blog_kc() {
  										'Icon' => array(
  											array('property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.blog-info i, ul.meta i, ul.meta .cx-icon'),
  											array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.blog-info i, ul.meta i, ul.meta .cx-icon'),
+
+ 											array('property' => 'color', 'label' => esc_html__('Icon Color for Featured Post (For Layout-3)', 'codexin'), 'selector' => '.blog-footer-item i'),
+ 											array('property' => 'font-size', 'label' => esc_html__('Icon Font Size for Featured Post (For Layout-3)', 'codexin'), 'selector' => '.blog-footer-item i'),
  											array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.blog-info i, ul.meta i, ul.meta .cx-icon'),
  											array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.blog-info i, ul.meta i, ul.meta .cx-icon')
 										),
@@ -605,34 +633,22 @@ function cx_blog_kc() {
 										),
 
  										'Button' => array(
- 											array('property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.blog-content .read-more, .img-thumb .cx-blog-btn'),
- 											array('property' => 'background-color', 'label' => esc_html__('Background Color', 'codexin'), 'selector' => '.blog-content .read-more, .img-thumb .cx-blog-btn'),
- 											array('property' => 'color', 'label' => esc_html__('Hover Color', 'codexin'), 'selector' => '.blog-content .read-more:hover, .img-thumb .cx-blog-btn:hover'),
- 											array('property' => 'background-color', 'label' => esc_html__('Backgroung Hover Color', 'codexin'), 'selector' => '.blog-content .read-more:hover, .img-thumb .cx-blog-btn:hover'),
- 											array('property' => 'border', 'label' => esc_html__('Border', 'codexin'), 'selector' => '.blog-content .read-more, .img-thumb .cx-blog-btn'),
- 											array('property' => 'border-color', 'label' => esc_html__('Border Hover Color', 'codexin'), 'selector' => '.blog-content .read-more:hover, .img-thumb .cx-blog-btn:hover'),
- 											array('property' => 'transition', 'label' => esc_html__('Hover Transition', 'codexin'), 'selector' => '.blog-content .read-more:hover, .img-thumb .cx-blog-btn:hover'),
- 											array('property' => 'font-family', 'label' => esc_html__('Font family', 'codexin'), 'selector' => '.blog-content .read-more, .img-thumb .cx-blog-btn'),
- 											array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.blog-content .read-more, .img-thumb .cx-blog-btn'),
- 											array('property' => 'font-weight', 'label' => esc_html__('Font Weight', 'codexin'), 'selector' => '.blog-content .read-more, .img-thumb .cx-blog-btn'),
- 											array('property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '.blog-content .read-more, .img-thumb .cx-blog-btn'),
- 											array('property' => 'text-transform', 'label' => esc_html__('Text Transform', 'codexin'), 'selector' => '.blog-content .read-more, .img-thumb .cx-blog-btn'),
- 											array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.blog-content .read-more, .img-thumb .cx-blog-btn'),
- 											array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.blog-content .read-more, .img-thumb .cx-blog-btn')
+ 											array('property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.blog-content .read-more, .img-thumb .cx-blog-btn, .blog-footer .cx-blog-btn'),
+ 											array('property' => 'background-color', 'label' => esc_html__('Background Color', 'codexin'), 'selector' => '.blog-content .read-more, .img-thumb .cx-blog-btn, .blog-footer .cx-blog-btn'),
+ 											array('property' => 'color', 'label' => esc_html__('Hover Color', 'codexin'), 'selector' => '.blog-content .read-more:hover, .img-thumb .cx-blog-btn:hover, .blog-footer .cx-blog-btn:hover'),
+ 											array('property' => 'background-color', 'label' => esc_html__('Backgroung Hover Color', 'codexin'), 'selector' => '.blog-content .read-more:hover, .img-thumb .cx-blog-btn:hover, .blog-footer .cx-blog-btn:hover'),
+ 											array('property' => 'border', 'label' => esc_html__('Border', 'codexin'), 'selector' => '.blog-content .read-more, .img-thumb .cx-blog-btn, .blog-footer .cx-blog-btn'),
+ 											array('property' => 'border-color', 'label' => esc_html__('Border Hover Color', 'codexin'), 'selector' => '.blog-content .read-more:hover, .img-thumb .cx-blog-btn:hover, .blog-footer .cx-blog-btn:hover'),
+ 											array('property' => 'background-color', 'label' => esc_html__('Border Bottom Color On Hover (For Layout-3)', 'codexin'), 'selector' => '.blog-wrapper-left .cx-blog-btn::before'),
+ 											array('property' => 'transition', 'label' => esc_html__('Hover Transition', 'codexin'), 'selector' => '.blog-content .read-more:hover, .img-thumb .cx-blog-btn:hover, .blog-footer .cx-blog-btn:hover'),
+ 											array('property' => 'font-family', 'label' => esc_html__('Font family', 'codexin'), 'selector' => '.blog-content .read-more, .img-thumb .cx-blog-btn, .blog-footer .cx-blog-btn'),
+ 											array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.blog-content .read-more, .img-thumb .cx-blog-btn, .blog-footer .cx-blog-btn'),
+ 											array('property' => 'font-weight', 'label' => esc_html__('Font Weight', 'codexin'), 'selector' => '.blog-content .read-more, .img-thumb .cx-blog-btn, .blog-footer .cx-blog-btn'),
+ 											array('property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '.blog-content .read-more, .img-thumb .cx-blog-btn, .blog-footer .cx-blog-btn'),
+ 											array('property' => 'text-transform', 'label' => esc_html__('Text Transform', 'codexin'), 'selector' => '.blog-content .read-more, .img-thumb .cx-blog-btn, .blog-footer .cx-blog-btn'),
+ 											array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.blog-content .read-more, .img-thumb .cx-blog-btn, .blog-footer .cx-blog-btn'),
+ 											array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.blog-content .read-more, .img-thumb .cx-blog-btn, .blog-footer .cx-blog-btn')
 										),
-
- 									// 	'Box'	=> array(
- 									// 		array('property' => 'background'),
- 									// 		array('property' => 'background-color', 'label' => esc_html__( 'BG Color On Hover' ), 'selector' => '.rv2-single-post:hover .post-img:before' ),
- 									// 		array('property' => 'border', 'label' => esc_html__('Border', 'codexin') ),
- 									// 		array('property' => 'border-radius', 'label' => esc_html__('Border Radius', 'codexin') ),
- 									// 		array('property' => 'box-shadow', 'label' => esc_html__('Box Shadow', 'codexin') ),
- 									// 		array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin') ),
- 									// 		array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin') ),
-										// ),
-
-
-
 									) 
 								) 
 							) 

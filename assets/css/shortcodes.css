@@ -1577,7 +1577,7 @@ div.cx-blog-2 {
     width: 0;
     position: absolute;
     bottom: 0;
-    height: 1px;
+    height: 2px;
     left: 50%;
     -webkit-transition: all 0.3s ease 0s;
     -moz-transition: all 0.3s ease 0s;
@@ -1589,6 +1589,12 @@ div.cx-blog-2 {
 .cx-blog-3 .blog-wrapper-left .cx-blog-btn:hover::before {
     width: 100%;
     left: 0;
+}
+
+.cx-blog-3 .blog-wrapper-right .blog-content,
+.cx-blog-3 .blog-wrapper-right .media-wrapper-right {
+    display: table-cell;
+    vertical-align: middle;
 }
 
 .cx-blog-3 .blog-wrapper-right {
@@ -1605,14 +1611,10 @@ div.cx-blog-2 {
 }
 
 .cx-blog-3 .blog-wrapper-right .img-thumb {
-    display: table-cell;
     width: 180px;
-    vertical-align: middle;
 }
 
 .cx-blog-3 .blog-wrapper-right .blog-content {
-    display: table-cell;
-    vertical-align: middle;
     padding: 10px 20px;
 }
 
