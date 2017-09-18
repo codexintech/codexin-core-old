@@ -139,6 +139,7 @@ class Codexin_Core {
 			add_image_size('rectangle-two', 570, 464, true);
 			add_image_size('rectangle-three', 480, 595, true);
 			add_image_size('square-one', 220, 220, true);
+			add_image_size('square-two', 500, 500, true);
 		    add_image_size('blog-grid-image', 540, 341, true);
 		    add_image_size('event-v2-image', 570, 310, true);
 			add_image_size('first-portfolio-img-rv2', 370, 550, true);

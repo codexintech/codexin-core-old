@@ -31,6 +31,10 @@ function cx_blog_shortcode( $atts, $content = null ) {
 	$cat_exclude = str_replace(',', ' ', $exclude);
 	$cat_excludes = explode( " ", $cat_exclude );
 
+    // Retrieving user define classes
+    $classes = array( 'row' );
+    (!empty($class)) ? $classes[] = $class : '';
+
 	ob_start(); 
 
 	if( ! empty( $layout ) ) :
@@ -39,9 +43,6 @@ function cx_blog_shortcode( $atts, $content = null ) {
 	   $master_class = apply_filters( 'kc-el-class', $atts );
 	   $master_class[] = 'cx-blog';
 
-	   // Retrieving user define classes
-	   $classes = array( 'row' );
-   	   (!empty($class)) ? $classes[] = $class : '';		
 	?>
 		<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
 			<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
@@ -114,13 +115,13 @@ function cx_blog_shortcode( $atts, $content = null ) {
 								</span>
 								<span> 											
 									<i class="fa fa-comments"></i> <i>
-										<?php comments_number('0', '1', '%'); ?>	
+										<a href="<?php comments_link(); ?>"><?php comments_number('0', '1', '%'); ?></a>
 									</i>
 								</span>
 								<?php elseif( $orderby == $order_com ) : ?>
 								<span> 											
 									<i class="fa fa-comments"></i> <i>
-										<?php comments_number('0', '1', '%'); ?>	
+										<a href="<?php comments_link(); ?>"><?php comments_number('0', '1', '%'); ?></a>	
 									</i>
 								</span>
 								<span>
@@ -136,7 +137,7 @@ function cx_blog_shortcode( $atts, $content = null ) {
 								</span>
 								<span> 											
 									<i class="fa fa-comments"></i> <i>
-										<?php comments_number('0', '1', '%'); ?>	
+										<a href="<?php comments_link(); ?>"><?php comments_number('0', '1', '%'); ?></a>
 									</i>
 								</span>
 							<?php endif; ?>	
@@ -164,11 +165,8 @@ function cx_blog_shortcode( $atts, $content = null ) {
 		// Assigning a master css class and hooking into KC
 		$master_class = apply_filters( 'kc-el-class', $atts );
 		$master_class[] = 'cx-blog-2';
-
-	    // Retrieving user define classes
-	    $classes = array( 'row' );
-   	    (!empty($class)) ? $classes[] = $class : '';		
-	?>
+	
+		?>
 		<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
 			<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
 
@@ -219,7 +217,7 @@ function cx_blog_shortcode( $atts, $content = null ) {
 								<ul class="meta">
 									<li><i class="fa fa-user"></i> <a href="<?php echo esc_url(get_author_posts_url( get_the_author_meta( 'ID' ), get_the_author_meta( 'user_nicename' ) )); ?>"> <?php the_author(); ?> </a> </li>
 									<?php if( $post_meta == 'comment' ): ?>
-										<li><i class="fa fa-paper-plane"></i> <?php comments_number('0', '1', '%'); ?> </li>
+										<li><i class="fa fa-paper-plane"></i> <a href="<?php comments_link(); ?>"><?php comments_number('0', '1', '%'); ?></a> </li>
 									<?php else: ?>
 										<li><i class="fa fa-eye"></i> <?php echo codexin_get_post_views(get_the_ID()); ?> </li>
 									<?php endif; ?>
@@ -250,9 +248,7 @@ function cx_blog_shortcode( $atts, $content = null ) {
 
 		$number_of_posts = 4;
 
-	    // Retrieving user define classes
-	    $classes = array( 'row' );
-   	    (!empty($class)) ? $classes[] = $class : ''; ?>
+		?>
 			
 		<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
 			<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
@@ -302,7 +298,7 @@ function cx_blog_shortcode( $atts, $content = null ) {
 								</p>
 							</div> <!-- end of blog-content -->
 							<div class="blog-footer">
-								<div class="blog-footer-item"><i class="fa fa-comments"></i> <?php comments_number('0', '1', '%'); ?> </div>
+								<div class="blog-footer-item"><i class="fa fa-comments"></i> <a href="<?php comments_link(); ?>"><?php comments_number('0', '1', '%'); ?></a> </div>
 								<div class="blog-footer-item"><i class="fa fa-eye"></i> <?php echo codexin_get_post_views(get_the_ID()); ?> </div>
 								<a href="<?php the_permalink(); ?>" class="cx-blog-btn">
 									<?php echo esc_html( !empty( $readmore_text ) ? $readmore_text : __('Read More', 'codexin') ); ?>
@@ -330,7 +326,7 @@ function cx_blog_shortcode( $atts, $content = null ) {
 										<li><?php echo esc_html__('By', 'reveal'); ?> <a href="<?php echo esc_url(get_author_posts_url( get_the_author_meta( 'ID' ), get_the_author_meta( 'user_nicename' ) )); ?>"> <?php the_author(); ?> </a> </li>
 										<li><?php echo esc_html__('On', 'reveal'); ?> <a href="<?php echo get_day_link(get_post_time('Y'), get_post_time('m'), get_post_time('j'));  ?>" class="entry-date"><?php echo get_the_time( 'd M, Y' ); ?></a> </li>
 										<li><i class="fa fa-eye"></i> <?php echo codexin_get_post_views(get_the_ID()); ?> </li>
-										<li><i class="fa fa-comments"></i> <?php comments_number('0', '1', '%'); ?> </li>
+										<li><i class="fa fa-comments"></i> <a href="<?php comments_link(); ?>"><?php comments_number('0', '1', '%'); ?></a> </li>
 									</ul>
 									<p class="blog-desc">
 										<?php echo esc_html( wp_trim_words( get_the_excerpt(), $desc_length ) ); ?> 
@@ -355,7 +351,73 @@ function cx_blog_shortcode( $atts, $content = null ) {
 			</div> <!-- end of cx-blog-3 -->
 			<div class="clearfix"></div>
 
-	<?php endif; //End layout - 3 ?>
+	<?php endif; //End layout - 3 
+
+	if( $layout == 4 ) : 
+		// Assigning a master css class and hooking into KC
+		$master_class = apply_filters( 'kc-el-class', $atts );
+		$master_class[] = 'cx-blog-4';
+
+		$number_of_posts = 3;
+		?>
+			
+		<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
+			<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
+			<?php 
+			//start query..
+			$args = array(
+					'post_type'				=> 'post',
+					'posts_per_page'		=> $number_of_posts,
+					'post_status'			=> 'publish',
+					'meta_key'				=> ( $orderby == 'meta_value_num' ) ? 'cx_post_views' : '',
+					'order'					=> $order,
+					'orderby'				=> $orderby,
+					'category__not_in' 		=> $cat_excludes,
+					'ignore_sticky_posts' 	=> 1
+			);
+
+			$data = new WP_Query( $args );
+
+			if( $data->have_posts() ) :
+
+				while( $data->have_posts() ) : $data->the_post();
+
+				// Retrieving Image alt tag
+				$image_alt = ( !empty( retrieve_alt_tag() ) ) ? retrieve_alt_tag() : get_the_title();
+				?>
+					<!-- Left column post -->
+					<div class="col-md-4 col-sm-12">
+						<div class="blog-wrapper">
+							<div class="img-thumb">
+								<a href="<?php esc_url( the_permalink() ); ?>">
+									<img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'square-two' ) : '//placehold.it/500x500' ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" class="img-responsive">
+								</a>
+							</div> <!-- End of img-thumb -->
+							<div class="blog-content">
+								<div class="blog-category">
+									<?php the_category(' '); ?>
+								</div>
+								<h3 class="blog-title">
+									<a href="<?php the_permalink(); ?>"><?php echo esc_html( wp_trim_words( get_the_title(), $title_length ) ); ?></a>
+								</h3>
+								<ul class="meta">
+									<li><i class="fa fa-clock-o"></i> <a href="<?php echo get_day_link(get_post_time('Y'), get_post_time('m'), get_post_time('j'));  ?>"><?php echo get_the_time( 'd M, Y' ); ?></a> </li>
+									<li><i class="fa fa-eye"></i> <?php echo codexin_get_post_views(get_the_ID()); ?> </li>
+									<li><i class="fa fa-comments"></i> <a href="<?php comments_link(); ?>"><?php comments_number('No Comments', '1 Comment', '% Comments'); ?></a> </li>
+								</ul>
+							</div> <!-- end of blog-content -->
+						</div> <!-- end blog-wrapper-left -->
+					</div> <!--end The col -->
+					<?php 
+					endwhile;
+				endif;
+				wp_reset_postdata();
+				?>
+				</div> <!-- end of row -->
+			</div> <!-- end of cx-blog-4 -->
+			<div class="clearfix"></div>
+
+	<?php endif; //End layout - 4 ?>
 			
 	<?php
 	endif;
@@ -415,9 +477,10 @@ function cx_blog_kc() {
 								'lable'	=> esc_html__( 'Select Blog Post Template', 'codexin' ),
 								'type'	=> 'radio_image',
 								'options'	=> array(
-									'1'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/blog/layout-1.png',
-									'2'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/blog/layout-2.png',
-									'3'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/blog/layout-3.png',
+									'1'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/blog/blog-1.jpg',
+									'2'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/blog/blog-2.jpg',
+									'3'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/blog/blog-3.jpg',
+									'4'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/blog/blog-4.jpg',
 								),
 								'value'	=> '1',
 								'admin_label'	=> true,
@@ -463,10 +526,6 @@ function cx_blog_kc() {
     								'meta_value_num' => 'Views Count',
     								'rand'			 => 'Randomize',
     							),
-    							// 'relation'	=> array(
-    							// 	'parent' 	=> 'layout',
-    							// 	'show_when'	=> '1',
-    							// ),
 	    						'value'			=> 'date',
 	    						'description'	=> esc_html__( 'Choose The Posts Sorting Method', 'codexin' ),
 	    					),
@@ -545,7 +604,11 @@ function cx_blog_kc() {
 	    							'max'			=> 32,
 	    							'unit'			=> '',
 	    							'show_input'	=> false
-    							)
+    							),
+    							'relation'	=> array(
+    								'parent' 	=> 'layout',
+    								'show_when'	=> '1,2,3',
+    							),
     						),
 
 	    					array(
@@ -566,6 +629,10 @@ function cx_blog_kc() {
 	    						'type'	=> 'text',
 	    						'value'	=> 'Read more',
 	    						'description' => esc_html__( 'Edit the text that appears on the "Read more" button.', 'codexin' ),
+    							'relation'	=> array(
+    								'parent' 	=> 'layout',
+    								'show_when'	=> '1,2,3',
+    							),
 	    					),
 
 	    					array(
@@ -617,7 +684,7 @@ function cx_blog_kc() {
 										),
 
 										'Image Hover' => array(
- 											array('property' => 'background', 'label' => esc_html__('Image Hover Color', 'codexin'), 'selector' => '.img-wrapper::before, .img-wrapper::after, .img-thumb:before' )
+ 											array('property' => 'background', 'label' => esc_html__('Image Hover Color', 'codexin'), 'selector' => '.img-wrapper::before, .img-wrapper::after, .img-thumb:before, .blog-wrapper::after' )
 										),
 
  										'Description' => array(
@@ -630,6 +697,23 @@ function cx_blog_kc() {
  											array('property' => 'text-transform', 'label' => esc_html__('Text Transform', 'codexin'), 'selector' => '.blog-content .blog-desc'),
  											array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.blog-content .blog-desc'),
  											array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.blog-content .blog-desc')
+										),
+
+ 										'Category' => array(
+ 											array('property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.blog-category a'),
+ 											array('property' => 'color', 'label' => esc_html__('Color on Hover', 'codexin'), 'selector' => '.blog-category a:hover'),
+ 											array('property' => 'background-color', 'label' => esc_html__('Background Color', 'codexin'), 'selector' => '.blog-category a'),
+ 											array('property' => 'background-color', 'label' => esc_html__('Background Color on Hover', 'codexin'), 'selector' => '.blog-category a:hover'),
+ 											array('property' => 'border', 'label' => esc_html__('Border', 'codexin'), 'selector' => '.blog-category a'),
+ 											array('property' => 'border-color', 'label' => esc_html__('Border Color on Hover', 'codexin'), 'selector' => '.blog-category a:hover'),
+ 											array('property' => 'font-family', 'label' => esc_html__('Font family', 'codexin'), 'selector' => '.blog-category a'),
+ 											array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.blog-category a'),
+ 											array('property' => 'font-weight', 'label' => esc_html__('Font Weight', 'codexin'), 'selector' => '.blog-category a'),
+ 											array('property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '.blog-category a'),
+ 											array('property' => 'text-align', 'label' => esc_html__('Text Align', 'codexin'), 'selector' => '.blog-category a'),
+ 											array('property' => 'text-transform', 'label' => esc_html__('Text Transform', 'codexin'), 'selector' => '.blog-category a'),
+ 											array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.blog-category a'),
+ 											array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.blog-category a')
 										),
 
  										'Button' => array(
