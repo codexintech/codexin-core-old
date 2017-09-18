@@ -46,16 +46,16 @@ function cx_information_box_shortcode( $atts, $content = null ) {
 		   	<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">	
 					<div class="info-wrapper">
 						<?php if(!empty($info_title)): ?>
-			   		<h2><?php echo esc_html( $info_title ); ?></h2>
-			   		<?php endif; ?>
+					   		<h2><?php echo esc_html( $info_title ); ?></h2>
+				   		<?php endif; ?>
 
-			   		<?php if(!empty($info_desc)): ?>
-			   		<p> <?php printf('%s', $info_desc ); ?> </p>
-			   		<?php endif; ?>
+				   		<?php if(!empty($info_desc)): ?>
+					   		<p> <?php printf('%s', $info_desc ); ?> </p>
+				   		<?php endif; ?>
 
-			   		<?php if( $button_toggle == 'yes') : ?>
-		   			<a href="<?php echo esc_url($retrieve_link[0]); ?>" <?php echo $title; ?> <?php echo $target; ?>><?php echo esc_html( $info_button_text ); ?></a>
-			   		<?php endif; ?>
+				   		<?php if( $button_toggle == 'yes') : ?>
+				   			<a href="<?php echo esc_url($retrieve_link[0]); ?>" <?php echo $title; ?> <?php echo $target; ?>><?php echo esc_html( $info_button_text ); ?></a>
+				   		<?php endif; ?>
 					</div>
 		   	</div><!-- end of content-mask -->
 	   </div><!-- end of contest-wrapper -->
@@ -230,6 +230,6 @@ function cx_information_box_kc() {
 			) //end of array 
 		);  //end of kc_add_map
 	} //End if
-} // end of cx_section_heading_kc
+} // end of cx_information_box
 
 
