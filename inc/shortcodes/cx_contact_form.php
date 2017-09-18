@@ -121,10 +121,10 @@ function cx_contact_form_kc() {
 
 	 						array(
 	 							'name' 			=> 'show_form_id',
-	 							'label' 		=> esc_html__( 'Select Form ', 'codexin' ),
+	 							'label' 		=> esc_html__( 'Select Form (Contact Form 7) ', 'codexin' ),
 	 							'type' 			=> 'select',
 	 							'options'		=> $contact_form,
-	 							'description'	=> esc_html__( 'Select Your Contact Form Here', 'codexin' ),
+	 							'description'	=> esc_html__( 'Select Your Contact Form 7 from the dropdown.', 'codexin' ),
 	 							'admin_label' 	=> true,
 	 						),
 
