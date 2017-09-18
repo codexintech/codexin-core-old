@@ -138,6 +138,49 @@
  	register_post_type( 'clients', $args );
 
 
+ 	//Create a custom post for team...
+ 	$labels = array(
+ 				'name'					=> 'Team',
+ 				'singular_name'			=> 'Team',
+ 				'add_new'				=> 'Add New Member',
+ 				'all_items'				=> 'All Members',
+ 				'add_new_item'			=> 'Add New Member',
+ 				'edit_item'				=> 'Edit Member',
+ 				'new_item'				=> 'New Member',
+ 				'view_item'				=> 'View Member',
+ 				'search_item'			=> 'Search Team Member',
+ 				'not_found'				=> 'No Team Member Found',
+ 				'not_found_in_trash' 	=> 'No Team Member In Trash',
+ 				'parent_item_colon'		=> 'Parent Team'
+
+ 			);
+
+ 	// Create a Aruments Array that Store all argumens of posts..
+ 	$args = array(
+ 			'labels'				=> $labels,
+ 			'menu_icon'				=> 'dashicons-groups',
+ 			'public'				=> true,
+ 			'has_archive'			=> true,
+ 			'publicly_queryable'	=> true,
+ 			'query_var'				=> true,
+ 			'rewrite'				=> true,
+ 			'capability-type'		=> 'post',
+ 			'hierarchical'			=> true,
+ 			// $Supports Array Create Custome From Fiels In WP-Dashbord,Defults are (title,Editor)
+ 			'supports'				=> array(
+ 										'title',
+ 										'thumbnail',
+ 										'editor',
+ 										'excerpt'
+ 									),
+ 			'taxonomies'			=> array(''),
+ 			'menu_position'			=> 5,
+ 			'exclude_from_search'	=> false
+ 		);
+
+ 	register_post_type( 'team', $args );
+
+
  	//Create a custom post for Events...
  	$labels = array(
  				'name'					=> 'Events',
