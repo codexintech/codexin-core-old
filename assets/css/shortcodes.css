@@ -2142,11 +2142,7 @@ section#location {
 .cx-pricing-tables .pricing-header {
     width: 100%;
     line-height: 1.4;
-    background: -webkit-linear-gradient(to bottom right,#3a98fe 0%, #3edbd9 100%);
-    background: -moz-linear-gradient(to bottom right,#3a98fe 0%, #3edbd9 100%);
-    background: -ms-linear-gradient(to bottom right,#3a98fe 0%, #3edbd9 100%);
-    background: -o-linear-gradient(to bottom right,#3a98fe 0%, #3edbd9 100%);
-    background: linear-gradient(to bottom right,#3a98fe 0%, #3edbd9 100%);
+    background: #295970;
     padding: 55px 30px;
 }
 
@@ -2231,7 +2227,7 @@ section#location {
     float: left;
     width: 100%;
     text-align: center;
-    background: #42BCE2;
+    background: #295970;
 }
 
 .cx-pricing-tables .pricing-button a {
@@ -2255,7 +2251,7 @@ section#location {
 
 .cx-pricing-tables .pricing-button a:hover {
     background: #fff;
-    color: #42BCE2;
+    color: #295970;
 }
 
 
