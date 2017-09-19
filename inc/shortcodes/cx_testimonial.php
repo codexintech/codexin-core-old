@@ -451,6 +451,11 @@ function cx_testimonial_kc() {
 											array( 'property' => 'border', 'label' => 'Icon Box Border', 'selector' => '.quote-author-thumb i' ),
 											array( 'property' => 'border-radius', 'label' => 'Icon Box Border Radius', 'selector' => '.quote-author-thumb i' ),
 											array( 'property' => 'display', 'label' => 'Display', 'selector' => '.quote-author-thumb i' ),
+											array( 'property' => 'font-size', 'label' => 'Font Size', 'selector' => '.quote-author-thumb i' ),
+											array( 'property' => 'text-align', 'label' => 'Text Align', 'selector' => '.quote-author-thumb i' ),
+											array( 'property' => 'line-height', 'label' => 'Line Height', 'selector' => '.quote-author-thumb i' ),
+											array( 'property' => 'padding', 'label' => 'Padding', 'selector' => '.quote-author-thumb i' ),
+											array( 'property' => 'margin', 'label' => 'Margin', 'selector' => '.quote-author-thumb i' ),
 										),
 
 										'Designation' => array(
@@ -477,7 +482,8 @@ function cx_testimonial_kc() {
 											
 											array('property' => 'border', 'label' => 'Image Box Border', 'selector' => '.media-thumb img'),
 											array('property' => 'border-radius', 'label' => 'Image Box Border Radius', 'selector' => '.media-thumb img'),
-											array('property' => 'display', 'label' => 'Image Box Border Radius', 'selector' => '.media-thumb'),
+											array('property' => 'padding', 'label' => 'Padding', 'selector' => '.media-thumb img'),
+											array('property' => 'margin', 'label' => 'Margin', 'selector' => '.media-thumb img'),
 										),
 
 										'Divider' => array(
