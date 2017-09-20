@@ -963,6 +963,107 @@ INDEX:
     display: block;
 }
 
+
+/**
+ * Codexin Testimonial Type 03
+ *
+ */
+
+.cx-testimonial-3 .quote-meta-wrapper {
+    display: table;
+    margin-bottom: 25px;
+}
+
+.cx-testimonial-4 .quote-author-thumb,
+.cx-testimonial-3 .quote-author-thumb {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-right: 25px;
+    overflow: hidden;
+}
+
+.cx-testimonial-4 .quote-author-thumb img,
+.cx-testimonial-3 .quote-author-thumb img {
+    width: 100%;
+}
+
+.cx-testimonial-4 .quote-author-meta,
+.cx-testimonial-3 .quote-author-meta {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.cx-testimonial-3 .quote-author-meta i {
+    font-size: 25px;
+    color: #295970;
+}
+
+.cx-testimonial-4 h3.quote-author-name,
+.cx-testimonial-3 h3.quote-author-name {
+    text-transform: uppercase;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.cx-testimonial-3 h3.quote-author-name,
+.cx-testimonial-4 h3.quote-author-name,
+.cx-testimonial-3 .author-designation,
+.cx-testimonial-4 .author-designation {
+    margin: 0;
+}
+
+.cx-testimonial-4 .quote-text p,
+.cx-testimonial-3 .quote-text p {
+    font-style: normal;
+    font-size: inherit;
+}
+
+
+/**
+ * Codexin Testimonial Type 04
+ *
+ */
+
+.cx-testimonial .center-block {
+    float: none;
+}
+
+
+.cx-testimonial-4 .item {
+    text-align: center;
+}
+
+.cx-testimonial-4 .quote-text {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.cx-testimonial-4 .quote-text p {
+    margin-bottom: 40px;
+}
+
+.cx-testimonial-4 .quote-meta-wrapper {
+    display: table;
+    margin-bottom: 0;
+}
+
+.cx-testimonial-4 .quote-author-thumb {
+    border: 2px solid #295970;
+    display: inline-block;
+}
+
+.cx-testimonial-4 .quote-author-meta {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.cx-testimonial-4 .author-designation {
+    color: #707070;
+}
+
+
+
 /*************************************
     007 - Codexin Team
 *************************************/
@@ -2432,7 +2533,7 @@ section#location {
 
 
 /******************************************
-    014 - Codexin Clients
+    015 - Codexin Clients
 ******************************************/
 
 /**
@@ -2461,6 +2562,8 @@ section#location {
 }
 
 
+.cx-testimonial-4 span,
+.cx-testimonial-3 span,
 .cx-client-carousel-1 span {
     position: absolute;
     top: 50%;
@@ -2478,24 +2581,51 @@ section#location {
     color: #999;
 }
 
+.cx-testimonial-4 span.prev,
+.cx-testimonial-3 span.prev,
 .cx-client-carousel-1 span.prev {
     left: -50px;
 }
 
+.cx-testimonial-4 span.next,
+.cx-testimonial-3 span.next,
 .cx-client-carousel-1 span.next {
     right: -50px;
 }
 
+.cx-testimonial-4 .slick-dots,
+.cx-testimonial-3 .slick-dots,
 .cx-client-carousel-1 .slick-dots {
     bottom: -50px;
 }
 
+.cx-testimonial-4 .slick-dots li,
+.cx-testimonial-3 .slick-dots li,
 .cx-client-carousel-1 .slick-dots li {
     margin:0;
 }
 
+.cx-testimonial-4 .slick-dots li button:before,
+.cx-testimonial-3 .slick-dots li button:before,
 .cx-client-carousel-1 .slick-dots li button:before {
     font-size: 10px;
+    opacity: 1;
+    color: rgba(0, 0, 0, 0.25);
+}
+
+.cx-testimonial-4 .slick-dots li button:hover:before,
+.cx-testimonial-4 .slick-dots li button:focus:before,
+.cx-testimonial-3 .slick-dots li button:hover:before,
+.cx-testimonial-3 .slick-dots li button:focus:before,
+.cx-client-carousel-1 .slick-dots li button:hover:before,
+.cx-client-carousel-1 .slick-dots li button:focus:before {
+    color: #333;
+}
+
+.cx-testimonial-4.slick-dotted.slick-slider,
+.cx-testimonial-3.slick-dotted.slick-slider,
+.cx-client-carousel-1.slick-dotted.slick-slider {
+    margin-bottom: 80px;
 }
 
 
@@ -2725,13 +2855,13 @@ h2.primary-title.rv2 {
 }
 
 /*----------------Client FeedBack------*/
-section#feedback {
+/*section#feedback {
     margin-top: 0;
     margin-bottom: 0;
 
 }
 .client-feedback{
-    /*background: url(../rev-2-img/Client-bg.jpg);*/
+    background: url(../rev-2-img/Client-bg.jpg);
     background-size: cover;
     background-position: center;
     position: relative;
@@ -2788,7 +2918,7 @@ section#feedback {
     transition: 0.3s;
 }
 .client-comment-curosel{
-    /*overflow: hidden;*/
+    overflow: hidden;
     width: 100% ;
 }
 .client-comment-curosel .col-sm-6{
@@ -2799,7 +2929,7 @@ section#feedback {
     height: 20px;
     overflow: hidden;
 }
-
+*/
 
 /************************************************************
     Codexin Clients  Type 01
@@ -3279,7 +3409,7 @@ figure.portfolio-rv2:hover .image-mask a {
 /*****************************
     011 - clients section
 ******************************/
-.client-comment-curosel-rv3  .client-name p {
+/*.client-comment-curosel-rv3  .client-name p {
     margin: 0;
     font-size: 15px;
     line-height: 1.65em;
@@ -3293,7 +3423,7 @@ figure.portfolio-rv2:hover .image-mask a {
 }
 .client-comment-curosel-rv3.arrow-middle .slick-next {
     right:  -100px;
-}
+}*/
 
 /*=============================================
     003 - Home - v3
