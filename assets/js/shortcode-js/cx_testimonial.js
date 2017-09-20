@@ -52,6 +52,7 @@
             autoplay: cxt2_autoplay,
             autoplaySpeed: ap_spd,
             dots: cxt2_nav,
+            adaptiveHeight: true,
             arrows: cxt2_arrow,
             fade: cx2_fade,
             prevArrow: '<span class="prev"><i class="fa fa-angle-left"></i></span>',

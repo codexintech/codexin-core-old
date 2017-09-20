@@ -341,6 +341,95 @@ function cx_testimonial_shortcode( $atts, $content = null ) {
 			</div> <!-- end of section -->
 			<div class="clearfix"></div>
 
+		<?php endif; //End layout - 4 
+
+		if( $layout == 5 ) : 
+		 	// Assigning a master css class and hooking into KC
+			$master_class = apply_filters( 'kc-el-class', $atts );
+			$master_class[] = 'cx-testimonial';
+
+			// Passing values to javascript
+			$codeopt = '';
+			(!empty( $speed )) ? $atp_speed = $speed : $atp_speed = '2000';
+			(!empty( $arrow )) ? $slick_arrow = true : $slick_arrow = false;
+			(!empty( $dots )) ? $en_dots = true : $en_dots = false;
+			(!empty( $play )) ? $auto_play = true : $auto_play = false;
+			(!empty( $fade )) ? $fade_eff = true : $fade_eff = false;
+			$codeopt .= '
+			<script type="text/javascript">
+				var s_arrow = "' . $slick_arrow . '";
+				var s_dot = "' . $en_dots . '";
+				var at_p = "' . $auto_play . '";
+				var ap_spd = "' . $atp_speed . '";
+				var fade_e = "' . $fade_eff . '";
+			</script>';
+			echo $codeopt;
+
+		?>
+			
+			<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
+				<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
+					<div class="col-sm-9 center-block">
+						<div class="cx-testimonial-5">
+						<?php 
+							//start new query..
+							$args = array(
+								'post_type'		 => 'testimonial',
+								'order'			 => 'DESC',
+								'orderby'		 => 'date',
+								'posts_per_page' => -1,
+								'post_status'	 => 'publish',
+								);
+
+							$data = new WP_Query( $args );
+							if( $data->have_posts() ) :
+								while( $data->have_posts() ) : $data->the_post();
+
+									// Retrieving Image alt tag
+									$img_alt = ( !empty( retrieve_alt_tag() ) ) ? retrieve_alt_tag() : get_the_title();
+								?>
+									<div class="item">
+										<div class="quote-text">
+											<p> <?php printf('%s', get_the_excerpt() ); ?> </p>
+										</div>
+										<div class="quote-meta-wrapper center-block">
+											<div class="quote-author-thumb">
+												<img src="<?php echo esc_url( the_post_thumbnail_url( 'square-one' ) ); ?>" alt="<?php echo esc_attr( $img_alt ); ?>">
+											</div>
+											<div class="quote-author-meta">
+												<h3 class="quote-author-name">
+													<?php 
+													$name = rwmb_meta( 'reveal_author_name', 'type=text' ); 
+													echo esc_html( $name );
+													?>
+												</h3>
+												<?php 
+												if( $designation ):
+													$desig = rwmb_meta( 'reveal_author_desig', 'type=text' ); 
+													$company = rwmb_meta( 'reveal_author_company', 'type=text' );  
+													if(!empty($desig) && !empty($company)):?>
+													<p class="author-designation"><?php echo esc_html( $desig ) .', '. esc_html( $company ); ?></p>
+													<?php elseif(!empty($desig) && empty($compnay)): ?>
+													<p class="author-designation"><?php echo esc_html( $desig ); ?></p>
+
+													<?php elseif(empty($desig) && !empty($company)): ?>
+													<p class="author-designation"><?php echo esc_html( $company ); ?></p>
+													<?php 
+													endif;
+												endif; ?>
+											</div>
+										</div>
+									</div>
+								<?php 
+								endwhile;
+							endif;
+							wp_reset_postdata(); ?>	
+						</div> <!-- end of cx-testimonial-4 -->
+					</div> <!-- end of col -->
+				</div> <!-- end of row -->
+			</div> <!-- end of section -->
+			<div class="clearfix"></div>
+
 		<?php endif; //End layout - 4 ?>
 
 	<?php
@@ -560,6 +649,15 @@ function cx_testimonial_kc() {
 											array('property' => 'height', 'label' => 'Height', 'selector' => '.quote-author-name::before, .media-texts::before'),
 											array('property' => 'margin', 'label' => 'Margin', 'selector' => '.quote-author-name::before, .media-texts::before'),
 											array('property' => 'padding', 'label' => 'padding', 'selector' => '.quote-author-name::before, .media-texts::before')
+										),
+
+										'Slider Wrapper' => array(
+											array('property' => 'background', 'label' => 'Color', 'selector' => '.item'),
+											array('property' => 'border', 'label' => 'Border', 'selector' => '.item'),
+											array('property' => 'border-radius', 'label' => 'Border Radius', 'selector' => '.item'),
+											array('property' => 'height', 'label' => 'Height', 'selector' => '.item'),
+											array('property' => 'margin', 'label' => 'Margin', 'selector' => '.item'),
+											array('property' => 'padding', 'label' => 'padding', 'selector' => '.item')
 										),
 
 										'Box'	=> array(
