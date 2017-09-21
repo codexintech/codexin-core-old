@@ -184,10 +184,10 @@ function cx_service_box_kc() {
   	        					'label'			=> esc_html__( 'Select Service Box Template', 'codexin' ),
   	        					'name'			=> 'layout',
   	        					'options'		=> array(
-                                    '1' => CODEXIN_CORE_ASSET_DIR . '/images/layout-img/servicebox/service-layout-1.jpg',
-                                    '2' => CODEXIN_CORE_ASSET_DIR . '/images/layout-img/servicebox/service-layout-2.jpg',
-                                    '3' => CODEXIN_CORE_ASSET_DIR . '/images/layout-img/servicebox/service-layout-3.jpg',
-                                    '4' => CODEXIN_CORE_ASSET_DIR . '/images/layout-img/servicebox/service-layout-4.jpg',
+                                    '1' => CODEXIN_CORE_ASSET_DIR . '/images/layout-img/servicebox/service-1.jpg',
+                                    '2' => CODEXIN_CORE_ASSET_DIR . '/images/layout-img/servicebox/service-2.jpg',
+                                    '3' => CODEXIN_CORE_ASSET_DIR . '/images/layout-img/servicebox/service-3.jpg',
+                                    '4' => CODEXIN_CORE_ASSET_DIR . '/images/layout-img/servicebox/service-4.jpg',
                                     ),
   	        					'value'			=> '1'
                             ),
