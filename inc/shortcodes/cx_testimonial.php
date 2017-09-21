@@ -14,6 +14,7 @@ function cx_testimonial_shortcode( $atts, $content = null ) {
 			'designation'	 	=> '',
 			'fade'			 	=> '',
 			'arrow'				=> '',
+			'adaptive_height'	=> '',
 			'dots'			 	=> '',
 			'play'		 		=> '',
 			'speed'		 		=> '',
@@ -35,6 +36,19 @@ function cx_testimonial_shortcode( $atts, $content = null ) {
    				// Assigning a master css class and hooking into KC
 				$master_class = apply_filters( 'kc-el-class', $atts );
 				$master_class[] = 'cx-testimonial';
+
+				// Passing values to javascript
+				$codeopt = '';
+				(!empty( $arrow )) ? $slick_arrow1 = true : $slick_arrow1 = false;
+				(!empty( $fade )) ? $fade1 = true : $fade1 = false;
+				(!empty( $adaptive_height )) ? $a_height = true : $a_height = false;
+				$codeopt .= '
+				<script type="text/javascript">
+					var sh_arrow1 = "' . $slick_arrow1 . '";
+					var fd1 = "' . $fade1 . '";
+					var ad_h1 = "' . $a_height . '";
+				</script>';
+				echo $codeopt;
 
 				?>
 
@@ -266,6 +280,7 @@ function cx_testimonial_shortcode( $atts, $content = null ) {
 			(!empty( $dots )) ? $en_dots = true : $en_dots = false;
 			(!empty( $play )) ? $auto_play = true : $auto_play = false;
 			(!empty( $fade )) ? $fade_eff = true : $fade_eff = false;
+			(!empty( $adaptive_height )) ? $ad_h = true : $ad_h = false;
 			$codeopt .= '
 			<script type="text/javascript">
 				var s_arrow = "' . $slick_arrow . '";
@@ -273,6 +288,7 @@ function cx_testimonial_shortcode( $atts, $content = null ) {
 				var at_p = "' . $auto_play . '";
 				var ap_spd = "' . $atp_speed . '";
 				var fade_e = "' . $fade_eff . '";
+				var ad_h4 = "' . $ad_h . '";
 			</script>';
 			echo $codeopt;
 
@@ -348,20 +364,25 @@ function cx_testimonial_shortcode( $atts, $content = null ) {
 			$master_class = apply_filters( 'kc-el-class', $atts );
 			$master_class[] = 'cx-testimonial';
 
+			$count_posts = wp_count_posts('testimonial')->publish;
+
 			// Passing values to javascript
 			$codeopt = '';
-			(!empty( $speed )) ? $atp_speed = $speed : $atp_speed = '2000';
-			(!empty( $arrow )) ? $slick_arrow = true : $slick_arrow = false;
-			(!empty( $dots )) ? $en_dots = true : $en_dots = false;
-			(!empty( $play )) ? $auto_play = true : $auto_play = false;
-			(!empty( $fade )) ? $fade_eff = true : $fade_eff = false;
+			(!empty( $speed )) ? $atp_speed5 = $speed : $atp_speed5 = '2000';
+			(!empty( $arrow )) ? $slick_arrow5 = true : $slick_arrow5 = false;
+			(!empty( $dots )) ? $en_dots5 = true : $en_dots5 = false;
+			(!empty( $play )) ? $auto_play5 = true : $auto_play5 = false;
+			(!empty( $fade )) ? $fade_eff5 = true : $fade_eff5 = false;
+			(!empty( $adaptive_height )) ? $ad_he5 = true : $ad_he5 = false;
 			$codeopt .= '
 			<script type="text/javascript">
-				var s_arrow = "' . $slick_arrow . '";
-				var s_dot = "' . $en_dots . '";
-				var at_p = "' . $auto_play . '";
-				var ap_spd = "' . $atp_speed . '";
-				var fade_e = "' . $fade_eff . '";
+				var s_arrow5 = "' . $slick_arrow5 . '";
+				var s_dot5 = "' . $en_dots5 . '";
+				var at_p5 = "' . $auto_play5 . '";
+				var ap_spd5 = "' . $atp_speed5 . '";
+				var fade_e5 = "' . $fade_eff5 . '";
+				var count = "' . $count_posts . '";
+				var ad_h5 = "' . $ad_he5 . '";
 			</script>';
 			echo $codeopt;
 
@@ -369,68 +390,89 @@ function cx_testimonial_shortcode( $atts, $content = null ) {
 			
 			<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
 				<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
-					<div class="col-sm-9 center-block">
+					<div class="col-sm-12 text-center">
 						<div class="cx-testimonial-5">
-						<?php 
-							//start new query..
-							$args = array(
-								'post_type'		 => 'testimonial',
-								'order'			 => 'DESC',
-								'orderby'		 => 'date',
-								'posts_per_page' => -1,
-								'post_status'	 => 'publish',
-								);
+							<div class="row">
+								<div class="col-md-6 col-md-push-3">
+									<div class="slick-slider-nav">
+									<?php 
+										//start new query..
+										$args = array(
+											'post_type'		 => 'testimonial',
+											'order'			 => 'DESC',
+											'orderby'		 => 'date',
+											'posts_per_page' => -1,
+											'post_status'	 => 'publish',
+											);
 
-							$data = new WP_Query( $args );
-							if( $data->have_posts() ) :
-								while( $data->have_posts() ) : $data->the_post();
+										$data = new WP_Query( $args );
+										if( $data->have_posts() ) :
+											while( $data->have_posts() ) : $data->the_post();
 
-									// Retrieving Image alt tag
-									$img_alt = ( !empty( retrieve_alt_tag() ) ) ? retrieve_alt_tag() : get_the_title();
-								?>
+												// Retrieving Image alt tag
+												$img_alt = ( !empty( retrieve_alt_tag() ) ) ? retrieve_alt_tag() : get_the_title();
+											?>
+
+											<?php //if (($data->current_post +1) !== ($data->post_count)): ?>	
+											<div class="item">
+												<div class="quote-author-media">
+													<img src="<?php echo esc_url( the_post_thumbnail_url( 'square-one' ) ); ?>" alt="<?php echo esc_attr( $img_alt ); ?>">
+												</div>
+											</div>
+
+											<?php if (($data->current_post +1) == ($data->post_count)): ?>								
+									</div><!-- end of slick-slider-nav -->
+								</div><!-- end of col -->
+							</div><!-- end of row -->
+							<div class="testimonial-content slick-slider-content">
+								<?php 
+								$new_data = new WP_Query( $args );
+								if( $new_data->have_posts() ) :
+									while( $new_data->have_posts() ) : $new_data->the_post(); ?>
 									<div class="item">
 										<div class="quote-text">
 											<p> <?php printf('%s', get_the_excerpt() ); ?> </p>
 										</div>
-										<div class="quote-meta-wrapper center-block">
-											<div class="quote-author-thumb">
-												<img src="<?php echo esc_url( the_post_thumbnail_url( 'square-one' ) ); ?>" alt="<?php echo esc_attr( $img_alt ); ?>">
-											</div>
-											<div class="quote-author-meta">
-												<h3 class="quote-author-name">
-													<?php 
-													$name = rwmb_meta( 'reveal_author_name', 'type=text' ); 
-													echo esc_html( $name );
-													?>
-												</h3>
+										<div class="quote-author-meta">
+											<h3 class="quote-author-name">
 												<?php 
-												if( $designation ):
-													$desig = rwmb_meta( 'reveal_author_desig', 'type=text' ); 
-													$company = rwmb_meta( 'reveal_author_company', 'type=text' );  
-													if(!empty($desig) && !empty($company)):?>
-													<p class="author-designation"><?php echo esc_html( $desig ) .', '. esc_html( $company ); ?></p>
-													<?php elseif(!empty($desig) && empty($compnay)): ?>
-													<p class="author-designation"><?php echo esc_html( $desig ); ?></p>
+												$name = rwmb_meta( 'reveal_author_name', 'type=text' ); 
+												echo esc_html( $name );
+												?>
+											</h3>
+											<?php 
+											if( $designation ):
+												$desig = rwmb_meta( 'reveal_author_desig', 'type=text' ); 
+												$company = rwmb_meta( 'reveal_author_company', 'type=text' );  
+												if(!empty($desig) && !empty($company)):?>
+												<p class="author-designation"><?php echo esc_html( $desig ) .', '. esc_html( $company ); ?></p>
+												<?php elseif(!empty($desig) && empty($compnay)): ?>
+												<p class="author-designation"><?php echo esc_html( $desig ); ?></p>
 
-													<?php elseif(empty($desig) && !empty($company)): ?>
-													<p class="author-designation"><?php echo esc_html( $company ); ?></p>
-													<?php 
-													endif;
-												endif; ?>
-											</div>
+												<?php elseif(empty($desig) && !empty($company)): ?>
+												<p class="author-designation"><?php echo esc_html( $company ); ?></p>
+												<?php 
+												endif;
+											endif; ?>
 										</div>
 									</div>
+								<?php 
+									endwhile; 
+								endif; 
+								endif; ?>
+
 								<?php 
 								endwhile;
 							endif;
 							wp_reset_postdata(); ?>	
-						</div> <!-- end of cx-testimonial-4 -->
+							</div> <!-- end of slick-slider-content -->
+						</div> <!-- end of cx-testimonial-5 -->							
 					</div> <!-- end of col -->
 				</div> <!-- end of row -->
-			</div> <!-- end of section -->
+			</div> <!-- end of cx-testimonial -->
 			<div class="clearfix"></div>
 
-		<?php endif; //End layout - 4 ?>
+		<?php endif; //End layout - 5 ?>
 
 	<?php
 	endif;
@@ -475,6 +517,7 @@ function cx_testimonial_kc() {
 									'2'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/testimonial/layout-2.png',
 									'3'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/testimonial/layout-3.png',
 									'4'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/testimonial/layout-4.png',
+									'5'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/testimonial/layout-4.png',
 								),
 								'value'	=> '1'
 							),
@@ -496,7 +539,7 @@ function cx_testimonial_kc() {
 								'type' 			=> 'toggle',
 								'relation'		=> array(
 									'parent'	=> 'layout',
-									'show_when' => '3,4',
+									'show_when' => '3,4,5',
 								),
 								'description'	=> esc_html__( 'Enable to display designation and company name.', 'codexin' ),
 							),
@@ -507,7 +550,7 @@ function cx_testimonial_kc() {
 								'type' 			=> 'toggle',
 								'relation'		=> array(
 									'parent'	=> 'layout',
-									'show_when' => '4',
+									'show_when' => '1,4,5',
 								),
 								'description'	=> esc_html__( 'Choose to Enable Fade Animation instead of default slide animation.', 'codexin' ),
 							),
@@ -518,7 +561,7 @@ function cx_testimonial_kc() {
 								'type' 			=> 'toggle',
 								'relation'		=> array(
 									'parent'	=> 'layout',
-									'show_when' => '3,4',
+									'hide_when' => '2',
 								),
 								'description'	=> esc_html__( 'Choose to Enable/Disable Navigation Arrows.', 'codexin' ),
 							),
@@ -529,9 +572,21 @@ function cx_testimonial_kc() {
 								'type' 			=> 'toggle',
 								'relation'		=> array(
 									'parent'	=> 'layout',
-									'show_when' => '3,4',
+									'show_when' => '3,4,5',
 								),
 								'description'	=> esc_html__( 'Choose to Enable/Disable Dot Pagination.', 'codexin' ),
+								'value'			=> 'yes'
+							),
+
+							array(
+								'name' 			=> 'adaptive_height',
+								'label' 		=> __( 'Enable Adaptive height? ', 'codexin' ),
+								'type' 			=> 'toggle',
+								'relation'		=> array(
+									'parent'	=> 'layout',
+									'show_when' => '1,4,5',
+								),
+								'description'	=> esc_html__( 'Choose to Enable Adaptive Height instead of Fixed Height.', 'codexin' ),
 								'value'			=> 'yes'
 							),
 
@@ -541,7 +596,7 @@ function cx_testimonial_kc() {
 								'type' 			=> 'toggle',
 								'relation'		=> array(
 									'parent'	=> 'layout',
-									'show_when' => '3,4',
+									'show_when' => '3,4,5',
 								),
 								'description'	=> esc_html__( 'Choose to Enable Autoplay.', 'codexin' ),
 								'value'			=> 'yes'
@@ -590,11 +645,11 @@ function cx_testimonial_kc() {
 										),
 
 										'Icon'	=> array(
-											array( 'property' => 'color', 'label' => 'Icon Color', 'selector' => '.quote-author-thumb i, .quote-author-meta i' ),
+											array( 'property' => 'color', 'label' => 'Icon Color', 'selector' => '.quote-author-thumb i, .quote-author-meta i, .slick-slider-nav .item.slick-current .cx-overlay::before' ),
 											array( 'property' => 'border', 'label' => 'Icon Box Border', 'selector' => '.quote-author-thumb i, .quote-author-meta i' ),
 											array( 'property' => 'border-radius', 'label' => 'Icon Box Border Radius', 'selector' => '.quote-author-thumb i, .quote-author-meta i' ),
 											array( 'property' => 'display', 'label' => 'Display', 'selector' => '.quote-author-thumb i, .quote-author-meta i' ),
-											array( 'property' => 'font-size', 'label' => 'Font Size', 'selector' => '.quote-author-thumb i, .quote-author-meta i' ),
+											array( 'property' => 'font-size', 'label' => 'Font Size', 'selector' => '.quote-author-thumb i, .quote-author-meta i, .slick-slider-nav .item.slick-current .cx-overlay::before' ),
 											array( 'property' => 'text-align', 'label' => 'Text Align', 'selector' => '.quote-author-thumb i, .quote-author-meta i' ),
 											array( 'property' => 'line-height', 'label' => 'Line Height', 'selector' => '.quote-author-thumb i, .quote-author-meta i' ),
 											array( 'property' => 'padding', 'label' => 'Padding', 'selector' => '.quote-author-thumb i, .quote-author-meta i' ),
@@ -624,10 +679,12 @@ function cx_testimonial_kc() {
 
 										'Image' => array(
 											
-											array('property' => 'border', 'label' => 'Image Box Border', 'selector' => '.media-thumb img, .quote-author-thumb'),
-											array('property' => 'border-radius', 'label' => 'Image Box Border Radius', 'selector' => '.media-thumb img, .quote-author-thumb'),
-											array('property' => 'padding', 'label' => 'Padding', 'selector' => '.media-thumb img, .quote-author-thumb'),
-											array('property' => 'margin', 'label' => 'Margin', 'selector' => '.media-thumb img, .quote-author-thumb'),
+											array('property' => 'border', 'label' => 'Image Box Border', 'selector' => '.media-thumb img, .quote-author-thumb, .quote-author-media img'),
+											array('property' => 'border-radius', 'label' => 'Image Box Border Radius', 'selector' => '.media-thumb img, .quote-author-thumb, .quote-author-media img'),
+											array('property' => 'background-color', 'label' => 'Active Image Overlay Color for Layout-5', 'selector' => '.slick-slider-nav .item.slick-current .cx-overlay'),
+											array('property' => 'box-shadow', 'label' => 'Active Image Box Shadow for Layout-5', 'selector' => '.slick-slider-nav .item.slick-current .quote-author-media img'),
+											array('property' => 'padding', 'label' => 'Padding', 'selector' => '.media-thumb img, .quote-author-thumb, .quote-author-media img'),
+											array('property' => 'margin', 'label' => 'Margin', 'selector' => '.media-thumb img, .quote-author-thumb, .quote-author-media img'),
 										),
 
 										'Nav' => array(

@@ -999,6 +999,7 @@ INDEX:
     color: #295970;
 }
 
+.cx-testimonial-5 h3.quote-author-name,
 .cx-testimonial-4 h3.quote-author-name,
 .cx-testimonial-3 h3.quote-author-name {
     text-transform: uppercase;
@@ -1006,13 +1007,16 @@ INDEX:
     font-weight: 500;
 }
 
+.cx-testimonial-5 h3.quote-author-name,
 .cx-testimonial-3 h3.quote-author-name,
 .cx-testimonial-4 h3.quote-author-name,
+.cx-testimonial-5 .author-designation,
 .cx-testimonial-3 .author-designation,
 .cx-testimonial-4 .author-designation {
     margin: 0;
 }
 
+.cx-testimonial-5 .quote-text p,
 .cx-testimonial-4 .quote-text p,
 .cx-testimonial-3 .quote-text p {
     font-style: normal;
@@ -1062,6 +1066,109 @@ INDEX:
     color: #707070;
 }
 
+
+/**
+ * Codexin Testimonial Type 05
+ *
+ */
+
+.cx-testimonial-5 .slick-slider-nav {
+    min-height: 100px;
+}
+
+.cx-testimonial-5 .slick-slider-nav .item {
+    float: left;
+    padding: 10px 0;
+    position: relative;
+}
+
+
+.cx-testimonial-5 .slick-slider-nav .item img,
+.cx-testimonial-5 .slick-slider-nav .item .cx-overlay {
+    position: relative;
+    height: 80px;
+    margin: 0 auto;
+    width: 80px;
+    padding: 5px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    border-radius: 50%;
+    -webkit-transition: box-shadow .3s ease 0s;
+    -moz-transition: box-shadow .3s ease 0s;
+    -ms-transition: box-shadow .3s ease 0s;
+    -o-transition: box-shadow .3s ease 0s;
+    transition: box-shadow .3s ease 0s;
+}
+
+.cx-testimonial-5 .slick-slider-nav .item.slick-current img {
+    -webkit-box-shadow: 0 0 0 2px #fff;
+    -moz-box-shadow: 0 0 0 2px #fff;
+    -ms-box-shadow: 0 0 0 2px #fff;
+    -o-box-shadow: 0 0 0 2px #fff;
+    box-shadow: 0 0 0 2px #fff;
+}
+
+.cx-testimonial-5 .slick-slider-nav .item .cx-overlay {
+    background: rgba(41, 89, 112, 0) none repeat scroll 0 0;
+    height: 70px;
+    margin-top: -75px;
+    width: 70px;
+}
+
+.cx-testimonial-5 .slick-slider-nav .item.slick-current .cx-overlay {
+    background: rgba(41, 89, 112, 0.75);
+}
+
+.cx-testimonial-5 .slick-slider-nav .item.slick-current .cx-overlay:before {
+    position: absolute;
+    font-family: FontAwesome;
+    content: "\f10d";
+    color: #fff;
+    font-size: 18px;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.cx-testimonial-5 .testimonial-content {
+    margin-top: 40px;
+}
+
+.cx-testimonial-5 .quote-text {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.cx-testimonial-5 .quote-text p {
+    margin-bottom: 40px;
+}
+
+.cx-testimonial-5 h3.quote-author-name {
+    font-size: 16px;
+    color: #295970;
+}
+
+.cx-testimonial-5 span.prev {
+    left: 0;
+    z-index: 1;
+}
+
+.cx-testimonial-5 span.next {
+    right: 0;
+}
+
+.cx-testimonial-5 .testimonial-content span {
+    top: 8%;
+}
+
+.cx-testimonial-5
+.cx-testimonial-5
 
 
 /*************************************
@@ -2562,6 +2669,7 @@ section#location {
 }
 
 
+.cx-testimonial-5 span,
 .cx-testimonial-4 span,
 .cx-testimonial-3 span,
 .cx-client-carousel-1 span {
@@ -2593,18 +2701,21 @@ section#location {
     right: -50px;
 }
 
+.cx-testimonial-5 .slick-dots,
 .cx-testimonial-4 .slick-dots,
 .cx-testimonial-3 .slick-dots,
 .cx-client-carousel-1 .slick-dots {
     bottom: -50px;
 }
 
+.cx-testimonial-5 .slick-dots li,
 .cx-testimonial-4 .slick-dots li,
 .cx-testimonial-3 .slick-dots li,
 .cx-client-carousel-1 .slick-dots li {
     margin:0;
 }
 
+.cx-testimonial-5 .slick-dots li button:before,
 .cx-testimonial-4 .slick-dots li button:before,
 .cx-testimonial-3 .slick-dots li button:before,
 .cx-client-carousel-1 .slick-dots li button:before {
@@ -2613,6 +2724,8 @@ section#location {
     color: rgba(0, 0, 0, 0.25);
 }
 
+.cx-testimonial-5 .slick-dots li button:hover:before,
+.cx-testimonial-5 .slick-dots li button:focus:before,
 .cx-testimonial-4 .slick-dots li button:hover:before,
 .cx-testimonial-4 .slick-dots li button:focus:before,
 .cx-testimonial-3 .slick-dots li button:hover:before,
@@ -2622,6 +2735,7 @@ section#location {
     color: #333;
 }
 
+.cx-testimonial-5 .testimonial-content.slick-dotted.slick-slider,
 .cx-testimonial-4.slick-dotted.slick-slider,
 .cx-testimonial-3.slick-dotted.slick-slider,
 .cx-client-carousel-1.slick-dotted.slick-slider {
