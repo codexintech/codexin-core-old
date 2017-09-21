@@ -342,43 +342,6 @@ INDEX:
     004 - Codexin Service Box
 ***************************************
 
-/*.cx-service-box .service-single {
-    margin-bottom: 40px;
-    margin-top: 50px;
-}
-
-.cx-service-box .service-single .media-thumb {
-    padding-right: 10px;
-    padding-top: 7px;
-    min-width: 75px;
-    float: left;
-    display: block;
-}
-
-.cx-service-box .service-single .media-title {
-    font-size: 16px;
-    text-transform: uppercase;
-    font-weight: bold;
-    margin-bottom: 10px;
-    margin-top: 2px;
-    letter-spacing: normal;
-}
-
-.cx-service-box .service-single .media-thumb i {
-    font-size: 50px;
-    padding: 5px;
-    text-align: center;
-    line-height: 50px;
-}
-
-.cx-service-box .service-single .media-desc {
-    max-width: calc(100% - 75px);
-    float: right;
-    display: block;
-    padding-top:7px;
-}
-*/
-
 /**
  * Codexin Service Box Type 01
  *
@@ -554,6 +517,7 @@ INDEX:
     color: #82c400;
 }
 
+.cx-service-box .service-single-4 .media-title,
 .cx-service-box .service-single-2 .media-title,
 .cx-service-box .service-single-3 .media-title {
     text-transform: uppercase;
@@ -561,6 +525,7 @@ INDEX:
     line-height: 1em;
 }
 
+.cx-service-box .service-single-4 .media-texts,
 .cx-service-box .service-single-3 .media-texts,
 .cx-service-box .service-single-2 .media-texts {
     margin-bottom: 0;
@@ -600,6 +565,95 @@ INDEX:
     border: 1px solid #82c400;
     background: initial;
 }
+
+
+/**
+ * Codexin Service Box Type 04
+ *
+ */
+
+.cx-service-box .service-single-4 {
+    background: #fff;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+    padding: 30px;
+    text-align: center;
+}
+
+.cx-service-box .service-single-4:hover {
+    -webkit-box-shadow: 0px 15px 60px -22px rgba(0,0,0,0.5);
+    -moz-box-shadow: 0px 15px 60px -22px rgba(0,0,0,0.5);
+    -ms-box-shadow: 0px 15px 60px -22px rgba(0,0,0,0.5);
+    -o-box-shadow: 0px 15px 60px -22px rgba(0,0,0,0.5);
+    box-shadow: 0px 15px 60px -22px rgba(0,0,0,0.5);
+}
+
+.cx-service-box .service-single-4 .media-desc {
+    position: relative;
+    top: -43px;
+    margin-bottom: -25px;
+}
+
+.cx-service-box .service-single-4 .media-thumb {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: #fff;
+    position: relative;
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: 0px;
+    line-height: 90px;
+    z-index: 0;
+}
+
+.cx-service-box .service-single-4 .media-thumb::before {
+    content: "";
+    position: absolute;
+    background: transparent;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: 0 auto;
+    opacity: .65;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    border-radius: 50%;
+    border: 10px solid #fff;
+    -webkit-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    -o-transform: scale(1.2);
+    transform: scale(1.2);
+    z-index: -1;
+}
+
+.cx-service-box .service-single-4 .media-thumb img {
+    max-width: 45px;
+}
+
+.cx-service-box .service-single-4 .media-thumb i {
+    font-size: 45px;
+}
+
+.cx-service-box .service-single-4 .media-title {
+    z-index: 1;
+    position: relative;
+    margin-top: 10px;
+}
+
+.cx-service-box .service-single-4 .no-media-thumb {
+    height: 90px;
+}
+
+
 
 
 /**************************************
