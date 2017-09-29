@@ -146,7 +146,7 @@
                 }]
             }), $(".slick-slider-nav .slick-slide").append('<div class="cx-overlay"></div>');
         } else {
-            $(".cx-testimonial-5").css('display','none').after('<div class="cx-error">Minimun requirement for this testimonial layout is not met. <br />Please add more than three testimonials or switch to other layouts.</div>');
+            $(".cx-testimonial-5").css('display','none').after('<div class="cx-error">Minimun requirement for this testimonial layout is not met. <br />Please add more than three testimonials from dashboard or switch to other layouts.</div>');
         }
     }
 

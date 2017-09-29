@@ -1221,8 +1221,9 @@ INDEX:
     top: 8%;
 }
 
-.cx-testimonial-5
-.cx-testimonial-5
+.cx-testimonial .cx-error {
+    background: #fff;
+}
 
 
 /*************************************

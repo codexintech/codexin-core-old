@@ -513,11 +513,11 @@ function cx_testimonial_kc() {
 								'name'			=> 'layout',
 								'admin_label'	=> true,
 								'options'		=> array(
-									'1'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/testimonial/layout-1.png',
-									'2'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/testimonial/layout-2.png',
-									'3'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/testimonial/layout-3.png',
-									'4'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/testimonial/layout-4.png',
-									'5'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/testimonial/layout-4.png',
+									'1'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/testimonial/testimonial-1.jpg',
+									'2'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/testimonial/testimonial-2.jpg',
+									'3'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/testimonial/testimonial-3.jpg',
+									'4'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/testimonial/testimonial-4.jpg',
+									'5'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/testimonial/testimonial-5.jpg',
 								),
 								'value'	=> '1'
 							),
