@@ -20,7 +20,7 @@ function reveal_register_meta_boxes( $meta_boxes ) {
     
     //1st meta box
     $meta_boxes[] = array(
-        'id'         => 'reveal-team-member',
+        'id'         => 'reveal-team-member-info',
         'title'      => esc_html__( 'Team Member Information', 'reveal' ),
         'post_types' => array( 'team' ),
         'context'    => 'normal',
@@ -34,6 +34,37 @@ function reveal_register_meta_boxes( $meta_boxes ) {
                 'clone' => false,
                 'size'  => 95
             ),
+
+            array(
+                'name'  => esc_html__( 'Email', 'reveal' ),
+                'desc'  => esc_html__('Enter Email', 'reveal' ),
+                'id'    => $prefix . 'team_email',
+                'type'  => 'email',
+                'clone' => false,
+                'size'  => 95
+            ),
+
+            array(
+                'name'  => esc_html__( 'Phone', 'reveal' ),
+                'desc'  => esc_html__('Enter Phone Number', 'reveal' ),
+                'id'    => $prefix . 'team_phone',
+                'type'  => 'text',
+                'clone' => false,
+                'size'  => 95
+            ),
+
+        ) //End Fields 
+
+    ); //End reveal-team-member-info
+
+    //reveal-team-member-social
+    $meta_boxes[] = array(
+        'id'         => 'reveal-team-member-social',
+        'title'      => esc_html__( 'Team Member Social Informarion', 'reveal' ),
+        'post_types' => array( 'team' ),
+        'context'    => 'normal',
+        'priority'   => 'high',
+        'fields' => array(
 
             array(
                 'name'  => esc_html__( 'Facebook URL', 'reveal' ),
@@ -62,7 +93,7 @@ function reveal_register_meta_boxes( $meta_boxes ) {
                 'size'  => 95
             ),
 
-        array(
+            array(
                 'name'  => esc_html__( 'Google Plus URL', 'reveal' ),
                 'desc'  => esc_html__('Enter Google Plus URL', 'reveal' ),
                 'id'    => $prefix . 'team_gp',
@@ -71,10 +102,20 @@ function reveal_register_meta_boxes( $meta_boxes ) {
                 'size'  => 95
             ),
 
+            array(
+                'name'  => esc_html__( 'Linkedin', 'reveal' ),
+                'desc'  => esc_html__('Enter Linkedin URL', 'reveal' ),
+                'id'    => $prefix . 'team_ld',
+                'type'  => 'text',
+                'clone' => false,
+                'size'  => 95
+            ),
 
-        )
-    );
+        ) //End Fields 
 
+    ); //End reveal-team-member-social
+
+    //stsrt reveal-testimonial-meta
     $meta_boxes[] = array(
         'id'         => 'reveal-testimonail-meta',
         'title'      => esc_html__( 'Author Information', 'reveal' ),
