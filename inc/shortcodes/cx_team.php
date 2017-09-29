@@ -61,7 +61,7 @@ function cx_team_shortcode( $atts, $content = null ) {
 						?>
 						<div class="col-sm-3">
 							<div class="team-single">
-								<img src="<?php if(has_post_thumbnail()): echo esc_url( the_post_thumbnail_url( 'rectangle-three' ) ); else: echo '//placehold.it/480x595'; endif; ?>" alt="<?php echo esc_attr( $img_alt ); ?>" class="img-responsive" />
+								<a href="#"><img src="<?php if(has_post_thumbnail()): echo esc_url( the_post_thumbnail_url( 'rectangle-three' ) ); else: echo '//placehold.it/480x595'; endif; ?>" alt="<?php echo esc_attr( $img_alt ); ?>" class="img-responsive" /></a>
 								<div class="team-single-wrapper">
 									<div class="team-social">
 										<?php
@@ -84,7 +84,7 @@ function cx_team_shortcode( $atts, $content = null ) {
 								</div>
 							</div>
 							<div class="team-description">
-								<p class="member-name"><?php echo esc_html( get_the_title() ); ?></p>
+								<p class="member-name"><a href="<?php esc_url(the_permalink()); ?>"><?php echo esc_html( get_the_title() ); ?></a></p>
 								<p class="member-designation"><?php echo esc_html( $designation ); ?></p>
 							</div>
 						</div><!-- end of col -->
@@ -187,15 +187,15 @@ function cx_team_kc() {
   	        							"screens" => "any,1199,991,767,479",
 
   	        							'Name' => array(
-  	        								array('property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.team-description p:first-child'),
-  	        								array('property' => 'font-family', 'label' => esc_html__('Font Family', 'codexin'), 'selector' => '.team-description p:first-child'),
-  	        								array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.team-description p:first-child'),
-  	        								array('property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '.team-description p:first-child'),
-  	        								array('property' => 'font-weight', 'label' => esc_html__('Font Weight', 'codexin'), 'selector' => '.team-description p:first-child'),
-  	        								array('property' => 'text-align', 'label' => esc_html__('Text Align', 'codexin'), 'selector' => '.team-description p:first-child'),
-  	        								array('property' => 'text-transform', 'label' => esc_html__('Text Transform', 'codexin'), 'selector' => '.team-description p:first-child'),
-  	        								array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.team-description p:first-child'),
-  	        								array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.team-description p:first-child'),
+  	        								array('property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.team-description p:first-child a'),
+  	        								array('property' => 'font-family', 'label' => esc_html__('Font Family', 'codexin'), 'selector' => '.team-description p:first-child a'),
+  	        								array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.team-description p:first-child a'),
+  	        								array('property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '.team-description p:first-child a'),
+  	        								array('property' => 'font-weight', 'label' => esc_html__('Font Weight', 'codexin'), 'selector' => '.team-description p:first-child a'),
+  	        								array('property' => 'text-align', 'label' => esc_html__('Text Align', 'codexin'), 'selector' => '.team-description p:first-child a'),
+  	        								array('property' => 'text-transform', 'label' => esc_html__('Text Transform', 'codexin'), 'selector' => '.team-description p:first-child a'),
+  	        								array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.team-description p:first-child a'),
+  	        								array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.team-description p:first-child a'),
         								),
 
   	        							'Designation' => array(

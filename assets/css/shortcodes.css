@@ -1332,9 +1332,11 @@ INDEX:
 .cx-team-wrapper .team-description p {
     margin: 0;
 }
-.cx-team-wrapper .team-description p:first-child {
+.cx-team-wrapper .team-description p:first-child a {
     text-transform: uppercase;
     font-weight: bold;
+    display: block;
+    color: #333;
 }
 
 .cx-team-wrapper .team-description p:last-child {
