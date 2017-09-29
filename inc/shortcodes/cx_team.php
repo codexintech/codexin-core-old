@@ -57,6 +57,7 @@ function cx_team_shortcode( $atts, $content = null ) {
 						$tr = rwmb_meta( 'reveal_team_twitter','type=text' );
 						$ig = rwmb_meta( 'reveal_team_ig','type=text' );
 						$gp = rwmb_meta( 'reveal_team_gp','type=text' );
+						$li = rwmb_meta( 'reveal_team_ld','type=text' );
 						?>
 						<div class="col-sm-3">
 							<div class="team-single">
@@ -75,6 +76,9 @@ function cx_team_shortcode( $atts, $content = null ) {
 										<?php endif;
 										if( ! empty( $gp ) ) :?>
 										<a href="<?php echo esc_url( $gp ); ?>"><i class="fa fa-google-plus"></i></a>
+										<?php endif; 
+										if( ! empty( $li ) ) :?>
+										<a href="<?php echo esc_url( $li ); ?>"><i class="fa fa-linkedin"></i></a>
 										<?php endif; ?>
 									</div>
 								</div>
