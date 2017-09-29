@@ -1259,6 +1259,11 @@ INDEX:
     background-size: cover;
     background-position: center;
     opacity: 0;
+}
+
+.cx-team-wrapper .team-single,
+.cx-team-wrapper .team-social i,
+.cx-team-wrapper .team-single-wrapper {
     -webkit-transition: all .3s;
     -moz-transition: all .3s;
     -ms-transition: all .3s;
@@ -1311,11 +1316,6 @@ INDEX:
     overflow: hidden;
     display: block;
     float: left;
-    -webkit-transition: all .3s;
-    -moz-transition: all .3s;
-    -ms-transition: all .3s;
-    -o-transition: all .3s;
-    transition: all .3s;
 }
 
 .cx-team-wrapper .team-social i:hover {
@@ -1339,6 +1339,11 @@ INDEX:
 
 .cx-team-wrapper .team-description p:last-child {
     font-style: italic;
+}
+
+.cx-team-wrapper .cx-error {
+    background:#fff;
+    text-align: center;
 }
 
 

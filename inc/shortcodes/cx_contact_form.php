@@ -71,7 +71,7 @@ function cx_get_contact_form() {
 	$cf7_val = array();
 	if ( $cf7_list ) {
 
-		$cf7_val[] = __( 'Select Contact Form..', 'codexin' );
+		$cf7_val[] = esc_html__( 'Select Contact Form..', 'codexin' );
 
 		foreach ( $cf7_list as $value ) {
 			$cf7_val[$value->ID] = $value->post_title;
@@ -79,7 +79,7 @@ function cx_get_contact_form() {
 
 	} else {
 
-		$cf7_val[0] = __( 'No contact forms found', 'codexin' );
+		$cf7_val[0] = esc_html__( 'No contact forms found', 'codexin' );
 
 	}
 

@@ -442,12 +442,12 @@ function cx_get_post_categories() {
 	if ( $categories ) {		
 
 		foreach ( $categories as $value ) {
-			$post_cat[$value->term_id] = ucfirst( $value->name ) . ' (Posts Count: '. $value->category_count .')';
+			$post_cat[$value->term_id] = ucwords(strtolower( $value->name ) ) . ' (Posts Count: '. $value->category_count .')';
 		}
 
 	} else {
 
-		$post_cat[0] = __( 'No Categories found', 'codexin' );
+		$post_cat[0] = esc_html__( 'No Categories found', 'codexin' );
 
 	}
 

@@ -10,14 +10,7 @@
 // Registering Team Shortcode
 function cx_team_shortcode( $atts, $content = null ) {
 	extract(shortcode_atts(array(
-			'member_name'	=> '',
-			'designation' 	=> '',
-			'image'			=> '',
-			'img_alt'		=> '',
-			'fb' 			=> '',
-			'tr' 			=> '',
-			'ig' 			=> '',
-			'gp' 			=> '',
+			'team_member'	=> '',
 			'class'			=> ''
 	), $atts));
 
@@ -25,42 +18,81 @@ function cx_team_shortcode( $atts, $content = null ) {
 	$master_class = apply_filters( 'kc-el-class', $atts );
 	$master_class[] = 'cx-team-wrapper';
 	// Retrieving user define classes
-	$classes = array( 'cx-team-single' );
+	$classes = array( 'cx-team' );
 	(!empty($class)) ? $classes[] = $class : '';
 
-	// Retrieving the image url
-	$retrive_img_url = retrieve_img_src( $image, 'rectangle-three' );
+	// Extracting user selected team members
+	$cx_team_m = str_replace(',', ' ', $team_member);
+	$cx_team_members = explode( " ", $cx_team_m );
 
 	$result = '';
 
 	ob_start(); 
 	?>
 	<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
-		<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">		
-			<div class="team-single">
-				<img src="<?php echo esc_url( $retrive_img_url ); ?>" alt="<?php echo esc_attr( $img_alt ); ?>" class="img-responsive" />
-				<div class="team-single-wrapper">
-					<div class="team-social">
-						<?php
-						if( ! empty( $fb ) ) :?>
-						<a href="<?php echo esc_url( $fb ); ?>"><i class="fa fa-facebook"></i></a>
-						<?php endif;
-						if( ! empty( $tr ) ) : ?>
-						<a href="<?php echo esc_url( $tr ); ?>"><i class="fa fa-twitter"></i></a>
-						<?php endif;
-						if( ! empty( $ig ) ) :?>
-						<a href="<?php echo esc_url( $ig ); ?>"><i class="fa fa-instagram"></i></a>
-						<?php endif;
-						if( ! empty( $gp ) ) :?>
-						<a href="<?php echo esc_url( $gp ); ?>"><i class="fa fa-google-plus"></i></a>
-						<?php endif; ?>
-					</div>
-				</div>
-			</div><!-- end of team-single -->
-			<div class="team-description">
-				<p class="member-name"><?php echo esc_html( $member_name ); ?></p>
-				<p class="member-designation"><?php echo esc_html( $designation ); ?></p>
-			</div>
+		<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
+			<div class="row">
+					<?php 
+					//start new query..
+					$args = array(
+						'post_type'		 => 'team',
+						'post__in'		 => ( !empty( $team_member ) ) ? $cx_team_members : '',
+						'order'			 => 'DESC',
+						'orderby'		 => 'post__in',
+						'posts_per_page' => 4,
+						'post_status'	 => 'publish'
+						);
+
+					$data = new WP_Query( $args );
+
+					if( $data->have_posts() ) :
+						//Start loop here...
+						while( $data->have_posts() ) : $data->the_post();
+
+						// Retrieving Image alt tag
+						$img_alt = ( !empty( retrieve_alt_tag() ) ) ? retrieve_alt_tag() : get_the_title();
+
+						$designation = rwmb_meta( 'reveal_team_designation','type=text' );
+						$fb = rwmb_meta( 'reveal_team_facebook','type=text' );
+						$tr = rwmb_meta( 'reveal_team_twitter','type=text' );
+						$ig = rwmb_meta( 'reveal_team_ig','type=text' );
+						$gp = rwmb_meta( 'reveal_team_gp','type=text' );
+						?>
+						<div class="col-sm-3">
+							<div class="team-single">
+								<img src="<?php if(has_post_thumbnail()): echo esc_url( the_post_thumbnail_url( 'rectangle-three' ) ); else: echo '//placehold.it/480x595'; endif; ?>" alt="<?php echo esc_attr( $img_alt ); ?>" class="img-responsive" />
+								<div class="team-single-wrapper">
+									<div class="team-social">
+										<?php
+										if( ! empty( $fb ) ) :?>
+										<a href="<?php echo esc_url( $fb ); ?>"><i class="fa fa-facebook"></i></a>
+										<?php endif;
+										if( ! empty( $tr ) ) : ?>
+										<a href="<?php echo esc_url( $tr ); ?>"><i class="fa fa-twitter"></i></a>
+										<?php endif;
+										if( ! empty( $ig ) ) :?>
+										<a href="<?php echo esc_url( $ig ); ?>"><i class="fa fa-instagram"></i></a>
+										<?php endif;
+										if( ! empty( $gp ) ) :?>
+										<a href="<?php echo esc_url( $gp ); ?>"><i class="fa fa-google-plus"></i></a>
+										<?php endif; ?>
+									</div>
+								</div>
+							</div>
+							<div class="team-description">
+								<p class="member-name"><?php echo esc_html( get_the_title() ); ?></p>
+								<p class="member-designation"><?php echo esc_html( $designation ); ?></p>
+							</div>
+						</div><!-- end of col -->
+
+						<?php 
+						endwhile;
+					else:
+						echo '<p class="cx-error">No Team Members were found. Please Add/Publish Team Members from the dashboard Team Menu.</p>';
+					endif;
+					wp_reset_postdata();
+					?>
+			</div><!-- end of row -->
 		</div><!-- end of team-single-item -->
 	</div><!-- end of revel-team-wrapper -->
 				
@@ -70,52 +102,65 @@ function cx_team_shortcode( $atts, $content = null ) {
 
 } //End cx_team
 
+/**
+ *
+ * Helper function to fetch all team members
+ *
+ */  
+function cx_get_team_members() {
+
+	$args = array( 
+		'post_type' => 'team',
+		'posts_per_page' => -1 
+	);
+
+	$team_list = get_posts( $args );
+
+	$cx_team = array();
+	if ( $team_list ) {
+
+		$cx_team = array();
+
+		foreach ( $team_list as $value ) {
+			$cx_team[$value->ID] = ucwords( strtolower( $value->post_title ) );
+		}
+
+	} else {
+
+		$cx_team[0] = esc_html__( 'No Team Members were found.', 'codexin' );
+
+	}
+
+	return $cx_team;
+
+
+} //End cx_get_team_members()..
+
 
 // Integrating Shortcode with King Composer
 function cx_team_kc() {
+
+	$team_members = cx_get_team_members();
+
 	if (function_exists('kc_add_map')) { 
 		kc_add_map(
 			array(
 				'cx_team' => array(
-					'name' => esc_html__( 'Codexin Team Section', 'codexin' ),
+					'name' => esc_html__( 'Codexin Team', 'codexin' ),
 					'description' => esc_html__('Team Section', 'codexin'),
 					'icon' => 'et-hazardous',
 					'category' => 'Codexin',
 					'params' => array(
 						//General params
 						'general'	=> array(
-							array(
-								'name' 			=> 'member_name',
-								'label' 		=> __( 'Name', 'codexin' ),
-								'type' 			=> 'text',
-								'description'	=> esc_html__( 'Enter Team Member Name Here', 'codexin' ),
-								'admin_label' 	=> false,
-							),
 
-							array(
-								'name' 			=> 'designation',
-								'label' 		=> __( 'Designation', 'codexin' ),
-								'type' 			=> 'text',
-								'description'	=> esc_html__( 'Enter Team Member Designation Here', 'codexin' ),
-								'admin_label' 	=> false,
-							),
-
-
-							array(
-								'name' 			=> 'image',
-								'label' 		=> __( 'Image', 'codexin' ),
-								'type' 			=> 'attach_image',
-								'description'	=> esc_html__( 'Upload Team Member Image Here', 'codexin' ),
-								'admin_label' 	=> true,
-							),
-
-							array(
-								'name' 			=> 'img_alt',
-								'label' 		=> __( 'Image Alt Tag', 'codexin' ),
-								'type' 			=> 'text',
-								'description'	=> esc_html__( 'Enter Image Alt tag Here', 'codexin' ),
-								'admin_label' 	=> false,
-							),
+	 						array(
+	 							'name' 			=> 'team_member',
+	 							'label' 		=> esc_html__( 'Select Team Members to Display (Select Four Members)', 'codexin' ),
+	 							'type' 			=> 'checkbox',
+	 							'options'		=> $team_members,
+	 							'description'	=> esc_html__( 'By Default, Latest Four Members are Displayed.', 'codexin' ),
+	 						),
 
 							array(
 								'name' 			=> 'class',
@@ -126,42 +171,6 @@ function cx_team_kc() {
 							),
 
                 		), //End general array..
-
-						//Social params
-                		'Social Icon' => array(
-                			array(
-								'name' 			=> 'fb',
-								'label' 		=> __( 'Facebook URL', 'codexin' ),
-								'type' 			=> 'text',
-								'description'	=> esc_html__( 'Enter Your Facebook Profile Url Here', 'codexin' ),
-								'admin_label' 	=> false,
-							),
-
-							array(
-								'name' 			=> 'tr',
-								'label' 		=> __( 'Twitter URL', 'codexin' ),
-								'type' 			=> 'text',
-								'description'	=> esc_html__( 'Enter Your Twitter Profile Url Here', 'codexin' ),
-								'admin_label' 	=> false,
-							),
-
-							array(
-								'name' 			=> 'ig',
-								'label' 		=> __( 'Instagram URL', 'codexin' ),
-								'type' 			=> 'text',
-								'description'	=> esc_html__( 'Enter Your Instagram Profile Url Here', 'codexin' ),
-								'admin_label' 	=> false,
-							),
-
-							array(
-								'name' 			=> 'gp',
-								'label' 		=> __( 'Google Plus URL', 'codexin' ),
-								'type' 			=> 'text',
-								'description'	=> esc_html__( 'Enter Your Google+ Profile Url Here', 'codexin' ),
-								'admin_label' 	=> false,
-							),
-
-                		),
 
 						// Styling params
   	        			'styling' => array(
@@ -206,6 +215,16 @@ function cx_team_kc() {
   	        								array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.team-description'),
         								),
 
+  	        							'Image'	=> array(
+  	        								array('property' => 'background', 'label' => esc_html__('Image Background Color on Hover', 'codexin'), 'selector' => '.team-single-wrapper'),
+  	        								array('property' => 'border', 'label' => esc_html__('Border', 'codexin'), 'selector' => '.team-single-wrapper' ),
+  	        								array('property' => 'box-shadow', 'label' => esc_html__('Box Shadow for Image', 'codexin'), 'selector' => '.team-single'),
+  	        								array('property' => 'box-shadow', 'label' => esc_html__('Box Shadow on Hover for Image','codexin'), 'selector' => '.team-single:hover'),
+  	        								array('property' => 'transition', 'label' => esc_html__('Hover Transition Animation', 'codexin'), 'selector' => '.team-single'),
+  	        								array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.team-single-wrapper' ),
+  	        								array('property' => 'margin', 'label' => esc_html__('Matgin', 'codexin'), 'selector' => '.team-single-wrapper' ),
+        								),
+
   	        							'Icon' => array(
   	        								array('property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.team-social i'),
   	        								array('property' => 'background-color', 'label' => esc_html__('Background Color', 'codexin'), 'selector' => '.team-social i'),
@@ -220,17 +239,7 @@ function cx_team_kc() {
   	        								array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.team-social a'),
   	        								
         								),
-
-  	        							'Box'	=> array(
-  	        								array('property' => 'background-color', 'label' => esc_html__('Background Color for Whole Wrapper', 'codexin')),
-  	        								array('property' => 'background', 'label' => esc_html__('Team Image Background Color on Hover', 'codexin'), 'selector' => '.team-single-wrapper'),
-  	        								array('property' => 'border', 'label' => esc_html__('Border', 'codexin') ),
-  	        								array('property' => 'box-shadow', 'label' => esc_html__('Box Shadow', 'codexin')),
-  	        								array('property' => 'box-shadow', 'label' => esc_html__('Box Shadow for Team Image', 'codexin'), 'selector' => '.team-single'),
-  	        								array('property' => 'box-shadow', 'label' => esc_html__('Box Shadow on Hover for Team Image','codexin'), 'selector' => '.team-single:hover'),
-  	        								array('property' => 'transition', 'label' => esc_html__('Hover Transition Animation', 'codexin'), 'selector' => '.team-single:hover'),
-  	        								array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin') ),
-        								)									
+									
         							)
         						)
         					)

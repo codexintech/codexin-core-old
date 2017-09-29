@@ -71,7 +71,7 @@ function cx_testimonial_shortcode( $atts, $content = null ) {
 								$data = new WP_Query( $args );
 								$i = 0;
 								if( $data->have_posts() ) :
-																	//Start loop here...
+									//Start loop here...
 									while( $data->have_posts() ) : $data->the_post();
 										?>
 										<div class="item">
