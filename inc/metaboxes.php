@@ -53,6 +53,15 @@ function reveal_register_meta_boxes( $meta_boxes ) {
                 'size'  => 95
             ),
 
+            array(
+                'name'  => esc_html__( 'Company Name', 'codexin' ),
+                'desc'  => esc_html__('Enter Company Name', 'codexin' ),
+                'id'    => $prefix . 'team_company',
+                'type'  => 'text',
+                'clone' => false,
+                'size'  => 95
+            ),
+
         ) //End Fields 
 
     ); //End reveal-team-member-info
