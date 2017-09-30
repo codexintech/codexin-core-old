@@ -660,6 +660,11 @@ INDEX:
    005 - Codexin Events
 **************************************/
 
+/**
+ * Codexin Events Type 01
+ *
+ */
+
 .cx-events-description .panel-group .panel {
     border-radius: 0;
 }
@@ -860,6 +865,106 @@ INDEX:
 }
 
 
+/**
+ * Codexin Events Type 02
+ *
+ */
+
+.cx-events-description .events-single-title,
+.cx-events-description .events-single .event-media:before,
+.cx-events-description .events-single {
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -ms-transition: all .3s;
+    -o-transition: all .3s;
+    transition: all .3s;
+}
+
+.cx-events-description .events-single {
+    border: 1px solid #ebebeb ;
+}
+
+.cx-events-description ul.events-meta li i,
+.cx-events-description .events-single:hover h3 {
+    color: #295970;
+}
+
+.cx-events-description ul.events-meta li i {
+    margin-right: 4px;
+}
+
+.cx-events-description .events-single-title {
+    text-transform: uppercase;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.cx-events-description .events-single .event-media {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.cx-events-description .events-single .event-media:before {
+    content: "";
+    background: #295970;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    opacity: 0;
+}
+
+.cx-events-description .events-single:hover .event-media:before {
+    opacity: 0.75;
+}
+
+.cx-events-description ul.events-meta {
+    padding-left: 0;
+    list-style: none;
+    margin-bottom: 20px;
+}
+
+.cx-events-description ul.events-meta li {
+    display: inline-block;
+    margin-right: 20px;
+    text-transform: capitalize;
+}
+
+.cx-events-btn {
+    background: #fff ;
+    border: 1px solid #295970 ;
+    display: inline-block;
+    padding: 10px 30px;
+    text-transform: uppercase;
+    margin-top: 30px;
+    font-size: 14px;
+}
+
+.cx-events-btn:hover{
+     background: #295970;
+     color: #fff ;
+     border-color:#295970;
+}
+
+.cx-events-description .events-single-content {
+    padding: 30px;
+    padding-top: 0;
+}
+
+.cx-events-description .events-single:hover{
+    -webkit-box-shadow:0px 0px 40px -1px rgba(0,0,0,0.2) ;
+    -moz-box-shadow:0px 0px 40px -1px rgba(0,0,0,0.2) ;
+    -ms-box-shadow:0px 0px 40px -1px rgba(0,0,0,0.2) ;
+    -o-box-shadow:0px 0px 40px -1px rgba(0,0,0,0.2) ;
+    box-shadow:0px 0px 40px -1px rgba(0,0,0,0.2) ;
+}
+
+.events-view-all {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
 
 
 /************************************************************
@@ -2983,7 +3088,7 @@ h2.primary-title.rv2 {
 
 /*---------Events v2------------*/
 
-.wreapper-event-v2 {
+/*.wreapper-event-v2 {
 
 }
 
@@ -3028,7 +3133,7 @@ h2.primary-title.rv2 {
 }
 
 .rv2-event-desc {
-}
+}*/
 
 /*----------------Client FeedBack------*/
 /*section#feedback {
@@ -4087,7 +4192,7 @@ section#portfolio_rv3 {
 /*****************************
     007 - events section
 ******************************/
-.cx-events-3 {
+/*.cx-events-3 {
     margin-top: 50px;
 }
 
@@ -4137,7 +4242,7 @@ section#portfolio_rv3 {
 }
 .rv3.rv3-single-event:hover{
     box-shadow:0px 0px 40px -1px rgba(0,0,0,0.2) ;
-}
+}*/
 
 /*****************************
     008 - feedback section
