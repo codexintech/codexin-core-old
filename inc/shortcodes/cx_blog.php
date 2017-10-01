@@ -73,7 +73,7 @@ function cx_blog_shortcode( $atts, $content = null ) {
 					$image_alt = ( !empty( retrieve_alt_tag() ) ) ? retrieve_alt_tag() : get_the_title();
 
 				 ?>
-					<div class="col-md-<?php echo $column ?> col-sm-12">
+					<div class="col-md-<?php echo esc_html( $column ); ?> col-sm-12">
 						<div class="blog-wrapper">
 							<div class="img-thumb">
 								<a href="<?php esc_url( the_permalink() ); ?>">
@@ -495,7 +495,7 @@ function cx_blog_kc() {
     								'3'	=> '3',
     								'4'	=> '4',
     							),
-	    						'value'			=> '3',
+	    						'value'			=> '2',
     							'relation'	=> array(
     								'parent' 	=> 'layout',
     								'show_when'	=> '1,2',

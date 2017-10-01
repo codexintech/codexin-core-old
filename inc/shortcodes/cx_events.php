@@ -11,10 +11,13 @@
 function cx_events_shortcode( $atts, $content = null ) {
 	extract(shortcode_atts(array(
 		'layout'			=> '',
+		'number_of_events'	=> '',
 		'event_icon_one'	=> '',
 		'event_icon_two'	=> '',
 		'event_icon_three'	=> '',
 		'order'				=> '',
+		'show_time'			=> '',
+		'show_date'			=> '',
 		'show_add'			=> '',
 		'show_all'			=> '',
 		'readmore'			=> '',
@@ -50,7 +53,7 @@ function cx_events_shortcode( $atts, $content = null ) {
 						$args = array(
 								'post_type'		 => 'events',
 								'order' 		 => $order,
-								'posts_per_page' => 3,
+								'posts_per_page' => $number_of_events,
 								);
 
 						$data = new WP_Query( $args );
@@ -72,6 +75,10 @@ function cx_events_shortcode( $atts, $content = null ) {
 									$event_icon = $event_icon_three;
 									$heading_id = 'headingThree';
 									$collapse_id = 'collapseThree';
+								} elseif ( $i == 4 ) {
+									$event_icon = $event_icon_three;
+									$heading_id = 'headingFour';
+									$collapse_id = 'collapseFour';
 								}
 							?>
 
@@ -130,12 +137,14 @@ function cx_events_shortcode( $atts, $content = null ) {
 				 		$args = array(
 				 			'post_type'		 => 'events',
 				 			'order' 		 => $order,
-				 			'posts_per_page' => 2,
+				 			'posts_per_page' => $number_of_events,
 				 			);
 
 				 		$data = new WP_Query( $args ); 
 						if( $data->have_posts() ) :
-							while( $data->have_posts() ) : $data->the_post(); 
+							while( $data->have_posts() ) : $data->the_post();
+
+							$column = 12/$number_of_events;
 
 							// Retrieving Image alt tag
 							$image_alt = ( !empty( retrieve_alt_tag() ) ) ? retrieve_alt_tag() : get_the_title();
@@ -147,14 +156,21 @@ function cx_events_shortcode( $atts, $content = null ) {
 							$date 		= strtotime( rwmb_meta( 'reveal_event_start_date','type=date' ) ); 
 
 							?>
-						 		<div class="col-sm-6">
+						 		<div class="col-md-<?php echo esc_html( $column ); ?> col-sm-12">
 						 			<div class="events-single">
-						 				<div class="event-media"><img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'rectangle-four' ) : '//placehold.it/600x327' ); ?>" alt="<?php echo esc_attr($image_alt); ?>"></div>
+						 				<div class="event-media-wrapper">
+						 					<a href="<?php echo esc_url(get_the_permalink()); ?>">
+						 						<div class="event-media">
+													<img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'rectangle-four' ) : '//placehold.it/600x327' ); ?>" alt="<?php echo esc_attr($image_alt); ?>">
+						 						</div>
+						 					</a>
+						 					</div>
 						 				<div class="events-single-content">
 						 					<a href="<?php echo esc_url(get_the_permalink()); ?>"><h3 class="events-single-title"><?php echo esc_html( wp_trim_words( get_the_title(), $title_length ) ); ?></h3></a>
 
+											
 						 					<ul class="events-meta">
-						 						<?php if( $show_add && ( !empty( $start_time ) || !empty( $end_time ) ) ): ?>
+						 						<?php if( $show_time && ( !empty( $start_time ) || !empty( $end_time ) ) ): ?>
 						 						<li><i class="fa fa-clock-o"></i>
 						 							<?php 
 
@@ -162,16 +178,16 @@ function cx_events_shortcode( $atts, $content = null ) {
 						 							?> 
 						 						</li>
 							 					<?php endif; ?>
-							 					<?php if( !empty( $date ) ): ?>
+							 					<?php if( $show_date && !empty( $date ) ): ?>
 						 						<li>
 						 							<i class="fa fa-calendar" aria-hidden="true"></i>
 						 							<?php 
-														$new_date = date( 'F j, Y', $date );
+														$new_date = date( get_option('date_format'), $date );
 														echo esc_html( $new_date );
 													?>
 						 						</li>
 							 					<?php endif; ?>
-							 					<?php if( !empty( $address ) ): ?>
+							 					<?php if( $show_add && !empty( $address ) ): ?>
 						 						<li>
 						 							<i class="fa fa-map-marker"></i> 
 						 							<?php echo esc_html( $address ); ?>
@@ -192,16 +208,16 @@ function cx_events_shortcode( $atts, $content = null ) {
 				 		wp_reset_postdata(); ?>
 				 	</div>
 			 	</div> <!-- end of cx-events-wrapper-2 -->
+				<div class="clearfix"></div>
+				<?php if( $show_all ): ?>
+				<div class="events-view-all">
+					<?php if( $href ): ?>
+					<a href="<?php echo esc_url($retrieve_link[0]); ?>" <?php echo $title; ?> <?php echo $target; ?>  class="cx-events-btn"><?php echo esc_html( !empty( $button_text_all ) ? $button_text_all : __('View All', 'codexin') ); ?></a>
+					<?php else: ?>
+					<a href="<?php echo esc_url( get_post_type_archive_link( 'events' ) ); ?>" class="cx-events-btn"><?php echo esc_html( !empty( $button_text_all ) ? $button_text_all : __('View All', 'codexin') ); ?></a>
+					<?php endif; ?>
+				</div>
 			</div> <!-- end of cx-events-description -->
-			<div class="clearfix"></div>
-			<?php if( $show_all ): ?>
-			<div class="events-view-all">
-				<?php if( $href ): ?>
-				<a href="<?php echo esc_url($retrieve_link[0]); ?>" <?php echo $title; ?> <?php echo $target; ?>  class="cx-events-btn"><?php echo esc_html( !empty( $button_text_all ) ? $button_text_all : __('View All', 'codexin') ); ?></a>
-				<?php else: ?>
-				<a href="<?php echo esc_url( get_post_type_archive_link( 'events' ) ); ?>" class="cx-events-btn"><?php echo esc_html( !empty( $button_text_all ) ? $button_text_all : __('View All', 'codexin') ); ?></a>
-				<?php endif; ?>
-			</div>
 			<?php endif; ?>
 		<?php endif; 
 
@@ -226,12 +242,14 @@ function cx_events_shortcode( $atts, $content = null ) {
 				 		$args = array(
 				 			'post_type'		 => 'events',
 				 			'order' 		 => $order,
-				 			'posts_per_page' => 3,
+				 			'posts_per_page' => $number_of_events,
 				 			);
 
 				 		$data = new WP_Query( $args ); 
 						if( $data->have_posts() ) :
-							while( $data->have_posts() ) : $data->the_post(); 
+							while( $data->have_posts() ) : $data->the_post();
+
+							$column = 12/$number_of_events;
 
 							// Retrieving Image alt tag
 							$image_alt = ( !empty( retrieve_alt_tag() ) ) ? retrieve_alt_tag() : get_the_title();
@@ -243,14 +261,29 @@ function cx_events_shortcode( $atts, $content = null ) {
 							$date 		= strtotime( rwmb_meta( 'reveal_event_start_date','type=date' ) ); 
 
 							?>
-						 		<div class="col-sm-6">
+						 		<div class="col-md-<?php echo esc_html( $column ); ?> col-sm-12">
 						 			<div class="events-single">
-						 				<div class="event-media"><img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'rectangle-four' ) : '//placehold.it/600x327' ); ?>" alt="<?php echo esc_attr($image_alt); ?>"></div>
+						 				<div class="event-media-wrapper">
+						 					<a href="<?php echo esc_url(get_the_permalink()); ?>">
+						 						<div class="event-media">
+													<img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'rectangle-four' ) : '//placehold.it/600x327' ); ?>" alt="<?php echo esc_attr($image_alt); ?>">
+								 					<?php if( $show_date && !empty( $date ) ): ?>
+							 						<div class="event-date">
+							 							<i class="fa fa-calendar" aria-hidden="true"></i>
+							 							<?php 
+															$new_date = date( get_option('date_format'), $date );
+															echo esc_html( $new_date );
+														?>
+							 						</div>
+								 					<?php endif; ?>
+						 						</div>
+						 					</a>
+						 					</div>
 						 				<div class="events-single-content">
 						 					<a href="<?php echo esc_url(get_the_permalink()); ?>"><h3 class="events-single-title"><?php echo esc_html( wp_trim_words( get_the_title(), $title_length ) ); ?></h3></a>
-
+											
 						 					<ul class="events-meta">
-						 						<?php if( $show_add && ( !empty( $start_time ) || !empty( $end_time ) ) ): ?>
+						 						<?php if( $show_time && ( !empty( $start_time ) || !empty( $end_time ) ) ): ?>
 						 						<li><i class="fa fa-clock-o"></i>
 						 							<?php 
 
@@ -258,16 +291,7 @@ function cx_events_shortcode( $atts, $content = null ) {
 						 							?> 
 						 						</li>
 							 					<?php endif; ?>
-							 					<?php if( !empty( $date ) ): ?>
-						 						<li>
-						 							<i class="fa fa-calendar" aria-hidden="true"></i>
-						 							<?php 
-														$new_date = date( 'F j, Y', $date );
-														echo esc_html( $new_date );
-													?>
-						 						</li>
-							 					<?php endif; ?>
-							 					<?php if( !empty( $address ) ): ?>
+							 					<?php if( $show_add && !empty( $address ) ): ?>
 						 						<li>
 						 							<i class="fa fa-map-marker"></i> 
 						 							<?php echo esc_html( $address ); ?>
@@ -276,10 +300,10 @@ function cx_events_shortcode( $atts, $content = null ) {
 						 					</ul>
 
 						 					<div class="events-single-desc"><?php echo esc_html( wp_trim_words( get_the_excerpt(), $desc_length ) ); ?></div>
-						 					<?php if( $readmore ): ?>
-						 					<a href="<?php echo esc_url(get_the_permalink()); ?>" class="cx-events-btn"><?php echo esc_html( !empty( $button_text ) ? $button_text : __('Read More', 'codexin') ); ?></a>
-							 				<?php endif; ?>
 						 				</div>
+					 					<?php if( $readmore ): ?>
+					 					<a href="<?php echo esc_url(get_the_permalink()); ?>" class="cx-events-btn-2"><?php echo esc_html( !empty( $button_text ) ? $button_text : __('Read More', 'codexin') ); ?></a>
+						 				<?php endif; ?>
 						 			</div>
 						 		</div> <!-- end of col -->
 					 		<?php 
@@ -288,20 +312,20 @@ function cx_events_shortcode( $atts, $content = null ) {
 				 		wp_reset_postdata(); ?>
 				 	</div>
 			 	</div> <!-- end of cx-events-wrapper-2 -->
-			</div> <!-- end of cx-events-description -->
-			<div class="clearfix"></div>
-			<?php if( $show_all ): ?>
-			<div class="events-view-all">
-				<?php if( $href ): ?>
-				<a href="<?php echo esc_url($retrieve_link[0]); ?>" <?php echo $title; ?> <?php echo $target; ?>  class="cx-events-btn"><?php echo esc_html( !empty( $button_text_all ) ? $button_text_all : __('View All', 'codexin') ); ?></a>
-				<?php else: ?>
-				<a href="<?php echo esc_url( get_post_type_archive_link( 'events' ) ); ?>" class="cx-events-btn"><?php echo esc_html( !empty( $button_text_all ) ? $button_text_all : __('View All', 'codexin') ); ?></a>
-				<?php endif; ?>
-			</div>
-			<?php endif; ?>
-		<?php endif; ?>
 
-	<?php
+				<div class="clearfix"></div>
+				<?php if( $show_all ): ?>
+				<div class="events-view-all">
+					<?php if( $href ): ?>
+					<a href="<?php echo esc_url($retrieve_link[0]); ?>" <?php echo $title; ?> <?php echo $target; ?>  class="cx-events-btn"><?php echo esc_html( !empty( $button_text_all ) ? $button_text_all : __('View All', 'codexin') ); ?></a>
+					<?php else: ?>
+					<a href="<?php echo esc_url( get_post_type_archive_link( 'events' ) ); ?>" class="cx-events-btn"><?php echo esc_html( !empty( $button_text_all ) ? $button_text_all : __('View All', 'codexin') ); ?></a>
+					<?php endif; ?>
+				</div>
+			</div> <!-- end of cx-events-description -->
+			<?php endif; ?>
+		<?php endif; 
+
 	endif;
 	$result .= ob_get_clean();
 	return $result;
@@ -338,9 +362,28 @@ function cx_events_kc() {
 								'options'		=> array(
 									'1'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/events/layout-1.png',
 									'2'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/events/layout-3.png',
+									'3'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/events/layout-3.png',
 								),
 								'value'	=> '1'
 							),
+
+							array(
+	    						'name'        	=> 'number_of_events',
+	    						'label'       	=> esc_html__('Number Of Events to Display', 'codexin'),
+	    						'type'        	=> 'select',
+	    						'options'		=> array(
+    								'2'	=> '2',
+    								'3'	=> '3',
+    								'4'	=> '4',
+    							),
+	    						'value'			=> '3',
+    							'relation'	=> array(
+    								'parent' 	=> 'layout',
+    								'show_when'	=> '1,2,3',
+    							),
+	    						'description'	=> esc_html__( 'Choose the number of events you want to show.', 'codexin' ),
+	    						'admin_label' 	=> true,
+	    					),
 
 	    					array(
 	    						'name'        	=> 'order',
@@ -417,14 +460,38 @@ function cx_events_kc() {
 
 	    					array(
 	    						'type'			=> 'toggle',
-	    						'name'			=> 'show_add',
-	    						'label'			=> esc_html__( 'Show Event Time?', 'codexin' ),
+	    						'name'			=> 'show_time',
+	    						'label'			=> esc_html__( 'Show Event Time? ', 'codexin' ),
 	    						'value'			=> 'yes',
     							'relation'	=> array(
     								'parent' 	=> 'layout',
-    								'show_when'	=> '2',
+    								'hide_when'	=> '1',
     							),
 	    						'description'	=> esc_html__('Choose to enable/disable events time', 'codexin'),
+	    					),
+
+	    					array(
+	    						'type'			=> 'toggle',
+	    						'name'			=> 'show_date',
+	    						'label'			=> esc_html__( 'Show Event Date? ', 'codexin' ),
+	    						'value'			=> 'yes',
+    							'relation'	=> array(
+    								'parent' 	=> 'layout',
+    								'hide_when'	=> '1',
+    							),
+	    						'description'	=> esc_html__('Choose to enable/disable events date', 'codexin'),
+	    					),
+
+	    					array(
+	    						'type'			=> 'toggle',
+	    						'name'			=> 'show_add',
+	    						'label'			=> esc_html__( 'Show Event Address? ', 'codexin' ),
+	    						'value'			=> 'yes',
+    							'relation'	=> array(
+    								'parent' 	=> 'layout',
+    								'hide_when'	=> '1',
+    							),
+	    						'description'	=> esc_html__('Choose to enable/disable events address', 'codexin'),
 	    					),
 
 	    					array(
@@ -434,7 +501,7 @@ function cx_events_kc() {
 	    						'value'			=> 'yes',
     							'relation'	=> array(
     								'parent' 	=> 'layout',
-    								'show_when'	=> '2',
+    								'hide_when'	=> '1',
     							),
 	    						'description'	=> esc_html__('Choose to enable/disable read more button for single event.', 'codexin'),
 	    					),
@@ -456,7 +523,7 @@ function cx_events_kc() {
 	    						'label'			=> esc_html__( 'Show \'View All\' Button? ', 'codexin' ),
     							'relation'	=> array(
     								'parent' 	=> 'layout',
-    								'show_when'	=> '2',
+    								'hide_when'	=> '1',
     							),
 	    						'description'	=> esc_html__('Choose to enable/disable view all events button at the end.', 'codexin'),
 	    					),
@@ -527,33 +594,51 @@ function cx_events_kc() {
  										),
 
  										'Icon' => array(
- 											array('property' => 'color', 'label' => esc_html__( 'Color', 'codexin'), 'selector' => '.panel-title i, .events-meta li i'),
- 											array('property' => 'font-size', 'label' => esc_html__( 'Font Size', 'codexin'), 'selector' => '.panel-title i, .events-meta li i'),
- 											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin'), 'selector' => '.panel-title i, .events-meta li i'),
- 											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin'), 'selector' => '.panel-title i, .events-meta li i')
+ 											array('property' => 'color', 'label' => esc_html__( 'Color', 'codexin'), 'selector' => '.panel-title i, .events-meta li i, .event-date i'),
+ 											array('property' => 'font-size', 'label' => esc_html__( 'Font Size', 'codexin'), 'selector' => '.panel-title i, .events-meta li i, .event-date i'),
+ 											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin'), 'selector' => '.panel-title i, .events-meta li i, .event-date i'),
+ 											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin'), 'selector' => '.panel-title i, .events-meta li i, .event-date i')
  										),
 
  										'Meta Text' => array(
- 											array('property' => 'color', 'label' => esc_html__( 'Color', 'codexin'), 'selector' => '.events-meta li'),
- 											array('property' => 'font-family', 'label' => esc_html__( 'Font Family', 'codexin'), 'selector' => '.events-meta li'),
- 											array('property' => 'font-size', 'label' => esc_html__( 'Font Size', 'codexin'), 'selector' => '.events-meta li'),
- 											array('property' => 'text-transform', 'label' => esc_html__( 'Text Transform', 'codexin'), 'selector' => '.events-meta li'),
- 											array('property' => 'font-weight', 'label' => esc_html__( 'Font Weight', 'codexin'), 'selector' => '.events-meta li'),
- 											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin'), 'selector' => '.events-meta li'),
- 											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin'), 'selector' => '.events-meta li')
+ 											array('property' => 'color', 'label' => esc_html__( 'Color', 'codexin'), 'selector' => '.events-meta li, .event-date'),
+ 											array('property' => 'font-family', 'label' => esc_html__( 'Font Family', 'codexin'), 'selector' => '.events-meta li, .event-date'),
+ 											array('property' => 'font-size', 'label' => esc_html__( 'Font Size', 'codexin'), 'selector' => '.events-meta li, .event-date'),
+ 											array('property' => 'text-transform', 'label' => esc_html__( 'Text Transform', 'codexin'), 'selector' => '.events-meta li, .event-date'),
+ 											array('property' => 'font-weight', 'label' => esc_html__( 'Font Weight', 'codexin'), 'selector' => '.events-meta li, .event-date'),
+ 											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin'), 'selector' => '.events-meta li, .event-date'),
+ 											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin'), 'selector' => '.events-meta li, .event-date')
  										),
 
  										'Image'	=> array(
- 											array('property' => 'background', 'label' => esc_html__( 'Background', 'codexin'), 'selector' => '.event-media:before'),
+ 											array('property' => 'background', 'label' => esc_html__( 'Background', 'codexin'), 'selector' => '.event-media:before, .event-media:after'),
  										),
 
  										'Wrapper' => array(
  											array('property' => 'background-color', 'label' => esc_html__( 'Background Color', 'codexin'), 'selector' => '.events-single'),
  											array('property' => 'border', 'label' => esc_html__( 'Border', 'codexin'), 'selector' => '.events-single'),
+ 											array('property' => 'border-color', 'label' => esc_html__( 'Border Color on Hover', 'codexin'), 'selector' => '.events-single:hover'),
  											array('property' => 'box-shadow', 'label' => esc_html__( 'Box Shadow', 'codexin'), 'selector' => '.events-single'),
  											array('property' => 'box-shadow', 'label' => esc_html__( 'Box Shadow on Hover', 'codexin'), 'selector' => '.events-single:hover'),
  											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin'), 'selector' => '.events-single'),
  											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin'), 'selector' => '.events-single')
+ 										),
+
+ 										'Button' => array(
+ 											array('property' => 'color', 'label' => esc_html__( 'Color', 'codexin'), 'selector' => '.cx-events-btn, .cx-events-btn-2'),
+ 											array('property' => 'color', 'label' => esc_html__( 'Color on Hover', 'codexin'), 'selector' => '.cx-events-btn:hover, .cx-events-btn-2:hover'),
+ 											array('property' => 'background-color', 'label' => esc_html__( 'Background Color', 'codexin'), 'selector' => '.cx-events-btn, .cx-events-btn-2'),
+ 											array('property' => 'background-color', 'label' => esc_html__( 'Background Color on Hover', 'codexin'), 'selector' => '.cx-events-btn:hover, .cx-events-btn-2:hover'),
+ 											array('property' => 'border', 'label' => esc_html__( 'Border', 'codexin'), 'selector' => '.cx-events-btn, .cx-events-btn-2'),
+ 											array('property' => 'border-color', 'label' => esc_html__( 'Border Color on Hover', 'codexin'), 'selector' => '.cx-events-btn:hover, .cx-events-btn-2:hover, .events-single:hover .cx-events-btn-2'),
+ 											array('property' => 'font-family', 'label' => esc_html__( 'Font Family', 'codexin'), 'selector' => '.cx-events-btn, .cx-events-btn-2'),
+ 											array('property' => 'font-size', 'label' => esc_html__( 'Font Size', 'codexin'), 'selector' => '.cx-events-btn, .cx-events-btn-2'),
+ 											array('property' => 'font-weight', 'label' => esc_html__( 'Font Weight', 'codexin'), 'selector' => '.cx-events-btn, .cx-events-btn-2'),
+ 											array('property' => 'line-height', 'label' => esc_html__( 'Line Height', 'codexin'), 'selector' => '.cx-events-btn, .cx-events-btn-2'),
+ 											array('property' => 'text-align', 'label' => esc_html__( 'Text Align', 'codexin'), 'selector' => '.cx-events-btn, .cx-events-btn-2'),
+ 											array('property' => 'text-align', 'label' => esc_html__( 'Text Align for "View All" Button', 'codexin'), 'selector' => '.events-view-all'),
+ 											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin'), 'selector' => '.cx-events-btn, .cx-events-btn-2'),
+ 											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin'), 'selector' => '.cx-events-btn, .cx-events-btn-2')
  										),
 
  										'Tabs'	=> array(

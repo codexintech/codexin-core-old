@@ -330,10 +330,11 @@ INDEX:
     font-size: 50px;
     margin-bottom: 0;
     line-height: 1em;
+    font-weight: 400;
 }
 
 .cx-animated-counter .counter-wrapper .content-right p {
-    text-transform: inherit;
+    text-transform: capitalize;
     font-size: 18px;
 }
 
@@ -881,22 +882,26 @@ INDEX:
 }
 
 .cx-events-description .events-single {
-    border: 1px solid #ebebeb ;
+    border: 1px solid #ebebeb;
+    margin-bottom: 30px;
 }
 
+.cx-events-wrapper-3 .event-date i,
 .cx-events-description ul.events-meta li i,
 .cx-events-description .events-single:hover h3 {
     color: #295970;
 }
 
+.cx-events-wrapper-3 .event-date i,
 .cx-events-description ul.events-meta li i {
-    margin-right: 4px;
+    margin-right: 5px;
 }
 
 .cx-events-description .events-single-title {
     text-transform: uppercase;
     font-size: 20px;
     font-weight: 500;
+    margin-bottom: 15px;
 }
 
 .cx-events-description .events-single .event-media {
@@ -904,7 +909,7 @@ INDEX:
     margin-bottom: 30px;
 }
 
-.cx-events-description .events-single .event-media:before {
+.cx-events-wrapper-2 .events-single .event-media:before {
     content: "";
     background: #295970;
     position: absolute;
@@ -915,7 +920,7 @@ INDEX:
     opacity: 0;
 }
 
-.cx-events-description .events-single:hover .event-media:before {
+.cx-events-wrapper-2 .events-single:hover .event-media:before {
     opacity: 0.75;
 }
 
@@ -935,7 +940,7 @@ INDEX:
     background: #fff ;
     border: 1px solid #295970 ;
     display: inline-block;
-    padding: 10px 30px;
+    padding: 7px 20px;
     text-transform: uppercase;
     margin-top: 30px;
     font-size: 14px;
@@ -952,7 +957,7 @@ INDEX:
     padding-top: 0;
 }
 
-.cx-events-description .events-single:hover{
+.cx-events-wrapper-2 .events-single:hover{
     -webkit-box-shadow:0px 0px 40px -1px rgba(0,0,0,0.2) ;
     -moz-box-shadow:0px 0px 40px -1px rgba(0,0,0,0.2) ;
     -ms-box-shadow:0px 0px 40px -1px rgba(0,0,0,0.2) ;
@@ -962,10 +967,61 @@ INDEX:
 
 .events-view-all {
     text-align: center;
-    margin-top: 20px;
     margin-bottom: 20px;
 }
 
+
+/**
+ * Codexin Events Type 03
+ *
+ */
+
+.cx-events-wrapper-3 .event-date {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+    color: #fff;
+    margin: 0;
+    text-transform: capitalize;
+    z-index: 1;
+    font-size: 15px;
+}
+
+.cx-events-wrapper-3 .event-media::after {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: -webkit-linear-gradient(to top, #000,transparent 50%, transparent);
+    background: -moz-linear-gradient(to top, #000,transparent 50%, transparent);
+    background: -ms-linear-gradient(to top, #000,transparent 50%, transparent);
+    background: -o-linear-gradient(to top, #000,transparent 50%, transparent);
+    background: linear-gradient(to top, #000,transparent 50%, transparent);
+}
+
+.cx-events-btn-2 {
+    border-top: 1px solid #ebebeb;
+    padding: 10px 30px;
+    display: block;
+}
+
+.cx-events-wrapper-3 .events-single:hover .cx-events-btn-2,
+.cx-events-wrapper-3 .events-single:hover {
+    border-color: #295970;
+}
+
+.cx-events-btn-2 {
+    color: inherit;
+}
+
+.cx-events-btn-2:hover {
+    color: #295970;
+}
 
 /************************************************************
     006 - Codexin Testimonial
