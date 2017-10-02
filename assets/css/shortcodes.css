@@ -2139,7 +2139,22 @@ div.cx-blog-2 {
     opacity: 0.5;
     margin: 0 5px;
 }
-
+.cx-blog-3 .row{
+    display: flex;
+}
+.cx-blog-3 .blog-wrapper-left{
+    height: 100% ;
+}
+.cx-blog-3 .blog-wrapper-left .blog-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+.cx-blog-3 .blog-wrapper-right .img-thumb img{
+    opacity: 0;
+    visibility: hidden;
+}
 .cx-blog-3 ul.meta li:first-child::before {
     content: "";
     margin: 0;

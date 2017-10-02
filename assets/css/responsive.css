@@ -2,22 +2,7 @@
 01 . counter up section
 02 . blog post section
 ======================*/
-.cx-blog-3 .row{
-    display: flex;
-}
-.cx-blog-3 .blog-wrapper-left{
-    height: 100% ;
-}
-.cx-blog-3 .blog-wrapper-left .blog-footer {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-}
-.cx-blog-3  .img-thumb img{
-    opacity: 0;
-    visibility: hidden;
-}
+
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
 
 }  /* end of (min-width: 992px) and (max-width: 1199px) */
@@ -168,9 +153,7 @@
     display: table-row;
     background-image: none !important ;
 }
-.cx-blog-3 .blog-wrapper-right .blog-content {
-    display: table-row;
-}
+
 .cx-blog-3  .img-thumb img{
     opacity: 1;
     visibility: visible;
