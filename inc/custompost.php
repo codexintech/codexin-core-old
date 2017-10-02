@@ -225,6 +225,59 @@
 
 } // End reveal_framework_custompost_type()...
 
+function reveal_events_taxonomies_type() {
+
+	// add new taxonomy hierarchical
+
+	$labels = array(
+
+		'name' 				=> __('Events Categories', 'reveal'),
+		'singular_name' 	=> __('Events Category', 'reveal'),
+		'search_items' 		=> __('Search Events Category', 'reveal'),
+		'all_items' 		=> __('All Events Categories', 'reveal'),
+		'parent_item' 		=> __('Parent Events Category', 'reveal'),
+		'parent_item_colon' => __('Parent Events Category:', 'reveal'),
+		'edit_item' 		=> __('Edit Events Category', 'reveal'),
+		'update_item' 		=> __('Update Events Category', 'reveal'),
+		'add_new_item' 		=> __('Add New Events Category', 'reveal'),
+		'new_item_name' 	=> __('New Events Category Name', 'reveal'),
+		'menu_name' 		=> __('Events Categories', 'reveal')
+
+	);
+
+
+
+	$args = array(
+		'hierarchical' => true,
+		'labels' => $labels,
+		'show_ui' => true,
+		'has_archive'	=> true,
+		'show_admin_column' => true,
+		'query_var' => true,
+		'rewrite' => array('slug' => 'events-category')
+	);
+
+
+
+	register_taxonomy('events-category', array('events'), $args);
+
+	// add new taxonomy NON hierarchical
+
+
+
+	register_taxonomy('events_tags', 'events', array(
+		'label' => 'Events Tags',
+		'rewrite' => array('slug' => 'events-tags'),
+		'hierarchical' => false
+
+	));
+
+}
+
+
+
+add_action('init', 'reveal_events_taxonomies_type');
+
 
 /**
  * Create Custom Place Holders..
