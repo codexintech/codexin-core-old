@@ -1,0 +1,157 @@
+/*======================
+01 . counter up section
+02 . blog post section
+======================*/
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+
+}  /* end of (min-width: 992px) and (max-width: 1199px) */
+
+
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+
+/*======================
+01 . counter up section
+======================*/
+.cx-animated-counter {
+    padding: 0;
+}
+.cx-animated-counter .project .counter{
+	font-size: 45px;
+}
+/*======================
+02 . blog post section
+======================*/
+
+.img-wrapper img {
+    width: 100%;
+}
+/*======================
+ blog 2 
+======================*/
+.cx-blog-2 .cx-blog-btn {
+    padding: 5px 8px;
+    font-size: 14px;
+}
+.cx-blog-2 .date-time p:first-child,
+.cx-blog-2 .date-time p{
+    font-size: 16px;
+    text-transform: capitalize;
+}
+.cx-blog-2 .blog-title a{
+	text-transform: capitalize;
+}
+
+/*======================
+ blog 3 
+======================*/
+.cx-blog-3 .blog-wrapper-right .img-thumb {
+    width: 100px;
+}
+.cx-blog-3 .blog-wrapper-right .media-wrapper-right {
+    display: block;
+}
+.cx-blog-3 .row{
+    display: flex;
+}
+.cx-blog-3 .blog-wrapper-left{
+    height: 100% ;
+}
+.cx-blog-3 .blog-wrapper-left .blog-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+/*======================
+ blog 4
+======================*/
+.cx-blog-4 .blog-wrapper .blog-category a {
+    padding: 0px 5px;
+}
+.cx-blog-4 .blog-wrapper .blog-title {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+.cx-blog-4 .blog-wrapper .blog-title a {
+    font-size: 16px;
+}
+
+
+
+
+
+
+
+}  /* end of (min-width: 768px) and (max-width: 991px) */
+
+
+
+@media only screen and (max-width: 767px) {
+/*======================
+01 . counter up section
+======================*/
+.cx-animated-counter {
+    padding: 0;
+    margin-bottom: 30px;
+}
+.cx-animated-counter .project .counter{
+	font-size: 50px;
+}
+.cx-animated-counter .project{
+	padding: 50px 0px;
+}
+/*======================
+02 . blog post section
+======================*/
+
+.img-wrapper img {
+    width: 100%;
+}
+/*======================
+ blog 2 
+======================*/
+.cx-blog-2 .cx-blog-btn {
+    padding: 10px 10px;
+}
+
+.blog-wrapper ,
+.blog-wrapper .img-thumb,
+.blog-wrapper .img-thumb .img-wrapper ,
+.cx-blog-2 .blog-wrapper  {
+    max-width: 100%;
+    width: 100% ;
+}
+.blog-wrapper .img-thumb img,
+.cx-blog-2 .blog-wrapper .img-thumb img{
+    width: 100% ;
+}
+/*======================
+ blog 4
+======================*/
+/*.cx-blog-4 .blog-wrapper .blog-category a {
+    padding: 0px 5px;
+}
+
+*/
+
+
+}  /* end of (max-width: 767px) */
+
+
+
+@media only screen and (max-width: 480px) {
+/*======================
+01 . counter up section
+======================*/
+.cx-animated-counter .project .counter {
+    font-size: 40px;
+}
+/*======================
+ blog 4
+======================*/
+
+
+
+}  /* end of (max-width: 480px) */
