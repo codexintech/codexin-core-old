@@ -256,7 +256,7 @@ function cx_blog_shortcode( $atts, $content = null ) {
 			//start query..
 			$args = array(
 					'post_type'				=> 'post',
-					'posts_per_page'		=> $number_of_posts,
+					'posts_per_page'		=> ( $sticky_post ) ? $number_of_posts-1 : 4,
 					'post_status'			=> 'publish',
 					'meta_key'				=> ( $orderby == 'meta_value_num' ) ? 'cx_post_views' : '',
 					'order'					=> $order,
