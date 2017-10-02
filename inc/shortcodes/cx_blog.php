@@ -277,7 +277,7 @@ function cx_blog_shortcode( $atts, $content = null ) {
 				if($i == 1): 
 				?>
 					<!-- Left column post -->
-					<div class="col-md-6 col-sm-6">
+					<div class="col-md-6 col-sm-5">
 						<div class="blog-wrapper-left">
 							<div class="img-thumb">
 								<a href="<?php esc_url( the_permalink() ); ?>">
@@ -309,7 +309,7 @@ function cx_blog_shortcode( $atts, $content = null ) {
 					</div> <!--end The col -->
 
 					<!-- Right column posts -->
-					<div class="col-sm-6">
+					<div class="col-md-6 col-sm-7">
 						<ul class="blog-wrapper-right">
 				<?php else : ?>
 							<li>
