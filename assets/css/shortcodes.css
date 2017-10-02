@@ -2149,8 +2149,7 @@ div.cx-blog-2 {
     left: 0;
 }
 
-.cx-blog-3 .blog-wrapper-right .blog-content,
-.cx-blog-3 .blog-wrapper-right .media-wrapper-right {
+.cx-blog-3 .blog-wrapper-right .blog-content{
     display: table-cell;
     vertical-align: middle;
 }
@@ -2159,9 +2158,26 @@ div.cx-blog-2 {
     margin: 0;
     padding: 0;
     list-style: none;
-
 }
 
+.cx-blog-3 .media-wrapper-right {
+
+}
+.cx-blog-3 a.thumbnail-link {
+    display: table-cell;
+    vertical-align: middle;
+    background-image: url(//placehold.it/220x220);
+    background-size: cover; 
+    background-position: center;
+    transition: 0.5s ;
+    background-size: 100% 100%;
+
+}
+.cx-blog-3 a.thumbnail-link:hover {
+    background-size: 105% 105%;
+    transition: 0.5s ;
+
+}
 .cx-blog-3 .blog-wrapper-right > li + li {
     margin-top: 30px;
 }
