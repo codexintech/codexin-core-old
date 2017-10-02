@@ -168,7 +168,7 @@ function cx_events_shortcode( $atts, $content = null ) {
 						 				<div class="events-single-content">
 						 					<a href="<?php echo esc_url(get_the_permalink()); ?>"><h3 class="events-single-title"><?php echo esc_html( wp_trim_words( get_the_title(), $title_length ) ); ?></h3></a>
 
-											
+											<?php if( !empty( $start_time ) || !empty( $end_time ) || !empty( $address ) || !empty( $date ) ): ?>
 						 					<ul class="events-meta">
 						 						<?php if( $show_time && ( !empty( $start_time ) || !empty( $end_time ) ) ): ?>
 						 						<li><i class="fa fa-clock-o"></i>
@@ -180,7 +180,7 @@ function cx_events_shortcode( $atts, $content = null ) {
 							 					<?php endif; ?>
 							 					<?php if( $show_date && !empty( $date ) ): ?>
 						 						<li>
-						 							<i class="fa fa-calendar" aria-hidden="true"></i>
+						 							<i class="fa fa-calendar"></i>
 						 							<?php 
 														$new_date = date( get_option('date_format'), $date );
 														echo esc_html( $new_date );
@@ -194,6 +194,7 @@ function cx_events_shortcode( $atts, $content = null ) {
 						 						</li>
 							 					<?php endif; ?>
 						 					</ul>
+							 				<?php endif; ?>
 
 						 					<div class="events-single-desc"><?php echo esc_html( wp_trim_words( get_the_excerpt(), $desc_length ) ); ?></div>
 						 					<?php if( $readmore ): ?>
@@ -201,7 +202,7 @@ function cx_events_shortcode( $atts, $content = null ) {
 							 				<?php endif; ?>
 						 				</div>
 						 			</div>
-						 		</div> <!-- end of col -->
+						 		</div>
 					 		<?php 
 					 		endwhile;
 				 		endif; 
@@ -269,7 +270,7 @@ function cx_events_shortcode( $atts, $content = null ) {
 													<img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'rectangle-four' ) : '//placehold.it/600x327' ); ?>" alt="<?php echo esc_attr($image_alt); ?>">
 								 					<?php if( $show_date && !empty( $date ) ): ?>
 							 						<div class="event-date">
-							 							<i class="fa fa-calendar" aria-hidden="true"></i>
+							 							<i class="fa fa-calendar"></i>
 							 							<?php 
 															$new_date = date( get_option('date_format'), $date );
 															echo esc_html( $new_date );
@@ -282,6 +283,7 @@ function cx_events_shortcode( $atts, $content = null ) {
 						 				<div class="events-single-content">
 						 					<a href="<?php echo esc_url(get_the_permalink()); ?>"><h3 class="events-single-title"><?php echo esc_html( wp_trim_words( get_the_title(), $title_length ) ); ?></h3></a>
 											
+											<?php if( !empty( $start_time ) || !empty( $end_time ) || !empty( $address ) ): ?>
 						 					<ul class="events-meta">
 						 						<?php if( $show_time && ( !empty( $start_time ) || !empty( $end_time ) ) ): ?>
 						 						<li><i class="fa fa-clock-o"></i>
@@ -298,6 +300,7 @@ function cx_events_shortcode( $atts, $content = null ) {
 						 						</li>
 							 					<?php endif; ?>
 						 					</ul>
+							 				<?php endif; ?>
 
 						 					<div class="events-single-desc"><?php echo esc_html( wp_trim_words( get_the_excerpt(), $desc_length ) ); ?></div>
 						 				</div>
@@ -305,7 +308,7 @@ function cx_events_shortcode( $atts, $content = null ) {
 					 					<a href="<?php echo esc_url(get_the_permalink()); ?>" class="cx-events-btn-2"><?php echo esc_html( !empty( $button_text ) ? $button_text : __('Read More', 'codexin') ); ?></a>
 						 				<?php endif; ?>
 						 			</div>
-						 		</div> <!-- end of col -->
+						 		</div>
 					 		<?php 
 					 		endwhile;
 				 		endif; 
@@ -324,7 +327,100 @@ function cx_events_shortcode( $atts, $content = null ) {
 				</div>
 			</div> <!-- end of cx-events-description -->
 			<?php endif; ?>
-		<?php endif; 
+		<?php endif;
+
+		if( $layout == 4 ) : 
+
+			// Retrieving user define classes
+			$classes = array( 'cx-events-wrapper-4' );
+			(!empty($class)) ? $classes[] = $class : ''; 
+
+			// Retrieving the url
+			$retrieve_link = retrieve_url( $href );
+			$title = ($retrieve_link[1]) ? 'title="'.esc_attr($retrieve_link[1]).'"':'';
+			$target = ($retrieve_link[2]) ? 'target="'.esc_attr($retrieve_link[2]).'"':'';
+
+			?>
+
+			<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
+				<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
+					<div class="row">
+						<div class="events-carousel">
+					 		<?php 
+					 		//start new query..
+					 		$args = array(
+					 			'post_type'		 => 'events',
+					 			'order' 		 => $order,
+					 			'posts_per_page' => -1,
+					 			);
+
+					 		$data = new WP_Query( $args ); 
+							if( $data->have_posts() ) :
+								while( $data->have_posts() ) : $data->the_post();
+
+								// Retrieving Image alt tag
+								$image_alt = ( !empty( retrieve_alt_tag() ) ) ? retrieve_alt_tag() : get_the_title();
+
+								// Retrieving the meta infos
+								$address 	= strtolower( rwmb_meta( 'reveal_event_address','type=textarea' ) );
+								$date 		= strtotime( rwmb_meta( 'reveal_event_start_date','type=date' ) ); 
+
+								?>
+							 		<div class="col-sm-6 item">
+							 			<div class="events-single">
+							 				<div class="event-media-wrapper">
+						 						<div class="event-media">
+													<img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'rectangle-four' ) : '//placehold.it/600x327' ); ?>" alt="<?php echo esc_attr($image_alt); ?>">
+								 					<?php if( $readmore ): ?>
+								 					<a href="<?php echo esc_url(get_the_permalink()); ?>" class="cx-events-btn"><?php echo esc_html( !empty( $button_text ) ? $button_text : __('Read More', 'codexin') ); ?></a>
+									 				<?php endif; ?>
+						 						</div>
+							 					</div>
+							 				<div class="events-single-content">
+							 					<a href="<?php echo esc_url(get_the_permalink()); ?>"><h3 class="events-single-title"><?php echo esc_html( wp_trim_words( get_the_title(), $title_length ) ); ?></h3></a>
+							 					<div class="events-single-desc"><?php echo esc_html( wp_trim_words( get_the_excerpt(), $desc_length ) ); ?></div>
+							 				</div>
+							 				<?php if( !empty( $address ) || !empty( $date ) ): ?>
+	                                        <ul class="events-meta">
+	                                            <?php if( $show_add && !empty( $address ) ): ?>
+	                                            <li>
+	                                                <i class="fa fa-map-marker"></i> 
+	                                                <?php echo esc_html( $address ); ?>
+	                                            </li>
+	                                            <?php endif; ?>
+	                                            <?php if( $show_date && !empty( $date ) ): ?>
+	                                            <li class="pull-right">
+	                                                <i class="fa fa-calendar"></i>
+	                                                <?php 
+	                                                    $new_date = date( get_option('date_format'), $date );
+	                                                    echo esc_html( $new_date );
+	                                                ?>
+	                                            </li>
+	                                            <?php endif; ?>
+	                                        </ul>
+		                                    <?php endif; ?>
+							 			</div>
+							 		</div>
+						 		<?php 
+						 		endwhile;
+					 		endif; 
+					 		wp_reset_postdata(); ?>
+					 	</div>
+				 	</div>
+			 	</div> <!-- end of cx-events-wrapper-2 -->
+
+				<div class="clearfix"></div>
+				<?php if( $show_all ): ?>
+				<div class="events-view-all">
+					<?php if( $href ): ?>
+					<a href="<?php echo esc_url($retrieve_link[0]); ?>" <?php echo $title; ?> <?php echo $target; ?>  class="cx-events-btn"><?php echo esc_html( !empty( $button_text_all ) ? $button_text_all : __('View All', 'codexin') ); ?></a>
+					<?php else: ?>
+					<a href="<?php echo esc_url( get_post_type_archive_link( 'events' ) ); ?>" class="cx-events-btn"><?php echo esc_html( !empty( $button_text_all ) ? $button_text_all : __('View All', 'codexin') ); ?></a>
+					<?php endif; ?>
+				</div>
+			</div> <!-- end of cx-events-description -->
+			<?php endif; ?>
+		<?php endif;
 
 	endif;
 	$result .= ob_get_clean();
@@ -346,8 +442,12 @@ function cx_events_kc() {
                 	//Only load assets when using this element
 					'assets' => array(
 						'scripts' => array(
+							'slick-cx-main-script' 	=> CODEXIN_CORE_ASSET_DIR . '/js/slick.min.js',
 							'event-js' => CODEXIN_CORE_ASSET_DIR . '/js/shortcode-js/cx_event.js',
 						),
+  	        			'styles'	=> array(
+  	        				'slick-cx-main-style'	=> CODEXIN_CORE_ASSET_DIR . '/css/slick.css',
+        				),
 
                 	), //End assets
  					'params' => array(
@@ -363,6 +463,7 @@ function cx_events_kc() {
 									'1'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/events/layout-1.png',
 									'2'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/events/layout-3.png',
 									'3'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/events/layout-3.png',
+									'4'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/events/layout-3.png',
 								),
 								'value'	=> '1'
 							),
