@@ -1028,6 +1028,10 @@ INDEX:
  *
  */
 
+.cx-events-wrapper-4 {
+    margin-bottom: 40px;
+}
+
 .cx-events-wrapper-4 .events-single .event-media:before {
     background: #000;
 }
@@ -2968,7 +2972,7 @@ section#location {
     outline: 0;
 }
 
-
+.cx-events-wrapper-4 span,
 .cx-testimonial-5 span,
 .cx-testimonial-4 span,
 .cx-testimonial-3 span,
@@ -2989,12 +2993,14 @@ section#location {
     color: #999;
 }
 
+.cx-events-wrapper-4 span.prev,
 .cx-testimonial-4 span.prev,
 .cx-testimonial-3 span.prev,
 .cx-client-carousel-1 span.prev {
     left: -50px;
 }
 
+.cx-events-wrapper-4 span.next,
 .cx-testimonial-4 span.next,
 .cx-testimonial-3 span.next,
 .cx-client-carousel-1 span.next {

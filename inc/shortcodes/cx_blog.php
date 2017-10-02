@@ -277,7 +277,7 @@ function cx_blog_shortcode( $atts, $content = null ) {
 				if($i == 1): 
 				?>
 					<!-- Left column post -->
-					<div class="col-md-6 col-sm-12">
+					<div class="col-md-6 col-sm-6">
 						<div class="blog-wrapper-left">
 							<div class="img-thumb">
 								<a href="<?php esc_url( the_permalink() ); ?>">
