@@ -221,6 +221,30 @@ function reveal_register_meta_boxes( $meta_boxes ) {
         )
     );
 
+    $meta_boxes[] = array(
+        'id'         => 'reveal-page-header-footer',
+        'title'      => esc_html__( 'Page Header & Footer Settings', 'codexin' ),
+        'post_types' => array( 'page' ),
+        'context'    => 'normal',
+        'priority'   => 'high',
+        'fields' => array(
+
+            array(
+                'id'   => $prefix . 'disable_header',
+                'name' => __( 'Disable Page Header?', 'codexin' ),
+                'type' => 'checkbox',
+                'desc' => __( 'Checking this will disable the Page Header', 'codexin' ),
+            ),
+
+            array(
+                'id'   => $prefix . 'disable_footer',
+                'name' => __( 'Disable Page Footer?', 'codexin' ),
+                'type' => 'checkbox',
+                'desc' => __( 'Checking this will disable the Page Footer', 'codexin' ),
+            ),
+        )
+    );
+
 
     $meta_boxes[] = array(
         'id'         => 'reveal-page-background-meta-common',
