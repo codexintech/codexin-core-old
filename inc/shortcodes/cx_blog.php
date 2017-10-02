@@ -277,7 +277,7 @@ function cx_blog_shortcode( $atts, $content = null ) {
 				if($i == 1): 
 				?>
 					<!-- Left column post -->
-					<div class="col-md-6 col-sm-5">
+					<div class="col-md-6 col-sm-4 col-xs-12">
 						<div class="blog-wrapper-left">
 							<div class="img-thumb">
 								<a href="<?php esc_url( the_permalink() ); ?>">
@@ -309,15 +309,18 @@ function cx_blog_shortcode( $atts, $content = null ) {
 					</div> <!--end The col -->
 
 					<!-- Right column posts -->
-					<div class="col-md-6 col-sm-7">
+					<div class="col-md-6 col-sm-8 col-xs-12">
 						<ul class="blog-wrapper-right">
 				<?php else : ?>
 							<li>
-								<div class="media-wrapper-right" style="background: url('<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'square-one' ) : '//placehold.it/220x220' ); ?>');background-size: cover; background-position: center;">
-									<div class="img-thumb">
-										
-									</div> <!-- End of img-thumb -->
-								</div> <!-- End of media-wraper-right -->
+								 <a class="thumbnail-link" href="<?php esc_url( the_permalink() ); ?>" style="background-image: url('<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'square-one' ) : '//placehold.it/220x220' ); ?>');"> 
+									<div class="media-wrapper-right" >
+										<div class="img-thumb">
+											<img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'square-two' ) : '//placehold.it/500x500' ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" class="img-responsive">
+										</div> <!-- End of img-thumb -->
+									</div>
+								</a> 
+								<!-- End of media-wraper-right -->
 								<div class="blog-content">
 									<h3 class="blog-title">
 										<a href="<?php the_permalink(); ?>"><?php echo esc_html( wp_trim_words( get_the_title(), $title_length ) ); ?></a>

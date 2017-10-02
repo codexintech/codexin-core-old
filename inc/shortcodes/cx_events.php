@@ -477,10 +477,10 @@ function cx_events_kc() {
 								'name'			=> 'layout',
 								'admin_label'	=> true,
 								'options'		=> array(
-									'1'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/events/layout-1.png',
-									'2'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/events/layout-3.png',
-									'3'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/events/layout-3.png',
-									'4'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/events/layout-3.png',
+									'1'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/events/events-1.jpg',
+									'2'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/events/events-2.jpg',
+									'3'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/events/events-3.jpg',
+									'4'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/events/events-4.jpg',
 								),
 								'value'	=> '1'
 							),
