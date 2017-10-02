@@ -687,7 +687,7 @@ function cx_blog_kc() {
 										),
 
 										'Image Hover' => array(
- 											array('property' => 'background', 'label' => esc_html__('Image Hover Color', 'codexin'), 'selector' => '.img-wrapper::before, .img-wrapper::after, .blog-wrapper-left .img-thumb:before, .blog-wrapper::after, .blog-wrapper-right .thumbnail-link:before' )
+ 											array('property' => 'background', 'label' => esc_html__('Image Hover Color', 'codexin'), 'selector' => '.img-wrapper::before, .img-wrapper::after, .blog-wrapper-left .img-thumb a:before, .blog-wrapper::after, .blog-wrapper-right .thumbnail-link:before' )
 										),
 
  										'Description' => array(

@@ -3,31 +3,6 @@
 02 . blog post section
 03 . call to action 
 ======================*/
-.thumbnail-link,.img-thumb{
-    position: relative;
-}
-
-.blog-wrapper-right a.thumbnail-link:before,
-.blog-wrapper-left .img-thumb:before {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0 ;
-    top: 0 ;
-    bottom: 0 ;
-    z-index: 99 ;
-    transform: scaleX(0);
-    transform-origin: center;
-    transition: all 0.5s ;
-}
-
-
-.blog-wrapper-right a.thumbnail-link:hover:before,
-.blog-wrapper-left .img-thumb:hover:before {
-    transform: scaleX(1);
-    
-}
-
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
 
@@ -171,7 +146,12 @@
 .cx-blog-3 .blog-wrapper-right .img-thumb{
     width: 100%;
 }
-
+.cx-blog-3 .blog-wrapper-right li {
+    display: block;
+}
+.cx-blog-3 a.thumbnail-link {
+    display: block;
+}
 /*======================
 03 . call to action 
 ======================*/

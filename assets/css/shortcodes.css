@@ -2232,13 +2232,8 @@ div.cx-blog-2 {
     background-size: cover; 
     background-position: center;
 
-
-
 }
 .cx-blog-3 a.thumbnail-link:hover {
-
-
-
 }
 .cx-blog-3 .blog-wrapper-right > li + li {
     margin-top: 30px;
@@ -2289,6 +2284,40 @@ div.cx-blog-2 {
 .cx-blog-3 .blog-wrapper-left .blog-footer-item a {
     color: inherit;
 }
+.thumbnail-link ,.img-thumb a{
+    position: relative;
+}
+
+.blog-wrapper-right a.thumbnail-link:before,
+.blog-wrapper-left .img-thumb a:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0 ;
+    top: 0 ;
+    bottom: 0 ;
+    z-index: 9 ;
+    background:rgba(41, 89, 112, 0.70);
+    opacity: 0;
+    visibility: hidden;
+    transform-origin: center;
+    transition: all 0.3s ;
+}
+.blog-wrapper-left .img-thumb a{
+    display: block;
+    position: relative;
+    z-index: 9;
+}
+
+
+.blog-wrapper-right a.thumbnail-link:hover:before,
+.blog-wrapper-left .img-thumb a:hover:before {
+    
+    opacity: 1;
+    visibility: visible;
+    
+}
+
 
 
 
