@@ -14,13 +14,19 @@
     });
 
 
+    /*--------------------------------------------------------------
+    carousel on events section
+    ---------------------------------------------------------------- */
+
+    var event_arrow = (ev_arrow == 1) ? true : false;
+    var event_dot = (ev_dot == 1) ? true : false;
     $('.events-carousel').slick({
-        dots: true,
+        dots: event_dot,
         infinite: false,
         speed: 300,
         slidesToShow: 2,
         slidesToScroll: 1,
-        arrows: true,
+        arrows: event_arrow,
         prevArrow:'<span class="prev"><i class="fa fa-angle-left"></i></span>',
         nextArrow:'<span class="next"><i class="fa fa-angle-right"></i></span>',
         responsive: [

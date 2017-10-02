@@ -26,6 +26,8 @@ function cx_events_shortcode( $atts, $content = null ) {
 		'button_text'		=> '',
 		'button_text_all'	=> '',
 		'href'				=> '',
+		'arrow'				=> '',
+		'dot'				=> '',
 		'class'				=> '',
 	), $atts));
 
@@ -340,6 +342,17 @@ function cx_events_shortcode( $atts, $content = null ) {
 			$title = ($retrieve_link[1]) ? 'title="'.esc_attr($retrieve_link[1]).'"':'';
 			$target = ($retrieve_link[2]) ? 'target="'.esc_attr($retrieve_link[2]).'"':'';
 
+			// Passing values to javascript
+			$codeopt = '';
+			(!empty( $arrow )) ? $slick_arrow = true : $slick_arrow = false;
+			(!empty( $dot )) ? $slick_dot = true : $slick_dot = false;
+			$codeopt .= '
+			<script type="text/javascript">
+				var ev_arrow = "' . $slick_arrow . '";
+				var ev_dot = "' . $slick_dot . '";
+			</script>';
+			echo $codeopt;
+
 			?>
 
 			<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
@@ -380,7 +393,7 @@ function cx_events_shortcode( $atts, $content = null ) {
 							 					<a href="<?php echo esc_url(get_the_permalink()); ?>"><h3 class="events-single-title"><?php echo esc_html( wp_trim_words( get_the_title(), $title_length ) ); ?></h3></a>
 							 					<div class="events-single-desc"><?php echo esc_html( wp_trim_words( get_the_excerpt(), $desc_length ) ); ?></div>
 							 				</div>
-							 				<?php if( !empty( $address ) || !empty( $date ) ): ?>
+							 				<?php if( $show_date || $show_add ): ?>
 	                                        <ul class="events-meta">
 	                                            <?php if( $show_add && !empty( $address ) ): ?>
 	                                            <li>
@@ -389,13 +402,17 @@ function cx_events_shortcode( $atts, $content = null ) {
 	                                            </li>
 	                                            <?php endif; ?>
 	                                            <?php if( $show_date && !empty( $date ) ): ?>
-	                                            <li class="pull-right">
-	                                                <i class="fa fa-calendar"></i>
-	                                                <?php 
-	                                                    $new_date = date( get_option('date_format'), $date );
-	                                                    echo esc_html( $new_date );
-	                                                ?>
-	                                            </li>
+	                                            	<?php if( $show_add ): ?>
+		                                            <li class="pull-right">
+		                                            <?php else: ?>
+		                                            <li>
+		                                            <?php endif; ?>
+		                                                <i class="fa fa-calendar"></i>
+		                                                <?php 
+		                                                    $new_date = date( get_option('date_format'), $date );
+		                                                    echo esc_html( $new_date );
+		                                                ?>
+		                                            </li>
 	                                            <?php endif; ?>
 	                                        </ul>
 		                                    <?php endif; ?>
@@ -561,12 +578,36 @@ function cx_events_kc() {
 
 	    					array(
 	    						'type'			=> 'toggle',
+	    						'name'			=> 'arrow',
+	    						'label'			=> esc_html__( 'Show Carousel Navigation Arrow? ', 'codexin' ),
+	    						'value'			=> 'yes',
+    							'relation'	=> array(
+    								'parent' 	=> 'layout',
+    								'show_when'	=> '4',
+    							),
+	    						'description'	=> esc_html__('Choose to enable/disable events carousel navigation arrow', 'codexin'),
+	    					),
+
+	    					array(
+	    						'type'			=> 'toggle',
+	    						'name'			=> 'dot',
+	    						'label'			=> esc_html__( 'Show Carousel Pagination? ', 'codexin' ),
+	    						'value'			=> 'yes',
+    							'relation'	=> array(
+    								'parent' 	=> 'layout',
+    								'show_when'	=> '4',
+    							),
+	    						'description'	=> esc_html__('Choose to enable/disable events carousel pagination', 'codexin'),
+	    					),
+
+	    					array(
+	    						'type'			=> 'toggle',
 	    						'name'			=> 'show_time',
 	    						'label'			=> esc_html__( 'Show Event Time? ', 'codexin' ),
 	    						'value'			=> 'yes',
     							'relation'	=> array(
     								'parent' 	=> 'layout',
-    								'hide_when'	=> '1',
+    								'hide_when'	=> '1,4',
     							),
 	    						'description'	=> esc_html__('Choose to enable/disable events time', 'codexin'),
 	    					),
@@ -716,7 +757,7 @@ function cx_events_kc() {
  										),
 
  										'Wrapper' => array(
- 											array('property' => 'background-color', 'label' => esc_html__( 'Background Color', 'codexin'), 'selector' => '.events-single'),
+ 											array('property' => 'background-color', 'label' => esc_html__( 'Background Color', 'codexin'), 'selector' => '.events-single, .events-single-content'),
  											array('property' => 'border', 'label' => esc_html__( 'Border', 'codexin'), 'selector' => '.events-single'),
  											array('property' => 'border-color', 'label' => esc_html__( 'Border Color on Hover', 'codexin'), 'selector' => '.events-single:hover'),
  											array('property' => 'box-shadow', 'label' => esc_html__( 'Box Shadow', 'codexin'), 'selector' => '.events-single'),
@@ -726,8 +767,8 @@ function cx_events_kc() {
  										),
 
  										'Button' => array(
- 											array('property' => 'color', 'label' => esc_html__( 'Color', 'codexin'), 'selector' => '.cx-events-btn, .cx-events-btn-2'),
- 											array('property' => 'color', 'label' => esc_html__( 'Color on Hover', 'codexin'), 'selector' => '.cx-events-btn:hover, .cx-events-btn-2:hover'),
+ 											array('property' => 'color', 'label' => esc_html__( 'Color', 'codexin'), 'selector' => '.cx-events-btn, .cx-events-btn-2, .cx-events-btn:before'),
+ 											array('property' => 'color', 'label' => esc_html__( 'Color on Hover', 'codexin'), 'selector' => '.cx-events-btn:hover, .cx-events-btn-2:hover, .cx-events-btn:hover:before'),
  											array('property' => 'background-color', 'label' => esc_html__( 'Background Color', 'codexin'), 'selector' => '.cx-events-btn, .cx-events-btn-2'),
  											array('property' => 'background-color', 'label' => esc_html__( 'Background Color on Hover', 'codexin'), 'selector' => '.cx-events-btn:hover, .cx-events-btn-2:hover'),
  											array('property' => 'border', 'label' => esc_html__( 'Border', 'codexin'), 'selector' => '.cx-events-btn, .cx-events-btn-2'),
@@ -747,6 +788,18 @@ function cx_events_kc() {
  											array('property' => 'background-color', 'label' => esc_html__( 'Title Tab Background on Hover', 'codexin'), 'selector' => '.panel-heading:hover'),
  											array('property' => 'background-color', 'label' => esc_html__( 'Description Tab Background Color', 'codexin'), 'selector' => '.panel-body'),
  										),
+
+										'Nav' => array(
+											array('property' => 'color', 'label' => 'Color of Nav Arrow', 'selector' => '.slick-slider span.slick-arrow'),
+											array('property' => 'background', 'label' => 'Background of Nav Arrow', 'selector' => '.slick-slider span.slick-arrow'),
+											array('property' => 'font-size', 'label' => 'Arrow Font Size of Nav Arrow', 'selector' => '.slick-slider span.slick-arrow'),
+											array('property' => 'margin', 'label' => 'Margin of Nav Arrow', 'selector' => '.slick-slider span.slick-arrow'),
+											array('property' => 'padding', 'label' => 'padding of Nav Arrow', 'selector' => '.slick-slider span.slick-arrow'),
+											array('property' => 'background-color', 'label' => 'Color of Dot Nav', 'selector' => '.slick-dots li'),
+											array('property' => 'background-color', 'label' => 'Color of Dot Nav on Active State', 'selector' => '.slick-dots li.slick-active'),
+											array('property' => 'background-color', 'label' => 'Color of Dot Nav on Hover', 'selector' => '.slick-dots li:hover'),
+											array('property' => 'margin', 'label' => 'Margin of Dot Nav', 'selector' => '.slick-dots'),
+										),
 
 									) //End inner-option array
 
