@@ -906,9 +906,9 @@ INDEX:
 
 .cx-events-description .events-single .event-media {
     position: relative;
-    margin-bottom: 30px;
 }
 
+.cx-events-wrapper-4 .events-single .event-media:before,
 .cx-events-wrapper-2 .events-single .event-media:before {
     content: "";
     background: #295970;
@@ -954,7 +954,6 @@ INDEX:
 
 .cx-events-description .events-single-content {
     padding: 30px;
-    padding-top: 0;
 }
 
 .cx-events-wrapper-2 .events-single:hover{
@@ -1021,6 +1020,88 @@ INDEX:
 
 .cx-events-btn-2:hover {
     color: #295970;
+}
+
+
+/**
+ * Codexin Events Type 04
+ *
+ */
+
+.cx-events-wrapper-4 {
+    margin-bottom: 40px;
+}
+
+.cx-events-wrapper-4 .events-single .event-media:before {
+    background: #000;
+}
+
+.cx-events-wrapper-4 .events-single:hover .event-media:before {
+    opacity: 0.65;
+}
+
+.cx-events-wrapper-4 a.cx-events-btn {
+    position: absolute;
+    display: inline-block;
+    line-height: 100%;
+    border: 1px solid #949494;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50% , -50%) scale(1.5);
+    color: #fff;
+    text-decoration: none;
+    padding: 10px;
+    outline: 0;
+    margin: 0;
+    padding-right: 35px;
+    padding-left: 20px;
+    background: transparent;
+}
+
+.cx-events-wrapper-4 a.cx-events-btn:hover {
+    background: rgba(41, 89, 112, 0.65);
+    border-color: rgba(41, 89, 112, 0.65);
+}
+
+.cx-events-wrapper-4 a.cx-events-btn:before {
+    content: "\f105";
+    font-family: FontAwesome;
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    line-height: 15px;
+    text-align: center;
+    border-radius: 50%;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    right: 13px;
+    color: #fff;
+}
+
+.cx-events-wrapper-4 a.cx-events-btn {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.cx-events-wrapper-4 .events-single:hover img + a {
+    transform: translate(-50% , -50%) scale(1);
+    opacity: 1;
+    visibility: visible;
+}
+
+.cx-events-wrapper-4 .events-single-content {
+    background: #fafafa;
+}
+
+.cx-events-wrapper-4 ul.events-meta {
+    margin-bottom: 0;
+    padding: 10px 30px;
+    border-top: 1px solid #ebebeb;
+}
+
+.cx-events-wrapper-4 .events-meta li:last-child {
+    margin-right: 0;
 }
 
 /************************************************************
@@ -2891,7 +2972,7 @@ section#location {
     outline: 0;
 }
 
-
+.cx-events-wrapper-4 span,
 .cx-testimonial-5 span,
 .cx-testimonial-4 span,
 .cx-testimonial-3 span,
@@ -2912,12 +2993,14 @@ section#location {
     color: #999;
 }
 
+.cx-events-wrapper-4 span.prev,
 .cx-testimonial-4 span.prev,
 .cx-testimonial-3 span.prev,
 .cx-client-carousel-1 span.prev {
     left: -50px;
 }
 
+.cx-events-wrapper-4 span.next,
 .cx-testimonial-4 span.next,
 .cx-testimonial-3 span.next,
 .cx-client-carousel-1 span.next {
