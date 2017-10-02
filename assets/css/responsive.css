@@ -1,7 +1,33 @@
 /*======================
 01 . counter up section
 02 . blog post section
+03 . call to action 
 ======================*/
+.thumbnail-link,.img-thumb{
+    position: relative;
+}
+
+.blog-wrapper-right a.thumbnail-link:before,
+.blog-wrapper-left .img-thumb:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0 ;
+    top: 0 ;
+    bottom: 0 ;
+    z-index: 99 ;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: all 0.3s ;
+}
+
+
+.blog-wrapper-right a.thumbnail-link:hover:before,
+.blog-wrapper-left .img-thumb:hover:before {
+    transform: scaleX(1);
+    
+}
+
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
 
@@ -133,6 +159,23 @@
 .cx-blog-3 .blog-wrapper-left {
     margin-bottom: 30px;
 }
+/*======================
+03 . call to action 
+======================*/
+.cx-cta .cta-content{
+    display: block;
+    text-align: center;
+}
+.cx-cta .cta-content .cta-details {
+    margin: 25px 0;
+    margin-right: 0;
+}
+
+
+
+
+
+
 
 
 }  /* end of (max-width: 767px) */
@@ -154,7 +197,7 @@
     background-image: none !important ;
 }
 
-.cx-blog-3  .img-thumb img{
+.cx-blog-3 .blog-wrapper-right .img-thumb img{
     opacity: 1;
     visibility: visible;
 }

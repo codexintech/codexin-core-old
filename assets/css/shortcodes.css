@@ -2231,13 +2231,13 @@ div.cx-blog-2 {
     background-image: url(//placehold.it/220x220);
     background-size: cover; 
     background-position: center;
-    transition: 0.5s ;
-    background-size: 100% 100%;
+
+
 
 }
 .cx-blog-3 a.thumbnail-link:hover {
-    background-size: 105% 105%;
-    transition: 0.5s ;
+
+
 
 }
 .cx-blog-3 .blog-wrapper-right > li + li {
@@ -2259,7 +2259,7 @@ div.cx-blog-2 {
     margin-bottom: 5px;
 }
 
-.cx-blog-3 .blog-wrapper-left:hover img,
+/*.cx-blog-3 .blog-wrapper-left:hover img,
 .cx-blog-3 .blog-wrapper-right li:hover img {
     -webkit-transform: scale(1.1);
     -moz-transform: scale(1.1);
@@ -2267,7 +2267,7 @@ div.cx-blog-2 {
     -o-transform: scale(1.1);
     transform: scale(1.1);
 }
-
+*/
 .cx-blog-3 .img-thumb img {
     -webkit-transition: all 0.3s ease 0s;
     -moz-transition: all 0.3s ease 0s;
