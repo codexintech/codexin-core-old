@@ -871,6 +871,9 @@ INDEX:
  *
  */
 
+.cx-events-wrapper-4 a.cx-events-btn:before,
+.cx-events-wrapper-4 .slick-dots li,
+.cx-events-wrapper-4 span.slick-arrow,
 .cx-events-description .events-single-title,
 .cx-events-description .events-single .event-media:before,
 .cx-events-description .events-single {
@@ -902,6 +905,10 @@ INDEX:
     font-size: 20px;
     font-weight: 500;
     margin-bottom: 15px;
+}
+
+.cx-events-description .events-single-title:focus {
+    outline: 0;
 }
 
 .cx-events-description .events-single .event-media {
@@ -1028,12 +1035,17 @@ INDEX:
  *
  */
 
-.cx-events-wrapper-4 {
-    margin-bottom: 40px;
-}
 
 .cx-events-wrapper-4 .events-single .event-media:before {
     background: #000;
+}
+
+.cx-events-wrapper-4 .events-single:hover {
+    -webkit-box-shadow: 0 5px 14px 5px #e4e4e4;
+    -moz-box-shadow: 0 5px 14px 5px #e4e4e4;
+    -ms-box-shadow: 0 5px 14px 5px #e4e4e4;
+    -o-box-shadow: 0 5px 14px 5px #e4e4e4;
+    box-shadow: 0 5px 14px 5px #e4e4e4;
 }
 
 .cx-events-wrapper-4 .events-single:hover .event-media:before {
@@ -1050,7 +1062,7 @@ INDEX:
     transform: translate(-50% , -50%) scale(1.5);
     color: #fff;
     text-decoration: none;
-    padding: 10px;
+    padding: 12px;
     outline: 0;
     margin: 0;
     padding-right: 35px;
@@ -1102,6 +1114,41 @@ INDEX:
 
 .cx-events-wrapper-4 .events-meta li:last-child {
     margin-right: 0;
+}
+
+.cx-events-wrapper-4 span.slick-arrow {
+    height: 40px;
+    line-height: 40px;
+}
+
+.cx-events-wrapper-4 span.slick-arrow:hover:not(.slick-disabled) {
+    opacity: 1;
+}
+
+.cx-events-wrapper-4 span.next, 
+.cx-events-wrapper-4 span.prev {
+    color: #fff;
+    background: #807e7e;
+    opacity: 0.75;
+}
+
+.cx-events-wrapper-4 .slick-arrow.slick-disabled {
+    opacity: 0.5;
+}
+
+.cx-events-wrapper-4 .slick-dots li {
+    width: 20px;
+    height: 5px;
+    background: #949494;
+}
+
+.cx-events-wrapper-4 .slick-dots li.slick-active {
+    width: 40px;
+    background: #295970;
+}
+
+.cx-events-wrapper-4 .slick-dots button::before {
+    display: none;
 }
 
 /************************************************************
