@@ -17,8 +17,8 @@
     bottom: 0 ;
     z-index: 99 ;
     transform: scaleX(0);
-    transform-origin: left;
-    transition: all 0.3s ;
+    transform-origin: center;
+    transition: all 0.5s ;
 }
 
 
@@ -159,6 +159,19 @@
 .cx-blog-3 .blog-wrapper-left {
     margin-bottom: 30px;
 }
+.cx-blog-3 a.thumbnail-link {
+    display: table-row;
+    background-image: none !important ;
+}
+
+.cx-blog-3 .blog-wrapper-right .img-thumb img{
+    opacity: 1;
+    visibility: visible;
+}
+.cx-blog-3 .blog-wrapper-right .img-thumb{
+    width: 100%;
+}
+
 /*======================
 03 . call to action 
 ======================*/
@@ -192,7 +205,7 @@
 /*======================
  blog 4
 ======================*/
-.cx-blog-3 a.thumbnail-link {
+/*.cx-blog-3 a.thumbnail-link {
     display: table-row;
     background-image: none !important ;
 }
@@ -204,7 +217,7 @@
 .cx-blog-3 .blog-wrapper-right .img-thumb{
     width: 100%;
 }
-
+*/
 
 
 }  /* end of (max-width: 480px) */
