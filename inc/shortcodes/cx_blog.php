@@ -313,9 +313,9 @@ function cx_blog_shortcode( $atts, $content = null ) {
 						<ul class="blog-wrapper-right">
 				<?php else : ?>
 							<li>
-								<div class="media-wrapper-right">
+								<div class="media-wrapper-right" style="background: url('<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'square-one' ) : '//placehold.it/220x220' ); ?>');background-size: cover; background-position: center;">
 									<div class="img-thumb">
-										<a href="<?php the_permalink(); ?>"><img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'square-one' ) : '//placehold.it/220x220' ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" class="img-responsive"></a>
+										
 									</div> <!-- End of img-thumb -->
 								</div> <!-- End of media-wraper-right -->
 								<div class="blog-content">

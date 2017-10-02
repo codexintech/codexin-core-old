@@ -44,6 +44,27 @@
 }
 
 /*======================
+ blog 3 
+======================*/
+.cx-blog-3 .blog-wrapper-right .img-thumb {
+    width: 100px;
+}
+.cx-blog-3 .blog-wrapper-right .media-wrapper-right {
+    display: block;
+}
+.cx-blog-3 .row{
+    display: flex;
+}
+.cx-blog-3 .blog-wrapper-left{
+    height: 100% ;
+}
+.cx-blog-3 .blog-wrapper-left .blog-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+/*======================
  blog 4
 ======================*/
 .cx-blog-4 .blog-wrapper .blog-category a {
@@ -56,14 +77,6 @@
 .cx-blog-4 .blog-wrapper .blog-title a {
     font-size: 16px;
 }
-.cx-blog-3 .blog-wrapper-right .img-thumb {
-    width: 100px;
-}
-.cx-blog-3 .blog-wrapper-right .media-wrapper-right {
-    display: block;
-}
-
-
 
 
 
