@@ -300,7 +300,7 @@ INDEX:
 }
 
 .cx-animated-counter.with-icon  {
-    padding:48px 25px;
+    /*padding:48px 25px;*/
 }
 
 .cx-animated-counter .cx-divider,
@@ -2883,7 +2883,9 @@ section#location {
  * Codexin CTA Type 01
  *
  */
-
+.cx-cta-3 {
+    padding: 90px 0;
+}
 .cx-cta-3 .cx-cta-btn,
 .cx-cta .cx-cta-btn {
     padding: 11px 20px;
@@ -2987,20 +2989,9 @@ section#location {
  *
  */
 
-.cx-cta-2 {
-    height: 400px;
-}
 
 .cx-cta-2 .cta-content {
-    position: relative;
-    top: 50%;
-    -webkit-transform: translateY(-50%);
-    -moz-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    -o-transform: translateY(-50%);
-    transform: translateY(-50%);
-    height: 75%;
-    margin: auto auto;
+    margin: 15px auto;
     padding: 15px 15px;
     border: 10px solid rgb(255, 255, 255);
     border: 10px solid rgba(255, 255, 255, 0.8);
@@ -3015,9 +3006,6 @@ section#location {
 }
 
 .cx-cta-2 .cx-content {
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
     font-size: 42px;
     padding: 0px 15%;
     line-height: 1.4em;
