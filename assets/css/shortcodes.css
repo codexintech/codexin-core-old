@@ -3213,10 +3213,10 @@ h2 {
 /*======================================================
     002 - Home - v2
 ========================================================*/
-.pad-50 {
+/*.pad-50 {
     padding-top: 50px;
     padding-bottom: 50px;
-}
+}*/
 
 /*title default style */
 /*.cx-section-heading .rv2-title {
@@ -3690,14 +3690,14 @@ figure.portfolio-rv2:hover .image-mask a {
 /***********************************    
     rv2 location section
 ***********************************/
-#location.location-rv2.mrg-50{
+/*#location.location-rv2.mrg-50{
     margin-top: 50px;
     margin-bottom: 50px;
-}
+}*/
 /*#gmap{
     height: 550px;
 }*/
-#map2 {
+/*#map2 {
     position: relative;
 }
 #location.location-rv2 {
@@ -3807,7 +3807,7 @@ figure.portfolio-rv2:hover .image-mask a {
 
 #location.location-rv2 .wpcf7-response-output {
     color: #fff;
-}
+}*/
 
 
 
@@ -3951,7 +3951,7 @@ figure.portfolio-rv2:hover .image-mask a {
 /*****************************
     005 - services  section
 ******************************/
-.layout-3.service-item {
+/*.layout-3.service-item {
     width: 100%;
     text-align: center;
     border: 1px solid transparent ;
@@ -3989,12 +3989,12 @@ figure.portfolio-rv2:hover .image-mask a {
 .layout-3.service-item:before,.layout-3.service-item:after {
     content: '';
     position: absolute;
-}
+}*/
 
 /*****************************
     004 - counter v3 section
 ******************************/
-.cx-animated-counter .rv2-title {
+/*.cx-animated-counter .rv2-title {
     padding-top: 5px;
     margin-bottom: 0;
     margin-top: 32px;
@@ -4015,12 +4015,12 @@ figure.portfolio-rv2:hover .image-mask a {
 .cx-animated-counter h2.rv3.rv2-title.title-top-style {
     text-indent: -99999999999999999px;
     line-height: 0;
-}
+}*/
 
 /*****************************
     006 - team section
 ******************************/
-.cx-team {
+/*.cx-team {
     margin-top: 50px;
     margin-bottom: 50px;
 }
@@ -4124,7 +4124,7 @@ figure.portfolio-rv2:hover .image-mask a {
 .layout-3.team-description p {
     margin : 0;
     color: #fff;
-}
+}*/
 
 /*****************************
     010 - portfolio section
@@ -4314,44 +4314,44 @@ section#portfolio_rv3 {
 /* rv2-single portfolio image pop up animation */
 
 /* overlay at start */
-.mfp-fade.mfp-bg {
+/*.mfp-fade.mfp-bg {
   opacity: 0;
 
   -webkit-transition: all 0.3s ease-out;
   -moz-transition: all 0.3s ease-out;
   transition: all 0.3s ease-out;
-}
+}*/
 /* overlay animate in */
-.mfp-fade.mfp-bg.mfp-ready {
+/*.mfp-fade.mfp-bg.mfp-ready {
   opacity: 0.8;
-}
+}*/
 /* overlay animate out */
-.mfp-fade.mfp-bg.mfp-removing {
+/*.mfp-fade.mfp-bg.mfp-removing {
   opacity: 0;
-}
+}*/
 
 /* content at start */
-.mfp-fade.mfp-wrap .mfp-content {
+/*.mfp-fade.mfp-wrap .mfp-content {
   opacity: 0;
 
   -webkit-transition: all 0.3s ease-out;
   -moz-transition: all 0.3s ease-out;
   transition: all 0.3s ease-out;
-}
+}*/
 /* content animate it */
-.mfp-fade.mfp-wrap.mfp-ready .mfp-content {
+/*.mfp-fade.mfp-wrap.mfp-ready .mfp-content {
   opacity: 1;
-}
+}*/
 /* content animate out */
-.mfp-fade.mfp-wrap.mfp-removing .mfp-content {
+/*.mfp-fade.mfp-wrap.mfp-removing .mfp-content {
   opacity: 0;
 }
-
+*/
 
 /*****************************
     009 - cta-button-rv2 section
 ******************************/
-.cx-cta-button-3 {
+/*.cx-cta-button-3 {
     padding: 90px 0;
     background-size: cover;
     background-position: center;
@@ -4410,7 +4410,7 @@ section#portfolio_rv3 {
 .btn-white{
     background: #fff ;
     color: #606060 ;
-}
+}*/
 
 /*.cta-content {
     display: table;
@@ -4485,7 +4485,7 @@ section#portfolio_rv3 {
 /*****************************
     008 - feedback section
 ******************************/
-.rv3 .rv2-title {
+/*.rv3 .rv2-title {
     margin-bottom: 50px;
 }
 .slick-slide:focus{
@@ -4566,7 +4566,7 @@ section#portfolio_rv3 {
 }
 .client-comment-curosel-rv3 .slick-next:hover, .slick-prev:focus, .slick-next:hover, .slick-next:focus {
     color: #fff;
-}
+}*/
 
 
 /*****************************
