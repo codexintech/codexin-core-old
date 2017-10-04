@@ -2947,6 +2947,7 @@ section#location {
 
 .cx-cta .cta-content .cta-title {
     margin-bottom: 0;
+    line-height: 1.4em;
 }
 
 .cx-cta .cta-content .cta-details p {
@@ -3003,6 +3004,7 @@ section#location {
     width: 100%;
     height: 100%;
     opacity: 0.9;
+    padding: 15px 0;
 }
 
 .cx-cta-2 .cx-content {
@@ -3030,6 +3032,7 @@ section#location {
 
 .cx-cta-3 .cta-content {
     text-align: center;
+    padding: 0 15px;
 }
 
 .cx-cta-3 .cta-content .cta-details p {

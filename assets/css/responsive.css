@@ -2,9 +2,59 @@
 01 . counter up section
 02 . blog post section
 03 . call to action 
+04 - Client Carousel Section
+05 - accordion-toggle event 
+06 - Events Section
+07 -information box 
 ======================*/
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
+
+/*======================
+04 - Client Carousel Section
+======================*/
+.cx-client-carousel-2 .col-lg-3.client-image-single {
+    width: 50%;
+    float: left;
+}
+
+.cx-client-carousel-2 .client-image-single {
+    border: 1px solid #dedede; 
+}
+.cx-client-carousel-2 .client-image-single:nth-child(even) {
+      border-right:1px solid #dedede; 
+}
+.cx-client-carousel-2 .client-image-single:nth-child(odd) {
+        border-right: none;
+}
+.cx-client-carousel-2 .client-image-single:nth-child(even) ,
+.cx-client-carousel-2 .client-image-single:nth-child(odd) {
+    border-top: 0 ;
+}
+.clients-first-row  .client-image-single:nth-child(1),
+.clients-first-row  .client-image-single:nth-child(2){
+   border-top: 1px solid #dedede; 
+}
+.clients-second-row  .client-image-single:nth-child(1),
+.clients-second-row  .client-image-single:nth-child(2){
+    border: 1px solid #dedede; 
+    border-top: 0 ;
+}
+
+.clients-second-row .client-image-single:nth-last-child(1),
+.clients-second-row .client-image-single:nth-last-child(2) {
+    border: 1px solid #dedede; 
+    border-top: 0px solid #dedede; 
+}
+.clients-second-row .client-image-single:nth-last-child(2),
+.clients-second-row .client-image-single:nth-child(odd) {
+    border-right: none;
+}
+
+
+
+
+
 
 }  /* end of (min-width: 992px) and (max-width: 1199px) */
 
@@ -28,9 +78,10 @@
 .img-wrapper img {
     width: 100%;
 }
-/*======================
- blog 2 
-======================*/
+/**
+ * Codexin  blog 2
+ *
+ */
 .cx-blog-2 .cx-blog-btn {
     padding: 5px 8px;
     font-size: 14px;
@@ -44,9 +95,10 @@
 	text-transform: capitalize;
 }
 
-/*======================
- blog 3 
-======================*/
+/**
+ * Codexin  blog 3
+ *
+ */
 .cx-blog-3 .blog-wrapper-right .img-thumb {
     width: 100px;
 }
@@ -54,9 +106,10 @@
     display: block;
 }
 
-/*======================
- blog 4
-======================*/
+/**
+ * Codexin  blog 4
+ *
+ */
 .cx-blog-4 .blog-wrapper .blog-category a {
     padding: 0px 5px;
 }
@@ -68,7 +121,69 @@
     font-size: 16px;
 }
 
+/**
+ * Codexin CTA Type 03
+ *
+ */
+.cx-cta-2 .cx-content {
+    font-size: 30px;
+}
 
+/*======================
+04 - Client Carousel Section
+======================*/
+.cx-client-carousel-2 .col-lg-3.client-image-single {
+    width: 50%;
+    float: left;
+}
+
+.cx-client-carousel-2 .client-image-single {
+    border: 1px solid #dedede; 
+}
+.cx-client-carousel-2 .client-image-single:nth-child(even) {
+      border-right:1px solid #dedede; 
+}
+.cx-client-carousel-2 .client-image-single:nth-child(odd) {
+        border-right: none;
+}
+.cx-client-carousel-2 .client-image-single:nth-child(even) ,
+.cx-client-carousel-2 .client-image-single:nth-child(odd) {
+    border-top: 0 ;
+}
+.clients-first-row  .client-image-single:nth-child(1),
+.clients-first-row  .client-image-single:nth-child(2){
+   border-top: 1px solid #dedede; 
+}
+.clients-second-row  .client-image-single:nth-child(1),
+.clients-second-row  .client-image-single:nth-child(2){
+    border: 1px solid #dedede; 
+    border-top: 0 ;
+}
+
+.clients-second-row .client-image-single:nth-last-child(1),
+.clients-second-row .client-image-single:nth-last-child(2) {
+    border: 1px solid #dedede; 
+    border-top: 0px solid #dedede; 
+}
+.clients-second-row .client-image-single:nth-last-child(2),
+.clients-second-row .client-image-single:nth-child(odd) {
+    border-right: none;
+}
+/*==========================
+    006 - Events Section
+==========================*/
+
+.cx-events-wrapper-3 .col-md-6.col-sm-12 ,
+.cx-events-wrapper-3 .col-md-3.col-sm-12 ,
+.cx-events-wrapper-2 .col-md-6.col-sm-12 ,
+.cx-events-wrapper-2 .col-md-3.col-sm-12 {
+    width: 50%;
+}
+.cx-events-wrapper-3 img,
+.cx-events-wrapper-4 .item img ,
+.cx-events-wrapper-2 img {
+    width: 100%;
+}
 
 
 
@@ -99,13 +214,14 @@
 .img-wrapper img {
     width: 100%;
 }
-/*======================
- blog 2 
-======================*/
+/**
+ * Codexin  blog 2
+ *
+ */
 .cx-blog-2 .cx-blog-btn {
     padding: 10px 10px;
 }
-
+.cx-image-box .img-thumb,
 .blog-wrapper ,
 .blog-wrapper .img-thumb,
 .blog-wrapper .img-thumb .img-wrapper ,
@@ -113,13 +229,15 @@
     max-width: 100%;
     width: 100% ;
 }
+
 .blog-wrapper .img-thumb img,
 .cx-blog-2 .blog-wrapper .img-thumb img{
     width: 100% ;
 }
-/*======================
- blog 3
-======================*/
+/**
+ * Codexin  blog 3
+ *
+ */
 
 .cx-blog-3 .row {
     display: block;
@@ -163,11 +281,47 @@
     margin: 25px 0;
     margin-right: 0;
 }
+.cx-cta-2 .cx-content {
+    font-size: 20px;
+}
 
+/*======================
+04 - Client Carousel Section
+======================*/
+.clients-first-row  .client-image-single:nth-child(1){
+    border: 1px solid #dedede;
+}
+.clients-first-row  .client-image-single{
+   border: 1px solid #dedede;
+   border-top: 0px solid #dedede;
+}
+.cx-client-carousel-2 .client-image-single:last-child {
+    border-right:  1px solid #dedede;
+}
+.cx-client-carousel-2 .clients-second-row .client-image-single{
+   border-left: 1px solid #dedede;
+   border-bottom: 1px solid #dedede;
+}
 
-
-
-
+/*======================
+05 - accordion-toggle event 
+======================*/
+.panel-title a.accordion-toggle {
+    font-size: 14px;
+}
+/**
+ * event 4
+ *
+ */
+.cx-events-wrapper-4 .item img {
+    width: 100%;
+}
+/*======================
+07 -information box 
+======================*/
+.contest-wrapper{
+    max-width: 100% !important;
+}
 
 
 
@@ -182,22 +336,6 @@
 .cx-animated-counter .project .counter {
     font-size: 40px;
 }
-/*======================
- blog 4
-======================*/
-/*.cx-blog-3 a.thumbnail-link {
-    display: table-row;
-    background-image: none !important ;
-}
-
-.cx-blog-3 .blog-wrapper-right .img-thumb img{
-    opacity: 1;
-    visibility: visible;
-}
-.cx-blog-3 .blog-wrapper-right .img-thumb{
-    width: 100%;
-}
-*/
 
 
 }  /* end of (max-width: 480px) */
