@@ -6,8 +6,14 @@
 05 - accordion-toggle event 
 06 - Events Section
 07 -information box 
+08 -portfolio  
 ======================*/
-
+img {
+    width: 100%;
+}
+.cx-testimonial{
+    padding-top: 30px ;
+}
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
 
 /*======================
@@ -50,8 +56,12 @@
 .clients-second-row .client-image-single:nth-child(odd) {
     border-right: none;
 }
-
-
+/*========================*
+    08 -portfolio  
+========================*/
+figure.cx-portfolio {
+    width: 50% !important;
+}
 
 
 
@@ -184,9 +194,30 @@
 .cx-events-wrapper-2 img {
     width: 100%;
 }
-
-
-
+/*========================*
+    08 -portfolio  
+========================*/
+figure.cx-portfolio {
+    width: 50% !important;
+}
+/*========================*
+09 -services section   
+========================*/
+.cx-service-box .service-single-4{
+    padding: 15px ;
+}
+.cx-service-box .service-single-3,
+.cx-service-box .service-single-2 {
+    padding: 35px 15px 35px;
+}
+.cx-service-box .service-single-4 .media-thumb i {
+    font-size: 35px;
+}
+.cx-service-box .service-single-4 .media-thumb {
+    width: 70px;
+    height: 70px;
+    line-height: 70px;
+}
 
 
 }  /* end of (min-width: 768px) and (max-width: 991px) */
@@ -322,6 +353,37 @@
 .contest-wrapper{
     max-width: 100% !important;
 }
+/*========================*
+    08 -portfolio  
+========================*/
+figure.cx-portfolio {
+    width: 50% !important;
+}
+/*========================*
+09 -services section   
+========================*/
+.cx-service-box .service-single-3,
+.cx-service-box .service-single-2 {
+    padding: 35px 15px 35px;
+}
+.cx-service-box .service-single-4{
+    padding: 15px ;
+}
+.cx-service-box .service-single-4 .media-thumb {
+    width: 80px;
+    height: 80px;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -336,6 +398,13 @@
 .cx-animated-counter .project .counter {
     font-size: 40px;
 }
+/*========================*
+    08 -portfolio  
+========================*/
+figure.cx-portfolio {
+    width: 100% !important;
+}
+
 
 
 }  /* end of (max-width: 480px) */
