@@ -14,16 +14,44 @@ img {
 .cx-testimonial{
     padding-top: 30px ;
 }
+.cx-events-wrapper-4 span.prev{
+    left: 40px ;
+}
+.cx-events-wrapper-4 span.next{
+    right: 40px ;
+}
+.cx-events-wrapper-4 span.prev,
+.cx-events-wrapper-4 span.next{
+    z-index: -1;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s ;
+
+}
+.cx-events-wrapper-4:hover span.prev,
+.cx-events-wrapper-4:hover span.next{
+    opacity: 1;
+    visibility: visible;
+}
+.cx-events-wrapper-4:hover span.prev{
+    left: -50px;
+}
+.cx-events-wrapper-4:hover span.next{
+    right: -50px;
+}
+.cx-blog-2 .col-md-3.col-sm-6 .img-thumb .cx-blog-btn {
+    padding: 5px 10px;
+}
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
 
 /*======================
 04 - Client Carousel Section
 ======================*/
-.cx-client-carousel-2 .col-lg-3.client-image-single {
+/*.cx-client-carousel-2 .col-lg-3.client-image-single {
     width: 50%;
     float: left;
 }
-
+*/
 .cx-client-carousel-2 .client-image-single {
     border: 1px solid #dedede; 
 }
@@ -142,11 +170,11 @@ figure.cx-portfolio {
 /*======================
 04 - Client Carousel Section
 ======================*/
-.cx-client-carousel-2 .col-lg-3.client-image-single {
+/*.cx-client-carousel-2 .col-lg-3.client-image-single {
     width: 50%;
     float: left;
 }
-
+*/
 .cx-client-carousel-2 .client-image-single {
     border: 1px solid #dedede; 
 }
@@ -183,12 +211,12 @@ figure.cx-portfolio {
     006 - Events Section
 ==========================*/
 
-.cx-events-wrapper-3 .col-md-6.col-sm-12 ,
+/*.cx-events-wrapper-3 .col-md-6.col-sm-12 ,
 .cx-events-wrapper-3 .col-md-3.col-sm-12 ,
 .cx-events-wrapper-2 .col-md-6.col-sm-12 ,
 .cx-events-wrapper-2 .col-md-3.col-sm-12 {
     width: 50%;
-}
+}*/
 .cx-events-wrapper-3 img,
 .cx-events-wrapper-4 .item img ,
 .cx-events-wrapper-2 img {

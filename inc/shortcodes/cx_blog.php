@@ -73,7 +73,7 @@ function cx_blog_shortcode( $atts, $content = null ) {
 					$image_alt = ( !empty( retrieve_alt_tag() ) ) ? retrieve_alt_tag() : get_the_title();
 
 				 ?>
-					<div class="col-md-<?php echo esc_html( $column ); ?> col-sm-4">
+					<div class="col-md-<?php echo esc_html( $column ); ?> col-sm-<?php echo ( $column==4 ) ? esc_html($column) : esc_html(6); ?>">
 						<div class="blog-wrapper">
 							<div class="img-thumb">
 								<a href="<?php esc_url( the_permalink() ); ?>">
@@ -194,7 +194,7 @@ function cx_blog_shortcode( $atts, $content = null ) {
 					$image_alt = ( !empty( retrieve_alt_tag() ) ) ? retrieve_alt_tag() : get_the_title();
 
 					?>
-					<div class="col-md-<?php echo $column ?> col-sm-4">
+					<div class="col-md-<?php echo $column ?> col-sm-<?php echo ( $column==4 ) ? esc_html($column) : esc_html(6); ?>">
 						<div class="blog-wrapper">
 							<div class="img-thumb">
 								<img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'rectangle-one' ) : '//placehold.it/600x400' ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" class="img-responsive">

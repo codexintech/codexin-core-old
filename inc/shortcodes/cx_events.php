@@ -158,7 +158,7 @@ function cx_events_shortcode( $atts, $content = null ) {
 							$date 		= strtotime( rwmb_meta( 'reveal_event_start_date','type=date' ) ); 
 
 							?>
-						 		<div class="col-md-<?php echo esc_html( $column ); ?> col-sm-12">
+						 		<div class="col-md-<?php echo esc_html( $column ); ?> col-sm-<?php echo ( $column==4 ) ? esc_html($column) : esc_html(6); ?>">
 						 			<div class="events-single">
 						 				<div class="event-media-wrapper">
 						 					<a href="<?php echo esc_url(get_the_permalink()); ?>">
@@ -264,7 +264,7 @@ function cx_events_shortcode( $atts, $content = null ) {
 							$date 		= strtotime( rwmb_meta( 'reveal_event_start_date','type=date' ) ); 
 
 							?>
-						 		<div class="col-md-<?php echo esc_html( $column ); ?> col-sm-12">
+						 		<div class="col-md-<?php echo esc_html( $column ); ?> col-sm-<?php echo ( $column==4 ) ? esc_html($column) : esc_html(6); ?>">
 						 			<div class="events-single">
 						 				<div class="event-media-wrapper">
 						 					<a href="<?php echo esc_url(get_the_permalink()); ?>">
