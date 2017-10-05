@@ -101,6 +101,8 @@
                 slidesToScroll: 1,
                 asNavFor: ".slick-slider-content",
                 dots: false,
+                autoplay: cxt3_autoplay,
+                
                 centerMode: true,
                 centerPadding: "0px",
                 focusOnSelect: true,
@@ -133,6 +135,8 @@
                 slidesToScroll: 1,
                 asNavFor: ".slick-slider-content",
                 dots: false,
+                autoplay: cxt3_autoplay,
+                
                 centerMode: true,
                 centerPadding: "0px",
                 focusOnSelect: true,

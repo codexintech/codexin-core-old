@@ -42,6 +42,9 @@ img {
 .cx-blog-2 .col-md-3.col-sm-6 .img-thumb .cx-blog-btn {
     padding: 5px 10px;
 }
+.cx-testimonial-5 .testimonial-content {
+    display: block;
+}
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
 
 /*======================
