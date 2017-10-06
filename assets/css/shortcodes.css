@@ -2450,12 +2450,12 @@ div.cx-blog-2 {
 }
 
 
-.blog-post {
+.post-wrapper {
     border-bottom: 1px solid #e5e5e5;
     padding-bottom: 30px;
 }
 
-#primary article.type-post:last-of-type .blog-post {
+#primary article.type-post:last-of-type .post-wrapper {
     border-bottom: 0px dashed #e5e5e5;
     padding-bottom: 0;
 }
