@@ -1633,7 +1633,7 @@ INDEX:
     font-style: italic;
 }
 
-.cx-image-box .cx-image,
+.cx-image-box .cx-error,
 .cx-team-wrapper .cx-error {
     background:#fff;
     text-align: center;
