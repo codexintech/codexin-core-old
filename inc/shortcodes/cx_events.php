@@ -166,7 +166,7 @@ function cx_events_shortcode( $atts, $content = null ) {
 													<img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'rectangle-four' ) : '//placehold.it/600x327' ); ?>" alt="<?php echo esc_attr($image_alt); ?>">
 						 						</div>
 						 					</a>
-						 					</div>
+					 					</div>
 						 				<div class="events-single-content">
 						 					<a href="<?php echo esc_url(get_the_permalink()); ?>"><h3 class="events-single-title"><?php echo esc_html( wp_trim_words( get_the_title(), $title_length ) ); ?></h3></a>
 
@@ -220,8 +220,8 @@ function cx_events_shortcode( $atts, $content = null ) {
 					<a href="<?php echo esc_url( get_post_type_archive_link( 'events' ) ); ?>" class="cx-events-btn"><?php echo esc_html( !empty( $button_text_all ) ? $button_text_all : __('View All', 'codexin') ); ?></a>
 					<?php endif; ?>
 				</div>
+				<?php endif; ?>
 			</div> <!-- end of cx-events-description -->
-			<?php endif; ?>
 		<?php endif; 
 
 		if( $layout == 3 ) : 
@@ -327,8 +327,8 @@ function cx_events_shortcode( $atts, $content = null ) {
 					<a href="<?php echo esc_url( get_post_type_archive_link( 'events' ) ); ?>" class="cx-events-btn"><?php echo esc_html( !empty( $button_text_all ) ? $button_text_all : __('View All', 'codexin') ); ?></a>
 					<?php endif; ?>
 				</div>
+				<?php endif; ?>
 			</div> <!-- end of cx-events-description -->
-			<?php endif; ?>
 		<?php endif;
 
 		if( $layout == 4 ) : 
@@ -435,8 +435,8 @@ function cx_events_shortcode( $atts, $content = null ) {
 					<a href="<?php echo esc_url( get_post_type_archive_link( 'events' ) ); ?>" class="cx-events-btn"><?php echo esc_html( !empty( $button_text_all ) ? $button_text_all : __('View All', 'codexin') ); ?></a>
 					<?php endif; ?>
 				</div>
+				<?php endif; ?>
 			</div> <!-- end of cx-events-description -->
-			<?php endif; ?>
 		<?php endif;
 
 	endif;

@@ -15,13 +15,16 @@ function cx_blog_shortcode( $atts, $content = null ) {
 			'order'				=> '',
 			'orderby'			=> '',
 			'exclude'			=> '',
+			'show_author'		=> '',
+			'show_meta'			=> '',
 			'show_date'			=> '',
+			'show_cat'			=> '',
+			'show_comm'			=> '',
+			'show_like'			=> '',
 			'title_length'		=> '',
 			'desc_length'		=> '',
-			'postview_comments'	=> '',
 			'sticky_post'		=> '',
 			'post_meta'			=> '',
-			'readmore_text'		=> '',
 			'class'				=> ''
 	), $atts));
 
@@ -29,17 +32,143 @@ function cx_blog_shortcode( $atts, $content = null ) {
 
 	// Assigning a master css class and hooking into KC
 	$master_class = apply_filters( 'kc-el-class', $atts );
-	$master_class[] = 'cx-blog';
+	$master_class[] = 'cx-blog-standard';
 
     // Retrieving user define classes
     $classes = array( 'row' );
     (!empty($class)) ? $classes[] = $class : '';
 
-
 	ob_start(); 
 
+	?>
+
+		<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
+			<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
+				<div class="blog-list-wrapper">
+					<?php 
+					//start query..
+					$paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
+					$args = array(
+						'post_type'				=> 'post',
+						'meta_key'				=> ( $orderby == 'meta_value_num' ) ? 'cx_post_views' : '',
+						'order'					=> $order,
+						'orderby'				=> $orderby,
+						'paged'   				=> $paged,
+						'ignore_sticky_posts' 	=> ( $sticky_post ) ? '' : 1,
+					);
+
+					$data = new WP_Query( $args );
+
+					if( $data->have_posts() ) :
+
+						while( $data->have_posts() ) : $data->the_post();
+
+						// Retrieving Image alt tag
+						$image_alt = ( !empty( retrieve_alt_tag() ) ) ? retrieve_alt_tag() : get_the_title();
+						$post_classes = ($sticky_post && is_sticky()) ? 'sticky clearfix' : 'clearfix';
+
+						$show_metas = explode(',', $show_meta);
+						print_r($show_metas);
+			            	
+					?>
+						<article id="post-<?php the_ID(); ?>" <?php post_class(array(esc_attr($post_classes))); ?> itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
+						    <div class="post-wrapper">
+					            <a href="<?php echo esc_url( get_the_permalink() ); ?>" class="blog-media-wrapper">
+					                <figure class="item-img-wrap" itemscope itemtype="http://schema.org/ImageObject">
+					                    <img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'reveal-post-single' ) : '//placehold.it/750x332' ); ?>" class="img-responsive" <?php printf( '%s', $image_alt ); ?> itemprop="image">
+					                    <div class="item-img-overlay">
+					                        <span></span>
+					                    </div>
+					                </figure>                       
+					            </a> <!-- end of blog-media-wrapper -->					            
+
+								<?php if(!empty($show_meta)): ?>
+					            <ul class="list-inline post-detail">
+
+					            	<?php if($show_metas[1]): ?>
+						                <li><i class="fa fa-pencil"></i> <span class="post-author vcard" itemprop="author" itemscope itemtype="https://schema.org/Person">
+						                    <a href="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ); ?>" itemprop="url" rel="author">
+						                        <span itemprop="name"><?php echo esc_html( get_the_author() ); ?></span>
+						                    </a>
+						                    </span>
+						                </li>
+						            <?php endif; ?>
+
+									<?php if($show_metas[2]): ?>
+						                <li><i class="fa fa-calendar"></i> <a href="<?php echo get_day_link(get_post_time('Y'), get_post_time('m'), get_post_time('j'));  ?>"><time datetime="<?php echo get_the_time('c'); ?>" itemprop="datePublished"><?php echo date( get_option('date_format'), strtotime( get_the_time( 'd M, Y' ) ) ); ?></time></a> </li>
+									<?php endif; ?>
+									
+									<?php if($show_metas[3]): ?>
+						                <li><i class="fa fa-tag"></i> <span itemprop="genre"><?php the_category( ', ' )?></span></li>
+						            <?php endif; ?>
+
+									<?php if($show_metas[4]): ?>
+						                <li><i class="fa fa-comment"></i><?php comments_number( 'No Comments', 'One Comment', '% Comments' )?></li>
+						            <?php endif; ?>
+
+									<?php if($show_metas[5]): ?>
+						                <li><?php if( function_exists( 'codexin_likes_button' ) ): echo codexin_likes_button( get_the_ID(), 0 ); endif; ?></li>
+						            <?php endif; ?>
+
+					            </ul>
+						        <?php endif; ?>
+
+						        <h2 class="post-title" itemprop="headline">
+						            <a href="<?php echo esc_url( get_the_permalink() ); ?>" rel="bookmark" itemprop="url">
+						                <span itemprop="name">
+						                <?php 
+						                    // $length_switch = reveal_option('reveal_blog_title_excerpt_length');
+						                    // if( $length_switch ) :
+						                    //     $reveal_title_len = reveal_option( 'reveal_title_length' );
+						                    //     reveal_title( $reveal_title_len );
+						                    // else:
+						                        the_title();
+						                    // endif;
+						                ?>
+						                </span>
+						            </a>
+						        </h2>
+
+	                			<div class="entry-content" itemprop="text">
+	                    			<?php the_excerpt();  ?>
+	                    			<p class="blog-more"><a class="cx-btn" href="<?php echo esc_url( get_the_permalink() ); ?>"><?php esc_html_e( 'Read More', 'reveal' ) ?></a></p>
+	                    		</div> <!-- end of entry-content -->
+					        </div> <!-- end of post-wrapper -->
+					    </article> <!-- #post-## -->
+					    <div class="clearfix"></div>
+
+						<?php 
+						endwhile;
+					endif;
+					wp_reset_postdata();
+					?>
+
+				<?php 
+
+		        $prev_link = get_previous_posts_link(esc_html__('&laquo; Newer Posts', 'reveal'));
+		        $next_link = get_next_posts_link(esc_html__('Older Posts &raquo; ', 'reveal'), $data->max_num_pages );
+
+		        echo '<div class="posts-nav clearfix">';
+		            if($next_link): 
+		            echo '<div class="nav-next alignright">'. $next_link .'</div>';
+		            endif; 
+		            
+		            if($prev_link): 
+		            echo '<div class="nav-previous alignleft">'. $prev_link .'</div>';
+		            endif; 
+		        echo '</div>';
+
+				 ?>
+				</div> <!-- end of blog-list-wrapper -->
+			</div> <!-- end of row -->
+		</div> <!-- end of cx-blog-standard -->
 
 
+
+
+	<?php
+	$result .= ob_get_clean();
+	return $result;
 }
 
 
@@ -60,37 +189,6 @@ function cx_blog_kc() {
 					'params' => array(
 	    				// General Params
 						'general' => array(
-							array(
-								'name'	=> 'layout',
-								'lable'	=> esc_html__( 'Select Blog Post Template', 'codexin' ),
-								'type'	=> 'radio_image',
-								'options'	=> array(
-									'1'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/blog/blog-1.jpg',
-									'2'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/blog/blog-2.jpg',
-									'3'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/blog/blog-3.jpg',
-									'4'	=> CODEXIN_CORE_ASSET_DIR . '/images/layout-img/blog/blog-4.jpg',
-								),
-								'value'	=> '1',
-								'admin_label'	=> true,
-							),
-
-							array(
-	    						'name'        	=> 'number_of_posts',
-	    						'label'       	=> esc_html__('Number Of Post to Display', 'codexin'),
-	    						'type'        	=> 'select',
-	    						'options'		=> array(
-    								'2'	=> '2',
-    								'3'	=> '3',
-    								'4'	=> '4',
-    							),
-	    						'value'			=> '2',
-    							'relation'	=> array(
-    								'parent' 	=> 'layout',
-    								'show_when'	=> '1,2',
-    							),
-	    						'description'	=> esc_html__( 'Choose the number of posts you want to show.', 'codexin' ),
-	    						'admin_label' 	=> true,
-	    					),
 
 	    					array(
 	    						'name'        	=> 'order',
@@ -119,51 +217,27 @@ function cx_blog_kc() {
 	    					),
 
 	    					array(
-	    						'name'        	=> 'post_meta',
-	    						'label'       	=> esc_html__('Post Meta to Show', 'codexin'),
-	    						'type'        	=> 'select',
-	    						'options'		=> array(
-    								'view'		 => 'Number of Post Views',
-    								'comment'	 => 'Number Of Comments',
-    							),
-    							'relation'	=> array(
-    								'parent' 	=> 'layout',
-    								'show_when'	=> '2',
-    							),
-	    						'value'			=> 'comment',
-	    						'description'	=> esc_html__( 'Choose The Post Meta to Display', 'codexin' ),
-	    					),
-
-	    					array(
 	    						'name'        	=> 'sticky_post',
 	    						'label'       	=> esc_html__('Show Sticky Post? ', 'codexin'),
 	    						'type'        	=> 'toggle',
-    							'relation'	=> array(
-    								'parent' 	=> 'layout',
-    								'show_when'	=> '3',
-    							),
 	    						'value'			=> 'no',
 	    						'description'	=> esc_html__( 'Enable this if you want to show sticky post first.', 'codexin' ),
 	    					),
 
-	 						array(
-	 							'name' 			=> 'exclude',
-	 							'label' 		=> esc_html__( 'Exclude Categories', 'codexin' ),
-	 							'type' 			=> 'multiple',
-	 							'options'		=> $cx_categories,
-	 							'description'	=> esc_html__( 'Choose if You Want to Exclude Any Post Category, Control + Click to Select Multiple Categories to Exclude (No Categories are Excluded by Default)', 'codexin' ),
-	 						),
-
 	    					array(
-	    						'type'			=> 'toggle',
-	    						'name'			=> 'show_date',
-	    						'label'			=> esc_html__( 'Show Post Pulbished Date?', 'codexin' ),
-	    						'value'			=> 'yes',
-    							'relation'	=> array(
-    								'parent' 	=> 'layout',
-    								'show_when'	=> '1,2',
-    							),
-	    						'description'	=> esc_html__('Choose to enable/disable post published date', 'codexin'),
+	    						'type'			=> 'checkbox',
+	    						'name'			=> 'show_meta',
+	    						'label'			=> esc_html__( 'Which Posts Meta You Want to Show? ', 'codexin' ),
+	    						'value'			=> array('show_author', 'show_date', 'show_cat', 'show_comm', 'show_like'),
+	    						'options'		=> array(
+	    							'show_author' => 'Post Author Name',
+	    							'show_date'   => 'Post Published Date',
+	    							'show_cat'    => 'Post Categories',
+	    							'show_comm'   => 'Post Comments Number',
+	    							'show_like'   => 'Post Likes Number',
+
+	    						),
+	    						'description'	=> esc_html__('Choose to enable/disable meta information', 'codexin'),
 	    						'admin_label' => true
 	    					),
 
@@ -193,35 +267,7 @@ function cx_blog_kc() {
 	    							'unit'			=> '',
 	    							'show_input'	=> false
     							),
-    							'relation'	=> array(
-    								'parent' 	=> 'layout',
-    								'show_when'	=> '1,2,3',
-    							),
     						),
-
-	    					array(
-	    						'type'			=> 'toggle',
-	    						'name'			=> 'postview_comments',
-	    						'label'			=> esc_html__( 'Show Posts View & Comments Number?', 'codexin' ),
-	    						'value'			=> 'yes',
-	    						'relation'	=> array(
-    								'parent' 	=> 'layout',
-    								'show_when'	=> '1',
-    							),
-	    						'description'	=> esc_html__('Displays the post views count and comments count', 'codexin'),
-	    					),
-
-	    					array(
-	    						'name'	=> 'readmore_text',
-	    						'label' => esc_html__( 'Read More Button Text', 'codexin' ),
-	    						'type'	=> 'text',
-	    						'value'	=> 'Read more',
-	    						'description' => esc_html__( 'Edit the text that appears on the "Read more" button.', 'codexin' ),
-    							'relation'	=> array(
-    								'parent' 	=> 'layout',
-    								'show_when'	=> '1,2,3',
-    							),
-	    					),
 
 	    					array(
 	    						'name'	=> 'class',

@@ -163,7 +163,7 @@ class Codexin_Twitter_Widget extends WP_Widget {
 				<div class="twitter-feed-wrapper clearfix">
 					<?php if( 'on' == $instance[ 'tw_profile' ] ): ?>
 					<div class="twitter-feed-left">
-						<a href="//twitter.com/<?php echo esc_html( $cx_tweet->user->screen_name ); ?>"">
+						<a href="//twitter.com/<?php echo esc_html( $cx_tweet->user->screen_name ); ?>">
 							<img class="media-object" src="<?php echo esc_url( $cx_tweet->user->profile_image_url ); ?>" alt="twitter-user-profile">
 						</a>
 					</div>

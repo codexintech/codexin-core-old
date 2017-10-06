@@ -11,13 +11,14 @@ INDEX:
     006 - Codexin Testimonial
     007 - Codexin Team
     008 - Codexin Portfolio
-    009 - Codexin Blog
+    009 - Codexin Mini Blog
     010 - Codexin Map
     011 - Codexin Contact Form
     012 - Codexin Social Share
     013 - Codexin Pricing Table
     014 - Codexin Call to Action
     015 - Codexin Clients
+    016 - Codexin Blog
     050 - Responsive CSS
 
 
@@ -1632,6 +1633,7 @@ INDEX:
     font-style: italic;
 }
 
+.cx-image-box .cx-image,
 .cx-team-wrapper .cx-error {
     background:#fff;
     text-align: center;
@@ -1780,7 +1782,7 @@ INDEX:
 
 
 /**************************************
-    009 - Codexin Blog
+    009 - Codexin Mini Blog
 *************************************/
 
 /**
@@ -3185,6 +3187,29 @@ section#location {
 
 .cx-client-carousel-2 .clients-second-row .client-image-single {
     border-bottom: none;
+}
+
+
+/**********************************
+   016 - Codexin Blog
+**********************************/
+
+.section + .section .cx-blog-standard {
+    margin-top: 0;
+}
+
+.cx-blog-standard {
+    margin-top: -40px;
+}
+
+.cx-blog-standard article:first-child {
+    margin-top: 0;
+}
+
+.cx-blog-standard .posts-nav {
+    padding-top: 40px;
+    border-top: 1px dashed #ddd;
+    margin-top: 40px;
 }
 
 

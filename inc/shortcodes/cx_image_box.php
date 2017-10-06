@@ -41,43 +41,50 @@ function cx_image_box_shortcode(  $atts, $content = null) {
 	$title = ($retrieve_link[1]) ? 'title="'.esc_attr($retrieve_link[1]).'"':'';
 	$target = ($retrieve_link[2]) ? 'target="'.esc_attr($retrieve_link[2]).'"':'';
 
-	$image_size = getimagesize($ret_full_img_url);
-	$data_size = $image_size['0'] . 'x' . $image_size['1'];
+	if(!empty($image)):
+		$image_size = getimagesize($ret_full_img_url);
+		$data_size = $image_size['0'] . 'x' . $image_size['1'];
+	endif;
 
    	ob_start(); ?>
 
 		<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
 			<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
-			<?php if ( $img_action == 'open_custom_link' ): ?>
-				<a href="<?php echo esc_url($retrieve_link[0]); ?>" <?php echo $title; ?> <?php echo $target; ?>>
-			<?php elseif ( $img_action == 'img_pop' ): ?>
-					<!-- <a href="<?php //echo $ret_full_img_url; ?>" class="event-image-popup"> -->
-	            <div class="image-pop-up item-img-wrap" itemscope itemtype="http://schema.org/ImageGallery">
-	                <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-	                    <a href="<?php echo esc_url( $ret_full_img_url ); ?>" itemprop="contentUrl" data-size="<?php echo esc_attr( $data_size ); ?>">
-			<?php else: ?>
-				<div class="content-wrapper">
-			<?php endif; ?>
-							<img src="<?php echo esc_url( $retrive_img_url ); ?>" alt="<?php echo esc_html( $img_alt ); ?>" itemprop="image" />
-							<div class="single-content-wrapper">
-								<div class="single-content">
+			<?php 
+				if(empty($image)): 
+				echo '<p class="cx-error">'.esc_html__('Please Upload Your Image', 'reveal').'</p>'; 
+				else: ?>
+					<?php if ( $img_action == 'open_custom_link' ): ?>
+						<a href="<?php echo esc_url($retrieve_link[0]); ?>" <?php echo $title; ?> <?php echo $target; ?>>
+					<?php elseif ( $img_action == 'img_pop' ): ?>
+							<!-- <a href="<?php //echo $ret_full_img_url; ?>" class="event-image-popup"> -->
+			            <div class="image-pop-up item-img-wrap" itemscope itemtype="http://schema.org/ImageGallery">
+			                <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+			                    <a href="<?php echo esc_url( $ret_full_img_url ); ?>" itemprop="contentUrl" data-size="<?php echo esc_attr( $data_size ); ?>">
+					<?php else: ?>
+						<div class="content-wrapper">
+					<?php endif; ?>
+									<img src="<?php echo esc_url( $retrive_img_url ); ?>" alt="<?php echo esc_html( $img_alt ); ?>" itemprop="image" />
+									<div class="single-content-wrapper">
+										<div class="single-content">
 
-									<?php if( $icon_toggle ): ?>
-									<i class="<?php echo esc_attr( $hover_icon ); ?>"></i>
-									<?php endif; ?>
-									
-									<p><?php echo esc_html( $hover ); ?></p>
-								</div>
-							</div>
-			<?php if ( $img_action == 'open_custom_link' ): ?>
-				</a>
-			<?php elseif( $img_action == 'img_pop' ): ?>
-	                    </a>
-	                    <figcaption itemprop="caption description"><?php echo esc_html( $img_alt ); ?></figcaption>
-	                </figure>
-	            </div><!-- end of image-pop-up -->
-			<?php else: ?>
-				</div><!-- end of content-wrapper -->
+											<?php if( $icon_toggle ): ?>
+											<i class="<?php echo esc_attr( $hover_icon ); ?>"></i>
+											<?php endif; ?>
+											
+											<p><?php echo esc_html( $hover ); ?></p>
+										</div>
+									</div>
+					<?php if ( $img_action == 'open_custom_link' ): ?>
+						</a>
+					<?php elseif( $img_action == 'img_pop' ): ?>
+			                    </a>
+			                    <figcaption itemprop="caption description"><?php echo esc_html( $img_alt ); ?></figcaption>
+			                </figure>
+			            </div><!-- end of image-pop-up -->
+					<?php else: ?>
+						</div><!-- end of content-wrapper -->
+					<?php endif; ?>
 			<?php endif; ?>
 			</div><!-- end of img-thumb -->
 		</div><!-- end of cx-image-box -->
