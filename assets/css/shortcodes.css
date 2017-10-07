@@ -3212,6 +3212,19 @@ section#location {
     margin-top: 40px;
 }
 
+.page-numbers.dots {
+    border: 0;
+    background: #fff;
+    color: inherit;
+    padding: 0;
+}
+
+.page-numbers.dots:hover {
+    background: inherit;
+    border: inherit;
+    color: inherit;
+}
+
 
 
 
