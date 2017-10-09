@@ -11,20 +11,22 @@
 function cx_blog_shortcode( $atts, $content = null ) {
 	extract(shortcode_atts(array(
 			'layout'			=> '',
-			'number_of_posts'	=> '',
 			'order'				=> '',
 			'orderby'			=> '',
-			'exclude'			=> '',
 			'show_author'		=> '',
 			'show_meta'			=> '',
 			'show_date'			=> '',
 			'show_cat'			=> '',
 			'show_comm'			=> '',
 			'show_like'			=> '',
+			'chr_length'		=> '',
 			'title_length'		=> '',
 			'desc_length'		=> '',
 			'sticky_post'		=> '',
 			'post_meta'			=> '',
+			'read_more'			=> '',
+			'readmore_txt'		=> '',
+			'pagination_type'	=> '',
 			'class'				=> ''
 	), $atts));
 
@@ -65,10 +67,12 @@ function cx_blog_shortcode( $atts, $content = null ) {
 
 						// Retrieving Image alt tag
 						$image_alt = ( !empty( retrieve_alt_tag() ) ) ? retrieve_alt_tag() : get_the_title();
+
+						// Assigning classed for post_class
 						$post_classes = ($sticky_post && is_sticky()) ? 'sticky clearfix' : 'clearfix';
 
+						// Retrieving User Meta Infos
 						$show_metas = explode(',', $show_meta);
-						print_r($show_metas);
 			            	
 					?>
 						<article id="post-<?php the_ID(); ?>" <?php post_class(array(esc_attr($post_classes))); ?> itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
@@ -82,10 +86,10 @@ function cx_blog_shortcode( $atts, $content = null ) {
 					                </figure>                       
 					            </a> <!-- end of blog-media-wrapper -->					            
 
-								<?php if(!empty($show_meta)): ?>
+								<?php if(in_array(true, array_values($show_metas))): ?>
 					            <ul class="list-inline post-detail">
 
-					            	<?php if($show_metas[1]): ?>
+					            	<?php if(in_array('show_author', array_values($show_metas))): ?>
 						                <li><i class="fa fa-pencil"></i> <span class="post-author vcard" itemprop="author" itemscope itemtype="https://schema.org/Person">
 						                    <a href="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ); ?>" itemprop="url" rel="author">
 						                        <span itemprop="name"><?php echo esc_html( get_the_author() ); ?></span>
@@ -94,44 +98,54 @@ function cx_blog_shortcode( $atts, $content = null ) {
 						                </li>
 						            <?php endif; ?>
 
-									<?php if($show_metas[2]): ?>
+									<?php if(in_array('show_date', array_values($show_metas))): ?>
 						                <li><i class="fa fa-calendar"></i> <a href="<?php echo get_day_link(get_post_time('Y'), get_post_time('m'), get_post_time('j'));  ?>"><time datetime="<?php echo get_the_time('c'); ?>" itemprop="datePublished"><?php echo date( get_option('date_format'), strtotime( get_the_time( 'd M, Y' ) ) ); ?></time></a> </li>
 									<?php endif; ?>
 									
-									<?php if($show_metas[3]): ?>
+									<?php if(in_array('show_cat', array_values($show_metas))): ?>
 						                <li><i class="fa fa-tag"></i> <span itemprop="genre"><?php the_category( ', ' )?></span></li>
 						            <?php endif; ?>
 
-									<?php if($show_metas[4]): ?>
+									<?php if(in_array('show_comm', array_values($show_metas))): ?>
 						                <li><i class="fa fa-comment"></i><?php comments_number( 'No Comments', 'One Comment', '% Comments' )?></li>
 						            <?php endif; ?>
 
-									<?php if($show_metas[5]): ?>
+									<?php if(in_array('show_like', array_values($show_metas))): ?>
 						                <li><?php if( function_exists( 'codexin_likes_button' ) ): echo codexin_likes_button( get_the_ID(), 0 ); endif; ?></li>
 						            <?php endif; ?>
 
-					            </ul>
+					            </ul> <!-- end of post-detail -->
 						        <?php endif; ?>
 
 						        <h2 class="post-title" itemprop="headline">
 						            <a href="<?php echo esc_url( get_the_permalink() ); ?>" rel="bookmark" itemprop="url">
 						                <span itemprop="name">
 						                <?php 
-						                    // $length_switch = reveal_option('reveal_blog_title_excerpt_length');
-						                    // if( $length_switch ) :
-						                    //     $reveal_title_len = reveal_option( 'reveal_title_length' );
-						                    //     reveal_title( $reveal_title_len );
-						                    // else:
+						                    if( $chr_length ) :
+						                    	if( function_exists('reveal_title') ):
+							                        reveal_title( $title_length );
+							                    endif;
+						                    else:
 						                        the_title();
-						                    // endif;
+						                    endif;
 						                ?>
 						                </span>
 						            </a>
 						        </h2>
 
 	                			<div class="entry-content" itemprop="text">
-	                    			<?php the_excerpt();  ?>
-	                    			<p class="blog-more"><a class="cx-btn" href="<?php echo esc_url( get_the_permalink() ); ?>"><?php esc_html_e( 'Read More', 'reveal' ) ?></a></p>
+					                <?php 
+					                    if( $chr_length ) :
+					                    	if( function_exists('reveal_excerpt') ):
+						                        reveal_excerpt( $desc_length );
+						                    endif;
+					                    else:
+					                        the_excerpt();
+					                    endif;
+					                ?>
+					                <?php if( $read_more ): ?>
+		                    			<p class="blog-more"><a class="cx-btn" href="<?php echo esc_url( get_the_permalink() ); ?>"><?php echo esc_html( !empty( $readmore_txt ) ? $readmore_txt : __('Read More', 'codexin') ); ?></a></p>
+		                    		<?php endif; ?>
 	                    		</div> <!-- end of entry-content -->
 					        </div> <!-- end of post-wrapper -->
 					    </article> <!-- #post-## -->
@@ -145,18 +159,31 @@ function cx_blog_shortcode( $atts, $content = null ) {
 
 				<?php 
 
-		        $prev_link = get_previous_posts_link(esc_html__('&laquo; Newer Posts', 'reveal'));
-		        $next_link = get_next_posts_link(esc_html__('Older Posts &raquo; ', 'reveal'), $data->max_num_pages );
+		        // $prev_link = get_previous_posts_link(esc_html__('&laquo; Newer Posts', 'reveal'));
+		        // $next_link = get_next_posts_link(esc_html__('Older Posts &raquo; ', 'reveal'), $data->max_num_pages );
 
-		        echo '<div class="posts-nav clearfix">';
-		            if($next_link): 
-		            echo '<div class="nav-next alignright">'. $next_link .'</div>';
-		            endif; 
+		        // echo '<div class="posts-nav clearfix">';
+		        //     if($next_link): 
+		        //     echo '<div class="nav-next alignright">'. $next_link .'</div>';
+		        //     endif; 
 		            
-		            if($prev_link): 
-		            echo '<div class="nav-previous alignleft">'. $prev_link .'</div>';
-		            endif; 
-		        echo '</div>';
+		        //     if($prev_link): 
+		        //     echo '<div class="nav-previous alignleft">'. $prev_link .'</div>';
+		        //     endif; 
+		        // echo '</div>';
+				if( $pagination_type == 'numbered' ):
+					if( function_exists('reveal_posts_link_numbered') ):
+				        echo reveal_posts_link_numbered($data);
+				    else:
+				    	echo '<p class="cx-error">'.esc_html__('Please Activate \'REVEAL\' Theme!', 'reveal').'</p>';
+				    endif;
+			    elseif( $pagination_type == 'button' ):
+			    	if( function_exists('reveal_posts_link') ):
+				        reveal_posts_link('Newer Posts', 'Older Posts', $data);
+				    else:
+				    	echo '<p class="cx-error">'.esc_html__('Please Activate \'REVEAL\' Theme!', 'reveal').'</p>';
+				    endif;
+			    endif;
 
 				 ?>
 				</div> <!-- end of blog-list-wrapper -->
@@ -195,8 +222,8 @@ function cx_blog_kc() {
 	    						'label'       	=> esc_html__('Post Order', 'codexin'),
 	    						'type'        	=> 'select',
 	    						'options'		=> array(
-    								'ASC'	=> 'Ascending',
-    								'DESC'	=> 'Descending',
+    								'ASC'	=> esc_html__('Ascending', 'codexin'),
+    								'DESC'	=> esc_html__('Descending', 'codexin'),
     							),
 	    						'value'			=> 'DESC',
 	    						'description'	=> esc_html__( 'Choose The Order to Display Posts:', 'codexin' ),
@@ -207,10 +234,10 @@ function cx_blog_kc() {
 	    						'label'       	=> esc_html__('Post Sorting Method', 'codexin'),
 	    						'type'        	=> 'select',
 	    						'options'		=> array(
-    								'date'			 => 'Date',
-    								'comment_count'	 => 'Number Of Comments',
-    								'meta_value_num' => 'Views Count',
-    								'rand'			 => 'Randomize',
+    								'date'			 => esc_html__('Date', 'codexin'),
+    								'comment_count'	 => esc_html__('Number Of Comments', 'codexin'),
+    								'meta_value_num' => esc_html__('Views Count', 'codexin'),
+    								'rand'			 => esc_html__('Randomize', 'codexin'),
     							),
 	    						'value'			=> 'date',
 	    						'description'	=> esc_html__( 'Choose The Posts Sorting Method', 'codexin' ),
@@ -230,26 +257,37 @@ function cx_blog_kc() {
 	    						'label'			=> esc_html__( 'Which Posts Meta You Want to Show? ', 'codexin' ),
 	    						'value'			=> array('show_author', 'show_date', 'show_cat', 'show_comm', 'show_like'),
 	    						'options'		=> array(
-	    							'show_author' => 'Post Author Name',
-	    							'show_date'   => 'Post Published Date',
-	    							'show_cat'    => 'Post Categories',
-	    							'show_comm'   => 'Post Comments Number',
-	    							'show_like'   => 'Post Likes Number',
+	    							'show_author' => esc_html__('Post Author Name', 'codexin'),
+	    							'show_date'   => esc_html__('Post Published Date', 'codexin'),
+	    							'show_cat'    => esc_html__('Post Categories', 'codexin'),
+	    							'show_comm'   => esc_html__('Post Comments Number', 'codexin'),
+	    							'show_like'   => esc_html__('Post Likes', 'codexin'),
 
 	    						),
 	    						'description'	=> esc_html__('Choose to enable/disable meta information', 'codexin'),
-	    						'admin_label' => true
+	    					),
+
+	    					array(
+	    						'name'        	=> 'chr_length',
+	    						'label'       	=> esc_html__('Enable Blog Title and Excerpt Length? ', 'codexin'),
+	    						'type'        	=> 'toggle',
+	    						'value'			=> 'no',
+	    						'description'	=> esc_html__( 'Select to enable/disable blog-title & excerpt length.', 'codexin' ),
 	    					),
 
 	    					array(
 	    						'name'			=> 'title_length',
-	    						'label'			=> esc_html__( 'Title Length (In Words)', 'codexin' ),
+	    						'label'			=> esc_html__( 'Title Length (In Character)', 'codexin' ),
 	    						'type'			=> 'number_slider',
-	    						'value'			=> '4',
-	    						'description'	=> esc_html__('Specify number of Words that you want to show in your title', 'codexin'),
+	    						'value'			=> '30',
+    							'relation'	=> array(
+    								'parent' 	=> 'chr_length',
+    								'show_when'	=> 'yes',
+    							),
+	    						'description'	=> esc_html__('Specify number of Characters that you want to show in your title', 'codexin'),
 	    						'options'		=> array(
-	    							'min'			=> 3,
-	    							'max'			=> 8,
+	    							'min'			=> 10,
+	    							'max'			=> 150,
 	    							'unit'			=> '',
 	    							'show_input'	=> false
     							)
@@ -257,17 +295,54 @@ function cx_blog_kc() {
 
 	    					array(
 	    						'name'			=> 'desc_length',
-	    						'label'			=> esc_html__( 'Excerpt Length (In Words)', 'codexin' ),
+	    						'label'			=> esc_html__( 'Excerpt Length (In Character)', 'codexin' ),
 	    						'type'			=> 'number_slider',
-	    						'value'			=> '10',
-	    						'description'	=> esc_html__('Specify number of Words that you want to show in your excerpt', 'codexin'),
+	    						'value'			=> '180',
+    							'relation'	=> array(
+    								'parent' 	=> 'chr_length',
+    								'show_when'	=> 'yes',
+    							),
+	    						'description'	=> esc_html__('Specify number of Characters that you want to show in your excerpt', 'codexin'),
 	    						'options'		=> array(
-	    							'min'			=> 10,
-	    							'max'			=> 32,
+	    							'min'			=> 20,
+	    							'max'			=> 500,
 	    							'unit'			=> '',
 	    							'show_input'	=> false
     							),
     						),
+
+	    					array(
+	    						'name'        	=> 'read_more',
+	    						'label'       	=> esc_html__('Enable Read More Button? ', 'codexin'),
+	    						'type'        	=> 'toggle',
+	    						'value'			=> 'yes',
+	    						'description'	=> esc_html__( 'Select to enable/disable Read More button.', 'codexin' ),
+	    					),
+
+	    					array(
+	    						'name'			=> 'readmore_txt',
+	    						'label' 		=> esc_html__( 'Button Text', 'codexin' ),
+	    						'type'			=> 'text',
+	    						'value' 		=> esc_html__( 'Read More', 'codexin' ),
+    							'relation'		=> array(
+    								'parent' 	=> 'read_more',
+    								'show_when'	=> 'yes',
+    							),
+	    						'description' => esc_html__( 'Enter Button Text', 'codexin' ),
+	    					),
+
+	    					array(
+	    						'type'			=> 'select',
+	    						'name'			=> 'pagination_type',
+	    						'label'			=> esc_html__( 'Pagination Type', 'codexin' ),
+	    						'value'			=> 'button',
+	    						'options'		=> array(
+	    							'button' 	=> esc_html__('Classic Next-Previous Button', 'codexin'),
+	    							'numbered'  => esc_html__('Numbered Pagination', 'codexin'),
+	    							'ajx_pagi'  => esc_html__('Ajax Pagination', 'codexin'),
+	    						),
+	    						'description'	=> esc_html__('Choose the Pagination Type.', 'codexin'),
+	    					),
 
 	    					array(
 	    						'name'	=> 'class',
