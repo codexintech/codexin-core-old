@@ -1652,6 +1652,7 @@ INDEX:
 
 .cx-portfolios figure {
     margin: 0;
+    /*margin: .5%;*/
 }
 
 .cx-portfolios figcaption {
@@ -1681,6 +1682,7 @@ INDEX:
     width: 25%;
     position: relative;
     overflow: hidden;
+    /*padding:15px;*/
 }
 
 

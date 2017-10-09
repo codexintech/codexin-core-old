@@ -14,6 +14,7 @@ function cx_portfolio_shortcode( $atts, $content = null ) {
 			'number_of_portfolios'	=> '',
 			'type_mode'      => '',
 			'column'      => '',
+			'column_gutter'      => '',
 			'order'					=> '',
 			'show_icon'					=> '',
 			'icon'					=> '',
@@ -85,31 +86,31 @@ function cx_portfolio_shortcode( $atts, $content = null ) {
 
 						?>
 
-								<figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" class="cx-portfolio <?php foreach ($term_list as $sterm) { echo $sterm->slug.' '; } ?>" <?php if(!empty($column)): echo 'style="width:' . $column . '";'; endif; ?>>
-								    <a href="<?php esc_url( the_post_thumbnail_url('full') ); ?>" itemprop="contentUrl" data-size="<?php echo esc_attr( $data_size ); ?>">
-											<?php if($type_mode == '2'): ?>
-								        <img src="<?php esc_url( the_post_thumbnail_url('full') ); ?>" itemprop="thumbnail" <?php echo $image_alt; ?> class="img-responsive" />
+							<figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" class="cx-portfolio <?php foreach ($term_list as $sterm) { echo $sterm->slug.' '; } ?>" <?php if(!empty($column)): $w = ($column - 2*$column_gutter); echo 'style="width:' . $w . '%; margin:'.$column_gutter.'%"'; endif; ?>>
+							    <a href="<?php esc_url( the_post_thumbnail_url('full') ); ?>" itemprop="contentUrl" data-size="<?php echo esc_attr( $data_size ); ?>">
+										<?php if($type_mode == '2'): ?>
+							        <img src="<?php esc_url( the_post_thumbnail_url('full') ); ?>" itemprop="thumbnail" <?php echo $image_alt; ?> class="img-responsive" />
 
-								      <?php else: ?>  
-								        <img src="<?php esc_url( the_post_thumbnail_url('rectangle-two') ); ?>" itemprop="thumbnail" <?php echo $image_alt; ?> class="img-responsive" />
-								      <?php endif; ?> 
+							      <?php else: ?>  
+							        <img src="<?php esc_url( the_post_thumbnail_url('rectangle-two') ); ?>" itemprop="thumbnail" <?php echo $image_alt; ?> class="img-responsive" />
+							      <?php endif; ?> 
 
-								    </a>
-								    <figcaption itemprop="caption description"><?php echo esc_html( $image_cap ); ?></figcaption>
-									<div class="image-mask">
-										<div class="image-content">
-											<a href="<?php echo esc_url( the_post_thumbnail_url( 'full' ) ); ?>">
-												<?php if(($show_icon == 'yes') && !empty('icon')): ?>
-												<i class="<?php echo $icon; ?>"></i>
-												<?php endif; ?>
-											</a>
-											<h3 class="portfolio-title"> <a href="<?php the_permalink(); ?>" class="clickable"> <?php echo esc_html( get_the_title() ); ?> </a></h3>
-											<?php if(($read_more == 'yes') && !empty('read_more_text')): ?>
-											<p class="portfolio-readmore"><a href="<?php the_permalink(); ?>" class="clickable"><?php printf('%s', $read_more_text); ?></a></p>
+							    </a>
+							    <figcaption itemprop="caption description"><?php echo esc_html( $image_cap ); ?></figcaption>
+								<div class="image-mask">
+									<div class="image-content">
+										<a href="<?php echo esc_url( the_post_thumbnail_url( 'full' ) ); ?>">
+											<?php if(($show_icon == 'yes') && !empty('icon')): ?>
+											<i class="<?php echo $icon; ?>"></i>
 											<?php endif; ?>
-										</div>
+										</a>
+										<h3 class="portfolio-title"> <a href="<?php the_permalink(); ?>" class="clickable"> <?php echo esc_html( get_the_title() ); ?> </a></h3>
+										<?php if(($read_more == 'yes') && !empty('read_more_text')): ?>
+										<p class="portfolio-readmore"><a href="<?php the_permalink(); ?>" class="clickable"><?php printf('%s', $read_more_text); ?></a></p>
+										<?php endif; ?>
 									</div>
-								</figure> <!-- end of cx-portfolio -->
+								</div>
+							</figure> <!-- end of cx-portfolio -->
 
 						<?php 
 								endwhile;
@@ -465,14 +466,21 @@ function cx_portfolio_kc() {
 	    						'label'       	=> esc_html__('No of Column', 'codexin'),
 	    						'type'        	=> 'select',
 	    						'options'		=> array(
-    								'50%'	=> '2 Column',
-    								'33.33%'	=> '3 Column',
-    								'25%'	=> '4 Column',
-    								'20%'	=> '5 Column',
-    								'16.66%'	=> '6 Column',
+    								'50'	=> '2 Column',
+    								'33.33'	=> '3 Column',
+    								'25'	=> '4 Column',
+    								'20'	=> '5 Column',
+    								'16.66'	=> '6 Column',
     							),
-	    						'value'			=> '25%',
+	    						'value'			=> '25',
 	    						'description'	=> esc_html__( 'Choose No. of Column ', 'codexin' ),
+	    					),
+
+							array(
+	    						'name'        	=> 'column_gutter',
+	    						'label'       	=> esc_html__('Column Gutter/Gap', 'codexin'),
+	    						'type'        	=> 'text',
+	    						'description'	=> esc_html__( 'Column Gutter/Gap on "%". Example: 0.5', 'codexin' ),
 	    					),
 
 	    					array(
