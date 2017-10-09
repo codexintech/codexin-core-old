@@ -418,3 +418,34 @@ function get_like_count( $like_count ) {
     $count = '<span class="cx-count">' . $number . '</span>';
     return $count;
 } // get_like_count()
+
+
+/**
+ *
+ * Helper function to fetch all post categories
+ *
+ */  
+function cx_get_post_categories() {
+
+    $categories = get_categories( array(
+        'orderby' => 'name',
+        'order'   => 'ASC'
+    ) );
+
+    $post_cat = array();
+    if ( $categories ) {        
+
+        foreach ( $categories as $value ) {
+            $post_cat[$value->term_id] = ucwords(strtolower( $value->name ) ) . ' (Posts Count: '. $value->category_count .')';
+        }
+
+    } else {
+
+        $post_cat[0] = esc_html__( 'No Categories found', 'codexin' );
+
+    }
+
+    return $post_cat;
+
+
+} //End cx_get_post_categories()..

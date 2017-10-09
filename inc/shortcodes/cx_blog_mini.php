@@ -14,7 +14,7 @@ function cx_blog_mini_shortcode( $atts, $content = null ) {
 			'number_of_posts'	=> '',
 			'order'				=> '',
 			'orderby'			=> '',
-			'exclude'			=> '',
+			'include'			=> '',
 			'show_date'			=> '',
 			'title_length'		=> '',
 			'desc_length'		=> '',
@@ -27,9 +27,9 @@ function cx_blog_mini_shortcode( $atts, $content = null ) {
 
 	$result = '';
 
-	// Extracting user excluded categories
-	$cat_exclude = str_replace(',', ' ', $exclude);
-	$cat_excludes = explode( " ", $cat_exclude );
+	// Extracting user included categories
+	$cat_include = str_replace(',', ' ', $include);
+	$cat_includes = explode( " ", $cat_include );
 
     // Retrieving user define classes
     $classes = array( 'row' );
@@ -57,7 +57,7 @@ function cx_blog_mini_shortcode( $atts, $content = null ) {
 					'meta_key'				=> ( $orderby == 'meta_value_num' ) ? 'cx_post_views' : '',
 					'order'					=> $order,
 					'orderby'				=> $orderby,
-					'category__not_in' 		=> $cat_excludes,
+					'category__in'	 		=> !empty( $include ) ? $cat_includes : '',
 					'ignore_sticky_posts' 	=> 1
 				);
 
@@ -179,7 +179,7 @@ function cx_blog_mini_shortcode( $atts, $content = null ) {
 					'meta_key'				=> ( $orderby == 'meta_value_num' ) ? 'cx_post_views' : '',
 					'order'					=> $order,
 					'orderby'				=> $orderby,
-					'category__not_in' 		=> $cat_excludes,
+					'category__in'	 		=> !empty( $include ) ? $cat_includes : '',
 					'ignore_sticky_posts' 	=> 1
 				);
 
@@ -261,7 +261,7 @@ function cx_blog_mini_shortcode( $atts, $content = null ) {
 					'meta_key'				=> ( $orderby == 'meta_value_num' ) ? 'cx_post_views' : '',
 					'order'					=> $order,
 					'orderby'				=> $orderby,
-					'category__not_in' 		=> $cat_excludes,
+					'category__in'	 		=> !empty( $include ) ? $cat_includes : '',
 					'ignore_sticky_posts' 	=> ( $sticky_post ) ? '' : 1
 			);
 
@@ -375,7 +375,7 @@ function cx_blog_mini_shortcode( $atts, $content = null ) {
 					'meta_key'				=> ( $orderby == 'meta_value_num' ) ? 'cx_post_views' : '',
 					'order'					=> $order,
 					'orderby'				=> $orderby,
-					'category__not_in' 		=> $cat_excludes,
+					'category__in'	 		=> !empty( $include ) ? $cat_includes : '',
 					'ignore_sticky_posts' 	=> 1
 			);
 
@@ -429,35 +429,7 @@ function cx_blog_mini_shortcode( $atts, $content = null ) {
 
 } //End of cx_blog_mini
 
-/**
- *
- * Helper function to fetch all post categories
- *
- */  
-function cx_get_post_categories() {
 
-	$categories = get_categories( array(
-	    'orderby' => 'name',
-	    'order'   => 'ASC'
-	) );
-
-	$post_cat = array();
-	if ( $categories ) {		
-
-		foreach ( $categories as $value ) {
-			$post_cat[$value->term_id] = ucwords(strtolower( $value->name ) ) . ' (Posts Count: '. $value->category_count .')';
-		}
-
-	} else {
-
-		$post_cat[0] = esc_html__( 'No Categories found', 'codexin' );
-
-	}
-
-	return $post_cat;
-
-
-} //End cx_get_post_categories()..
 
 // Integrating Shortcode with King Composer
 function cx_blog_mini_kc() {
@@ -562,11 +534,11 @@ function cx_blog_mini_kc() {
 	    					),
 
 	 						array(
-	 							'name' 			=> 'exclude',
-	 							'label' 		=> esc_html__( 'Exclude Categories', 'codexin' ),
+	 							'name' 			=> 'include',
+	 							'label' 		=> esc_html__( 'Include Categories', 'codexin' ),
 	 							'type' 			=> 'multiple',
 	 							'options'		=> $cx_categories,
-	 							'description'	=> esc_html__( 'Choose if You Want to Exclude Any Post Category, Control + Click to Select Multiple Categories to Exclude (No Categories are Excluded by Default)', 'codexin' ),
+	 							'description'	=> esc_html__( 'Choose if You Want to Show Any Specific Post Category/Categories, Control + Click to Select Multiple Categories to Include (All Categories will be shown by Default)', 'codexin' ),
 	 						),
 
 	    					array(
