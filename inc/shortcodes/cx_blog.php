@@ -178,7 +178,7 @@ function cx_blog_shortcode( $atts, $content = null ) {
 							    	if( $layout == 'grid' ):
 							    ?>
 								        <div class="img-thumb">
-								            <div class="img-wrapper"><a href="<?php the_permalink(); ?>"><img src="<?php if(has_post_thumbnail()): the_post_thumbnail_url('rectangle-one'); else: echo '//placehold.it/600X400'; endif; ?>" alt="" class="img-responsive"></a></div>
+								            <div class="img-wrapper"><a href="<?php the_permalink(); ?>"><img src="<?php if(has_post_thumbnail()): the_post_thumbnail_url('rectangle-one'); else: echo '//placehold.it/600X400'; endif; ?>" alt="<?php echo esc_attr($image_alt); ?>" class="img-responsive"></a></div>
 
 								            <?php if(in_array('show_date', array_values($show_metas))): ?>
 								                <div class="meta">
@@ -194,7 +194,7 @@ function cx_blog_shortcode( $atts, $content = null ) {
 
 							            <a href="<?php echo esc_url( get_the_permalink() ); ?>" class="blog-media-wrapper">
 							                <figure class="item-img-wrap" itemscope itemtype="http://schema.org/ImageObject">
-							                    <img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'reveal-post-single' ) : '//placehold.it/750x332' ); ?>" class="img-responsive" <?php printf( '%s', $image_alt ); ?> itemprop="image">
+							                    <img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'reveal-post-single' ) : '//placehold.it/750x332' ); ?>" class="img-responsive" alt="<?php echo esc_attr($image_alt); ?>" itemprop="image">
 							                    <div class="item-img-overlay">
 							                        <span></span>
 							                    </div>
