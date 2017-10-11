@@ -3204,7 +3204,7 @@ section#location {
     margin-top: -40px;
 }
 
-.cx-blog-standard article:first-child {
+.cx-blog-standard .blog-list-wrapper article:first-child {
     margin-top: 0;
 }
 

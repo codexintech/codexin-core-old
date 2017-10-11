@@ -11,6 +11,7 @@
 function cx_blog_shortcode( $atts, $content = null ) {
 	extract(shortcode_atts(array(
 			'layout'			=> '',
+			'grid_col'			=> '',
 			'order'				=> '',
 			'orderby'			=> '',
 			'show_author'		=> '',
@@ -51,25 +52,27 @@ function cx_blog_shortcode( $atts, $content = null ) {
 
 		<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
 			<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
-				<div class="blog-list-wrapper">
-					<?php 
-					//start query..
-					$paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
-					$args = array(
-						'post_type'				=> 'post',
-						'meta_key'				=> ( $orderby == 'meta_value_num' ) ? 'cx_post_views' : '',
-						'order'					=> $order,
-						'orderby'				=> $orderby,
-						'paged'   				=> $paged,
-						'category__in'	 		=> !empty( $include ) ? $cat_includes : '',
-						'ignore_sticky_posts' 	=> ( $sticky_post ) ? '' : 1,
-					);
+				<?php 
+				echo ($layout == 'grid') ? '<div class="blog-grid-wrapper"><div class="row">' : '<div class="blog-list-wrapper">';
+				//start query..
+				$paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
+				$args = array(
+					'post_type'				=> 'post',
+					'meta_key'				=> ( $orderby == 'meta_value_num' ) ? 'cx_post_views' : '',
+					'order'					=> $order,
+					'orderby'				=> $orderby,
+					'paged'   				=> $paged,
+					'category__in'	 		=> !empty( $include ) ? $cat_includes : '',
+					'ignore_sticky_posts' 	=> ( $sticky_post ) ? '' : 1,
+				);
 
-					$data = new WP_Query( $args );
+				$data = new WP_Query( $args );
 
-					if( $data->have_posts() ) :
+				if( $data->have_posts() ) :
+					$i = 0;
 
-						while( $data->have_posts() ) : $data->the_post();
+					while( $data->have_posts() ) : $data->the_post();
+						$i++;
 
 						// Retrieving Image alt tag
 						$image_alt = ( !empty( retrieve_alt_tag() ) ) ? retrieve_alt_tag() : get_the_title();
@@ -79,14 +82,19 @@ function cx_blog_shortcode( $atts, $content = null ) {
 
 						// Retrieving User Meta Infos
 						$show_metas = explode(',', $show_meta);
+
+						// layout
+						if( $layout == 'grid' ):
+							$grid_columns = 12/$grid_col;
+							printf('<div class="post-single-wrap col-lg-%1$s col-md-%1$s col-sm-12">', $grid_columns);
+						endif;
 			            	
 					?>
 						<article id="post-<?php the_ID(); ?>" <?php post_class(array(esc_attr($post_classes))); ?> itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
-						    <div class="post-wrapper">
+						    <div class="<?php echo ($layout == 'grid') ? 'blog-wrapper' : 'post-wrapper'; ?>">
 						    	<?php if(has_post_format('gallery')):
-							    $post_metas = reveal_option('reveal_blog_post_meta');
 
-						        $cx_gallery = rwmb_meta( 'reveal_gallery', 'type=image_advanced&size=gallery-format-image' );
+						        $cx_gallery = ($layout == 'grid') ? rwmb_meta( 'reveal_gallery', 'type=image_advanced&size=rectangle-one' ) : rwmb_meta( 'reveal_gallery', 'type=image_advanced&size=gallery-format-image' );
 						        echo '<div class="gallery-carousel image-pop-up">';
 						        foreach ($cx_gallery as $cx_image):
 
@@ -112,21 +120,18 @@ function cx_blog_shortcode( $atts, $content = null ) {
 						        echo '</div><!-- end of gallery-carousel -->';
 
 							    elseif(has_post_format('audio')):
-							        $post_metas = reveal_option('reveal_blog_post_meta');
 						            $cx_embed = rwmb_meta( 'reveal_audio', 'type=oembed' );
 						            echo '<div class="embed">';
 						                echo sprintf( '%s', $cx_embed );
 						            echo '</div>';
 
 								elseif(has_post_format('video')):
-							        $post_metas = reveal_option('reveal_blog_post_meta');
 						            $cx_embed = rwmb_meta( 'reveal_video', 'type=oembed' );
 						            echo '<div class="embed">';
 						                echo sprintf( '%s', $cx_embed );
 						            echo '</div>';
 
 								elseif(has_post_format('link')):
-							        $post_metas = reveal_option('reveal_blog_post_meta');							            
 						            $link_url = rwmb_meta( 'reveal_link_url', 'type=text' );
 						            $link_txt = rwmb_meta( 'reveal_link_text', 'type=text' );
 						            $link_rel = rwmb_meta( 'reveal_link_rel', 'type=text' ); 
@@ -145,7 +150,6 @@ function cx_blog_shortcode( $atts, $content = null ) {
 							    
 							    <?php
 								elseif(has_post_format('quote')):
-							        $post_metas = reveal_option('reveal_blog_post_meta');
 						            $cx_quote = rwmb_meta( 'reveal_quote_text', 'type=textarea' );
 						            $cx_name = rwmb_meta( 'reveal_quote_name', 'type=text' );
 						            $cx_source = rwmb_meta( 'reveal_quote_source', 'type=url' );
@@ -169,19 +173,61 @@ function cx_blog_shortcode( $atts, $content = null ) {
 						                </div>
 						            <?php endif;
 
-							    else: ?>
-						            <a href="<?php echo esc_url( get_the_permalink() ); ?>" class="blog-media-wrapper">
-						                <figure class="item-img-wrap" itemscope itemtype="http://schema.org/ImageObject">
-						                    <img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'reveal-post-single' ) : '//placehold.it/750x332' ); ?>" class="img-responsive" <?php printf( '%s', $image_alt ); ?> itemprop="image">
-						                    <div class="item-img-overlay">
-						                        <span></span>
-						                    </div>
-						                </figure>                       
-						            </a> <!-- end of blog-media-wrapper -->
-					            <?php endif; ?>				            
+							    else: 
 
-								<?php if(in_array(true, array_values($show_metas))): ?>
-					            <ul class="list-inline post-detail">
+							    	if( $layout == 'grid' ):
+							    ?>
+								        <div class="img-thumb">
+								            <div class="img-wrapper"><a href="<?php the_permalink(); ?>"><img src="<?php if(has_post_thumbnail()): the_post_thumbnail_url('rectangle-one'); else: echo '//placehold.it/600X400'; endif; ?>" alt="" class="img-responsive"></a></div>
+
+								            <?php if(in_array('show_date', array_values($show_metas))): ?>
+								                <div class="meta">
+								                	<a href="<?php echo get_day_link(get_post_time('Y'), get_post_time('m'), get_post_time('j'));  ?>">
+									                    <p><?php echo get_the_time( 'd' ); ?></p>
+									                    <p><?php echo get_the_time( 'M' ); ?></p>
+								                	</a>
+								                </div>
+								            <?php endif; ?>
+								        </div> <!-- end of img-thumb -->
+
+							        <?php else: ?>
+
+							            <a href="<?php echo esc_url( get_the_permalink() ); ?>" class="blog-media-wrapper">
+							                <figure class="item-img-wrap" itemscope itemtype="http://schema.org/ImageObject">
+							                    <img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'reveal-post-single' ) : '//placehold.it/750x332' ); ?>" class="img-responsive" <?php printf( '%s', $image_alt ); ?> itemprop="image">
+							                    <div class="item-img-overlay">
+							                        <span></span>
+							                    </div>
+							                </figure>                       
+							            </a> <!-- end of blog-media-wrapper -->
+					            	<?php 
+						            endif;
+					            endif;
+
+								if( $layout == 'grid' ): ?>
+
+							        <div class="blog-content">
+							            <h3 class="blog-title grid" itemprop="headline">
+							            	<a href="<?php echo esc_url( get_the_permalink() ); ?>" rel="bookmark" itemprop="url">
+								                <span itemprop="name">
+								                <?php 
+								                    if( $chr_length ) :
+								                    	if( function_exists('reveal_title') ):
+									                        reveal_title( $title_length );
+													    else:
+													    	echo '<p class="cx-error">'.esc_html__('Please Activate \'REVEAL\' Theme!', 'codexin').'</p>';
+									                    endif;
+								                    else:
+								                        the_title();
+								                    endif;
+								                ?>
+								                </span>
+								            </a>
+								        </h3>
+								<?php endif;
+
+								if(in_array(true, array_values($show_metas))): ?>
+					            <ul class="list-inline post-detail <?php echo esc_attr(( $layout == 'grid' ) ? 'post-meta' : ''); ?>">
 
 					            	<?php if(in_array('show_author', array_values($show_metas))): ?>
 						                <li><i class="fa fa-pencil"></i> <span class="post-author vcard" itemprop="author" itemscope itemtype="https://schema.org/Person">
@@ -192,7 +238,7 @@ function cx_blog_shortcode( $atts, $content = null ) {
 						                </li>
 						            <?php endif; ?>
 
-									<?php if(in_array('show_date', array_values($show_metas))): ?>
+									<?php if(in_array('show_date', array_values($show_metas)) && ($layout == 'list')): ?>
 						                <li><i class="fa fa-calendar"></i> <a href="<?php echo get_day_link(get_post_time('Y'), get_post_time('m'), get_post_time('j'));  ?>"><time datetime="<?php echo get_the_time('c'); ?>" itemprop="datePublished"><?php echo date( get_option('date_format'), strtotime( get_the_time( 'd M, Y' ) ) ); ?></time></a> </li>
 									<?php endif; ?>
 									
@@ -209,27 +255,29 @@ function cx_blog_shortcode( $atts, $content = null ) {
 						            <?php endif; ?>
 
 					            </ul> <!-- end of post-detail -->
-						        <?php endif; ?>
+						        <?php endif; 
 
-						        <h2 class="post-title" itemprop="headline">
-						            <a href="<?php echo esc_url( get_the_permalink() ); ?>" rel="bookmark" itemprop="url">
-						                <span itemprop="name">
-						                <?php 
-						                    if( $chr_length ) :
-						                    	if( function_exists('reveal_title') ):
-							                        reveal_title( $title_length );
-											    else:
-											    	echo '<p class="cx-error">'.esc_html__('Please Activate \'REVEAL\' Theme!', 'codexin').'</p>';
+						        if( $layout == 'list' ): ?>	
+							        <h2 class="post-title" itemprop="headline">
+							            <a href="<?php echo esc_url( get_the_permalink() ); ?>" rel="bookmark" itemprop="url">
+							                <span itemprop="name">
+							                <?php 
+							                    if( $chr_length ) :
+							                    	if( function_exists('reveal_title') ):
+								                        reveal_title( $title_length );
+												    else:
+												    	echo '<p class="cx-error">'.esc_html__('Please Activate \'REVEAL\' Theme!', 'codexin').'</p>';
+								                    endif;
+							                    else:
+							                        the_title();
 							                    endif;
-						                    else:
-						                        the_title();
-						                    endif;
-						                ?>
-						                </span>
-						            </a>
-						        </h2>
+							                ?>
+							                </span>
+							            </a>
+							        </h2>
+							    <?php endif; ?>
 
-	                			<div class="entry-content" itemprop="text">
+	                			<div class="<?php echo ($layout == 'grid') ? 'wrapper-content' : 'entry-content'; ?>" itemprop="text">
 					                <?php 
 					                    if( $chr_length ) :
 					                    	if( function_exists('reveal_excerpt') ):
@@ -241,21 +289,31 @@ function cx_blog_shortcode( $atts, $content = null ) {
 					                        the_excerpt();
 					                    endif;
 					                ?>
-	                    		</div> <!-- end of entry-content -->
+	                    		</div> <!-- end of <?php echo ($layout == 'grid') ? 'wrapper-content' : 'entry-content'; ?> -->
 				                <?php if( $read_more ): ?>
-	                    			<div class="blog-more"><a class="cx-btn" href="<?php echo esc_url( get_the_permalink() ); ?>"><?php echo esc_html( !empty( $readmore_txt ) ? $readmore_txt : __('Read More', 'codexin') ); ?></a></div>
-	                    		<?php endif; ?>
-					        </div> <!-- end of post-wrapper -->
+	                    			<div class="blog-more"><a class="<?php echo ( $layout == 'grid' ) ? 'read-more' : 'cx-btn'; ?>" href="<?php echo esc_url( get_the_permalink() ); ?>"><?php echo esc_html( !empty( $readmore_txt ) ? $readmore_txt : __('Read More', 'codexin') ); ?></a></div>
+	                    		<?php endif; 
+	                    		?>
+	                    		<?php echo ($layout == 'grid') ? '</div> <!-- end of blog-content -->' : ''; ?>
+					        </div> <!-- end of <?php echo ($layout == 'grid') ? 'blog-wrapper' : 'post-wrapper'; ?> -->
 					    </article> <!-- #post-## -->
-					    <div class="clearfix"></div>
+					    <?php 
+					    if( $layout == 'grid' ):
+		                    echo '</div><!-- end of post-single-wrap -->';
 
-						<?php 
-						endwhile;
-					endif;
-					wp_reset_postdata();
-					?>
+		                    if( $i % $grid_col == 0 ):
+		                        echo '<div class="clearfix"></div>';
+		                    endif;
+		                endif;
+
+					endwhile;
+				endif;
+				wp_reset_postdata();
+				?>
 
 				<?php 
+				echo '<div class="clearfix"></div>';
+				echo ( $layout == 'grid' ) ? '<div class="col-xs-12">' : '' ;
 				if( $pagination_type == 'numbered' ):
 					if( function_exists('reveal_posts_link_numbered') ):
 				        echo reveal_posts_link_numbered($data);
@@ -269,9 +327,10 @@ function cx_blog_shortcode( $atts, $content = null ) {
 				    	echo '<p class="cx-error">'.esc_html__('Please Activate \'REVEAL\' Theme!', 'codexin').'</p>';
 				    endif;
 			    endif;
+			    echo ( $layout == 'grid' ) ? '</div></div>' : '' ;
 
 				 ?>
-				</div> <!-- end of blog-list-wrapper -->
+				</div> <!-- end of blog-wrapper -->
 			</div> <!-- end of row -->
 		</div> <!-- end of cx-blog-standard -->
 
@@ -303,7 +362,7 @@ function cx_blog_kc() {
 						'general' => array(
 
 	    					array(
-	    						'type'			=> 'dropdown',
+	    						'type'			=> 'select',
 	    						'name'			=> 'layout',
 	    						'label'			=> esc_html__( 'Select Layout', 'codexin' ),
 	    						'value'			=> 'list',
@@ -312,6 +371,23 @@ function cx_blog_kc() {
 	    							'grid'	    => esc_html__('Grid View', 'codexin'),
 	    						),
 	    						'description'	=> esc_html__('Choose the posts view.', 'codexin'),
+	    					),
+
+	    					array(
+	    						'type'			=> 'select',
+	    						'name'			=> 'grid_col',
+	    						'label'			=> esc_html__( 'Number of Column', 'codexin' ),
+	    						'value'			=> '2',
+	    						'options'		=> array(
+	    							'2' 		=> esc_html__('2', 'codexin'),
+	    							'3'		    => esc_html__('3', 'codexin'),
+	    							'4'		    => esc_html__('4', 'codexin'),
+	    						),
+    							'relation'	=> array(
+    								'parent' 	=> 'layout',
+    								'show_when'	=> 'grid',
+    							),
+	    						'description'	=> esc_html__('Choose the number of column to diplay posts.', 'codexin'),
 	    					),
 
 	    					array(
@@ -326,7 +402,7 @@ function cx_blog_kc() {
 	    						'type'			=> 'checkbox',
 	    						'name'			=> 'show_meta',
 	    						'label'			=> esc_html__( 'Which Posts Meta You Want to Show? ', 'codexin' ),
-	    						'value'			=> array('show_author', 'show_date', 'show_cat', 'show_comm', 'show_like'),
+	    						'value'			=> array('show_date', 'show_cat'),
 	    						'options'		=> array(
 	    							'show_author' => esc_html__('Post Author Name', 'codexin'),
 	    							'show_date'   => esc_html__('Post Published Date', 'codexin'),
