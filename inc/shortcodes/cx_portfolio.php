@@ -277,7 +277,7 @@ function cx_portfolio_shortcode( $atts, $content = null ) {
 	  					'post_type'			=> 'portfolio',
 	  					'orderby'			=> 'data',
 	  					'order'				=> 'DESC',
-	  					'posts_per_page'	=> -1
+	  					'posts_per_page'	=> 5
 	  					);
 		  				$data = new WP_Query( $args );
 		  				$i = 0;
@@ -295,49 +295,24 @@ function cx_portfolio_shortcode( $atts, $content = null ) {
 		  				$image_alt  = ( !empty( $image['alt'] ) ) ? 'alt="' . esc_attr( $image['alt'] ) . '"' : 'alt="' .get_the_title() . '"';
 		  				$image_cap  = $image['caption']; ?>
 
-		  				<?php if( $i != 2 ) : ?>
-		  					<div class="portfolio col-sm-3 col-xs-12 pad-0 javascript">
-		  						<figure  itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" >
-		  							<a href="<?php esc_url( the_post_thumbnail_url('full') ); ?>" itemprop="contentUrl" data-size="<?php echo esc_attr( $data_size ); ?>">
-		  								<img src="<?php esc_url( the_post_thumbnail_url('rv2-blog-mini-img') ); ?>" itemprop="thumbnail" <?php echo $image_alt; ?> class="img-responsive" />
-		  							</a>  
-		  							<figcaption itemprop="caption description"></figcaption>
-		  							<div class="image-mask">
-		  								<div class="image-content">
-		  									<a href="<?php echo esc_url( the_post_thumbnail_url( 'full' ) ); ?>">
-		  										<i class="fa fa-search" aria-hidden="true"></i>
-		  									</a>
-		  									<h3 class="portfolio-title"> 
-		  										<a href="#" class="clickable"> <?php echo esc_html( get_the_title() ); ?> </a>
-		  									</h3>
+							<div class="portfolio cx-portfolio col-xs-12 <?php echo ($i!=2) ? 'col-sm-3' : 'col-sm-6'; ?> pad-0 <?php foreach ($term_list as $sterm) { echo $sterm->slug.' '; }?>">
+								<figure  itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" >
+								    <a href="<?php esc_url( the_post_thumbnail_url('full') ); ?>" itemprop="contentUrl" data-size="<?php echo esc_attr( $data_size ); ?>">
+								        <img src="<?php echo esc_url( the_post_thumbnail_url('rectangle-five') ); ?>" itemprop="thumbnail" class="img-responsive" <?php echo $image_alt; ?> />
+								    </a>  
+							    <figcaption itemprop="caption description"></figcaption>
+									<div class="image-mask">
+										<div class="image-content">
+											<a href="<?php echo esc_url( the_post_thumbnail_url( 'full' ) ); ?>">
+												<i class="fa fa-search" aria-hidden="true"></i>
+											</a>
+											<h3 class="portfolio-title"> <a href="<?php the_permalink(); ?>" class="clickable"> <?php echo esc_html( get_the_title() ); ?> </a></h3>
 
-		  								</div>
-		  							</div>
-		  						</figure>
-		  					</div> 
-		  				<?php endif; 
-		  					 if( $i == 2 ) : ?>
-
-		  					<div class="portfolio col-sm-6 col-xs-12 pad-0 laravel python">
-		  						<figure  itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" >
-		  							<a href="<?php esc_url( the_post_thumbnail_url('full') ); ?>" itemprop="contentUrl" data-size="<?php echo esc_attr( $data_size ); ?>">
-		  								<img src="<?php esc_url( the_post_thumbnail_url('rectangle-three') ); ?>" itemprop="thumbnail" <?php echo $image_alt; ?> class="img-responsive" />
-		  							</a>  
-		  							<figcaption itemprop="caption description"></figcaption>
-		  							<div class="image-mask">
-		  								<div class="image-content">
-		  									<a href="<?php echo esc_url( the_post_thumbnail_url( 'full' ) ); ?>">
-		  										<i class="fa fa-search" aria-hidden="true"></i>
-		  									</a>
-		  									<h3 class="portfolio-title"> 
-		  										<a href="" class="clickable"> <?php echo esc_html( get_the_title() ); ?> </a>
-		  									</h3>
-		  								</div>
-		  							</div>
-
-		  						</figure>
-		  					</div>
-		  				<?php endif; ?>
+										</div>
+									</div>
+								</figure>
+							</div>
+		  						
 
 		  				<?php 
 		  				endwhile;
@@ -445,6 +420,10 @@ function cx_portfolio_kc() {
 	    						'name'        	=> 'number_of_portfolios',
 	    						'label'       	=> esc_html__('Number Of Portfolios to Display', 'codexin'),
 	    						'type'        	=> 'number',
+									'relation' => array(
+										'parent'	=> 'layout',
+										'show_when'	=> '1',
+									),
 	    						'value'			=> '',
 	    						'description'	=> esc_html__( 'Choose the number of portfolios you want to show. To show all portfolio, leave the field blank', 'codexin' ),
 	    					),
@@ -457,6 +436,11 @@ function cx_portfolio_kc() {
     								'1'	=> 'Grid',
     								'2'	=> 'Masonry',
     							),
+
+									'relation' => array(
+										'parent'	=> 'layout',
+										'show_when'	=> '1',
+									),
 	    						'value'			=> '1',
 	    						'description'	=> esc_html__( 'Choose Portfolio Layout Mode ', 'codexin' ),
 	    					),
@@ -472,6 +456,11 @@ function cx_portfolio_kc() {
     								'20'	=> '5 Column',
     								'16.66'	=> '6 Column',
     							),
+
+									'relation' => array(
+										'parent'	=> 'layout',
+										'show_when'	=> '1',
+									),
 	    						'value'			=> '25',
 	    						'description'	=> esc_html__( 'Choose No. of Column ', 'codexin' ),
 	    					),
@@ -480,6 +469,10 @@ function cx_portfolio_kc() {
 	    						'name'        	=> 'column_gutter',
 	    						'label'       	=> esc_html__('Column Gutter/Gap', 'codexin'),
 	    						'type'        	=> 'text',
+									'relation' => array(
+										'parent'	=> 'layout',
+										'show_when'	=> array('1', '3'),
+									),
 	    						'description'	=> esc_html__( 'Column Gutter/Gap on "%". Example: 0.5', 'codexin' ),
 	    					),
 

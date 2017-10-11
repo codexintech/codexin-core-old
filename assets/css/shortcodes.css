@@ -1781,8 +1781,37 @@ INDEX:
     background: rgba(41, 89, 112, 0.75);
 }
 
+.portfolios.rv3 .portfolio-wrapper {
+    width:100%;
+    display: block;
+}
 
 
+
+
+@media only screen and (min-width: 1200px) {
+
+    .portfolios.rv3 .cx-portfolio.col-sm-3 img {
+        max-height:223px;
+    }
+
+        .portfolios.rv3 .cx-portfolio.col-sm-6 img {
+        max-height:446px;
+    }
+
+
+    .kc-row-container:not(.kc-container) .portfolios.rv3 .cx-portfolio.col-sm-3 img {
+        max-height:none;
+    }
+
+    .kc-row-container:not(.kc-container) .portfolios.rv3 .cx-portfolio.col-sm-6 img {
+        max-height:none;
+    }
+
+
+
+
+}
 /**************************************
     009 - Codexin Mini Blog
 *************************************/

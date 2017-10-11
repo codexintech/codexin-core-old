@@ -11,6 +11,7 @@
         $isocontainer.isotope({
              itemSelector: ".cx-portfolio",
              layoutMode: 'masonry',
+             //percentPosition: true,
         });
 
     });
