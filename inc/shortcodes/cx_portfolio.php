@@ -26,16 +26,17 @@ function cx_portfolio_shortcode( $atts, $content = null ) {
 
 	$result = '';
 
+	// Assigning a master css class and hooking into KC
+	$master_class = apply_filters( 'kc-el-class', $atts );
+	$master_class[] = 'cx-portfolios';
 	ob_start(); 
+
+
 		if( ! empty( $layout ) ) :
 
 			if( $layout == 1 ) :
-			// Assigning a master css class and hooking into KC
-			$master_class = apply_filters( 'kc-el-class', $atts );
-			$master_class[] = 'cx-portfolios';
-
 			// Retrieving user define classes
-			$classes = array( 'portfolio-area' );
+			$classes = array( 'portfolio-wrapper-1' );
 			(!empty($class)) ? $classes[] = $class : ''; ?>
 	
 			<div class="<?php echo esc_attr( implode( ' ', $master_class )); ?>">
@@ -124,28 +125,22 @@ function cx_portfolio_shortcode( $atts, $content = null ) {
 	<?php endif; // End layout - 1
 
 			if( $layout == 2 ) :
-			// Assigning a master css class and hooking into KC
-			$master_class = apply_filters( 'kc-el-class', $atts );
-			$master_class[] = 'portfolios rv2 mrg-50';
-
 			// Retrieving user define classes
-			$classes = array( 'portfolio-area-rv2' );
+			$classes = array( 'portfolio-wrapper-2' );
 			(!empty($class)) ? $classes[] = $class : ''; ?>
 
-			<div id="portfolio_rv2" class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
+			<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
 				<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
 
 					<div class="container">
 						<div class="row">
-							<div class="portfolio_rv2-button">
+							<div class="filter-wrapper">
 								<!-- section title  -->
-								<div class="row-middle col-sm-3">
-									<div class="rv2-title mrg-0">
-										<h2 class="primary-title mrg-0 rv2"><?php echo esc_html__( $section_title ); ?></h2>
-									</div>
-								</div>  <!-- end of col-sm-12 -->
-								<div class="row-middle col-sm-8">
-									<div class="portfolio-filter rv2 pull-right">
+								<div class="col-sm-4">
+									<h2 class="primary-title"><?php echo esc_html__( $section_title ); ?></h2>
+								</div>  <!-- end of col-sm-4 -->
+								<div class="col-sm-8">
+									<div class="portfolio-filter pull-right">
 										<ul class="list-inline">
 											<li class="active" data-filter="*">All</li>
 											<?php 
@@ -159,7 +154,7 @@ function cx_portfolio_shortcode( $atts, $content = null ) {
 											<li class="view-all"> view all </li>
 										</ul>
 									</div>
-								</div>
+								</div> <!-- end of col-sm-8 -->
 							</div>
 						</div> <!-- end of row -->
 					</div> <!-- end of container -->
@@ -190,7 +185,7 @@ function cx_portfolio_shortcode( $atts, $content = null ) {
 					            $image_cap  = $image['caption']; 
 						?>
 							<div class="col-sm-4 col-xs-12 portfolio-item <?php foreach ($term_list as $sterm) { echo $sterm->slug.' '; } ?>">
-								<figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" class="portfolio-rv2">
+								<figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" class="portfolio-type-2">
 									<a href="<?php esc_url( the_post_thumbnail_url('full') ); ?>" itemprop="contentUrl" data-size="<?php echo esc_attr( $data_size ); ?>">
 									<?php 
 									if( $i == 1 ) : ?>
@@ -232,43 +227,42 @@ function cx_portfolio_shortcode( $atts, $content = null ) {
 
 		if( $layout == 3 ) :
 		  // Assigning a master css class and hooking into KC
-		  $master_class = apply_filters( 'kc-el-class', $atts );
-		  $master_class[] = 'portfolios rv3';
+		  // $master_class = apply_filters( 'kc-el-class', $atts );
+		  // $master_class[] = 'portfolios rv3';
 
 		  // Retrieving user define classes
-		  $classes = array( 'wrapper-portfolio-3' );
+		  $classes = array( 'portfolio-wrapper-3' );
 		  (!empty($class)) ? $classes[] = $class : ''; ?> 
-		  <div id="portfolio_rv3" class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
-		  	<div class="wrapper-portfolio">
-		  		<div class="container">
-		  			<div class="row">
-		  				<div class="portfolio_rv2-button">
-		  					<!-- section title  -->
-		  					<div class="row-middle col-sm-3">
-		  						<div class=" rv3 rv2-title mrg-0">
-		  							<h2 class="primary-title mrg-0 rv2">OUR WORK</h2>
-		  						</div>
-		  					</div>  <!-- end of col-sm-12 -->
-		  					<div class="row-middle col-sm-8">
-		  						<div class="portfolio-filter rv2 rv3 pull-right">
-		  							<ul class="list-inline">
-		  								<li class="active" data-filter="*">All</li>
-		  								<?php 
-		  								$taxonomy = 'portfolio-category';
-		  								$taxonomies = get_terms($taxonomy); 
-		  								foreach ( $taxonomies as $tax ) {
-		  									echo '<li data-filter=".' .strtolower($tax->slug) .'" >' . $tax->name . '</li>';
+		  <div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
+		  	<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
+					
+					<div class="container">
+							<div class="filter-wrapper">
+								<!-- section title  -->
+								<div class="col-sm-4">
+									<h2 class="primary-title"><?php echo esc_html__( $section_title ); ?></h2>
+								</div>  <!-- end of col-sm-4 -->
+								<div class="col-sm-8">
+									<div class="portfolio-filter pull-right">
+										<ul class="list-inline">
+											<li class="active" data-filter="*">All</li>
+											<?php 
+												$taxonomy = 'portfolio-category';
+												$taxonomies = get_terms($taxonomy); 
+												foreach ( $taxonomies as $tax ) {
+													echo '<li data-filter=".' .strtolower($tax->slug) .'" >' . $tax->name . '</li>';
 
-		  								}
-		  								?>
-		  								<li class="view-all"> view all </li>
-		  							</ul>
-		  						</div>
-		  					</div>
-		  				</div>
-		  			</div> <!-- end of row -->
-		  		</div> <!-- end of container -->
-		  		<div class="portfolio-area-3">
+												}
+											?>
+											<li class="view-all"> view all </li>
+										</ul>
+									</div>
+								</div> <!-- end of col-sm-8 -->
+							</div>
+						
+					</div> <!-- end of container -->
+
+					
 
 		  			<div class="portfolio-wrapper image-pop-up responsive-class" itemscope itemtype="http://schema.org/ImageGallery">
 		  				<?php 
@@ -320,10 +314,9 @@ function cx_portfolio_shortcode( $atts, $content = null ) {
 		  				wp_reset_postdata();
 		  				?>
 
-		  			</div><!-- end of portfolio-wrapper -->
-		  		</div> <!-- end of portfolio-area-3 -->
-		  	</div> <!-- end of wrapper-portfolio -->
-		  </div> <!-- end of section -->
+		  			</div>
+				</div>			  			
+		  	</div>
 		  <div class="clearfix"></div>
 			
 	<?php endif; //End layout - 3 ?>
@@ -512,7 +505,7 @@ function cx_portfolio_kc() {
 								'type'	=> 'text',
 								'relation' => array(
 									'parent'	=> 'layout',
-									'show_when'	=> '2',
+									'show_when'	=> array('2', '3')
 								),
 								'description' => esc_html__( 'Enter Portfolio Section Title Here', 'codexin' ),
 								),

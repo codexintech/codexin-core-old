@@ -1657,6 +1657,11 @@ INDEX:
     008 - Codexin Portfolio
 **************************************/
 
+/**
+ * POrtfolio Type 01
+ *
+ */
+
 .cx-portfolios {
     overflow: hidden;
     margin-bottom: 0;
@@ -1793,6 +1798,136 @@ INDEX:
     background: rgb(41, 89, 112);
     background: rgba(41, 89, 112, 0.75);
 }
+
+
+
+/**
+ * Portfolio Type 02
+ *
+ */
+
+.portfolio-wrapper-2 h2 {
+    margin-top: 25px;
+    margin-bottom:25px;
+    line-height: 41px;
+}
+
+.portfolio-wrapper-2 .filter-wrapper {
+
+}
+
+.portfolio-type-2 .image-mask{
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    margin: auto;
+}
+
+.portfolio-type-2:hover:before {
+    visibility: visible;
+    background: #23dac9;
+    opacity: 0.85;
+}
+.portfolio-type-2:before {
+    position: absolute;
+    content: "";
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+}
+
+figure.portfolio-type-2 {
+    position: relative;
+}
+
+.portfolio-type-2:before, .portfolio-type-2 .image-mask a {
+    position: absolute;
+    content: "";
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+}
+
+figure.portfolio-type-2:hover .image-mask a {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+.portfolio-type-2 .image-content p a {
+    font-size: 20px;
+    text-transform: uppercase;
+    margin-top: 20px;
+    color: #fff;
+    font-weight: normal;
+    font-family: Poppins;
+}
+
+.portfolio-type-2 .image-content i {
+    font-size: 40px;
+    line-height: 40px;
+}
+
+
+.rv2 .portfolio-filter ul {
+    text-align: none;
+}
+.portfolio-filter.rv2 ul li{
+    float: left;
+}
+.portfolio-type-2{
+    position: relative;
+    margin-top: 30px;
+    transition: 0.3s ;
+}
+
+.portfolio-type-2 .image-content i {
+    font-size: 40px;
+    line-height: 40px;
+}
+
+
+.portfolio-filter.rv2 ul li{
+    border: 0px solid;
+    font-size: 18px;
+    font-weight: 400;
+    transition: 0.3s ;
+}
+
+
+.portfolio-filter.rv2 ul li.view-all{
+    margin-left: 30px;
+}
+.portfolio-filter.rv2 ul li.active{
+    color: #23dac9 ;
+    background: transparent;
+}
+
+
+
+
+.portfolio-type-2 img{
+    max-width: 100%;
+}
+.portfolio-wrapper-2 .image-content {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/**
+ * POrtfolio Type 03
+ *
+ */
 
 .portfolios.rv3 .portfolio-wrapper {
     width:100%;
@@ -3651,141 +3786,7 @@ h2.primary-title.rv2 {
 
 
 /*------------------------------ Portfolio Section rv2 ---------------------*/
-.portfolio-area-rv2 {
 
-}
-
-.portfolio-rv2 .image-mask{
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    top: 0;
-    margin: auto;
-}
-
-.portfolio-rv2:hover:before {
-    visibility: visible;
-    background: #23dac9;
-    opacity: 0.85;
-}
-.portfolio-rv2:before {
-    position: absolute;
-    content: "";
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    opacity: 0;
-    visibility: hidden;
-    transition: 0.3s;
-}
-
-figure.portfolio-rv2 {
-    position: relative;
-}
-
-.portfolio-rv2:before, .portfolio-rv2 .image-mask a {
-    position: absolute;
-    content: "";
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    opacity: 0;
-    visibility: hidden;
-    transition: 0.3s;
-}
-
-figure.portfolio-rv2:hover .image-mask a {
-    visibility: visible;
-    opacity: 1;
-}
-
-
-.portfolio-rv2 .image-content p a {
-    font-size: 20px;
-    text-transform: uppercase;
-    margin-top: 20px;
-    color: #fff;
-    font-weight: normal;
-    font-family: Poppins;
-}
-
-.portfolio-rv2 .image-content i {
-    font-size: 40px;
-    line-height: 40px;
-}
-
-
-.rv2 .portfolio-filter ul {
-    text-align: none;
-}
-.portfolio-filter.rv2 ul li{
-    float: left;
-}
-.portfolio-rv2{
-    position: relative;
-    margin-top: 30px;
-    transition: 0.3s ;
-}
-
-.portfolio-rv2 .image-content i {
-    font-size: 40px;
-    line-height: 40px;
-}
-.portfolio-filter.rv2  .rv2-title,
-.portfolio-filter.rv2 .list-inline {
-    margin: 0;
-}
-.portfolio_rv2-button {
-    display: table;
-    width: 100%;
-    margin-bottom: 30px;
-}
-.row-middle{
-    display: table-cell;
-    vertical-align: bottom;
-    float: none;
-}
-.portfolio-filter.rv2 ul li{
-    border: 0px solid;
-    font-size: 18px;
-    font-weight: 400;
-    transition: 0.3s ;
-}
-
-.portfolio-filter.rv2 ul li:hover,
-.portfolio-filter.rv2 ul li.view-all{
-    background: #23dac9 ;
-    color: #fff ;
-}
-.portfolio-filter.rv2 ul li.view-all{
-    margin-left: 30px;
-}
-.portfolio-filter.rv2 ul li.active{
-    color: #23dac9 ;
-    background: transparent;
-}
-
-.portfolio_rv2-button .rv2-title{
-    float: left;
-}
-.portfolio_rv2-button .rv2-title:before,
-.portfolio_rv2-button  .rv2-title:after{
-    right: inherit;
-    left: 0 ;
-}
-.portfolio_rv2-button  .rv2-title:after{
-    left: 40px;
-}
-.portfolio-rv2 img{
-    max-width: 100%;
-}
-#portfolio_rv2 .image-content {
-    top: 50%;
-    transform: translateY(-50%);
-}
 
 /***********************************    
     rv2 location section
@@ -4233,13 +4234,7 @@ section#portfolio_rv3 {
     margin: 0;
 }
 
-#portfolio_rv3 .wrapper-portfolio .portfolio_rv2-button {
-    margin-bottom: 30px;
-}
 
-#portfolio_rv3 .wrapper-portfolio .rv2-title {
-    margin-bottom: 0;
-}
 
 .portfolio-wrapper .pad-0 {
     padding: 0;
@@ -4247,11 +4242,7 @@ section#portfolio_rv3 {
 .mrg-0{
     margin: 0;
 }
-#portfolio_rv3 .wrapper-portfolio .row-middle {
-    display: table-cell;
-    vertical-align: bottom;
-    float: none;
-}
+
 .portfolio-filter ul li {
     cursor: pointer;
     text-transform: uppercase;
@@ -4279,24 +4270,22 @@ section#portfolio_rv3 {
 .portfolio-filter.rv3 ul li.active:hover{
         background: #82c400;
 }
-.rv3 .portfolio-item.portfolio-rv2{
+.rv3 .portfolio-item.portfolio-type-2{
     display: block;
     width: auto;
     margin: 0 ;
 }
-.rv3 .portfolio_rv2-button{
-    margin-bottom: 60px;
-}
+
 .portfolio-wrapper{
     /*max-width: 2000px;*/
     margin: 0 auto;
 }
 
-.rv3 .portfolio-rv2 img {
+.rv3 .portfolio-type-2 img {
     max-width: 100%;
     width: 100%;
 }
-.rv3 .portfolio-rv2:hover:before {
+.rv3 .portfolio-type-2:hover:before {
     visibility: visible;
     background: #82c400;
 }
