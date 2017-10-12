@@ -3,7 +3,7 @@
 
 /*
     ======================================
-        CODEXIN TESTIMONIAL SHORTCODE
+      CODEXIN MINI TESTIMONIAL SHORTCODE
     ======================================
 */
 	

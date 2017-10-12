@@ -3238,16 +3238,19 @@ section#location {
    016 - Codexin Blog
 **********************************/
 
+.section + .section .cx-team-grid-wrapper,
 .section + .section .cx-testimonials,
 .section + .section .cx-blog-standard {
     margin-top: 0;
 }
 
+.cx-team-grid-wrapper,
 .cx-testimonials,
 .cx-blog-standard {
     margin-top: -40px;
 }
 
+.cx-team-grid-wrapper .team-wrapper,
 .cx-testimonials .testimonial-list-wrapper .testimonial-archive-wrapper article:first-child,
 .cx-blog-standard .blog-list-wrapper article:first-child {
     margin-top: 0;
@@ -3284,6 +3287,7 @@ section#location {
     padding-right: 0;
 }
 
+.cx-team-grid-wrapper .team-wrapper,
 .cx-testimonials .testimonial-archive-wrapper article:last-child {
     margin-bottom: 20px;
 }
