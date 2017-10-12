@@ -7,8 +7,8 @@
     ======================================
 */
 	
-// Registering Testimonial Shortcode
-function cx_testimonial_shortcode( $atts, $content = null ) {
+// Registering Mini Testimonial Shortcode
+function cx_testimonial_mini_shortcode( $atts, $content = null ) {
 	extract(shortcode_atts(array(
 			'layout'			=> '',
 			'designation'	 	=> '',
@@ -479,17 +479,17 @@ function cx_testimonial_shortcode( $atts, $content = null ) {
 	$result .= ob_get_clean();
 	return $result;
 
-} //End cx_testimonial
+} //End cx_testimonial_mini
 
 // Integrating Shortcode with King Composer
-function cx_testimonial_kc() {
+function cx_testimonial_mini_kc() {
 
 	if (function_exists('kc_add_map')) { 
 		kc_add_map(
 			array(
-				'cx_testimonial' => array(
-					'name' => esc_html__( 'Codexin Testimonial', 'codexin' ),
-					'description' => esc_html__('Codexin Testimonial', 'codexin'),
+				'cx_testimonial_mini' => array(
+					'name' => esc_html__( 'Codexin Mini Testimonial', 'codexin' ),
+					'description' => esc_html__('Codexin Mini Testimonial', 'codexin'),
 					'icon' => 'et-hazardous',
 					'category' => 'Codexin',
 					// Only load assets when using this element
@@ -754,6 +754,6 @@ function cx_testimonial_kc() {
 
 	} //End if
 
-} // end of cx_testimonial
+} // end of cx_testimonial_mini_kc
 
 

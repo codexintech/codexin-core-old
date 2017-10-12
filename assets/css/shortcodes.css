@@ -19,6 +19,7 @@ INDEX:
     014 - Codexin Call to Action
     015 - Codexin Clients
     016 - Codexin Blog
+    017 - Codexin Testimonials
     050 - Responsive CSS
 
 
@@ -1446,6 +1447,11 @@ INDEX:
     transition: box-shadow .3s ease 0s;
 }
 
+.col-sm-8.col-md-8 .cx-testimonial-5 .slick-slider-nav img {
+    height: 69px;
+    width: 69px;
+}
+
 .cx-testimonial-5 .slick-slider-nav .item.slick-current img {
     -webkit-box-shadow: 0 0 0 2px #fff;
     -moz-box-shadow: 0 0 0 2px #fff;
@@ -1461,8 +1467,15 @@ INDEX:
     width: 70px;
 }
 
+.col-sm-8.col-md-8 .cx-testimonial-5 .slick-slider-nav .cx-overlay {
+    height: 60px;
+    width: 60px;
+    margin-top: -65px;
+}
+
 .cx-testimonial-5 .slick-slider-nav .item.slick-current .cx-overlay {
-    background: rgba(41, 89, 112, 0.75);
+    background: #295970;
+    opacity: 0.75;
 }
 
 .cx-testimonial-5 .slick-slider-nav .item.slick-current .cx-overlay:before {
@@ -3196,14 +3209,17 @@ section#location {
    016 - Codexin Blog
 **********************************/
 
+.section + .section .cx-testimonials,
 .section + .section .cx-blog-standard {
     margin-top: 0;
 }
 
+.cx-testimonials,
 .cx-blog-standard {
     margin-top: -40px;
 }
 
+.cx-testimonials .testimonial-list-wrapper .testimonial-archive-wrapper article:first-child,
 .cx-blog-standard .blog-list-wrapper article:first-child {
     margin-top: 0;
 }
@@ -3227,6 +3243,21 @@ section#location {
     color: inherit;
 }
 
+
+/**********************************
+   017 - Codexin Testimonials
+**********************************/
+
+.col-sm-8.col-md-8 .col-sm-12.col-md-10.col-md-offset-1 {
+    width: 100%;
+    margin-left: 0;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.cx-testimonials .testimonial-archive-wrapper article:last-child {
+    margin-bottom: 20px;
+}
 
 
 
