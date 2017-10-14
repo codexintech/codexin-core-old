@@ -10,18 +10,18 @@
 // Registering Portfolio Shortcode
 function cx_portfolio_shortcode( $atts, $content = null ) {
 	extract(shortcode_atts(array(
-			'section_title' 		=> '',
-			'number_of_portfolios'	=> '',
-			'type_mode'      => '',
-			'column'      => '',
-			'column_gutter'      => '',
-			'order'					=> '',
-			'show_icon'					=> '',
-			'icon'					=> '',
-			'read_more'     => '',
-			'read_more_text' => '',
-			'layout'				=> '',
-			'class'					=> '',
+		'section_title' 		=> '',
+		'number_of_portfolios'	=> '',
+		'type_mode'      => '',
+		'column'      => '',
+		'column_gutter'      => '',
+		'order'					=> '',
+		'show_icon'					=> '',
+		'icon'					=> '',
+		'read_more'     => '',
+		'read_more_text' => '',
+		'layout'				=> '',
+		'class'					=> '',
 	), $atts));
 
 	$result = '';
@@ -41,7 +41,7 @@ function cx_portfolio_shortcode( $atts, $content = null ) {
 	
 			<div class="<?php echo esc_attr( implode( ' ', $master_class )); ?>">
 				<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>" >
-					<div class="container">
+
 						<div class="row">
 							<div class="col-xs-12">
 								<div class="portfolio-filter">
@@ -59,7 +59,7 @@ function cx_portfolio_shortcode( $atts, $content = null ) {
 								</div><!--end of portfolio-filter-->
 							</div><!--end of col-xs-12-->
 						</div> <!-- end of row -->
-					</div> <!-- end of container -->
+
 
 		            <div class="portfolio-wrapper image-pop-up" itemscope itemtype="http://schema.org/ImageGallery">
 
@@ -132,32 +132,34 @@ function cx_portfolio_shortcode( $atts, $content = null ) {
 			<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
 				<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
 
-					<div class="container">
+					
+					<div class="filter-wrapper">
 						<div class="row">
-							<div class="filter-wrapper">
-								<!-- section title  -->
-								<div class="col-sm-4">
-									<h2 class="primary-title"><?php echo esc_html__( $section_title ); ?></h2>
-								</div>  <!-- end of col-sm-4 -->
-								<div class="col-sm-8">
-									<div class="portfolio-filter pull-right">
-										<ul class="list-inline">
-											<li class="active" data-filter="*">All</li>
-											<?php 
-												$taxonomy = 'portfolio-category';
-												$taxonomies = get_terms($taxonomy); 
-												foreach ( $taxonomies as $tax ) {
-													echo '<li data-filter=".' .strtolower($tax->slug) .'" >' . $tax->name . '</li>';
+							<!-- section title  -->
+							<div class="col-sm-4">
+								<h2 class="primary-title"><?php echo esc_html__( $section_title ); ?></h2>
+							</div>  <!-- end of col-sm-4 -->
+							<div class="col-sm-8">
+								<div class="portfolio-filter pull-right">
+									<ul class="list-inline">
+										<li class="active" data-filter="*">All</li>
+										<?php 
+											$taxonomy = 'portfolio-category';
+											$taxonomies = get_terms($taxonomy); 
+											foreach ( $taxonomies as $tax ) {
+												echo '<li data-filter=".' .strtolower($tax->slug) .'" >' . $tax->name . '</li>';
 
-												}
-											?>
-											<li class="view-all"> view all </li>
-										</ul>
-									</div>
-								</div> <!-- end of col-sm-8 -->
-							</div>
+											}
+										?>
+										<li class="view-all"> view all </li>
+									</ul>
+								</div>
+							</div> <!-- end of col-sm-8 -->
+
+							
 						</div> <!-- end of row -->
-					</div> <!-- end of container -->
+					</div>
+					
 
 					<div class="portfolio-wrapper image-pop-up" itemscope itemtype="http://schema.org/ImageGallery">
 					<?php 
@@ -166,7 +168,7 @@ function cx_portfolio_shortcode( $atts, $content = null ) {
 							'post_type'			=> 'portfolio',
 							'orderby'			=> 'data',
 							'order'				=> 'DESC',
-							'posts_per_page'	=> !empty($number_of_portfolios) ? $number_of_portfolios : -1
+							'posts_per_page'	=> 5,
 							);
 						$data = new WP_Query( $args );
 						$i = 0;
@@ -184,7 +186,7 @@ function cx_portfolio_shortcode( $atts, $content = null ) {
 					            $image_alt  = ( !empty( $image['alt'] ) ) ? 'alt="' . esc_attr( $image['alt'] ) . '"' : 'alt="' .get_the_title() . '"';
 					            $image_cap  = $image['caption']; 
 						?>
-							<div class="col-sm-4 col-xs-12 portfolio-item <?php foreach ($term_list as $sterm) { echo $sterm->slug.' '; } ?>">
+							<div class="portfolio cx-portfolio pad-0 col-sm-4 col-xs-12 portfolio-item <?php foreach ($term_list as $sterm) { echo $sterm->slug.' '; } ?>">
 								<figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" class="portfolio-type-2">
 									<a href="<?php esc_url( the_post_thumbnail_url('full') ); ?>" itemprop="contentUrl" data-size="<?php echo esc_attr( $data_size ); ?>">
 									<?php 
@@ -236,31 +238,33 @@ function cx_portfolio_shortcode( $atts, $content = null ) {
 		  <div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
 		  	<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
 					
-					<div class="container">
-							<div class="filter-wrapper">
-								<!-- section title  -->
-								<div class="col-sm-4">
-									<h2 class="primary-title"><?php echo esc_html__( $section_title ); ?></h2>
-								</div>  <!-- end of col-sm-4 -->
-								<div class="col-sm-8">
-									<div class="portfolio-filter pull-right">
-										<ul class="list-inline">
-											<li class="active" data-filter="*">All</li>
-											<?php 
-												$taxonomy = 'portfolio-category';
-												$taxonomies = get_terms($taxonomy); 
-												foreach ( $taxonomies as $tax ) {
-													echo '<li data-filter=".' .strtolower($tax->slug) .'" >' . $tax->name . '</li>';
 
-												}
-											?>
-											<li class="view-all"> view all </li>
-										</ul>
-									</div>
-								</div> <!-- end of col-sm-8 -->
+				<div class="filter-wrapper">
+					<div class="row">
+						<!-- section title  -->
+						<div class="col-sm-4">
+							<h2 class="primary-title"><?php echo esc_html__( $section_title ); ?></h2>
+						</div>  <!-- end of col-sm-4 -->
+						<div class="col-sm-8">
+							<div class="portfolio-filter pull-right">
+								<ul class="list-inline">
+									<li class="active" data-filter="*">All</li>
+									<?php 
+										$taxonomy = 'portfolio-category';
+										$taxonomies = get_terms($taxonomy); 
+										foreach ( $taxonomies as $tax ) {
+											echo '<li data-filter=".' .strtolower($tax->slug) .'" >' . $tax->name . '</li>';
+
+										}
+									?>
+									<li class="view-all"> view all </li>
+								</ul>
 							</div>
+						</div> <!-- end of col-sm-8 -->
+					</div>
+				</div>
 						
-					</div> <!-- end of container -->
+
 
 					
 
@@ -289,23 +293,23 @@ function cx_portfolio_shortcode( $atts, $content = null ) {
 		  				$image_alt  = ( !empty( $image['alt'] ) ) ? 'alt="' . esc_attr( $image['alt'] ) . '"' : 'alt="' .get_the_title() . '"';
 		  				$image_cap  = $image['caption']; ?>
 
-							<div class="portfolio cx-portfolio col-xs-12 <?php echo ($i!=2) ? 'col-sm-3' : 'col-sm-6'; ?> pad-0 <?php foreach ($term_list as $sterm) { echo $sterm->slug.' '; }?>">
-								<figure  itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" >
-								    <a href="<?php esc_url( the_post_thumbnail_url('full') ); ?>" itemprop="contentUrl" data-size="<?php echo esc_attr( $data_size ); ?>">
-								        <img src="<?php echo esc_url( the_post_thumbnail_url('rectangle-five') ); ?>" itemprop="thumbnail" class="img-responsive" <?php echo $image_alt; ?> />
-								    </a>  
-							    <figcaption itemprop="caption description"></figcaption>
-									<div class="image-mask">
-										<div class="image-content">
-											<a href="<?php echo esc_url( the_post_thumbnail_url( 'full' ) ); ?>">
-												<i class="fa fa-search" aria-hidden="true"></i>
-											</a>
-											<h3 class="portfolio-title"> <a href="<?php the_permalink(); ?>" class="clickable"> <?php echo esc_html( get_the_title() ); ?> </a></h3>
+						<div class="portfolio cx-portfolio col-xs-12 <?php echo ($i!=2) ? 'col-sm-3 quarter' : 'col-sm-6 half'; ?> pad-0 <?php foreach ($term_list as $sterm) { echo $sterm->slug.' '; }?>">
+							<figure style="background-image:url('<?php esc_url(the_post_thumbnail_url('full')); ?>');" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" >
+							    <a href="<?php esc_url( the_post_thumbnail_url('full') ); ?>" itemprop="contentUrl" data-size="<?php echo esc_attr( $data_size ); ?>">
+							        <img style="visibility:hidden;opacity:0;"src="<?php echo esc_url( the_post_thumbnail_url('rectangle-five') ); ?>" itemprop="thumbnail" class="img-responsive" <?php echo $image_alt; ?> />
+							    </a>  
+						    <figcaption itemprop="caption description"></figcaption>
+								<div class="image-mask">
+									<div class="image-content">
+										<a href="<?php echo esc_url( the_post_thumbnail_url( 'full' ) ); ?>">
+											<i class="fa fa-search" aria-hidden="true"></i>
+										</a>
+										<h3 class="portfolio-title"> <a href="<?php the_permalink(); ?>" class="clickable"> <?php echo esc_html( get_the_title() ); ?> </a></h3>
 
-										</div>
 									</div>
-								</figure>
-							</div>
+								</div>
+							</figure>
+						</div>
 		  						
 
 		  				<?php 

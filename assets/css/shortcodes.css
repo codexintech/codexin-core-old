@@ -1806,6 +1806,7 @@ INDEX:
  *
  */
 
+.portfolio-wrapper-3 h2,
 .portfolio-wrapper-2 h2 {
     margin-top: 25px;
     margin-bottom:25px;
@@ -1824,6 +1825,8 @@ INDEX:
     top: 0;
     margin: auto;
 }
+
+
 
 .portfolio-type-2:hover:before {
     visibility: visible;
@@ -1929,9 +1932,44 @@ figure.portfolio-type-2:hover .image-mask a {
  *
  */
 
-.portfolios.rv3 .portfolio-wrapper {
-    width:100%;
-    display: block;
+
+ .portfolio-wrapper {
+    overflow: hidden;
+ }
+
+.portfolio-wrapper-3 .portfolio {
+    overflow: visible;
+}
+
+
+
+.portfolio-wrapper-3 figure {
+background-size: cover;
+background-repeat: no-repeat;
+background-position: center;
+background-attachment: scroll;
+-webkit-transform: scale(1.006);
+-moz-transform: scale(1.006);
+-ms-transform: scale(1.006);
+-o-transform: scale(1.006);
+transform: scale(1.006);
+width:100%;
+}
+
+.portfolio-wrapper-3 .quarter {
+    z-index:1;
+}
+
+.portfolio-wrapper-3 .quarter figure {
+    height: 250px;
+}
+
+.portfolio-wrapper-3 .half {
+    z-index:2;
+}
+
+.portfolio-wrapper-3 .half figure {
+    height: 500px;
 }
 
 
