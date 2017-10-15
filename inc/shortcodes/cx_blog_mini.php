@@ -535,10 +535,10 @@ function cx_blog_mini_kc() {
 
 	 						array(
 	 							'name' 			=> 'include',
-	 							'label' 		=> esc_html__( 'Include Categories', 'codexin' ),
+	 							'label' 		=> esc_html__( 'Filter Categories', 'codexin' ),
 	 							'type' 			=> 'multiple',
 	 							'options'		=> $cx_categories,
-	 							'description'	=> esc_html__( 'Choose if You Want to Show Any Specific Post Category/Categories, Control + Click to Select Multiple Categories to Include (All Categories will be shown by Default)', 'codexin' ),
+	 							'description'	=> esc_html__( 'Choose if You Want to Show Any Specific Post Category/Categories, Control + Click to Select Multiple Categories to Filter (All Categories will be shown by Default)', 'codexin' ),
 	 						),
 
 	    					array(
