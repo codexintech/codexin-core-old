@@ -3412,6 +3412,8 @@ section#location {
    016 - Codexin Blog
 **********************************/
 
+.section + .section .cx-portfolio-standard,
+.page-template-page-home .cx-portfolio-standard,
 .section + .section .cx-events-standard,
 .page-template-page-home .cx-events-standard,
 .section + .section .cx-team-grid-wrapper,
@@ -3423,6 +3425,7 @@ section#location {
     margin-top: 0;
 }
 
+.cx-portfolio-standard,
 .cx-events-standard,
 .cx-team-grid-wrapper,
 .cx-testimonials,
@@ -3434,6 +3437,7 @@ section#location {
     margin-bottom: -40px;
 }
 
+.cx-portfolio-standard .portfolio-archive-wrapper article:first-child,
 .cx-events-standard .events-archive-wrapper article:first-child,
 .cx-team-grid-wrapper .team-wrapper,
 .cx-testimonials .testimonial-lists-wrapper .testimonial-archive-wrapper article:first-child,
@@ -3473,6 +3477,7 @@ section#location {
 }
 
 /*.cx-testimonials .testimonial-archive-wrapper article:last-child,*/
+.cx-portfolio-standard .portfolio-content-wrapper .posts-nav,
 .cx-events-standard .events-content-wrapper .posts-nav,
 .cx-team-grid-wrapper .team-wrapper {
     margin-bottom: 20px;
@@ -3505,7 +3510,7 @@ section#location {
    018 - Codexin Events
 **********************************/
 
-
+.col-sm-8.col-md-8 .cx-portfolio-standard .portfolio-content-wrapper,
 .page-template-page-no-sidebar .cx-blog-standard .blog-list-wrapper,
 .page-template-page-no-sidebar .cx-events-standard .events-content-wrapper,
 .col-sm-8.col-md-8 .cx-events-standard .events-content-wrapper {
@@ -3513,15 +3518,19 @@ section#location {
     margin-right: -15px;
 }
 
+.page-template-page-no-sidebar .cx-portfolio-standard,
 .page-template-page-no-sidebar .cx-events-standard,
+.col-sm-8.col-md-8 .cx-portfolio-standard,
 .col-sm-8.col-md-8 .cx-events-standard {
     margin-bottom: -60px;
 }
 
+.cx-portfolio-standard .portfolio-archive-wrapper article:first-child,
 .cx-events-standard .events-archive-wrapper article:first-child {
     margin-bottom: 40px;
 }
 
+.cx-portfolio-standard .number-pagination .pagination,
 .cx-events-standard .number-pagination .pagination {
     margin-top: 0;
 }

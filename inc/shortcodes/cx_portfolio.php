@@ -3,12 +3,12 @@
 
 /*
     ================================
-        CODEXIN EVENTS SHORTCODE
+        CODEXIN PORTFOLIO SHORTCODE
     ================================
 */
 
-// Registering Codexin Events Shortcode
-function cx_events_shortcode( $atts, $content = null ) {
+// Registering Codexin Portfolio Shortcode
+function cx_portfolio_shortcode( $atts, $content = null ) {
 	extract(shortcode_atts(array(
 			'layout'			=> '',
 			'grid_col'			=> '',
@@ -28,10 +28,10 @@ function cx_events_shortcode( $atts, $content = null ) {
 
 	// Assigning a master css class and hooking into KC
 	$master_class = apply_filters( 'kc-el-class', $atts );
-	$master_class[] = 'cx-events-standard';
+	$master_class[] = 'cx-portfolio-standard';
 
     // Retrieving user define classes
-    $classes = array( 'events-content-wrapper' );
+    $classes = array( 'portfolio-content-wrapper' );
     (!empty($class)) ? $classes[] = $class : '';
 
 	// Extracting user included categories
@@ -44,7 +44,7 @@ function cx_events_shortcode( $atts, $content = null ) {
 
 		<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
 			<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
-				<div class="<?php echo ($layout == 'grid') ? 'events-grid-wrapper' : 'events-list-wrapper' ?>">
+				<div class="<?php echo ($layout == 'grid') ? 'portfolio-grid-wrapper' : 'portfolio-list-wrapper' ?>">
 					<?php 
 
 					echo ($layout == 'grid') ? '<div class="row">' : '';
@@ -53,8 +53,8 @@ function cx_events_shortcode( $atts, $content = null ) {
 
 					if( empty($include) ):
 						$args = array(
-							'post_type'				=> 'events',
-							'meta_key'				=> ( $orderby == 'meta_value' ) ? 'reveal_event_start_date' : '',
+							'post_type'				=> 'portfolio',
+							'meta_key'				=> ( $orderby == 'meta_value' ) ? 'reveal_portfolio_date' : '',
 							'order'					=> $order,
 							'orderby'				=> $orderby,
 							'paged'   				=> $paged,
@@ -62,14 +62,14 @@ function cx_events_shortcode( $atts, $content = null ) {
 
 					else:
 						$args = array(
-							'post_type'				=> 'events',
-							'meta_key'				=> ( $orderby == 'meta_value' ) ? 'reveal_event_start_date' : '',
+							'post_type'				=> 'portfolio',
+							'meta_key'				=> ( $orderby == 'meta_value' ) ? 'reveal_portfolio_date' : '',
 							'order'					=> $order,
 							'orderby'				=> $orderby,
 							'paged'   				=> $paged,
 						    'tax_query' 			=> array(
 						        array(
-						            'taxonomy' => 'events-category',
+						            'taxonomy' => 'portfolio-category',
 						            'field'    => 'term_id',
 						            'terms'    => $cat_includes,
 						        ),
@@ -81,7 +81,7 @@ function cx_events_shortcode( $atts, $content = null ) {
 
 					if( $data->have_posts() ) :
 						$i = 0;
-						echo '<div class="events-archive-wrapper clearfix">';
+						echo '<div class="portfolio-archive-wrapper clearfix">';
 
 						while( $data->have_posts() ) : $data->the_post();
 							$i++;
@@ -90,36 +90,33 @@ function cx_events_shortcode( $atts, $content = null ) {
 							$image_alt = ( !empty( retrieve_alt_tag() ) ) ? retrieve_alt_tag() : get_the_title();
 
 							// Assigning classed for post_class
-							$post_classes = ($layout == 'list') ? 'clearfix events-list' : '';
+							$post_classes = ($layout == 'list') ? 'clearfix portfolio-list' : '';
 
 							// layout
 							if( $layout == 'grid' ):
 								$grid_columns = 12/$grid_col;
-								printf('<div class="events-single-wrap col-lg-%1$s col-md-%1$s col-sm-12">', $grid_columns);
+								printf('<div class="portfolio-single-wrap col-lg-%1$s col-md-%1$s col-sm-12">', $grid_columns);
 							endif;
 
 							// Retrieving Values from the Metaboxes
-							$e_start_date = strtotime(rwmb_meta('reveal_event_start_date', 'type=date'));
-							$e_end_date = rwmb_meta('reveal_event_end_date', 'type=date');
-							$e_start_time = rwmb_meta('reveal_event_start_time', 'type=time');
-							$e_end_time = rwmb_meta('reveal_event_end_time', 'type=time');
-							$e_st_date=date( get_option('date_format'), $e_start_date );
+							$p_date = strtotime(rwmb_meta('reveal_portfolio_date', 'type=date'));
+							$port_date=date( get_option('date_format'), $p_date );
 				            	
 						?>
 							<article id="event-<?php esc_attr(the_ID()); ?>" <?php post_class(array(esc_attr($post_classes))); ?> itemscope itemtype="http://schema.org/Event">
-							    <div class="<?php echo ($layout == 'grid') ? 'events-item-content' : 'post-wrapper'; ?>">
-							    	<?php echo ($layout == 'list') ? '<div class="event-list-wrapper">' : '' ?>
+							    <div class="<?php echo ($layout == 'grid') ? 'portfolio-item-content' : 'post-wrapper'; ?>">
+							    	<?php echo ($layout == 'list') ? '<div class="port-list-wrapper">' : '' ?>
 							    		<?php if( $layout == 'list' ): ?>
-							                <div class="thumb-events" style="background-image:url('<?php if(has_post_thumbnail()): esc_url(the_post_thumbnail_url('reveal-rectangle-one')); else: echo '//placehold.it/600X375'; endif; ?>');">
+							                <div class="thumb-port" style="background-image:url('<?php if(has_post_thumbnail()): esc_url(the_post_thumbnail_url('reveal-rectangle-one')); else: echo '//placehold.it/600X375'; endif; ?>');">
 							                    <a href="<?php echo esc_url(get_the_permalink()); ?>"></a>
-							                    <?php if( !empty($e_st_date) ): ?>
-								                    <div class="events-date"><p><?php echo esc_html($e_st_date); ?></p></div>
+							                    <?php if( !empty($port_date) ): ?>
+								                    <div class="port-date"><p><?php echo esc_html($port_date); ?></p></div>
 								                <?php endif; ?>
 							                </div>
 							            <?php else: ?>
 										    <div class="item-thumbnail">
 										        <img src="<?php echo esc_url(the_post_thumbnail_url( 'rectangle-four' )); ?>"  alt="<?php echo esc_attr($image_alt); ?>">                                          
-										        <ul class="events-action-btn">
+										        <ul class="portfolio-action-btn">
 										            <li>
 										                <a class="venobox" href="<?php echo esc_url(get_the_permalink()); ?>" itemprop="url"><i class="flaticon-link"></i></a>
 										            </li>
@@ -127,14 +124,14 @@ function cx_events_shortcode( $atts, $content = null ) {
 										    </div>
 									    <?php endif; ?>
 
-							            <div class="<?php echo ($layout == 'list') ? 'desc-events' : 'events-description' ?>">
+							            <div class="<?php echo ($layout == 'list') ? 'desc-port' : 'portfolio-description' ?>">
 							            	<?php 
 							            	if( $layout == 'list' ):
-								            	$event_list = get_the_term_list( $data->ID, 'events-category', '', ', ', '' );
-								            	if(!empty($event_list)): ?>
+								            	$port_list = get_the_term_list( $data->ID, 'portfolio-category', '', ', ', '' );
+								            	if(!empty($port_list)): ?>
 									                <p class="list-tag"><i class="flaticon-bookmark"></i> 
 									                <?php 
-									                   printf( '%s', $event_list );
+									                   printf( '%s', $port_list );
 									                ?>
 									                </p>
 									            <?php 
@@ -157,12 +154,12 @@ function cx_events_shortcode( $atts, $content = null ) {
 									                ?>
 							                	</a>
 							            	<?php echo ( $layout == 'list' ) ? '</h2>' : '</h4>'; 
-							            	if( ($layout == 'grid') && (!empty($e_st_date) || !empty($e_start_time)) ): ?>
+							            	if( ($layout == 'grid') && (!empty($port_date) || !empty($e_start_time)) ): ?>
 										        <div class="event-grid-meta">
-										        	<?php if( !empty($e_st_date) ): ?>
-											        	<p class="ev-start-date pull-left" itemprop="startDate" content="<?php echo get_the_time('c'); ?>"><i class="flaticon-agenda"></i> <?php echo esc_html($e_st_date); ?></p>
+										        	<?php if( !empty($port_date) ): ?>
+											        	<p class="ev-start-date pull-left" itemprop="startDate" content="<?php echo get_the_time('c'); ?>"><i class="flaticon-agenda"></i> <?php echo esc_html($port_date); ?></p>
 											        <?php endif; ?>
-											        <?php if( !empty($e_st_date) || !empty($e_start_time) ): ?>
+											        <?php if( !empty($port_date) || !empty($e_start_time) ): ?>
 											        	<p class="event-grid-time">
 											        		<i class="flaticon-clock-1"></i>
 											        		<?php if( !empty($e_start_time) ): ?> 
@@ -175,7 +172,7 @@ function cx_events_shortcode( $atts, $content = null ) {
 											        <?php endif; ?>
 										        </div>
 									        <?php endif; ?>
-							                <div class="<?php echo ($layout == 'grid') ? 'events-grid-excerpt' : 'list-content'; ?>">
+							                <div class="<?php echo ($layout == 'grid') ? 'portfolio-grid-excerpt' : 'list-content'; ?>">
 							                <?php
 							                    if( $chr_length ) :
 							                    	if( function_exists('reveal_excerpt') ):
@@ -188,19 +185,19 @@ function cx_events_shortcode( $atts, $content = null ) {
 							                    endif;
 							                ?>
 							                </div>
-						                <?php echo ($layout == 'grid') ? '</div> <!-- end of events-description -->' : ''; ?>
+						                <?php echo ($layout == 'grid') ? '</div> <!-- end of portfolio-description -->' : ''; ?>
 											<?php if( $read_more ): ?>
-								                <div class="<?php echo ( $layout == 'list' ) ? 'blog-more' : 'events-grid-more'; ?>">
+								                <div class="<?php echo ( $layout == 'list' ) ? 'blog-more' : 'portfolio-grid-more'; ?>">
 								                	<a <?php echo ($layout == 'list') ? 'class="cx-btn"' : ''; ?> href="<?php echo esc_url(get_the_permalink()); ?>"><?php echo esc_html( !empty( $readmore_txt ) ? $readmore_txt : __('Read More', 'codexin') ); ?></a>
 								                </div>
 								            <?php endif; ?>
-							            <?php echo ($layout == 'list') ? '</div> <!-- end of desc-events -->' : ''; ?>
+							            <?php echo ($layout == 'list') ? '</div> <!-- end of desc-portfolio -->' : ''; ?>
 									<?php echo ($layout == 'list') ? '</div> <!-- end of event-list-wrapper -->' : '' ?>
-						        </div> <!-- end of <?php echo ($layout == 'grid') ? 'events-item-content' : 'post-wrapper'; ?> -->
+						        </div> <!-- end of <?php echo ($layout == 'grid') ? 'portfolio-item-content' : 'post-wrapper'; ?> -->
 						    </article> <!-- #event-## -->
 						    <?php 
 						    if( $layout == 'grid' ):
-			                    echo '</div><!-- end of events-single-wrap -->';
+			                    echo '</div><!-- end of portfolio-single-wrap -->';
 
 			                    if( $i % $grid_col == 0 ):
 			                        echo '<div class="clearfix"></div>';
@@ -208,7 +205,7 @@ function cx_events_shortcode( $atts, $content = null ) {
 			                endif;
 
 						endwhile;
-						echo '</div><!-- end of events-archive-wrapper -->';
+						echo '</div><!-- end of portfolio-archive-wrapper -->';
 					endif;
 					wp_reset_postdata();
 					?>
@@ -224,16 +221,16 @@ function cx_events_shortcode( $atts, $content = null ) {
 					    endif;
 					elseif( $pagination_type == 'button' ):
 				    	if( function_exists('reveal_posts_link') ):
-					        reveal_posts_link('Newer Events', 'Older Events', $data);
+					        reveal_posts_link('Newer Portfolios', 'Older Portfolios', $data);
 					    else:
 					    	echo '<p class="cx-error">'.esc_html__('Please Activate \'REVEAL\' Theme!', 'codexin').'</p>';
 					    endif;
 					endif;
 				    echo ($layout == 'grid') ? '</div></div> <!-- end of row -->' : '';
 					?>
-				</div> <!-- end of <?php echo ($layout == 'grid') ? 'events-grid-wrapper' : 'events-list-wrapper'; ?> -->
-			</div> <!-- end of events-content-wrapper -->
-		</div> <!-- end of cx-events-standard -->
+				</div> <!-- end of <?php echo ($layout == 'grid') ? 'portfolio-grid-wrapper' : 'portfolio-list-wrapper'; ?> -->
+			</div> <!-- end of portfolio-content-wrapper -->
+		</div> <!-- end of cx-portfolio-standard -->
 
 
 
@@ -246,16 +243,16 @@ function cx_events_shortcode( $atts, $content = null ) {
 
 
 // Integrating Shortcode with King Composer
-function cx_events_kc() {
+function cx_portfolio_kc() {
 
-	$cx_events_categories = cx_get_custom_categories('events-category');
+	$cx_portfolio_categories = cx_get_custom_categories('portfolio-category');
 
 	if (function_exists('kc_add_map')) { 
 		kc_add_map(
 			array(
-				'cx_events' => array(
-					'name' => esc_html__( 'Codexin Events', 'codexin' ),
-					'description' => esc_html__('Codexin Events', 'codexin'),
+				'cx_portfolio' => array(
+					'name' => esc_html__( 'Codexin Portfolio', 'codexin' ),
+					'description' => esc_html__('Codexin Portfolio', 'codexin'),
 					'icon' => 'et-hazardous',
 					'category' => 'Codexin',
 					'params' => array(
@@ -271,7 +268,7 @@ function cx_events_kc() {
 	    							'list' 		=> esc_html__('List View', 'codexin'),
 	    							'grid'	    => esc_html__('Grid View', 'codexin'),
 	    						),
-	    						'description'	=> esc_html__('Choose the Events View.', 'codexin'),
+	    						'description'	=> esc_html__('Choose the Portfolio View.', 'codexin'),
 	    						'admin_label' 	=> true,
 	    					),
 
@@ -289,15 +286,15 @@ function cx_events_kc() {
     								'parent' 	=> 'layout',
     								'show_when'	=> 'grid',
     							),
-	    						'description'	=> esc_html__('Choose the number of column to display Events.', 'codexin'),
+	    						'description'	=> esc_html__('Choose the number of column to display Portfolio.', 'codexin'),
 	    					),
 
 	    					array(
 	    						'name'        	=> 'chr_length',
-	    						'label'       	=> esc_html__('Enable Events Title and Excerpt Length? ', 'codexin'),
+	    						'label'       	=> esc_html__('Enable Portfolio Title and Excerpt Length? ', 'codexin'),
 	    						'type'        	=> 'toggle',
 	    						'value'			=> 'no',
-	    						'description'	=> esc_html__( 'Select to enable/disable events-title & excerpt length.', 'codexin' ),
+	    						'description'	=> esc_html__( 'Select to enable/disable portfolio-title & excerpt length.', 'codexin' ),
 	    					),
 
 	    					array(
@@ -381,19 +378,19 @@ function cx_events_kc() {
 
 	    					array(
 	    						'name'        	=> 'order',
-	    						'label'       	=> esc_html__('Events Order', 'codexin'),
+	    						'label'       	=> esc_html__('Portfolio Order', 'codexin'),
 	    						'type'        	=> 'select',
 	    						'options'		=> array(
     								'ASC'	=> esc_html__('Ascending', 'codexin'),
     								'DESC'	=> esc_html__('Descending', 'codexin'),
     							),
 	    						'value'			=> 'DESC',
-	    						'description'	=> esc_html__( 'Choose The Order to Display Events:', 'codexin' ),
+	    						'description'	=> esc_html__( 'Choose The Order to Display Portfolio:', 'codexin' ),
 	    					),
 
 	    					array(
 	    						'name'        	=> 'orderby',
-	    						'label'       	=> esc_html__('Events Sorting Method', 'codexin'),
+	    						'label'       	=> esc_html__('Portfolio Sorting Method', 'codexin'),
 	    						'type'        	=> 'select',
 	    						'options'		=> array(
     								'meta_value'	 => esc_html__('Date', 'codexin'),
@@ -401,25 +398,25 @@ function cx_events_kc() {
     								'rand'			 => esc_html__('Randomize', 'codexin'),
     							),
 	    						'value'			=> 'date',
-	    						'description'	=> esc_html__( 'Choose The Events Sorting Method', 'codexin' ),
+	    						'description'	=> esc_html__( 'Choose The Portfolio Sorting Method', 'codexin' ),
 	    					),
 
 	 						array(
 	 							'name' 			=> 'include',
-	 							'label' 		=> esc_html__( 'Filter Events Categories', 'codexin' ),
+	 							'label' 		=> esc_html__( 'Filter Portfolio Categories', 'codexin' ),
 	 							'type' 			=> 'multiple',
-	 							'options'		=> $cx_events_categories,
-	 							'description'	=> esc_html__( 'Choose if You Want to Show Any Specific Events Category/Categories, Control + Click to Select Multiple Categories to Filter (All Categories will be shown by Default)', 'codexin' ),
+	 							'options'		=> $cx_portfolio_categories,
+	 							'description'	=> esc_html__( 'Choose if You Want to Show Any Specific Portfolio Category/Categories, Control + Click to Select Multiple Categories to Filter (All Categories will be shown by Default)', 'codexin' ),
 	 						),
 
     					),
 
 
 	                ) //End params array
-	            ),  // End of cx_events array
+	            ),  // End of cx_portfolio array
 			) //end of  array 
 		);  //end of kc_add_map
 	} //End if
-} // end of cx_events_kc
+} // end of cx_portfolio_kc
 
 

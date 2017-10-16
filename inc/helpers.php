@@ -453,28 +453,27 @@ function cx_get_post_categories() {
 
 /**
  *
- * Helper function to fetch all events categories
+ * Helper function to fetch all csutom taxonomies by slug
  *
  */  
-function cx_get_events_categories() {
+function cx_get_custom_categories($custom) {
 
-    $events_categories =  get_terms( 'events-category', array('hide_empty' => false) );
-    // print_r($events_categories);
+    $custom_categories =  get_terms( $custom, array('hide_empty' => false) );
 
-    $events_cat = array();
-    if ( $events_categories ) {        
+    $custom_cat = array();
+    if ( $custom_categories ) {        
 
-        foreach ( $events_categories as $value ) {
-            $events_cat[$value->term_id] = ucwords(strtolower( $value->name ) ) . ' (Posts Count: '. $value->count .')';
+        foreach ( $custom_categories as $value ) {
+            $custom_cat[$value->term_id] = ucwords(strtolower( $value->name ) ) . ' (Posts Count: '. $value->count .')';
         }
 
     } else {
 
-        $events_cat[0] = esc_html__( 'No Categories found', 'codexin' );
+        $custom_cat[0] = esc_html__( 'No Categories found', 'codexin' );
 
     }
 
-    return $events_cat;
+    return $custom_cat;
 
 
-} //End cx_get_events_categories()..
+} //End cx_get_custom_categories()..
