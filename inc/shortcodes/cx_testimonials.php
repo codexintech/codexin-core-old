@@ -31,10 +31,10 @@ function cx_testimonials_shortcode( $atts, $content = null ) {
 	ob_start();
 	?>
 
-		<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
+		<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); echo (!$pagination) ? ' testimonials-no-pagination' : ''; ?>">
 			<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
 				<div class="col-sm-12 col-md-10 col-md-offset-1">
-					<div class="testimonial-list-wrapper">
+					<div class="testimonial-lists-wrapper">
 						<?php 
 
 						$paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;

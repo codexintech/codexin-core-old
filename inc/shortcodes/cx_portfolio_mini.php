@@ -3,12 +3,12 @@
 
 /*
     ======================================
-        CODEXIN PORTFOLIO SHORTCODE
+        CODEXIN MINI PORTFOLIO SHORTCODE
     ======================================
 */
 
-// Registering Portfolio Shortcode
-function cx_portfolio_shortcode( $atts, $content = null ) {
+// Registering Mini Portfolio Shortcode
+function cx_portfolio_mini_shortcode( $atts, $content = null ) {
 	extract(shortcode_atts(array(
 		'section_title' 		=> '',
 		'number_of_portfolios'	=> '',
@@ -369,17 +369,17 @@ function cx_portfolio_shortcode( $atts, $content = null ) {
 	$result .= ob_get_clean();
 	return $result;
 
-} //End cx_portfolio
+} //End cx_portfolio_mini
 
 // Integrating Shortcode with King Composer
-function cx_portfolio_kc() {
+function cx_portfolio_mini_kc() {
 
 	if (function_exists('kc_add_map')) { 
 		kc_add_map(
 			array(
-				'cx_portfolio' => array(
-					'name' => esc_html__( 'Codexin Portfolio', 'codexin' ),
-					'description' => esc_html__('Portfolio Section', 'codexin'),
+				'cx_portfolio_mini' => array(
+					'name' => esc_html__( 'Codexin Mini Portfolio', 'codexin' ),
+					'description' => esc_html__('Mini Portfolio Section', 'codexin'),
 					'icon' => 'et-hazardous',
 					'category' => 'Codexin',
                 	//Only load assets when using this element
@@ -624,10 +624,10 @@ function cx_portfolio_kc() {
 							)
 						),//End animate
 					), //End Params
-            	),  // End of elemnt cx_portfolio
+            	),  // End of elemnt cx_portfolio_mini
 			) //end of array 
 		);  //end of kc_add_map
 	} //End if
-} // end of cx_team_kc
+} // end of cx_portfolio_mini_kc
 
 

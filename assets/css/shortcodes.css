@@ -10,7 +10,7 @@ INDEX:
     005 - Codexin Mini Events
     006 - Codexin Mini Testimonial
     007 - Codexin Mini Team
-    008 - Codexin Portfolio
+    008 - Codexin Mini Portfolio
     009 - Codexin Mini Blog
     010 - Codexin Map
     011 - Codexin Contact Form
@@ -1655,11 +1655,11 @@ INDEX:
 
 
 /**************************************
-    008 - Codexin Portfolio
+    008 - Codexin Mini Portfolio
 **************************************/
 
 /**
- * POrtfolio Type 01
+ * Mini Portfolio Type 01
  *
  */
 
@@ -1803,7 +1803,7 @@ INDEX:
 
 
 /**
- * Portfolio Type 02
+ * Mini Portfolio Type 02
  *
  */
 
@@ -1929,7 +1929,7 @@ figure.portfolio-type-2:hover .image-mask a {
 }
 
 /**
- * POrtfolio Type 03
+ * Mini Portfolio Type 03
  *
  */
 
@@ -3430,16 +3430,20 @@ section#location {
     margin-top: -40px;
 }
 
+.page-template-page-no-sidebar .cx-blog-standard {
+    margin-bottom: -40px;
+}
+
 .cx-events-standard .events-archive-wrapper article:first-child,
 .cx-team-grid-wrapper .team-wrapper,
-.cx-testimonials .testimonial-list-wrapper .testimonial-archive-wrapper article:first-child,
+.cx-testimonials .testimonial-lists-wrapper .testimonial-archive-wrapper article:first-child,
 .cx-blog-standard .blog-list-wrapper article:first-child {
     margin-top: 0;
 }
 
 .cx-blog-standard .posts-nav {
-    padding-top: 40px;
-    border-top: 1px dashed #ddd;
+/*    padding-top: 40px;
+    border-top: 1px dashed #ddd;*/
     margin-top: 40px;
 }
 
@@ -3468,10 +3472,32 @@ section#location {
     padding-right: 0;
 }
 
+/*.cx-testimonials .testimonial-archive-wrapper article:last-child,*/
 .cx-events-standard .events-content-wrapper .posts-nav,
-.cx-team-grid-wrapper .team-wrapper,
-.cx-testimonials .testimonial-archive-wrapper article:last-child {
+.cx-team-grid-wrapper .team-wrapper {
     margin-bottom: 20px;
+}
+
+.cx-testimonials .testimonial-lists-wrapper nav.number-pagination {
+    margin-top: 40px;
+}
+
+.cx-testimonials .testimonial-lists-wrapper nav.number-pagination {
+    border-top: 1px dashed #ddd;
+}
+
+.cx-testimonials.testimonials-no-pagination {
+    margin-bottom: 20px;
+}
+
+.page-template-page-home .cx-testimonials.testimonials-no-pagination {
+    margin-bottom: 40px;
+}
+
+.page-template-page-no-sidebar .cx-testimonials.testimonials-no-pagination,
+.page-template-page-left-sidebar .cx-testimonials.testimonials-no-pagination,
+.page-template-default .cx-testimonials.testimonials-no-pagination {
+    margin-bottom: -40px;
 }
 
 
@@ -3479,6 +3505,8 @@ section#location {
    018 - Codexin Events
 **********************************/
 
+
+.page-template-page-no-sidebar .cx-blog-standard .blog-list-wrapper,
 .page-template-page-no-sidebar .cx-events-standard .events-content-wrapper,
 .col-sm-8.col-md-8 .cx-events-standard .events-content-wrapper {
     margin-left: -15px;
@@ -3490,7 +3518,13 @@ section#location {
     margin-bottom: -60px;
 }
 
+.cx-events-standard .events-archive-wrapper article:first-child {
+    margin-bottom: 40px;
+}
 
+.cx-events-standard .number-pagination .pagination {
+    margin-top: 0;
+}
 
 
 /*--------------------------------------

@@ -327,7 +327,7 @@ function cx_blog_shortcode( $atts, $content = null ) {
 					    	echo '<p class="cx-error">'.esc_html__('Please Activate \'REVEAL\' Theme!', 'codexin').'</p>';
 					    endif;
 				    endif;
-				    echo ( $layout == 'grid' ) ? '</div></div>' : '' ;
+				    echo ( $layout == 'grid' ) ? '</div>' : '' ;
 
 					 ?>
 					</div> <!-- end of <?php echo ($layout == 'grid') ? 'row' : 'blog-list-wrapper'; ?> -->

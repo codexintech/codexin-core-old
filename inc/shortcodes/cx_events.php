@@ -20,6 +20,7 @@ function cx_events_shortcode( $atts, $content = null ) {
 			'desc_length'		=> '',
 			'read_more'			=> '',
 			'readmore_txt'		=> '',
+			'pagination_type'	=> '',
 			'class'				=> ''
 	), $atts));
 
@@ -213,11 +214,19 @@ function cx_events_shortcode( $atts, $content = null ) {
 					<?php 
 					echo '<div class="clearfix"></div>';
 					echo ( $layout == 'grid' ) ? '<div class="col-xs-12">' : '' ;
-			    	if( function_exists('reveal_posts_link') ):
-				        reveal_posts_link('Newer Events', 'Older Events', $data);
-				    else:
-				    	echo '<p class="cx-error">'.esc_html__('Please Activate \'REVEAL\' Theme!', 'codexin').'</p>';
-				    endif;
+					if( $pagination_type == 'numbered' ):
+						if( function_exists('reveal_posts_link_numbered') ):
+					        echo reveal_posts_link_numbered($data);
+					    else:
+					    	echo '<p class="cx-error">'.esc_html__('Please Activate \'REVEAL\' Theme!', 'codexin').'</p>';
+					    endif;
+					elseif( $pagination_type == 'button' ):
+				    	if( function_exists('reveal_posts_link') ):
+					        reveal_posts_link('Newer Events', 'Older Events', $data);
+					    else:
+					    	echo '<p class="cx-error">'.esc_html__('Please Activate \'REVEAL\' Theme!', 'codexin').'</p>';
+					    endif;
+					endif;
 				    echo ($layout == 'grid') ? '</div></div> <!-- end of row -->' : '';
 					?>
 				</div> <!-- end of <?php echo ($layout == 'grid') ? 'events-grid-wrapper' : 'events-list-wrapper'; ?> -->
@@ -343,6 +352,18 @@ function cx_events_kc() {
     								'show_when'	=> 'yes',
     							),
 	    						'description' => esc_html__( 'Enter Button Text', 'codexin' ),
+	    					),
+
+	    					array(
+	    						'type'			=> 'select',
+	    						'name'			=> 'pagination_type',
+	    						'label'			=> esc_html__( 'Pagination Type', 'codexin' ),
+	    						'value'			=> 'button',
+	    						'options'		=> array(
+	    							'button' 	=> esc_html__('Classic Next-Previous Button', 'codexin'),
+	    							'numbered'  => esc_html__('Numbered Pagination', 'codexin'),
+	    						),
+	    						'description'	=> esc_html__('Choose the Pagination Type.', 'codexin'),
 	    					),
 
 	    					array(
