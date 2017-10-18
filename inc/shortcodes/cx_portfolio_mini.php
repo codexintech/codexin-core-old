@@ -10,18 +10,18 @@
 // Registering Mini Portfolio Shortcode
 function cx_portfolio_mini_shortcode( $atts, $content = null ) {
 	extract(shortcode_atts(array(
-		'section_title' 		=> '',
-		'number_of_portfolios'	=> '',
-		'type_mode'      => '',
-		'column'      => '',
-		'column_gutter'      => '',
-		'order'					=> '',
+		'section_title' 			=> '',
+		'number_of_portfolios'		=> '',
+		'type_mode'     	 		=> '',
+		'column'      				=> '',
+		'column_gutter'      		=> '',
+		'order'						=> '',
 		'show_icon'					=> '',
-		'icon'					=> '',
-		'read_more'     => '',
-		'read_more_text' => '',
-		'layout'				=> '',
-		'class'					=> '',
+		'icon'						=> '',
+		'read_more'     			=> '',
+		'read_more_text' 			=> '',
+		'layout'					=> '',
+		'class'						=> '',
 	), $atts));
 
 	$result = '';
@@ -228,9 +228,7 @@ function cx_portfolio_mini_shortcode( $atts, $content = null ) {
 	<?php endif; // End Layout - 2
 
 		if( $layout == 3 ) :
-		  // Assigning a master css class and hooking into KC
-		  // $master_class = apply_filters( 'kc-el-class', $atts );
-		  // $master_class[] = 'portfolios rv3';
+
 
 		  // Retrieving user define classes
 		  $classes = array( 'portfolio-wrapper-3' );
@@ -294,8 +292,9 @@ function cx_portfolio_mini_shortcode( $atts, $content = null ) {
 		  				$image_cap  = $image['caption']; ?>
 
 						<div class="portfolio cx-portfolio col-xs-12 <?php echo ($i!=2) ? 'col-sm-3 quarter' : 'col-sm-6 half'; ?> pad-0 <?php foreach ($term_list as $sterm) { echo $sterm->slug.' '; }?>">
-							<figure style="background-image:url('<?php esc_url(the_post_thumbnail_url('full')); ?>');" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" >
-							    <a href="<?php esc_url( the_post_thumbnail_url('full') ); ?>" itemprop="contentUrl" data-size="<?php echo esc_attr( $data_size ); ?>">
+							<?php $height = ($i!=2) ? 250 : 500 + 2*$column_gutter; ?>
+							<figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" <?php echo (!empty($column_gutter)) ? ' style="margin:'. $column_gutter .'; height:'.$height.'px";' : '' ?>>
+							    <a <?php if(!empty($column_gutter)): echo 'class="no-transform"'; endif; ?> style="background-image:url('<?php esc_url(the_post_thumbnail_url('full')); ?>');" href="<?php esc_url( the_post_thumbnail_url('full') ); ?>" itemprop="contentUrl" data-size="<?php echo esc_attr( $data_size ); ?>">
 							        <img style="visibility:hidden;opacity:0;"src="<?php echo esc_url( the_post_thumbnail_url('rectangle-five') ); ?>" itemprop="thumbnail" class="img-responsive" <?php echo $image_alt; ?> />
 							    </a>  
 						    <figcaption itemprop="caption description"></figcaption>
