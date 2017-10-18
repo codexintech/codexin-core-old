@@ -1938,12 +1938,15 @@ figure.portfolio-type-2:hover .image-mask a {
     overflow: hidden;
  }
 
+.portfolio-wrapper-1 .portfolio,
+.portfolio-wrapper-2 .portfolio,
 .portfolio-wrapper-3 .portfolio {
     overflow: visible;
 }
 
 
-
+.portfolio-wrapper-1 figure > a,
+.portfolio-wrapper-2 figure > a,
 .portfolio-wrapper-3 figure > a {
 background-size: cover;
 background-repeat: no-repeat;
@@ -1959,6 +1962,14 @@ width:100%;
 
 .portfolio-wrapper-3 .quarter {
     z-index:1;
+}
+
+.portfolio-wrapper-2 .long-height figure {
+    height: 500px;
+}
+
+.portfolio-wrapper-2 .short-height figure {
+    height: 250px;
 }
 
 .portfolio-wrapper-3 .quarter figure {
@@ -4351,8 +4362,22 @@ section#portfolio_rv3 {
     padding: 0;
 }
 
+.portfolio-wrapper-1 figure,
+.portfolio-wrapper-2 figure,
 .portfolio-wrapper-3 figure {
     position: relative;
+}
+
+.portfolio-wrapper-2 figure.item-1,
+.portfolio-wrapper-3 figure.item-1,
+.portfolio-wrapper-3 figure.item-4 {
+    margin-left: 0 !important;
+}
+.portfolio-wrapper-2 figure.item-3,
+.portfolio-wrapper-2 figure.item-5,
+.portfolio-wrapper-3 figure.item-3,
+.portfolio-wrapper-3 figure.item-5 {
+    margin-right: 0 !important;
 }
 
 #whole .no-transform {
@@ -4363,6 +4388,16 @@ section#portfolio_rv3 {
     transform: none;
 }
 
+#whole .add-transform {
+-webkit-transform: scale(1.006);
+-moz-transform: scale(1.006);
+-ms-transform: scale(1.006);
+-o-transform: scale(1.006);
+transform: scale(1.006);
+}
+
+.portfolio-wrapper-1 figure > a,
+.portfolio-wrapper-2 figure > a,
 .portfolio-wrapper-3 figure > a {
     display: block;
     width:100%;

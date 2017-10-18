@@ -72,11 +72,13 @@ function cx_portfolio_mini_shortcode( $atts, $content = null ) {
 							'posts_per_page'	=> !empty($number_of_portfolios) ? $number_of_portfolios : -1
 							);
 						$data = new WP_Query( $args );
+						$i = 0;
 						//Check post
 						if( $data->have_posts() ) :
+
 							//startloop here..
 							while( $data->have_posts() ) : $data->the_post(); 
-
+								$i++;
 								$term_list = wp_get_post_terms( get_the_ID(), 'portfolio-category' ); 
 
 								global $post;
@@ -86,14 +88,14 @@ function cx_portfolio_mini_shortcode( $atts, $content = null ) {
 					            $image_cap  = $image['caption']; 
 
 						?>
-
-							<figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" class="cx-portfolio <?php foreach ($term_list as $sterm) { echo $sterm->slug.' '; } ?>" <?php if(!empty($column)): $w = ($column - 2*$column_gutter); echo 'style="width:' . $w . '%; margin:'.$column_gutter.'%"'; endif; ?>>
-							    <a href="<?php esc_url( the_post_thumbnail_url('full') ); ?>" itemprop="contentUrl" data-size="<?php echo esc_attr( $data_size ); ?>">
-										<?php if($type_mode == '2'): ?>
-							        <img src="<?php esc_url( the_post_thumbnail_url('full') ); ?>" itemprop="thumbnail" <?php echo $image_alt; ?> class="img-responsive" />
+						<div class="portfolio cx-portfolio pad-0 <?php foreach ($term_list as $sterm) { echo $sterm->slug.' '; }?>" <?php if(!empty($column)): echo 'style="width:'. $column .'"'; endif; ?>>
+							<figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" <?php echo (!empty($column_gutter)) ? ' style="margin:'. $column_gutter .'px;" class="item-'.$i.'"' : '' ?>>
+							    <a <?php if(!empty($column_gutter)): echo 'class="no-transform"'; endif; ?> style="background-image:url('<?php esc_url(the_post_thumbnail_url('full')); ?>');" href="<?php esc_url( the_post_thumbnail_url('full') ); ?>" itemprop="contentUrl" data-size="<?php echo esc_attr( $data_size ); ?>">
+									<?php if($type_mode == '2'): ?>
+							        <img style="visibility:hidden;opacity:0;" src="<?php esc_url( the_post_thumbnail_url('full') ); ?>" itemprop="thumbnail" <?php echo $image_alt; ?> class="img-responsive" />
 
 							      <?php else: ?>  
-							        <img src="<?php esc_url( the_post_thumbnail_url('rectangle-two') ); ?>" itemprop="thumbnail" <?php echo $image_alt; ?> class="img-responsive" />
+							        <img style="visibility:hidden;opacity:0;" src="<?php esc_url( the_post_thumbnail_url('rectangle-two') ); ?>" itemprop="thumbnail" <?php echo $image_alt; ?> class="img-responsive" />
 							      <?php endif; ?> 
 
 							    </a>
@@ -112,6 +114,7 @@ function cx_portfolio_mini_shortcode( $atts, $content = null ) {
 									</div>
 								</div>
 							</figure> <!-- end of cx-portfolio -->
+						</div>	
 
 						<?php 
 								endwhile;
@@ -178,37 +181,27 @@ function cx_portfolio_mini_shortcode( $atts, $content = null ) {
 							while( $data->have_posts() ) : $data->the_post(); 
 							$i++;
 
-								$term_list = wp_get_post_terms( get_the_ID(), 'portfolio-category' ); 
-
-								global $post;
-					            $image      = wp_prepare_attachment_for_js( get_post_thumbnail_id( $post->ID ) );
-					            $data_size  = $image['width'] . 'x' . $image['height'];
-					            $image_alt  = ( !empty( $image['alt'] ) ) ? 'alt="' . esc_attr( $image['alt'] ) . '"' : 'alt="' .get_the_title() . '"';
-					            $image_cap  = $image['caption']; 
+							$term_list = wp_get_post_terms( get_the_ID(), 'portfolio-category' ); 
+							global $post;
+				            $image      = wp_prepare_attachment_for_js( get_post_thumbnail_id( $post->ID ) );
+				            $data_size  = $image['width'] . 'x' . $image['height'];
+				            $image_alt  = ( !empty( $image['alt'] ) ) ? 'alt="' . esc_attr( $image['alt'] ) . '"' : 'alt="' .get_the_title() . '"';
+				            $image_cap  = $image['caption']; 
 						?>
-							<div class="portfolio cx-portfolio pad-0 col-sm-4 col-xs-12 portfolio-item <?php foreach ($term_list as $sterm) { echo $sterm->slug.' '; } ?>">
-								<figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" class="portfolio-type-2">
-									<a href="<?php esc_url( the_post_thumbnail_url('full') ); ?>" itemprop="contentUrl" data-size="<?php echo esc_attr( $data_size ); ?>">
-									<?php 
-									if( $i == 1 ) : ?>
-										<img src="<?php esc_url( the_post_thumbnail_url('first-portfolio-img-rv2') ); ?>" itemprop="thumbnail" <?php echo $image_alt; ?> class="img-responsive" />
-									<?php		
-									else : ?>
-										 <img src="<?php esc_url( the_post_thumbnail_url('portfolio-min-img-rv2') ); ?>" itemprop="thumbnail" <?php echo $image_alt; ?> class="img-responsive" />
-									<?php		 
-									endif;
-									 ?>
-									</a>
-									
-									<div class="image-mask">
+							<div class="portfolio cx-portfolio col-xs-12 col-sm-4 <?php echo ($i==1) ? 'long-height' : 'short-height'; ?> pad-0 <?php foreach ($term_list as $sterm) { echo $sterm->slug.' '; }?>">
+								<?php $height = ($i!=1) ? 250 : 500 + 2*$column_gutter; ?>
+								<figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" <?php echo (!empty($column_gutter)) ? ' style="margin:'. $column_gutter .'px; height:'.$height.'px"; class="item-'.$i.'"' : '' ?>>
+								    <a <?php if(!empty($column_gutter)): echo 'class="no-transform"'; endif; ?> style="background-image:url('<?php esc_url(the_post_thumbnail_url('full')); ?>');" href="<?php esc_url( the_post_thumbnail_url('full') ); ?>" itemprop="contentUrl" data-size="<?php echo esc_attr( $data_size ); ?>">
+								        <img style="visibility:hidden;opacity:0;" src="<?php echo esc_url( the_post_thumbnail_url('rectangle-five') ); ?>" itemprop="thumbnail" class="img-responsive" <?php echo $image_alt; ?> />
+								    </a>  
+							    <figcaption itemprop="caption description"></figcaption>
+									<div class="image-mask <?php echo (empty($column_gutter) ? 'add-transform' : '' );?>">
 										<div class="image-content">
 											<a href="<?php echo esc_url( the_post_thumbnail_url( 'full' ) ); ?>">
-												<i class="flaticon-plus-sign-to-add"></i>
+												<i class="fa fa-search" aria-hidden="true"></i>
 											</a>
-											<p class="portfolio-title"> <a href="<?php the_permalink(); ?>" class="clickable"> <?php echo esc_html( get_the_title() ); ?> </a></p>
-											<?php if(($read_more == 'yes') && !empty('read_more_text')): ?>
-											<p class="portfolio-readmore"><a href="<?php the_permalink(); ?>" class="clickable"><?php printf('%s', $read_more_text); ?></a></p>
-											<?php endif; ?>
+											<h3 class="portfolio-title"> <a href="<?php the_permalink(); ?>" class="clickable"> <?php echo esc_html( get_the_title() ); ?> </a></h3>
+
 										</div>
 									</div>
 								</figure>
@@ -261,70 +254,66 @@ function cx_portfolio_mini_shortcode( $atts, $content = null ) {
 						</div> <!-- end of col-sm-8 -->
 					</div>
 				</div>
-						
-
-
 					
+	  			<div class="portfolio-wrapper image-pop-up responsive-class" itemscope itemtype="http://schema.org/ImageGallery">
+	  				<?php 
+					//start wp query..
+  					$args = array(
+  					'post_type'			=> 'portfolio',
+  					'orderby'			=> 'data',
+  					'order'				=> 'DESC',
+  					'posts_per_page'	=> 5
+  					);
+	  				$data = new WP_Query( $args );
+	  				$i = 0;
+					//Check post
+	  				if( $data->have_posts() ) :
+						//startloop here..
+	  					while( $data->have_posts() ) : $data->the_post(); 
+	  					$i++;
 
-		  			<div class="portfolio-wrapper image-pop-up responsive-class" itemscope itemtype="http://schema.org/ImageGallery">
-		  				<?php 
-						//start wp query..
-	  					$args = array(
-	  					'post_type'			=> 'portfolio',
-	  					'orderby'			=> 'data',
-	  					'order'				=> 'DESC',
-	  					'posts_per_page'	=> 5
-	  					);
-		  				$data = new WP_Query( $args );
-		  				$i = 0;
-						//Check post
-		  				if( $data->have_posts() ) :
-							//startloop here..
-		  					while( $data->have_posts() ) : $data->the_post(); 
-		  					$i++;
+	  				$term_list = wp_get_post_terms( get_the_ID(), 'portfolio-category' ); 
 
-		  				$term_list = wp_get_post_terms( get_the_ID(), 'portfolio-category' ); 
+	  				global $post;
+	  				$image      = wp_prepare_attachment_for_js( get_post_thumbnail_id( $post->ID ) );
+	  				$data_size  = $image['width'] . 'x' . $image['height'];
+	  				$image_alt  = ( !empty( $image['alt'] ) ) ? 'alt="' . esc_attr( $image['alt'] ) . '"' : 'alt="' .get_the_title() . '"';
+	  				$image_cap  = $image['caption']; ?>
 
-		  				global $post;
-		  				$image      = wp_prepare_attachment_for_js( get_post_thumbnail_id( $post->ID ) );
-		  				$data_size  = $image['width'] . 'x' . $image['height'];
-		  				$image_alt  = ( !empty( $image['alt'] ) ) ? 'alt="' . esc_attr( $image['alt'] ) . '"' : 'alt="' .get_the_title() . '"';
-		  				$image_cap  = $image['caption']; ?>
+					<div class="portfolio cx-portfolio col-xs-12 <?php echo ($i!=2) ? 'col-sm-3 quarter' : 'col-sm-6 half'; ?> pad-0 <?php foreach ($term_list as $sterm) { echo $sterm->slug.' '; }?>">
+						<?php $height = ($i!=2) ? 250 : 500 + 2*$column_gutter; ?>
+						<figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" <?php echo (!empty($column_gutter)) ? ' style="margin:'. $column_gutter .'px; height:'.$height.'px"; class="item-'.$i.'"' : '' ?>>
+						    <a <?php if(!empty($column_gutter)): echo 'class="no-transform"'; endif; ?> style="background-image:url('<?php esc_url(the_post_thumbnail_url('full')); ?>');" href="<?php esc_url( the_post_thumbnail_url('full') ); ?>" itemprop="contentUrl" data-size="<?php echo esc_attr( $data_size ); ?>">
+						        <img style="visibility:hidden;opacity:0;" src="<?php echo esc_url( the_post_thumbnail_url('rectangle-five') ); ?>" itemprop="thumbnail" class="img-responsive" <?php echo $image_alt; ?> />
+						    </a>  
+					    <figcaption itemprop="caption description"></figcaption>
+							<div class="image-mask <?php echo (empty($column_gutter) ? 'add-transform' : '' );?>">
+								<div class="image-content">
+									<a href="<?php echo esc_url( the_post_thumbnail_url( 'full' ) ); ?>">
+										<i class="fa fa-search" aria-hidden="true"></i>
+									</a>
+									<h3 class="portfolio-title"> <a href="<?php the_permalink(); ?>" class="clickable"> <?php echo esc_html( get_the_title() ); ?> </a></h3>
 
-						<div class="portfolio cx-portfolio col-xs-12 <?php echo ($i!=2) ? 'col-sm-3 quarter' : 'col-sm-6 half'; ?> pad-0 <?php foreach ($term_list as $sterm) { echo $sterm->slug.' '; }?>">
-							<?php $height = ($i!=2) ? 250 : 500 + 2*$column_gutter; ?>
-							<figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" <?php echo (!empty($column_gutter)) ? ' style="margin:'. $column_gutter .'; height:'.$height.'px";' : '' ?>>
-							    <a <?php if(!empty($column_gutter)): echo 'class="no-transform"'; endif; ?> style="background-image:url('<?php esc_url(the_post_thumbnail_url('full')); ?>');" href="<?php esc_url( the_post_thumbnail_url('full') ); ?>" itemprop="contentUrl" data-size="<?php echo esc_attr( $data_size ); ?>">
-							        <img style="visibility:hidden;opacity:0;"src="<?php echo esc_url( the_post_thumbnail_url('rectangle-five') ); ?>" itemprop="thumbnail" class="img-responsive" <?php echo $image_alt; ?> />
-							    </a>  
-						    <figcaption itemprop="caption description"></figcaption>
-								<div class="image-mask">
-									<div class="image-content">
-										<a href="<?php echo esc_url( the_post_thumbnail_url( 'full' ) ); ?>">
-											<i class="fa fa-search" aria-hidden="true"></i>
-										</a>
-										<h3 class="portfolio-title"> <a href="<?php the_permalink(); ?>" class="clickable"> <?php echo esc_html( get_the_title() ); ?> </a></h3>
-
-									</div>
 								</div>
-							</figure>
-						</div>
-		  						
+							</div>
+						</figure>
+					</div>
+	  						
 
-		  				<?php 
-		  				endwhile;
-		  				endif;
-		  				wp_reset_postdata();
-		  				?>
+	  				<?php 
+	  				endwhile;
+	  				endif;
+	  				wp_reset_postdata();
+	  				?>
 
-		  			</div>
-				</div>			  			
-		  	</div>
-		  <div class="clearfix"></div>
+	  			</div> <!-- end of portfolio-wrapper -->
+			</div>	<!-- end of user class -->
+	  	</div> <!-- end of master-class -->
+		<div class="clearfix"></div>
 			
 	<?php endif; //End layout - 3 ?>
 
-	<?php endif; ?>
+	<?php endif; ?> <!-- End Empty Layout -->
 
 	<!-- Initializing Photoswipe -->
 	<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
@@ -446,11 +435,11 @@ function cx_portfolio_mini_kc() {
 	    						'label'       	=> esc_html__('No of Column', 'codexin'),
 	    						'type'        	=> 'select',
 	    						'options'		=> array(
-    								'50'	=> '2 Column',
-    								'33.33'	=> '3 Column',
-    								'25'	=> '4 Column',
-    								'20'	=> '5 Column',
-    								'16.66'	=> '6 Column',
+    								'50%'	=> '2 Column',
+    								'33.33333333%'	=> '3 Column',
+    								'25%'	=> '4 Column',
+    								'20%'	=> '5 Column',
+    								'16.66666666%'	=> '6 Column',
     							),
 
 									'relation' => array(
@@ -467,9 +456,9 @@ function cx_portfolio_mini_kc() {
 	    						'type'        	=> 'text',
 									'relation' => array(
 										'parent'	=> 'layout',
-										'show_when'	=> array('1', '3'),
+										'show_when'	=> array('1', '2', '3'),
 									),
-	    						'description'	=> esc_html__( 'Column Gutter/Gap on "%". Example: 0.5', 'codexin' ),
+	    						'description'	=> esc_html__( 'Column Gutter/Gap on "px". Enter only value. For Example: 5', 'codexin' ),
 	    					),
 
 	    					array(
