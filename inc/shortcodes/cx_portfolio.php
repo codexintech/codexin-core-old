@@ -53,7 +53,6 @@ function cx_portfolio_shortcode( $atts, $content = null ) {
 				if( empty($include) ):
 					$args = array(
 						'post_type'				=> 'portfolio',
-						'meta_key'				=> ( $orderby == 'meta_value' ) ? 'reveal_portfolio_date' : '',
 						'order'					=> $order,
 						'orderby'				=> $orderby,
 						'paged'   				=> $paged,
@@ -62,7 +61,6 @@ function cx_portfolio_shortcode( $atts, $content = null ) {
 				else:
 					$args = array(
 						'post_type'				=> 'portfolio',
-						'meta_key'				=> ( $orderby == 'meta_value' ) ? 'reveal_portfolio_date' : '',
 						'order'					=> $order,
 						'orderby'				=> $orderby,
 						'paged'   				=> $paged,
@@ -384,8 +382,8 @@ function cx_portfolio_kc() {
 	    						'label'       	=> esc_html__('Portfolio Sorting Method', 'codexin'),
 	    						'type'        	=> 'select',
 	    						'options'		=> array(
-    								'meta_value'	 => esc_html__('Project Completion Date', 'codexin'),
-    								'name'			 => esc_html__('Project Name', 'codexin'),
+    								'date'	 		 => esc_html__('Date', 'codexin'),
+    								'name'			 => esc_html__('Name', 'codexin'),
     								'rand'			 => esc_html__('Randomize', 'codexin'),
     							),
 	    						'value'			=> 'meta_value',
