@@ -1658,6 +1658,24 @@ INDEX:
     008 - Codexin Mini Portfolio
 **************************************/
 
+
+.cx-portfolios .blog-more {
+    text-align: center;
+}
+
+
+.cx-portfolios .portfolio-filter .blog-more a {
+    margin-top: 0;
+    padding: 7px 15px;
+    border-color:#333;
+}
+
+.cx-portfolios .portfolio-filter li.blog-more {
+    padding:0;
+    border:0;
+    
+}
+
 /**
  * Mini Portfolio Type 01
  *
@@ -1690,7 +1708,8 @@ INDEX:
     position: relative;
     padding: 7px 15px;
     letter-spacing: 1px;
-    margin: 2px;
+    margin-left: 5px;
+    margin-right: 0;
     border: 1px solid #333;
     font-size: 12px;
     font-weight: bold;

@@ -125,9 +125,7 @@ function cx_portfolio_mini_shortcode( $atts, $content = null ) {
 		            </div><!-- end of portfolio-item-wrapper -->
 					
 					<?php if($show_view_btn): ?>
-			            <div class="btn-portfolio">
-			            	<a href="<?php echo esc_url($show_view_btn_link); ?>" class="cx-btn"><?php echo $show_view_btn_text ? esc_html($show_view_btn_text) : esc_html__('View All', 'codexin'); ?></a>
-		            	</div>
+						<p class="blog-more"><a class="cx-btn" href="<?php echo esc_url($show_view_btn_link); ?>"><?php echo $show_view_btn_text ? esc_html($show_view_btn_text) : esc_html__('View All', 'codexin'); ?></a></p>
 		            <?php endif; ?>	
 				</div><!-- end of portfolio-wrapper-1 -->
 			</div> <!-- end of cx-portfolios -->
@@ -161,7 +159,11 @@ function cx_portfolio_mini_shortcode( $atts, $content = null ) {
 
 											}
 										?>
-										<li class="view-all"> view all </li>
+										<?php if($show_view_btn): ?>
+											
+												<li class="blog-more"><a class="cx-btn" href="<?php echo esc_url($show_view_btn_link); ?>"><?php echo $show_view_btn_text ? esc_html($show_view_btn_text) : esc_html__('View All', 'codexin'); ?></a></li>
+											
+										<?php endif; ?>	
 									</ul>
 								</div>
 							</div> <!-- end of col-sm-8 -->
@@ -255,7 +257,11 @@ function cx_portfolio_mini_shortcode( $atts, $content = null ) {
 
 										}
 									?>
-									<li class="view-all"> view all </li>
+									<?php if($show_view_btn): ?>
+										
+											<li class="blog-more"><a class="cx-btn" href="<?php echo esc_url($show_view_btn_link); ?>"><?php echo $show_view_btn_text ? esc_html($show_view_btn_text) : esc_html__('View All', 'codexin'); ?></a></li>
+										
+									<?php endif; ?>	
 								</ul>
 							</div>
 						</div> <!-- end of col-sm-8 -->
@@ -532,6 +538,30 @@ function cx_portfolio_mini_kc() {
 							  'name' 			=> 'show_view_btn',
 							  'label' 		=> esc_html__( 'Enable \'View All\' Button? ', 'codexin' ),
 							  'type' 			=> 'toggle',
+							),
+
+							array(
+								'name'	=> 'show_view_btn_text',
+								'label' => esc_html__( 'Text For \'View All\' Button', 'codexin' ),
+								'type'	=> 'text',
+				                'relation'		=> array(
+				                	'parent'	=> 'show_view_btn',
+				                	'show_when'	=> 'yes'
+				                	),
+                				'value' => 'View All',
+								'description' => esc_html__( 'Default Text is "View All"', 'codexin' ),
+							),
+
+							array(
+								'name'	=> 'show_view_btn_link',
+								'label' => esc_html__( 'URL For \'View All\' Button', 'codexin' ),
+								'type'	=> 'text',
+				                'relation'		=> array(
+				                	'parent'	=> 'show_view_btn',
+				                	'show_when'	=> 'yes'
+				                	),
+                				'value' => '#',
+								'description' => esc_html__( 'Enter URL', 'codexin' ),
 							),
 
 							array(
