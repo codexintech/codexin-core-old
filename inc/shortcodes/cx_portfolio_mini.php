@@ -21,6 +21,9 @@ function cx_portfolio_mini_shortcode( $atts, $content = null ) {
 		'read_more'     			=> '',
 		'read_more_text' 			=> '',
 		'layout'					=> '',
+		'show_view_btn'				=> '',
+		'show_view_btn_text'		=> '',
+		'show_view_btn_link'		=> '',
 		'class'						=> '',
 	), $atts));
 
@@ -30,7 +33,6 @@ function cx_portfolio_mini_shortcode( $atts, $content = null ) {
 	$master_class = apply_filters( 'kc-el-class', $atts );
 	$master_class[] = 'cx-portfolios';
 	ob_start(); 
-
 
 		if( ! empty( $layout ) ) :
 
@@ -42,26 +44,26 @@ function cx_portfolio_mini_shortcode( $atts, $content = null ) {
 			<div class="<?php echo esc_attr( implode( ' ', $master_class )); ?>">
 				<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>" >
 
-						<div class="row">
-							<div class="col-xs-12">
-								<div class="portfolio-filter">
-									<ul class="list-inline">
-										<li class="active" data-filter="*">All</li>
-										<?php 
-											$taxonomy = 'portfolio-category';
-											$taxonomies = get_terms($taxonomy); 
-											foreach ( $taxonomies as $tax ) {
-												echo '<li data-filter=".' .strtolower($tax->slug) .'" >' . $tax->name . '</li>';
+					<div class="row">
+						<div class="col-xs-12">
+							<div class="portfolio-filter">
+								<ul class="list-inline">
+									<li class="active" data-filter="*">All</li>
+									<?php 
+										$taxonomy = 'portfolio-category';
+										$taxonomies = get_terms($taxonomy); 
+										foreach ( $taxonomies as $tax ) {
+											echo '<li data-filter=".' .strtolower($tax->slug) .'" >' . $tax->name . '</li>';
 
-											}
-										?>
-									</ul>
-								</div><!--end of portfolio-filter-->
-							</div><!--end of col-xs-12-->
-						</div> <!-- end of row -->
+										}
+									?>
+								</ul>
+							</div><!--end of portfolio-filter-->
+						</div><!--end of col-xs-12-->
+					</div> <!-- end of row -->
 
 
-		            <div class="portfolio-wrapper image-pop-up" itemscope itemtype="http://schema.org/ImageGallery">
+		            <div class="portfolio-item-wrapper image-pop-up" itemscope itemtype="http://schema.org/ImageGallery">
 
 					<?php 
 						//start wp query..
@@ -75,7 +77,6 @@ function cx_portfolio_mini_shortcode( $atts, $content = null ) {
 						$i = 0;
 						//Check post
 						if( $data->have_posts() ) :
-
 							//startloop here..
 							while( $data->have_posts() ) : $data->the_post(); 
 								$i++;
@@ -100,7 +101,7 @@ function cx_portfolio_mini_shortcode( $atts, $content = null ) {
 
 							    </a>
 							    <figcaption itemprop="caption description"><?php echo esc_html( $image_cap ); ?></figcaption>
-								<div class="image-mask">
+								<div class="image-mask <?php echo (empty($column_gutter) ? 'add-transform' : '' );?>">
 									<div class="image-content">
 										<a href="<?php echo esc_url( the_post_thumbnail_url( 'full' ) ); ?>">
 											<?php if(($show_icon == 'yes') && !empty('icon')): ?>
@@ -121,8 +122,14 @@ function cx_portfolio_mini_shortcode( $atts, $content = null ) {
 							endif;
 							wp_reset_postdata();
 						 ?>
-		            </div><!-- end of portfolio-wrapper -->
-				</div><!-- end of portfolio-area -->
+		            </div><!-- end of portfolio-item-wrapper -->
+					
+					<?php if($show_view_btn): ?>
+			            <div class="btn-portfolio">
+			            	<a href="<?php echo esc_url($show_view_btn_link); ?>" class="cx-btn"><?php echo $show_view_btn_text ? esc_html($show_view_btn_text) : esc_html__('View All', 'codexin'); ?></a>
+		            	</div>
+		            <?php endif; ?>	
+				</div><!-- end of portfolio-wrapper-1 -->
 			</div> <!-- end of cx-portfolios -->
 
 	<?php endif; // End layout - 1
@@ -164,7 +171,7 @@ function cx_portfolio_mini_shortcode( $atts, $content = null ) {
 					</div>
 					
 
-					<div class="portfolio-wrapper image-pop-up" itemscope itemtype="http://schema.org/ImageGallery">
+					<div class="portfolio-item-wrapper image-pop-up" itemscope itemtype="http://schema.org/ImageGallery">
 					<?php 
 						//start wp query..
 						$args = array(
@@ -255,7 +262,7 @@ function cx_portfolio_mini_shortcode( $atts, $content = null ) {
 					</div>
 				</div>
 					
-	  			<div class="portfolio-wrapper image-pop-up responsive-class" itemscope itemtype="http://schema.org/ImageGallery">
+	  			<div class="portfolio-item-wrapper image-pop-up responsive-class" itemscope itemtype="http://schema.org/ImageGallery">
 	  				<?php 
 					//start wp query..
   					$args = array(
@@ -399,7 +406,7 @@ function cx_portfolio_mini_kc() {
 									),
 								'value'			=> '1',
 								'admin_label' 	=> true,
-								),
+							),
 
 							array(
 	    						'name'        	=> 'number_of_portfolios',
@@ -409,7 +416,7 @@ function cx_portfolio_mini_kc() {
 										'parent'	=> 'layout',
 										'show_when'	=> '1',
 									),
-	    						'value'			=> '',
+	    						'value'			=> '8',
 	    						'description'	=> esc_html__( 'Choose the number of portfolios you want to show. To show all portfolio, leave the field blank', 'codexin' ),
 	    					),
 
@@ -418,8 +425,8 @@ function cx_portfolio_mini_kc() {
 	    						'label'       	=> esc_html__('Portfolio Layout Mode', 'codexin'),
 	    						'type'        	=> 'select',
 	    						'options'		=> array(
-    								'1'	=> 'Grid',
-    								'2'	=> 'Masonry',
+    								'1'	=> 'Rectangle Grid',
+    								'2'	=> 'Masonry Grid',
     							),
 
 									'relation' => array(
@@ -442,10 +449,10 @@ function cx_portfolio_mini_kc() {
     								'16.66666666%'	=> '6 Column',
     							),
 
-									'relation' => array(
-										'parent'	=> 'layout',
-										'show_when'	=> '1',
-									),
+								'relation' => array(
+									'parent'	=> 'layout',
+									'show_when'	=> '1',
+								),
 	    						'value'			=> '25',
 	    						'description'	=> esc_html__( 'Choose No. of Column ', 'codexin' ),
 	    					),
@@ -473,23 +480,23 @@ function cx_portfolio_mini_kc() {
 	    						'description'	=> esc_html__( 'Choose The Order to Display Portfolios.', 'codexin' ),
 	    					),
 
-              array(
-                  'name' 			=> 'show_icon',
-                  'label' 		=> esc_html__( 'Enable Icon? ', 'codexin' ),
-                  'type' 			=> 'toggle',
-              ),
+							array(
+							  'name' 			=> 'show_icon',
+							  'label' 		=> esc_html__( 'Enable Icon? ', 'codexin' ),
+							  'type' 			=> 'toggle',
+							),
 
-	    					array(
-	    						'name'        	=> 'icon',
-	    						'label'       	=> esc_html__('Select Hover Icon', 'codexin'),
-	    						'type'        	=> 'icon_picker',
-	                'relation'		=> array(
-	                	'parent'	=> 'show_icon',
-	                	'show_when'	=> 'yes'
-	                ),
-	    						'value'			=> 'et-focus',
-	    						'description'	=> esc_html__( 'Choose Icon to show on hover.', 'codexin' ),
-	    					),
+							array(
+								'name'        	=> 'icon',
+								'label'       	=> esc_html__('Select Hover Icon', 'codexin'),
+								'type'        	=> 'icon_picker',
+							    'relation'		=> array(
+							    	'parent'	=> 'show_icon',
+							    	'show_when'	=> 'yes'
+									),
+								'value'			=> 'et-focus',
+								'description'	=> esc_html__( 'Choose Icon to show on hover.', 'codexin' ),
+							),
 
 							array(
 								'name'	=> 'section_title',
@@ -502,31 +509,37 @@ function cx_portfolio_mini_kc() {
 								'description' => esc_html__( 'Enter Portfolio Section Title Here', 'codexin' ),
 								),
 
-              array(
-                  'name' 			=> 'read_more',
-                  'label' 		=> esc_html__( 'Enable \'Read More\' Button? ', 'codexin' ),
-                  'type' 			=> 'toggle',
-              ),
+							array(
+							  'name' 			=> 'read_more',
+							  'label' 		=> esc_html__( 'Enable \'Read More\' Button? ', 'codexin' ),
+							  'type' 			=> 'toggle',
+							),
 
 
 							array(
 								'name'	=> 'read_more_text',
 								'label' => esc_html__( 'Text For \'Read More\' Button', 'codexin' ),
 								'type'	=> 'text',
-                'relation'		=> array(
-                	'parent'	=> 'read_more',
-                	'show_when'	=> 'yes'
-                ),
-                'value' => 'Read More',
+				                'relation'		=> array(
+				                	'parent'	=> 'read_more',
+				                	'show_when'	=> 'yes'
+				                	),
+                				'value' => 'Read More',
 								'description' => esc_html__( 'Default Text is "Read More"', 'codexin' ),
-								),
+							),
+
+							array(
+							  'name' 			=> 'show_view_btn',
+							  'label' 		=> esc_html__( 'Enable \'View All\' Button? ', 'codexin' ),
+							  'type' 			=> 'toggle',
+							),
 
 							array(
 								'name'	=> 'class',
 								'label' => esc_html__( 'Extra Class', 'codexin' ),
 								'type'	=> 'text',
 								'description' => esc_html__( 'If you wish to style a particular content element differently, please add a class name to this field and refer to it in your custom CSS.', 'codexin' ),
-								),
+							),
 
                 		), //End general
 

@@ -5,7 +5,7 @@
 	Isotope Js for Portfolio Section
     ---------------------------------------------------------------- */
 
-    var $isocontainer = $('.portfolio-wrapper');
+    var $isocontainer = $('.portfolio-item-wrapper');
 
     $isocontainer.imagesLoaded(function() {
         $isocontainer.isotope({

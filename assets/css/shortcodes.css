@@ -1934,9 +1934,7 @@ figure.portfolio-type-2:hover .image-mask a {
  */
 
 
- .portfolio-wrapper {
-    overflow: hidden;
- }
+
 
 .portfolio-wrapper-1 .portfolio,
 .portfolio-wrapper-2 .portfolio,
@@ -4358,7 +4356,7 @@ section#portfolio_rv3 {
 
 
 
-.portfolio-wrapper .pad-0 {
+.portfolio-item-wrapper .pad-0 {
     padding: 0;
 }
 
@@ -4441,9 +4439,9 @@ transform: scale(1.006);
     margin: 0 ;
 }
 
-.portfolio-wrapper{
-    /*max-width: 2000px;*/
+.portfolio-item-wrapper{
     margin: 0 auto;
+    overflow: hidden;
 }
 
 .rv3 .portfolio-type-2 img {
