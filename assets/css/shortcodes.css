@@ -3421,6 +3421,13 @@ section#location {
    016 - Codexin Blog
 **********************************/
 
+.cx-portfolio-standard .portfolio-archive-wrapper article:first-child,
+.cx-events-standard .events-archive-wrapper article:first-child,
+.cx-team-grid-wrapper .team-wrapper,
+.cx-testimonials .testimonial-lists-wrapper .testimonial-archive-wrapper article:first-child,
+.cx-blog-standard .blog-list-wrapper article:first-child,
+.cx-portfolio-standard .number-pagination .pagination,
+.cx-events-standard .number-pagination .pagination,
 .section + .section .cx-portfolio-standard,
 .page-template-page-home .cx-portfolio-standard,
 .section + .section .cx-events-standard,
@@ -3442,35 +3449,34 @@ section#location {
     margin-top: -40px;
 }
 
+.page-template-page-no-sidebar .cx-testimonials.testimonials-no-pagination,
+.page-template-page-left-sidebar .cx-testimonials.testimonials-no-pagination,
+.page-template-default .cx-testimonials.testimonials-no-pagination,
 .page-template-page-no-sidebar .cx-blog-standard {
     margin-bottom: -40px;
 }
 
-.cx-portfolio-standard .portfolio-archive-wrapper article:first-child,
-.cx-events-standard .events-archive-wrapper article:first-child,
-.cx-team-grid-wrapper .team-wrapper,
-.cx-testimonials .testimonial-lists-wrapper .testimonial-archive-wrapper article:first-child,
-.cx-blog-standard .blog-list-wrapper article:first-child {
-    margin-top: 0;
-}
-
+.cx-testimonials .testimonial-lists-wrapper nav.number-pagination,
 .cx-blog-standard .posts-nav {
 /*    padding-top: 40px;
     border-top: 1px dashed #ddd;*/
     margin-top: 40px;
 }
 
+.page-numbers.dots,
+.page-numbers.dots:hover {
+    color: inherit;
+}
+
 .page-numbers.dots {
     border: 0;
     background: #fff;
-    color: inherit;
     padding: 0;
 }
 
 .page-numbers.dots:hover {
     background: inherit;
     border: inherit;
-    color: inherit;
 }
 
 
@@ -3486,6 +3492,12 @@ section#location {
 }
 
 /*.cx-testimonials .testimonial-archive-wrapper article:last-child,*/
+.page-template-page-full-width .cx-portfolio-standard .posts-nav,
+.page-template-page-no-sidebar .cx-portfolio-standard .portfolio-list-wrapper,
+.page-template-page-no-sidebar .cx-portfolio-standard .portfolio-grid-wrapper,
+.col-sm-8.col-md-8 .cx-portfolio-standard .posts-nav,
+/*.page-template-page-left-sidebar .cx-portfolio-standard .portfolio-list-wrapper,*/
+.cx-testimonials.testimonials-no-pagination,
 .cx-portfolio-standard .portfolio-content-wrapper .posts-nav,
 .cx-events-standard .events-content-wrapper .posts-nav,
 .cx-team-grid-wrapper .team-wrapper {
@@ -3493,25 +3505,14 @@ section#location {
 }
 
 .cx-testimonials .testimonial-lists-wrapper nav.number-pagination {
-    margin-top: 40px;
-}
-
-.cx-testimonials .testimonial-lists-wrapper nav.number-pagination {
     border-top: 1px dashed #ddd;
 }
 
-.cx-testimonials.testimonials-no-pagination {
-    margin-bottom: 20px;
-}
-
+.page-template-page-home .cx-portfolio-standard .posts-nav,
+.cx-portfolio-standard .portfolio-archive-wrapper article:first-child,
+.cx-events-standard .events-archive-wrapper article:first-child,
 .page-template-page-home .cx-testimonials.testimonials-no-pagination {
     margin-bottom: 40px;
-}
-
-.page-template-page-no-sidebar .cx-testimonials.testimonials-no-pagination,
-.page-template-page-left-sidebar .cx-testimonials.testimonials-no-pagination,
-.page-template-default .cx-testimonials.testimonials-no-pagination {
-    margin-bottom: -40px;
 }
 
 
@@ -3519,7 +3520,11 @@ section#location {
    018 - Codexin Events
 **********************************/
 
-.col-sm-8.col-md-8 .cx-portfolio-standard .portfolio-content-wrapper,
+.page-template-page-no-sidebar .cx-portfolio-standard .portfolio-list-wrapper .posts-nav,
+.page-template-page-no-sidebar .cx-portfolio-standard .portfolio-grid-wrapper .posts-nav,
+.col-sm-8.col-md-8 .cx-portfolio-standard .posts-nav,
+.col-sm-8.col-md-8 .cx-portfolio-standard .portfolio-archive-wrapper,
+.page-template-page-no-sidebar .cx-portfolio-standard .portfolio-archive-wrapper,
 .page-template-page-no-sidebar .cx-blog-standard .blog-list-wrapper,
 .page-template-page-no-sidebar .cx-events-standard .events-content-wrapper,
 .col-sm-8.col-md-8 .cx-events-standard .events-content-wrapper {
@@ -3532,16 +3537,6 @@ section#location {
 .col-sm-8.col-md-8 .cx-portfolio-standard,
 .col-sm-8.col-md-8 .cx-events-standard {
     margin-bottom: -60px;
-}
-
-.cx-portfolio-standard .portfolio-archive-wrapper article:first-child,
-.cx-events-standard .events-archive-wrapper article:first-child {
-    margin-bottom: 40px;
-}
-
-.cx-portfolio-standard .number-pagination .pagination,
-.cx-events-standard .number-pagination .pagination {
-    margin-top: 0;
 }
 
 

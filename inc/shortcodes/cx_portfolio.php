@@ -31,7 +31,7 @@ function cx_portfolio_shortcode( $atts, $content = null ) {
 	$master_class[] = 'cx-portfolio-standard';
 
     // Retrieving user define classes
-    $classes = array( 'portfolio-content-wrapper' );
+    $classes = array( ($layout == 'grid') ? 'portfolio-grid-wrapper' : 'portfolio-list-wrapper' );
     (!empty($class)) ? $classes[] = $class : '';
 
 	// Extracting user included categories
@@ -44,136 +44,122 @@ function cx_portfolio_shortcode( $atts, $content = null ) {
 
 		<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
 			<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
-				<div class="<?php echo ($layout == 'grid') ? 'portfolio-grid-wrapper' : 'portfolio-list-wrapper' ?>">
-					<?php 
+				<?php 
 
-					echo ($layout == 'grid') ? '<div class="row">' : '';
-					//start query..
-					$paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
+				echo ($layout == 'grid') ? '<div class="row">' : '';
+				//start query..
+				$paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
 
-					if( empty($include) ):
-						$args = array(
-							'post_type'				=> 'portfolio',
-							'meta_key'				=> ( $orderby == 'meta_value' ) ? 'reveal_portfolio_date' : '',
-							'order'					=> $order,
-							'orderby'				=> $orderby,
-							'paged'   				=> $paged,
-						);
+				if( empty($include) ):
+					$args = array(
+						'post_type'				=> 'portfolio',
+						'order'					=> $order,
+						'orderby'				=> $orderby,
+						'paged'   				=> $paged,
+					);
 
-					else:
-						$args = array(
-							'post_type'				=> 'portfolio',
-							'meta_key'				=> ( $orderby == 'meta_value' ) ? 'reveal_portfolio_date' : '',
-							'order'					=> $order,
-							'orderby'				=> $orderby,
-							'paged'   				=> $paged,
-						    'tax_query' 			=> array(
-						        array(
-						            'taxonomy' => 'portfolio-category',
-						            'field'    => 'term_id',
-						            'terms'    => $cat_includes,
-						        ),
-						    ),
-						);
-					endif;
+				else:
+					$args = array(
+						'post_type'				=> 'portfolio',
+						'order'					=> $order,
+						'orderby'				=> $orderby,
+						'paged'   				=> $paged,
+					    'tax_query' 			=> array(
+					        array(
+					            'taxonomy' => 'portfolio-category',
+					            'field'    => 'term_id',
+					            'terms'    => $cat_includes,
+					        ),
+					    ),
+					);
+				endif;
 
-					$data = new WP_Query( $args );
+				$data = new WP_Query( $args );
 
-					if( $data->have_posts() ) :
-						$i = 0;
-						echo '<div class="portfolio-archive-wrapper clearfix">';
+				if( $data->have_posts() ) :
+					$i = 0;
+					echo '<div class="portfolio-archive-wrapper clearfix">';
 
-						while( $data->have_posts() ) : $data->the_post();
-							$i++;
+					while( $data->have_posts() ) : $data->the_post();
+						$i++;
 
-							// Retrieving Image alt tag
-							$image_alt = ( !empty( retrieve_alt_tag() ) ) ? retrieve_alt_tag() : get_the_title();
+						// Retrieving Image alt tag
+						$image_alt = ( !empty( retrieve_alt_tag() ) ) ? retrieve_alt_tag() : get_the_title();
 
-							// Assigning classed for post_class
-							$post_classes = ($layout == 'list') ? 'clearfix portfolio-list' : '';
+						// Assigning classed for post_class
+						$post_classes = ($layout == 'list') ? 'clearfix portfolio-list' : '';
 
-							// layout
-							if( $layout == 'grid' ):
-								$grid_columns = 12/$grid_col;
-								printf('<div class="portfolio-single-wrap col-lg-%1$s col-md-%1$s col-sm-12">', $grid_columns);
-							endif;
+						// layout
+						if( $layout == 'grid' ):
+							$grid_columns = 12/$grid_col;
+							printf('<div class="portfolio-single-wrap col-lg-%1$s col-md-%1$s col-sm-12">', $grid_columns);
+						endif;
 
-							// Retrieving Values from the Metaboxes
-							$p_date = strtotime(rwmb_meta('reveal_portfolio_date', 'type=date'));
-							$port_date=date( get_option('date_format'), $p_date );
-				            	
-						?>
-							<article id="event-<?php esc_attr(the_ID()); ?>" <?php post_class(array(esc_attr($post_classes))); ?> itemscope itemtype="http://schema.org/Event">
-							    <div class="<?php echo ($layout == 'grid') ? 'portfolio-item-content' : 'post-wrapper'; ?>">
-							    	<?php echo ($layout == 'list') ? '<div class="port-list-wrapper">' : '' ?>
-							    		<?php if( $layout == 'list' ): ?>
-							                <div class="thumb-port" style="background-image:url('<?php if(has_post_thumbnail()): esc_url(the_post_thumbnail_url('reveal-rectangle-one')); else: echo '//placehold.it/600X375'; endif; ?>');">
-							                    <a href="<?php echo esc_url(get_the_permalink()); ?>"></a>
-							                    <?php if( !empty($port_date) ): ?>
-								                    <div class="port-date"><p><?php echo esc_html($port_date); ?></p></div>
-								                <?php endif; ?>
-							                </div>
-							            <?php else: ?>
-										    <div class="item-thumbnail">
-										        <img src="<?php echo esc_url(the_post_thumbnail_url( 'rectangle-four' )); ?>"  alt="<?php echo esc_attr($image_alt); ?>">                                          
-										        <ul class="portfolio-action-btn">
-										            <li>
-										                <a class="venobox" href="<?php echo esc_url(get_the_permalink()); ?>" itemprop="url"><i class="flaticon-link"></i></a>
-										            </li>
-										        </ul>                                            
-										    </div>
-									    <?php endif; ?>
+						// Retrieving the Lists of custom taxonomy for the specific ID
+						$port_list = get_the_term_list( $data->ID, 'portfolio-category', '', ', ', '' );
 
-							            <div class="<?php echo ($layout == 'list') ? 'desc-port' : 'portfolio-description' ?>">
-							            	<?php 
-							            	if( $layout == 'list' ):
-								            	$port_list = get_the_term_list( $data->ID, 'portfolio-category', '', ', ', '' );
-								            	if(!empty($port_list)): ?>
-									                <p class="list-tag"><i class="flaticon-bookmark"></i> 
-									                <?php 
-									                   printf( '%s', $port_list );
-									                ?>
-									                </p>
-									            <?php 
-								        		endif;
-								            endif;
-								            echo ( $layout == 'list' ) ? '<h2 class="post-title" itemprop="name">' : '<h4 itemprop="name">';
-							                
-							                ?>
-								                <a href="<?php echo esc_url(get_the_permalink()); ?>" itemprop="url">							                    
-									                <?php
-								                    if( $chr_length ) :
-								                    	if( function_exists('reveal_title') ):
-									                        reveal_title( $title_length );
-													    else:
-													    	echo '<p class="cx-error">'.esc_html__('Please Activate \'REVEAL\' Theme!', 'codexin').'</p>';
-									                    endif;
-								                    else:
-								                        the_title();
+						// Retrieving Values from the Metaboxes
+						$p_date = strtotime(rwmb_meta('reveal_portfolio_date', 'type=date'));
+						$port_date=date( get_option('date_format'), $p_date );
+			            	
+					?>
+						<article id="event-<?php esc_attr(the_ID()); ?>" <?php post_class(array(esc_attr($post_classes))); ?> itemscope itemtype="http://schema.org/Event">
+						    <div class="<?php echo ($layout == 'grid') ? 'portfolio-item-content' : 'post-wrapper'; ?>">
+						    	<?php echo ($layout == 'list') ? '<div class="port-list-wrapper">' : '' ?>
+						    		<?php if( $layout == 'list' ): ?>
+						                <div class="thumb-port" style="background-image:url('<?php if(has_post_thumbnail()): esc_url(the_post_thumbnail_url('reveal-rectangle-one')); else: echo '//placehold.it/600X375'; endif; ?>');">
+						                    <a href="<?php echo esc_url(get_the_permalink()); ?>"></a>
+						                    <?php if( !empty($port_date) ): ?>
+							                    <div class="port-date"><p><?php echo esc_html($port_date); ?></p></div>
+							                <?php endif; ?>
+						                </div> <!-- end of thumb-port -->
+						            <?php else: ?>
+									    <div class="item-thumbnail">
+									        <img src="<?php if(has_post_thumbnail()): esc_url(the_post_thumbnail_url('rectangle-one')); else: echo '//placehold.it/600X400'; endif; ?>"  alt="<?php echo esc_attr($image_alt); ?>">
+									        <ul class="portfolio-action-btn">
+									            <li>
+									                <a class="venobox" href="<?php echo esc_url(get_the_permalink()); ?>" itemprop="url"><i class="flaticon-link"></i></a>
+									            </li>
+									        </ul>                                            
+									    </div> <!-- end of item-thumbnail -->
+								    <?php endif; ?>
+
+						            <div class="<?php echo ($layout == 'list') ? 'desc-port' : 'portfolio-description' ?>">
+						            	<?php 
+						            	if( $layout == 'list' ):
+							            	if(!empty($port_list)): ?>
+								                <p class="list-tag"><i class="flaticon-bookmark"></i> 
+								                <?php 
+								                   printf( '%s', $port_list );
+								                ?>
+								                </p>
+								            <?php 
+							        		endif;
+							            endif;
+							            echo ( $layout == 'list' ) ? '<h2 class="post-title" itemprop="name">' : '<h4 itemprop="name">';
+						                
+						                ?>
+							                <a href="<?php echo esc_url(get_the_permalink()); ?>" itemprop="url">							                    
+								                <?php
+							                    if( $chr_length ) :
+							                    	if( function_exists('reveal_title') ):
+								                        reveal_title( $title_length );
+												    else:
+												    	echo '<p class="cx-error">'.esc_html__('Please Activate \'REVEAL\' Theme!', 'codexin').'</p>';
 								                    endif;
-									                ?>
-							                	</a>
-							            	<?php echo ( $layout == 'list' ) ? '</h2>' : '</h4>'; 
-							            	if( ($layout == 'grid') && (!empty($port_date) || !empty($e_start_time)) ): ?>
-										        <div class="event-grid-meta">
-										        	<?php if( !empty($port_date) ): ?>
-											        	<p class="ev-start-date pull-left" itemprop="startDate" content="<?php echo get_the_time('c'); ?>"><i class="flaticon-agenda"></i> <?php echo esc_html($port_date); ?></p>
-											        <?php endif; ?>
-											        <?php if( !empty($port_date) || !empty($e_start_time) ): ?>
-											        	<p class="event-grid-time">
-											        		<i class="flaticon-clock-1"></i>
-											        		<?php if( !empty($e_start_time) ): ?> 
-												        		<span class=""><?php echo esc_html($e_start_time); ?></span>
-												        	<?php endif;
-												        	if( !empty($e_end_time) ): ?>
-												        		<span class=""> - <?php echo esc_html($e_end_time); ?></span>
-											        		<?php endif; ?>
-											        	</p>
-											        <?php endif; ?>
-										        </div>
-									        <?php endif; ?>
-							                <div class="<?php echo ($layout == 'grid') ? 'portfolio-grid-excerpt' : 'list-content'; ?>">
-							                <?php
+							                    else:
+							                        the_title();
+							                    endif;
+								                ?>
+						                	</a>
+						            	<?php echo ( $layout == 'list' ) ? '</h2>' : '</h4>'; 
+						            	if( ($layout == 'grid') && !empty($port_list) ): ?>
+											<ul class="portfolio-cat">
+												<?php printf('%s', get_the_term_list( $data->ID, 'portfolio-category', '<li>', ', </li><li>', '</li>' ) ); ?>
+											</ul>
+								        <?php endif; 
+						                if ($layout == 'list'): 
+						                	echo '<div class="list-content">'; 
 							                    if( $chr_length ) :
 							                    	if( function_exists('reveal_excerpt') ):
 								                        reveal_excerpt( $desc_length );
@@ -183,53 +169,52 @@ function cx_portfolio_shortcode( $atts, $content = null ) {
 							                    else:
 							                        the_excerpt();
 							                    endif;
-							                ?>
+						                endif;
+						                ?>
+						                </div> <!-- end of <?php echo ($layout == 'grid') ? 'portfolio-description' : 'list-content'; ?> -->
+										<?php if( ($layout == 'list') && $read_more ): ?>
+							                <div class="<?php echo ( $layout == 'list' ) ? 'blog-more' : 'portfolio-grid-more'; ?>">
+							                	<a <?php echo ($layout == 'list') ? 'class="cx-btn"' : ''; ?> href="<?php echo esc_url(get_the_permalink()); ?>"><?php echo esc_html( !empty( $readmore_txt ) ? $readmore_txt : __('Read More', 'codexin') ); ?></a>
 							                </div>
-						                <?php echo ($layout == 'grid') ? '</div> <!-- end of portfolio-description -->' : ''; ?>
-											<?php if( $read_more ): ?>
-								                <div class="<?php echo ( $layout == 'list' ) ? 'blog-more' : 'portfolio-grid-more'; ?>">
-								                	<a <?php echo ($layout == 'list') ? 'class="cx-btn"' : ''; ?> href="<?php echo esc_url(get_the_permalink()); ?>"><?php echo esc_html( !empty( $readmore_txt ) ? $readmore_txt : __('Read More', 'codexin') ); ?></a>
-								                </div>
-								            <?php endif; ?>
-							            <?php echo ($layout == 'list') ? '</div> <!-- end of desc-portfolio -->' : ''; ?>
-									<?php echo ($layout == 'list') ? '</div> <!-- end of event-list-wrapper -->' : '' ?>
-						        </div> <!-- end of <?php echo ($layout == 'grid') ? 'portfolio-item-content' : 'post-wrapper'; ?> -->
-						    </article> <!-- #event-## -->
-						    <?php 
-						    if( $layout == 'grid' ):
-			                    echo '</div><!-- end of portfolio-single-wrap -->';
+							            <?php endif; ?>
+						            <?php echo ($layout == 'list') ? '</div> <!-- end of desc-portfolio -->' : ''; ?>
+								<?php echo ($layout == 'list') ? '</div> <!-- end of event-list-wrapper -->' : '' ?>
+					        </div> <!-- end of <?php echo ($layout == 'grid') ? 'portfolio-item-content' : 'post-wrapper'; ?> -->
+					    </article> <!-- #event-## -->
+					    <?php 
+					    if( $layout == 'grid' ):
+		                    echo '</div><!-- end of portfolio-single-wrap -->';
 
-			                    if( $i % $grid_col == 0 ):
-			                        echo '<div class="clearfix"></div>';
-			                    endif;
-			                endif;
+		                    if( $i % $grid_col == 0 ):
+		                        echo '<div class="clearfix"></div>';
+		                    endif;
+		                endif;
 
-						endwhile;
-						echo '</div><!-- end of portfolio-archive-wrapper -->';
-					endif;
-					wp_reset_postdata();
-					?>
+					endwhile;
+					echo '</div><!-- end of portfolio-archive-wrapper -->';
+				endif;
+				wp_reset_postdata();
+				?>
 
-					<?php 
-					echo '<div class="clearfix"></div>';
-					echo ( $layout == 'grid' ) ? '<div class="col-xs-12">' : '' ;
-					if( $pagination_type == 'numbered' ):
-						if( function_exists('reveal_posts_link_numbered') ):
-					        echo reveal_posts_link_numbered($data);
-					    else:
-					    	echo '<p class="cx-error">'.esc_html__('Please Activate \'REVEAL\' Theme!', 'codexin').'</p>';
-					    endif;
-					elseif( $pagination_type == 'button' ):
-				    	if( function_exists('reveal_posts_link') ):
-					        reveal_posts_link('Newer Portfolios', 'Older Portfolios', $data);
-					    else:
-					    	echo '<p class="cx-error">'.esc_html__('Please Activate \'REVEAL\' Theme!', 'codexin').'</p>';
-					    endif;
-					endif;
-				    echo ($layout == 'grid') ? '</div></div> <!-- end of row -->' : '';
-					?>
-				</div> <!-- end of <?php echo ($layout == 'grid') ? 'portfolio-grid-wrapper' : 'portfolio-list-wrapper'; ?> -->
-			</div> <!-- end of portfolio-content-wrapper -->
+				<?php 
+				echo '<div class="clearfix"></div>';
+				echo ( $layout == 'grid' ) ? '<div class="col-xs-12">' : '' ;
+				if( $pagination_type == 'numbered' ):
+					if( function_exists('reveal_posts_link_numbered') ):
+				        echo reveal_posts_link_numbered($data);
+				    else:
+				    	echo '<p class="cx-error">'.esc_html__('Please Activate \'REVEAL\' Theme!', 'codexin').'</p>';
+				    endif;
+				elseif( $pagination_type == 'button' ):
+			    	if( function_exists('reveal_posts_link') ):
+				        reveal_posts_link('Newer Portfolios', 'Older Portfolios', $data);
+				    else:
+				    	echo '<p class="cx-error">'.esc_html__('Please Activate \'REVEAL\' Theme!', 'codexin').'</p>';
+				    endif;
+				endif;
+			    echo ($layout == 'grid') ? '</div></div> <!-- end of row -->' : '';
+				?>
+			</div> <!-- end of <?php echo ($layout == 'grid') ? 'portfolio-grid-wrapper' : 'portfolio-list-wrapper'; ?> -->
 		</div> <!-- end of cx-portfolio-standard -->
 
 
@@ -276,7 +261,7 @@ function cx_portfolio_kc() {
 	    						'type'			=> 'select',
 	    						'name'			=> 'grid_col',
 	    						'label'			=> esc_html__( 'Number of Column', 'codexin' ),
-	    						'value'			=> '2',
+	    						'value'			=> '3',
 	    						'options'		=> array(
 	    							'2' 		=> esc_html__('2', 'codexin'),
 	    							'3'		    => esc_html__('3', 'codexin'),
@@ -339,6 +324,10 @@ function cx_portfolio_kc() {
 	    						'type'        	=> 'toggle',
 	    						'value'			=> 'yes',
 	    						'description'	=> esc_html__( 'Select to enable/disable Read More button.', 'codexin' ),
+    							'relation'	=> array(
+    								'parent' 	=> 'layout',
+    								'show_when'	=> 'list',
+    							),
 	    					),
 
 	    					array(
@@ -393,11 +382,11 @@ function cx_portfolio_kc() {
 	    						'label'       	=> esc_html__('Portfolio Sorting Method', 'codexin'),
 	    						'type'        	=> 'select',
 	    						'options'		=> array(
-    								'meta_value'	 => esc_html__('Date', 'codexin'),
+    								'date'	 		 => esc_html__('Date', 'codexin'),
     								'name'			 => esc_html__('Name', 'codexin'),
     								'rand'			 => esc_html__('Randomize', 'codexin'),
     							),
-	    						'value'			=> 'date',
+	    						'value'			=> 'meta_value',
 	    						'description'	=> esc_html__( 'Choose The Portfolio Sorting Method', 'codexin' ),
 	    					),
 
