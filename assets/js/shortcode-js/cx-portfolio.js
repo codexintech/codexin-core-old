@@ -17,7 +17,7 @@
     });
 
 
-    $('.portfolio-filter li').click(function(e) {
+    $('.portfolio-filter li').not($('.view-more')).click(function(e) {
          var $this = $(this);
          var $filter = $this.attr('data-filter');
 
