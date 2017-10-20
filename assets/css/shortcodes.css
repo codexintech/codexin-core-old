@@ -1659,19 +1659,8 @@ INDEX:
 **************************************/
 
 
-.cx-portfolios .blog-more {
+.cx-portfolios .btn-more {
     text-align: center;
-}
-
-
-.cx-portfolios .portfolio-filter .blog-more a {
-    margin-top: 0;
-    padding: 7px 15px;
-    border-color:#333;
-}
-
-.cx-portfolios .portfolio-filter .blog-more.active {
-    background: transparent;
 }
 
 
@@ -1683,10 +1672,7 @@ INDEX:
     border-color:#295970;
 }
 
-.cx-portfolios .portfolio-filter li.blog-more {
-    padding:0;
-    border:0;
-}
+
 
 /**
  * Mini Portfolio Type 01
@@ -1721,8 +1707,7 @@ INDEX:
     position: relative;
     padding: 7px 15px;
     letter-spacing: 1px;
-    margin-left: 5px;
-    margin-right: 0;
+    margin:3px;
     border: 1px solid #333;
     font-size: 12px;
     font-weight: bold;

@@ -10,7 +10,7 @@
 // Registering Mini Portfolio Shortcode
 function cx_portfolio_mini_shortcode( $atts, $content = null ) {
 	extract(shortcode_atts(array(
-		'section_title' 			=> '',
+		'layout'					=> '',
 		'number_of_portfolios'		=> '',
 		'type_mode'     	 		=> '',
 		'column'      				=> '',
@@ -20,14 +20,18 @@ function cx_portfolio_mini_shortcode( $atts, $content = null ) {
 		'icon'						=> '',
 		'read_more'     			=> '',
 		'read_more_text' 			=> '',
-		'layout'					=> '',
 		'show_view_btn'				=> '',
-		'show_view_btn_text'		=> '',
 		'show_view_btn_link'		=> '',
 		'class'						=> '',
 	), $atts));
 
 	$result = '';
+
+	// Retrieving the url
+	$retrieve_link = retrieve_url( $show_view_btn_link );
+	$href = ($retrieve_link[0]) ? 'href="'.esc_attr($retrieve_link[0]).'"':'';
+	$btn_text = ($retrieve_link[1]) ? $retrieve_link[1] : 'View More';
+	$target = ($retrieve_link[2]) ? 'target="'.esc_attr($retrieve_link[2]).'"':'';
 
 	// Assigning a master css class and hooking into KC
 	$master_class = apply_filters( 'kc-el-class', $atts );
@@ -110,7 +114,8 @@ function cx_portfolio_mini_shortcode( $atts, $content = null ) {
 										</a>
 										<h3 class="portfolio-title"> <a href="<?php the_permalink(); ?>" class="clickable"> <?php echo esc_html( get_the_title() ); ?> </a></h3>
 										<?php if(($read_more == 'yes') && !empty('read_more_text')): ?>
-										<p class="portfolio-readmore"><a href="<?php the_permalink(); ?>" class="clickable"><?php printf('%s', $read_more_text); ?></a></p>
+											<p class="portfolio-readmore"><a href="<?php the_permalink(); ?>" class="clickable"><?php printf('%s', $read_more_text); ?></a>
+											</p>
 										<?php endif; ?>
 									</div>
 								</div>
@@ -125,7 +130,7 @@ function cx_portfolio_mini_shortcode( $atts, $content = null ) {
 		            </div><!-- end of portfolio-item-wrapper -->
 					
 					<?php if($show_view_btn): ?>
-						<p class="blog-more"><a class="cx-btn" href="<?php echo esc_url($show_view_btn_link); ?>"><?php echo $show_view_btn_text ? esc_html($show_view_btn_text) : esc_html__('View All', 'codexin'); ?></a></p>
+						<p class="btn-more"><a class="cx-btn" href="<?php echo esc_url($retrieve_link[0]); ?>" <?php echo $target; ?>><?php echo $btn_text; ?></a></p>
 		            <?php endif; ?>	
 				</div><!-- end of portfolio-wrapper-1 -->
 			</div> <!-- end of cx-portfolios -->
@@ -139,39 +144,23 @@ function cx_portfolio_mini_shortcode( $atts, $content = null ) {
 
 			<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
 				<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
+					<div class="row">
+						<div class="col-xs-12">
+							<div class="portfolio-filter">
+								<ul class="list-inline">
+									<li class="active" data-filter="*">All</li>
+									<?php 
+										$taxonomy = 'portfolio-category';
+										$taxonomies = get_terms($taxonomy); 
+										foreach ( $taxonomies as $tax ) {
+											echo '<li data-filter=".' .strtolower($tax->slug) .'" >' . $tax->name . '</li>';
 
-					
-					<div class="filter-wrapper">
-						<div class="row">
-							<!-- section title  -->
-							<div class="col-sm-4">
-								<h2 class="primary-title"><?php echo esc_html__( $section_title ); ?></h2>
-							</div>  <!-- end of col-sm-4 -->
-							<div class="col-sm-8">
-								<div class="portfolio-filter pull-right">
-									<ul class="list-inline">
-										<li class="active" data-filter="*">All</li>
-										<?php 
-											$taxonomy = 'portfolio-category';
-											$taxonomies = get_terms($taxonomy); 
-											foreach ( $taxonomies as $tax ) {
-												echo '<li data-filter=".' .strtolower($tax->slug) .'" >' . $tax->name . '</li>';
-
-											}
-										?>
-										<?php if($show_view_btn): ?>
-											
-												<li class="view-more"><a href="<?php echo esc_url($show_view_btn_link); ?>"><?php echo $show_view_btn_text ? esc_html($show_view_btn_text) : esc_html__('View All', 'codexin'); ?></a></li>
-											
-										<?php endif; ?>	
-									</ul>
-								</div>
-							</div> <!-- end of col-sm-8 -->
-
-							
-						</div> <!-- end of row -->
-					</div>
-					
+										}
+									?>
+								</ul>
+							</div><!--end of portfolio-filter-->
+						</div><!--end of col-xs-12-->
+					</div> <!-- end of row -->
 
 					<div class="portfolio-item-wrapper image-pop-up" itemscope itemtype="http://schema.org/ImageGallery">
 					<?php 
@@ -220,15 +209,18 @@ function cx_portfolio_mini_shortcode( $atts, $content = null ) {
 								</figure>
 							</div>
 						
-					<?php 
+						<?php 
 							endwhile;
 						endif;
 						wp_reset_postdata();
-					?>
-					</div> <!-- end of portfolio-wrapper -->
+						?>
+					</div> <!-- end of portfolio-item-wrapper -->
 
-				</div> <!-- end of portfolio-area-rv2 -->
-			</div> <!-- end of  -->
+					<?php if($show_view_btn): ?>
+						<p class="btn-more"><a class="cx-btn" href="<?php echo esc_url($retrieve_link[0]); ?>" <?php echo $target; ?>><?php echo $btn_text; ?></a></p>
+		            <?php endif; ?>	
+				</div> <!-- end of portfolio-wrapper-2-->
+			</div> <!-- end of cx-portfolios-->
 			<div class="clearfix"></div>
 
 	<?php endif; // End Layout - 2
@@ -241,36 +233,24 @@ function cx_portfolio_mini_shortcode( $atts, $content = null ) {
 		  (!empty($class)) ? $classes[] = $class : ''; ?> 
 		  <div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
 		  	<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
-					
 
-				<div class="filter-wrapper">
-					<div class="row">
-						<!-- section title  -->
-						<div class="col-sm-4">
-							<h2 class="primary-title"><?php echo esc_html__( $section_title ); ?></h2>
-						</div>  <!-- end of col-sm-4 -->
-						<div class="col-sm-8">
-							<div class="portfolio-filter pull-right">
-								<ul class="list-inline">
-									<li class="active" data-filter="*">All</li>
-									<?php 
-										$taxonomy = 'portfolio-category';
-										$taxonomies = get_terms($taxonomy); 
-										foreach ( $taxonomies as $tax ) {
-											echo '<li data-filter=".' .strtolower($tax->slug) .'" >' . $tax->name . '</li>';
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="portfolio-filter">
+							<ul class="list-inline">
+								<li class="active" data-filter="*">All</li>
+								<?php 
+									$taxonomy = 'portfolio-category';
+									$taxonomies = get_terms($taxonomy); 
+									foreach ( $taxonomies as $tax ) {
+										echo '<li data-filter=".' .strtolower($tax->slug) .'" >' . $tax->name . '</li>';
 
-										}
-									?>
-									<?php if($show_view_btn): ?>
-										
-											<li class="blog-more"><a class="cx-btn" href="<?php echo esc_url($show_view_btn_link); ?>"><?php echo $show_view_btn_text ? esc_html($show_view_btn_text) : esc_html__('View All', 'codexin'); ?></a></li>
-										
-									<?php endif; ?>	
-								</ul>
-							</div>
-						</div> <!-- end of col-sm-8 -->
-					</div>
-				</div>
+									}
+								?>
+							</ul>
+						</div><!--end of portfolio-filter-->
+					</div><!--end of col-xs-12-->
+				</div> <!-- end of row -->
 					
 	  			<div class="portfolio-item-wrapper image-pop-up responsive-class" itemscope itemtype="http://schema.org/ImageGallery">
 	  				<?php 
@@ -327,9 +307,12 @@ function cx_portfolio_mini_shortcode( $atts, $content = null ) {
 	  				wp_reset_postdata();
 	  				?>
 
-	  			</div> <!-- end of portfolio-wrapper -->
-			</div>	<!-- end of user class -->
-	  	</div> <!-- end of master-class -->
+	  			</div> <!-- end of portfolio-item-wrapper -->
+				<?php if($show_view_btn): ?>
+						<p class="btn-more"><a class="cx-btn" href="<?php echo esc_url($retrieve_link[0]); ?>" <?php echo $target; ?>><?php echo $btn_text; ?></a></p>
+	            <?php endif; ?>	
+			</div>	<!-- end of portfolio-wrapper-3  -->
+	  	</div> <!-- end of cx-portfolios -->
 		<div class="clearfix"></div>
 			
 	<?php endif; //End layout - 3 ?>
@@ -410,7 +393,7 @@ function cx_portfolio_mini_kc() {
 						'General' => array(
 							array(
 								'type'			=> 'radio_image',
-								'label'			=> esc_html__( 'Select Portfolio Template', 'codexin' ),
+								'label'			=> esc_html__( 'Select Portfolio Style', 'codexin' ),
 								'name'			=> 'layout',
 								'admin_label'	=> true,
 								'options'		=> array(
@@ -424,7 +407,7 @@ function cx_portfolio_mini_kc() {
 
 							array(
 	    						'name'        	=> 'number_of_portfolios',
-	    						'label'       	=> esc_html__('Number Of Portfolios to Display', 'codexin'),
+	    						'label'       	=> esc_html__('Number of Portfolios to Display', 'codexin'),
 	    						'type'        	=> 'number',
 									'relation' => array(
 										'parent'	=> 'layout',
@@ -441,12 +424,12 @@ function cx_portfolio_mini_kc() {
 	    						'options'		=> array(
     								'1'	=> 'Rectangle Grid',
     								'2'	=> 'Masonry Grid',
-    							),
+								),
 
-									'relation' => array(
-										'parent'	=> 'layout',
-										'show_when'	=> '1',
-									),
+								'relation' => array(
+									'parent'	=> 'layout',
+									'show_when'	=> '1',
+								),
 	    						'value'			=> '1',
 	    						'description'	=> esc_html__( 'Choose Portfolio Layout Mode ', 'codexin' ),
 	    					),
@@ -475,10 +458,6 @@ function cx_portfolio_mini_kc() {
 	    						'name'        	=> 'column_gutter',
 	    						'label'       	=> esc_html__('Column Gutter/Gap', 'codexin'),
 	    						'type'        	=> 'text',
-									'relation' => array(
-										'parent'	=> 'layout',
-										'show_when'	=> array('1', '2', '3'),
-									),
 	    						'description'	=> esc_html__( 'Column Gutter/Gap on "px". Enter only value. For Example: 5', 'codexin' ),
 	    					),
 
@@ -512,16 +491,6 @@ function cx_portfolio_mini_kc() {
 								'description'	=> esc_html__( 'Choose Icon to show on hover.', 'codexin' ),
 							),
 
-							array(
-								'name'	=> 'section_title',
-								'label' => esc_html__( 'Enter Title', 'codexin' ),
-								'type'	=> 'text',
-								'relation' => array(
-									'parent'	=> 'layout',
-									'show_when'	=> array('2', '3')
-								),
-								'description' => esc_html__( 'Enter Portfolio Section Title Here', 'codexin' ),
-								),
 
 							array(
 							  'name' 			=> 'read_more',
@@ -537,40 +506,28 @@ function cx_portfolio_mini_kc() {
 				                'relation'		=> array(
 				                	'parent'	=> 'read_more',
 				                	'show_when'	=> 'yes'
-				                	),
+			                	),
                 				'value' => 'Read More',
 								'description' => esc_html__( 'Default Text is "Read More"', 'codexin' ),
 							),
 
 							array(
 							  'name' 			=> 'show_view_btn',
-							  'label' 		=> esc_html__( 'Enable \'View All\' Button? ', 'codexin' ),
+							  'label' 		=> esc_html__( 'Enable \'View More\' Button? ', 'codexin' ),
 							  'type' 			=> 'toggle',
 							),
 
-							array(
-								'name'	=> 'show_view_btn_text',
-								'label' => esc_html__( 'Text For \'View All\' Button', 'codexin' ),
-								'type'	=> 'text',
+	    					array(
+	    						'name'     		=> 'show_view_btn_link',
+	    						'label' => esc_html__( 'URL For \'View More\' Button', 'codexin' ),
+	    						'type'    		=> 'link',
 				                'relation'		=> array(
 				                	'parent'	=> 'show_view_btn',
 				                	'show_when'	=> 'yes'
-				                	),
-                				'value' => 'View All',
-								'description' => esc_html__( 'Default Text is "View All"', 'codexin' ),
-							),
-
-							array(
-								'name'	=> 'show_view_btn_link',
-								'label' => esc_html__( 'URL For \'View All\' Button', 'codexin' ),
-								'type'	=> 'text',
-				                'relation'		=> array(
-				                	'parent'	=> 'show_view_btn',
-				                	'show_when'	=> 'yes'
-				                	),
-                				'value' => '#',
-								'description' => esc_html__( 'Enter URL', 'codexin' ),
-							),
+			                	),
+	    						'description' 	=> esc_html__(' The URL which this box assigned to. You can select page/post or other post type', 'codexin'),
+	    						'value'		  	=> '#'
+    						),
 
 							array(
 								'name'	=> 'class',
@@ -635,18 +592,35 @@ function cx_portfolio_mini_kc() {
  											array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.portfolio-title')
 										),
 
- 										'Button' => array(
+ 										'Read More Button' => array(
  											array('property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.portfolio-readmore a'),
  											array('property' => 'font-family', 'label' => esc_html__('Font family', 'codexin'), 'selector' => '.portfolio-readmore a'),
  											array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.portfolio-readmore a'),
  											array('property' => 'font-weight', 'label' => esc_html__('Font Weight', 'codexin'), 'selector' => '.portfolio-readmore a'),
  											array('property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '.portfolio-readmore a'),
- 											array('property' => 'text-align', 'label' => esc_html__('Text Align', 'codexin'), 'selector' => '.portfolio-readmore a'),
+ 											array('property' => 'text-align', 'label' => esc_html__('Text Align', 'codexin'), 'selector' => '.portfolio-readmore'),
  											array('property' => 'text-transform', 'label' => esc_html__('Text Transform', 'codexin'), 'selector' => '.portfolio-readmore a'),
  											array('property' => 'display', 'label' => esc_html__('Display', 'codexin'), 'selector' => '.portfolio-readmore a'),
+ 											array('property' => 'width', 'label' => esc_html__('Width', 'codexin'), 'selector' => '.portfolio-readmore a'),
  											array('property' => 'background-color', 'label' => esc_html__('Background Color', 'codexin'), 'selector' => '.portfolio-readmore a'),
  											array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.portfolio-readmore a'),
  											array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.portfolio-readmore a')
+										),
+
+										'View More Button' => array(
+											array('property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.btn-more a.cx-btn'),
+											array('property' => 'background-color', 'label' => esc_html__('Background Color', 'codexin'), 'selector' => '.btn-more a.cx-btn'),
+ 											array('property' => 'border', 'label' => esc_html__('Button Border', 'codexin'), 'selector' => '.btn-more a.cx-btn'),
+											array('property' => 'font-family', 'label' => esc_html__('Font family', 'codexin'), 'selector' => '.btn-more a.cx-btn'),
+											array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.btn-more a.cx-btn'),
+											array('property' => 'font-weight', 'label' => esc_html__('Font Weight', 'codexin'), 'selector' => '.btn-more a.cx-btn'),
+											array('property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '.btn-more a.cx-btn'),
+											array('property' => 'text-align', 'label' => esc_html__('Text Align', 'codexin'), 'selector' => '.btn-more a.cx-btn'),
+											array('property' => 'text-transform', 'label' => esc_html__('Text Transform', 'codexin'), 'selector' => '.btn-more a.cx-btn'),
+											array('property' => 'display', 'label' => esc_html__('Display', 'codexin'), 'selector' => '.btn-more a.cx-btn'),
+											array('property' => 'width', 'label' => esc_html__('Width', 'codexin'), 'selector' => '.btn-more a.cx-btn'),
+											array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.btn-more a.cx-btn'),
+											array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.btn-more a.cx-btn')
 										),
 
 
