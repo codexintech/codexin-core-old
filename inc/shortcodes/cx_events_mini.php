@@ -11,7 +11,10 @@
 function cx_events_mini_shortcode( $atts, $content = null ) {
 	extract(shortcode_atts(array(
 		'layout'			=> '',
+		'include'			=> '',
+		'orderby'			=> '',
 		'number_of_events'	=> '',
+		'icons'				=> '',
 		'event_icon_one'	=> '',
 		'event_icon_two'	=> '',
 		'event_icon_three'	=> '',
@@ -35,28 +38,52 @@ function cx_events_mini_shortcode( $atts, $content = null ) {
 	$master_class = apply_filters( 'kc-el-class', $atts );
 	$master_class[] = 'cx-events-description';
 
-	// Retrieving user define classes
-	$classes = array( 'panel-group' );
-	(!empty($class)) ? $classes[] = $class : '';
+	// Extracting user included categories
+	$cat_include = str_replace(',', ' ', $include);
+	$cat_includes = explode( " ", $cat_include );
 
 	$result = '';
 
 	ob_start();
 
-		if( ! empty( $layout ) ) :
+	if( ! empty( $layout ) ) :
 
-			if( $layout == 1 ) :
+		if( $layout == 1 ) :
+
+			// Retrieving user define classes
+			$classes = array( 'panel-group' );
+			(!empty($class)) ? $classes[] = $class : '';
 		?>
 	
 				<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
 					<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>" id="accordion" role="tablist" aria-multiselectable="true">
 					<?php 
 						//start new query..
-						$args = array(
-								'post_type'		 => 'events',
-								'order' 		 => $order,
-								'posts_per_page' => $number_of_events,
-								);
+						if( empty($include) ):
+							$args = array(
+								'post_type'				=> 'events',
+								'meta_key'				=> ( $orderby == 'meta_value' ) ? 'reveal_event_start_date' : '',
+								'order'					=> $order,
+								'orderby'				=> $orderby,
+								'posts_per_page'		=> 3
+							);
+
+						else:
+							$args = array(
+								'post_type'				=> 'events',
+								'meta_key'				=> ( $orderby == 'meta_value' ) ? 'reveal_event_start_date' : '',
+								'order'					=> $order,
+								'orderby'				=> $orderby,
+							    'tax_query' 			=> array(
+							        array(
+							            'taxonomy' => 'events-category',
+							            'field'    => 'term_id',
+							            'terms'    => $cat_includes,
+							        ),
+							    ),
+							    'posts_per_page'		=> 3
+							);
+						endif;
 
 						$data = new WP_Query( $args );
 
@@ -77,10 +104,6 @@ function cx_events_mini_shortcode( $atts, $content = null ) {
 									$event_icon = $event_icon_three;
 									$heading_id = 'headingThree';
 									$collapse_id = 'collapseThree';
-								} elseif ( $i == 4 ) {
-									$event_icon = $event_icon_three;
-									$heading_id = 'headingFour';
-									$collapse_id = 'collapseFour';
 								}
 							?>
 
@@ -99,7 +122,9 @@ function cx_events_mini_shortcode( $atts, $content = null ) {
 						<?php endif; ?>	
 								<h4 class="panel-title">
 									<a class="accordion-toggle" role="button" data-toggle="collapse" data-parent="#accordion" href="#<?php echo $collapse_id;?>" aria-expanded="true" aria-controls="<?php echo $collapse_id;?>">
-										<i class="<?php echo esc_attr( $event_icon );?>" > </i> <?php echo esc_html( wp_trim_words( get_the_title(), $title_length ) ); ?>
+										<?php if( $icons ) { ?>
+											<i class="<?php echo esc_attr( $event_icon );?>" > </i> <?php } ?><?php echo esc_html( wp_trim_words( get_the_title(), $title_length ) ); ?>
+										
 									</a>
 								</h4>
 							</div>
@@ -136,11 +161,31 @@ function cx_events_mini_shortcode( $atts, $content = null ) {
 					<div class="row">
 				 		<?php 
 				 		//start new query..
-				 		$args = array(
-				 			'post_type'		 => 'events',
-				 			'order' 		 => $order,
-				 			'posts_per_page' => $number_of_events,
-				 			);
+						if( empty($include) ):
+							$args = array(
+								'post_type'				=> 'events',
+								'meta_key'				=> ( $orderby == 'meta_value' ) ? 'reveal_event_start_date' : '',
+								'order'					=> $order,
+								'orderby'				=> $orderby,
+								'posts_per_page'		=> $number_of_events
+							);
+
+						else:
+							$args = array(
+								'post_type'				=> 'events',
+								'meta_key'				=> ( $orderby == 'meta_value' ) ? 'reveal_event_start_date' : '',
+								'order'					=> $order,
+								'orderby'				=> $orderby,
+							    'tax_query' 			=> array(
+							        array(
+							            'taxonomy' => 'events-category',
+							            'field'    => 'term_id',
+							            'terms'    => $cat_includes,
+							        ),
+							    ),
+							    'posts_per_page'		=> $number_of_events
+							);
+						endif;
 
 				 		$data = new WP_Query( $args ); 
 						if( $data->have_posts() ) :
@@ -242,11 +287,31 @@ function cx_events_mini_shortcode( $atts, $content = null ) {
 					<div class="row">
 				 		<?php 
 				 		//start new query..
-				 		$args = array(
-				 			'post_type'		 => 'events',
-				 			'order' 		 => $order,
-				 			'posts_per_page' => $number_of_events,
-				 			);
+						if( empty($include) ):
+							$args = array(
+								'post_type'				=> 'events',
+								'meta_key'				=> ( $orderby == 'meta_value' ) ? 'reveal_event_start_date' : '',
+								'order'					=> $order,
+								'orderby'				=> $orderby,
+								'posts_per_page'		=> $number_of_events
+							);
+
+						else:
+							$args = array(
+								'post_type'				=> 'events',
+								'meta_key'				=> ( $orderby == 'meta_value' ) ? 'reveal_event_start_date' : '',
+								'order'					=> $order,
+								'orderby'				=> $orderby,
+							    'tax_query' 			=> array(
+							        array(
+							            'taxonomy' => 'events-category',
+							            'field'    => 'term_id',
+							            'terms'    => $cat_includes,
+							        ),
+							    ),
+							    'posts_per_page'		=> $number_of_events
+							);
+						endif;
 
 				 		$data = new WP_Query( $args ); 
 						if( $data->have_posts() ) :
@@ -361,11 +426,31 @@ function cx_events_mini_shortcode( $atts, $content = null ) {
 						<div class="events-carousel">
 					 		<?php 
 					 		//start new query..
-					 		$args = array(
-					 			'post_type'		 => 'events',
-					 			'order' 		 => $order,
-					 			'posts_per_page' => -1,
-					 			);
+						if( empty($include) ):
+							$args = array(
+								'post_type'				=> 'events',
+								'meta_key'				=> ( $orderby == 'meta_value' ) ? 'reveal_event_start_date' : '',
+								'order'					=> $order,
+								'orderby'				=> $orderby,
+								'posts_per_page'		=> -1
+							);
+
+						else:
+							$args = array(
+								'post_type'				=> 'events',
+								'meta_key'				=> ( $orderby == 'meta_value' ) ? 'reveal_event_start_date' : '',
+								'order'					=> $order,
+								'orderby'				=> $orderby,
+							    'tax_query' 			=> array(
+							        array(
+							            'taxonomy' => 'events-category',
+							            'field'    => 'term_id',
+							            'terms'    => $cat_includes,
+							        ),
+							    ),
+							    'posts_per_page'		=> -1
+							);
+						endif;
 
 					 		$data = new WP_Query( $args ); 
 							if( $data->have_posts() ) :
@@ -448,6 +533,8 @@ function cx_events_mini_shortcode( $atts, $content = null ) {
 // Integrating Shortcode with King Composer
 function cx_events_mini_kc() {
 
+	$cx_events_categories = cx_get_custom_categories('events-category');
+
 	if (function_exists('kc_add_map')) { 
  		kc_add_map(
  			array(
@@ -497,7 +584,7 @@ function cx_events_mini_kc() {
 	    						'value'			=> '3',
     							'relation'	=> array(
     								'parent' 	=> 'layout',
-    								'show_when'	=> '1,2,3',
+    								'show_when'	=> '2,3',
     							),
 	    						'description'	=> esc_html__( 'Choose the number of events you want to show.', 'codexin' ),
 	    						'admin_label' 	=> true,
@@ -514,6 +601,27 @@ function cx_events_mini_kc() {
 	    						'value'			=> 'DESC',
 	    						'description'	=> esc_html__( 'Choose The Order to Display Events', 'codexin' ),
 	    					),
+
+	    					array(
+	    						'name'        	=> 'orderby',
+	    						'label'       	=> esc_html__('Events Sorting Method', 'codexin'),
+	    						'type'        	=> 'select',
+	    						'options'		=> array(
+    								'meta_value'	 => esc_html__('Event Date', 'codexin'),
+    								'name'			 => esc_html__('Event Name', 'codexin'),
+    								'rand'			 => esc_html__('Randomize', 'codexin'),
+    							),
+	    						'value'			=> 'date',
+	    						'description'	=> esc_html__( 'Choose The Events Sorting Method', 'codexin' ),
+	    					),
+
+	 						array(
+	 							'name' 			=> 'include',
+	 							'label' 		=> esc_html__( 'Filter Events Categories', 'codexin' ),
+	 							'type' 			=> 'multiple',
+	 							'options'		=> $cx_events_categories,
+	 							'description'	=> esc_html__( 'Choose if You Want to Show Any Specific Events Category/Categories, Control + Click to Select Multiple Categories to Filter (All Categories will be shown by Default)', 'codexin' ),
+	 						),
 
 	    					array(
 	    						'name'			=> 'title_length',
@@ -544,12 +652,24 @@ function cx_events_mini_kc() {
     						),
 
  							array(
+ 								'name' 			=> 'icons',
+ 								'label' 		=> esc_html__( 'Enable Icons', 'codexin' ),
+ 								'type' 			=> 'toggle',
+ 								'relation'		=> array(
+ 									'parent'	=> 'layout',
+ 									'show_when' => '1',
+ 								),
+ 								'value'			=> 'yes',
+ 								'description'	=> esc_html__( 'Select to Enable/Disable Icons', 'codexin' ),
+ 							),
+
+ 							array(
  								'name' 			=> 'event_icon_one',
  								'label' 		=> esc_html__( 'Select First Icon', 'codexin' ),
  								'type' 			=> 'icon_picker',
  								'relation'		=> array(
- 									'parent'	=> 'layout',
- 									'show_when' => '1',
+    								'parent' 	=> 'icons',
+    								'show_when'	=> 'yes',
  								),
  								'description'	=> esc_html__( 'Select Event First Icon Here', 'codexin' ),
  							),
@@ -559,8 +679,8 @@ function cx_events_mini_kc() {
  								'label' 		=> __( 'Select Second Icon', 'codexin' ),
  								'type' 			=> 'icon_picker',
  								'relation'		=> array(
- 									'parent'	=> 'layout',
- 									'show_when' => '1',
+    								'parent' 	=> 'icons',
+    								'show_when'	=> 'yes',
  								),
  								'description'	=> esc_html__( 'Select Event Second Icon Here', 'codexin' ),
  							),
@@ -570,8 +690,8 @@ function cx_events_mini_kc() {
  								'label' 		=> esc_html__( 'Select Third Icon', 'codexin' ),
  								'type' 			=> 'icon_picker',
  								'relation'		=> array(
- 									'parent'	=> 'layout',
- 									'show_when' => '1',
+    								'parent' 	=> 'icons',
+    								'show_when'	=> 'yes',
  								),
  								'description'	=> esc_html__( 'Select Event Third Icon Here', 'codexin' ),
  							),
@@ -628,7 +748,6 @@ function cx_events_mini_kc() {
 	    						'type'			=> 'toggle',
 	    						'name'			=> 'show_add',
 	    						'label'			=> esc_html__( 'Show Event Address? ', 'codexin' ),
-	    						'value'			=> 'yes',
     							'relation'	=> array(
     								'parent' 	=> 'layout',
     								'hide_when'	=> '1',

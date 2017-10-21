@@ -944,6 +944,7 @@ INDEX:
     display: inline-block;
     margin-right: 20px;
     text-transform: capitalize;
+    max-width: 60%;
 }
 
 .cx-events-btn {
@@ -1113,6 +1114,7 @@ INDEX:
     margin-bottom: 0;
     padding: 10px 30px;
     border-top: 1px solid #ebebeb;
+    overflow: hidden;
 }
 
 .cx-events-wrapper-4 .events-meta li:last-child {

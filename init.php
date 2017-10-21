@@ -93,7 +93,7 @@ class Codexin_Core {
 
 		wp_enqueue_style( 'codexin-shortcodes-stylesheet', CODEXIN_CORE_ASSET_DIR . '/css/shortcodes.css', false, '1.0','all');
 		wp_enqueue_style( 'codexin-widget-stylesheet', CODEXIN_CORE_ASSET_DIR . '/css/widgets.css', false, '1.0','all');
-		wp_enqueue_style( 'codexin-responsive-stylesheet', CODEXIN_CORE_ASSET_DIR . '/css/responsive.css', false, '1.0','all');
+		// wp_enqueue_style( 'codexin-responsive-stylesheet', CODEXIN_CORE_ASSET_DIR . '/css/responsive.css', false, '1.0','all');
 
 	}
 
