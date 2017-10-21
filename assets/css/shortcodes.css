@@ -4327,18 +4327,6 @@ section#portfolio_rv3 {
     position: relative;
 }
 
-.portfolio-wrapper-2 figure.item-1,
-.portfolio-wrapper-3 figure.item-1,
-.portfolio-wrapper-3 figure.item-4 {
-    margin-left: 0 !important;
-}
-.portfolio-wrapper-2 figure.item-3,
-.portfolio-wrapper-2 figure.item-5,
-.portfolio-wrapper-3 figure.item-3,
-.portfolio-wrapper-3 figure.item-5 {
-    margin-right: 0 !important;
-}
-
 #whole .no-transform {
     -webkit-transform: none;
     -moz-transform: none;

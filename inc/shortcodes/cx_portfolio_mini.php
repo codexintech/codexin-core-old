@@ -12,9 +12,11 @@ function cx_portfolio_mini_shortcode( $atts, $content = null ) {
 	extract(shortcode_atts(array(
 		'layout'					=> '',
 		'number_of_portfolios'		=> '',
+		'show_filter'				=> '',
 		'type_mode'     	 		=> '',
 		'column'      				=> '',
 		'column_gutter'      		=> '',
+		'include'					=> '',
 		'order'						=> '',
 		'show_icon'					=> '',
 		'icon'						=> '',
@@ -33,6 +35,10 @@ function cx_portfolio_mini_shortcode( $atts, $content = null ) {
 	$btn_text = ($retrieve_link[1]) ? $retrieve_link[1] : 'View More';
 	$target = ($retrieve_link[2]) ? 'target="'.esc_attr($retrieve_link[2]).'"':'';
 
+	// Extracting user included categories
+	$cat_include = str_replace(',', ' ', $include);
+	$cat_includes = explode( " ", $cat_include );
+
 	// Assigning a master css class and hooking into KC
 	$master_class = apply_filters( 'kc-el-class', $atts );
 	$master_class[] = 'cx-portfolios';
@@ -47,36 +53,58 @@ function cx_portfolio_mini_shortcode( $atts, $content = null ) {
 	
 			<div class="<?php echo esc_attr( implode( ' ', $master_class )); ?>">
 				<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>" >
-
-					<div class="row">
-						<div class="col-xs-12">
-							<div class="portfolio-filter">
-								<ul class="list-inline">
-									<li class="active" data-filter="*">All</li>
-									<?php 
-										$taxonomy = 'portfolio-category';
-										$taxonomies = get_terms($taxonomy); 
-										foreach ( $taxonomies as $tax ) {
-											echo '<li data-filter=".' .strtolower($tax->slug) .'" >' . $tax->name . '</li>';
-
-										}
-									?>
-								</ul>
-							</div><!--end of portfolio-filter-->
-						</div><!--end of col-xs-12-->
-					</div> <!-- end of row -->
-
+					<?php if($show_filter): ?>
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="portfolio-filter">
+									<ul class="list-inline">
+										<li class="active" data-filter="*">All</li>
+										<?php 
+											$taxonomy = get_terms('portfolio-category'); 
+											foreach ($taxonomy as $tax_arr) {
+												$taxonomies[] = $tax_arr->term_id;
+											};
+											$filtered_cat = !empty($include) ? $cat_includes : $taxonomies;
+											$val ='';
+											foreach ( $filtered_cat as $tax ) {
+												$val = get_term_by( 'id', $tax, 'portfolio-category' );
+												echo '<li data-filter=".' .strtolower($val->slug) .'" >' . $val->name . '</li>';
+											}
+										?>
+									</ul>
+								</div><!--end of portfolio-filter-->
+							</div><!--end of col-xs-12-->
+						</div> <!-- end of row -->
+					<?php endif; ?>
 
 		            <div class="portfolio-item-wrapper image-pop-up" itemscope itemtype="http://schema.org/ImageGallery">
 
 					<?php 
-						//start wp query..
+
+					if( empty($include) ):
 						$args = array(
-							'post_type'			=> 'portfolio',
-							'orderby'			=> 'date',
-							'order'				=> $order,
+							'post_type'				=> 'portfolio',
+							'order'					=> $order,
+							'orderby'				=> 'date',
 							'posts_per_page'	=> !empty($number_of_portfolios) ? $number_of_portfolios : -1
-							);
+						);
+
+					else:
+						$args = array(
+							'post_type'				=> 'portfolio',
+							'order'					=> $order,
+							'orderby'				=> 'date',
+						    'tax_query' 			=> array(
+						        array(
+						            'taxonomy' => 'portfolio-category',
+						            'field'    => 'term_id',
+						            'terms'    => $cat_includes,
+						        ),
+						    ),
+						    'posts_per_page'	=> !empty($number_of_portfolios) ? $number_of_portfolios : -1
+						);
+					endif;
+
 						$data = new WP_Query( $args );
 						$i = 0;
 						//Check post
@@ -144,33 +172,56 @@ function cx_portfolio_mini_shortcode( $atts, $content = null ) {
 
 			<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
 				<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
-					<div class="row">
-						<div class="col-xs-12">
-							<div class="portfolio-filter">
-								<ul class="list-inline">
-									<li class="active" data-filter="*">All</li>
-									<?php 
-										$taxonomy = 'portfolio-category';
-										$taxonomies = get_terms($taxonomy); 
-										foreach ( $taxonomies as $tax ) {
-											echo '<li data-filter=".' .strtolower($tax->slug) .'" >' . $tax->name . '</li>';
-
-										}
-									?>
-								</ul>
-							</div><!--end of portfolio-filter-->
-						</div><!--end of col-xs-12-->
-					</div> <!-- end of row -->
+					<?php if($show_filter): ?>
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="portfolio-filter">
+									<ul class="list-inline">
+										<li class="active" data-filter="*">All</li>
+										<?php 
+											$taxonomy = get_terms('portfolio-category'); 
+											foreach ($taxonomy as $tax_arr) {
+												$taxonomies[] = $tax_arr->term_id;
+											};
+											$filtered_cat = !empty($include) ? $cat_includes : $taxonomies;
+											$val ='';
+											foreach ( $filtered_cat as $tax ) {
+												$val = get_term_by( 'id', $tax, 'portfolio-category' );
+												echo '<li data-filter=".' .strtolower($val->slug) .'" >' . $val->name . '</li>';
+											}
+										?>
+									</ul>
+								</div><!--end of portfolio-filter-->
+							</div><!--end of col-xs-12-->
+						</div> <!-- end of row -->
+					<?php endif; ?>
 
 					<div class="portfolio-item-wrapper image-pop-up" itemscope itemtype="http://schema.org/ImageGallery">
-					<?php 
-						//start wp query..
-						$args = array(
-							'post_type'			=> 'portfolio',
-							'orderby'			=> 'date',
-							'order'				=> $order,
-							'posts_per_page'	=> 5,
+
+						<?php 
+						if( empty($include) ):
+							$args = array(
+								'post_type'				=> 'portfolio',
+								'order'					=> $order,
+								'orderby'				=> 'date',
+								'posts_per_page'	=> 5
 							);
+
+						else:
+							$args = array(
+								'post_type'				=> 'portfolio',
+								'order'					=> $order,
+								'orderby'				=> 'date',
+							    'tax_query' 			=> array(
+							        array(
+							            'taxonomy' => 'portfolio-category',
+							            'field'    => 'term_id',
+							            'terms'    => $cat_includes,
+							        ),
+							    ),
+							    'posts_per_page'	=> 5
+							);
+						endif;
 						$data = new WP_Query( $args );
 						$i = 0;
 						//Check post
@@ -234,33 +285,56 @@ function cx_portfolio_mini_shortcode( $atts, $content = null ) {
 		  <div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
 		  	<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
 
-				<div class="row">
-					<div class="col-xs-12">
-						<div class="portfolio-filter">
-							<ul class="list-inline">
-								<li class="active" data-filter="*">All</li>
-								<?php 
-									$taxonomy = 'portfolio-category';
-									$taxonomies = get_terms($taxonomy); 
-									foreach ( $taxonomies as $tax ) {
-										echo '<li data-filter=".' .strtolower($tax->slug) .'" >' . $tax->name . '</li>';
-
-									}
-								?>
-							</ul>
-						</div><!--end of portfolio-filter-->
-					</div><!--end of col-xs-12-->
-				</div> <!-- end of row -->
+					<?php if($show_filter): ?>
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="portfolio-filter">
+									<ul class="list-inline">
+										<li class="active" data-filter="*">All</li>
+										<?php 
+											$taxonomy = get_terms('portfolio-category'); 
+											foreach ($taxonomy as $tax_arr) {
+												$taxonomies[] = $tax_arr->term_id;
+											};
+											$filtered_cat = !empty($include) ? $cat_includes : $taxonomies;
+											$val ='';
+											foreach ( $filtered_cat as $tax ) {
+												$val = get_term_by( 'id', $tax, 'portfolio-category' );
+												echo '<li data-filter=".' .strtolower($val->slug) .'" >' . $val->name . '</li>';
+											}
+										?>
+									</ul>
+								</div><!--end of portfolio-filter-->
+							</div><!--end of col-xs-12-->
+						</div> <!-- end of row -->
+					<?php endif; ?>
 					
 	  			<div class="portfolio-item-wrapper image-pop-up responsive-class" itemscope itemtype="http://schema.org/ImageGallery">
 	  				<?php 
 					//start wp query..
-  					$args = array(
-  					'post_type'			=> 'portfolio',
-  					'orderby'			=> 'date',
-  					'order'				=> $order,
-  					'posts_per_page'	=> 5
-  					);
+					if( empty($include) ):
+						$args = array(
+							'post_type'				=> 'portfolio',
+							'order'					=> $order,
+							'orderby'				=> 'date',
+							'posts_per_page'	=> 5
+						);
+
+					else:
+						$args = array(
+							'post_type'				=> 'portfolio',
+							'order'					=> $order,
+							'orderby'				=> 'date',
+						    'tax_query' 			=> array(
+						        array(
+						            'taxonomy' => 'portfolio-category',
+						            'field'    => 'term_id',
+						            'terms'    => $cat_includes,
+						        ),
+						    ),
+						    'posts_per_page'	=> 5
+						);
+					endif;
 	  				$data = new WP_Query( $args );
 	  				$i = 0;
 					//Check post
@@ -366,6 +440,8 @@ function cx_portfolio_mini_shortcode( $atts, $content = null ) {
 // Integrating Shortcode with King Composer
 function cx_portfolio_mini_kc() {
 
+	$cx_portfolio_categories = cx_get_custom_categories('portfolio-category');
+
 	if (function_exists('kc_add_map')) { 
 		kc_add_map(
 			array(
@@ -417,13 +493,29 @@ function cx_portfolio_mini_kc() {
 	    						'description'	=> esc_html__( 'Choose the number of portfolios you want to show. To show all portfolio, leave the field blank', 'codexin' ),
 	    					),
 
+	 						array(
+	 							'name' 			=> 'include',
+	 							'label' 		=> esc_html__( 'Filter Portfolio Categories', 'codexin' ),
+	 							'type' 			=> 'multiple',
+	 							'options'		=> $cx_portfolio_categories,
+	 							'description'	=> esc_html__( 'Choose if You Want to Show Any Specific Portfolio Category/Categories, Control + Click to Select Multiple Categories to Filter (All Categories will be shown by Default)', 'codexin' ),
+	 						),
+
+							array(
+							  'name' 			=> 'show_filter',
+							  'label' 			=> esc_html__( 'Enable Filter? ', 'codexin' ),
+							  'type' 			=> 'toggle',
+							  'description'		=> esc_html__( 'Choose if You Want to Show portfolio categories as a filter', 'codexin' ),
+							  'value'			=> 'yes'
+							),
+
 							array(
 	    						'name'        	=> 'type_mode',
 	    						'label'       	=> esc_html__('Portfolio Layout Mode', 'codexin'),
 	    						'type'        	=> 'select',
 	    						'options'		=> array(
-    								'1'	=> 'Rectangle Grid',
-    								'2'	=> 'Masonry Grid',
+    								'1'	=> esc_html__('Rectangle Grid', 'codexin'),
+    								'2'	=> esc_html__('Masonry Grid', 'codexin'),
 								),
 
 								'relation' => array(
