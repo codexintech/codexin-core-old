@@ -1661,22 +1661,20 @@ INDEX:
 **************************************/
 
 
-.cx-portfolios .blog-more {
+.cx-portfolios .btn-more {
     text-align: center;
 }
 
 
-.cx-portfolios .portfolio-filter .blog-more a {
+.cx-portfolios .portfolio-filter .blog-more a:hover,
+.cx-portfolios .portfolio-filter .blog-more a:active,
+.cx-portfolios .portfolio-filter .blog-more a:focus {
     margin-top: 0;
     padding: 7px 15px;
-    border-color:#333;
+    border-color:#295970;
 }
 
-.cx-portfolios .portfolio-filter li.blog-more {
-    padding:0;
-    border:0;
-    
-}
+
 
 /**
  * Mini Portfolio Type 01
@@ -1702,6 +1700,7 @@ INDEX:
     text-align: center;
     margin-top: 25px;
     margin-bottom: 25px;
+
 }
 
 .cx-portfolios .portfolio-filter ul li {
@@ -1710,15 +1709,20 @@ INDEX:
     position: relative;
     padding: 7px 15px;
     letter-spacing: 1px;
-    margin-left: 5px;
-    margin-right: 0;
+    margin:3px;
     border: 1px solid #333;
     font-size: 12px;
     font-weight: bold;
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -ms-transition: all .3s;
+    -o-transition: all .3s;
+    transition: all .3s;
+
 }
 
 
-.cx-portfolio {
+.cx-portfolios .portfolio-wrapper-1 .cx-portfolio {
     width: 25%;
     position: relative;
     overflow: hidden;
@@ -1726,7 +1730,7 @@ INDEX:
 }
 
 
-.cx-portfolio img {
+.cx-portfolios .cx-portfolio img {
     width: 100%;
     max-width:100%;
     display: block;
@@ -1737,7 +1741,7 @@ INDEX:
     transform: scale(1.006);
 }
 
-.cx-portfolio .image-mask {
+.cx-portfolios .cx-portfolio .image-mask {
     background-size: cover;
     background-position: center;
     position: absolute;
@@ -1782,24 +1786,24 @@ INDEX:
 .cx-portfolios .image-content h3 {
     text-transform: uppercase;
     font-size: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     color: #fff;
 }
 
-.portfolio-readmore {
+.cx-portfolios .portfolio-readmore {
     margin-bottom: 0;
 }
 
-.portfolio-readmore a {
-    font-size: 14px;
+.cx-portfolios .portfolio-readmore a {
+    font-size: 16px;
     letter-spacing: .05em;
 }
 
-.portfolio-readmore a:hover {
+.cx-portfolios .portfolio-readmore a:hover {
     
 }
 
-.cx-portfolio:hover .image-mask {
+.cx-portfolios .cx-portfolio:hover .image-mask {
     opacity: 1;
 }
 
@@ -1809,14 +1813,14 @@ INDEX:
     border-color: #295970;
 }
 
-.cx-portfolio a,
-.cx-portfolio a:visited,
-.cx-portfolio a:focus,
-.cx-portfolio a:hover {
+.cx-portfolios .cx-portfolio a,
+.cx-portfolios .cx-portfolio a:visited,
+.cx-portfolios .cx-portfolio a:focus,
+.cx-portfolios .cx-portfolio a:hover {
     color: #fff;
 }
 
-.cx-portfolio .image-mask {
+.cx-portfolios .cx-portfolio .image-mask {
     background: rgb(41, 89, 112);
     background: rgba(41, 89, 112, 0.75);
 }
@@ -1828,18 +1832,14 @@ INDEX:
  *
  */
 
-.portfolio-wrapper-3 h2,
-.portfolio-wrapper-2 h2 {
+.cx-portfolios .portfolio-wrapper-3 h2,
+.cx-portfolios .portfolio-wrapper-2 h2 {
     margin-top: 25px;
     margin-bottom:25px;
     line-height: 41px;
 }
 
-.portfolio-wrapper-2 .filter-wrapper {
-
-}
-
-.portfolio-type-2 .image-mask{
+.cx-portfolios .portfolio-type-2 .image-mask{
     position: absolute;
     left: 0;
     right: 0;
@@ -1850,12 +1850,13 @@ INDEX:
 
 
 
-.portfolio-type-2:hover:before {
+.cx-portfolios .portfolio-type-2:hover:before {
     visibility: visible;
     background: #23dac9;
     opacity: 0.85;
 }
-.portfolio-type-2:before {
+
+.cx-portfolios .portfolio-type-2:before {
     position: absolute;
     content: "";
     left: 0;
@@ -1867,11 +1868,12 @@ INDEX:
     transition: 0.3s;
 }
 
-figure.portfolio-type-2 {
+.cx-portfolios figure.portfolio-type-2 {
     position: relative;
 }
 
-.portfolio-type-2:before, .portfolio-type-2 .image-mask a {
+.cx-portfolios .portfolio-type-2:before, 
+.cx-portfolios .portfolio-type-2 .image-mask a {
     position: absolute;
     content: "";
     left: 0;
@@ -1883,13 +1885,13 @@ figure.portfolio-type-2 {
     transition: 0.3s;
 }
 
-figure.portfolio-type-2:hover .image-mask a {
+.cx-portfolios figure.portfolio-type-2:hover .image-mask a {
     visibility: visible;
     opacity: 1;
 }
 
 
-.portfolio-type-2 .image-content p a {
+.cx-portfolios .portfolio-type-2 .image-content p a {
     font-size: 20px;
     text-transform: uppercase;
     margin-top: 20px;
@@ -1898,53 +1900,27 @@ figure.portfolio-type-2:hover .image-mask a {
     font-family: Poppins;
 }
 
-.portfolio-type-2 .image-content i {
+.cx-portfolios .portfolio-type-2 .image-content i {
     font-size: 40px;
     line-height: 40px;
 }
 
 
-.rv2 .portfolio-filter ul {
-    text-align: none;
-}
-.portfolio-filter.rv2 ul li{
-    float: left;
-}
-.portfolio-type-2{
+.cx-portfolios .portfolio-type-2{
     position: relative;
     margin-top: 30px;
     transition: 0.3s ;
 }
 
-.portfolio-type-2 .image-content i {
+.cx-portfolios .portfolio-type-2 .image-content i {
     font-size: 40px;
     line-height: 40px;
 }
 
-
-.portfolio-filter.rv2 ul li{
-    border: 0px solid;
-    font-size: 18px;
-    font-weight: 400;
-    transition: 0.3s ;
-}
-
-
-.portfolio-filter.rv2 ul li.view-all{
-    margin-left: 30px;
-}
-.portfolio-filter.rv2 ul li.active{
-    color: #23dac9 ;
-    background: transparent;
-}
-
-
-
-
-.portfolio-type-2 img{
+.cx-portfolios .portfolio-type-2 img{
     max-width: 100%;
 }
-.portfolio-wrapper-2 .image-content {
+.cx-portfolios .portfolio-wrapper-2 .image-content {
     top: 50%;
     transform: translateY(-50%);
 }
@@ -1957,78 +1933,49 @@ figure.portfolio-type-2:hover .image-mask a {
 
 
 
-.portfolio-wrapper-1 .portfolio,
-.portfolio-wrapper-2 .portfolio,
-.portfolio-wrapper-3 .portfolio {
+.cx-portfolios .portfolio{
     overflow: visible;
 }
 
-
-.portfolio-wrapper-1 figure > a,
-.portfolio-wrapper-2 figure > a,
-.portfolio-wrapper-3 figure > a {
-background-size: cover;
-background-repeat: no-repeat;
-background-position: center;
-background-attachment: scroll;
--webkit-transform: scale(1.006);
--moz-transform: scale(1.006);
--ms-transform: scale(1.006);
--o-transform: scale(1.006);
-transform: scale(1.006);
-width:100%;
+.cx-portfolios figure > a {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: scroll;
+    -webkit-transform: scale(1.006);
+    -moz-transform: scale(1.006);
+    -ms-transform: scale(1.006);
+    -o-transform: scale(1.006);
+    transform: scale(1.006);
+    width:100%;
 }
 
-.portfolio-wrapper-3 .quarter {
+.cx-portfolios .portfolio-wrapper-3 .quarter {
     z-index:1;
 }
 
-.portfolio-wrapper-2 .long-height figure {
+.cx-portfolios .portfolio-wrapper-2 .long-height figure {
     height: 500px;
 }
 
-.portfolio-wrapper-2 .short-height figure {
+.cx-portfolios .portfolio-wrapper-2 .short-height figure {
     height: 250px;
 }
 
-.portfolio-wrapper-3 .quarter figure {
+.cx-portfolios .portfolio-wrapper-3 .quarter figure {
     height: 250px;
 }
 
-.portfolio-wrapper-3 .half {
+.cx-portfolios .portfolio-wrapper-3 .half {
     z-index:2;
 }
 
-.portfolio-wrapper-3 .half figure {
+.cx-portfolios .portfolio-wrapper-3 .half figure {
     height: 500px;
 }
 
 
 
-
-@media only screen and (min-width: 1200px) {
-
-    .portfolios.rv3 .cx-portfolio.col-sm-3 img {
-        max-height:223px;
-    }
-
-        .portfolios.rv3 .cx-portfolio.col-sm-6 img {
-        max-height:446px;
-    }
-
-
-    .kc-row-container:not(.kc-container) .portfolios.rv3 .cx-portfolio.col-sm-3 img {
-        max-height:none;
-    }
-
-    .kc-row-container:not(.kc-container) .portfolios.rv3 .cx-portfolio.col-sm-6 img {
-        max-height:none;
-    }
-
-
-
-
-}
 /**************************************
     009 - Codexin Mini Blog
 *************************************/
@@ -4380,18 +4327,6 @@ section#portfolio_rv3 {
 .portfolio-wrapper-2 figure,
 .portfolio-wrapper-3 figure {
     position: relative;
-}
-
-.portfolio-wrapper-2 figure.item-1,
-.portfolio-wrapper-3 figure.item-1,
-.portfolio-wrapper-3 figure.item-4 {
-    margin-left: 0 !important;
-}
-.portfolio-wrapper-2 figure.item-3,
-.portfolio-wrapper-2 figure.item-5,
-.portfolio-wrapper-3 figure.item-3,
-.portfolio-wrapper-3 figure.item-5 {
-    margin-right: 0 !important;
 }
 
 #whole .no-transform {
