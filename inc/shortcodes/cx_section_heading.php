@@ -31,10 +31,10 @@ function cx_section_heading_shortcode(  $atts, $content = null) {
 
 	// Assigning a master css class and hooking into KC
 	$master_class = apply_filters( 'kc-el-class', $atts );
-	$master_class[] = 'section-heading';
+	$master_class[] = 'cx-section-heading';
 
 	// Retrieving user define classes
-	$classes = array( 'cx-section-heading' );
+	$classes = array( 'section-heading' );
 	(!empty($class)) ? $classes[] = $class : ''; 
 
 	// Divider
@@ -55,10 +55,10 @@ function cx_section_heading_shortcode(  $atts, $content = null) {
 			<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
 				<?php if( $div_pos == 'top' ): printf( '%s', $divider_line ); endif; ?>
 				<?php if( !empty( $subtitle ) ): ?>
-				<h3 class="secondary-title"><?php echo esc_html( $subtitle ); ?></h3>
+				<h2 class="secondary-title"><?php echo esc_html( $subtitle ); ?></h3>
 				<?php endif; ?>
 				<?php if( !empty( $title ) ): ?>
-				<h2 class="primary-title"><?php echo esc_html( $title ); ?></h2>
+				<h3 class="primary-title"><?php echo esc_html( $title ); ?></h2>
 				<?php endif; ?>
 				<?php if( $div_pos == 'bottom' ): printf( '%s', $divider_line ); endif; ?>
 				<?php if( $description_toggle == 'yes' ): ?>
