@@ -436,11 +436,16 @@ INDEX:
 .cx-service-box .service-single .media-title {
     font-size: 16px;
     text-transform: uppercase;
-    font-weight: bold;
+    font-weight: 700;
     margin-bottom: 10px;
     margin-top: 2px;
     letter-spacing: normal;
     line-height: 1.4em;
+}
+
+.cx-testimonial-2 .quote-wrapper .media-title {
+    margin-bottom: 0;
+    margin-top: 0;
 }
 
 .cx-service-box .service-single .media-thumb i {
@@ -1252,10 +1257,7 @@ INDEX:
     min-width:110px;
 }
 
-.cx-testimonial-2 .quote-wrapper .media-title {
-    margin-top: 0;
-    margin-bottom: 5px;
-}
+
 
 .cx-testimonial-2 .quote-wrapper .media-designation {
     font-style: italic;
