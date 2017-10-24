@@ -193,6 +193,8 @@ INDEX:
     border-bottom: 2px solid #fff;
 }
 
+
+
 .cx-image-box .img-thumb .content-wrapper::after,
 .cx-image-box .img-thumb a::after {
     border-right: 2px solid #fff;
@@ -226,6 +228,7 @@ INDEX:
 
 .cx-image-box .single-content {
     position: absolute;
+    font-size: 18px;
     width:100%;
     /*text-align: center;*/
     top: 50%;
