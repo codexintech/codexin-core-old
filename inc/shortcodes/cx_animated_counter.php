@@ -60,19 +60,19 @@ function cx_animated_counter_shortcode( $atts, $content = null ) {
                             <i class="<?php echo esc_attr( $icon ); ?>"></i>
                         </div>
                         <div class="content-right">
-                            <span class="counter"><?php echo esc_html( $count_up ); ?></span>
-                            <p><?php echo esc_html( $txt ); ?></p>
+                            <span class="counter h3"><?php echo esc_html( $count_up ); ?></span>
+                            <p class="h3"><?php echo esc_html( $txt ); ?></p>
                         </div>
                     </div>
                 <?php elseif( $icon_pos == 'icon-top' ): ?>
                     <i class="<?php echo esc_attr( $icon ); ?>"></i>
-                    <span class="counter"><?php echo esc_html( $count_up ); ?></span>
-                    <p><?php echo esc_html( $txt ); ?></p>
+                    <span class="counter h3"><?php echo esc_html( $count_up ); ?></span>
+                    <p class="h3"><?php echo esc_html( $txt ); ?></p>
                 <?php endif; ?>
             <?php else: ?>
-                <span class="counter"><?php echo esc_html( $count_up ); ?></span>
+                <span class="counter h3"><?php echo esc_html( $count_up ); ?></span>
                 <?php if( $divider ) : echo $divider_line; endif; ?>
-                <p><?php echo esc_html( $txt ); ?></p>
+                <p class="h3"><?php echo esc_html( $txt ); ?></p>
             <?php endif; ?>
         </div><!-- end of project -->
     </div><!-- end of cx-animated-counter -->

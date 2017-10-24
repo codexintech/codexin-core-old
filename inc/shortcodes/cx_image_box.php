@@ -72,7 +72,7 @@ function cx_image_box_shortcode(  $atts, $content = null) {
 											<i class="<?php echo esc_attr( $hover_icon ); ?>"></i>
 											<?php endif; ?>
 											
-											<p><?php echo esc_html( $hover ); ?></p>
+											<p class="h3"><?php echo esc_html( $hover ); ?></p>
 										</div>
 									</div>
 					<?php if ( $img_action == 'open_custom_link' ): ?>

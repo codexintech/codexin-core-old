@@ -251,6 +251,8 @@ INDEX:
     margin-left: auto;
     margin-right: auto;
     text-align: center;
+    font-size: 18px;
+    margin-top: 7px;
 }
 
 .cx-image-box .single-content i {
@@ -1232,6 +1234,10 @@ INDEX:
     transform:translateY(-50%);
 }
 
+.quote-text p.quote-author-name.sec-font {
+    margin-bottom: 0;
+    font-size: 18px;
+}
 
 .cx-testimonial-1 span.prev {
     left:-95px;
@@ -1902,7 +1908,6 @@ INDEX:
     margin-top: 20px;
     color: #fff;
     font-weight: normal;
-    font-family: Poppins;
 }
 
 .cx-portfolios .portfolio-type-2 .image-content i {
