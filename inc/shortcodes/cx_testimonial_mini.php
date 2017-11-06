@@ -81,7 +81,7 @@ function cx_testimonial_mini_shortcode( $atts, $content = null ) {
 												</div>
 												<div class="quote-text">
 													<p> "<?php printf( '%s', get_the_excerpt() ); ?>" </p>
-													<p class="quote-author-name cx-bg-overlay">
+													<p class="quote-author-name sec-font cx-bg-overlay">
 														<?php 
 														$aut_name = rwmb_meta( 'reveal_author_name','type=text' );
 														echo esc_html( $aut_name );

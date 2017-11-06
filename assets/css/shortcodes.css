@@ -324,6 +324,8 @@ INDEX:
     border-bottom: 2px solid #fff;
 }
 
+
+
 .cx-image-box .img-thumb .content-wrapper::after,
 .cx-image-box .img-thumb a::after {
     border-right: 2px solid #fff;
@@ -357,6 +359,7 @@ INDEX:
 
 .cx-image-box .single-content {
     position: absolute;
+    font-size: 18px;
     width:100%;
     /*text-align: center;*/
     top: 50%;
@@ -379,6 +382,8 @@ INDEX:
     margin-left: auto;
     margin-right: auto;
     text-align: center;
+    font-size: 18px;
+    margin-top: 7px;
 }
 
 .cx-image-box .single-content i + p {
@@ -1207,6 +1212,10 @@ INDEX:
     transform:translateY(-50%);
 }
 
+.quote-text p.quote-author-name.sec-font {
+    margin-bottom: 0;
+    font-size: 18px;
+}
 
 .cx-testimonial-1 span.prev {
     left:-95px;
@@ -1911,7 +1920,6 @@ transform: scale(1.006);
     margin-top: 20px;
     color: #fff;
     font-weight: normal;
-    font-family: Poppins;
 }
 
 .cx-portfolios .portfolio-type-2 .image-content i {
