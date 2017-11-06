@@ -38,7 +38,7 @@ function cx_contact_form_shortcode( $atts, $content = null ) {
 					<?php echo do_shortcode( '[contact-form-7 id="'. $show_form_id .'" title=""]' ); ?>
 				</div> <!-- end of form-element -->
 			</div> <!-- end of contact-form -->
-		</div> <!-- end of contact-form-wrapper -->
+		</div> <!-- end of cx-form-wrapper -->
 
 
 	<?php
@@ -225,7 +225,7 @@ function cx_contact_form_kc() {
  											array('property' => 'line-height', 'label' => esc_html__( 'Line Height', 'codexin' ), 'selector' => '.wpcf7-submit'),
  											array('property' => 'text-transform', 'label' => esc_html__( 'Text Transform', 'codexin' ), 'selector' => '.wpcf7-submit'),
  											array('property' => 'border', 'label' => esc_html__( 'Border', 'codexin' ), 'selector' => '.wpcf7-submit'),
- 											array('property' => 'border', 'label' => esc_html__( 'Border on Hover', 'codexin' ), 'selector' => '.wpcf7-submit:hover'),
+ 											array('property' => 'border-color', 'label' => esc_html__( 'Border Color on Hover', 'codexin' ), 'selector' => '.wpcf7-submit:hover'),
  											array('property' => 'border-radius', 'label' => esc_html__( 'Border Radius', 'codexin' ), 'selector' => '.wpcf7-submit'),
  											array('property' => 'width', 'label' => esc_html__( 'Width', 'codexin' ), 'selector' => '.wpcf7-submit'),
  											array('property' => 'height', 'label' => esc_html__( 'Height', 'codexin' ), 'selector' => '.wpcf7-submit'),

@@ -415,7 +415,7 @@ function get_like_count( $like_count ) {
     } else {
         $number = $like_text;
     }
-    $count = '<span class="cx-count">' . $number . '</span>';
+    $count = '<span class="cx-count reveal-color-0">' . $number . '</span>';
     return $count;
 } // get_like_count()
 

@@ -76,12 +76,12 @@ function cx_testimonial_mini_shortcode( $atts, $content = null ) {
 										?>
 										<div class="item">
 											<div class="quote-wrapper clearfix">
-												<div class="quote-author-thumb">
+												<div class="quote-author-thumb cx-color-1">
 													<i class="fa <?php echo $testimonial_icon; ?>"></i>
 												</div>
 												<div class="quote-text">
 													<p> "<?php printf( '%s', get_the_excerpt() ); ?>" </p>
-													<p class="quote-author-name">
+													<p class="quote-author-name cx-bg-overlay">
 														<?php 
 														$aut_name = rwmb_meta( 'reveal_author_name','type=text' );
 														echo esc_html( $aut_name );
@@ -159,7 +159,7 @@ function cx_testimonial_mini_shortcode( $atts, $content = null ) {
 									<?php endif; ?>
 
 
-									<p class="media-texts"> <?php printf('%s', get_the_excerpt() ); ?> </p>
+									<p class="media-texts cx-bg-overlay"> <?php printf('%s', get_the_excerpt() ); ?> </p>
 								</div>
 							</div>
 						</div> <!--end of quote-wrapper -->
@@ -228,7 +228,7 @@ function cx_testimonial_mini_shortcode( $atts, $content = null ) {
 												<img src="<?php echo esc_url( the_post_thumbnail_url( 'square-one' ) ); ?>" alt="<?php echo esc_attr( $img_alt ); ?>">
 											</div>
 											<div class="quote-author-meta">
-												<i class="fa fa-quote-right"></i>
+												<i class="fa fa-quote-right cx-color-1"></i>
 												<h3 class="quote-author-name">
 													<?php 
 													$name = rwmb_meta( 'reveal_author_name', 'type=text' ); 

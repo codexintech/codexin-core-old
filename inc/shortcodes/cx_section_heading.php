@@ -40,13 +40,13 @@ function cx_section_heading_shortcode(  $atts, $content = null) {
 	// Divider
 	if( $divider ):
 		if( $div_type == 'div_icon' ):
-			$divider_line = '<div class="cx-divider"><i class="'. $icon .'"></i></div>';
+			$divider_line = '<div class="cx-bg-overlay cx-color-1 cx-divider"><i class="'. $icon .'"></i></div>';
 		elseif( $div_type == 'div_text' ):
-			$divider_line = '<div class="cx-divider"><span>' . $text . '</span></div>';
+			$divider_line = '<div class="cx-bg-overlay cx-divider"><span>' . $text . '</span></div>';
 		elseif( $div_type == 'dc_line' ):
-			$divider_line = '<div class="cx-divider-2"></div>';
+			$divider_line = '<div class="cx-bg-overlay cx-divider-2"></div>';
 		else:
-			$divider_line = '<div class="cx-divider"></div>';
+			$divider_line = '<div class="cx-bg-overlay cx-divider"></div>';
 		endif;
 	endif;
 
@@ -226,12 +226,12 @@ function cx_section_heading_kc() {
 										),
 
 										'Divider-1' => array(
-											array('property' => 'background', 'label' => esc_html__( 'Color', 'codexin'), 'selector' => '.cx-divider::after' ),
-											array('property' => 'width', 'label' => esc_html__( 'Width', 'codexin'), 'selector' => '.cx-divider::after'),
-											array('property' => 'height', 'label' => esc_html__( 'Height', 'codexin'), 'selector' => '.cx-divider::after'),
-											array('property' => 'display', 'label' => esc_html__( 'Display', 'codexin'), 'selector' => '.cx-divider::after'),
+											array('property' => 'background', 'label' => esc_html__( 'Color', 'codexin'), 'selector' => '.cx-divider::before' ),
+											array('property' => 'width', 'label' => esc_html__( 'Width', 'codexin'), 'selector' => '.cx-divider::before'),
+											array('property' => 'height', 'label' => esc_html__( 'Height', 'codexin'), 'selector' => '.cx-divider::before'),
+											array('property' => 'display', 'label' => esc_html__( 'Display', 'codexin'), 'selector' => '.cx-divider::before'),
 											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin'), 'selector' => '.cx-divider'),
-											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin'), 'selector' => '.cx-divider::after')
+											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin'), 'selector' => '.cx-divider::before')
 										),
 
 										'Divider-2' => array(

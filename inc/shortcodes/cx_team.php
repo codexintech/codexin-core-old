@@ -63,7 +63,7 @@ function cx_team_shortcode( $atts, $content = null ) {
 							      <div class="team-single-wrapper">
 							         <img src="<?php esc_url(the_post_thumbnail_url('square-two'));  ?>" alt="<?php echo esc_attr( $img_alt ); ?>">
 							         <figcaption>
-							            <div class="team-info-wrapper">
+							            <div class="team-info-wrapper reveal-color-2">
 							            	<?php if( $designation ): ?>
 												<span><?php echo esc_html( $r_team_desig ); ?></span>
 											<?php endif; ?>

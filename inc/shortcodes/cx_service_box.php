@@ -42,14 +42,14 @@ function cx_service_box_shortcode( $atts, $content = null ) {
         if( $layout == 1 ):
 
             // Retrieving user define classes
-            $classes = array( 'service-single clearfix' );
+            $classes = array( 'service-single' );
             (!empty($class)) ? $classes[] = $class : '';
            ?>
           	<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
           		<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
           			<div class="media-wrapper">
           				<?php if( $icon_toggle ): ?>
-          				<div class="media-thumb">
+          				<div class="media-thumb cx-color-1">
                             <?php if( $s_media == 's_icon' ): ?>
               					<i class="<?php echo esc_attr( $icon ); ?>"></i>
                             <?php else: ?>
@@ -70,20 +70,22 @@ function cx_service_box_shortcode( $atts, $content = null ) {
         if( $layout == 2 ) :
 
             // Retrieving user define classes
-            $classes = array( 'service-single-2 clearfix' );
+            $classes = array( 'service-single-2' );
             (!empty($class)) ? $classes[] = $class : '';
             ?>
 
             <div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
                 <div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
                     <div class="media-wrapper">
-                        <div class="media-thumb">
-                            <?php if( $s_media == 's_icon' ): ?>
-                                <i class="<?php echo esc_attr( $icon ); ?>"></i>
-                            <?php else: ?>
-                                <img src="<?php echo esc_url( $ret_full_img_url ); ?>" alt="<?php if( !empty( $image_alt ) ): echo esc_html( $image_alt ); else: echo esc_html( $service_title ); endif; ?>">
-                            <?php endif; ?>
-                        </div>
+                        <?php if( $icon_toggle ): ?>
+                            <div class="media-thumb cx-color-1">
+                                <?php if( $s_media == 's_icon' ): ?>
+                                    <i class="<?php echo esc_attr( $icon ); ?>"></i>
+                                <?php else: ?>
+                                    <img src="<?php echo esc_url( $ret_full_img_url ); ?>" alt="<?php if( !empty( $image_alt ) ): echo esc_html( $image_alt ); else: echo esc_html( $service_title ); endif; ?>">
+                                <?php endif; ?>
+                            </div>
+                        <?php endif; ?>
                         <div class="media-desc">
                             <h4 class="media-title"><?php echo esc_html( $service_title ); ?></h4>
                             <p class="media-texts"><?php printf( '%s', $service_desc ) ; ?></p>
@@ -97,7 +99,7 @@ function cx_service_box_shortcode( $atts, $content = null ) {
         if( $layout == 3 ) :
 
             // Retrieving user define classes
-            $classes = array( 'service-single-3 clearfix' );
+            $classes = array( 'service-single-3' );
             (!empty($class)) ? $classes[] = $class : '';
 
             ?>
@@ -105,7 +107,7 @@ function cx_service_box_shortcode( $atts, $content = null ) {
             <div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
                 <div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
                     <div class="media-wrapper">
-                        <div class="media-thumb">
+                        <div class="media-thumb cx-color-1">
                             <?php if( $s_media == 's_icon' ): ?>
                                 <i class="<?php echo esc_attr( $icon ); ?>"></i>
                             <?php else: ?>
@@ -141,7 +143,7 @@ function cx_service_box_shortcode( $atts, $content = null ) {
                         </div>
                         <div class="media-desc">
                             <?php if( $icon_toggle ): ?>
-                                <div class="media-thumb">
+                                <div class="media-thumb cx-color-1">
                                     <?php if( $s_media == 's_icon' ): ?>
                                         <i class="<?php echo esc_attr( $icon ); ?>"></i>
                                     <?php else: ?>

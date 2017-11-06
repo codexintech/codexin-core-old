@@ -151,13 +151,13 @@ function cx_map_kc() {
 	 							'label' 		=> esc_html__( 'Choose Default Color Scheme', 'codexin' ),
 	 							'type' 			=> 'select',
 	 							'options'		=> array(
-	 									'original' => 'Original',
-										'grey' 	=> 'Grey',
-										'retro' => 'Retro',
-										'dark'	=> 'Dark',
-										'bw' 	=> 'Black & White',
-										'light' => 'Light',
-										'blue' 	=> 'Blue',
+	 									'original' 		=> 'Original',
+										'grey' 			=> 'Grey',
+										'retro' 		=> 'Retro',
+										'dark'			=> 'Dark',
+										'bw' 			=> 'Black & White',
+										'light' 		=> 'Light',
+										'blue' 			=> 'Blue',
 										'DarkTurquoise' => 'Dark Turquoise',
 								),
 	 							'value'			=> 'default',
@@ -184,7 +184,7 @@ function cx_map_kc() {
 	 							'label' 		=> esc_html__( 'Map Zoom Level', 'codexin' ),
 	 							'type' 			=> 'number_slider',  // USAGE RADIO TYPE
 								'options' 		=> array(    // REQUIRED
-										'min' 		=> 8,
+										'min' 		=> 1,
 										'max' 		=> 20,
 										'unit' 		=> '',
 										'show_input'=> true

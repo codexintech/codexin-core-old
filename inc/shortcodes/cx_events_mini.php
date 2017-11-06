@@ -123,7 +123,7 @@ function cx_events_mini_shortcode( $atts, $content = null ) {
 								<h4 class="panel-title">
 									<a class="accordion-toggle" role="button" data-toggle="collapse" data-parent="#accordion" href="#<?php echo $collapse_id;?>" aria-expanded="true" aria-controls="<?php echo $collapse_id;?>">
 										<?php if( $icons ) { ?>
-											<i class="<?php echo esc_attr( $event_icon );?>" > </i> <?php } ?><?php echo esc_html( wp_trim_words( get_the_title(), $title_length ) ); ?>
+											<i class="<?php echo esc_attr( $event_icon );?> cx-color-1" > </i> <?php } ?><?php echo esc_html( wp_trim_words( get_the_title(), $title_length ) ); ?>
 										
 									</a>
 								</h4>
@@ -204,21 +204,23 @@ function cx_events_mini_shortcode( $atts, $content = null ) {
 
 							?>
 						 		<div class="col-md-<?php echo esc_html( $column ); ?> col-sm-<?php echo ( $column==4 ) ? esc_html($column) : esc_html(6); ?>">
-						 			<div class="events-single">
+						 			<div class="events-single cx-border-1">
 						 				<div class="event-media-wrapper">
 						 					<a href="<?php echo esc_url(get_the_permalink()); ?>">
-						 						<div class="event-media">
+						 						<div class="event-media cx-bg-overlay">
 													<img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'rectangle-four' ) : '//placehold.it/600x327' ); ?>" alt="<?php echo esc_attr($image_alt); ?>">
 						 						</div>
 						 					</a>
 					 					</div>
 						 				<div class="events-single-content">
-						 					<a href="<?php echo esc_url(get_the_permalink()); ?>"><h3 class="events-single-title"><?php echo esc_html( wp_trim_words( get_the_title(), $title_length ) ); ?></h3></a>
+						 					<h3 class="events-single-title">
+						 						<a href="<?php echo esc_url(get_the_permalink()); ?>"><?php echo esc_html( wp_trim_words( get_the_title(), $title_length ) ); ?></a>
+					 						</h3>
 
 											<?php if( !empty( $start_time ) || !empty( $end_time ) || !empty( $address ) || !empty( $date ) ): ?>
 						 					<ul class="events-meta">
 						 						<?php if( $show_time && ( !empty( $start_time ) || !empty( $end_time ) ) ): ?>
-						 						<li><i class="fa fa-clock-o"></i>
+						 						<li><i class="fa fa-clock-o cx-color-1"></i>
 						 							<?php 
 
 						 							echo esc_html($start_time) . ' - ' . esc_html($end_time);
@@ -227,7 +229,7 @@ function cx_events_mini_shortcode( $atts, $content = null ) {
 							 					<?php endif; ?>
 							 					<?php if( $show_date && !empty( $date ) ): ?>
 						 						<li>
-						 							<i class="fa fa-calendar"></i>
+						 							<i class="fa fa-calendar cx-color-1"></i>
 						 							<?php 
 														$new_date = date( get_option('date_format'), $date );
 														echo esc_html( $new_date );
@@ -236,7 +238,7 @@ function cx_events_mini_shortcode( $atts, $content = null ) {
 							 					<?php endif; ?>
 							 					<?php if( $show_add && !empty( $address ) ): ?>
 						 						<li>
-						 							<i class="fa fa-map-marker"></i> 
+						 							<i class="fa fa-map-marker cx-color-1"></i>
 						 							<?php echo esc_html( $address ); ?>
 						 						</li>
 							 					<?php endif; ?>
@@ -245,7 +247,9 @@ function cx_events_mini_shortcode( $atts, $content = null ) {
 
 						 					<div class="events-single-desc"><?php echo esc_html( wp_trim_words( get_the_excerpt(), $desc_length ) ); ?></div>
 						 					<?php if( $readmore ): ?>
-						 					<a href="<?php echo esc_url(get_the_permalink()); ?>" class="cx-events-btn"><?php echo esc_html( !empty( $button_text ) ? $button_text : __('Read More', 'codexin') ); ?></a>
+												<div class="cx-color-0 cx-primary-btn">
+													<a class="cx-events-btn" href="<?php echo esc_url(get_the_permalink()); ?>"><?php echo esc_html( !empty( $button_text ) ? $button_text : __('Read More', 'codexin') ); ?></a>
+												</div>
 							 				<?php endif; ?>
 						 				</div>
 						 			</div>
@@ -260,9 +264,13 @@ function cx_events_mini_shortcode( $atts, $content = null ) {
 				<?php if( $show_all ): ?>
 				<div class="events-view-all">
 					<?php if( $href ): ?>
-					<a href="<?php echo esc_url($retrieve_link[0]); ?>" <?php echo $title; ?> <?php echo $target; ?>  class="cx-events-btn"><?php echo esc_html( !empty( $button_text_all ) ? $button_text_all : __('View All', 'codexin') ); ?></a>
+						<div class="cx-color-0 cx-primary-btn">
+							<a href="<?php echo esc_url($retrieve_link[0]); ?>" <?php echo $title; ?> <?php echo $target; ?>  class="cx-events-btn"><?php echo esc_html( !empty( $button_text_all ) ? $button_text_all : __('View All', 'codexin') ); ?></a>
+						</div>
 					<?php else: ?>
-					<a href="<?php echo esc_url( get_post_type_archive_link( 'events' ) ); ?>" class="cx-events-btn"><?php echo esc_html( !empty( $button_text_all ) ? $button_text_all : __('View All', 'codexin') ); ?></a>
+						<div class="cx-color-0 cx-primary-btn">
+							<a href="<?php echo esc_url( get_post_type_archive_link( 'events' ) ); ?>" class="cx-events-btn"><?php echo esc_html( !empty( $button_text_all ) ? $button_text_all : __('View All', 'codexin') ); ?></a>
+						</div>
 					<?php endif; ?>
 				</div>
 				<?php endif; ?>
@@ -330,8 +338,8 @@ function cx_events_mini_shortcode( $atts, $content = null ) {
 
 							?>
 						 		<div class="col-md-<?php echo esc_html( $column ); ?> col-sm-<?php echo ( $column==4 ) ? esc_html($column) : esc_html(6); ?>">
-						 			<div class="events-single">
-						 				<div class="event-media-wrapper">
+						 			<div class="events-single cx-border-1">
+						 				<div class="event-media-wrapper cx-color-2">
 						 					<a href="<?php echo esc_url(get_the_permalink()); ?>">
 						 						<div class="event-media">
 													<img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'rectangle-four' ) : '//placehold.it/600x327' ); ?>" alt="<?php echo esc_attr($image_alt); ?>">
@@ -348,12 +356,14 @@ function cx_events_mini_shortcode( $atts, $content = null ) {
 						 					</a>
 						 					</div>
 						 				<div class="events-single-content">
-						 					<a href="<?php echo esc_url(get_the_permalink()); ?>"><h3 class="events-single-title"><?php echo esc_html( wp_trim_words( get_the_title(), $title_length ) ); ?></h3></a>
+						 					<h3 class="events-single-title">
+						 						<a href="<?php echo esc_url(get_the_permalink()); ?>"><?php echo esc_html( wp_trim_words( get_the_title(), $title_length ) ); ?></a>
+						 					</h3>
 											
 											<?php if( !empty( $start_time ) || !empty( $end_time ) || !empty( $address ) ): ?>
 						 					<ul class="events-meta">
 						 						<?php if( $show_time && ( !empty( $start_time ) || !empty( $end_time ) ) ): ?>
-						 						<li><i class="fa fa-clock-o"></i>
+						 						<li><i class="fa fa-clock-o cx-color-1"></i>
 						 							<?php 
 
 						 							echo esc_html($start_time) . ' - ' . esc_html($end_time);
@@ -362,7 +372,7 @@ function cx_events_mini_shortcode( $atts, $content = null ) {
 							 					<?php endif; ?>
 							 					<?php if( $show_add && !empty( $address ) ): ?>
 						 						<li>
-						 							<i class="fa fa-map-marker"></i> 
+						 							<i class="fa fa-map-marker cx-color-1"></i> 
 						 							<?php echo esc_html( $address ); ?>
 						 						</li>
 							 					<?php endif; ?>
@@ -372,7 +382,9 @@ function cx_events_mini_shortcode( $atts, $content = null ) {
 						 					<div class="events-single-desc"><?php echo esc_html( wp_trim_words( get_the_excerpt(), $desc_length ) ); ?></div>
 						 				</div>
 					 					<?php if( $readmore ): ?>
-					 					<a href="<?php echo esc_url(get_the_permalink()); ?>" class="cx-events-btn-2"><?php echo esc_html( !empty( $button_text ) ? $button_text : __('Read More', 'codexin') ); ?></a>
+					 						<div class="events-cx-btn cx-color-0">
+							 					<a href="<?php echo esc_url(get_the_permalink()); ?>"><?php echo esc_html( !empty( $button_text ) ? $button_text : __('Read More', 'codexin') ); ?></a>
+							 				</div>
 						 				<?php endif; ?>
 						 			</div>
 						 		</div>
@@ -387,9 +399,13 @@ function cx_events_mini_shortcode( $atts, $content = null ) {
 				<?php if( $show_all ): ?>
 				<div class="events-view-all">
 					<?php if( $href ): ?>
-					<a href="<?php echo esc_url($retrieve_link[0]); ?>" <?php echo $title; ?> <?php echo $target; ?>  class="cx-events-btn"><?php echo esc_html( !empty( $button_text_all ) ? $button_text_all : __('View All', 'codexin') ); ?></a>
+						<div class="cx-color-0 cx-primary-btn">
+							<a href="<?php echo esc_url($retrieve_link[0]); ?>" <?php echo $title; ?> <?php echo $target; ?>  class="cx-events-btn"><?php echo esc_html( !empty( $button_text_all ) ? $button_text_all : __('View All', 'codexin') ); ?></a>
+						</div>
 					<?php else: ?>
-					<a href="<?php echo esc_url( get_post_type_archive_link( 'events' ) ); ?>" class="cx-events-btn"><?php echo esc_html( !empty( $button_text_all ) ? $button_text_all : __('View All', 'codexin') ); ?></a>
+						<div class="cx-color-0 cx-primary-btn">
+							<a href="<?php echo esc_url( get_post_type_archive_link( 'events' ) ); ?>" class="cx-events-btn"><?php echo esc_html( !empty( $button_text_all ) ? $button_text_all : __('View All', 'codexin') ); ?></a>
+						</div>
 					<?php endif; ?>
 				</div>
 				<?php endif; ?>
@@ -465,24 +481,28 @@ function cx_events_mini_shortcode( $atts, $content = null ) {
 
 								?>
 							 		<div class="col-sm-6 item">
-							 			<div class="events-single">
+							 			<div class="events-single cx-border-1">
 							 				<div class="event-media-wrapper">
 						 						<div class="event-media">
 													<img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'rectangle-four' ) : '//placehold.it/600x327' ); ?>" alt="<?php echo esc_attr($image_alt); ?>">
 								 					<?php if( $readmore ): ?>
-								 					<a href="<?php echo esc_url(get_the_permalink()); ?>" class="cx-events-btn"><?php echo esc_html( !empty( $button_text ) ? $button_text : __('Read More', 'codexin') ); ?></a>
+								 						<div class="cx-color-0 cx-primary-btn cx-white-btn">
+										 					<a href="<?php echo esc_url(get_the_permalink()); ?>" class="cx-events-btn"><?php echo esc_html( !empty( $button_text ) ? $button_text : __('Read More', 'codexin') ); ?></a>
+										 				</div>
 									 				<?php endif; ?>
 						 						</div>
 							 					</div>
-							 				<div class="events-single-content">
-							 					<a href="<?php echo esc_url(get_the_permalink()); ?>"><h3 class="events-single-title"><?php echo esc_html( wp_trim_words( get_the_title(), $title_length ) ); ?></h3></a>
+							 				<div class="events-single-content cx-bg-1">
+							 					<h3 class="events-single-title">
+							 						<a href="<?php echo esc_url(get_the_permalink()); ?>"><?php echo esc_html( wp_trim_words( get_the_title(), $title_length ) ); ?></a>
+							 					</h3>
 							 					<div class="events-single-desc"><?php echo esc_html( wp_trim_words( get_the_excerpt(), $desc_length ) ); ?></div>
 							 				</div>
 							 				<?php if( $show_date || $show_add ): ?>
-	                                        <ul class="events-meta">
+	                                        <ul class="events-meta cx-border-1">
 	                                            <?php if( $show_add && !empty( $address ) ): ?>
 	                                            <li>
-	                                                <i class="fa fa-map-marker"></i> 
+	                                                <i class="fa fa-map-marker cx-color-1"></i> 
 	                                                <?php echo esc_html( $address ); ?>
 	                                            </li>
 	                                            <?php endif; ?>
@@ -492,7 +512,7 @@ function cx_events_mini_shortcode( $atts, $content = null ) {
 		                                            <?php else: ?>
 		                                            <li>
 		                                            <?php endif; ?>
-		                                                <i class="fa fa-calendar"></i>
+		                                                <i class="fa fa-calendar cx-color-1"></i>
 		                                                <?php 
 		                                                    $new_date = date( get_option('date_format'), $date );
 		                                                    echo esc_html( $new_date );
@@ -515,9 +535,13 @@ function cx_events_mini_shortcode( $atts, $content = null ) {
 				<?php if( $show_all ): ?>
 				<div class="events-view-all">
 					<?php if( $href ): ?>
-					<a href="<?php echo esc_url($retrieve_link[0]); ?>" <?php echo $title; ?> <?php echo $target; ?>  class="cx-events-btn"><?php echo esc_html( !empty( $button_text_all ) ? $button_text_all : __('View All', 'codexin') ); ?></a>
+						<div class="cx-color-0 cx-primary-btn">
+							<a href="<?php echo esc_url($retrieve_link[0]); ?>" <?php echo $title; ?> <?php echo $target; ?>  class="cx-events-btn"><?php echo esc_html( !empty( $button_text_all ) ? $button_text_all : __('View All', 'codexin') ); ?></a>
+						</div>
 					<?php else: ?>
-					<a href="<?php echo esc_url( get_post_type_archive_link( 'events' ) ); ?>" class="cx-events-btn"><?php echo esc_html( !empty( $button_text_all ) ? $button_text_all : __('View All', 'codexin') ); ?></a>
+						<div class="cx-color-0 cx-primary-btn">
+							<a href="<?php echo esc_url( get_post_type_archive_link( 'events' ) ); ?>" class="cx-events-btn"><?php echo esc_html( !empty( $button_text_all ) ? $button_text_all : __('View All', 'codexin') ); ?></a>
+						</div>
 					<?php endif; ?>
 				</div>
 				<?php endif; ?>
@@ -802,7 +826,7 @@ function cx_events_mini_kc() {
 
 	    					array(
 	    						'name'     		=> 'href',
-	    						'label'    		=> esc_html__(' Custom URL for All Events Button', 'codexin'),
+	    						'label'    		=> esc_html__('Custom URL for \'View All\' Button', 'codexin'),
 	    						'type'    		=> 'link',
  								'relation'		=> array(
  									'parent'	=> 'show_all',
@@ -831,34 +855,34 @@ function cx_events_mini_kc() {
  										"screens" => "any,1199,991,767,479",
 
  										'Title' => array(
- 											array('property' => 'color', 'label' => esc_html__( 'Color', 'codexin'), 'selector' => '.panel-title, h3.events-single-title'),
- 											array('property' => 'color', 'label' => esc_html__( 'Color On Hover' ), 'selector' => '.panel-title, .events-single:hover h3.events-single-title'),
- 											array('property' => 'font-family', 'label' => esc_html__( 'Font Family', 'codexin'), 'selector' => '.panel-title, h3.events-single-title'),
- 											array('property' => 'font-size', 'label' => esc_html__( 'Font Size', 'codexin'), 'selector' => '.panel-title, h3.events-single-title'),
- 											array('property' => 'line-height', 'label' => esc_html__( 'Line Height', 'codexin'), 'selector' => '.panel-title, h3.events-single-title'),
- 											array('property' => 'text-transform', 'label' => esc_html__( 'Text Transform', 'codexin'), 'selector' => '.panel-title, h3.events-single-title'),
- 											array('property' => 'text-align', 'label' => esc_html__( 'Text Align', 'codexin'), 'selector' => '.panel-title, h3.events-single-title'),
- 											array('property' => 'font-weight', 'label' => esc_html__( 'Font Weight', 'codexin'), 'selector' => '.panel-title, h3.events-single-title'),
- 											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin'), 'selector' => '.panel-title, h3.events-single-title'),
- 											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin'), 'selector' => '.panel-title, h3.events-single-title')
+ 											array('property' => 'color', 'label' => esc_html__( 'Color', 'codexin'), 'selector' => '.panel-title a, .events-single-title a'),
+ 											array('property' => 'color', 'label' => esc_html__( 'Color On Hover' ), 'selector' => '.panel-title a:hover, .events-single-title a:hover'),
+ 											array('property' => 'font-family', 'label' => esc_html__( 'Font Family', 'codexin'), 'selector' => '.panel-title a, .events-single-title a'),
+ 											array('property' => 'font-size', 'label' => esc_html__( 'Font Size', 'codexin'), 'selector' => '.panel-title a, .events-single-title a'),
+ 											array('property' => 'line-height', 'label' => esc_html__( 'Line Height', 'codexin'), 'selector' => '.panel-title a, .events-single-title a'),
+ 											array('property' => 'text-transform', 'label' => esc_html__( 'Text Transform', 'codexin'), 'selector' => '.panel-title a, .events-single-title a'),
+ 											array('property' => 'text-align', 'label' => esc_html__( 'Text Align', 'codexin'), 'selector' => '.panel-title a, .events-single-title a'),
+ 											array('property' => 'font-weight', 'label' => esc_html__( 'Font Weight', 'codexin'), 'selector' => '.panel-title a, .events-single-title a'),
+ 											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin'), 'selector' => '.panel-title a, .events-single-title a'),
+ 											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin'), 'selector' => '.panel-title a, .events-single-title a')
  										),
 
  										'Description' => array(
- 											array('property' => 'color', 'label' => esc_html__( 'Color', 'codexin'), 'selector' => '.panel-body p, .events-single-desc'),
- 											array('property' => 'font-family', 'label' => esc_html__( 'Font Family', 'codexin'), 'selector' => '.panel-body p, .events-single-desc'),
- 											array('property' => 'font-size', 'label' => esc_html__( 'Font Size', 'codexin'), 'selector' => '.panel-body p, .events-single-desc'),
- 											array('property' => 'font-weight', 'label' => esc_html__( 'Font Weight', 'codexin'), 'selector' => '.panel-body p, .events-single-desc'),
- 											array('property' => 'line-height', 'label' => esc_html__( 'Line Height', 'codexin'), 'selector' => '.panel-body p, .events-single-desc'),
- 											array('property' => 'text-align', 'label' => esc_html__( 'Text Align', 'codexin'), 'selector' => '.panel-body p, .events-single-desc'),
- 											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin'), 'selector' => '.panel-body p, .events-single-desc'),
- 											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin'), 'selector' => '.panel-body p, .events-single-desc')
+ 											array('property' => 'color', 'label' => esc_html__( 'Color', 'codexin'), 'selector' => '.panel-body, .events-single-desc'),
+ 											array('property' => 'font-family', 'label' => esc_html__( 'Font Family', 'codexin'), 'selector' => '.panel-body, .events-single-desc'),
+ 											array('property' => 'font-size', 'label' => esc_html__( 'Font Size', 'codexin'), 'selector' => '.panel-body, .events-single-desc'),
+ 											array('property' => 'font-weight', 'label' => esc_html__( 'Font Weight', 'codexin'), 'selector' => '.panel-body, .events-single-desc'),
+ 											array('property' => 'line-height', 'label' => esc_html__( 'Line Height', 'codexin'), 'selector' => '.panel-body, .events-single-desc'),
+ 											array('property' => 'text-align', 'label' => esc_html__( 'Text Align', 'codexin'), 'selector' => '.panel-body, .events-single-desc'),
+ 											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin'), 'selector' => '.panel-body, .events-single-desc'),
+ 											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin'), 'selector' => '.panel-body, .events-single-desc')
  										),
 
  										'Icon' => array(
- 											array('property' => 'color', 'label' => esc_html__( 'Color', 'codexin'), 'selector' => '.panel-title i, .events-meta li i, .event-date i'),
- 											array('property' => 'font-size', 'label' => esc_html__( 'Font Size', 'codexin'), 'selector' => '.panel-title i, .events-meta li i, .event-date i'),
- 											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin'), 'selector' => '.panel-title i, .events-meta li i, .event-date i'),
- 											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin'), 'selector' => '.panel-title i, .events-meta li i, .event-date i')
+ 											array('property' => 'color', 'label' => esc_html__( 'Color', 'codexin'), 'selector' => '.panel-title i, .panel-title a::after, .events-meta li i, .event-date i'),
+ 											array('property' => 'font-size', 'label' => esc_html__( 'Font Size', 'codexin'), 'selector' => '.panel-title i, .panel-title a::after, .events-meta li i, .event-date i'),
+ 											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin'), 'selector' => '.panel-title i, .panel-title a::after, .events-meta li i, .event-date i'),
+ 											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin'), 'selector' => '.panel-title i, .panel-title a::after, .events-meta li i, .event-date i')
  										),
 
  										'Meta Text' => array(
@@ -886,25 +910,25 @@ function cx_events_mini_kc() {
  										),
 
  										'Button' => array(
- 											array('property' => 'color', 'label' => esc_html__( 'Color', 'codexin'), 'selector' => '.cx-events-btn, .cx-events-btn-2, .cx-events-btn:before'),
- 											array('property' => 'color', 'label' => esc_html__( 'Color on Hover', 'codexin'), 'selector' => '.cx-events-btn:hover, .cx-events-btn-2:hover, .cx-events-btn:hover:before'),
- 											array('property' => 'background-color', 'label' => esc_html__( 'Background Color', 'codexin'), 'selector' => '.cx-events-btn, .cx-events-btn-2'),
- 											array('property' => 'background-color', 'label' => esc_html__( 'Background Color on Hover', 'codexin'), 'selector' => '.cx-events-btn:hover, .cx-events-btn-2:hover'),
- 											array('property' => 'border', 'label' => esc_html__( 'Border', 'codexin'), 'selector' => '.cx-events-btn, .cx-events-btn-2'),
- 											array('property' => 'border-color', 'label' => esc_html__( 'Border Color on Hover', 'codexin'), 'selector' => '.cx-events-btn:hover, .cx-events-btn-2:hover, .events-single:hover .cx-events-btn-2'),
- 											array('property' => 'font-family', 'label' => esc_html__( 'Font Family', 'codexin'), 'selector' => '.cx-events-btn, .cx-events-btn-2'),
- 											array('property' => 'font-size', 'label' => esc_html__( 'Font Size', 'codexin'), 'selector' => '.cx-events-btn, .cx-events-btn-2'),
- 											array('property' => 'font-weight', 'label' => esc_html__( 'Font Weight', 'codexin'), 'selector' => '.cx-events-btn, .cx-events-btn-2'),
- 											array('property' => 'line-height', 'label' => esc_html__( 'Line Height', 'codexin'), 'selector' => '.cx-events-btn, .cx-events-btn-2'),
- 											array('property' => 'text-align', 'label' => esc_html__( 'Text Align', 'codexin'), 'selector' => '.cx-events-btn, .cx-events-btn-2'),
+ 											array('property' => 'color', 'label' => esc_html__( 'Color', 'codexin'), 'selector' => '.cx-events-btn, .events-cx-btn a, .cx-events-btn-2, .cx-events-btn:before'),
+ 											array('property' => 'color', 'label' => esc_html__( 'Color on Hover', 'codexin'), 'selector' => '.cx-events-btn:hover, .cx-events-btn-2:hover, .cx-events-btn:hover:before, .events-cx-btn a:hover'),
+ 											array('property' => 'background-color', 'label' => esc_html__( 'Background Color', 'codexin'), 'selector' => '.cx-events-btn, .events-cx-btn a, .cx-events-btn-2'),
+ 											array('property' => 'background-color', 'label' => esc_html__( 'Background Color on Hover', 'codexin'), 'selector' => '.cx-events-btn:hover, .cx-events-btn-2:hover, .events-cx-btn a:hover'),
+ 											array('property' => 'border', 'label' => esc_html__( 'Border', 'codexin'), 'selector' => '.cx-events-btn, .events-cx-btn a, .cx-events-btn-2'),
+ 											array('property' => 'border-color', 'label' => esc_html__( 'Border Color on Hover', 'codexin'), 'selector' => '.cx-events-btn:hover, .cx-events-btn-2:hover, .events-single:hover .cx-events-btn-2, .events-cx-btn a:hover'),
+ 											array('property' => 'font-family', 'label' => esc_html__( 'Font Family', 'codexin'), 'selector' => '.cx-events-btn, .events-cx-btn a, .cx-events-btn-2'),
+ 											array('property' => 'font-size', 'label' => esc_html__( 'Font Size', 'codexin'), 'selector' => '.cx-events-btn, .events-cx-btn a, .cx-events-btn-2'),
+ 											array('property' => 'font-weight', 'label' => esc_html__( 'Font Weight', 'codexin'), 'selector' => '.cx-events-btn, .events-cx-btn a, .cx-events-btn-2'),
+ 											array('property' => 'line-height', 'label' => esc_html__( 'Line Height', 'codexin'), 'selector' => '.cx-events-btn, .events-cx-btn a, .cx-events-btn-2'),
+ 											array('property' => 'text-align', 'label' => esc_html__( 'Text Align', 'codexin'), 'selector' => '.cx-events-btn, .events-cx-btn a, .cx-events-btn-2'),
  											array('property' => 'text-align', 'label' => esc_html__( 'Text Align for "View All" Button', 'codexin'), 'selector' => '.events-view-all'),
- 											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin'), 'selector' => '.cx-events-btn, .cx-events-btn-2'),
- 											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin'), 'selector' => '.cx-events-btn, .cx-events-btn-2')
+ 											array('property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin'), 'selector' => '.cx-events-btn, .events-cx-btn a, .cx-events-btn-2'),
+ 											array('property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin'), 'selector' => '.cx-events-btn, .events-cx-btn a, .cx-events-btn-2')
  										),
 
  										'Tabs'	=> array(
  											array('property' => 'background-color', 'label' => esc_html__( 'Title Tab Background', 'codexin'), 'selector' => '.panel-heading'),
- 											array('property' => 'background-color', 'label' => esc_html__( 'Title Tab Background on Hover', 'codexin'), 'selector' => '.panel-heading:hover'),
+ 											array('property' => 'background-color', 'label' => esc_html__( 'Title Tab Background on Hover', 'codexin'), 'selector' => '.panel-heading:hover, .panel-heading.active'),
  											array('property' => 'background-color', 'label' => esc_html__( 'Description Tab Background Color', 'codexin'), 'selector' => '.panel-body'),
  										),
 

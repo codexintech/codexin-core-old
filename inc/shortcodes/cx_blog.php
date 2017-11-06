@@ -53,7 +53,7 @@ function cx_blog_shortcode( $atts, $content = null ) {
 		<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
 			<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
 				<?php 
-				echo ($layout == 'grid') ? '<div class="blog-grid-wrapper"><div class="row">' : '<div class="col-sm-12 col-md-12"><div class="blog-list-wrapper">';
+				echo ($layout == 'grid') ? '<div class="blog-grid-wrapper"><div class="row">' : '<div class="blog-list-wrapper">';
 					//start query..
 					$paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
 					$args = array(
@@ -91,7 +91,7 @@ function cx_blog_shortcode( $atts, $content = null ) {
 				            	
 						?>
 							<article id="post-<?php the_ID(); ?>" <?php post_class(array(esc_attr($post_classes))); ?> itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
-							    <div class="<?php echo ($layout == 'grid') ? 'blog-wrapper' : 'post-wrapper'; ?>">
+							    <div class="<?php echo ($layout == 'grid') ? 'blog-wrapper reveal-bg-1' : 'post-wrapper  reveal-border-1'; ?>">
 							    	<?php if(has_post_format('gallery')):
 
 							        $cx_gallery = ($layout == 'grid') ? rwmb_meta( 'reveal_gallery', 'type=image_advanced&size=rectangle-one' ) : rwmb_meta( 'reveal_gallery', 'type=image_advanced&size=gallery-format-image' );
@@ -139,9 +139,9 @@ function cx_blog_shortcode( $atts, $content = null ) {
 
 							            $cx_rel = ( !empty( $link_rel ) ) ? 'rel="'. esc_attr( $link_rel ) .'"' : '';
 							            ?>
-							            <div class="post-link">
+							            <div class="post-link reveal-color-0">
 							                <a href="<?php echo esc_url( $link_url ); ?>" <?php printf( '%s', $cx_rel ); ?> target="<?php if($link_target == '_self'): echo esc_attr('_self'); else: echo esc_attr('_blank'); endif; ?>">
-							                    <div class="post-format-link">
+							                    <div class="post-format-link reveal-border-1">
 							                        <span class="icon"></span>
 							                        <p><?php echo ( !empty( $link_txt ) ) ? $link_txt : get_the_title(); ?></p>
 							                    </div>
@@ -155,7 +155,7 @@ function cx_blog_shortcode( $atts, $content = null ) {
 							            $cx_source = rwmb_meta( 'reveal_quote_source', 'type=url' );
 
 							            if( !empty( $cx_quote ) ): ?>
-							                <div class="post-quote">
+							                <div class="post-quote reveal-color-0 reveal-border-1">
 							                <span class="icon"></span>
 							                    <blockquote>
 							                        <?php printf( '%s', $cx_quote ); ?>
@@ -181,7 +181,7 @@ function cx_blog_shortcode( $atts, $content = null ) {
 									            <div class="img-wrapper"><a href="<?php echo esc_url(get_the_permalink()); ?>"><img src="<?php if(has_post_thumbnail()): esc_url(the_post_thumbnail_url('rectangle-one')); else: echo '//placehold.it/600X400'; endif; ?>" alt="<?php echo esc_attr($image_alt); ?>" class="img-responsive"></a></div>
 
 									            <?php if(in_array('show_date', array_values($show_metas))): ?>
-									                <div class="meta">
+									                <div class="meta reveal-color-2">
 									                	<a href="<?php echo get_day_link(get_post_time('Y'), get_post_time('m'), get_post_time('j'));  ?>">
 										                    <p><?php echo get_the_time( 'd' ); ?></p>
 										                    <p><?php echo get_the_time( 'M' ); ?></p>
@@ -206,7 +206,7 @@ function cx_blog_shortcode( $atts, $content = null ) {
 
 									if( $layout == 'grid' ): ?>
 
-								        <div class="blog-content">
+								        <div class="blog-content reveal-border-1">
 								            <h3 class="blog-title grid" itemprop="headline">
 								            	<a href="<?php echo esc_url( get_the_permalink() ); ?>" rel="bookmark" itemprop="url">
 									                <span itemprop="name">
@@ -227,7 +227,7 @@ function cx_blog_shortcode( $atts, $content = null ) {
 									<?php endif;
 
 									if(in_array(true, array_values($show_metas))): ?>
-						            <ul class="list-inline post-detail <?php echo esc_attr(( $layout == 'grid' ) ? 'post-meta' : ''); ?>">
+						            <ul class="list-inline post-detail reveal-color-0 reveal-border-1 <?php echo esc_attr(( $layout == 'grid' ) ? 'post-meta' : ''); ?>">
 
 						            	<?php if(in_array('show_author', array_values($show_metas))): ?>
 							                <li><i class="fa fa-pencil"></i> <span class="post-author vcard" itemprop="author" itemscope itemtype="https://schema.org/Person">
@@ -291,7 +291,9 @@ function cx_blog_shortcode( $atts, $content = null ) {
 						                ?>
 		                    		</div> <!-- end of <?php echo ($layout == 'grid') ? 'wrapper-content' : 'entry-content'; ?> -->
 					                <?php if( $read_more ): ?>
-		                    			<div class="blog-more"><a class="<?php echo ( $layout == 'grid' ) ? 'read-more' : 'cx-btn'; ?>" href="<?php echo esc_url( get_the_permalink() ); ?>"><?php echo esc_html( !empty( $readmore_txt ) ? $readmore_txt : __('Read More', 'codexin') ); ?></a></div>
+						                <div class="<?php echo ( $layout == 'grid' ) ? 'cx-btn-grid' : 'cx-btn'; ?> reveal-color-0 reveal-primary-btn">
+						                    <a class="cx-btn-text" href="<?php echo esc_url( get_the_permalink() ); ?>"><?php echo esc_html( !empty( $readmore_txt ) ? $readmore_txt : __('Read More', 'codexin') ); ?></a>
+						                </div>
 		                    		<?php endif; 
 		                    		?>
 		                    		<?php echo ($layout == 'grid') ? '</div> <!-- end of blog-content -->' : ''; ?>
@@ -331,7 +333,7 @@ function cx_blog_shortcode( $atts, $content = null ) {
 
 					 ?>
 					</div> <!-- end of <?php echo ($layout == 'grid') ? 'row' : 'blog-list-wrapper'; ?> -->
-				</div> <!-- end of <?php echo ($layout == 'grid') ? 'blog-grid-wrapper' : 'col'; ?> -->
+				<?php echo ($layout == 'grid') ? '</div> <!-- end of blog-grid-wrapper -->' : ''; ?>
 			</div> <!-- end of row -->
 		</div> <!-- end of cx-blog-standard -->
 

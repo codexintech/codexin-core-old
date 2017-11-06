@@ -1,28 +1,38 @@
+
+
+/******************************
+
+INDEX:
+    000 - General Settings
+    001 - Instagram widget
+    002 - Mailchimp widget
+    003 - Address Box widget
+    004 - Popular Posts widget
+    005 - Popular Projects widget
+    006 - Events Section
+    007 - Social Share widget
+    008 - Twitter Feed widget
+
+
+******************************/
+
+
+
+/************************************
+    000 - General Settings
+*************************************/
+
+
 .widget-title {
     text-transform: uppercase;
     margin-top: 15px;
     margin-bottom: 40px;
 }
 
-.reveal-widget .media {
-    margin-bottom: 30px;
-}
 
-.reveal-widget .media .media-body {
-    padding-top: 10px;
-}
-
-.reveal-widget .media .blog-info {
-    padding-top: 5px;
-}
-
-.media-object {
-    max-width: none;
-}
-
-/************************************************************
-    Instagram widget
-*************************************************************/
+/************************************
+    001 - Instagram widget
+*************************************/
 
 .codexin-instagram-widget .instagram-images img {
     width: 100%;
@@ -57,9 +67,10 @@
     height: 100%;
 }
 
-/************************************************************
-    Mailchimp widget
-*************************************************************/
+
+/************************************
+    002 - Mailchimp widget
+*************************************/
 
 .mailchimp-success {
 	display: none;
@@ -84,29 +95,14 @@
     margin-bottom: 10px;
 }
 
-.mailchimp-firstname::-webkit-input-placeholder,
-.mailchimp-lastname::-webkit-input-placeholder,
-.mailchimp-email::-webkit-input-placeholder,
-.mailchimp-firstname:-ms-input-placeholder,
-.mailchimp-lastname:-ms-input-placeholder,
-.mailchimp-email:-ms-input-placeholder,
-.mailchimp-firstname::-moz-placeholder,
-.mailchimp-lastname::-moz-placeholder,
-.mailchimp-email::-moz-placeholder {
-	color: #ddd;
-	font-size: 85%;
-}
-
 .mailchimp-submit {
     width: 100%;
     border-radius: 0;
     padding: 8px 10px;
     outline: 0;
     border: 0;
-    background: #295970;
-    color: #fff;
-    border-top:1px solid #295970;
-    border-bottom:1px solid #295970;
+    border-top:1px solid;
+    border-bottom:1px solid;
     -webkit-transition: all .3s;
     -moz-transition: all .3s;
     -ms-transition: all .3s;
@@ -120,15 +116,11 @@
 	opacity: .65;
 }
 
-.mailchimp-submit:hover {
-    background: #002037;
-}
-
 .mailchimp-desc p {
     font-size: 85%;
     margin-bottom: 15px;
     font-style: italic;
-    color: #666;
+    opacity: 0.95;
 }
 
 .mailchimp-error {
@@ -208,9 +200,10 @@
     box-shadow: none;
 }
 
-/************************************************************
-    Address Box
-*************************************************************/
+
+/************************************
+    003 - Address Box widget
+*************************************/
 
 .codexin-address-box {
     margin-bottom: 30px;
@@ -291,9 +284,10 @@
     left:0;
 }
 
-/************************************************************
-    Popular Posts
-*************************************************************/
+
+/************************************
+    004 - Popular Posts widget
+*************************************/
 
 .posts-single {
     margin-bottom: 20px;
@@ -335,7 +329,9 @@
     margin-bottom: 0;
 }
 
-.posts-single .blog-info span, .posts-single-right .cx-count, .blog-info .fa {
+.posts-single .blog-info span, 
+.posts-single-right .cx-count, 
+.blog-info .fa {
     font-style: italic;
 }
 
@@ -351,7 +347,6 @@
 .posts-single-right p {
     margin: 0;
     padding: 0;
-    color: #555;
     font-size: 13px;
     font-style: italic;
     line-height: 1.5em;
@@ -360,10 +355,21 @@
 }
 
 .posts-single-right .cx-icon {
-    font-size: 12px;
     margin-right: 6px;
-    color: #555;
     font-style: italic;
+}
+
+.posts-single .blog-info span, 
+.posts-single-right .cx-count, 
+.posts-single-right .cx-icon,
+.posts-single-right p,
+.blog-info .fa {
+    opacity: 0.9;
+}
+
+.posts-single-right .cx-icon,
+.posts-single-right .cx-count {
+    font-size: 12px;
 }
 
 .posts-single-right p + span {
@@ -373,9 +379,10 @@
     line-height: 1.5em;
 }
 
-/************************************************************
-    Social widget
-*************************************************************/
+
+/************************************
+    005 - Social widget
+*************************************/
 
 .codexin-social-widget .italic {
     margin-right: 20px;
@@ -386,16 +393,12 @@
     display: inline-block;
     width: 20px;
     height: 20px;
-    -webkit-transition: all .3s;
-    -moz-transition: all .3s;
-    -ms-transition: all .3s;
-    -o-transition: all .3s;
-    transition: all .3s;
 }
 
-/************************************************************
-    Popular projects
-*************************************************************/
+
+/************************************
+    006 - Popular Projects widget
+*************************************/
 
 .codexin-recent-projects-widget  .posts-single-right p,
 .codexin-popular-project-widget  .posts-single-right p {
@@ -404,29 +407,14 @@
     width:100%;
 }
 
-/************************************************************
-    Social Share
-*************************************************************/
+
+/************************************
+    007 - Social Share widget
+*************************************/
 
 .codexin-social-share-widget .caption {
     display: inline-block;
     margin-right:20px;
-}
-
-
-.codexin-social-share-widget .socials i {
-    margin-right: 5px;
-    width: 30px;
-    height: 30px;
-    line-height: 30px;
-    text-align: center;
-    margin-right: 10px;
-    margin-top: 15px;
-    -webkit-transition: all .3s;
-    -moz-transition: all .3s;
-    -ms-transition: all .3s;
-    -o-transition: all .3s;
-    transition: all .3s;
 }
 
 .codexin-social-share-widget .socials .caption span {
@@ -434,9 +422,10 @@
     margin-right: 5px;
 }
 
-/************************************************************
-    Twitter Feed
-*************************************************************/
+
+/************************************
+    008 - Twitter Feed widget
+*************************************/
 
 .twitter-feed-wrapper {
     margin-bottom: 30px;

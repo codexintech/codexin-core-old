@@ -133,7 +133,7 @@ function cx_client_shortcode( $atts, $content = null ) {
 							// Retrieving Image alt tag
 							$image_alt = ( !empty( retrieve_alt_tag() ) ) ? retrieve_alt_tag() : get_the_title();  
 							?>
-						<div class="col-lg-<?php echo esc_html( $grid_columns ); ?> col-sm-6 client-image-single">
+						<div class="col-lg-<?php echo esc_html( $grid_columns ); ?> col-sm-6 client-image-single cx-border-1">
 							<?php if( $link_client ): ?>
 							<a href="<?php echo esc_url( $client_url ); ?>" target="_blank">
 							<?php endif; ?>

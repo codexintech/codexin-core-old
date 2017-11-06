@@ -61,7 +61,7 @@ function cx_team_mini_shortcode( $atts, $content = null ) {
 						?>
 						<div class="col-sm-3">
 							<div class="team-single">
-								<a href="#"><img src="<?php if(has_post_thumbnail()): echo esc_url( the_post_thumbnail_url( 'rectangle-three' ) ); else: echo '//placehold.it/480x595'; endif; ?>" alt="<?php echo esc_attr( $img_alt ); ?>" class="img-responsive" /></a>
+								<img src="<?php if(has_post_thumbnail()): echo esc_url( the_post_thumbnail_url( 'rectangle-three' ) ); else: echo '//placehold.it/480x595'; endif; ?>" alt="<?php echo esc_attr( $img_alt ); ?>" class="img-responsive" />
 								<div class="team-single-wrapper">
 									<div class="team-social">
 										<?php

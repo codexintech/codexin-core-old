@@ -150,7 +150,7 @@ class Codexin_Social_Widget extends WP_Widget {
 		
 		printf( '%s', $args['before_widget'] ); ?>
 
-		<div class="footer-left">
+		<div class="socials-wrapper cx-color-0">
 			<p><span class="italic"><?php echo esc_html($instance[ 'title' ] ); ?></span>
 
 				<?php if( !empty( $cx_facebook ) && ( 'on' == $instance[ 'facebook' ] ) ) : ?>

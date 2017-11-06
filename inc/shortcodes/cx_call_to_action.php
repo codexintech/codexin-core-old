@@ -37,16 +37,16 @@ function cx_call_to_action_shortcode(  $atts, $content = null) {
 	   		$master_class[] = 'cx-cta';
 
 			// Retrieving user define classes
-	   		$classes = array( 'cta-content' );
+	   		$classes = array( 'cta-content cx-bg-0' );
 	   		(!empty($class)) ? $classes[] = $class : '';
 		?>
 
 		   	<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
 	   			<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
 					<?php if( $icon_toggle ): ?>
-					<i class="<?php echo esc_attr( $icon ); ?>"></i>
+					<i class="<?php echo esc_attr( $icon ); ?> cx-color-2"></i>
 					<?php endif; ?>
-	   				<div class="cta-details">
+	   				<div class="cta-details cx-color-2">
 	   					<?php if( !empty( $cta_title ) ): ?>
 		   					<h4 class="cta-title"><?php printf('%s', $cta_title); ?></h4>
 		   				<?php endif; ?>
@@ -54,7 +54,9 @@ function cx_call_to_action_shortcode(  $atts, $content = null) {
 		   					<p><?php printf('%s', $cta_desc); ?></p>
 		   				<?php endif; ?>
 	   				</div>
-	   				<a href="<?php echo esc_url($retrieve_link[0]); ?>" <?php echo $title; ?> <?php echo $target; ?> class="cx-cta-btn"><?php echo esc_html( $button_text ); ?></a>
+	   				<div class="cx-cta-btn">
+		   				<a href="<?php echo esc_url($retrieve_link[0]); ?>" <?php echo $title; ?> <?php echo $target; ?>><?php echo esc_html( $button_text ); ?></a>
+		   			</div>
 	   			</div><!-- end of cta-content -->
 		   	</div><!-- end of cx-cta -->
 
@@ -67,13 +69,13 @@ function cx_call_to_action_shortcode(  $atts, $content = null) {
 			$master_class[] = 'cx-cta-2';
 
 			// Retrieving user define classes
-			$classes = array( 'cta-content' );
+			$classes = array( 'cta-content cx-border-2' );
 			(!empty($class)) ? $classes[] = $class : ''; 
 		?>
 			
 			<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">	
 				<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
-					<div class="cta-details">
+					<div class="cta-details cx-bg-2">
 						<div class="cx-content">
 							<p><?php printf( '%s', $cta_content ); ?></p>
 						</div>
@@ -89,7 +91,7 @@ function cx_call_to_action_shortcode(  $atts, $content = null) {
 			$master_class[] = 'cx-cta-3';
 
 			// Retrieving user define classes
-			$classes = array( 'cta-content' );
+			$classes = array( 'cta-content cx-bg-0 cx-color-2' );
 			(!empty($class)) ? $classes[] = $class : ''; 
 		?>
 
@@ -102,7 +104,9 @@ function cx_call_to_action_shortcode(  $atts, $content = null) {
 				  		<?php if( !empty( $cta_desc ) ): ?>
 				  			<p> <?php printf( '%s', $cta_desc ); ?> </p>
 				  		<?php endif; ?>
-			  			<a href="<?php echo esc_url($retrieve_link[0]); ?>" <?php echo $title; ?> <?php echo $target; ?> class="cx-cta-btn"><?php echo esc_html( $button_text ); ?></a>
+		   				<div class="cx-cta-btn">
+			   				<a href="<?php echo esc_url($retrieve_link[0]); ?>" <?php echo $title; ?> <?php echo $target; ?>><?php echo esc_html( $button_text ); ?></a>
+			   			</div>
 			  		</div>
 	   			</div><!-- end of cta-content -->
 		   	</div><!-- end of cx-cta -->
@@ -287,24 +291,24 @@ function cx_call_to_action_kc() {
     									),
 
 	    								'Button' => array(
-	    									array('property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.cx-cta-btn'),
-	    									array('property' => 'color', 'label' => esc_html__('Color On Hover', 'codexin'), 'selector' => '.cx-cta-btn:hover'),
-	    									array('property' => 'background', 'label' => esc_html__('Background Color', 'codexin'), 'selector' => '.cx-cta-btn'),
-	    									array('property' => 'background-color', 'label' => esc_html__('Background Color On Hover', 'codexin'), 'selector' => '.cx-cta-btn:hover'),
-	    									array('property' => 'font-family', 'label' => esc_html__('Font Family', 'codexin'), 'selector' => '.cx-cta-btn'),
-	    									array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.cx-cta-btn'),
-	    									array('property' => 'font-weight', 'label' => esc_html__('Font Weight', 'codexin'), 'selector' => '.cx-cta-btn'),
-	    									array('property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '.cx-cta-btn'),
-	    									array('property' => 'text-align', 'label' => esc_html__('Text Align', 'codexin'), 'selector' => '.cx-cta-btn'),
-	    									array('property' => 'text-transform', 'label' => esc_html__('Text Transform', 'codexin'), 'selector' => '.cx-cta-btn'),
-											array('property' => 'border', 'label' => esc_html__('Border', 'codexin'), 'selector' => '.cx-cta-btn'),
-	    									array('property' => 'border', 'label' => esc_html__('Border on Hover', 'codexin'), 'selector' => '.cx-cta-btn:hover'),
-	    									array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.cx-cta-btn'),
-	    									array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.cx-cta-btn')
+	    									array('property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.cx-cta-btn a'),
+	    									array('property' => 'color', 'label' => esc_html__('Color On Hover', 'codexin'), 'selector' => '.cx-cta-btn a:hover'),
+	    									array('property' => 'background', 'label' => esc_html__('Background Color', 'codexin'), 'selector' => '.cx-cta-btn a'),
+	    									array('property' => 'background-color', 'label' => esc_html__('Background Color On Hover', 'codexin'), 'selector' => '.cx-cta-btn a:hover'),
+	    									array('property' => 'font-family', 'label' => esc_html__('Font Family', 'codexin'), 'selector' => '.cx-cta-btn a'),
+	    									array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.cx-cta-btn a'),
+	    									array('property' => 'font-weight', 'label' => esc_html__('Font Weight', 'codexin'), 'selector' => '.cx-cta-btn a'),
+	    									array('property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '.cx-cta-btn a'),
+	    									array('property' => 'text-align', 'label' => esc_html__('Text Align', 'codexin'), 'selector' => '.cx-cta-btn a'),
+	    									array('property' => 'text-transform', 'label' => esc_html__('Text Transform', 'codexin'), 'selector' => '.cx-cta-btn a'),
+											array('property' => 'border', 'label' => esc_html__('Border', 'codexin'), 'selector' => '.cx-cta-btn a'),
+	    									array('property' => 'border-color', 'label' => esc_html__('Border Color on Hover', 'codexin'), 'selector' => '.cx-cta-btn a:hover'),
+	    									array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.cx-cta-btn a'),
+	    									array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.cx-cta-btn a')
     									),
 
 	    								'Content Wrapper' => array(
-	    									array('property' => 'background-color', 'label' => esc_html__('Background', 'codexin'), 'selector' => '.cta-details'),
+	    									array('property' => 'background-color', 'label' => esc_html__('Background', 'codexin'), 'selector' => '.cta-content'),
 	    									array('property' => 'width', 'label' => esc_html__('Width', 'codexin'), 'selector' => '.cta-content'),
 	    									array('property' => 'height', 'label' => esc_html__('Height', 'codexin'), 'selector' => '.cta-content'),
 	    									array('property' => 'border', 'label' => esc_html__('Border', 'codexin'), 'selector' => '.cta-content'),

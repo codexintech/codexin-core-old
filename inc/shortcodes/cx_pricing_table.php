@@ -45,7 +45,7 @@ function cx_pricing_table_shortcode( $atts, $content = null ) {
 	if ( !empty( $price_desc ) ):
 		$pr_desc = explode( "\n", $price_desc );
 		if( count( $pr_desc ) ):
-			$list_desc .= '<ul class="pricing-features">';
+			$list_desc .= '<ul class="pricing-features cx-bg-1 cx-border-1">';
 
 			foreach( $pr_desc as $pr ):
 					$list_desc .= '<li>'. $pr .' </li>';
@@ -59,7 +59,7 @@ function cx_pricing_table_shortcode( $atts, $content = null ) {
 
 		<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
 			<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
-				<div class="pricing-header">
+				<div class="pricing-header cx-bg-0">
 					<?php if( !empty( $price_title ) ): ?>
 			        <div class="pricing-title"><?php echo esc_html( $price_title ); ?></div>
 				    <?php endif; ?>
@@ -79,16 +79,12 @@ function cx_pricing_table_shortcode( $atts, $content = null ) {
 				<?php printf( '%s', $list_desc ); ?>
 
 				<?php if( $btn_toggle ): ?>
-			    <div class="pricing-button">
+			    <div class="pricing-button cx-bg-0 cx-color-0">
 			    	<a href="<?php echo esc_url($retrieve_link[0]); ?>" <?php echo $title; ?> <?php echo $target; ?>><?php if( !empty( $btn_text ) ): echo esc_html($btn_text); endif; ?></a>
 			    </div>
 				<?php endif; ?>
 			</div>
 		</div>
-
-
-
-
 
 
 <?php
@@ -297,7 +293,7 @@ function cx_pricing_table_kc() {
 	    									array('property' => 'border', 'label' => esc_html__('Border', 'codexin'), 'selector' => '.pricing-button a'),
 	    									array('property' => 'color', 'label' => esc_html__('Color on Hover', 'codexin'), 'selector' => '.pricing-button a:hover'),
 	    									array('property' => 'background-color', 'label' => esc_html__('Background Color on Hover', 'codexin'), 'selector' => '.pricing-button a:hover'),
-											array('property' => 'border', 'label' => esc_html__('Border on Hover', 'codexin'), 'selector' => '.pricing-button a:hover'),
+											array('property' => 'border-color', 'label' => esc_html__('Border Color on Hover', 'codexin'), 'selector' => '.pricing-button a:hover'),
 	    									array('property' => 'background-color', 'label' => esc_html__('Wrapper Background Color', 'codexin'), 'selector' => '.pricing-button'),
 	    									array('property' => 'font-family', 'label' => esc_html__('Font Family', 'codexin'), 'selector' => '.pricing-button a'),
 	    									array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.pricing-button a'),

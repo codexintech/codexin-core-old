@@ -24,6 +24,7 @@
         $('.events-carousel').slick({
             dots: event_dot,
             infinite: false,
+            autoplay: false,
             speed: 300,
             slidesToShow: 2,
             slidesToScroll: 1,

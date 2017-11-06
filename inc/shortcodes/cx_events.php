@@ -107,19 +107,19 @@ function cx_events_shortcode( $atts, $content = null ) {
 				            	
 						?>
 							<article id="event-<?php esc_attr(the_ID()); ?>" <?php post_class(array(esc_attr($post_classes))); ?> itemscope itemtype="http://schema.org/Event">
-							    <div class="<?php echo ($layout == 'grid') ? 'events-item-content' : 'post-wrapper'; ?>">
-							    	<?php echo ($layout == 'list') ? '<div class="event-list-wrapper">' : '' ?>
+							    <div class="<?php echo ($layout == 'grid') ? 'events-item-content' : 'post-wrapper reveal-border-1'; ?>">
+							    	<?php echo ($layout == 'list') ? '<div class="event-list-wrapper reveal-bg-2">' : '' ?>
 							    		<?php if( $layout == 'list' ): ?>
 							                <div class="thumb-events" style="background-image:url('<?php if(has_post_thumbnail()): esc_url(the_post_thumbnail_url('reveal-rectangle-one')); else: echo '//placehold.it/600X375'; endif; ?>');">
 							                    <a href="<?php echo esc_url(get_the_permalink()); ?>"></a>
 							                    <?php if( !empty($e_st_date) ): ?>
-								                    <div class="events-date"><p><?php echo esc_html($e_st_date); ?></p></div>
+								                    <div class="events-date reveal-bg-2"><p><?php echo esc_html($e_st_date); ?></p></div>
 								                <?php endif; ?>
 							                </div>
 							            <?php else: ?>
 										    <div class="item-thumbnail">
 										        <img src="<?php echo esc_url(the_post_thumbnail_url( 'rectangle-four' )); ?>"  alt="<?php echo esc_attr($image_alt); ?>">                                          
-										        <ul class="events-action-btn">
+										        <ul class="events-action-btn reveal-color-0">
 										            <li>
 										                <a class="venobox" href="<?php echo esc_url(get_the_permalink()); ?>" itemprop="url"><i class="flaticon-link"></i></a>
 										            </li>
@@ -132,7 +132,7 @@ function cx_events_shortcode( $atts, $content = null ) {
 							            	if( $layout == 'list' ):
 								            	$event_list = get_the_term_list( $data->ID, 'events-category', '', ', ', '' );
 								            	if(!empty($event_list)): ?>
-									                <p class="list-tag"><i class="flaticon-bookmark"></i> 
+									                <p class="list-tag reveal-color-0"><i class="flaticon-bookmark"></i> 
 									                <?php 
 									                   printf( '%s', $event_list );
 									                ?>
@@ -190,8 +190,8 @@ function cx_events_shortcode( $atts, $content = null ) {
 							                </div>
 						                <?php echo ($layout == 'grid') ? '</div> <!-- end of events-description -->' : ''; ?>
 											<?php if( $read_more ): ?>
-								                <div class="<?php echo ( $layout == 'list' ) ? 'blog-more' : 'events-grid-more'; ?>">
-								                	<a <?php echo ($layout == 'list') ? 'class="cx-btn"' : ''; ?> href="<?php echo esc_url(get_the_permalink()); ?>"><?php echo esc_html( !empty( $readmore_txt ) ? $readmore_txt : __('Read More', 'codexin') ); ?></a>
+								                <div class="<?php echo ( $layout == 'list' ) ? 'cx-btn reveal-color-0 reveal-primary-btn' : 'events-cx-btn reveal-color-0'; ?>">
+								                	<a <?php echo ($layout == 'list') ? 'class="cx-btn-text"' : ''; ?> href="<?php echo esc_url(get_the_permalink()); ?>"><?php echo esc_html( !empty( $readmore_txt ) ? $readmore_txt : __('Read More', 'codexin') ); ?></a>
 								                </div>
 								            <?php endif; ?>
 							            <?php echo ($layout == 'list') ? '</div> <!-- end of desc-events -->' : ''; ?>

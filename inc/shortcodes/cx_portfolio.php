@@ -104,19 +104,19 @@ function cx_portfolio_shortcode( $atts, $content = null ) {
 			            	
 					?>
 						<article id="event-<?php esc_attr(the_ID()); ?>" <?php post_class(array(esc_attr($post_classes))); ?> itemscope itemtype="http://schema.org/Event">
-						    <div class="<?php echo ($layout == 'grid') ? 'portfolio-item-content' : 'post-wrapper'; ?>">
-						    	<?php echo ($layout == 'list') ? '<div class="port-list-wrapper">' : '' ?>
+						    <div class="<?php echo ($layout == 'grid') ? 'portfolio-item-content' : 'post-wrapper reveal-border-1'; ?>">
+						    	<?php echo ($layout == 'list') ? '<div class="port-list-wrapper reveal-bg-2">' : '' ?>
 						    		<?php if( $layout == 'list' ): ?>
 						                <div class="thumb-port" style="background-image:url('<?php if(has_post_thumbnail()): esc_url(the_post_thumbnail_url('reveal-rectangle-one')); else: echo '//placehold.it/600X375'; endif; ?>');">
 						                    <a href="<?php echo esc_url(get_the_permalink()); ?>"></a>
 						                    <?php if( !empty($port_date) ): ?>
-							                    <div class="port-date"><p><?php echo esc_html($port_date); ?></p></div>
+							                    <div class="port-date reveal-bg-2"><p><?php echo esc_html($port_date); ?></p></div>
 							                <?php endif; ?>
 						                </div> <!-- end of thumb-port -->
 						            <?php else: ?>
 									    <div class="item-thumbnail">
 									        <img src="<?php if(has_post_thumbnail()): esc_url(the_post_thumbnail_url('rectangle-one')); else: echo '//placehold.it/600X400'; endif; ?>"  alt="<?php echo esc_attr($image_alt); ?>">
-									        <ul class="portfolio-action-btn">
+									        <ul class="portfolio-action-btn reveal-color-0">
 									            <li>
 									                <a class="venobox" href="<?php echo esc_url(get_the_permalink()); ?>" itemprop="url"><i class="flaticon-link"></i></a>
 									            </li>
@@ -128,7 +128,7 @@ function cx_portfolio_shortcode( $atts, $content = null ) {
 						            	<?php 
 						            	if( $layout == 'list' ):
 							            	if(!empty($port_list)): ?>
-								                <p class="list-tag"><i class="flaticon-bookmark"></i> 
+								                <p class="list-tag reveal-color-0"><i class="flaticon-bookmark"></i> 
 								                <?php 
 								                   printf( '%s', $port_list );
 								                ?>
@@ -154,7 +154,7 @@ function cx_portfolio_shortcode( $atts, $content = null ) {
 						                	</a>
 						            	<?php echo ( $layout == 'list' ) ? '</h2>' : '</h4>'; 
 						            	if( ($layout == 'grid') && !empty($port_list) ): ?>
-											<ul class="portfolio-cat">
+											<ul class="portfolio-cat reveal-color-0">
 												<?php printf('%s', get_the_term_list( $data->ID, 'portfolio-category', '<li>', ', </li><li>', '</li>' ) ); ?>
 											</ul>
 								        <?php endif; 
@@ -173,8 +173,8 @@ function cx_portfolio_shortcode( $atts, $content = null ) {
 						                ?>
 						                </div> <!-- end of <?php echo ($layout == 'grid') ? 'portfolio-description' : 'list-content'; ?> -->
 										<?php if( ($layout == 'list') && $read_more ): ?>
-							                <div class="<?php echo ( $layout == 'list' ) ? 'blog-more' : 'portfolio-grid-more'; ?>">
-							                	<a <?php echo ($layout == 'list') ? 'class="cx-btn"' : ''; ?> href="<?php echo esc_url(get_the_permalink()); ?>"><?php echo esc_html( !empty( $readmore_txt ) ? $readmore_txt : __('Read More', 'codexin') ); ?></a>
+							                <div class="cx-btn reveal-color-0 reveal-primary-btn">
+							                	<a class="cx-btn-text" href="<?php echo esc_url(get_the_permalink()); ?>"><?php echo esc_html( !empty( $readmore_txt ) ? $readmore_txt : __('Read More', 'codexin') ); ?></a>
 							                </div>
 							            <?php endif; ?>
 						            <?php echo ($layout == 'list') ? '</div> <!-- end of desc-portfolio -->' : ''; ?>

@@ -82,27 +82,33 @@ function cx_blog_mini_shortcode( $atts, $content = null ) {
 									</div>
 								</a>
 								<?php if( $show_date ) : ?>
-								<div class="meta">
-									<p><?php echo get_the_time( 'd' ); ?></p>
-									<p><?php echo get_the_time( 'M' ); ?></p>
+								<div class="meta cx-color-2">
+									<a href="<?php echo get_day_link(get_post_time('Y'), get_post_time('m'), get_post_time('j'));  ?>" class="entry-date">
+										<p><?php echo get_the_time( 'd' ); ?></p>
+										<p><?php echo get_the_time( 'M' ); ?></p>
+									</a>
 								</div>
 								<?php endif; ?>
 							</div> <!-- End of img-thumb -->
 
 							<div class="blog-content">
-								<p class="blog-title">
+								<h3 class="blog-title">
 									<a href="<?php the_permalink(); ?>"><?php echo esc_html( wp_trim_words( get_the_title(), $title_length ) ); ?></a>
-								</p>
+								</h3>
 								<p class="blog-desc"> 
 									<?php echo esc_html( wp_trim_words( get_the_excerpt(), $desc_length ) ); ?> 
 								</p>
-								<a class="read-more" href="<?php echo esc_url( get_the_permalink() ); ?>">
-									<?php echo esc_html( !empty( $readmore_text ) ? $readmore_text : __('Read More', 'codexin') ); ?>
-								</a>
+							
+								<div class="cx-color-0 cx-primary-btn">
+									<a class="read-more" href="<?php echo esc_url( get_the_permalink() ); ?>">
+										<?php echo esc_html( !empty( $readmore_text ) ? $readmore_text : __('Read More', 'codexin') ); ?>
+									</a>
+								</div>
 							</div> <!-- end of blog-content -->
+							
 						<?php
 							if( $postview_comments ) : ?>
-							<div class="blog-info">
+							<div class="blog-info cx-border-1 cx-color-0">
 								<?php
 								$order_cpv = 'meta_value_num';
 								$order_com = 'comment_count';
@@ -114,15 +120,15 @@ function cx_blog_mini_shortcode( $atts, $content = null ) {
 									</i>
 								</span>
 								<span> 											
-									<i class="fa fa-comments"></i> <i>
-										<a href="<?php comments_link(); ?>"><?php comments_number('0', '1', '%'); ?></a>
-									</i>
+									<a href="<?php comments_link(); ?>">
+										<i class="fa fa-comments"></i> <i><?php comments_number('0', '1', '%'); ?></i>
+									</a>
 								</span>
 								<?php elseif( $orderby == $order_com ) : ?>
 								<span> 											
-									<i class="fa fa-comments"></i> <i>
-										<a href="<?php comments_link(); ?>"><?php comments_number('0', '1', '%'); ?></a>	
-									</i>
+									<a href="<?php comments_link(); ?>">
+										<i class="fa fa-comments"></i> <i><?php comments_number('0', '1', '%'); ?></i>
+									</a>
 								</span>
 								<span>
 									<i class="fa fa-eye"></i> <i>
@@ -135,10 +141,10 @@ function cx_blog_mini_shortcode( $atts, $content = null ) {
 										<?php echo codexin_get_post_views(get_the_ID()); ?>
 									</i>
 								</span>
-								<span> 											
-									<i class="fa fa-comments"></i> <i>
-										<a href="<?php comments_link(); ?>"><?php comments_number('0', '1', '%'); ?></a>
-									</i>
+								<span>									
+									<a href="<?php comments_link(); ?>">
+										<i class="fa fa-comments"></i> <i><?php comments_number('0', '1', '%'); ?></i>
+									</a>									
 								</span>
 							<?php endif; ?>	
 
@@ -196,28 +202,30 @@ function cx_blog_mini_shortcode( $atts, $content = null ) {
 					?>
 					<div class="col-md-<?php echo $column ?> col-sm-<?php echo ( $column==4 ) ? esc_html($column) : esc_html(6); ?>">
 						<div class="blog-wrapper">
-							<div class="img-thumb">
+							<div class="img-thumb cx-bg-overlay">
 								<img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'rectangle-one' ) : '//placehold.it/600x400' ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" class="img-responsive">
-								<a href="<?php the_permalink(); ?>" class="cx-blog-btn">
-									<?php echo esc_html( !empty( $readmore_text ) ? $readmore_text : __('Read More', 'codexin') ); ?>
-								</a>
+								<div class="cx-color-0 cx-primary-btn cx-white-btn">
+									<a href="<?php the_permalink(); ?>" class="cx-blog-btn">
+										<?php echo esc_html( !empty( $readmore_text ) ? $readmore_text : __('Read More', 'codexin') ); ?>
+									</a>
+								</div>
 								<?php if( $show_date ) : ?>
-									<div class="date-time"> 
+									<div class="date-time cx-bg-0 cx-color-2">
 										<p><?php echo get_the_time( 'd' ); ?></p>
 										<p><?php echo get_the_time( 'M' ); ?></p>
 									</div>
 								<?php endif; ?>
 							</div> <!-- End of img-thumb -->
 
-							<div class="blog-content">
+							<div class="blog-content cx-bg-1 cx-border-1">
 								<h3 class="blog-title">
 									<a href="<?php the_permalink(); ?>"><?php echo esc_html( wp_trim_words( get_the_title(), $title_length ) ); ?></a>
 								</h3>
-								<p class="blog-category"> <?php the_category( '  ' ); ?> </p>
-								<ul class="meta">
-									<li><i class="fa fa-user"></i> <a href="<?php echo esc_url(get_author_posts_url( get_the_author_meta( 'ID' ), get_the_author_meta( 'user_nicename' ) )); ?>"> <?php the_author(); ?> </a> </li>
+								<p class="blog-category cx-color-0"> <?php the_category( '  ' ); ?> </p>
+								<ul class="meta cx-color-0">
+									<li><a href="<?php echo esc_url(get_author_posts_url( get_the_author_meta( 'ID' ), get_the_author_meta( 'user_nicename' ) )); ?>"><i class="fa fa-user"></i>  <?php the_author(); ?> </a> </li>
 									<?php if( $post_meta == 'comment' ): ?>
-										<li><i class="fa fa-paper-plane"></i> <a href="<?php comments_link(); ?>"><?php comments_number('0', '1', '%'); ?></a> </li>
+										<li><a href="<?php comments_link(); ?>"><i class="fa fa-paper-plane"></i>  <?php comments_number('0', '1', '%'); ?></a> </li>
 									<?php else: ?>
 										<li><i class="fa fa-eye"></i> <?php echo codexin_get_post_views(get_the_ID()); ?> </li>
 									<?php endif; ?>
@@ -278,7 +286,7 @@ function cx_blog_mini_shortcode( $atts, $content = null ) {
 				?>
 					<!-- Left column post -->
 					<div class="col-md-6 col-sm-4 col-xs-12">
-						<div class="blog-wrapper-left">
+						<div class="blog-wrapper-left cx-border-1">
 							<div class="img-thumb">
 								<a href="<?php esc_url( the_permalink() ); ?>">
 									<img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'rectangle-one' ) : '//placehold.it/600x400' ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" class="img-responsive">
@@ -288,19 +296,19 @@ function cx_blog_mini_shortcode( $atts, $content = null ) {
 								<h3 class="blog-title">
 									<a href="<?php the_permalink(); ?>"><?php echo esc_html( wp_trim_words( get_the_title(), $title_length ) ); ?></a>
 								</h3>
-								<ul class="meta">
-									<li><?php echo esc_html__('By', 'reveal'); ?> <a href="<?php echo esc_url(get_author_posts_url( get_the_author_meta( 'ID' ), get_the_author_meta( 'user_nicename' ) )); ?>"> <?php the_author(); ?> </a> </li>
-									<li><?php echo esc_html__('On', 'reveal'); ?> <a href="<?php echo get_day_link(get_post_time('Y'), get_post_time('m'), get_post_time('j'));  ?>" class="entry-date"><?php echo get_the_time( 'd M, Y' ); ?></a> </li>
+								<ul class="meta cx-color-0">
+									<li><a href="<?php echo esc_url(get_author_posts_url( get_the_author_meta( 'ID' ), get_the_author_meta( 'user_nicename' ) )); ?>"><?php echo esc_html__('By ', 'reveal'); the_author(); ?> </a> </li>
+									<li><a href="<?php echo get_day_link(get_post_time('Y'), get_post_time('m'), get_post_time('j'));  ?>" class="entry-date"><?php echo esc_html__('On ', 'reveal'); echo get_the_time( 'd M, Y' ); ?></a> </li>
 									<li><?php echo esc_html__('In', 'reveal'); ?> <?php the_category( ', ' ); ?> </li>
 								</ul>
 								<p class="blog-desc">
 									<?php echo esc_html( wp_trim_words( get_the_excerpt(), $desc_length ) ); ?> 
 								</p>
 							</div> <!-- end of blog-content -->
-							<div class="blog-footer">
-								<div class="blog-footer-item"><i class="fa fa-comments"></i> <a href="<?php comments_link(); ?>"><?php comments_number('0', '1', '%'); ?></a> </div>
+							<div class="blog-footer cx-border-1 cx-bg-1 cx-color-0">
+								<div class="blog-footer-item"><a href="<?php comments_link(); ?>"><i class="fa fa-comments"></i> <?php comments_number('0', '1', '%'); ?></a> </div>
 								<div class="blog-footer-item"><i class="fa fa-eye"></i> <?php echo codexin_get_post_views(get_the_ID()); ?> </div>
-								<a href="<?php the_permalink(); ?>" class="cx-blog-btn">
+								<a href="<?php the_permalink(); ?>" class="cx-blog-btn cx-bg-overlay">
 									<?php echo esc_html( !empty( $readmore_text ) ? $readmore_text : __('Read More', 'codexin') ); ?>
 								</a>
 								<div class="clearfix"></div>
@@ -312,7 +320,7 @@ function cx_blog_mini_shortcode( $atts, $content = null ) {
 					<div class="col-md-6 col-sm-8 col-xs-12">
 						<ul class="blog-wrapper-right">
 				<?php else : ?>
-							<li>
+							<li class="cx-border-1">
 								 <a class="thumbnail-link" href="<?php esc_url( the_permalink() ); ?>" style="background-image: url('<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'square-one' ) : '//placehold.it/220x220' ); ?>');"> 
 									<div class="media-wrapper-right" >
 										<div class="img-thumb">
@@ -325,11 +333,11 @@ function cx_blog_mini_shortcode( $atts, $content = null ) {
 									<h3 class="blog-title">
 										<a href="<?php the_permalink(); ?>"><?php echo esc_html( wp_trim_words( get_the_title(), $title_length ) ); ?></a>
 									</h3>
-									<ul class="meta">
-										<li><?php echo esc_html__('By', 'reveal'); ?> <a href="<?php echo esc_url(get_author_posts_url( get_the_author_meta( 'ID' ), get_the_author_meta( 'user_nicename' ) )); ?>"> <?php the_author(); ?> </a> </li>
-										<li><?php echo esc_html__('On', 'reveal'); ?> <a href="<?php echo get_day_link(get_post_time('Y'), get_post_time('m'), get_post_time('j'));  ?>" class="entry-date"><?php echo get_the_time( 'd M, Y' ); ?></a> </li>
+									<ul class="meta cx-color-0">
+										<li><a href="<?php echo esc_url(get_author_posts_url( get_the_author_meta( 'ID' ), get_the_author_meta( 'user_nicename' ) )); ?>"><?php echo esc_html__('By ', 'reveal'); the_author(); ?> </a> </li>
+										<li><a href="<?php echo get_day_link(get_post_time('Y'), get_post_time('m'), get_post_time('j'));  ?>" class="entry-date"><?php echo esc_html__('On ', 'reveal'); echo get_the_time( 'd M, Y' ); ?></a> </li>
 										<li><i class="fa fa-eye"></i> <?php echo codexin_get_post_views(get_the_ID()); ?> </li>
-										<li><i class="fa fa-comments"></i> <a href="<?php comments_link(); ?>"><?php comments_number('0', '1', '%'); ?></a> </li>
+										<li><a href="<?php comments_link(); ?>"><i class="fa fa-comments"></i> <?php comments_number('0', '1', '%'); ?></a> </li>
 									</ul>
 									<p class="blog-desc">
 										<?php echo esc_html( wp_trim_words( get_the_excerpt(), $desc_length ) ); ?> 
@@ -396,7 +404,7 @@ function cx_blog_mini_shortcode( $atts, $content = null ) {
 									<img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'square-two' ) : '//placehold.it/500x500' ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" class="img-responsive">
 								</a>
 							</div> <!-- End of img-thumb -->
-							<div class="blog-content">
+							<div class="blog-content cx-color-2">
 								<div class="blog-category">
 									<?php the_category(' '); ?>
 								</div>
@@ -642,10 +650,10 @@ function cx_blog_mini_kc() {
 										),
 
  										'Date' => array(
- 											array('property' => 'color', 'label' => esc_html__('Date Color', 'codexin'), 'selector' => 'div.meta, .date-time'),
- 											array('property' => 'background-color', 'label' => esc_html__('Date Background', 'codexin'), 'selector' => 'div.meta, .date-time'),
- 											array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => 'div.meta, .date-time'),
- 											array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => 'div.meta, .date-time')
+ 											array('property' => 'color', 'label' => esc_html__('Date Color', 'codexin'), 'selector' => 'div.meta a, .date-time'),
+ 											array('property' => 'background-color', 'label' => esc_html__('Date Background', 'codexin'), 'selector' => 'div.meta a, .date-time'),
+ 											array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => 'div.meta a, .date-time'),
+ 											array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => 'div.meta a, .date-time')
 										),
 
  										'Icon' => array(
@@ -659,7 +667,7 @@ function cx_blog_mini_kc() {
 										),
 
 										'Image Hover' => array(
- 											array('property' => 'background', 'label' => esc_html__('Image Hover Color', 'codexin'), 'selector' => '.img-wrapper::before, .img-wrapper::after, .blog-wrapper-left .img-thumb a:before, .blog-wrapper::after, .blog-wrapper-right .thumbnail-link:before' )
+ 											array('property' => 'background', 'label' => esc_html__('Image Hover Color', 'codexin'), 'selector' => '.img-wrapper::before, .img-wrapper::after, .blog-wrapper-left .img-thumb a:before, .blog-wrapper::after, .blog-wrapper-right .thumbnail-link:before, .blog-wrapper .img-thumb:before' )
 										),
 
  										'Description' => array(
@@ -707,6 +715,13 @@ function cx_blog_mini_kc() {
  											array('property' => 'text-transform', 'label' => esc_html__('Text Transform', 'codexin'), 'selector' => '.blog-content .read-more, .img-thumb .cx-blog-btn, .blog-footer .cx-blog-btn'),
  											array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.blog-content .read-more, .img-thumb .cx-blog-btn, .blog-footer .cx-blog-btn'),
  											array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.blog-content .read-more, .img-thumb .cx-blog-btn, .blog-footer .cx-blog-btn')
+										),
+
+										'Content Box' => array(
+ 											array('property' => 'background-color', 'label' => esc_html__('Background', 'codexin'), 'selector' => '.blog-content, .blog-wrapper-left, .blog-wrapper-right li.cx-border-1, .blog-wrapper' ),
+ 											array('property' => 'border', 'label' => esc_html__('Border', 'codexin'), 'selector' => '.blog-content, .blog-wrapper-left, .blog-wrapper-right li.cx-border-1, .blog-wrapper' ),
+ 											array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.blog-content, .blog-wrapper-left, .blog-wrapper-right li.cx-border-1, .blog-wrapper' ),
+ 											array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.blog-content, .blog-wrapper-left, .blog-wrapper-right li.cx-border-1, .blog-wrapper' )
 										),
 									) 
 								) 

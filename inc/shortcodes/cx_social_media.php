@@ -51,7 +51,7 @@ function cx_social_media_shortcode( $atts, $content = null ) {
 				<div class="socials-title"><h4> <?php echo esc_html( $social_title ); ?> </h4></div>
 			<?php endif; ?>
 			
-			<div class="cx-socials-wrapper">
+			<div class="cx-socials-wrapper cx-color-0 cx-primary-btn">
 				<?php if( !empty( $cx_facebook ) && ( $show_fb ) ) : ?>
 					<a href="<?php echo esc_url($cx_facebook); ?>" target="_blank"><i class="fa fa-facebook"></i></a>
 				<?php elseif( empty( $cx_facebook ) && ( $show_fb) ): echo '<i class="fa fa-exclamation-triangle" title="'. esc_html__('No Valid URL Found', 'codexin') .'"></i>'; ?>

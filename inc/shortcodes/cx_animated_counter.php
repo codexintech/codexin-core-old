@@ -38,9 +38,9 @@ function cx_animated_counter_shortcode( $atts, $content = null ) {
     // Divider
     if( $divider ):
         if( $div_type == 'dc_line' ):
-            $divider_line = '<div class="cx-divider-2"></div>';
+            $divider_line = '<div class="cx-bg-overlay cx-divider-2"></div>';
         else:
-            $divider_line = '<div class="cx-divider"></div>';
+            $divider_line = '<div class="cx-bg-overlay cx-divider"></div>';
         endif;
     endif;
 	
@@ -57,7 +57,7 @@ function cx_animated_counter_shortcode( $atts, $content = null ) {
                 <?php if( $icon_pos == 'icon-left' ): ?>
                     <div class="counter-wrapper">
                         <div class="content-left">
-                            <i class="<?php echo esc_attr( $icon ); ?>"></i>
+                            <i class="<?php echo esc_attr( $icon ); ?> cx-color-1"></i>
                         </div>
                         <div class="content-right">
                             <span class="counter"><?php echo esc_html( $count_up ); ?></span>
@@ -65,7 +65,7 @@ function cx_animated_counter_shortcode( $atts, $content = null ) {
                         </div>
                     </div>
                 <?php elseif( $icon_pos == 'icon-top' ): ?>
-                    <i class="<?php echo esc_attr( $icon ); ?>"></i>
+                    <i class="<?php echo esc_attr( $icon ); ?> cx-color-1"></i>
                     <span class="counter"><?php echo esc_html( $count_up ); ?></span>
                     <p><?php echo esc_html( $txt ); ?></p>
                 <?php endif; ?>
@@ -230,12 +230,12 @@ function cx_animated_counter_kc() {
         								),
 
                                         'Divider' => array(
-                                            array('property' => 'background-color', 'label' => esc_html__( 'Color (For Divider-1)', 'codexin'), 'selector' => '.cx-divider::after' ),
-                                            array('property' => 'width', 'label' => esc_html__( 'Width (For Divider-1)', 'codexin'), 'selector' => '.cx-divider::after'),
-                                            array('property' => 'height', 'label' => esc_html__( 'Height (For Divider-1)', 'codexin'), 'selector' => '.cx-divider::after'),
-                                            array('property' => 'display', 'label' => esc_html__( 'Display (For Divider-1)', 'codexin'), 'selector' => '.cx-divider::after'),
+                                            array('property' => 'background-color', 'label' => esc_html__( 'Color (For Divider-1)', 'codexin'), 'selector' => '.cx-divider::before' ),
+                                            array('property' => 'width', 'label' => esc_html__( 'Width (For Divider-1)', 'codexin'), 'selector' => '.cx-divider::before'),
+                                            array('property' => 'height', 'label' => esc_html__( 'Height (For Divider-1)', 'codexin'), 'selector' => '.cx-divider::before'),
+                                            array('property' => 'display', 'label' => esc_html__( 'Display (For Divider-1)', 'codexin'), 'selector' => '.cx-divider::before'),
                                             array('property' => 'padding', 'label' => esc_html__( 'Padding (For Divider-1)', 'codexin'), 'selector' => '.cx-divider'),
-                                            array('property' => 'margin', 'label' => esc_html__( 'Margin (For Divider-1)', 'codexin'), 'selector' => '.cx-divider::after'),
+                                            array('property' => 'margin', 'label' => esc_html__( 'Margin (For Divider-1)', 'codexin'), 'selector' => '.cx-divider::before'),
                                             array('property' => 'background-color', 'label' => esc_html__( 'Color of Left Line (For Divider-2)', 'codexin'), 'selector' => '.cx-divider-2::before' ),
                                             array('property' => 'background-color', 'label' => esc_html__( 'Color of Right Line (For Divider-2)', 'codexin'), 'selector' => '.cx-divider-2::after' ),
                                             array('property' => 'width', 'label' => esc_html__( 'Width of Left Line (For Divider-2)', 'codexin'), 'selector' => '.cx-divider-2::before'),
