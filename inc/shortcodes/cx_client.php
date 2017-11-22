@@ -175,12 +175,12 @@ function cx_client_kc() {
 	                //Only load assets when using this element
  					'assets' => array(
  						'scripts' => array(
- 							 'slick-cx-main-script' => CODEXIN_CORE_ASSET_DIR . '/js/slick.min.js',
+ 							 'slick-script' => CODEXIN_CORE_ASSET_DIR . '/js/slick.min.js',
  							 'slick-cx-user-client-script' => CODEXIN_CORE_ASSET_DIR . '/js/shortcode-js/cx_client-carousel.js',
 						),
 
 		      			'styles'	=> array(
-		      				'slick-cx-main-style'	=> CODEXIN_CORE_ASSET_DIR . '/css/slick.css',
+		      				'slick-stylesheet'	=> CODEXIN_CORE_ASSET_DIR . '/css/slick.css',
 	      				),
 
 	                ), //End assets

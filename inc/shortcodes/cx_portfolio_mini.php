@@ -475,8 +475,8 @@ function cx_portfolio_mini_kc() {
 							'imagesloaded-js' => CODEXIN_CORE_ASSET_DIR . '/js/imagesloaded.pkgd.min.js',
 							'isotope-js-script' => CODEXIN_CORE_ASSET_DIR . '/js/isotope.pkgd.min.js',
 							'portfolio-js' => CODEXIN_CORE_ASSET_DIR . '/js/shortcode-js/cx-portfolio.js',
-							'photswipe-js' => CODEXIN_CORE_ASSET_DIR . '/js/photoswipe.min.js',
-							'photswipe-main-js' => CODEXIN_CORE_ASSET_DIR . '/js/photoswipe-main.js',
+							'photswipe-script' => CODEXIN_CORE_ASSET_DIR . '/js/photoswipe.min.js',
+							'photswipe-main-script' => CODEXIN_CORE_ASSET_DIR . '/js/photoswipe-main.js',
 							),
 						'styles' => array(
 							'photoswipe-stylesheet' => CODEXIN_CORE_ASSET_DIR . '/css/photoswipe.css',

@@ -79,7 +79,11 @@ function cx_team_shortcode( $atts, $content = null ) {
 		            endwhile; 
 		            echo '</ul>';
 		            echo '<div class="clearfix"></div>';
-		            echo reveal_posts_link_numbered($data);
+					if( function_exists( 'codexin_numbered_posts_nav' ) ) {
+				        echo codexin_numbered_posts_nav( $data );
+					} else {
+						echo '<p class="cx-error">'.esc_html__( 'Please Activate \'REVEAL\' Theme!', 'codexin' ).'</p>';
+					}
 		        endif; ?>
 			</div> <!-- end of team-wrapper -->
 		</div> <!-- end of team-main-wrapper -->

@@ -98,8 +98,8 @@ function cx_testimonials_shortcode( $atts, $content = null ) {
 				            echo '</div> <!-- end of testimonial-archive-wrapper -->';
 				            echo '<div class="clearfix"></div>';
 				            if( $pagination ):
-				            	if( function_exists('reveal_posts_link_numbered') ):
-						            echo reveal_posts_link_numbered($data);
+				            	if( function_exists( 'codexin_numbered_posts_nav' ) ):
+						            echo codexin_numbered_posts_nav( $data );
 						        endif;
 						    endif;
 				        endif; ?>

@@ -138,15 +138,15 @@ class Codexin_Social_Widget extends WP_Widget {
 	public function widget( $args, $instance ) {
 
 		// Retrieving values from options page
-		$cx_facebook 	= $this->options['fb_url'];	
-		$cx_twitter 	= $this->options['tw_url'];	
-		$cx_instagram 	= $this->options['in_url'];	
-		$cx_pinterest 	= $this->options['pin_url'];	
-		$cx_behance 	= $this->options['be_url'];	
-		$cx_gplus 		= $this->options['gp_url'];	
-		$cx_youtube 	= $this->options['yt_url'];	
-		$cx_skype 		= $this->options['sk_url'];	
-		$cx_linkedin 	= $this->options['li_url'];	
+		$cx_facebook 	= $this->options['fb_url'];
+		$cx_instagram 	= $this->options['in_url'];
+		$cx_twitter 	= $this->options['tw_url'];
+		$cx_pinterest 	= $this->options['pin_url'];
+		$cx_behance 	= $this->options['be_url'];
+		$cx_gplus 		= $this->options['gp_url'];
+		$cx_youtube 	= $this->options['yt_url'];
+		$cx_skype 		= $this->options['sk_url'];
+		$cx_linkedin 	= $this->options['li_url'];
 		
 		printf( '%s', $args['before_widget'] ); ?>
 

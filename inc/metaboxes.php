@@ -287,12 +287,12 @@ function reveal_register_meta_boxes( $meta_boxes ) {
 
             array(
                 'name'      => esc_html__( 'Select a Page Slider', 'codexin' ),
-                'desc'      => esc_html__('Select Slider Name to show on Page header, Please note that, Slider will be functional for \'Page - Home\' template only  ', 'codexin'),
+                'desc'      => empty( array_filter( $sliders ) ) ? esc_html__( 'Smart Slider is not Activated. Please Activate Smart Slider and try again.', 'codexin' ) : esc_html__('Select Slider Name to show on Page header, Please note that, Slider will be functional for \'Page - Home\' template only  ', 'codexin'),
                 'id'        => $prefix . 'page_slider',
                 //'type'      => 'image_advanced',
                 'type'    => 'select',
                 'options' => $sliders,
-                'placeholder' => __( 'Select a Slider', 'codexin' ),
+                'placeholder' => esc_html__( 'Select a Slider', 'codexin' ),
                 'clone'     => false,
             ),
         )

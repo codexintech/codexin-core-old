@@ -147,8 +147,8 @@ function cx_image_box_kc() {
                 	//Only load assets when using this element
 					'assets' => array(
 						'scripts' => array(
-							'photswipe-js' => CODEXIN_CORE_ASSET_DIR . '/js/photoswipe.min.js',
-							'photswipe-main-js' => CODEXIN_CORE_ASSET_DIR . '/js/photoswipe-main.js',
+							'photswipe-script' => CODEXIN_CORE_ASSET_DIR . '/js/photoswipe.min.js',
+							'photswipe-main-script' => CODEXIN_CORE_ASSET_DIR . '/js/photoswipe-main.js',
 						),
 		                'styles' => array(
 		            	    'photoswipe-stylesheet' => CODEXIN_CORE_ASSET_DIR . '/css/photoswipe.css',

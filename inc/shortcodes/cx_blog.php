@@ -317,16 +317,16 @@ function cx_blog_shortcode( $atts, $content = null ) {
 					echo '<div class="clearfix"></div>';
 					echo ( $layout == 'grid' ) ? '<div class="col-xs-12">' : '' ;
 					if( $pagination_type == 'numbered' ):
-						if( function_exists('reveal_posts_link_numbered') ):
-					        echo reveal_posts_link_numbered($data);
+						if( function_exists( 'codexin_numbered_posts_nav' ) ):
+					        echo codexin_numbered_posts_nav( $data );
 					    else:
 					    	echo '<p class="cx-error">'.esc_html__('Please Activate \'REVEAL\' Theme!', 'codexin').'</p>';
 					    endif;
 				    elseif( $pagination_type == 'button' ):
-				    	if( function_exists('reveal_posts_link') ):
-					        reveal_posts_link('Newer Posts', 'Older Posts', $data);
+				    	if( function_exists( 'codexin_posts_link' ) ):
+					        codexin_posts_link( 'Newer Posts', 'Older Posts', $data );
 					    else:
-					    	echo '<p class="cx-error">'.esc_html__('Please Activate \'REVEAL\' Theme!', 'codexin').'</p>';
+					    	echo '<p class="cx-error">'.esc_html__( 'Please Activate \'REVEAL\' Theme!', 'codexin' ).'</p>';
 					    endif;
 				    endif;
 				    echo ( $layout == 'grid' ) ? '</div>' : '' ;
