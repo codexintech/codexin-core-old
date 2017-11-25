@@ -211,7 +211,7 @@ function reveal_register_meta_boxes( $meta_boxes ) {
 
             array(
                 'name'  => esc_html__( 'Project Skills', 'codexin' ),
-                'desc'  => esc_html__('Enter project skills', 'codexin' ),
+                'desc'  => esc_html__( 'Enter project skills (if have multiple skills, seperate them by comma)', 'codexin' ),
                 'id'    => $prefix . 'portfolio_skills',
                 'type'  => 'text',
                 'clone' => false,
@@ -247,8 +247,33 @@ function reveal_register_meta_boxes( $meta_boxes ) {
 
 
     $meta_boxes[] = array(
-        'id'         => 'reveal-page-background-meta-common',
+        'id'         => 'reveal-page-header-layout',
         'title'      => esc_html__( 'Page Header Settings', 'codexin' ),
+        'post_types' => array( 'page' ),
+        'context'    => 'normal',
+        'priority'   => 'high',
+        'fields' => array(
+
+            array(
+                'name'     => esc_html__( 'Header layout', 'reveal' ),
+                'type'     => 'image_select',
+                'id'       => $prefix.'header_layout',
+                'desc'     => esc_html__( "Please choose header layout for this page only. If you wish to use the global settings, select the first image named 'Global Header'.", 'reveal' ),
+                'options'  => array(
+                    0 => CODEXIN_CORE_ASSET_DIR . '/images/header/header-0.png',
+                    1 => CODEXIN_CORE_ASSET_DIR . '/images/header/header-1.png',
+                    2 => CODEXIN_CORE_ASSET_DIR . '/images/header/header-2.png',
+                    3 => CODEXIN_CORE_ASSET_DIR . '/images/header/header-3.png',
+                    4 => CODEXIN_CORE_ASSET_DIR . '/images/header/header-4.png',
+                ),
+            ),
+        )
+    );
+
+
+    $meta_boxes[] = array(
+        'id'         => 'reveal-page-background-meta-common',
+        'title'      => esc_html__( 'Page Title Settings', 'codexin' ),
         'post_types' => array( 'page', 'portfolio' ),
         'context'    => 'normal',
         'priority'   => 'high',
@@ -335,7 +360,7 @@ function reveal_register_meta_boxes( $meta_boxes ) {
 
     $meta_boxes[] = array(
         'id'         => 'reveal-audio-meta',
-        'title'      => esc_html__( 'Audio Placeholder metabox', 'codexin' ),
+        'title'      => esc_html__( 'Audio', 'codexin' ),
         'post_types' => array( 'post' ),
         'context'    => 'normal',
         'priority'   => 'high',

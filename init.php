@@ -33,6 +33,9 @@ class Codexin_Core {
 		// Enquequeing styles and scripts
 		$this -> codexin_enqueque();
 
+		// Enquequeing admin styles and scripts
+		$this -> codexin_admin_enqueque();
+
 		// Register actions using add_actions() custom function.
 		$this -> codexin_add_actions();
 
@@ -106,6 +109,24 @@ class Codexin_Core {
 			'like' => esc_html__( 'Like', 'codexin' ),
 			'unlike' => esc_html__( 'Unlike', 'codexin' )
 		) );
+
+	}
+
+	/**
+	 * Enqueques admin styles and scripts
+	 * 
+	 * @since v1.0.0
+	 */
+
+	public function codexin_admin_enqueque() {
+
+		add_action( 'admin_enqueue_scripts', array( $this, 'codexin_admin_styles' ), 99 );
+
+	}
+
+	public function codexin_admin_styles() {
+
+		wp_enqueue_style( 'codexin-admin-stylesheet', CODEXIN_CORE_ASSET_DIR . '/css/admin/admin-styles.css', false, '1.0','all');
 
 	}
 
