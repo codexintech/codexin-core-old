@@ -5,9 +5,93 @@
     000 - Metabox Styles
 *************************************************************/
 
+.rwmb-meta-box .rwmb-label {
+    width: 30%;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 1.5em;
+}
+
+.rwmb-meta-box .rwmb-label ~ .rwmb-input {
+    width: 70%;
+}
+
+.rwmb-meta-box .rwmb-field {
+    border-bottom: 1px solid #e8e8e8;
+    padding: 15px;
+}
+
+.rwmb-meta-box .rwmb-field:last-child {
+    border-bottom: 0;
+}
+
+.rwmb-meta-box input[type=checkbox] {
+    border: 1px solid #c8c8c8;
+    box-shadow: none;
+}
+
+div#post-body .rwmb-oembed:focus,
+div#post-body .rwmb-textarea:focus,
+div#post-body .rwmb-url:focus,
+div#post-body .rwmb-select:focus,
+div#post-body .rwmb-text:focus,
+.rwmb-meta-box input[type=checkbox]:focus {
+    border-color: #295972;
+    -webkit-box-shadow: 0 0 2px rgba(41, 89, 114, 0.80);
+    box-shadow: 0 0 2px rgba(41, 89, 114, 0.80);
+}
+
+div#post-body .rwmb-oembed,
+div#post-body .rwmb-url,
+div#post-body .rwmb-text {
+    border: 1px solid #c8c8c8;
+    height: 35px;
+    width: 400px;
+    box-shadow: none;
+    max-width: 100%;
+}
+
+div#post-body .rwmb-textarea {
+    border: 1px solid #c8c8c8;
+    width: 400px;
+    box-shadow: none;
+    max-width: 100%;
+    height: 150px;
+}
+
+
+div#post-body .rwmb-select {
+    border: 1px solid #c8c8c8;
+    cursor: pointer;
+    height: 35px;
+    width: 400px;
+    box-shadow: none;
+    max-width: 100%;
+}
 
 .rwmb-image-select {
     width: 100%;
     height: auto;
     line-height: 0;
+    border-radius: 0;
+}
+
+.rwmb-image-select:hover, .rwmb-image-select.rwmb-active {
+	border-color: #295972;
+}
+
+.rwmb-meta-box .rwmb-media-add a.button {
+    border-radius: 0;
+    box-shadow: none;
+    background: #f1f1f1;
+    text-align: center;
+    height: 32px;
+    line-height: 30px;
+    border-color: #ccc;
+    margin: 10px 0;
+}
+
+.rwmb-meta-box .rwmb-media-add a.button:hover {
+    background: #eee;
+    border-color: #999;
 }

@@ -146,8 +146,8 @@ function cx_events_shortcode( $atts, $content = null ) {
 								                <a href="<?php echo esc_url(get_the_permalink()); ?>" itemprop="url">							                    
 									                <?php
 								                    if( $chr_length ) :
-								                    	if( function_exists('reveal_title') ):
-									                        reveal_title( $title_length );
+								                    	if( function_exists('codexin_char_limit') ):
+									                        echo apply_filters( 'the_title', codexin_char_limit( $title_length, 'title' ) );
 													    else:
 													    	echo '<p class="cx-error">'.esc_html__('Please Activate \'REVEAL\' Theme!', 'codexin').'</p>';
 									                    endif;
@@ -178,8 +178,8 @@ function cx_events_shortcode( $atts, $content = null ) {
 							                <div class="<?php echo ($layout == 'grid') ? 'events-grid-excerpt' : 'list-content'; ?>">
 							                <?php
 							                    if( $chr_length ) :
-							                    	if( function_exists('reveal_excerpt') ):
-								                        reveal_excerpt( $desc_length );
+							                    	if( function_exists('codexin_char_limit') ):
+								                        echo apply_filters( 'the_content', codexin_char_limit( $desc_length, 'excerpt' ) );
 												    else:
 												    	echo '<p class="cx-error">'.esc_html__('Please Activate \'REVEAL\' Theme!', 'codexin').'</p>';
 								                    endif;

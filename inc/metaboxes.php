@@ -3,6 +3,7 @@ add_filter( 'rwmb_meta_boxes', 'reveal_register_meta_boxes' );
 
 function reveal_register_meta_boxes( $meta_boxes ) {
     $prefix = 'reveal_';
+
     if ( is_plugin_active( 'nextend-smart-slider3-pro/nextend-smart-slider3-pro.php' ) ):
         global $wpdb; 
         $a = array();
@@ -283,7 +284,6 @@ function reveal_register_meta_boxes( $meta_boxes ) {
                 'name'      => esc_html__( 'Disable Page Title Area?', 'codexin' ),
                 'desc'      => esc_html__('Checking this will disable the Page Title Section', 'codexin'),
                 'id'        => $prefix . 'disable_page_title',
-                //'type'      => 'image_advanced',
                 'type'      => 'checkbox',
                 'clone'     => false,
             ),
@@ -292,11 +292,42 @@ function reveal_register_meta_boxes( $meta_boxes ) {
                 'name'      => esc_html__( 'Page Title Background Image', 'codexin' ),
                 'desc'      => esc_html__('Upload Page Header Background Image. The Image will be functional for all page templates except \'Page - Home\'. This image will override the page title background image set from theme options ', 'codexin'),
                 'id'        => $prefix . 'page_background',
-                //'type'      => 'image_advanced',
                 'type'      => 'image_advanced',
                 'max_file_uploads' => 1,
                 'max_status'       => true,
                 'clone'     => false,
+            ),
+
+            array(
+                'name'      => esc_html__( 'Page Title Alignment', 'codexin' ),
+                'desc'      => esc_html__('Please Select the Page title alignment to override. If you want default settings, choose \'Global Settings\'', 'codexin'),
+                'id'        => $prefix . 'page_title_alignment',
+                'type'      => 'select',
+                'options'   => array(
+                        '0' => __( 'Global Settings', 'codexin' ),
+                        '1' => __( 'Left', 'codexin' ),
+                        '2' => __( 'Center', 'codexin' ),
+                        '3' => __( 'Right', 'codexin' ),
+                    ),
+
+                'std'       => '0',
+                'size'  => 95,
+            ),
+
+            array(
+                'name'      => esc_html__( 'Breadcrumbs Alignment', 'codexin' ),
+                'desc'      => esc_html__('Please Select the Breadcrumbs alignment to override. If you want default settings, choose \'Global Settings\'', 'codexin'),
+                'id'        => $prefix . 'page_breadcrumb_alignment',
+                'type'      => 'select',
+                'options'   => array(
+                        '0' => __( 'Global Settings', 'codexin' ),
+                        '1' => __( 'Left', 'codexin' ),
+                        '2' => __( 'Center', 'codexin' ),
+                        '3' => __( 'Right', 'codexin' ),
+                    ),
+
+                'std'       => '0',
+                'size'  => 95,
             ),
         )
     );
