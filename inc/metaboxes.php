@@ -267,6 +267,7 @@ function reveal_register_meta_boxes( $meta_boxes ) {
                     3 => CODEXIN_CORE_ASSET_DIR . '/images/header/header-3.png',
                     4 => CODEXIN_CORE_ASSET_DIR . '/images/header/header-4.png',
                 ),
+                'std'       => '0',
             ),
         )
     );
