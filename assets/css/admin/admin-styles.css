@@ -2,7 +2,7 @@
 
 
 /************************************************************
-    000 - Metabox Styles
+    Metabox & Admin Menu Styles
 *************************************************************/
 
 .rwmb-meta-box .rwmb-label {
@@ -26,21 +26,33 @@
 }
 
 .rwmb-meta-box input[type=checkbox] {
-    border: 1px solid #c8c8c8;
+    border: 1px solid #7c9258;
     box-shadow: none;
 }
 
+.rwmb-meta-box input[type=checkbox]::before {
+    color: #7c9258;
+}
+
+#codexin_core a:focus,
+#codexin_core input.cx-core-text:focus,
 div#post-body .rwmb-oembed:focus,
 div#post-body .rwmb-textarea:focus,
+div#post-body .rwmb-date:focus,
+div#post-body .rwmb-time:focus,
 div#post-body .rwmb-url:focus,
 div#post-body .rwmb-select:focus,
 div#post-body .rwmb-text:focus,
 .rwmb-meta-box input[type=checkbox]:focus {
-    border-color: #295972;
-    -webkit-box-shadow: 0 0 2px rgba(41, 89, 114, 0.80);
-    box-shadow: 0 0 2px rgba(41, 89, 114, 0.80);
+    border-color: #7c9258;
+    -webkit-box-shadow: 0 0 2px rgba(124, 146, 88, 0.8);
+    box-shadow: 0 0 2px rgba(124, 146, 88, 0.8);
 }
 
+#codexin_core input.cx-core-text,
+div#post-body .rwmb-time,
+div#post-body .rwmb-email,
+div#post-body .rwmb-date,
 div#post-body .rwmb-oembed,
 div#post-body .rwmb-url,
 div#post-body .rwmb-text {
@@ -77,9 +89,10 @@ div#post-body .rwmb-select {
 }
 
 .rwmb-image-select:hover, .rwmb-image-select.rwmb-active {
-	border-color: #295972;
+	border-color: #7c9258;
 }
 
+#codexin_core p.submit input,
 .rwmb-meta-box .rwmb-media-add a.button {
     border-radius: 0;
     box-shadow: none;
@@ -95,3 +108,47 @@ div#post-body .rwmb-select {
     background: #eee;
     border-color: #999;
 }
+
+#ui-datepicker-div.ui-datepicker thead,
+#ui-datepicker-div.ui-datepicker .ui-datepicker-header,
+#ui-datepicker-div .ui-timepicker-div .ui-widget-header {
+    background: #464b50;
+}
+
+#ui-datepicker-div.ui-datepicker td .ui-state-active,
+#ui-datepicker-div.ui-datepicker td .ui-state-hover {
+    background: #7c9258;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+#ui-datepicker-div .ui-slider-horizontal .ui-slider-handle:focus {
+    outline-color: #7c9258;
+}
+
+#codexin_core .form-table th {
+    width: 30%;
+    vertical-align: middle;
+}
+
+#codexin_core tr {
+    border-bottom: 1px solid #dedede;
+}
+
+#codexin_core span.description {
+    display: block;
+    margin-top: 10px;
+}
+
+#codexin_core p.submit input {
+    text-shadow: none;
+    background: #b2d27e !important;
+    border-color: #7c9258 !important;
+    color: #444;
+    transition: all 0.3s;
+}
+
+#codexin_core p.submit input:hover {
+    background: #c7eb8d !important;
+}
+

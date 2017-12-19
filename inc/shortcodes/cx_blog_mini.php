@@ -78,7 +78,7 @@ function cx_blog_mini_shortcode( $atts, $content = null ) {
 							<div class="img-thumb">
 								<a href="<?php esc_url( the_permalink() ); ?>">
 									<div class="img-wrapper">
-										<img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'rectangle-one' ) : '//placehold.it/600x400' ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" class="img-responsive">
+										<img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'codexin-core-rectangle-one' ) : '//placehold.it/600x400' ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" class="img-responsive">
 									</div>
 								</a>
 								<?php if( $show_date ) : ?>
@@ -203,7 +203,7 @@ function cx_blog_mini_shortcode( $atts, $content = null ) {
 					<div class="col-md-<?php echo $column ?> col-sm-<?php echo ( $column==4 ) ? esc_html($column) : esc_html(6); ?>">
 						<div class="blog-wrapper">
 							<div class="img-thumb cx-bg-overlay">
-								<img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'rectangle-one' ) : '//placehold.it/600x400' ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" class="img-responsive">
+								<img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'codexin-core-rectangle-one' ) : '//placehold.it/600x400' ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" class="img-responsive">
 								<div class="cx-color-0 cx-primary-btn cx-white-btn">
 									<a href="<?php the_permalink(); ?>" class="cx-blog-btn">
 										<?php echo esc_html( !empty( $readmore_text ) ? $readmore_text : __('Read More', 'codexin') ); ?>
@@ -289,7 +289,7 @@ function cx_blog_mini_shortcode( $atts, $content = null ) {
 						<div class="blog-wrapper-left cx-border-1">
 							<div class="img-thumb">
 								<a href="<?php esc_url( the_permalink() ); ?>">
-									<img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'rectangle-one' ) : '//placehold.it/600x400' ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" class="img-responsive">
+									<img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'codexin-core-rectangle-one' ) : '//placehold.it/600x400' ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" class="img-responsive">
 								</a>
 							</div> <!-- End of img-thumb -->
 							<div class="blog-content">
@@ -321,10 +321,10 @@ function cx_blog_mini_shortcode( $atts, $content = null ) {
 						<ul class="blog-wrapper-right">
 				<?php else : ?>
 							<li class="cx-border-1">
-								 <a class="thumbnail-link" href="<?php esc_url( the_permalink() ); ?>" style="background-image: url('<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'square-one' ) : '//placehold.it/220x220' ); ?>');"> 
+								 <a class="thumbnail-link" href="<?php esc_url( the_permalink() ); ?>" style="background-image: url('<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'codexin-core-square-one' ) : '//placehold.it/220x220' ); ?>');"> 
 									<div class="media-wrapper-right" >
 										<div class="img-thumb">
-											<img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'square-two' ) : '//placehold.it/500x500' ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" class="img-responsive">
+											<img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'codexin-core-square-two' ) : '//placehold.it/500x500' ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" class="img-responsive">
 										</div> <!-- End of img-thumb -->
 									</div>
 								</a> 
@@ -401,7 +401,7 @@ function cx_blog_mini_shortcode( $atts, $content = null ) {
 						<div class="blog-wrapper">
 							<div class="img-thumb">
 								<a href="<?php esc_url( the_permalink() ); ?>">
-									<img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'square-two' ) : '//placehold.it/500x500' ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" class="img-responsive">
+									<img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'codexin-core-square-two' ) : '//placehold.it/500x500' ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" class="img-responsive">
 								</a>
 							</div> <!-- End of img-thumb -->
 							<div class="blog-content cx-color-2">

@@ -94,7 +94,7 @@ function cx_blog_shortcode( $atts, $content = null ) {
 							    <div class="<?php echo ($layout == 'grid') ? 'blog-wrapper reveal-bg-1' : 'post-wrapper  reveal-border-1'; ?>">
 							    	<?php if(has_post_format('gallery')):
 
-							        $cx_gallery = ($layout == 'grid') ? rwmb_meta( 'reveal_gallery', 'type=image_advanced&size=rectangle-one' ) : rwmb_meta( 'reveal_gallery', 'type=image_advanced&size=gallery-format-image' );
+							        $cx_gallery = ($layout == 'grid') ? rwmb_meta( 'reveal_gallery', 'type=image_advanced&size=codexin-core-rectangle-one' ) : rwmb_meta( 'reveal_gallery', 'type=image_advanced&size=codexin-framework-rectangle-four' );
 							        echo '<div class="gallery-carousel image-pop-up">';
 							        foreach ($cx_gallery as $cx_image):
 
@@ -178,7 +178,7 @@ function cx_blog_shortcode( $atts, $content = null ) {
 								    	if( $layout == 'grid' ):
 								    ?>
 									        <div class="img-thumb">
-									            <div class="img-wrapper"><a href="<?php echo esc_url(get_the_permalink()); ?>"><img src="<?php if(has_post_thumbnail()): esc_url(the_post_thumbnail_url('rectangle-one')); else: echo '//placehold.it/600X400'; endif; ?>" alt="<?php echo esc_attr($image_alt); ?>" class="img-responsive"></a></div>
+									            <div class="img-wrapper"><a href="<?php echo esc_url(get_the_permalink()); ?>"><img src="<?php if(has_post_thumbnail()): esc_url(the_post_thumbnail_url('codexin-core-rectangle-one')); else: echo '//placehold.it/600X400'; endif; ?>" alt="<?php echo esc_attr($image_alt); ?>" class="img-responsive"></a></div>
 
 									            <?php if(in_array('show_date', array_values($show_metas))): ?>
 									                <div class="meta reveal-color-2">
@@ -194,7 +194,7 @@ function cx_blog_shortcode( $atts, $content = null ) {
 
 								            <a href="<?php echo esc_url( get_the_permalink() ); ?>" class="blog-media-wrapper">
 								                <figure class="item-img-wrap" itemscope itemtype="http://schema.org/ImageObject">
-								                    <img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'reveal-post-single' ) : '//placehold.it/750x332' ); ?>" class="img-responsive" alt="<?php echo esc_attr($image_alt); ?>" itemprop="image">
+								                    <img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'codexin-framework-rectangle-two' ) : '//placehold.it/800x354' ); ?>" class="img-responsive" alt="<?php echo esc_attr($image_alt); ?>" itemprop="image">
 								                    <div class="item-img-overlay">
 								                        <span></span>
 								                    </div>

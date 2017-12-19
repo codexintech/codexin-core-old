@@ -24,7 +24,7 @@ function cx_image_box_shortcode(  $atts, $content = null) {
 	$result = '';
 
 	// Retrieving the image url
-	$retrive_img_url = retrieve_img_src( $image, 'rectangle-one' );
+	$retrive_img_url = retrieve_img_src( $image, 'codexin-core-rectangle-one' );
 	$ret_full_img_url = retrieve_img_src( $image, 'full' );
 
 	// Retrieving the url

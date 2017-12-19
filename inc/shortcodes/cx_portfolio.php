@@ -107,7 +107,7 @@ function cx_portfolio_shortcode( $atts, $content = null ) {
 						    <div class="<?php echo ($layout == 'grid') ? 'portfolio-item-content' : 'post-wrapper reveal-border-1'; ?>">
 						    	<?php echo ($layout == 'list') ? '<div class="port-list-wrapper reveal-bg-2">' : '' ?>
 						    		<?php if( $layout == 'list' ): ?>
-						                <div class="thumb-port" style="background-image:url('<?php if(has_post_thumbnail()): esc_url(the_post_thumbnail_url('reveal-rectangle-one')); else: echo '//placehold.it/600X375'; endif; ?>');">
+						                <div class="thumb-port" style="background-image:url('<?php if(has_post_thumbnail()): esc_url(the_post_thumbnail_url('codexin-framework-rectangle-one')); else: echo '//placehold.it/600X375'; endif; ?>');">
 						                    <a href="<?php echo esc_url(get_the_permalink()); ?>"></a>
 						                    <?php if( !empty($port_date) ): ?>
 							                    <div class="port-date reveal-bg-2"><p><?php echo esc_html($port_date); ?></p></div>
@@ -115,7 +115,7 @@ function cx_portfolio_shortcode( $atts, $content = null ) {
 						                </div> <!-- end of thumb-port -->
 						            <?php else: ?>
 									    <div class="item-thumbnail">
-									        <img src="<?php if(has_post_thumbnail()): esc_url(the_post_thumbnail_url('rectangle-one')); else: echo '//placehold.it/600X400'; endif; ?>"  alt="<?php echo esc_attr($image_alt); ?>">
+									        <img src="<?php if(has_post_thumbnail()): esc_url(the_post_thumbnail_url('codexin-core-rectangle-one')); else: echo '//placehold.it/600X400'; endif; ?>"  alt="<?php echo esc_attr($image_alt); ?>">
 									        <ul class="portfolio-action-btn reveal-color-0">
 									            <li>
 									                <a class="venobox" href="<?php echo esc_url(get_the_permalink()); ?>" itemprop="url"><i class="flaticon-link"></i></a>

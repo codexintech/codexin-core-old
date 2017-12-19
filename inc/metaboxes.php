@@ -1,35 +1,55 @@
 <?php
-add_filter( 'rwmb_meta_boxes', 'reveal_register_meta_boxes' );
+/**
+ * The file Contains all metaboxes used in the 'Reveal' Theme using Metabox Plugin
+ *
+ * @since       1.0
+ */
 
-function reveal_register_meta_boxes( $meta_boxes ) {
+// Do not allow directly accessing this file.
+defined( 'ABSPATH' ) OR die( esc_html__( 'This script cannot be accessed directly.', 'codexin' ) );
+
+
+add_filter( 'rwmb_meta_boxes', 'codexin_register_meta_boxes' );
+/**
+ * Function to register all the metaboxes
+ *
+ * @since 1.0
+ */
+function codexin_register_meta_boxes( $meta_boxes ) {
     $prefix = 'reveal_';
 
-    if ( is_plugin_active( 'nextend-smart-slider3-pro/nextend-smart-slider3-pro.php' ) ):
+    // Retrieving the created slider names and ids from Smart Slider
+    if ( is_plugin_active( 'nextend-smart-slider3-pro/nextend-smart-slider3-pro.php' ) ) {
         global $wpdb; 
         $a = array();
         $b = array();
-        $smartsliders = $wpdb->get_results("SELECT id, title FROM ".$wpdb->prefix."nextend2_smartslider3_sliders");
-        foreach ($smartsliders as $slide) {
+        $smartsliders = $wpdb->get_results( "SELECT id, title FROM ".$wpdb->prefix."nextend2_smartslider3_sliders" );
+        foreach( $smartsliders as $slide ) {
             $a[] = $slide->id;
             $b[] = $slide->title;
         }
-        $sliders = array_combine($a, $b);
+        $sliders = array_combine( $a, $b );
 
-    else: 
+    } else {
         $sliders = array();
-    endif;
+    }
     
-    //1st meta box
+    /**
+     * Metabox for 'Team' Custom Post
+     *
+     */
+
+    // Team Member Information Metabox
     $meta_boxes[] = array(
-        'id'         => 'reveal-team-member-info',
-        'title'      => esc_html__( 'Team Member Information', 'codexin' ),
-        'post_types' => array( 'team' ),
-        'context'    => 'normal',
-        'priority'   => 'high',
-        'fields' => array(
+        'id'            => 'codexin_team_member_info',
+        'title'         => esc_html__( 'Team Member Information', 'codexin' ),
+        'post_types'    => array( 'team' ),
+        'context'       => 'normal',
+        'priority'      => 'high',
+        'fields'        => array(
             array(
                 'name'  => esc_html__( 'Designation', 'codexin' ),
-                'desc'  => esc_html__('Enter Designation', 'codexin' ),
+                'desc'  => esc_html__( 'Enter Designation', 'codexin' ),
                 'id'    => $prefix . 'team_designation',
                 'type'  => 'text',
                 'clone' => false,
@@ -38,7 +58,7 @@ function reveal_register_meta_boxes( $meta_boxes ) {
 
             array(
                 'name'  => esc_html__( 'Email', 'codexin' ),
-                'desc'  => esc_html__('Enter Email Address', 'codexin' ),
+                'desc'  => esc_html__( 'Enter Email Address', 'codexin' ),
                 'id'    => $prefix . 'team_email',
                 'type'  => 'email',
                 'clone' => false,
@@ -47,7 +67,7 @@ function reveal_register_meta_boxes( $meta_boxes ) {
 
             array(
                 'name'  => esc_html__( 'Phone', 'codexin' ),
-                'desc'  => esc_html__('Enter Phone Number', 'codexin' ),
+                'desc'  => esc_html__( 'Enter Phone Number', 'codexin' ),
                 'id'    => $prefix . 'team_phone',
                 'type'  => 'text',
                 'clone' => false,
@@ -56,29 +76,26 @@ function reveal_register_meta_boxes( $meta_boxes ) {
 
             array(
                 'name'  => esc_html__( 'Company Name', 'codexin' ),
-                'desc'  => esc_html__('Enter Company Name', 'codexin' ),
+                'desc'  => esc_html__( 'Enter Company Name', 'codexin' ),
                 'id'    => $prefix . 'team_company',
                 'type'  => 'text',
                 'clone' => false,
                 'size'  => 95
             ),
-
         ) //End Fields 
+    ); //End codexin_team_member_info
 
-    ); //End reveal-team-member-info
-
-    //reveal-team-member-social
+    // Team Member Social Information Metabox
     $meta_boxes[] = array(
-        'id'         => 'reveal-team-member-social',
-        'title'      => esc_html__( 'Team Member Social Information', 'codexin' ),
-        'post_types' => array( 'team' ),
-        'context'    => 'normal',
-        'priority'   => 'high',
-        'fields' => array(
-
+        'id'            => 'codexin_team_member_social',
+        'title'         => esc_html__( 'Team Member Social Information', 'codexin' ),
+        'post_types'    => array( 'team' ),
+        'context'       => 'normal',
+        'priority'      => 'high',
+        'fields'        => array(
             array(
                 'name'  => esc_html__( 'Facebook URL', 'codexin' ),
-                'desc'  => esc_html__('Enter facebook URL', 'codexin' ),
+                'desc'  => esc_html__( 'Enter facebook URL', 'codexin' ),
                 'id'    => $prefix . 'team_facebook',
                 'type'  => 'text',
                 'clone' => false,
@@ -87,7 +104,7 @@ function reveal_register_meta_boxes( $meta_boxes ) {
 
             array(
                 'name'  => esc_html__( 'Twitter URL', 'codexin' ),
-                'desc'  => esc_html__('Enter Twitter URL', 'codexin' ),
+                'desc'  => esc_html__( 'Enter Twitter URL', 'codexin' ),
                 'id'    => $prefix . 'team_twitter',
                 'type'  => 'text',
                 'clone' => false,
@@ -96,7 +113,7 @@ function reveal_register_meta_boxes( $meta_boxes ) {
 
             array(
                 'name'  => esc_html__( 'Instagram URL', 'codexin' ),
-                'desc'  => esc_html__('Enter Instagram URL', 'codexin' ),
+                'desc'  => esc_html__( 'Enter Instagram URL', 'codexin' ),
                 'id'    => $prefix . 'team_ig',
                 'type'  => 'text',
                 'clone' => false,
@@ -105,7 +122,7 @@ function reveal_register_meta_boxes( $meta_boxes ) {
 
             array(
                 'name'  => esc_html__( 'Google Plus URL', 'codexin' ),
-                'desc'  => esc_html__('Enter Google Plus URL', 'codexin' ),
+                'desc'  => esc_html__( 'Enter Google Plus URL', 'codexin' ),
                 'id'    => $prefix . 'team_gp',
                 'type'  => 'text',
                 'clone' => false,
@@ -114,29 +131,31 @@ function reveal_register_meta_boxes( $meta_boxes ) {
 
             array(
                 'name'  => esc_html__( 'LinkedIn URL', 'codexin' ),
-                'desc'  => esc_html__('Enter LinkedIn URL', 'codexin' ),
+                'desc'  => esc_html__( 'Enter LinkedIn URL', 'codexin' ),
                 'id'    => $prefix . 'team_ld',
                 'type'  => 'text',
                 'clone' => false,
                 'size'  => 95
             ),
-
         ) //End Fields 
+    ); //End codexin_team_member_social
 
-    ); //End reveal-team-member-social
-
-    //start reveal-testimonial-meta
+    /**
+     * Metabox for 'Testimonial' Custom Post
+     *
+     */
+    
+    // Testimonial Author Information Metabox
     $meta_boxes[] = array(
-        'id'         => 'reveal-testimonail-meta',
-        'title'      => esc_html__( 'Author Information', 'codexin' ),
-        'post_types' => array( 'testimonial' ),
-        'context'    => 'normal',
-        'priority'   => 'high',
-        'fields' => array(
-
+        'id'            => 'codexin_testimonial_meta',
+        'title'         => esc_html__( 'Author Information', 'codexin' ),
+        'post_types'    => array( 'testimonial' ),
+        'context'       => 'normal',
+        'priority'      => 'high',
+        'fields'        => array(
             array(
                 'name'  => esc_html__( 'Name', 'codexin' ),
-                'desc'  => esc_html__('Enter Name', 'codexin' ),
+                'desc'  => esc_html__( 'Enter Name', 'codexin' ),
                 'id'    => $prefix . 'author_name',
                 'type'  => 'text',
                 'clone' => false,
@@ -145,7 +164,7 @@ function reveal_register_meta_boxes( $meta_boxes ) {
 
             array(
                 'name'  => esc_html__( 'Designation', 'codexin' ),
-                'desc'  => esc_html__('Enter Designation', 'codexin' ),
+                'desc'  => esc_html__( 'Enter Designation', 'codexin' ),
                 'id'    => $prefix . 'author_desig',
                 'type'  => 'text',
                 'clone' => false,
@@ -154,29 +173,31 @@ function reveal_register_meta_boxes( $meta_boxes ) {
 
             array(
                 'name'  => esc_html__( 'Company', 'codexin' ),
-                'desc'  => esc_html__('Enter Company Name', 'codexin' ),
+                'desc'  => esc_html__( 'Enter Company Name', 'codexin' ),
                 'id'    => $prefix . 'author_company',
                 'type'  => 'text',
                 'clone' => false,
                 'size'  => 95
             ),
+        ) // End fields
+    ); // End codexin_testimonial_meta
 
-        )
-
-    );
-
-
+    /**
+     * Metabox for 'Portfolio' Custom Post
+     *
+     */
+    
+    // Portfolio Information Metabox
     $meta_boxes[] = array(
-        'id'         => 'reveal-portfolio-meta',
-        'title'      => esc_html__( 'Portfolio', 'codexin' ),
-        'post_types' => array( 'portfolio' ),
-        'context'    => 'normal',
-        'priority'   => 'high',
-        'fields' => array(
-
+        'id'            => 'codexin_portfolio_meta',
+        'title'         => esc_html__( 'Portfolio', 'codexin' ),
+        'post_types'    => array( 'portfolio' ),
+        'context'       => 'normal',
+        'priority'      => 'high',
+        'fields'        => array(
             array(
                 'name'  => esc_html__( 'Client Name', 'codexin' ),
-                'desc'  => esc_html__('Enter client name', 'codexin' ),
+                'desc'  => esc_html__( 'Enter client name', 'codexin' ),
                 'id'    => $prefix . 'portfolio_client',
                 'type'  => 'text',
                 'clone' => false,
@@ -185,7 +206,7 @@ function reveal_register_meta_boxes( $meta_boxes ) {
 
             array(
                 'name'  => esc_html__( 'Project Site Name', 'codexin' ),
-                'desc'  => esc_html__('Enter project site name', 'codexin' ),
+                'desc'  => esc_html__( 'Enter project site name', 'codexin' ),
                 'id'    => $prefix . 'portfolio_sname',
                 'type'  => 'text',
                 'clone' => false,
@@ -194,7 +215,7 @@ function reveal_register_meta_boxes( $meta_boxes ) {
 
             array(
                 'name'  => esc_html__( 'Project Site URL', 'codexin' ),
-                'desc'  => esc_html__('Enter project site URL', 'codexin' ),
+                'desc'  => esc_html__( 'Enter project site URL', 'codexin' ),
                 'id'    => $prefix . 'portfolio_surl',
                 'type'  => 'text',
                 'clone' => false,
@@ -203,7 +224,7 @@ function reveal_register_meta_boxes( $meta_boxes ) {
 
             array(
                 'name'  => esc_html__( 'Project Date', 'codexin' ),
-                'desc'  => esc_html__('Enter project date. Example: 14-Apr-17', 'codexin' ),
+                'desc'  => esc_html__( 'Enter project date. Example: 14-Apr-17', 'codexin' ),
                 'id'    => $prefix . 'portfolio_date',
                 'type'  => 'date',
                 'clone' => false,
@@ -218,10 +239,15 @@ function reveal_register_meta_boxes( $meta_boxes ) {
                 'clone' => false,
                 'size'  => 95
             ),
+        ) // End fields
+    ); // End codexin_portfolio_meta
 
-        )
-    );
-
+    /**
+     * Metabox for Pages
+     *
+     */
+    
+    // Page Header & Footer Disabling Metabox
     $meta_boxes[] = array(
         'id'         => 'reveal-page-header-footer',
         'title'      => esc_html__( 'Page Header & Footer Settings', 'codexin' ),
@@ -246,7 +272,7 @@ function reveal_register_meta_boxes( $meta_boxes ) {
         )
     );
 
-
+    // Page Header Metabox
     $meta_boxes[] = array(
         'id'         => 'reveal-page-header-layout',
         'title'      => esc_html__( 'Page Header Settings', 'codexin' ),
@@ -272,7 +298,7 @@ function reveal_register_meta_boxes( $meta_boxes ) {
         )
     );
 
-
+    // Page Title Metabox
     $meta_boxes[] = array(
         'id'         => 'reveal-page-background-meta-common',
         'title'      => esc_html__( 'Page Title Settings', 'codexin' ),
@@ -333,7 +359,7 @@ function reveal_register_meta_boxes( $meta_boxes ) {
         )
     );
 
-
+    // Page Slider Metabox
     $meta_boxes[] = array(
         'id'         => 'reveal-page-background-meta',
         'title'      => esc_html__( 'Page Slider Settings', 'codexin' ),
@@ -346,7 +372,6 @@ function reveal_register_meta_boxes( $meta_boxes ) {
                 'name'      => esc_html__( 'Select a Page Slider', 'codexin' ),
                 'desc'      => empty( array_filter( $sliders ) ) ? esc_html__( 'Smart Slider is not Activated. Please Activate Smart Slider and try again.', 'codexin' ) : esc_html__('Select Slider Name to show on Page header, Please note that, Slider will be functional for \'Page - Home\' template only  ', 'codexin'),
                 'id'        => $prefix . 'page_slider',
-                //'type'      => 'image_advanced',
                 'type'    => 'select',
                 'options' => $sliders,
                 'placeholder' => esc_html__( 'Select a Slider', 'codexin' ),
@@ -355,6 +380,12 @@ function reveal_register_meta_boxes( $meta_boxes ) {
         )
     );
 
+    /**
+     * Metabox for Posts Formats for 'Posts'
+     *
+     */
+
+    // Gallery Metabox for 'Posts'
     $meta_boxes[] = array(
         'id'         => 'reveal-gallery-meta',
         'title'      => esc_html__( 'Gallery', 'codexin' ),
@@ -372,6 +403,7 @@ function reveal_register_meta_boxes( $meta_boxes ) {
         )
     );
 
+    // Video Metabox for 'Posts'
     $meta_boxes[] = array(
         'id'         => 'reveal-video-meta',
         'title'      => esc_html__( 'Video', 'codexin' ),
@@ -390,6 +422,7 @@ function reveal_register_meta_boxes( $meta_boxes ) {
         )
     );
 
+    // Audio Metabox for 'Posts'
     $meta_boxes[] = array(
         'id'         => 'reveal-audio-meta',
         'title'      => esc_html__( 'Audio', 'codexin' ),
@@ -408,6 +441,7 @@ function reveal_register_meta_boxes( $meta_boxes ) {
         )
     );
 
+    // Quote Metabox for 'Posts'
     $meta_boxes[] = array(
         'id'         => 'reveal-quote-meta',
         'title'      => esc_html__( 'Quote', 'codexin' ),
@@ -442,6 +476,7 @@ function reveal_register_meta_boxes( $meta_boxes ) {
         )
     );
 
+    // Link Metabox for 'Posts'
     $meta_boxes[] = array(
         'id'         => 'reveal-link-meta',
         'title'      => esc_html__( 'Link', 'codexin' ),
@@ -490,8 +525,12 @@ function reveal_register_meta_boxes( $meta_boxes ) {
         )
     );
 
+    /**
+     * Metabox for 'Clients' Custom Post
+     *
+     */
 
-
+    // Client Information Metabox
     $meta_boxes[] = array(
         'id'         => 'reveal-client-logo-meta',
         'title'      => esc_html__( 'Client Information', 'codexin' ),
@@ -499,7 +538,6 @@ function reveal_register_meta_boxes( $meta_boxes ) {
         'context'    => 'normal',
         'priority'   => 'high',
         'fields' => array(
-
 
             array(
                 'name'  => esc_html__( 'Client Site URL', 'codexin' ),
@@ -510,12 +548,15 @@ function reveal_register_meta_boxes( $meta_boxes ) {
                 'size'  => 95
             ),
 
-
-
         )
     );
 
+    /**
+     * Metabox for 'Events' Custom Post
+     *
+     */
 
+    // Events Information Metabox
     $meta_boxes[] = array(
         'id'         => 'reveal-event-meta',
         'title'      => esc_html__( 'Event Information', 'codexin' ),
@@ -561,6 +602,17 @@ function reveal_register_meta_boxes( $meta_boxes ) {
                 'clone' => false,
                 'size'  => 95
             ),
+        )
+    );
+
+    // Events Contact Information Metabox
+    $meta_boxes[] = array(
+        'id'         => 'reveal-event-contact-meta',
+        'title'      => esc_html__( 'Event Contact Information', 'codexin' ),
+        'post_types' => array( 'events' ),
+        'context'    => 'normal',
+        'priority'   => 'high',
+        'fields' => array(
 
             array(
                 'name'  => esc_html__( 'Contact Phone', 'codexin' ),
@@ -579,6 +631,17 @@ function reveal_register_meta_boxes( $meta_boxes ) {
                 'clone' => false,
                 'size'  => 95
             ),
+        )
+    );
+
+    // Events Location Metabox
+    $meta_boxes[] = array(
+        'id'         => 'reveal-event-location-meta',
+        'title'      => esc_html__( 'Event Location Information', 'codexin' ),
+        'post_types' => array( 'events' ),
+        'context'    => 'normal',
+        'priority'   => 'high',
+        'fields' => array(
 
             array(
                 'name'  => esc_html__( 'Events Address', 'codexin' ),
@@ -591,7 +654,7 @@ function reveal_register_meta_boxes( $meta_boxes ) {
 
             array(
                 'name'  => esc_html__( 'Events Location Latitude', 'codexin' ),
-                'desc'  => esc_html__('Enter event location latitude, you can find latitude/longitude by entering your address here', 'codexin' ),
+                'desc'  => sprintf( '%1$s<a href="%2$s" target="_blank">%3$s</a>', esc_html__('Enter event location latitude, you can find latitude/longitude by entering your address ', 'codexin' ), esc_url( '//latlong.net' ), esc_html__( 'here', 'codexin' ) ),
                 'id'    => $prefix . 'event_address_latitude',
                 'type'  => 'text',
                 'clone' => false,
@@ -600,16 +663,12 @@ function reveal_register_meta_boxes( $meta_boxes ) {
 
             array(
                 'name'  => esc_html__( 'Events Location Longitude', 'codexin' ),
-                'desc'  => esc_html__('Enter event location longitude, you can find latitude/longitude by entering your address here', 'codexin' ),
+                'desc'  => sprintf( '%1$s<a href="%2$s" target="_blank">%3$s</a>', esc_html__('Enter event location longitude, you can find latitude/longitude by entering your address ', 'codexin' ), esc_url( '//latlong.net' ), esc_html__( 'here', 'codexin' ) ),
                 'id'    => $prefix . 'event_address_longitude',
                 'type'  => 'text',
                 'clone' => false,
                 'size'  => 95
             ),
-
-
-
-
         )
     );
 

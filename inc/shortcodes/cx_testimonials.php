@@ -69,7 +69,7 @@ function cx_testimonials_shortcode( $atts, $content = null ) {
 								        <div class="testimonial-list-wrapper">
 								                <div class="thumb-testimonial-wrapper">
 								                    <div class="thumb-testimonial">
-								                        <img src="<?php if(has_post_thumbnail()): echo esc_url( the_post_thumbnail_url( 'square-one' ) ); else: echo '//placehold.it/220X220'; endif; ?>" alt="<?php echo esc_attr( $img_alt ); ?>" class="reveal-border-0">
+								                        <img src="<?php if(has_post_thumbnail()): echo esc_url( the_post_thumbnail_url( 'codexin-core-square-one' ) ); else: echo '//placehold.it/220X220'; endif; ?>" alt="<?php echo esc_attr( $img_alt ); ?>" class="reveal-border-0">
 								                    </div>
 								                </div>
 

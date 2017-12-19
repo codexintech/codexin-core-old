@@ -131,7 +131,7 @@ function cx_service_box_shortcode( $atts, $content = null ) {
             (!empty($class)) ? $classes[] = $class : '';
 
             // Retrieving the image url
-            $ret_img_url = retrieve_img_src( $media_img, 'rectangle-one' );
+            $ret_img_url = retrieve_img_src( $media_img, 'codexin-core-rectangle-one' );
 
             ?>
 

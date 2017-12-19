@@ -61,7 +61,7 @@ function cx_team_shortcode( $atts, $content = null ) {
 							<a href="<?php echo esc_url(get_the_permalink()); ?>">
 							   <figure>
 							      <div class="team-single-wrapper">
-							         <img src="<?php esc_url(the_post_thumbnail_url('square-two'));  ?>" alt="<?php echo esc_attr( $img_alt ); ?>">
+							         <img src="<?php esc_url(the_post_thumbnail_url('codexin-core-square-two'));  ?>" alt="<?php echo esc_attr( $img_alt ); ?>">
 							         <figcaption>
 							            <div class="team-info-wrapper reveal-color-2">
 							            	<?php if( $designation ): ?>

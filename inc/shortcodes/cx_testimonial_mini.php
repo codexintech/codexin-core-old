@@ -136,7 +136,7 @@ function cx_testimonial_mini_shortcode( $atts, $content = null ) {
 						<div class="col-sm-6 quote-wrapper">
 							<div class="media-wrapper">
 								<div class="media-thumb">
-									<img src="<?php if(has_post_thumbnail()): echo esc_url( the_post_thumbnail_url( 'square-one' ) ); else: echo '//placehold.it/220X220'; endif; ?>" alt="<?php echo esc_attr( $img_alt ); ?>">
+									<img src="<?php if(has_post_thumbnail()): echo esc_url( the_post_thumbnail_url( 'codexin-core-square-one' ) ); else: echo '//placehold.it/220X220'; endif; ?>" alt="<?php echo esc_attr( $img_alt ); ?>">
 								</div>
 								<div class="media-desc">
 									<h3 class="media-title">
@@ -225,7 +225,7 @@ function cx_testimonial_mini_shortcode( $atts, $content = null ) {
 									<div class="item">
 										<div class="quote-meta-wrapper">
 											<div class="quote-author-thumb">
-												<img src="<?php echo esc_url( the_post_thumbnail_url( 'square-one' ) ); ?>" alt="<?php echo esc_attr( $img_alt ); ?>">
+												<img src="<?php echo esc_url( the_post_thumbnail_url( 'codexin-core-square-one' ) ); ?>" alt="<?php echo esc_attr( $img_alt ); ?>">
 											</div>
 											<div class="quote-author-meta">
 												<i class="fa fa-quote-right cx-color-1"></i>
@@ -321,7 +321,7 @@ function cx_testimonial_mini_shortcode( $atts, $content = null ) {
 										</div>
 										<div class="quote-meta-wrapper center-block">
 											<div class="quote-author-thumb">
-												<img src="<?php echo esc_url( the_post_thumbnail_url( 'square-one' ) ); ?>" alt="<?php echo esc_attr( $img_alt ); ?>">
+												<img src="<?php echo esc_url( the_post_thumbnail_url( 'codexin-core-square-one' ) ); ?>" alt="<?php echo esc_attr( $img_alt ); ?>">
 											</div>
 											<div class="quote-author-meta">
 												<h3 class="quote-author-name">
@@ -416,7 +416,7 @@ function cx_testimonial_mini_shortcode( $atts, $content = null ) {
 											<?php //if (($data->current_post +1) !== ($data->post_count)): ?>	
 											<div class="item">
 												<div class="quote-author-media">
-													<img src="<?php echo esc_url( the_post_thumbnail_url( 'square-one' ) ); ?>" alt="<?php echo esc_attr( $img_alt ); ?>">
+													<img src="<?php echo esc_url( the_post_thumbnail_url( 'codexin-core-square-one' ) ); ?>" alt="<?php echo esc_attr( $img_alt ); ?>">
 												</div>
 											</div>
 

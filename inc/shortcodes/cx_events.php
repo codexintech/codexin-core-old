@@ -110,7 +110,7 @@ function cx_events_shortcode( $atts, $content = null ) {
 							    <div class="<?php echo ($layout == 'grid') ? 'events-item-content' : 'post-wrapper reveal-border-1'; ?>">
 							    	<?php echo ($layout == 'list') ? '<div class="event-list-wrapper reveal-bg-2">' : '' ?>
 							    		<?php if( $layout == 'list' ): ?>
-							                <div class="thumb-events" style="background-image:url('<?php if(has_post_thumbnail()): esc_url(the_post_thumbnail_url('reveal-rectangle-one')); else: echo '//placehold.it/600X375'; endif; ?>');">
+							                <div class="thumb-events" style="background-image:url('<?php if(has_post_thumbnail()): esc_url(the_post_thumbnail_url('codexin-framework-rectangle-one')); else: echo '//placehold.it/600X375'; endif; ?>');">
 							                    <a href="<?php echo esc_url(get_the_permalink()); ?>"></a>
 							                    <?php if( !empty($e_st_date) ): ?>
 								                    <div class="events-date reveal-bg-2"><p><?php echo esc_html($e_st_date); ?></p></div>
@@ -118,7 +118,7 @@ function cx_events_shortcode( $atts, $content = null ) {
 							                </div>
 							            <?php else: ?>
 										    <div class="item-thumbnail">
-										        <img src="<?php echo esc_url(the_post_thumbnail_url( 'rectangle-four' )); ?>"  alt="<?php echo esc_attr($image_alt); ?>">                                          
+										        <img src="<?php echo esc_url(the_post_thumbnail_url( 'codexin-core-rectangle-four' )); ?>"  alt="<?php echo esc_attr($image_alt); ?>">                                          
 										        <ul class="events-action-btn reveal-color-0">
 										            <li>
 										                <a class="venobox" href="<?php echo esc_url(get_the_permalink()); ?>" itemprop="url"><i class="flaticon-link"></i></a>

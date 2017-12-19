@@ -150,7 +150,7 @@ class Codexin_Recent_Projects extends WP_Widget {
 						echo '<div class="posts-single-left">';
 							echo '<a href="' . get_the_permalink() . '"><img src="';
 							if ( has_post_thumbnail() ) { 
-								esc_url( the_post_thumbnail_url('blog-widget-image') ); 
+								esc_url( the_post_thumbnail_url('codexin-core-square-one') ); 
 							} else { 
 								echo esc_url('//placehold.it/80x80'); 
 							}

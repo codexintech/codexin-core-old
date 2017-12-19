@@ -129,7 +129,7 @@ function cx_portfolio_mini_shortcode( $atts, $content = null ) {
 							        <img style="visibility:hidden;opacity:0;" src="<?php esc_url( the_post_thumbnail_url('full') ); ?>" itemprop="thumbnail" <?php echo $image_alt; ?> class="img-responsive" />
 
 							      <?php else: ?>  
-							        <img style="visibility:hidden;opacity:0;" src="<?php esc_url( the_post_thumbnail_url('rectangle-two') ); ?>" itemprop="thumbnail" <?php echo $image_alt; ?> class="img-responsive" />
+							        <img style="visibility:hidden;opacity:0;" src="<?php esc_url( the_post_thumbnail_url('codexin-core-rectangle-two') ); ?>" itemprop="thumbnail" <?php echo $image_alt; ?> class="img-responsive" />
 							      <?php endif; ?> 
 
 							    </a>
@@ -248,7 +248,7 @@ function cx_portfolio_mini_shortcode( $atts, $content = null ) {
 								<?php $height = ($i!=1) ? 250 : 500 + 2*$column_gutter; ?>
 								<figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" <?php echo (!empty($column_gutter)) ? ' style="margin:'. $column_gutter .'px; height:'.$height.'px"; class="item-'.$i.'"' : '' ?>>
 								    <a <?php if(!empty($column_gutter)): echo 'class="no-transform"'; endif; ?> style="background-image:url('<?php esc_url(the_post_thumbnail_url('full')); ?>');" href="<?php esc_url( the_post_thumbnail_url('full') ); ?>" itemprop="contentUrl" data-size="<?php echo esc_attr( $data_size ); ?>">
-								        <img style="visibility:hidden;opacity:0;" src="<?php echo esc_url( the_post_thumbnail_url('rectangle-five') ); ?>" itemprop="thumbnail" class="img-responsive" <?php echo $image_alt; ?> />
+								        <img style="visibility:hidden;opacity:0;" src="<?php echo esc_url( the_post_thumbnail_url('codexin-core-rectangle-five') ); ?>" itemprop="thumbnail" class="img-responsive" <?php echo $image_alt; ?> />
 								    </a>  
 							    <figcaption itemprop="caption description"></figcaption>
 									<div class="image-mask <?php echo (empty($column_gutter) ? 'add-transform' : '' );?>">
@@ -368,7 +368,7 @@ function cx_portfolio_mini_shortcode( $atts, $content = null ) {
 						<?php $height = ($i!=2) ? 250 : 500 + 2*$column_gutter; ?>
 						<figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" <?php echo (!empty($column_gutter)) ? ' style="margin:'. $column_gutter .'px; height:'.$height.'px"; class="item-'.$i.'"' : '' ?>>
 						    <a <?php if(!empty($column_gutter)): echo 'class="no-transform"'; endif; ?> style="background-image:url('<?php esc_url(the_post_thumbnail_url('full')); ?>');" href="<?php esc_url( the_post_thumbnail_url('full') ); ?>" itemprop="contentUrl" data-size="<?php echo esc_attr( $data_size ); ?>">
-						        <img style="visibility:hidden;opacity:0;" src="<?php echo esc_url( the_post_thumbnail_url('rectangle-five') ); ?>" itemprop="thumbnail" class="img-responsive" <?php echo $image_alt; ?> />
+						        <img style="visibility:hidden;opacity:0;" src="<?php echo esc_url( the_post_thumbnail_url('codexin-core-rectangle-five') ); ?>" itemprop="thumbnail" class="img-responsive" <?php echo $image_alt; ?> />
 						    </a>  
 					    <figcaption itemprop="caption description"></figcaption>
 							<div class="image-mask <?php echo (empty($column_gutter) ? 'add-transform' : '' );?>">

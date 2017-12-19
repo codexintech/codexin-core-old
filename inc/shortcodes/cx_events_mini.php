@@ -208,7 +208,7 @@ function cx_events_mini_shortcode( $atts, $content = null ) {
 						 				<div class="event-media-wrapper">
 						 					<a href="<?php echo esc_url(get_the_permalink()); ?>">
 						 						<div class="event-media cx-bg-overlay">
-													<img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'rectangle-four' ) : '//placehold.it/600x327' ); ?>" alt="<?php echo esc_attr($image_alt); ?>">
+													<img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'codexin-core-rectangle-four' ) : '//placehold.it/600x327' ); ?>" alt="<?php echo esc_attr($image_alt); ?>">
 						 						</div>
 						 					</a>
 					 					</div>
@@ -342,7 +342,7 @@ function cx_events_mini_shortcode( $atts, $content = null ) {
 						 				<div class="event-media-wrapper cx-color-2">
 						 					<a href="<?php echo esc_url(get_the_permalink()); ?>">
 						 						<div class="event-media">
-													<img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'rectangle-four' ) : '//placehold.it/600x327' ); ?>" alt="<?php echo esc_attr($image_alt); ?>">
+													<img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'codexin-core-rectangle-four' ) : '//placehold.it/600x327' ); ?>" alt="<?php echo esc_attr($image_alt); ?>">
 								 					<?php if( $show_date && !empty( $date ) ): ?>
 							 						<div class="event-date">
 							 							<i class="fa fa-calendar"></i>
@@ -484,7 +484,7 @@ function cx_events_mini_shortcode( $atts, $content = null ) {
 							 			<div class="events-single cx-border-1">
 							 				<div class="event-media-wrapper">
 						 						<div class="event-media">
-													<img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'rectangle-four' ) : '//placehold.it/600x327' ); ?>" alt="<?php echo esc_attr($image_alt); ?>">
+													<img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'codexin-core-rectangle-four' ) : '//placehold.it/600x327' ); ?>" alt="<?php echo esc_attr($image_alt); ?>">
 								 					<?php if( $readmore ): ?>
 								 						<div class="cx-color-0 cx-primary-btn cx-white-btn">
 										 					<a href="<?php echo esc_url(get_the_permalink()); ?>" class="cx-events-btn"><?php echo esc_html( !empty( $button_text ) ? $button_text : __('Read More', 'codexin') ); ?></a>

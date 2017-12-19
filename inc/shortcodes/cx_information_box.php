@@ -37,7 +37,7 @@ function cx_information_box_shortcode( $atts, $content = null ) {
 	$target = ($retrieve_link[2]) ? 'target="'.esc_attr($retrieve_link[2]).'"':'';
 
 	// Retrieving the image url
-	$retrive_img_url = retrieve_img_src( $image, 'rectangle-one' );
+	$retrive_img_url = retrieve_img_src( $image, 'codexin-core-rectangle-one' );
 
 	ob_start(); ?>
 
