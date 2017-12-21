@@ -31,7 +31,7 @@ function cx_portfolio_mini_shortcode( $atts, $content = null ) {
 	$result = '';
 
 	// Retrieving the url
-	$retrieve_link = retrieve_url( $show_view_btn_link );
+	$retrieve_link = codexin_retrieve_url( $show_view_btn_link );
 	$href = ($retrieve_link[0]) ? 'href="'.esc_attr($retrieve_link[0]).'"':'';
 	$title = ($retrieve_link[1]) ? 'title="'.esc_attr($retrieve_link[1]).'"':'';
 	$target = ($retrieve_link[2]) ? 'target="'.esc_attr($retrieve_link[2]).'"':'';
@@ -459,7 +459,7 @@ function cx_portfolio_mini_shortcode( $atts, $content = null ) {
 // Integrating Shortcode with King Composer
 function cx_portfolio_mini_kc() {
 
-	$cx_portfolio_categories = cx_get_custom_categories('portfolio-category');
+	$cx_portfolio_categories = codexin_get_custom_categories('portfolio-category');
 
 	if (function_exists('kc_add_map')) { 
 		kc_add_map(

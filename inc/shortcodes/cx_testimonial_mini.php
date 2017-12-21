@@ -131,7 +131,7 @@ function cx_testimonial_mini_shortcode( $atts, $content = null ) {
 							while( $data->have_posts() ) : $data->the_post();
 
 							// Retrieving Image alt tag
-							$img_alt = ( !empty( retrieve_alt_tag() ) ) ? retrieve_alt_tag() : get_the_title();
+							$img_alt = ( !empty( codexin_retrieve_alt_tag() ) ) ? codexin_retrieve_alt_tag() : get_the_title();
 							?>
 						<div class="col-sm-6 quote-wrapper">
 							<div class="media-wrapper">
@@ -219,7 +219,7 @@ function cx_testimonial_mini_shortcode( $atts, $content = null ) {
 							while( $data->have_posts() ) : $data->the_post();
 
 								// Retrieving Image alt tag
-								$img_alt = ( !empty( retrieve_alt_tag() ) ) ? retrieve_alt_tag() : get_the_title();
+								$img_alt = ( !empty( codexin_retrieve_alt_tag() ) ) ? codexin_retrieve_alt_tag() : get_the_title();
 							?>
 								<div class="col-sm-6">
 									<div class="item">
@@ -313,7 +313,7 @@ function cx_testimonial_mini_shortcode( $atts, $content = null ) {
 								while( $data->have_posts() ) : $data->the_post();
 
 									// Retrieving Image alt tag
-									$img_alt = ( !empty( retrieve_alt_tag() ) ) ? retrieve_alt_tag() : get_the_title();
+									$img_alt = ( !empty( codexin_retrieve_alt_tag() ) ) ? codexin_retrieve_alt_tag() : get_the_title();
 								?>
 									<div class="item">
 										<div class="quote-text">
@@ -410,7 +410,7 @@ function cx_testimonial_mini_shortcode( $atts, $content = null ) {
 											while( $data->have_posts() ) : $data->the_post();
 
 												// Retrieving Image alt tag
-												$img_alt = ( !empty( retrieve_alt_tag() ) ) ? retrieve_alt_tag() : get_the_title();
+												$img_alt = ( !empty( codexin_retrieve_alt_tag() ) ) ? codexin_retrieve_alt_tag() : get_the_title();
 											?>
 
 											<?php //if (($data->current_post +1) !== ($data->post_count)): ?>	

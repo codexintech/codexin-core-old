@@ -78,7 +78,7 @@ function cx_client_shortcode( $atts, $content = null ) {
 					while( $data->have_posts() ) : $data->the_post();
 				$client_url = rwmb_meta( 'reveal_clients_surl', 'type=text' );
 				// Retrieving Image alt tag
-				$image_alt = ( !empty( retrieve_alt_tag() ) ) ? retrieve_alt_tag() : get_the_title();  
+				$image_alt = ( !empty( codexin_retrieve_alt_tag() ) ) ? codexin_retrieve_alt_tag() : get_the_title();  
 				?>
 				<div class="item">
 					<?php if($link_client): ?>
@@ -131,7 +131,7 @@ function cx_client_shortcode( $atts, $content = null ) {
 							$i++;
 							$client_url = rwmb_meta( 'reveal_clients_surl', 'type=text' );
 							// Retrieving Image alt tag
-							$image_alt = ( !empty( retrieve_alt_tag() ) ) ? retrieve_alt_tag() : get_the_title();  
+							$image_alt = ( !empty( codexin_retrieve_alt_tag() ) ) ? codexin_retrieve_alt_tag() : get_the_title();  
 							?>
 						<div class="col-lg-<?php echo esc_html( $grid_columns ); ?> col-sm-6 client-image-single cx-border-1">
 							<?php if( $link_client ): ?>

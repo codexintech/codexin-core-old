@@ -1,8 +1,9 @@
 <?php 
+
 /**
  * The file Contains all propertyes & attributes of all the Custom Posts Type and Taxonomies used in the 'Reveal' Theme
  *
- * @since 		1.0
+ * @since 1.0
  */
 
 // Do not allow directly accessing this file.

@@ -70,7 +70,7 @@ function cx_blog_mini_shortcode( $atts, $content = null ) {
 					$column = 12/$number_of_posts;
 
 					// Retrieving Image alt tag
-					$image_alt = ( !empty( retrieve_alt_tag() ) ) ? retrieve_alt_tag() : get_the_title();
+					$image_alt = ( !empty( codexin_retrieve_alt_tag() ) ) ? codexin_retrieve_alt_tag() : get_the_title();
 
 				 ?>
 					<div class="col-md-<?php echo esc_html( $column ); ?> col-sm-<?php echo ( $column==4 ) ? esc_html($column) : esc_html(6); ?>">
@@ -197,7 +197,7 @@ function cx_blog_mini_shortcode( $atts, $content = null ) {
 					$column = 12/$number_of_posts;
 
 					// Retrieving Image alt tag
-					$image_alt = ( !empty( retrieve_alt_tag() ) ) ? retrieve_alt_tag() : get_the_title();
+					$image_alt = ( !empty( codexin_retrieve_alt_tag() ) ) ? codexin_retrieve_alt_tag() : get_the_title();
 
 					?>
 					<div class="col-md-<?php echo $column ?> col-sm-<?php echo ( $column==4 ) ? esc_html($column) : esc_html(6); ?>">
@@ -281,7 +281,7 @@ function cx_blog_mini_shortcode( $atts, $content = null ) {
 				while( $data->have_posts() ) : $data->the_post();
 
 				// Retrieving Image alt tag
-				$image_alt = ( !empty( retrieve_alt_tag() ) ) ? retrieve_alt_tag() : get_the_title();
+				$image_alt = ( !empty( codexin_retrieve_alt_tag() ) ) ? codexin_retrieve_alt_tag() : get_the_title();
 				if($i == 1): 
 				?>
 					<!-- Left column post -->
@@ -394,7 +394,7 @@ function cx_blog_mini_shortcode( $atts, $content = null ) {
 				while( $data->have_posts() ) : $data->the_post();
 
 				// Retrieving Image alt tag
-				$image_alt = ( !empty( retrieve_alt_tag() ) ) ? retrieve_alt_tag() : get_the_title();
+				$image_alt = ( !empty( codexin_retrieve_alt_tag() ) ) ? codexin_retrieve_alt_tag() : get_the_title();
 				?>
 					<!-- Left column post -->
 					<div class="col-md-4 col-sm-4">
@@ -442,7 +442,7 @@ function cx_blog_mini_shortcode( $atts, $content = null ) {
 // Integrating Shortcode with King Composer
 function cx_blog_mini_kc() {
 
-	$cx_categories = cx_get_post_categories();
+	$cx_categories = codexin_get_post_categories();
 
 	if (function_exists('kc_add_map')) { 
 		kc_add_map(

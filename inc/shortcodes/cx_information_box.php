@@ -32,12 +32,12 @@ function cx_information_box_shortcode( $atts, $content = null ) {
 	(!empty($class)) ? $classes[] = $class : '';
 
 	// Retrieving the url
-	$retrieve_link = retrieve_url( $href );
+	$retrieve_link = codexin_retrieve_url( $href );
 	$title = ($retrieve_link[1]) ? 'title="'.esc_attr($retrieve_link[1]).'"':'';
 	$target = ($retrieve_link[2]) ? 'target="'.esc_attr($retrieve_link[2]).'"':'';
 
 	// Retrieving the image url
-	$retrive_img_url = retrieve_img_src( $image, 'codexin-core-rectangle-one' );
+	$retrive_img_url = codexin_retrieve_img_src( $image, 'codexin-core-rectangle-one' );
 
 	ob_start(); ?>
 

@@ -84,7 +84,7 @@ function cx_portfolio_shortcode( $atts, $content = null ) {
 						$i++;
 
 						// Retrieving Image alt tag
-						$image_alt = ( !empty( retrieve_alt_tag() ) ) ? retrieve_alt_tag() : get_the_title();
+						$image_alt = ( !empty( codexin_retrieve_alt_tag() ) ) ? codexin_retrieve_alt_tag() : get_the_title();
 
 						// Assigning classed for post_class
 						$post_classes = ($layout == 'list') ? 'clearfix portfolio-list' : '';
@@ -230,7 +230,7 @@ function cx_portfolio_shortcode( $atts, $content = null ) {
 // Integrating Shortcode with King Composer
 function cx_portfolio_kc() {
 
-	$cx_portfolio_categories = cx_get_custom_categories('portfolio-category');
+	$cx_portfolio_categories = codexin_get_custom_categories('portfolio-category');
 
 	if (function_exists('kc_add_map')) { 
 		kc_add_map(

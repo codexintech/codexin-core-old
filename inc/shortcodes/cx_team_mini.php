@@ -50,7 +50,7 @@ function cx_team_mini_shortcode( $atts, $content = null ) {
 						while( $data->have_posts() ) : $data->the_post();
 
 						// Retrieving Image alt tag
-						$img_alt = ( !empty( retrieve_alt_tag() ) ) ? retrieve_alt_tag() : get_the_title();
+						$img_alt = ( !empty( codexin_retrieve_alt_tag() ) ) ? codexin_retrieve_alt_tag() : get_the_title();
 
 						$designation = rwmb_meta( 'reveal_team_designation','type=text' );
 						$fb = rwmb_meta( 'reveal_team_facebook','type=text' );

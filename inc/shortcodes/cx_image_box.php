@@ -24,26 +24,26 @@ function cx_image_box_shortcode(  $atts, $content = null) {
 	$result = '';
 
 	// Retrieving the image url
-	$retrive_img_url = retrieve_img_src( $image, 'codexin-core-rectangle-one' );
-	$ret_full_img_url = retrieve_img_src( $image, 'full' );
+	$retrive_img_url 	= codexin_retrieve_img_src( $image, 'codexin-core-rectangle-one' );
+	$ret_full_img_url 	= codexin_retrieve_img_src( $image, 'full' );
 
 	// Retrieving the url
-	$retrieve_link = retrieve_url( $href );
+	$retrieve_link 		= codexin_retrieve_url( $href );
 
 	// Assigning a master css class and hooking into KC
-	$master_class = apply_filters( 'kc-el-class', $atts );
-	$master_class[] = 'cx-image-box';
+	$master_class 		= apply_filters( 'kc-el-class', $atts );
+	$master_class[] 	= 'cx-image-box';
 
 	// Retrieving user define classes
-	$classes = array( 'img-thumb' );
+	$classes 			= array( 'img-thumb' );
 	(!empty($class)) ? $classes[] = $class : '';
 
-	$title = ($retrieve_link[1]) ? 'title="'.esc_attr($retrieve_link[1]).'"':'';
-	$target = ($retrieve_link[2]) ? 'target="'.esc_attr($retrieve_link[2]).'"':'';
+	$title 				= ( $retrieve_link[1] ) ? 'title="'. esc_attr( $retrieve_link[1] ).'"':'';
+	$target 			= ( $retrieve_link[2] ) ? 'target="'. esc_attr( $retrieve_link[2] ).'"':'';
 
 	if(!empty($image)):
-		$image_size = getimagesize($ret_full_img_url);
-		$data_size = $image_size['0'] . 'x' . $image_size['1'];
+		$image_size 	= getimagesize( $ret_full_img_url );
+		$data_size 		= $image_size['0'] . 'x' . $image_size['1'];
 	endif;
 
    	ob_start(); ?>

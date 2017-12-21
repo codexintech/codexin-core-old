@@ -30,7 +30,7 @@ function cx_map_shortcode( $atts, $content = null ) {
 	), $atts));
 
 	// Retrieving the image url
-	$ret_full_img_url = retrieve_img_src( $gmap_marker, '' );
+	$ret_full_img_url = codexin_retrieve_img_src( $gmap_marker, '' );
 
 	// Assigning a master css class and hooking into KC
 	$master_class = apply_filters( 'kc-el-class', $atts );

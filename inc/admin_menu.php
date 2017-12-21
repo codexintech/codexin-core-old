@@ -1,14 +1,21 @@
 <?php
- 
-/* ------------------------------------------------------------------------ *
- * Admin Menu Registration
- * ------------------------------------------------------------------------ */
- 
+
 /**
  * Initializes the plugins admin menu page by registering the Sections,
  * Fields, and Settings.
  *
  * This function is registered with the 'admin_init' hook.
+ *
+ * @since 1.0
+ */
+
+// Do not allow directly accessing this file.
+defined( 'ABSPATH' ) OR die( esc_html__( 'This script cannot be accessed directly.', 'codexin' ) );
+
+/**
+ * Main class for the Codexin Admin Menu Construction
+ * 
+ * @since v1.0
  */
 class CodexinAdminMenu {
 

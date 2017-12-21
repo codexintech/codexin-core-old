@@ -11,6 +11,8 @@ Text Domain: codexin
 */
 
 // Declaring Global Constants for plugin paths and URL
+define( 'CODEXIN_CORE_VERSION', '1.0' );
+
 define('CODEXIN_CORE_INC_DIR', plugin_dir_path( __FILE__ ) .'inc');
 define('CODEXIN_CORE_ASSET_DIR', plugin_dir_url( __FILE__ ) .'assets');
 define('CODEXIN_CORE_SC_DIR', plugin_dir_path( __FILE__ ) .'inc/shortcodes');
@@ -18,9 +20,9 @@ define('CODEXIN_CORE_WDGT_DIR', plugin_dir_path( __FILE__ ) .'inc/widgets');
 
 if( ! class_exists( 'Codexin_Core' ) ) {
 	/**
-	 * Main class for the Codexin Core Plugin
+	 * Master class for the Codexin Core Plugin
 	 * 
-	 * @since v1.0.0
+	 * @since v1.0
 	 */
 	class Codexin_Core {
 
@@ -29,7 +31,6 @@ if( ! class_exists( 'Codexin_Core' ) ) {
 		 * 
 		 * @since v1.0
 		 */
-
 		public function __construct() {
 
 			// Loading the core files
@@ -70,6 +71,9 @@ if( ! class_exists( 'Codexin_Core' ) ) {
 			// Adding metaboxes
 			require_once CODEXIN_CORE_INC_DIR . '/metaboxes.php';
 
+			// Including post like system
+			require_once CODEXIN_CORE_INC_DIR . '/post_like.php';
+
 			// Initalizing custom widgets
 			$cx_widgets = glob(CODEXIN_CORE_WDGT_DIR.'/*.php');
 			foreach( $cx_widgets as $cx_widget ) {
@@ -89,7 +93,6 @@ if( ! class_exists( 'Codexin_Core' ) ) {
 		 * 
 		 * @since v1.0
 		 */
-
 		public function codexin_enqueque() {
 
 			add_action( 'wp_enqueue_scripts', array( $this, 'codexin_styles' ), 9 );
@@ -122,7 +125,6 @@ if( ! class_exists( 'Codexin_Core' ) ) {
 		 * 
 		 * @since v1.0
 		 */
-
 		public function codexin_admin_enqueque() {
 
 			add_action( 'admin_enqueue_scripts', array( $this, 'codexin_admin_styles' ), 99 );
@@ -142,7 +144,6 @@ if( ! class_exists( 'Codexin_Core' ) ) {
 		 * @uses add_filter()
 		 * @since v1.0
 		 */
-
 		public function codexin_add_actions() {
 
 			/**
@@ -190,7 +191,7 @@ if( ! class_exists( 'Codexin_Core' ) ) {
 }
 
 
-// Instantiating the class
+// Instantiating the Master Class
 $codexin_core = new Codexin_Core();
 		
 

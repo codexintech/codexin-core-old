@@ -31,7 +31,7 @@ function cx_service_box_shortcode( $atts, $content = null ) {
     $master_class[] = 'cx-service-box';
 
     // Retrieving the image url
-    $ret_full_img_url = retrieve_img_src( $media_image, 'full' );
+    $ret_full_img_url = codexin_retrieve_img_src( $media_image, 'full' );
 
 
 	ob_start(); 
@@ -131,7 +131,7 @@ function cx_service_box_shortcode( $atts, $content = null ) {
             (!empty($class)) ? $classes[] = $class : '';
 
             // Retrieving the image url
-            $ret_img_url = retrieve_img_src( $media_img, 'codexin-core-rectangle-one' );
+            $ret_img_url = codexin_retrieve_img_src( $media_img, 'codexin-core-rectangle-one' );
 
             ?>
 

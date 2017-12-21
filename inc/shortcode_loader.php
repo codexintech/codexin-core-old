@@ -1,17 +1,30 @@
 <?php
 
+/**
+ * The shortcodes loader Class
+ *
+ * @since 1.0
+ */
 
+// Do not allow directly accessing this file.
+defined( 'ABSPATH' ) OR die( esc_html__( 'This script cannot be accessed directly.', 'codexin' ) );
+
+/**
+ * Main class for the Codexin Shortcode Loader
+ * 
+ * @since v1.0
+ */
 class CodexinShortcodeloader {
 
 	// Building an array that holds all the custom shortcode names
 	public static function cx_sc_names() {
 
 		$shortcode_names = array();
-		$cx_shortcode_names = glob(CODEXIN_CORE_SC_DIR . "/*.php", GLOB_BRACE);
+		$cx_shortcode_names = glob( CODEXIN_CORE_SC_DIR . "/*.php", GLOB_BRACE );
 
-		foreach($cx_shortcode_names as $cx_shortcode_name) {
+		foreach( $cx_shortcode_names as $cx_shortcode_name ) {
 			$shortcode_name = sanitize_text_field( str_replace( '.php', '', $cx_shortcode_name ) );
-		   	$shortcode_names[] =  basename($shortcode_name);
+		   	$shortcode_names[] =  basename( $shortcode_name );
 		}
 
 		return $shortcode_names;

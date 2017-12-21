@@ -30,7 +30,7 @@ function cx_pricing_table_shortcode( $atts, $content = null ) {
 	ob_start(); 
 
 	// Retrieving the url
-	$retrieve_link = retrieve_url( $href );
+	$retrieve_link = codexin_retrieve_url( $href );
 	$title = ($retrieve_link[1]) ? 'title="'.esc_attr($retrieve_link[1]).'"':'';
 	$target = ($retrieve_link[2]) ? 'target="'.esc_attr($retrieve_link[2]).'"':'';
 

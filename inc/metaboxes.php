@@ -2,7 +2,7 @@
 /**
  * The file Contains all metaboxes used in the 'Reveal' Theme using Metabox Plugin
  *
- * @since       1.0
+ * @since 1.0
  */
 
 // Do not allow directly accessing this file.
@@ -249,38 +249,36 @@ function codexin_register_meta_boxes( $meta_boxes ) {
     
     // Page Header & Footer Disabling Metabox
     $meta_boxes[] = array(
-        'id'         => 'reveal-page-header-footer',
-        'title'      => esc_html__( 'Page Header & Footer Settings', 'codexin' ),
-        'post_types' => array( 'page' ),
-        'context'    => 'normal',
-        'priority'   => 'high',
-        'fields' => array(
-
+        'id'            => 'codexin_page_header_footer',
+        'title'         => esc_html__( 'Page Header & Footer Settings', 'codexin' ),
+        'post_types'    => array( 'page' ),
+        'context'       => 'normal',
+        'priority'      => 'high',
+        'fields'        => array(
             array(
-                'id'   => $prefix . 'disable_header',
-                'name' => __( 'Disable Page Header?', 'codexin' ),
-                'type' => 'checkbox',
-                'desc' => __( 'Checking this will disable the Page Header', 'codexin' ),
+                'id'    => $prefix . 'disable_header',
+                'name'  => esc_html__( 'Disable Page Header?', 'codexin' ),
+                'type'  => 'checkbox',
+                'desc'  => esc_html__( 'Checking this will disable the Page Header', 'codexin' ),
             ),
 
             array(
-                'id'   => $prefix . 'disable_footer',
-                'name' => __( 'Disable Page Footer?', 'codexin' ),
-                'type' => 'checkbox',
-                'desc' => __( 'Checking this will disable the Page Footer', 'codexin' ),
+                'id'    => $prefix . 'disable_footer',
+                'name'  => esc_html__( 'Disable Page Footer?', 'codexin' ),
+                'type'  => 'checkbox',
+                'desc'  => esc_html__( 'Checking this will disable the Page Footer', 'codexin' ),
             ),
-        )
-    );
+        ) // End fields
+    ); // End codexin_page_header_footer
 
     // Page Header Metabox
     $meta_boxes[] = array(
-        'id'         => 'reveal-page-header-layout',
-        'title'      => esc_html__( 'Page Header Settings', 'codexin' ),
-        'post_types' => array( 'page' ),
-        'context'    => 'normal',
-        'priority'   => 'high',
-        'fields' => array(
-
+        'id'            => 'codexin_page_header_layout',
+        'title'         => esc_html__( 'Page Header Settings', 'codexin' ),
+        'post_types'    => array( 'page' ),
+        'context'       => 'normal',
+        'priority'      => 'high',
+        'fields'        => array(
             array(
                 'name'     => esc_html__( 'Header layout', 'reveal' ),
                 'type'     => 'image_select',
@@ -295,21 +293,20 @@ function codexin_register_meta_boxes( $meta_boxes ) {
                 ),
                 'std'       => '0',
             ),
-        )
-    );
+        ) // End fields
+    ); // End codexin_page_header_layout
 
     // Page Title Metabox
     $meta_boxes[] = array(
-        'id'         => 'reveal-page-background-meta-common',
-        'title'      => esc_html__( 'Page Title Settings', 'codexin' ),
-        'post_types' => array( 'page', 'portfolio' ),
-        'context'    => 'normal',
-        'priority'   => 'high',
-        'fields' => array(
-
+        'id'            => 'codexin_page_background_meta_common',
+        'title'         => esc_html__( 'Page Title Settings', 'codexin' ),
+        'post_types'    => array( 'page', 'portfolio' ),
+        'context'       => 'normal',
+        'priority'      => 'high',
+        'fields'        => array(
             array(
                 'name'      => esc_html__( 'Disable Page Title Area?', 'codexin' ),
-                'desc'      => esc_html__('Checking this will disable the Page Title Section', 'codexin'),
+                'desc'      => esc_html__( 'Checking this will disable the Page Title Section', 'codexin' ),
                 'id'        => $prefix . 'disable_page_title',
                 'type'      => 'checkbox',
                 'clone'     => false,
@@ -317,7 +314,7 @@ function codexin_register_meta_boxes( $meta_boxes ) {
 
             array(
                 'name'      => esc_html__( 'Page Title Background Image', 'codexin' ),
-                'desc'      => esc_html__('Upload Page Header Background Image. The Image will be functional for all page templates except \'Page - Home\'. This image will override the page title background image set from theme options ', 'codexin'),
+                'desc'      => esc_html__( 'Upload Page Header Background Image. The Image will be functional for all page templates except \'Page - Home\'. This image will override the page title background image set from theme options ', 'codexin' ),
                 'id'        => $prefix . 'page_background',
                 'type'      => 'image_advanced',
                 'max_file_uploads' => 1,
@@ -327,14 +324,14 @@ function codexin_register_meta_boxes( $meta_boxes ) {
 
             array(
                 'name'      => esc_html__( 'Page Title Alignment', 'codexin' ),
-                'desc'      => esc_html__('Please Select the Page title alignment to override. If you want default settings, choose \'Global Settings\'', 'codexin'),
+                'desc'      => esc_html__( 'Please Select the Page title alignment to override. If you want default settings, choose \'Global Settings\'', 'codexin' ),
                 'id'        => $prefix . 'page_title_alignment',
                 'type'      => 'select',
                 'options'   => array(
-                        '0' => __( 'Global Settings', 'codexin' ),
-                        '1' => __( 'Left', 'codexin' ),
-                        '2' => __( 'Center', 'codexin' ),
-                        '3' => __( 'Right', 'codexin' ),
+                        '0' => esc_html__( 'Global Settings', 'codexin' ),
+                        '1' => esc_html__( 'Left', 'codexin' ),
+                        '2' => esc_html__( 'Center', 'codexin' ),
+                        '3' => esc_html__( 'Right', 'codexin' ),
                     ),
 
                 'std'       => '0',
@@ -343,42 +340,41 @@ function codexin_register_meta_boxes( $meta_boxes ) {
 
             array(
                 'name'      => esc_html__( 'Breadcrumbs Alignment', 'codexin' ),
-                'desc'      => esc_html__('Please Select the Breadcrumbs alignment to override. If you want default settings, choose \'Global Settings\'', 'codexin'),
+                'desc'      => esc_html__( 'Please Select the Breadcrumbs alignment to override. If you want default settings, choose \'Global Settings\'', 'codexin' ),
                 'id'        => $prefix . 'page_breadcrumb_alignment',
                 'type'      => 'select',
                 'options'   => array(
-                        '0' => __( 'Global Settings', 'codexin' ),
-                        '1' => __( 'Left', 'codexin' ),
-                        '2' => __( 'Center', 'codexin' ),
-                        '3' => __( 'Right', 'codexin' ),
+                        '0' => esc_html__( 'Global Settings', 'codexin' ),
+                        '1' => esc_html__( 'Left', 'codexin' ),
+                        '2' => esc_html__( 'Center', 'codexin' ),
+                        '3' => esc_html__( 'Right', 'codexin' ),
                     ),
 
                 'std'       => '0',
                 'size'  => 95,
             ),
-        )
-    );
+        ) // End fields
+    ); // End codexin_page_background_meta_common
 
     // Page Slider Metabox
     $meta_boxes[] = array(
-        'id'         => 'reveal-page-background-meta',
-        'title'      => esc_html__( 'Page Slider Settings', 'codexin' ),
-        'post_types' => array( 'page' ),
-        'context'    => 'normal',
-        'priority'   => 'high',
-        'fields' => array(
-
+        'id'            => 'codexin_page_background_meta',
+        'title'         => esc_html__( 'Page Slider Settings', 'codexin' ),
+        'post_types'    => array( 'page' ),
+        'context'       => 'normal',
+        'priority'      => 'high',
+        'fields'        => array(
             array(
-                'name'      => esc_html__( 'Select a Page Slider', 'codexin' ),
-                'desc'      => empty( array_filter( $sliders ) ) ? esc_html__( 'Smart Slider is not Activated. Please Activate Smart Slider and try again.', 'codexin' ) : esc_html__('Select Slider Name to show on Page header, Please note that, Slider will be functional for \'Page - Home\' template only  ', 'codexin'),
-                'id'        => $prefix . 'page_slider',
-                'type'    => 'select',
-                'options' => $sliders,
-                'placeholder' => esc_html__( 'Select a Slider', 'codexin' ),
-                'clone'     => false,
+                'name'          => esc_html__( 'Select a Page Slider', 'codexin' ),
+                'desc'          => empty( array_filter( $sliders ) ) ? esc_html__( 'Smart Slider is not Activated. Please Activate Smart Slider and try again.', 'codexin' ) : esc_html__( 'Select Slider Name to show on Page header, Please note that, Slider will be functional for \'Page - Home\' template only  ', 'codexin' ),
+                'id'            => $prefix . 'page_slider',
+                'type'          => 'select',
+                'options'       => $sliders,
+                'placeholder'   => esc_html__( 'Select a Slider', 'codexin' ),
+                'clone'         => false,
             ),
-        )
-    );
+        ) // End fields
+    ); // End codexin_page_background_meta
 
     /**
      * Metabox for Posts Formats for 'Posts'
@@ -387,139 +383,134 @@ function codexin_register_meta_boxes( $meta_boxes ) {
 
     // Gallery Metabox for 'Posts'
     $meta_boxes[] = array(
-        'id'         => 'reveal-gallery-meta',
-        'title'      => esc_html__( 'Gallery', 'codexin' ),
-        'post_types' => array( 'post' ),
-        'context'    => 'normal',
-        'priority'   => 'high',
-        'fields' => array(
-
+        'id'            => 'reveal-gallery-meta',
+        'title'         => esc_html__( 'Gallery', 'codexin' ),
+        'post_types'    => array( 'post' ),
+        'context'       => 'normal',
+        'priority'      => 'high',
+        'fields'        => array(
             array(
-                'name'      => esc_html__( 'Create Gallery', 'codexin' ),
-                'desc'      => esc_html__('Add images to create a slideshow', 'codexin'),
-                'id'        => $prefix . 'gallery',
-                'type'      => 'image_advanced',
+                'name'  => esc_html__( 'Create Gallery', 'codexin' ),
+                'desc'  => esc_html__( 'Add images to create a slideshow', 'codexin' ),
+                'id'    => $prefix . 'gallery',
+                'type'  => 'image_advanced',
             ),
         )
     );
 
     // Video Metabox for 'Posts'
     $meta_boxes[] = array(
-        'id'         => 'reveal-video-meta',
-        'title'      => esc_html__( 'Video', 'codexin' ),
-        'post_types' => array( 'post' ),
-        'context'    => 'normal',
-        'priority'   => 'high',
-        'fields' => array(
-
+        'id'            => 'reveal-video-meta',
+        'title'         => esc_html__( 'Video', 'codexin' ),
+        'post_types'    => array( 'post' ),
+        'context'       => 'normal',
+        'priority'      => 'high',
+        'fields'        => array(
             array(
-                'name'      => esc_html__( 'Embed Video', 'codexin' ),
-                'desc'      => sprintf('%1$s<a href="%2$s" target="_blank">%3$s</a>', esc_html__('Insert Video Links from Youtube, Vimeo and ', 'codexin'), esc_url('//codex.wordpress.org/Embeds'), esc_html__('all Video supported sites by WordPress.', 'codexin')),
-                'id'        => $prefix . 'video',
-                'type'      => 'oembed',
-                'size'      => 95
+                'name'  => esc_html__( 'Embed Video', 'codexin' ),
+                'desc'  => sprintf( '%1$s<a href="%2$s" target="_blank">%3$s</a>', esc_html__( 'Insert Video Links from Youtube, Vimeo and ', 'codexin' ), esc_url( '//codex.wordpress.org/Embeds' ), esc_html__( 'all Video supported sites by WordPress.', 'codexin' ) ),
+                'id'    => $prefix . 'video',
+                'type'  => 'oembed',
+                'size'  => 95
             ),
         )
     );
 
     // Audio Metabox for 'Posts'
     $meta_boxes[] = array(
-        'id'         => 'reveal-audio-meta',
-        'title'      => esc_html__( 'Audio', 'codexin' ),
-        'post_types' => array( 'post' ),
-        'context'    => 'normal',
-        'priority'   => 'high',
-        'fields' => array(
-
+        'id'            => 'reveal-audio-meta',
+        'title'         => esc_html__( 'Audio', 'codexin' ),
+        'post_types'    => array( 'post' ),
+        'context'       => 'normal',
+        'priority'      => 'high',
+        'fields'        => array(
             array(
-                'name'      => esc_html__( 'Embed Audio', 'codexin' ),
-                'desc'      => sprintf('%1$s<a href="%2$s" target="_blank">%3$s</a>', esc_html__('Insert Audio Links from Soundcloud, Spotify and ', 'codexin'), esc_url('//codex.wordpress.org/Embeds'), esc_html__('all Music supported sites by WordPress.', 'codexin')),
-                'id'        => $prefix . 'audio',
-                'type'      => 'oembed',
-                'size'      => 95
+                'name'  => esc_html__( 'Embed Audio', 'codexin' ),
+                'desc'  => sprintf( '%1$s<a href="%2$s" target="_blank">%3$s</a>', esc_html__( 'Insert Audio Links from Soundcloud, Spotify and ', 'codexin' ), esc_url( '//codex.wordpress.org/Embeds' ), esc_html__( 'all Music supported sites by WordPress.', 'codexin' ) ),
+                'id'    => $prefix . 'audio',
+                'type'  => 'oembed',
+                'size'  => 95
             ),
         )
     );
 
     // Quote Metabox for 'Posts'
     $meta_boxes[] = array(
-        'id'         => 'reveal-quote-meta',
-        'title'      => esc_html__( 'Quote', 'codexin' ),
-        'post_types' => array( 'post' ),
-        'context'    => 'normal',
-        'priority'   => 'high',
-        'fields' => array(
-
+        'id'            => 'reveal-quote-meta',
+        'title'         => esc_html__( 'Quote', 'codexin' ),
+        'post_types'    => array( 'post' ),
+        'context'       => 'normal',
+        'priority'      => 'high',
+        'fields'        => array(
             array(
-                'name'      => esc_html__( 'Quote Text', 'codexin' ),
-                'desc'      => esc_html__('Insert The Quote Text', 'codexin'),
-                'id'        => $prefix . 'quote_text',
-                'type'      => 'textarea',
-                'rows'      => '5'
+                'name'  => esc_html__( 'Quote Text', 'codexin' ),
+                'desc'  => esc_html__( 'Insert The Quote Text', 'codexin' ),
+                'id'    => $prefix . 'quote_text',
+                'type'  => 'textarea',
+                'rows'  => '5'
             ),
 
             array(
-                'name'      => esc_html__( 'Name', 'codexin' ),
-                'desc'      => esc_html__('Author Name', 'codexin'),
-                'id'        => $prefix . 'quote_name',
-                'type'      => 'text',
-                'size'      => 80,
+                'name'  => esc_html__( 'Name', 'codexin' ),
+                'desc'  => esc_html__( 'Author Name', 'codexin' ),
+                'id'    => $prefix . 'quote_name',
+                'type'  => 'text',
+                'size'  => 80,
             ),
 
             array(
-                'name'      => esc_html__( 'Source', 'codexin' ),
-                'desc'      => esc_html__('Source URL', 'codexin'),
-                'id'        => $prefix . 'quote_source',
-                'type'      => 'url',
-                'size'      => 80,
+                'name'  => esc_html__( 'Source', 'codexin' ),
+                'desc'  => esc_html__( 'Source URL', 'codexin' ),
+                'id'    => $prefix . 'quote_source',
+                'type'  => 'url',
+                'size'  => 80,
             ),
         )
     );
 
     // Link Metabox for 'Posts'
     $meta_boxes[] = array(
-        'id'         => 'reveal-link-meta',
-        'title'      => esc_html__( 'Link', 'codexin' ),
-        'post_types' => array( 'post' ),
-        'context'    => 'normal',
-        'priority'   => 'high',
-        'fields' => array(
-
+        'id'            => 'reveal-link-meta',
+        'title'         => esc_html__( 'Link', 'codexin' ),
+        'post_types'    => array( 'post' ),
+        'context'       => 'normal',
+        'priority'      => 'high',
+        'fields'        => array(
             array(
-                'name'      => esc_html__( 'Link URL', 'codexin' ),
-                'desc'      => esc_html__('Insert Link URL', 'codexin'),
-                'id'        => $prefix . 'link_url',
-                'type'      => 'text',
+                'name'  => esc_html__( 'Link URL', 'codexin' ),
+                'desc'  => esc_html__( 'Insert Link URL', 'codexin' ),
+                'id'    => $prefix . 'link_url',
+                'type'  => 'text',
                 'size'  => 95,
             ),
 
             array(
-                'name'      => esc_html__( 'Link Text', 'codexin' ),
-                'desc'      => esc_html__('Insert Link Text', 'codexin'),
-                'id'        => $prefix . 'link_text',
-                'type'      => 'text',
+                'name'  => esc_html__( 'Link Text', 'codexin' ),
+                'desc'  => esc_html__( 'Insert Link Text', 'codexin' ),
+                'id'    => $prefix . 'link_text',
+                'type'  => 'text',
                 'size'  => 95,
             ),
 
             array(
-                'name'      => esc_html__( 'Open link in a new window?', 'codexin' ),
-                'desc'      => esc_html__('Select "yes" to open link in a new window', 'codexin'),
-                'id'        => $prefix . 'link_target',
-                'type'      => 'select',
-                'options'   => array(
-                        '_blank' => __('Yes', 'codexin'),
-                        '_self' => __('No', 'codexin'),
-                    ),
+                'name'    => esc_html__( 'Open link in a new window?', 'codexin' ),
+                'desc'    => esc_html__( 'Select "yes" to open link in a new window', 'codexin' ),
+                'id'      => $prefix . 'link_target',
+                'type'    => 'select',
+                'options' => array(
+                    '_blank' => esc_html__( 'Yes', 'codexin' ),
+                    '_self' => esc_html__( 'No', 'codexin' ),
+                ),
 
-                'std'       => '_blank',
-                'size'  => 95,
+                'std'     => '_blank',
+                'size'    => 95,
             ),
 
             array(
-                'name'      => esc_html__( 'Link Relation (Optional)', 'codexin' ),
-                'desc'      => esc_html__('Set the link "rel" attribute(ex: nofollow, dofollow, etc.)', 'codexin'),
-                'id'        => $prefix . 'link_rel',
-                'type'      => 'text',
+                'name'  => esc_html__( 'Link Relation (Optional)', 'codexin' ),
+                'desc'  => esc_html__( 'Set the link "rel" attribute(ex: nofollow, dofollow, etc.)', 'codexin' ),
+                'id'    => $prefix . 'link_rel',
+                'type'  => 'text',
                 'size'  => 95,
             ),
         )
@@ -532,24 +523,22 @@ function codexin_register_meta_boxes( $meta_boxes ) {
 
     // Client Information Metabox
     $meta_boxes[] = array(
-        'id'         => 'reveal-client-logo-meta',
-        'title'      => esc_html__( 'Client Information', 'codexin' ),
-        'post_types' => array( 'clients' ),
-        'context'    => 'normal',
-        'priority'   => 'high',
-        'fields' => array(
-
+        'id'            => 'codexin_client_logo_meta',
+        'title'         => esc_html__( 'Client Information', 'codexin' ),
+        'post_types'    => array( 'clients' ),
+        'context'       => 'normal',
+        'priority'      => 'high',
+        'fields'        => array(
             array(
                 'name'  => esc_html__( 'Client Site URL', 'codexin' ),
-                'desc'  => esc_html__('Enter client site URL', 'codexin' ),
+                'desc'  => esc_html__( 'Enter client site URL', 'codexin' ),
                 'id'    => $prefix . 'clients_surl',
                 'type'  => 'text',
                 'clone' => false,
                 'size'  => 95
             ),
-
-        )
-    );
+        ) // End fields
+    ); // End codexin_client_logo_meta
 
     /**
      * Metabox for 'Events' Custom Post
@@ -558,16 +547,15 @@ function codexin_register_meta_boxes( $meta_boxes ) {
 
     // Events Information Metabox
     $meta_boxes[] = array(
-        'id'         => 'reveal-event-meta',
-        'title'      => esc_html__( 'Event Information', 'codexin' ),
-        'post_types' => array( 'events' ),
-        'context'    => 'normal',
-        'priority'   => 'high',
-        'fields' => array(
-
+        'id'            => 'codexin_event_meta',
+        'title'         => esc_html__( 'Event Information', 'codexin' ),
+        'post_types'    => array( 'events' ),
+        'context'       => 'normal',
+        'priority'      => 'high',
+        'fields'        => array(
             array(
                 'name'  => esc_html__( 'Event Start Date', 'codexin' ),
-                'desc'  => esc_html__('Enter event start date', 'codexin' ),
+                'desc'  => esc_html__( 'Enter event start date', 'codexin' ),
                 'id'    => $prefix . 'event_start_date',
                 'type'  => 'date',
                 'clone' => false,
@@ -575,10 +563,9 @@ function codexin_register_meta_boxes( $meta_boxes ) {
                 'js_options' => 'MM d, YY'
             ),
 
-
             array(
                 'name'  => esc_html__( 'Event Start Time', 'codexin' ),
-                'desc'  => esc_html__('Enter event start time', 'codexin' ),
+                'desc'  => esc_html__( 'Enter event start time', 'codexin' ),
                 'id'    => $prefix . 'event_start_time',
                 'type'  => 'time',
                 'clone' => false,
@@ -587,7 +574,7 @@ function codexin_register_meta_boxes( $meta_boxes ) {
 
             array(
                 'name'  => esc_html__( 'Event End Date', 'codexin' ),
-                'desc'  => esc_html__('Enter events end date', 'codexin' ),
+                'desc'  => esc_html__( 'Enter events end date', 'codexin' ),
                 'id'    => $prefix . 'event_end_date',
                 'type'  => 'date',
                 'clone' => false,
@@ -596,27 +583,26 @@ function codexin_register_meta_boxes( $meta_boxes ) {
 
             array(
                 'name'  => esc_html__( 'Event End Time', 'codexin' ),
-                'desc'  => esc_html__('Enter event end time', 'codexin' ),
+                'desc'  => esc_html__( 'Enter event end time', 'codexin' ),
                 'id'    => $prefix . 'event_end_time',
                 'type'  => 'time',
                 'clone' => false,
                 'size'  => 95
             ),
-        )
-    );
+        ) // End fields
+    ); // End codexin_event_meta
 
     // Events Contact Information Metabox
     $meta_boxes[] = array(
-        'id'         => 'reveal-event-contact-meta',
-        'title'      => esc_html__( 'Event Contact Information', 'codexin' ),
-        'post_types' => array( 'events' ),
-        'context'    => 'normal',
-        'priority'   => 'high',
-        'fields' => array(
-
+        'id'            => 'codexin_event_contact_meta',
+        'title'         => esc_html__( 'Event Contact Information', 'codexin' ),
+        'post_types'    => array( 'events' ),
+        'context'       => 'normal',
+        'priority'      => 'high',
+        'fields'        => array(
             array(
                 'name'  => esc_html__( 'Contact Phone', 'codexin' ),
-                'desc'  => esc_html__('Enter phone number', 'codexin' ),
+                'desc'  => esc_html__( 'Enter phone number', 'codexin' ),
                 'id'    => $prefix . 'event_phone',
                 'type'  => 'text',
                 'clone' => false,
@@ -625,27 +611,27 @@ function codexin_register_meta_boxes( $meta_boxes ) {
 
             array(
                 'name'  => esc_html__( 'Contact Email', 'codexin' ),
-                'desc'  => esc_html__('Enter email address', 'codexin' ),
+                'desc'  => esc_html__( 'Enter email address', 'codexin' ),
                 'id'    => $prefix . 'event_email',
                 'type'  => 'text',
                 'clone' => false,
                 'size'  => 95
             ),
-        )
-    );
+        ) // End fields
+    ); // End codexin_event_contact_meta
 
     // Events Location Metabox
     $meta_boxes[] = array(
-        'id'         => 'reveal-event-location-meta',
-        'title'      => esc_html__( 'Event Location Information', 'codexin' ),
-        'post_types' => array( 'events' ),
-        'context'    => 'normal',
-        'priority'   => 'high',
-        'fields' => array(
+        'id'            => 'codexin_event_location_meta',
+        'title'         => esc_html__( 'Event Location Information', 'codexin' ),
+        'post_types'    => array( 'events' ),
+        'context'       => 'normal',
+        'priority'      => 'high',
+        'fields'        => array(
 
             array(
                 'name'  => esc_html__( 'Events Address', 'codexin' ),
-                'desc'  => esc_html__('Enter event location address', 'codexin' ),
+                'desc'  => esc_html__( 'Enter event location address', 'codexin' ),
                 'id'    => $prefix . 'event_address',
                 'type'  => 'textarea',
                 'clone' => false,
@@ -654,7 +640,7 @@ function codexin_register_meta_boxes( $meta_boxes ) {
 
             array(
                 'name'  => esc_html__( 'Events Location Latitude', 'codexin' ),
-                'desc'  => sprintf( '%1$s<a href="%2$s" target="_blank">%3$s</a>', esc_html__('Enter event location latitude, you can find latitude/longitude by entering your address ', 'codexin' ), esc_url( '//latlong.net' ), esc_html__( 'here', 'codexin' ) ),
+                'desc'  => sprintf( '%1$s<a href="%2$s" target="_blank">%3$s</a>', esc_html__( 'Enter event location latitude, you can find latitude/longitude by entering your address ', 'codexin' ), esc_url( '//latlong.net' ), esc_html__( 'here', 'codexin' ) ),
                 'id'    => $prefix . 'event_address_latitude',
                 'type'  => 'text',
                 'clone' => false,
@@ -663,14 +649,14 @@ function codexin_register_meta_boxes( $meta_boxes ) {
 
             array(
                 'name'  => esc_html__( 'Events Location Longitude', 'codexin' ),
-                'desc'  => sprintf( '%1$s<a href="%2$s" target="_blank">%3$s</a>', esc_html__('Enter event location longitude, you can find latitude/longitude by entering your address ', 'codexin' ), esc_url( '//latlong.net' ), esc_html__( 'here', 'codexin' ) ),
+                'desc'  => sprintf( '%1$s<a href="%2$s" target="_blank">%3$s</a>', esc_html__( 'Enter event location longitude, you can find latitude/longitude by entering your address ', 'codexin' ), esc_url( '//latlong.net' ), esc_html__( 'here', 'codexin' ) ),
                 'id'    => $prefix . 'event_address_longitude',
                 'type'  => 'text',
                 'clone' => false,
                 'size'  => 95
             ),
-        )
-    );
+        ) // End fields
+    ); // End codexin_event_location_meta
 
     return $meta_boxes;
 }

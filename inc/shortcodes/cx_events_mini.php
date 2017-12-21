@@ -150,7 +150,7 @@ function cx_events_mini_shortcode( $atts, $content = null ) {
 			(!empty($class)) ? $classes[] = $class : ''; 
 
 			// Retrieving the url
-			$retrieve_link = retrieve_url( $href );
+			$retrieve_link = codexin_retrieve_url( $href );
 			$title = ($retrieve_link[1]) ? 'title="'.esc_attr($retrieve_link[1]).'"':'';
 			$target = ($retrieve_link[2]) ? 'target="'.esc_attr($retrieve_link[2]).'"':'';
 
@@ -194,7 +194,7 @@ function cx_events_mini_shortcode( $atts, $content = null ) {
 							$column = 12/$number_of_events;
 
 							// Retrieving Image alt tag
-							$image_alt = ( !empty( retrieve_alt_tag() ) ) ? retrieve_alt_tag() : get_the_title();
+							$image_alt = ( !empty( codexin_retrieve_alt_tag() ) ) ? codexin_retrieve_alt_tag() : get_the_title();
 
 							// Retrieving the meta infos
 							$start_time = rwmb_meta( 'reveal_event_start_time','type=time' );
@@ -284,7 +284,7 @@ function cx_events_mini_shortcode( $atts, $content = null ) {
 			(!empty($class)) ? $classes[] = $class : ''; 
 
 			// Retrieving the url
-			$retrieve_link = retrieve_url( $href );
+			$retrieve_link = codexin_retrieve_url( $href );
 			$title = ($retrieve_link[1]) ? 'title="'.esc_attr($retrieve_link[1]).'"':'';
 			$target = ($retrieve_link[2]) ? 'target="'.esc_attr($retrieve_link[2]).'"':'';
 
@@ -328,7 +328,7 @@ function cx_events_mini_shortcode( $atts, $content = null ) {
 							$column = 12/$number_of_events;
 
 							// Retrieving Image alt tag
-							$image_alt = ( !empty( retrieve_alt_tag() ) ) ? retrieve_alt_tag() : get_the_title();
+							$image_alt = ( !empty( codexin_retrieve_alt_tag() ) ) ? codexin_retrieve_alt_tag() : get_the_title();
 
 							// Retrieving the meta infos
 							$start_time = rwmb_meta( 'reveal_event_start_time','type=time' );
@@ -419,7 +419,7 @@ function cx_events_mini_shortcode( $atts, $content = null ) {
 			(!empty($class)) ? $classes[] = $class : ''; 
 
 			// Retrieving the url
-			$retrieve_link = retrieve_url( $href );
+			$retrieve_link = codexin_retrieve_url( $href );
 			$title = ($retrieve_link[1]) ? 'title="'.esc_attr($retrieve_link[1]).'"':'';
 			$target = ($retrieve_link[2]) ? 'target="'.esc_attr($retrieve_link[2]).'"':'';
 
@@ -473,7 +473,7 @@ function cx_events_mini_shortcode( $atts, $content = null ) {
 								while( $data->have_posts() ) : $data->the_post();
 
 								// Retrieving Image alt tag
-								$image_alt = ( !empty( retrieve_alt_tag() ) ) ? retrieve_alt_tag() : get_the_title();
+								$image_alt = ( !empty( codexin_retrieve_alt_tag() ) ) ? codexin_retrieve_alt_tag() : get_the_title();
 
 								// Retrieving the meta infos
 								$address 	= strtolower( rwmb_meta( 'reveal_event_address','type=textarea' ) );
@@ -557,7 +557,7 @@ function cx_events_mini_shortcode( $atts, $content = null ) {
 // Integrating Shortcode with King Composer
 function cx_events_mini_kc() {
 
-	$cx_events_categories = cx_get_custom_categories('events-category');
+	$cx_events_categories = codexin_get_custom_categories('events-category');
 
 	if (function_exists('kc_add_map')) { 
  		kc_add_map(

@@ -54,9 +54,7 @@ function cx_testimonials_shortcode( $atts, $content = null ) {
 				            /* Start the Loop */
 				            while ( $data->have_posts() ) : $data->the_post();
 
-								if( function_exists( 'retrieve_alt_tag' ) ):
-								    $img_alt = ( !empty( retrieve_alt_tag() ) ) ? retrieve_alt_tag() : get_the_title();
-								endif;
+							    $img_alt = ( !empty( codexin_retrieve_alt_tag() ) ) ? codexin_retrieve_alt_tag() : get_the_title();
 
 								$rt_name = rwmb_meta( 'reveal_author_name', 'type=text' ); 
 								$rt_desig = rwmb_meta( 'reveal_author_desig', 'type=text' ); 
