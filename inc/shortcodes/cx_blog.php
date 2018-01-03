@@ -321,8 +321,8 @@ function cx_blog_shortcode( $atts, $content = null ) {
 		                    }
 		                }
 
-					}
-				}
+					} // end of loop have_posts()
+				} //End check-posts if()
 				wp_reset_postdata();
 				?>
 
@@ -361,7 +361,7 @@ function cx_blog_kc() {
 
 	$cx_categories = codexin_get_post_categories();
 
-	if (function_exists('kc_add_map')) { 
+	if( function_exists( 'kc_add_map' ) ) { 
 		kc_add_map(
 			array(
 				'cx_blog' => array(
