@@ -1,15 +1,17 @@
-<?php 
+<?php
 
+/**
+ * Shortcode -  Events
+ *
+ * @since 1.0
+ */
 
-/*
-    ================================
-        CODEXIN EVENTS SHORTCODE
-    ================================
-*/
+// Do not allow directly accessing this file.
+defined( 'ABSPATH' ) OR die( esc_html__( 'This script cannot be accessed directly.', 'codexin' ) );
 
-// Registering Codexin Events Shortcode
+// Registering Events Shortcode
 function cx_events_shortcode( $atts, $content = null ) {
-	extract(shortcode_atts(array(
+	extract( shortcode_atts( array(
 			'layout'			=> '',
 			'grid_col'			=> '',
 			'order'				=> '',
@@ -22,21 +24,21 @@ function cx_events_shortcode( $atts, $content = null ) {
 			'readmore_txt'		=> '',
 			'pagination_type'	=> '',
 			'class'				=> ''
-	), $atts));
+	), $atts ) );
 
 	$result = '';
 
 	// Assigning a master css class and hooking into KC
-	$master_class = apply_filters( 'kc-el-class', $atts );
+	$master_class 	= apply_filters( 'kc-el-class', $atts );
 	$master_class[] = 'cx-events-standard';
 
     // Retrieving user define classes
     $classes = array( 'events-content-wrapper' );
-    (!empty($class)) ? $classes[] = $class : '';
+    ( ! empty( $class ) ) ? $classes[] = $class : '';
 
 	// Extracting user included categories
-	$cat_include = str_replace(',', ' ', $include);
-	$cat_includes = explode( " ", $cat_include );
+	$cat_include 	= str_replace( ',', ' ', $include );
+	$cat_includes 	= explode( " ", $cat_include );
 
 	ob_start(); 
 
@@ -44,199 +46,198 @@ function cx_events_shortcode( $atts, $content = null ) {
 
 		<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
 			<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
-				<div class="<?php echo ($layout == 'grid') ? 'events-grid-wrapper' : 'events-list-wrapper' ?>">
+				<div class="<?php echo ( $layout == 'grid' ) ? 'events-grid-wrapper' : 'events-list-wrapper' ?>">
 					<?php 
 
-					echo ($layout == 'grid') ? '<div class="row">' : '';
+					echo ( $layout == 'grid' ) ? '<div class="row">' : '';
 					//start query..
 					$paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
 
-					if( empty($include) ):
-						$args = array(
-							'post_type'				=> 'events',
-							'meta_key'				=> ( $orderby == 'meta_value' ) ? 'reveal_event_start_date' : '',
-							'order'					=> $order,
-							'orderby'				=> $orderby,
-							'paged'   				=> $paged,
-						);
+					$args = array(
+						'post_type'				=> 'events',
+						'meta_key'				=> ( $orderby == 'meta_value' ) ? 'reveal_event_start_date' : '',
+						'order'					=> $order,
+						'orderby'				=> $orderby,
+						'paged'   				=> $paged,
+					);
 
-					else:
-						$args = array(
-							'post_type'				=> 'events',
-							'meta_key'				=> ( $orderby == 'meta_value' ) ? 'reveal_event_start_date' : '',
-							'order'					=> $order,
-							'orderby'				=> $orderby,
-							'paged'   				=> $paged,
-						    'tax_query' 			=> array(
-						        array(
-						            'taxonomy' => 'events-category',
-						            'field'    => 'term_id',
-						            'terms'    => $cat_includes,
-						        ),
-						    ),
-						);
-					endif;
+
+				    if( ! empty( $include ) ) {
+				        $args['tax_query'] = array(
+					        array(
+					            'taxonomy' => 'events-category',
+					            'field'    => 'term_id',
+					            'terms'    => $cat_includes,
+					        ),
+			            );
+				    }
 
 					$data = new WP_Query( $args );
 
-					if( $data->have_posts() ) :
+					if( $data->have_posts() ) {
 						$i = 0;
 						echo '<div class="events-archive-wrapper clearfix">';
 
-						while( $data->have_posts() ) : $data->the_post();
+						while( $data->have_posts() ) {
+						 	$data->the_post();
 							$i++;
 
 							// Retrieving Image alt tag
-							$image_alt = ( !empty( codexin_retrieve_alt_tag() ) ) ? codexin_retrieve_alt_tag() : get_the_title();
+							$image_alt = ( ! empty( codexin_retrieve_alt_tag() ) ) ? codexin_retrieve_alt_tag() : get_the_title();
 
 							// Assigning classed for post_class
-							$post_classes = ($layout == 'list') ? 'clearfix events-list' : '';
+							$post_classes = ( $layout == 'list' ) ? 'clearfix events-list' : '';
 
 							// layout
-							if( $layout == 'grid' ):
-								$grid_columns = 12/$grid_col;
-								printf('<div class="events-single-wrap col-lg-%1$s col-md-%1$s col-sm-12">', $grid_columns);
-							endif;
+							if( $layout == 'grid' ) {
+								$grid_columns = 12 / $grid_col;
+								printf( '<div class="events-single-wrap col-lg-%1$s col-md-%1$s col-sm-12">', $grid_columns );
+							}
 
 							// Retrieving Values from the Metaboxes
-							$e_start_date = strtotime(rwmb_meta('reveal_event_start_date', 'type=date'));
-							$e_end_date = rwmb_meta('reveal_event_end_date', 'type=date');
-							$e_start_time = rwmb_meta('reveal_event_start_time', 'type=time');
-							$e_end_time = rwmb_meta('reveal_event_end_time', 'type=time');
-							$e_st_date=date( get_option('date_format'), $e_start_date );
+							$e_start_date 	= strtotime( rwmb_meta( 'reveal_event_start_date', 'type=date' ) );
+							$e_end_date 	= rwmb_meta( 'reveal_event_end_date', 'type=date' );
+							$e_start_time 	= rwmb_meta( 'reveal_event_start_time', 'type=time' );
+							$e_end_time 	= rwmb_meta( 'reveal_event_end_time', 'type=time' );
+							$e_st_date 		= date( get_option( 'date_format' ), $e_start_date );
+
+							$thumbnail_size = ( $layout == 'list' ) ? 'codexin-framework-rectangle-one' : 'codexin-core-rectangle-four';
+
+							if( function_exists( 'codexin_attachment_metas_extended' ) ) {
+								$post_thumbnail = codexin_attachment_metas_extended( get_the_ID(), 'events', $thumbnail_size )['src'];
+							} else {
+								$post_thumbnail = ( has_post_thumbnail() ) ? get_the_post_thumbnail_url( get_the_ID(), $thumbnail_size ) : '//placehold.it/600X375';
+							}
 				            	
 						?>
-							<article id="event-<?php esc_attr(the_ID()); ?>" <?php post_class(array(esc_attr($post_classes))); ?> itemscope itemtype="http://schema.org/Event">
-							    <div class="<?php echo ($layout == 'grid') ? 'events-item-content' : 'post-wrapper reveal-border-1'; ?>">
-							    	<?php echo ($layout == 'list') ? '<div class="event-list-wrapper reveal-bg-2">' : '' ?>
-							    		<?php if( $layout == 'list' ): ?>
-							                <div class="thumb-events" style="background-image:url('<?php if(has_post_thumbnail()): esc_url(the_post_thumbnail_url('codexin-framework-rectangle-one')); else: echo '//placehold.it/600X375'; endif; ?>');">
-							                    <a href="<?php echo esc_url(get_the_permalink()); ?>"></a>
-							                    <?php if( !empty($e_st_date) ): ?>
-								                    <div class="events-date reveal-bg-2"><p><?php echo esc_html($e_st_date); ?></p></div>
-								                <?php endif; ?>
+							<article id="event-<?php esc_attr(the_ID()); ?>" <?php post_class( array( esc_attr( $post_classes ) ) ); ?> itemscope itemtype="http://schema.org/Event">
+							    <div class="<?php echo ( $layout == 'grid' ) ? esc_attr( 'events-item-content' ) : esc_attr( 'post-wrapper reveal-border-1' ); ?>">
+							    	<?php echo ( $layout == 'list' ) ? '<div class="event-list-wrapper reveal-bg-2">' : '' ?>
+							    		<?php if( $layout == 'list' ) { ?>
+							                <div class="thumb-events" style="background-image: url('<?php echo esc_url( $post_thumbnail ); ?>');">
+							                    <a href="<?php echo esc_url( get_the_permalink() ); ?>"></a>
+							                    <?php if( ! empty( $e_st_date ) ) { ?>
+								                    <div class="events-date reveal-bg-2"><p><?php echo esc_html( $e_st_date ); ?></p></div>
+								                <?php } ?>
 							                </div>
-							            <?php else: ?>
+							            <?php } else { ?>
 										    <div class="item-thumbnail">
-										        <img src="<?php echo esc_url(the_post_thumbnail_url( 'codexin-core-rectangle-four' )); ?>"  alt="<?php echo esc_attr($image_alt); ?>">                                          
+										        <img src="<?php echo esc_url( $post_thumbnail ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>">                                          
 										        <ul class="events-action-btn reveal-color-0">
 										            <li>
 										                <a class="venobox" href="<?php echo esc_url(get_the_permalink()); ?>" itemprop="url"><i class="flaticon-link"></i></a>
 										            </li>
 										        </ul>                                            
 										    </div>
-									    <?php endif; ?>
+									    <?php } ?>
 
-							            <div class="<?php echo ($layout == 'list') ? 'desc-events' : 'events-description' ?>">
+							            <div class="<?php echo ( $layout == 'list' ) ? esc_attr( 'desc-events' ) : esc_attr( 'events-description' ); ?>">
 							            	<?php 
-							            	if( $layout == 'list' ):
+							            	if( $layout == 'list' ) {
 								            	$event_list = get_the_term_list( $data->ID, 'events-category', '', ', ', '' );
-								            	if(!empty($event_list)): ?>
+								            	if( ! empty( $event_list ) ) { ?>
 									                <p class="list-tag reveal-color-0"><i class="flaticon-bookmark"></i> 
 									                <?php 
 									                   printf( '%s', $event_list );
 									                ?>
 									                </p>
 									            <?php 
-								        		endif;
-								            endif;
+								        		}
+								            }
 								            echo ( $layout == 'list' ) ? '<h2 class="post-title" itemprop="name">' : '<h4 itemprop="name">';
 							                
 							                ?>
-								                <a href="<?php echo esc_url(get_the_permalink()); ?>" itemprop="url">							                    
+								                <a href="<?php echo esc_url( get_the_permalink() ); ?>" itemprop="url">							                    
 									                <?php
-								                    if( $chr_length ) :
-								                    	if( function_exists('codexin_char_limit') ):
+								                    if( $chr_length ) {
+								                    	if( function_exists( 'codexin_char_limit' ) ) {
 									                        echo apply_filters( 'the_title', codexin_char_limit( $title_length, 'title' ) );
-													    else:
-													    	echo '<p class="cx-error">'.esc_html__('Please Activate \'REVEAL\' Theme!', 'codexin').'</p>';
-									                    endif;
-								                    else:
+								                    	} else {
+													    	echo '<p class="cx-error">'. esc_html__( 'Please Activate \'REVEAL\' Theme!', 'codexin' ) .'</p>';
+								                    	}
+								                    } else {
 								                        the_title();
-								                    endif;
+								                    }
 									                ?>
 							                	</a>
 							            	<?php echo ( $layout == 'list' ) ? '</h2>' : '</h4>'; 
-							            	if( ($layout == 'grid') && (!empty($e_st_date) || !empty($e_start_time)) ): ?>
+							            	if( ( $layout == 'grid' ) && ( ! empty( $e_st_date ) || ! empty( $e_start_time ) ) ) { ?>
 										        <div class="event-grid-meta">
-										        	<?php if( !empty($e_st_date) ): ?>
-											        	<p class="ev-start-date pull-left" itemprop="startDate" content="<?php echo get_the_time('c'); ?>"><i class="flaticon-agenda"></i> <?php echo esc_html($e_st_date); ?></p>
-											        <?php endif; ?>
-											        <?php if( !empty($e_st_date) || !empty($e_start_time) ): ?>
+										        	<?php if( ! empty( $e_st_date ) ) { ?>
+											        	<p class="ev-start-date pull-left" itemprop="startDate" content="<?php echo esc_attr( get_the_time('c') ); ?>"><i class="flaticon-agenda"></i> <?php echo esc_html( $e_st_date ); ?></p>
+											        <?php } ?>
+											        <?php if( ! empty( $e_st_date ) || ! empty( $e_start_time ) ) { ?>
 											        	<p class="event-grid-time">
 											        		<i class="flaticon-clock-1"></i>
-											        		<?php if( !empty($e_start_time) ): ?> 
-												        		<span class=""><?php echo esc_html($e_start_time); ?></span>
-												        	<?php endif;
-												        	if( !empty($e_end_time) ): ?>
-												        		<span class=""> - <?php echo esc_html($e_end_time); ?></span>
-											        		<?php endif; ?>
+											        		<?php if( ! empty( $e_start_time ) ) { ?> 
+												        		<span class=""><?php echo esc_html( $e_start_time ); ?></span>
+												        	<?php }
+												        	if( ! empty( $e_end_time ) ) { ?>
+												        		<span class=""> - <?php echo esc_html( $e_end_time ); ?></span>
+											        		<?php } ?>
 											        	</p>
-											        <?php endif; ?>
+											        <?php } ?>
 										        </div>
-									        <?php endif; ?>
-							                <div class="<?php echo ($layout == 'grid') ? 'events-grid-excerpt' : 'list-content'; ?>">
+									        <?php } ?>
+							                <div class="<?php echo ( $layout == 'grid' ) ? esc_attr( 'events-grid-excerpt' ) : esc_attr( 'list-content' ); ?>">
 							                <?php
-							                    if( $chr_length ) :
-							                    	if( function_exists('codexin_char_limit') ):
+							                    if( $chr_length ) {
+							                    	if( function_exists( 'codexin_char_limit' ) ) {
 								                        echo apply_filters( 'the_content', codexin_char_limit( $desc_length, 'excerpt' ) );
-												    else:
-												    	echo '<p class="cx-error">'.esc_html__('Please Activate \'REVEAL\' Theme!', 'codexin').'</p>';
-								                    endif;
-							                    else:
+							                    	} else {
+												    	echo '<p class="cx-error">'.esc_html__( 'Please Activate \'REVEAL\' Theme!', 'codexin' ) .'</p>';
+							                    	}
+							                    } else {
 							                        the_excerpt();
-							                    endif;
+							                    }
 							                ?>
 							                </div>
-						                <?php echo ($layout == 'grid') ? '</div> <!-- end of events-description -->' : ''; ?>
-											<?php if( $read_more ): ?>
-								                <div class="<?php echo ( $layout == 'list' ) ? 'cx-btn reveal-color-0 reveal-primary-btn' : 'events-cx-btn reveal-color-0'; ?>">
-								                	<a <?php echo ($layout == 'list') ? 'class="cx-btn-text"' : ''; ?> href="<?php echo esc_url(get_the_permalink()); ?>"><?php echo esc_html( !empty( $readmore_txt ) ? $readmore_txt : __('Read More', 'codexin') ); ?></a>
+						                	<?php echo ( $layout == 'grid' ) ? '</div> <!-- end of events-description -->' : ''; ?>
+											<?php if( $read_more ) { ?>
+								                <div class="<?php echo ( $layout == 'list' ) ? esc_attr( 'cx-btn reveal-color-0 reveal-primary-btn' ) : esc_attr( 'events-cx-btn reveal-color-0' ); ?>">
+								                	<a <?php echo ( $layout == 'list' ) ? 'class="cx-btn-text"' : ''; ?> href="<?php echo esc_url( get_the_permalink() ); ?>"><?php echo esc_html( ! empty( $readmore_txt ) ? $readmore_txt : esc_html__('Read More', 'codexin') ); ?></a>
 								                </div>
-								            <?php endif; ?>
-							            <?php echo ($layout == 'list') ? '</div> <!-- end of desc-events -->' : ''; ?>
-									<?php echo ($layout == 'list') ? '</div> <!-- end of event-list-wrapper -->' : '' ?>
-						        </div> <!-- end of <?php echo ($layout == 'grid') ? 'events-item-content' : 'post-wrapper'; ?> -->
+								            <?php } ?>
+							            <?php echo ( $layout == 'list' ) ? '</div> <!-- end of desc-events -->' : ''; ?>
+									<?php echo ( $layout == 'list' ) ? '</div> <!-- end of event-list-wrapper -->' : '' ?>
+						        </div> <!-- end of <?php echo ( $layout == 'grid' ) ? 'events-item-content' : 'post-wrapper'; ?> -->
 						    </article> <!-- #event-## -->
 						    <?php 
-						    if( $layout == 'grid' ):
+						    if( $layout == 'grid' ) {
 			                    echo '</div><!-- end of events-single-wrap -->';
 
-			                    if( $i % $grid_col == 0 ):
+			                    if( $i % $grid_col == 0 ) {
 			                        echo '<div class="clearfix"></div>';
-			                    endif;
-			                endif;
+			                    }
+			                }
 
-						endwhile;
-						echo '</div><!-- end of events-archive-wrapper -->';
-					endif;
+						}
+						echo '</div> <!-- end of events-archive-wrapper -->';
+					}
 					wp_reset_postdata();
 					?>
 
 					<?php 
 					echo '<div class="clearfix"></div>';
 					echo ( $layout == 'grid' ) ? '<div class="col-xs-12">' : '' ;
-					if( $pagination_type == 'numbered' ):
-						if( function_exists( 'codexin_numbered_posts_nav' ) ):
+					if( $pagination_type == 'numbered' ) {
+						if( function_exists( 'codexin_numbered_posts_nav' ) ) {
 					        echo codexin_numbered_posts_nav( $data );
-					    else:
+						} else {
 					    	echo '<p class="cx-error">'.esc_html__( 'Please Activate \'REVEAL\' Theme!', 'codexin' ).'</p>';
-					    endif;
-					elseif( $pagination_type == 'button' ):
-				    	if( function_exists( 'codexin_posts_link' ) ):
+						}
+					} elseif( $pagination_type == 'button' ) {
+				    	if( function_exists( 'codexin_posts_link' ) ) {
 					        codexin_posts_link( 'Newer Events', 'Older Events', $data );
-					    else:
-					    	echo '<p class="cx-error">'.esc_html__('Please Activate \'REVEAL\' Theme!', 'codexin').'</p>';
-					    endif;
-					endif;
-				    echo ($layout == 'grid') ? '</div></div> <!-- end of row -->' : '';
+				    	} else {
+					    	echo '<p class="cx-error">'.esc_html__( 'Please Activate \'REVEAL\' Theme!', 'codexin' ).'</p>';
+				    	}
+					}
+				    echo ( $layout == 'grid' ) ? '</div></div> <!-- end of row -->' : '';
 					?>
-				</div> <!-- end of <?php echo ($layout == 'grid') ? 'events-grid-wrapper' : 'events-list-wrapper'; ?> -->
+				</div> <!-- end of <?php echo ( $layout == 'grid' ) ? 'events-grid-wrapper' : 'events-list-wrapper'; ?> -->
 			</div> <!-- end of events-content-wrapper -->
 		</div> <!-- end of cx-events-standard -->
-
-
-
 
 	<?php
 	$result .= ob_get_clean();
@@ -250,15 +251,15 @@ function cx_events_kc() {
 
 	$cx_events_categories = codexin_get_custom_categories('events-category');
 
-	if (function_exists('kc_add_map')) { 
+	if( function_exists( 'kc_add_map' ) ) { 
 		kc_add_map(
 			array(
-				'cx_events' => array(
-					'name' => esc_html__( 'Codexin Events', 'codexin' ),
-					'description' => esc_html__('Codexin Events', 'codexin'),
-					'icon' => 'et-hazardous',
-					'category' => 'Codexin',
-					'params' => array(
+				'cx_events' 		=> array(
+					'name' 			=> esc_html__( 'Codexin Events', 'codexin' ),
+					'description' 	=> esc_html__('Codexin Events', 'codexin'),
+					'icon' 			=> 'et-hazardous',
+					'category' 		=> 'Codexin',
+					'params' 		=> array(
 	    				// General Params
 						'general' => array(
 
@@ -268,10 +269,10 @@ function cx_events_kc() {
 	    						'label'			=> esc_html__( 'Select Layout', 'codexin' ),
 	    						'value'			=> 'list',
 	    						'options'		=> array(
-	    							'list' 		=> esc_html__('List View', 'codexin'),
-	    							'grid'	    => esc_html__('Grid View', 'codexin'),
+	    							'list' 		=> esc_html__( 'List View', 'codexin' ),
+	    							'grid'	    => esc_html__( 'Grid View', 'codexin' ),
 	    						),
-	    						'description'	=> esc_html__('Choose the Events View.', 'codexin'),
+	    						'description'	=> esc_html__( 'Choose the Events View.', 'codexin' ),
 	    						'admin_label' 	=> true,
 	    					),
 
@@ -281,20 +282,20 @@ function cx_events_kc() {
 	    						'label'			=> esc_html__( 'Number of Column', 'codexin' ),
 	    						'value'			=> '2',
 	    						'options'		=> array(
-	    							'2' 		=> esc_html__('2', 'codexin'),
-	    							'3'		    => esc_html__('3', 'codexin'),
-	    							'4'		    => esc_html__('4', 'codexin'),
+	    							'2' 		=> esc_html__( '2', 'codexin' ),
+	    							'3'		    => esc_html__( '3', 'codexin' ),
+	    							'4'		    => esc_html__( '4', 'codexin' ),
 	    						),
     							'relation'	=> array(
     								'parent' 	=> 'layout',
     								'show_when'	=> 'grid',
     							),
-	    						'description'	=> esc_html__('Choose the number of column to display Events.', 'codexin'),
+	    						'description'	=> esc_html__( 'Choose the number of column to display Events.', 'codexin' ),
 	    					),
 
 	    					array(
 	    						'name'        	=> 'chr_length',
-	    						'label'       	=> esc_html__('Enable Events Title and Excerpt Length? ', 'codexin'),
+	    						'label'       	=> esc_html__( 'Enable Events Title and Excerpt Length? ', 'codexin' ),
 	    						'type'        	=> 'toggle',
 	    						'value'			=> 'no',
 	    						'description'	=> esc_html__( 'Select to enable/disable events-title & excerpt length.', 'codexin' ),
@@ -309,7 +310,7 @@ function cx_events_kc() {
     								'parent' 	=> 'chr_length',
     								'show_when'	=> 'yes',
     							),
-	    						'description'	=> esc_html__('Specify number of Characters that you want to show in your title', 'codexin'),
+	    						'description'	=> esc_html__( 'Specify number of Characters that you want to show in your title', 'codexin' ),
 	    						'options'		=> array(
 	    							'min'			=> 10,
 	    							'max'			=> 150,
@@ -327,7 +328,7 @@ function cx_events_kc() {
     								'parent' 	=> 'chr_length',
     								'show_when'	=> 'yes',
     							),
-	    						'description'	=> esc_html__('Specify number of Characters that you want to show in your excerpt', 'codexin'),
+	    						'description'	=> esc_html__( 'Specify number of Characters that you want to show in your excerpt', 'codexin' ),
 	    						'options'		=> array(
 	    							'min'			=> 20,
 	    							'max'			=> 500,
@@ -338,7 +339,7 @@ function cx_events_kc() {
 
 	    					array(
 	    						'name'        	=> 'read_more',
-	    						'label'       	=> esc_html__('Enable Read More Button? ', 'codexin'),
+	    						'label'       	=> esc_html__( 'Enable Read More Button? ', 'codexin' ),
 	    						'type'        	=> 'toggle',
 	    						'value'			=> 'yes',
 	    						'description'	=> esc_html__( 'Select to enable/disable Read More button.', 'codexin' ),
@@ -362,10 +363,10 @@ function cx_events_kc() {
 	    						'label'			=> esc_html__( 'Pagination Type', 'codexin' ),
 	    						'value'			=> 'button',
 	    						'options'		=> array(
-	    							'button' 	=> esc_html__('Classic Next-Previous Button', 'codexin'),
-	    							'numbered'  => esc_html__('Numbered Pagination', 'codexin'),
+	    							'button' 	=> esc_html__( 'Classic Next-Previous Button', 'codexin' ),
+	    							'numbered'  => esc_html__( 'Numbered Pagination', 'codexin' ),
 	    						),
-	    						'description'	=> esc_html__('Choose the Pagination Type.', 'codexin'),
+	    						'description'	=> esc_html__( 'Choose the Pagination Type.', 'codexin' ),
 	    					),
 
 	    					array(
@@ -381,11 +382,11 @@ function cx_events_kc() {
 
 	    					array(
 	    						'name'        	=> 'order',
-	    						'label'       	=> esc_html__('Events Order', 'codexin'),
+	    						'label'       	=> esc_html__( 'Events Order', 'codexin' ),
 	    						'type'        	=> 'select',
 	    						'options'		=> array(
-    								'ASC'	=> esc_html__('Ascending', 'codexin'),
-    								'DESC'	=> esc_html__('Descending', 'codexin'),
+    								'ASC'	=> esc_html__( 'Ascending', 'codexin' ),
+    								'DESC'	=> esc_html__( 'Descending', 'codexin' ),
     							),
 	    						'value'			=> 'DESC',
 	    						'description'	=> esc_html__( 'Choose The Order to Display Events:', 'codexin' ),
@@ -393,12 +394,12 @@ function cx_events_kc() {
 
 	    					array(
 	    						'name'        	=> 'orderby',
-	    						'label'       	=> esc_html__('Events Sorting Method', 'codexin'),
+	    						'label'       	=> esc_html__( 'Events Sorting Method', 'codexin' ),
 	    						'type'        	=> 'select',
 	    						'options'		=> array(
-    								'meta_value'	 => esc_html__('Date', 'codexin'),
-    								'name'			 => esc_html__('Name', 'codexin'),
-    								'rand'			 => esc_html__('Randomize', 'codexin'),
+    								'meta_value'	 => esc_html__( 'Date', 'codexin' ),
+    								'name'			 => esc_html__( 'Name', 'codexin' ),
+    								'rand'			 => esc_html__( 'Randomize', 'codexin' ),
     							),
 	    						'value'			=> 'date',
 	    						'description'	=> esc_html__( 'Choose The Events Sorting Method', 'codexin' ),
@@ -411,10 +412,7 @@ function cx_events_kc() {
 	 							'options'		=> $cx_events_categories,
 	 							'description'	=> esc_html__( 'Choose if You Want to Show Any Specific Events Category/Categories, Control + Click to Select Multiple Categories to Filter (All Categories will be shown by Default)', 'codexin' ),
 	 						),
-
     					),
-
-
 	                ) //End params array
 	            ),  // End of cx_events array
 			) //end of  array 

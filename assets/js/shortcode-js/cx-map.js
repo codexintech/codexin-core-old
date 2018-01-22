@@ -9,25 +9,25 @@
 
             map = new GMaps({
                 el: '#gmap',
-                lat: codexin_lat,
-                lng: codexin_long,
-                scrollwheel: codexin_scroll,
-                zoom: codexin_m_zoom,
-                mapTypeControl: codexin_type,
-                zoomControl: codexin_zoom,
+                lat: cx_gmap_params.codexin_lat,
+                lng: cx_gmap_params.codexin_long,
+                scrollwheel: cx_gmap_params.codexin_scroll,
+                zoom: Number( cx_gmap_params.codexin_m_zoom ),
+                mapTypeControl: cx_gmap_params.codexin_type,
+                zoomControl: cx_gmap_params.codexin_zoom,
                 scaleControl: false,
-                streetViewControl: codexin_street_view,
+                streetViewControl: cx_gmap_params.codexin_street_view,
                 streetViewControlOptions: {
                     position: google.maps.ControlPosition.RIGHT_BOTTOM
                 },
-                fullscreenControl: codexin_fullscreen
+                fullscreenControl: cx_gmap_params.codexin_fullscreen
             });
 
             // var image = 'images/map-marker.png';
-            var image = codexin_marker;
+            var image = cx_gmap_params.codexin_marker;
             map.addMarker({
-                lat: codexin_lat,
-                lng: codexin_long,
+                lat: cx_gmap_params.codexin_lat,
+                lng: cx_gmap_params.codexin_long,
                 icon: image,
                 animation: google.maps.Animation.DROP,
                 verticalAlign: 'bottom',
@@ -35,10 +35,10 @@
                 backgroundColor: '#3e8bff',
             });
 
-            // var $color_scheme = codexin_map_color;
+            // var $color_scheme = cx_gmap_params.codexin_map_color;
 
 
-            if ( codexin_map_color == 'grey' ) {
+            if ( cx_gmap_params.codexin_map_color == 'grey' ) {
                 var styles = [ 
                 {
                     "elementType": "geometry",
@@ -83,28 +83,28 @@
             } 
 
 
-            else if ( codexin_map_color == 'original' ) {
+            else if ( cx_gmap_params.codexin_map_color == 'original' ) {
                 var styles = [
 
                   ];
             } 
 
-            else if ( codexin_map_color == 'custom' ) {
+            else if ( cx_gmap_params.codexin_map_color == 'custom' ) {
                 var styles = [ 
                 {
                     "featureType": "road",
                     "stylers": [
-                    { "color": codexin_road }
+                    { "color": cx_gmap_params.codexin_road }
                     ]
                 },{
                     "featureType": "water",
                     "stylers": [
-                    { "color": codexin_water }
+                    { "color": cx_gmap_params.codexin_water }
                     ]
                 },{
                     "featureType": "landscape",
                     "stylers": [
-                    { "color": codexin_land }
+                    { "color": cx_gmap_params.codexin_land }
                     ]
                 },{
                     "elementType": "labels.text.fill",
@@ -114,21 +114,21 @@
                 },{
                     "featureType": "poi",
                     "stylers": [
-                    { "color": codexin_poi }
+                    { "color": cx_gmap_params.codexin_poi }
                     ]
                 },{
                     "elementType": "labels.text",
                     "stylers": [
                     { "saturation": 1 },
                     { "weight": 0.1 },
-                    { "color": codexin_label }
+                    { "color": cx_gmap_params.codexin_label }
                     ]
                 }
 
                 ];
             } 
 
-            else if ( codexin_map_color == 'retro' ) {
+            else if ( cx_gmap_params.codexin_map_color == 'retro' ) {
                 var styles = [
                   {
                     "elementType": "geometry",
@@ -346,7 +346,7 @@
                 ]
             }
 
-            else if ( codexin_map_color == 'dark' ) {
+            else if ( cx_gmap_params.codexin_map_color == 'dark' ) {
                 var styles = [
                   {
                     "elementType": "geometry",
@@ -535,7 +535,7 @@
                 ]
             }
 
-            else if ( codexin_map_color == 'bw' ) {
+            else if ( cx_gmap_params.codexin_map_color == 'bw' ) {
                 var styles = [
                     {
                         "featureType": "road",
@@ -653,7 +653,7 @@
                 ]
             }
 
-            else if ( codexin_map_color == 'light' ) {
+            else if ( cx_gmap_params.codexin_map_color == 'light' ) {
                 var styles = [
                     {
                         "featureType": "water",
@@ -832,7 +832,7 @@
                 ]
             }
 
-            else if ( codexin_map_color == 'DarkTurquoise' ) {
+            else if ( cx_gmap_params.codexin_map_color == 'DarkTurquoise' ) {
               var styles = [
                     {
                       "featureType": "road",

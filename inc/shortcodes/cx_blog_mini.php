@@ -680,7 +680,7 @@ function cx_blog_mini_kc() {
  									array(
  										"screens" => "any,1199,991,767,479",
 
- 										'Title' => array(
+ 										esc_html__( 'Title', 'codexin' ) => array(
  											array( 'property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.blog-title a'),
  											array( 'property' => 'color', 'label' => esc_html__('Color on Hover', 'codexin'), 'selector' => '.blog-title a:hover'),
  											array( 'property' => 'font-family', 'label' => esc_html__('Font family', 'codexin'), 'selector' => '.blog-title'),
@@ -693,14 +693,14 @@ function cx_blog_mini_kc() {
  											array( 'property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.blog-title')
 										),
 
- 										'Date' => array(
+ 										esc_html__( 'Date', 'codexin' ) => array(
  											array( 'property' => 'color', 'label' => esc_html__('Date Color', 'codexin'), 'selector' => 'div.meta a, .date-time'),
  											array( 'property' => 'background-color', 'label' => esc_html__('Date Background', 'codexin'), 'selector' => 'div.meta a, .date-time'),
  											array( 'property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => 'div.meta a, .date-time'),
  											array( 'property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => 'div.meta a, .date-time')
 										),
 
- 										'Icon' => array(
+ 										esc_html__( 'Icon', 'codexin' ) => array(
  											array( 'property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.blog-info i, ul.meta i, ul.meta .cx-icon'),
  											array( 'property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.blog-info i, ul.meta i, ul.meta .cx-icon'),
 
@@ -710,11 +710,11 @@ function cx_blog_mini_kc() {
  											array( 'property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.blog-info i, ul.meta i, ul.meta .cx-icon')
 										),
 
-										'Image Hover' => array(
+										esc_html__( 'Image Hover', 'codexin' ) => array(
  											array( 'property' => 'background', 'label' => esc_html__('Image Hover Color', 'codexin'), 'selector' => '.img-wrapper::before, .img-wrapper::after, .blog-wrapper-left .img-thumb a:before, .blog-wrapper::after, .blog-wrapper-right .thumbnail-link:before, .blog-wrapper .img-thumb:before' )
 										),
 
- 										'Description' => array(
+ 										esc_html__( 'Description', 'codexin' ) => array(
  											array( 'property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.blog-content .blog-desc, .blog-content .blog-category a, .blog-content .meta li, .blog-content .meta li a, .cx-count'),
  											array( 'property' => 'font-family', 'label' => esc_html__('Font family', 'codexin'), 'selector' => '.blog-content .blog-desc'),
  											array( 'property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.blog-content .blog-desc'),
@@ -726,7 +726,7 @@ function cx_blog_mini_kc() {
  											array( 'property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.blog-content .blog-desc')
 										),
 
- 										'Category' => array(
+ 										esc_html__( 'Category', 'codexin' ) => array(
  											array( 'property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.blog-category a'),
  											array( 'property' => 'color', 'label' => esc_html__('Color on Hover', 'codexin'), 'selector' => '.blog-category a:hover'),
  											array( 'property' => 'background-color', 'label' => esc_html__('Background Color', 'codexin'), 'selector' => '.blog-category a'),
@@ -743,7 +743,7 @@ function cx_blog_mini_kc() {
  											array( 'property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.blog-category a')
 										),
 
- 										'Button' => array(
+ 										esc_html__( 'Button', 'codexin' ) => array(
  											array( 'property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.blog-content .read-more, .img-thumb .cx-blog-btn, .blog-footer .cx-blog-btn'),
  											array( 'property' => 'background-color', 'label' => esc_html__('Background Color', 'codexin'), 'selector' => '.blog-content .read-more, .img-thumb .cx-blog-btn, .blog-footer .cx-blog-btn'),
  											array( 'property' => 'color', 'label' => esc_html__('Hover Color', 'codexin'), 'selector' => '.blog-content .read-more:hover, .img-thumb .cx-blog-btn:hover, .blog-footer .cx-blog-btn:hover'),
@@ -761,7 +761,7 @@ function cx_blog_mini_kc() {
  											array( 'property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.blog-content .read-more, .img-thumb .cx-blog-btn, .blog-footer .cx-blog-btn')
 										),
 
-										'Content Box' => array(
+										esc_html__( 'Content Box', 'codexin' ) => array(
  											array( 'property' => 'background-color', 'label' => esc_html__('Background', 'codexin'), 'selector' => '.blog-content, .blog-wrapper-left, .blog-wrapper-right li.cx-border-1, .blog-wrapper' ),
  											array( 'property' => 'border', 'label' => esc_html__('Border', 'codexin'), 'selector' => '.blog-content, .blog-wrapper-left, .blog-wrapper-right li.cx-border-1, .blog-wrapper' ),
  											array( 'property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.blog-content, .blog-wrapper-left, .blog-wrapper-right li.cx-border-1, .blog-wrapper' ),

@@ -248,7 +248,7 @@ function cx_call_to_action_kc() {
 	    							array(
 	    								"screens" => "any,1199,991,767,479",
 
-	    								'Title' => array(
+	    								esc_html__( 'Title', 'codexin' ) => array(
 	    									array( 'property' => 'color', 'label' => esc_html__( 'Color', 'codexin'), 'selector' => '.cta-title'),
 	    									array( 'property' => 'font-family', 'label' => esc_html__( 'Font Family', 'codexin'), 'selector' => '.cta-title'),
 	    									array( 'property' => 'font-size', 'label' => esc_html__( 'Font Size', 'codexin'), 'selector' => '.cta-title'),
@@ -260,7 +260,7 @@ function cx_call_to_action_kc() {
 	    									array( 'property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin'), 'selector' => '.cta-title'),
     									),
 
-    									'Content' => array(
+    									esc_html__( 'Content', 'codexin' ) => array(
 	    									array( 'property' => 'color', 'label' => esc_html__( 'Color', 'codexin'), 'selector' => '.cta-details p, .cx-content p'),
 	    									array( 'property' => 'color', 'label' => esc_html__( 'Content Link Color (If any)', 'codexin'), 'selector' => '.cta-details p a, .cx-content p a'),
 	    									array( 'property' => 'color', 'label' => esc_html__( 'Content Link Color on Hover (If any)', 'codexin'), 'selector' => '.cta-details p a:hover, .cx-content p a:hover'),
@@ -274,7 +274,7 @@ function cx_call_to_action_kc() {
 	    									array( 'property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin'), 'selector' => '.cta-details p, .cx-content p'),
     									),
 
-	    								'Icon' => array(
+	    								esc_html__( 'Icon', 'codexin' ) => array(
 	    									array( 'property' => 'color', 'label' => esc_html__( 'Icon Color', 'codexin'), 'selector' => '.cta-content i'),
 	    									array( 'property' => 'font-size', 'label' => esc_html__( 'Icon Font Size', 'codexin'), 'selector' => '.cta-content i'),
 	    									array( 'property' => 'font-weight', 'label' => esc_html__( 'Icon Font Size', 'codexin'), 'selector' => '.cta-content i'),
@@ -284,7 +284,7 @@ function cx_call_to_action_kc() {
 
     									),
 
-	    								'Button' => array(
+	    								esc_html__( 'Button', 'codexin' ) => array(
 	    									array( 'property' => 'color', 'label' => esc_html__( 'Color', 'codexin'), 'selector' => '.cx-cta-btn a'),
 	    									array( 'property' => 'color', 'label' => esc_html__( 'Color On Hover', 'codexin'), 'selector' => '.cx-cta-btn a:hover'),
 	    									array( 'property' => 'background', 'label' => esc_html__( 'Background Color', 'codexin'), 'selector' => '.cx-cta-btn a'),
@@ -301,7 +301,7 @@ function cx_call_to_action_kc() {
 	    									array( 'property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin'), 'selector' => '.cx-cta-btn a')
     									),
 
-	    								'Content Wrapper' => array(
+	    								esc_html__( 'Content Wrapper', 'codexin' ) => array(
 	    									array( 'property' => 'background-color', 'label' => esc_html__( 'Background', 'codexin'), 'selector' => '.cta-content'),
 	    									array( 'property' => 'width', 'label' => esc_html__( 'Width', 'codexin'), 'selector' => '.cta-content'),
 	    									array( 'property' => 'height', 'label' => esc_html__( 'Height', 'codexin'), 'selector' => '.cta-content'),
@@ -310,7 +310,7 @@ function cx_call_to_action_kc() {
 	    									array( 'property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin'), 'selector' => '.cta-content'),
     									),
 
-	    								'Box'	=> array(
+	    								esc_html__( 'Box', 'codexin' ) => array(
 	    									array( 'property' => 'background'),
 	    									array( 'property' => 'border', 'label' => esc_html__( 'Border', 'codexin') ),
 	    									array( 'property' => 'height', 'label' => esc_html__( 'Height', 'codexin') ),

@@ -1,15 +1,17 @@
 <?php
 
+/**
+ * Shortcode -  Map
+ *
+ * @since 1.0
+ */
 
-/*
-    ======================================
-        CODEXIN MAP SHORTCODE
-    ======================================
-*/
+// Do not allow directly accessing this file.
+defined( 'ABSPATH' ) OR die( esc_html__( 'This script cannot be accessed directly.', 'codexin' ) );
 
 // Registering Map Shortcode
 function cx_map_shortcode( $atts, $content = null ) {
-	extract(shortcode_atts(array(
+	extract( shortcode_atts( array(
 			'img_alt'		 	=> '',
 			'gmap_color' 	 	=> '',
 			'gmap_latitude'  	=> '',
@@ -27,81 +29,85 @@ function cx_map_shortcode( $atts, $content = null ) {
 			'landscape_color'	=> '',
 			'poi_color'			=> '',
 			'label_text_color'	=> '',
-	), $atts));
+	), $atts ) );
 
 	// Retrieving the image url
-	$ret_full_img_url = codexin_retrieve_img_src( $gmap_marker, '' );
+	$ret_full_img_url 	= codexin_retrieve_img_src( $gmap_marker, '' );
 
 	// Assigning a master css class and hooking into KC
-	$master_class = apply_filters( 'kc-el-class', $atts );
-	$master_class[] = 'map-wrapper';
+	$master_class 		= apply_filters( 'kc-el-class', $atts );
+	$master_class[] 	= 'map-wrapper';
 
 	$result = '';
 
 	ob_start(); 
 
-	// Passing values to javascript
-	if( $map_advanced ):
+	// Building variables to pass values to javascript
+	// $gmap_color 		= ( $map_advanced ) ? 'custom' : '';
+	if( $map_advanced ) {
 		$gmap_color = 'custom';
-	endif;
-	(!empty( $gmap_color )) ? $map_color = $gmap_color : '';
-	(!empty( $gmap_latitude )) ? $lat = $gmap_latitude : '';
-	(!empty( $gmap_longitude )) ? $long = $gmap_longitude : '';
-	(!empty( $ret_full_img_url )) ? $gmap_marker = $ret_full_img_url : '';
-	(!empty( $gmap_zoom_level )) ? $c_zoom = $gmap_zoom_level : '';
-	(!empty( $map_scroll )) ? $gmap_scroll = true : $gmap_scroll = false;
-	(!empty( $map_type )) ? $gmap_type = true : $gmap_type = false;
-	(!empty( $map_zoom )) ? $gmap_zoom = true : $gmap_zoom = false;
-	(!empty( $map_street_view )) ? $gmap_street_view = true : $gmap_street_view = false;
-	(!empty( $map_fullscreen )) ? $gmap_fullscreen = true : $gmap_fullscreen = false;
+	}
 
-	(!empty( $road_color )) ? $gmap_road = $road_color : '';
-	(!empty( $water_color )) ? $gmap_water = $water_color : '';
-	(!empty( $landscape_color )) ? $gmap_land = $landscape_color : '';
-	(!empty( $poi_color )) ? $gmap_poi = $poi_color : '';
-	(!empty( $label_text_color )) ? $gmap_label = $label_text_color : '';
+	$map_color 			= ( ! empty( $gmap_color ) ) ? $gmap_color : '';
+	$lat 				= ( ! empty( $gmap_latitude ) ) ? $gmap_latitude : '';
+	$long 				= ( ! empty( $gmap_longitude ) ) ? $gmap_longitude : '';
+	$gmap_marker 		= ( ! empty( $ret_full_img_url ) ) ? $ret_full_img_url : '';
+	$c_zoom 			= ( ! empty( $gmap_zoom_level ) ) ? $gmap_zoom_level : '';
+	$gmap_scroll 		= ( $map_scroll ) ? true : false;
+	$gmap_type 			= ( $map_type ) ? true : false;
+	$gmap_zoom 			= ( $map_zoom ) ? true : false;
+	$gmap_street_view 	= ( $map_street_view ) ? true : false;
+	$gmap_fullscreen 	= ( $map_fullscreen ) ? true : false;
 
-	$codeopt = '';
-	$codeopt .= '
-	<script type="text/javascript">
-		var codexin_lat = "'. $lat .'"; 
-		var codexin_long = "'. $long .'"; 
-		var codexin_marker = "'. $gmap_marker .'"; 
-		var codexin_m_zoom = Number ("'. $c_zoom .'"); 
-		var codexin_map_color =  "'. $map_color . '";
-		var codexin_scroll =  "'. $gmap_scroll . '";
-		var codexin_type =  "'. $gmap_type . '";
-		var codexin_zoom =  "'. $gmap_zoom . '";
-		var codexin_street_view =  "'. $gmap_street_view . '";
-		var codexin_fullscreen =  "'. $gmap_fullscreen . '";
-	</script>';
+	$gmap_road 			= ( ! empty( $road_color ) ) ? $road_color : '';
+	$gmap_water			= ( ! empty( $water_color ) ) ? $water_color : '';
+	$gmap_land			= ( ! empty( $landscape_color ) ) ? $landscape_color : '';
+	$gmap_poi			= ( ! empty( $poi_color ) ) ? $poi_color : '';
+	$gmap_label			= ( ! empty( $label_text_color ) ) ? $label_text_color : '';
 
-	if( $map_advanced ):
-	$codeopt .= '
-	<script type="text/javascript">
-		var codexin_road =  "'. $road_color . '";
-		var codexin_water =  "'. $water_color . '";
-		var codexin_land =  "'. $landscape_color . '";
-		var codexin_poi =  "'. $poi_color . '";
-		var codexin_label =  "'. $label_text_color . '";
-	</script>';
-	endif;
-	echo $codeopt; ?>
+	// Registering and enqueueing some scripts and passing the values to Javascript
+	wp_register_script( 'cx-map-js', CODEXIN_CORE_JS_DIR . '/cx-map.js', array ( 'jquery', 'google-js', 'gmap-js' ), 1.0, true );
+    $map_localize_array = array(
+        'codexin_lat' 			=> $lat,
+        'codexin_long' 			=> $long,
+        'codexin_marker' 		=> $gmap_marker,
+        'codexin_m_zoom'		=> $c_zoom,
+        'codexin_map_color'		=> $map_color,
+        'codexin_scroll'		=> $gmap_scroll,
+        'codexin_type' 			=> $gmap_type,
+        'codexin_zoom' 			=> $gmap_zoom,
+        'codexin_street_view' 	=> $gmap_street_view,
+        'codexin_fullscreen' 	=> $gmap_fullscreen,
+    );
+	
+	if( $map_advanced ) {
+		$map_localize_custom = array(
+			'codexin_road' 		=> $road_color,
+			'codexin_water'		=> $water_color,
+			'codexin_land'		=> $landscape_color,
+			'codexin_poi'		=> $poi_color,
+			'codexin_label'		=> $label_text_color,
+		);
 
-	<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
-		<div class="gmap-wrap">
-			<div id="gmap"></div>	 			
-		</div>
-	</div><!--end of map-wrapper -->
+		$map_localize_array = array_merge( $map_localize_array, $map_localize_custom );
+	}
+	
+    wp_localize_script( 'cx-map-js', 'cx_gmap_params', $map_localize_array );
+    wp_enqueue_script( 'cx-map-js' );
+
+	echo '<div class="'.esc_attr( implode( ' ', $master_class ) ) .'">';
+		echo '<div class="gmap-wrap">';
+			echo '<div id="gmap"></div>';
+		echo '</div>';
+	echo '</div> <!--end of map-wrapper -->';
 			
-	<?php
 	$result .= ob_get_clean();
 	return $result;
 
 } //End cx_map
 
 // Registering new param type to show info
-add_action('init', 'info_param', 99 );
+add_action( 'init', 'info_param', 99 );
 function info_param() {
 	if ( isset( $GLOBALS['kc'] ) ) {
 	    global $kc;
@@ -109,36 +115,35 @@ function info_param() {
 	}
 }		
 function cx_info_cb() {
-	echo '<p>'. esc_html__('Please Fill Up The Google Map API Information In The "Google Map API" Section of ', 'codexin') .'<strong><a href="'. esc_url(admin_url().'admin.php?page=codexin-options&action=api') .'" target="_blank">'. esc_html('Codexin Core', 'codexin') .'</a></strong> if not filled yet.</p>';
+	echo sprintf( '<p>%1$s <strong><a href="'. esc_url( admin_url().'admin.php?page=codexin-options&action=api' ) .'" target="_blank">%2$s</a></strong> %3$s.</p>', esc_html__( 'Please Fill Up The Google Map API Information In The "Google Map API" Section of', 'codexin' ), esc_html__( 'Codexin Core', 'codexin' ), esc_html__( 'if not filled up yet', 'codexin' ) );
 }
 
 
 // Integrating Shortcode with King Composer
 function cx_map_kc() {
 
- 	if (function_exists('kc_add_map')) { 
+ 	if( function_exists( 'kc_add_map' ) ) { 
 
-	 	$get_api = get_option( 'codexin_options_gmap_api' )[ 'gmap_api' ];
-		$cx_api = ( !empty( $get_api ) ) ? $get_api : '';
+	 	$get_api 	= get_option( 'codexin_options_gmap_api' )[ 'gmap_api' ];
+		$cx_api 	= ( ! empty( $get_api ) ) ? $get_api : '';
 
  		kc_add_map(
  			array(
  				'cx_map' => array(
- 					'name' => esc_html__( 'Codexin Google Map', 'codexin' ),
- 					'description' => esc_html__('Codexin Google Map', 'codexin'),
- 					'icon' => 'et-hazardous',
- 					'category' => 'Codexin',
+ 					'name' 			=> esc_html__( 'Codexin Google Map', 'codexin' ),
+ 					'description' 	=> esc_html__('Codexin Google Map', 'codexin'),
+ 					'icon' 			=> 'et-hazardous',
+ 					'category' 		=> 'Codexin',
 	                //Only load assets when using this element
- 					'assets' => array(
- 						'scripts' => array(
+ 					'assets' 		=> array(
+ 						'scripts' 	=> array(
  							'google-js' => 'https://maps.googleapis.com/maps/api/js?key=' . $cx_api,
- 							'gmap-js'		=> CODEXIN_CORE_ASSET_DIR . '/js/gmaps.js',
- 							'cx-map-js'		=> CODEXIN_CORE_ASSET_DIR . '/js/shortcode-js/cx_map.js',
+ 							'gmap-js'	=> CODEXIN_CORE_ASSET_DIR . '/js/gmaps.js',
 						),
 
 					), //End assets
 
- 					'params' => array(
+ 					'params' 		=> array(
  						//General params
 	    				'general' 	=> array(
 	 						array(
@@ -151,14 +156,14 @@ function cx_map_kc() {
 	 							'label' 		=> esc_html__( 'Choose Default Color Scheme', 'codexin' ),
 	 							'type' 			=> 'select',
 	 							'options'		=> array(
-	 									'original' 		=> 'Original',
-										'grey' 			=> 'Grey',
-										'retro' 		=> 'Retro',
-										'dark'			=> 'Dark',
-										'bw' 			=> 'Black & White',
-										'light' 		=> 'Light',
-										'blue' 			=> 'Blue',
-										'DarkTurquoise' => 'Dark Turquoise',
+	 									'original' 		=> esc_html__( 'Original', 'codexin' ),
+										'grey' 			=> esc_html__( 'Grey', 'codexin' ),
+										'retro' 		=> esc_html__( 'Retro', 'codexin' ),
+										'dark'			=> esc_html__( 'Dark', 'codexin' ),
+										'bw' 			=> esc_html__( 'Black & White', 'codexin' ),
+										'light' 		=> esc_html__( 'Light', 'codexin' ),
+										'blue' 			=> esc_html__( 'Blue', 'codexin' ),
+										'DarkTurquoise' => esc_html__( 'Dark Turquoise', 'codexin' ),
 								),
 	 							'value'			=> 'default',
 	 							'description'	=> esc_html__( 'You can select the map color here. Please note that if you enable "Advanced Map Color Customization" in the advanced tab, default color scheme will not work.', 'codexin' ),
@@ -169,7 +174,7 @@ function cx_map_kc() {
 	 							'name' 			=> 'gmap_latitude',
 	 							'label' 		=> esc_html__( 'Map Latitude', 'codexin' ),
 	 							'type' 			=> 'text',
-	 							'description'	=> sprintf(__('You can find the <strong>Latitude</strong> and <strong>Longitude</strong> information by placing your address <a href="%s" target="_blank">by placing your address Here</a>', 'codexin'), esc_url('//latlong.net/')),
+	 							'description'	=> sprintf( __( 'You can find the <strong>Latitude</strong> and <strong>Longitude</strong> information by placing your address <a href="%s" target="_blank">by placing your address Here</a>', 'codexin' ), esc_url( '//latlong.net/' ) ),
 	 						),
 
 	 						array(
@@ -182,12 +187,12 @@ function cx_map_kc() {
 	 						array(
 	 							'name' 			=> 'gmap_zoom_level',
 	 							'label' 		=> esc_html__( 'Map Zoom Level', 'codexin' ),
-	 							'type' 			=> 'number_slider',  // USAGE RADIO TYPE
-								'options' 		=> array(    // REQUIRED
-										'min' 		=> 1,
-										'max' 		=> 20,
-										'unit' 		=> '',
-										'show_input'=> true
+	 							'type' 			=> 'number_slider',
+								'options' 		=> array(
+									'min' 		=> 1,
+									'max' 		=> 20,
+									'unit' 		=> '',
+									'show_input'=> true
 								),
 								'value'			=> 16,						
 	 							'description'	=> esc_html__( 'Enter Map Zoom Level Here', 'codexin' ),
@@ -243,7 +248,7 @@ function cx_map_kc() {
 	 							'label' 		=> esc_html__( 'Advanced Map Color Customization?', 'codexin' ),
 	 							'type' 			=> 'toggle',
 	 							'description'	=> esc_html__( 'Do you want to enable advanced map customization?) Warning: Enabling this will override default color scheme.', 'codexin' ),
-	 							'description'	=> sprintf(__('Do you want to enable advanced map customization? <strong style="color:#d9534f">%s</strong>', 'codexin'), esc_html('Warning: Enabling this will override the existing color scheme setup.')),
+	 							'description'	=> sprintf( __( 'Do you want to enable advanced map customization? <strong style="color:#d9534f">%s</strong>', 'codexin' ), esc_html('Warning: Enabling this will override the existing color scheme setup.' ) ),
 								'admin_label' 	=> true,
 	 						),
 	 						array(
@@ -307,20 +312,18 @@ function cx_map_kc() {
 	    							array(
 	    								"screens" => "any,1199,991,767,479",
 
-	    								'Box'	=> array(
-	    									array('property' => 'width', 'label' => esc_html__('Width', 'codexin'), 'selector' => '#gmap'),
-	    									array('property' => 'height', 'label' => esc_html__('Height', 'codexin'), 'selector' => '#gmap'),
-	    									array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '#gmap'),
-	    									array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '#gmap'),
+	    								esc_html__( 'Box', 'codexin' )	=> array(
+	    									array( 'property' => 'width', 'label' => esc_html__( 'Width', 'codexin' ), 'selector' => '#gmap' ),
+	    									array( 'property' => 'height', 'label' => esc_html__( 'Height', 'codexin' ), 'selector' => '#gmap' ),
+	    									array( 'property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin' ), 'selector' => '#gmap' ),
+	    									array( 'property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin' ), 'selector' => '#gmap' ),
     									)
     								)
     							)
     						)
     					), // end of styling
-
-
-            ) //End params array()..
-        ),  // End of elemnt cx_blog....
+		            ) //End params array()..
+		        ),  // End of elemnt cx_blog....
 			) //end of  array 
 		);  //end of kc_add_map
 	} //End if

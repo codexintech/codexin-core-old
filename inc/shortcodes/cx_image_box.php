@@ -1,15 +1,17 @@
 <?php
 
+/**
+ * Shortcode -  Image Box
+ *
+ * @since 1.0
+ */
 
-/*
-    ======================================
-        CODEXIN IMAGE BOX SHORTCODE
-    ======================================
-*/
+// Do not allow directly accessing this file.
+defined( 'ABSPATH' ) OR die( esc_html__( 'This script cannot be accessed directly.', 'codexin' ) );
 
 // Registering Image Box Shortcode
-function cx_image_box_shortcode(  $atts, $content = null) {
-   extract(shortcode_atts(array(
+function cx_image_box_shortcode( $atts, $content = null ) {
+   extract( shortcode_atts( array(
    			'image'	 			=> '',
    			'img_alt'		 	=> '',
    			'hover'  			=> '',
@@ -19,7 +21,7 @@ function cx_image_box_shortcode(  $atts, $content = null) {
    			'href'		  		=> '',
    			'img_action'  		=> '',
    			'class'				=> ''
-	), $atts));
+	), $atts ) );
 
 	$result = '';
 
@@ -36,99 +38,58 @@ function cx_image_box_shortcode(  $atts, $content = null) {
 
 	// Retrieving user define classes
 	$classes 			= array( 'img-thumb' );
-	(!empty($class)) ? $classes[] = $class : '';
+	( ! empty( $class ) ) ? $classes[] = $class : '';
 
-	$title 				= ( $retrieve_link[1] ) ? 'title="'. esc_attr( $retrieve_link[1] ).'"':'';
-	$target 			= ( $retrieve_link[2] ) ? 'target="'. esc_attr( $retrieve_link[2] ).'"':'';
+	$title 				= ( $retrieve_link[1] ) ? 'title="'. esc_attr( $retrieve_link[1] ) .'"':'';
+	$target 			= ( $retrieve_link[2] ) ? 'target="'. esc_attr( $retrieve_link[2] ) .'"':'';
 
-	if(!empty($image)):
+	// Retrieving image dimensions
+	if( ! empty( $image ) ) {
 		$image_size 	= getimagesize( $ret_full_img_url );
 		$data_size 		= $image_size['0'] . 'x' . $image_size['1'];
-	endif;
+	}
 
-   	ob_start(); ?>
+   	ob_start();
 
-		<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
-			<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
-			<?php 
-				if(empty($image)): 
-				echo '<p class="cx-error">'.esc_html__('Please Upload Your Image', 'reveal').'</p>'; 
-				else: ?>
-					<?php if ( $img_action == 'open_custom_link' ): ?>
-						<a href="<?php echo esc_url($retrieve_link[0]); ?>" <?php echo $title; ?> <?php echo $target; ?>>
-					<?php elseif ( $img_action == 'img_pop' ): ?>
-							<!-- <a href="<?php //echo $ret_full_img_url; ?>" class="event-image-popup"> -->
-			            <div class="image-pop-up item-img-wrap" itemscope itemtype="http://schema.org/ImageGallery">
-			                <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-			                    <a href="<?php echo esc_url( $ret_full_img_url ); ?>" itemprop="contentUrl" data-size="<?php echo esc_attr( $data_size ); ?>">
-					<?php else: ?>
-						<div class="content-wrapper">
-					<?php endif; ?>
-									<img src="<?php echo esc_url( $retrive_img_url ); ?>" alt="<?php echo esc_html( $img_alt ); ?>" itemprop="image" />
-									<div class="single-content-wrapper">
-										<div class="single-content">
+		echo '<div class="'. esc_attr( implode( ' ', $master_class ) ) .'">';
+			echo '<div class="'. esc_attr( implode( ' ', $classes ) ) .'">';
 
-											<?php if( $icon_toggle ): ?>
-											<i class="<?php echo esc_attr( $hover_icon ); ?>"></i>
-											<?php endif; ?>
-											
-											<p class="h3"><?php echo esc_html( $hover ); ?></p>
-										</div>
-									</div>
-					<?php if ( $img_action == 'open_custom_link' ): ?>
-						</a>
-					<?php elseif( $img_action == 'img_pop' ): ?>
-			                    </a>
-			                    <figcaption itemprop="caption description"><?php echo esc_html( $img_alt ); ?></figcaption>
-			                </figure>
-			            </div><!-- end of image-pop-up -->
-					<?php else: ?>
-						</div><!-- end of content-wrapper -->
-					<?php endif; ?>
-			<?php endif; ?>
-			</div><!-- end of img-thumb -->
-		</div><!-- end of cx-image-box -->
+				if( empty( $image ) ) {
+				echo '<p class="cx-error">'. esc_html__( 'Please Upload Your Image', 'reveal' ).'</p>'; 
+				} else {
+					if ( $img_action == 'open_custom_link' ) {
+						echo '<a href="'. esc_url( $retrieve_link[0] ) .'" '. $title.' '.$target.'>';
+					} elseif ( $img_action == 'img_pop' ) {
+						echo '<div class="image-pop-up item-img-wrap" itemscope itemtype="http://schema.org/ImageGallery">';
+							echo '<figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">';
+								echo '<a href="'. esc_url( $ret_full_img_url ) .'" itemprop="contentUrl" data-size="'. esc_attr( $data_size ) .'">';
+					} else {
+						echo '<div class="content-wrapper">';
+					}
 
+					echo '<img src="'. esc_url( $retrive_img_url ) .'" alt="'. esc_html( $img_alt ) .'" itemprop="image" />';
+					echo '<div class="single-content-wrapper">';
+						echo '<div class="single-content">';
+							echo ( $icon_toggle ) ? '<i class="'. esc_attr( $hover_icon ) .'"></i>' : '';
+							echo '<p class="h3">'. esc_html( $hover ) .'</p>';
+						echo '</div>';
+					echo '</div>';
 
-<!-- Initializing Photoswipe -->
-<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="pswp__bg"></div>
-    <div class="pswp__scroll-wrap">
-        <div class="pswp__container">
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-        </div>
-        <div class="pswp__ui pswp__ui--hidden">
-            <div class="pswp__top-bar">
-                <div class="pswp__counter"></div>
-                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-                <button class="pswp__button pswp__button--share" title="Share"></button>
-                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-                <div class="pswp__preloader">
-                    <div class="pswp__preloader__icn">
-                        <div class="pswp__preloader__cut">
-                            <div class="pswp__preloader__donut"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-                <div class="pswp__share-tooltip"></div>
-            </div>
-            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
-            </button>
-            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
-            </button>
-            <div class="pswp__caption">
-                <div class="pswp__caption__center"></div>
-            </div>
-        </div>
-    </div>
-</div><!-- end of pswp -->
+					if ( $img_action == 'open_custom_link' ) {
+						echo '</a>';
+					} elseif ( $img_action == 'img_pop' ) {
+								echo '</a>';
+								echo '<figcaption itemprop="caption description">'. esc_html( $img_alt ) .'</figcaption>';
+							echo '</figure>';
+						echo '</div><!-- end of image-pop-up -->';
+					} else {
+						echo '</div><!-- end of content-wrapper -->';
+					}
+				}
 
-	<?php
+			echo '</div><!-- end of img-thumb -->';
+		echo '</div><!-- end of cx-image-box -->';
+
 	$result .= ob_get_clean();
 	return $result;
 
@@ -145,14 +106,14 @@ function cx_image_box_kc() {
 	    			'icon' 			=> 'kc-icon-feature-box',
 	    			'category' 		=> 'Codexin',
                 	//Only load assets when using this element
-					'assets' => array(
-						'scripts' => array(
+					'assets' 		=> array(
+						'scripts' 	=> array(
 							'photswipe-script' => CODEXIN_CORE_ASSET_DIR . '/js/photoswipe.min.js',
 							'photswipe-main-script' => CODEXIN_CORE_ASSET_DIR . '/js/photoswipe-main.js',
 						),
-		                'styles' => array(
-		            	    'photoswipe-stylesheet' => CODEXIN_CORE_ASSET_DIR . '/css/photoswipe.css',
-		                )
+		                // 'styles' 	=> array(
+		            	   //  'photoswipe-stylesheet' => CODEXIN_CORE_ASSET_DIR . '/css/photoswipe.css',
+		                // )
                 	), //End assets
 
 	    			'params' 		=> array(
@@ -160,7 +121,7 @@ function cx_image_box_kc() {
 	    				'general' 	=> array(
 	    					array(
 	    						'name'        	=> 'image',
-	    						'label'       	=> esc_html__(' Upload Image', 'codexin'),
+	    						'label'       	=> esc_html__( 'Upload Image', 'codexin' ),
 	    						'type'        	=> 'attach_image',
 	    						'admin_label' 	=> true,
     						),
@@ -199,29 +160,29 @@ function cx_image_box_kc() {
 	    						'label'   		=> esc_html__(' On click event', 'codexin'),
 	    						'type'    		=> 'select',
 	    						'options' 		=> array(
-	    							''                 => esc_html__(' None', 'codexin'),
-	    							'img_pop'          => esc_html__(' Open Image In Lightbox', 'codexin'),
-	    							'open_custom_link' => esc_html__(' Open Custom Link', 'codexin')
+	    							''                 => esc_html__( 'None', 'codexin' ),
+	    							'img_pop'          => esc_html__( 'Open Image In Lightbox', 'codexin' ),
+	    							'open_custom_link' => esc_html__( 'Open Custom Link', 'codexin' )
 	    							),
 	    						'value'	  		=> '',
-	    						'description' 	=> esc_html__(' Select the click event when users click on the image.', 'codexin')
+	    						'description' 	=> esc_html__( 'Select the click event when users click on the image.', 'codexin' )
     						),
 
 	    					array(
 	    						'name'     		=> 'href',
-	    						'label'    		=> esc_html__(' Custom URL', 'codexin'),
+	    						'label'    		=> esc_html__( 'Custom URL', 'codexin' ),
 	    						'type'    		=> 'link',
 	    						'relation' 		=> array(
 	    							'parent'    => 'img_action',
 	    							'show_when' => 'open_custom_link',
 	    							),
 	    						'value'    		=> '#',
-	    						'description' 	=> esc_html__(' The URL which this box assigned to. You can select page/post or other post type', 'codexin')
+	    						'description' 	=> esc_html__( 'The URL which this box assigned to. You can select page/post or other post type', 'codexin' )
     						),
 
 	    					array(
 	    						'name'			=> 'class',
-	    						'label' 		=> esc_html__(' Extra Class', 'codexin'),
+	    						'label' 		=> esc_html__( 'Extra Class', 'codexin' ),
 	    						'type'			=> 'text'
     						),
     					), // end of general
@@ -235,49 +196,49 @@ function cx_image_box_kc() {
 	    							array(
 	    								"screens" => "any,1199,991,767,479",
 
-	    								'Hover Text' => array(
-	    									array('property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.single-content p'),
-	    									array('property' => 'font-family', 'label' => esc_html__('Font Family', 'codexin'), 'selector' => '.single-content p'),
-	    									array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.single-content p'),
-	    									array('property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '.single-content p'),
-	    									array('property' => 'font-weight', 'label' => esc_html__('Font Weight', 'codexin'), 'selector' => '.single-content p'),
-	    									array('property' => 'text-align', 'label' => esc_html__('Text Align', 'codexin'), 'selector' => '.single-content p'),
-	    									array('property' => 'text-transform', 'label' => esc_html__('Text Transform', 'codexin'), 'selector' => '.single-content p'),
-	    									array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.single-content p'),
-	    									array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.single-content p'),
+	    								esc_html__( 'Hover Text', 'codexin' ) => array(
+	    									array( 'property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.single-content p'),
+	    									array( 'property' => 'font-family', 'label' => esc_html__('Font Family', 'codexin'), 'selector' => '.single-content p'),
+	    									array( 'property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.single-content p'),
+	    									array( 'property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '.single-content p'),
+	    									array( 'property' => 'font-weight', 'label' => esc_html__('Font Weight', 'codexin'), 'selector' => '.single-content p'),
+	    									array( 'property' => 'text-align', 'label' => esc_html__('Text Align', 'codexin'), 'selector' => '.single-content p'),
+	    									array( 'property' => 'text-transform', 'label' => esc_html__('Text Transform', 'codexin'), 'selector' => '.single-content p'),
+	    									array( 'property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.single-content p'),
+	    									array( 'property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.single-content p'),
     									),
 
-	    								'Icon' 	=> array(
-	    									array('property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.single-content i'),
-	    									array('property' => 'background', 'label' => esc_html__('Label Color', 'codexin'), 'selector' => '.single-content i'),
-	    									array('property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.single-content i'),
-	    									array('property' => 'display', 'label' => esc_html__('Display', 'codexin'), 'selector' => '.single-content i'),
-	    									array('property' => 'text-align', 'label' => esc_html__('Text Align', 'codexin'), 'selector' => '.single-content i'),
-	    									array('property' => 'width', 'label' => esc_html__('Width', 'codexin'), 'selector' => '.single-content i'),
-	    									array('property' => 'height', 'label' => esc_html__('Height', 'codexin'), 'selector' => '.single-content i'),
-	    									array('property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '.single-content i'),
-	    									array('property' => 'border-radius', 'label' => esc_html__('Border radius', 'codexin'), 'selector' => '.single-content i'),
-	    									array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.single-content i'),
-	    									array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.single-content i')
+	    								esc_html__( 'Icon', 'codexin' )	=> array(
+	    									array( 'property' => 'color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.single-content i'),
+	    									array( 'property' => 'background', 'label' => esc_html__('Label Color', 'codexin'), 'selector' => '.single-content i'),
+	    									array( 'property' => 'font-size', 'label' => esc_html__('Font Size', 'codexin'), 'selector' => '.single-content i'),
+	    									array( 'property' => 'display', 'label' => esc_html__('Display', 'codexin'), 'selector' => '.single-content i'),
+	    									array( 'property' => 'text-align', 'label' => esc_html__('Text Align', 'codexin'), 'selector' => '.single-content i'),
+	    									array( 'property' => 'width', 'label' => esc_html__('Width', 'codexin'), 'selector' => '.single-content i'),
+	    									array( 'property' => 'height', 'label' => esc_html__('Height', 'codexin'), 'selector' => '.single-content i'),
+	    									array( 'property' => 'line-height', 'label' => esc_html__('Line Height', 'codexin'), 'selector' => '.single-content i'),
+	    									array( 'property' => 'border-radius', 'label' => esc_html__('Border radius', 'codexin'), 'selector' => '.single-content i'),
+	    									array( 'property' => 'padding', 'label' => esc_html__('Padding', 'codexin'), 'selector' => '.single-content i'),
+	    									array( 'property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.single-content i')
     									),
 
-	    								'Hover Border' => array(
-	    									array('property' => 'border-color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.img-thumb .content-wrapper::before, .img-thumb a::before, .img-thumb .content-wrapper::after, .img-thumb a::after'),
-	    									array('property' => 'border-width', 'label' => esc_html__('Border Width', 'codexin'), 'selector' => '.img-thumb .content-wrapper::before, .img-thumb a::before, .img-thumb .content-wrapper::after, .img-thumb a::after'),
-	    									array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.img-thumb .content-wrapper::before, .img-thumb a::before, .img-thumb .content-wrapper::after, .img-thumb a::after')
+	    								esc_html__( 'Hover Border', 'codexin' ) => array(
+	    									array( 'property' => 'border-color', 'label' => esc_html__('Color', 'codexin'), 'selector' => '.img-thumb .content-wrapper::before, .img-thumb a::before, .img-thumb .content-wrapper::after, .img-thumb a::after'),
+	    									array( 'property' => 'border-width', 'label' => esc_html__('Border Width', 'codexin'), 'selector' => '.img-thumb .content-wrapper::before, .img-thumb a::before, .img-thumb .content-wrapper::after, .img-thumb a::after'),
+	    									array( 'property' => 'margin', 'label' => esc_html__('Margin', 'codexin'), 'selector' => '.img-thumb .content-wrapper::before, .img-thumb a::before, .img-thumb .content-wrapper::after, .img-thumb a::after')
     									),
 
-	    								'Overlay' => array(
-	    									array('property' => 'background', 'label' => esc_html__('Background', 'codexin'), 'selector' => '.img-thumb .content-wrapper, :hover .single-content-wrapper, .img-thumb a:hover .single-content-wrapper')
+	    								esc_html__( 'Overlay', 'codexin' ) => array(
+	    									array( 'property' => 'background', 'label' => esc_html__('Background', 'codexin'), 'selector' => '.img-thumb .content-wrapper, :hover .single-content-wrapper, .img-thumb a:hover .single-content-wrapper')
     									),
 
-	    								'Box'	=> array(
-	    									array('property' => 'border', 'label' => esc_html__('Border', 'codexin')),
-	    									array('property' => 'box-shadow', 'label' => esc_html__('Box Shadow', 'codexin'), 'selector' => '+.cx-image-box'),
-	    									array('property' => 'box-shadow', 'label' => esc_html__('Box Shadow on Hover', 'codexin'), 'selector' => '+.cx-image-box:hover'),
-	    									array('property' => 'transition', 'label' => esc_html__('Hover Transition Animation', 'codexin'), 'selector' => '+.cx-image-box'),
-	    									array('property' => 'margin', 'label' => esc_html__('Margin', 'codexin')),
-	    									array('property' => 'padding', 'label' => esc_html__('Padding', 'codexin')),
+	    								esc_html__( 'Box', 'codexin' )	=> array(
+	    									array( 'property' => 'border', 'label' => esc_html__('Border', 'codexin')),
+	    									array( 'property' => 'box-shadow', 'label' => esc_html__('Box Shadow', 'codexin'), 'selector' => '+.cx-image-box'),
+	    									array( 'property' => 'box-shadow', 'label' => esc_html__('Box Shadow on Hover', 'codexin'), 'selector' => '+.cx-image-box:hover'),
+	    									array( 'property' => 'transition', 'label' => esc_html__('Hover Transition Animation', 'codexin'), 'selector' => '+.cx-image-box'),
+	    									array( 'property' => 'margin', 'label' => esc_html__('Margin', 'codexin')),
+	    									array( 'property' => 'padding', 'label' => esc_html__('Padding', 'codexin')),
     									)
     								)
     							)

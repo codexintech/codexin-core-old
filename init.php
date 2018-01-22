@@ -13,10 +13,11 @@ Text Domain: codexin
 // Declaring Global Constants for plugin paths and URL
 define( 'CODEXIN_CORE_VERSION', '1.0' );
 
-define('CODEXIN_CORE_INC_DIR', plugin_dir_path( __FILE__ ) .'inc');
-define('CODEXIN_CORE_ASSET_DIR', plugin_dir_url( __FILE__ ) .'assets');
-define('CODEXIN_CORE_SC_DIR', plugin_dir_path( __FILE__ ) .'inc/shortcodes');
-define('CODEXIN_CORE_WDGT_DIR', plugin_dir_path( __FILE__ ) .'inc/widgets');
+define( 'CODEXIN_CORE_INC_DIR', plugin_dir_path( __FILE__ ) . 'inc' );
+define( 'CODEXIN_CORE_ASSET_DIR', plugin_dir_url( __FILE__ ) . 'assets' );
+define( 'CODEXIN_CORE_JS_DIR', CODEXIN_CORE_ASSET_DIR . '/js/shortcode-js' );
+define( 'CODEXIN_CORE_SC_DIR', plugin_dir_path( __FILE__ ) . 'inc/shortcodes' );
+define( 'CODEXIN_CORE_WDGT_DIR', plugin_dir_path( __FILE__ ) . 'inc/widgets' );
 
 if( ! class_exists( 'Codexin_Core' ) ) {
 	/**
