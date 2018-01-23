@@ -12,15 +12,15 @@ defined( 'ABSPATH' ) OR die( esc_html__( 'This script cannot be accessed directl
 // Registering Image Box Shortcode
 function cx_image_box_shortcode( $atts, $content = null ) {
    extract( shortcode_atts( array(
-   			'image'	 			=> '',
-   			'img_alt'		 	=> '',
-   			'hover'  			=> '',
-   			'icon_toggle'  		=> '',
-   			'link_toggle'  		=> '',
-   			'hover_icon'  		=> '',
-   			'href'		  		=> '',
-   			'img_action'  		=> '',
-   			'class'				=> ''
+		'image'	 			=> '',
+		'img_alt'		 	=> '',
+		'hover'  			=> '',
+		'icon_toggle'  		=> '',
+		'link_toggle'  		=> '',
+		'hover_icon'  		=> '',
+		'href'		  		=> '',
+		'img_action'  		=> '',
+		'class'				=> ''
 	), $atts ) );
 
 	$result = '';

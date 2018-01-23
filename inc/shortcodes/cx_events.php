@@ -12,18 +12,18 @@ defined( 'ABSPATH' ) OR die( esc_html__( 'This script cannot be accessed directl
 // Registering Events Shortcode
 function cx_events_shortcode( $atts, $content = null ) {
 	extract( shortcode_atts( array(
-			'layout'			=> '',
-			'grid_col'			=> '',
-			'order'				=> '',
-			'orderby'			=> '',
-			'include'			=> '',
-			'chr_length'		=> '',
-			'title_length'		=> '',
-			'desc_length'		=> '',
-			'read_more'			=> '',
-			'readmore_txt'		=> '',
-			'pagination_type'	=> '',
-			'class'				=> ''
+		'layout'			=> '',
+		'grid_col'			=> '',
+		'order'				=> '',
+		'orderby'			=> '',
+		'include'			=> '',
+		'chr_length'		=> '',
+		'title_length'		=> '',
+		'desc_length'		=> '',
+		'read_more'			=> '',
+		'readmore_txt'		=> '',
+		'pagination_type'	=> '',
+		'class'				=> ''
 	), $atts ) );
 
 	$result = '';
@@ -110,7 +110,7 @@ function cx_events_shortcode( $atts, $content = null ) {
 							}
 				            	
 						?>
-							<article id="event-<?php esc_attr(the_ID()); ?>" <?php post_class( array( esc_attr( $post_classes ) ) ); ?> itemscope itemtype="http://schema.org/Event">
+							<article id="event-<?php echo esc_attr( get_the_ID() ); ?>" <?php post_class( array( esc_attr( $post_classes ) ) ); ?> itemscope itemtype="http://schema.org/Event">
 							    <div class="<?php echo ( $layout == 'grid' ) ? esc_attr( 'events-item-content' ) : esc_attr( 'post-wrapper reveal-border-1' ); ?>">
 							    	<?php echo ( $layout == 'list' ) ? '<div class="event-list-wrapper reveal-bg-2">' : '' ?>
 							    		<?php if( $layout == 'list' ) { ?>

@@ -1771,6 +1771,8 @@ transform: scale(1.006);
     -ms-transform: scale(1.006);
     -o-transform: scale(1.006);
     transform: scale(1.006);
+    visibility: hidden;
+    opacity: 0;
 }
 
 .cx-portfolios .cx-portfolio .image-mask {

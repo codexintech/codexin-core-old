@@ -12,15 +12,15 @@ defined( 'ABSPATH' ) OR die( esc_html__( 'This script cannot be accessed directl
 // Registering Call To Action Shortcode
 function cx_call_to_action_shortcode( $atts, $content = null ) {
    extract( shortcode_atts( array(
-   			'layout'		=> '',
-   			'cta_title'		=> '',
-   			'icon_toggle' 	=> '',
-   			'icon'       	=> '',
-   			'cta_desc'      => '',
-   			'cta_content'   => '',
-   			'button_text'  	=> '',
-   			'href'		  	=> '',
-   			'class'			=> ''
+		'layout'		=> '',
+		'cta_title'		=> '',
+		'icon_toggle' 	=> '',
+		'icon'       	=> '',
+		'cta_desc'      => '',
+		'cta_content'   => '',
+		'button_text'  	=> '',
+		'href'		  	=> '',
+		'class'			=> ''
 	), $atts ) );
 
 	$result = '';

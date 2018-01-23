@@ -12,26 +12,26 @@ defined( 'ABSPATH' ) OR die( esc_html__( 'This script cannot be accessed directl
 // Registering Blog Shortcode
 function cx_blog_shortcode( $atts, $content = null ) {
 	extract( shortcode_atts( array(
-			'layout'			=> '',
-			'grid_col'			=> '',
-			'order'				=> '',
-			'orderby'			=> '',
-			'show_author'		=> '',
-			'show_meta'			=> '',
-			'show_date'			=> '',
-			'show_cat'			=> '',
-			'show_comm'			=> '',
-			'show_like'			=> '',
-			'include'			=> '',
-			'chr_length'		=> '',
-			'title_length'		=> '',
-			'desc_length'		=> '',
-			'sticky_post'		=> '',
-			'post_meta'			=> '',
-			'read_more'			=> '',
-			'readmore_txt'		=> '',
-			'pagination_type'	=> '',
-			'class'				=> ''
+		'layout'			=> '',
+		'grid_col'			=> '',
+		'order'				=> '',
+		'orderby'			=> '',
+		'show_author'		=> '',
+		'show_meta'			=> '',
+		'show_date'			=> '',
+		'show_cat'			=> '',
+		'show_comm'			=> '',
+		'show_like'			=> '',
+		'include'			=> '',
+		'chr_length'		=> '',
+		'title_length'		=> '',
+		'desc_length'		=> '',
+		'sticky_post'		=> '',
+		'post_meta'			=> '',
+		'read_more'			=> '',
+		'readmore_txt'		=> '',
+		'pagination_type'	=> '',
+		'class'				=> ''
 	), $atts ) );
 
 	$result = '';
@@ -94,7 +94,7 @@ function cx_blog_shortcode( $atts, $content = null ) {
 						}
 			            	
 			?>
-						<article id="post-<?php the_ID(); ?>" <?php post_class( array( esc_attr( $post_classes ) ) ); ?> itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
+						<article id="post-<?php echo esc_attr( get_the_ID() ); ?>" <?php post_class( array( esc_attr( $post_classes ) ) ); ?> itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
 						    <div class="<?php echo ( $layout == 'grid' ) ? esc_attr( 'blog-wrapper reveal-bg-1' ) : esc_attr( 'post-wrapper reveal-border-1' ); ?>">
 						    	<?php if( has_post_format( 'gallery' ) ) {
 
@@ -182,12 +182,19 @@ function cx_blog_shortcode( $atts, $content = null ) {
 
 							    } else {
 
+									$thumbnail_size = ( $layout == 'grid' ) ? 'codexin-core-rectangle-one' : 'codexin-framework-rectangle-two';
+									if( function_exists( 'codexin_attachment_metas_extended' ) ) {
+										$post_thumbnail = codexin_attachment_metas_extended( get_the_ID(), 'blog', $thumbnail_size )['src'];
+									} else {
+										$post_thumbnail = ( has_post_thumbnail() ) ? get_the_post_thumbnail_url( get_the_ID(), $thumbnail_size ) : '//placehold.it/600X400';
+									}
+
 							    	if( $layout == 'grid' ) {
 							    ?>
 								        <div class="img-thumb">
 								            <div class="img-wrapper">
 								            	<a href="<?php echo esc_url( get_the_permalink() ); ?>">
-								            		<img src="<?php echo ( has_post_thumbnail() ) ? esc_url( the_post_thumbnail_url( 'codexin-core-rectangle-one') ) : esc_url( '//placehold.it/600X400' ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" class="img-responsive">
+								            		<img src="<?php echo esc_url( $post_thumbnail ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" class="img-responsive">
 								            	</a>
 								            </div>
 
@@ -205,7 +212,7 @@ function cx_blog_shortcode( $atts, $content = null ) {
 
 							            <a href="<?php echo esc_url( get_the_permalink() ); ?>" class="blog-media-wrapper">
 							                <figure class="item-img-wrap" itemscope itemtype="http://schema.org/ImageObject">
-							                    <img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'codexin-framework-rectangle-two' ) : '//placehold.it/800x354' ); ?>" class="img-responsive" alt="<?php echo esc_attr($image_alt); ?>" itemprop="image">
+							                    <img src="<?php echo esc_url( $post_thumbnail ); ?>" class="img-responsive" alt="<?php echo esc_attr($image_alt); ?>" itemprop="image">
 							                    <div class="item-img-overlay">
 							                        <span></span>
 							                    </div>

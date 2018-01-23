@@ -12,19 +12,19 @@ defined( 'ABSPATH' ) OR die( esc_html__( 'This script cannot be accessed directl
 // Registering Mini Blog Shortcode
 function cx_blog_mini_shortcode( $atts, $content = null ) {
 	extract( shortcode_atts( array(
-			'layout'			=> '',
-			'number_of_posts'	=> '',
-			'order'				=> '',
-			'orderby'			=> '',
-			'include'			=> '',
-			'show_date'			=> '',
-			'title_length'		=> '',
-			'desc_length'		=> '',
-			'postview_comments'	=> '',
-			'sticky_post'		=> '',
-			'post_meta'			=> '',
-			'readmore_text'		=> '',
-			'class'				=> ''
+		'layout'			=> '',
+		'number_of_posts'	=> '',
+		'order'				=> '',
+		'orderby'			=> '',
+		'include'			=> '',
+		'show_date'			=> '',
+		'title_length'		=> '',
+		'desc_length'		=> '',
+		'postview_comments'	=> '',
+		'sticky_post'		=> '',
+		'post_meta'			=> '',
+		'readmore_text'		=> '',
+		'class'				=> ''
 	), $atts ) );
 
 	$result = '';
@@ -74,14 +74,21 @@ function cx_blog_mini_shortcode( $atts, $content = null ) {
 							// Retrieving Image alt tag
 							$image_alt = ( ! empty( codexin_retrieve_alt_tag() ) ) ? codexin_retrieve_alt_tag() : get_the_title();
 
+							$thumbnail_size = 'codexin-core-rectangle-one';
+							if( function_exists( 'codexin_attachment_metas_extended' ) ) {
+								$post_thumbnail = codexin_attachment_metas_extended( get_the_ID(), 'blog', $thumbnail_size )['src'];
+							} else {
+								$post_thumbnail = ( has_post_thumbnail() ) ? get_the_post_thumbnail_url( get_the_ID(), $thumbnail_size ) : '//placehold.it/600X400';
+							}
+
 					 ?>
 							<div class="col-md-<?php echo esc_html( $column ); ?> col-sm-<?php echo ( $column == 4 ) ? esc_attr( $column ) : esc_attr( 6 ); ?>">
-								<article id="post-<?php the_ID(); ?>" <?php post_class(); ?> itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
+								<article id="post-<?php echo esc_attr( get_the_ID() ); ?>" <?php post_class(); ?> itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
 									<div class="blog-wrapper">
 										<div class="img-thumb">
 											<a href="<?php echo esc_url( get_the_permalink() ); ?>">
 												<div class="img-wrapper">
-													<img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'codexin-core-rectangle-one' ) : '//placehold.it/600x400' ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" class="img-responsive">
+													<img src="<?php echo esc_url( $post_thumbnail ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" class="img-responsive">
 												</div>
 											</a>
 											<?php if( $show_date ) { ?>
@@ -206,12 +213,19 @@ function cx_blog_mini_shortcode( $atts, $content = null ) {
 					// Retrieving Image alt tag
 					$image_alt = ( !empty( codexin_retrieve_alt_tag() ) ) ? codexin_retrieve_alt_tag() : get_the_title();
 
+					$thumbnail_size = 'codexin-core-rectangle-one';
+					if( function_exists( 'codexin_attachment_metas_extended' ) ) {
+						$post_thumbnail = codexin_attachment_metas_extended( get_the_ID(), 'blog', $thumbnail_size )['src'];
+					} else {
+						$post_thumbnail = ( has_post_thumbnail() ) ? get_the_post_thumbnail_url( get_the_ID(), $thumbnail_size ) : '//placehold.it/600X400';
+					}
+
 				?>
 					<div class="col-md-<?php echo esc_attr( $column ); ?> col-sm-<?php echo ( $column == 4 ) ? esc_attr( $column ) : esc_attr( 6 ); ?>">
-						<article id="post-<?php the_ID(); ?>" <?php post_class(); ?> itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
+						<article id="post-<?php echo esc_attr( get_the_ID() ); ?>" <?php post_class(); ?> itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
 							<div class="blog-wrapper">
 								<div class="img-thumb cx-bg-overlay">
-									<img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'codexin-core-rectangle-one' ) : '//placehold.it/600x400' ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" class="img-responsive">
+									<img src="<?php echo esc_url( $post_thumbnail ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" class="img-responsive">
 									<div class="cx-color-0 cx-primary-btn cx-white-btn">
 										<a href="<?php echo esc_url( get_the_permalink() ); ?>" class="cx-blog-btn">
 											<?php echo esc_html( !empty( $readmore_text ) ? $readmore_text : esc_html__( 'Read More', 'codexin' ) ); ?>
@@ -299,14 +313,21 @@ function cx_blog_mini_shortcode( $atts, $content = null ) {
 
 					// Retrieving Image alt tag
 					$image_alt = ( !empty( codexin_retrieve_alt_tag() ) ) ? codexin_retrieve_alt_tag() : get_the_title();
+					$thumbnail_size = ( $i == 1 ) ? 'codexin-core-rectangle-one' : 'codexin-core-square-two';
+					if( function_exists( 'codexin_attachment_metas_extended' ) ) {
+						$post_thumbnail = codexin_attachment_metas_extended( get_the_ID(), 'blog', $thumbnail_size )['src'];
+					} else {
+						$post_thumbnail = ( has_post_thumbnail() ) ? get_the_post_thumbnail_url( get_the_ID(), $thumbnail_size ) : '//placehold.it/600X400';
+					}
+
 					if( $i == 1 ) {
 					?>
 						<!-- Left column post -->
 						<div class="col-md-6 col-sm-4 col-xs-12">							
-							<div id="<?php the_ID(); ?>" <?php post_class( array( 'blog-wrapper-left cx-border-1' ) ); ?>>
+							<div id="<?php echo esc_attr( get_the_ID() ); ?>" <?php post_class( array( 'blog-wrapper-left cx-border-1' ) ); ?>>
 								<div class="img-thumb">
 									<a href="<?php echo esc_url( get_the_permalink() ); ?>">
-										<img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'codexin-core-rectangle-one' ) : '//placehold.it/600x400' ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" class="img-responsive">
+										<img src="<?php echo esc_url( $post_thumbnail ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" class="img-responsive">
 									</a>
 								</div> <!-- End of img-thumb -->
 								<div class="blog-content">
@@ -351,11 +372,11 @@ function cx_blog_mini_shortcode( $atts, $content = null ) {
 						<div class="col-md-6 col-sm-8 col-xs-12">
 							<ul class="blog-wrapper-right">
 					<?php } else { ?>
-								<li id="<?php the_ID(); ?>" <?php post_class( array( 'cx-border-1' ) ); ?>>
-									<a class="thumbnail-link" href="<?php echo esc_url( get_the_permalink() ); ?>" style="background-image: url('<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'codexin-core-square-one' ) : '//placehold.it/220x220' ); ?>');"> 
+								<li id="<?php echo esc_attr( get_the_ID() ); ?>" <?php post_class( array( 'cx-border-1' ) ); ?>>
+									<a class="thumbnail-link" href="<?php echo esc_url( get_the_permalink() ); ?>" style="background-image: url('<?php echo esc_url( $post_thumbnail ); ?>');"> 
 										<div class="media-wrapper-right" >
 											<div class="img-thumb">
-												<img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'codexin-core-square-two' ) : '//placehold.it/500x500' ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" class="img-responsive">
+												<img src="<?php echo esc_url( $post_thumbnail ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" class="img-responsive">
 											</div> <!-- End of img-thumb -->
 										</div>
 									</a> 
@@ -430,14 +451,21 @@ function cx_blog_mini_shortcode( $atts, $content = null ) {
 
 					// Retrieving Image alt tag
 					$image_alt = ( !empty( codexin_retrieve_alt_tag() ) ) ? codexin_retrieve_alt_tag() : get_the_title();
+
+					$thumbnail_size = 'codexin-core-square-two';
+					if( function_exists( 'codexin_attachment_metas_extended' ) ) {
+						$post_thumbnail = codexin_attachment_metas_extended( get_the_ID(), 'blog', $thumbnail_size )['src'];
+					} else {
+						$post_thumbnail = ( has_post_thumbnail() ) ? get_the_post_thumbnail_url( get_the_ID(), $thumbnail_size ) : '//placehold.it/600X400';
+					}
 					?>
 					<!-- Left column post -->
 					<div class="col-md-4 col-sm-4">
-						<article id="post-<?php the_ID(); ?>" <?php post_class(); ?> itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
+						<article id="post-<?php echo esc_attr( get_the_ID() ); ?>" <?php post_class(); ?> itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
 							<div class="blog-wrapper">
 								<div class="img-thumb">
 									<a href="<?php echo esc_url( get_the_permalink() ); ?>">
-										<img src="<?php echo esc_url( ( has_post_thumbnail() ) ? the_post_thumbnail_url( 'codexin-core-square-two' ) : '//placehold.it/500x500' ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" class="img-responsive">
+										<img src="<?php echo esc_url( $post_thumbnail ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" class="img-responsive">
 									</a>
 								</div> <!-- End of img-thumb -->
 								<div class="blog-content cx-color-2">

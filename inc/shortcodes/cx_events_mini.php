@@ -48,6 +48,7 @@ function cx_events_mini_shortcode( $atts, $content = null ) {
 	$title 			= ( $retrieve_link[1] ) ? 'title="'. esc_attr( $retrieve_link[1] ).'"':'';
 	$target 		= ( $retrieve_link[2] ) ? 'target="'. esc_attr( $retrieve_link[2]) .'"':'';
 
+	// Rendering view all button
 	$render_view_all .= '<div class="events-view-all">';
 		if( $href ) {
 			$render_view_all .= '<div class="cx-color-0 cx-primary-btn">';
@@ -470,7 +471,7 @@ function cx_events_mini_kc() {
 
 	$cx_events_categories = codexin_get_custom_categories('events-category');
 
-	if (function_exists('kc_add_map')) { 
+	if( function_exists( 'kc_add_map' ) ) { 
  		kc_add_map(
  			array(
  				'cx_events_mini' => array(
