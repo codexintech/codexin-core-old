@@ -51,7 +51,7 @@ function cx_events_shortcode( $atts, $content = null ) {
 
 					echo ( $layout == 'grid' ) ? '<div class="row">' : '';
 					//start query..
-					$paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
+					$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
 
 					$args = array(
 						'post_type'				=> 'events',

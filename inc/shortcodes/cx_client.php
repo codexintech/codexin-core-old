@@ -35,13 +35,13 @@ function cx_client_shortcode( $atts, $content = null ) {
 	ob_start();
 
 	// Building variables to pass values to javascript
-	$num_slide 		= ( !empty( $number_of_slides ) ) ? $number_of_slides : '6';
+	$num_slide 		= ( ! empty( $number_of_slides ) ) ? $number_of_slides : '6';
 	$cont_p 		= ( $continous_p ) ? true : 0;
 	$slick_arrow 	= ( $arrow ) ? true : 0;
 	$en_dots 		= ( $dots ) ? true : 0;
 	$auto_play 		= ( $play ) ? true : 0;
-	$atp_speed 		= ( !empty( $speed ) ) ? $speed : '2000';
-	$con_speed 		= ( !empty( $pl_speed ) ) ? $pl_speed : '2500';
+	$atp_speed 		= ( ! empty( $speed ) ) ? $speed : '2000';
+	$con_speed 		= ( ! empty( $pl_speed ) ) ? $pl_speed : '2500';
 
 	if( ! empty( $layout ) ) {
 		if( $layout == 1 ) {

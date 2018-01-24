@@ -112,7 +112,7 @@ if( ! class_exists( 'Codexin_Core' ) ) {
 		public function codexin_script() {
 
 			wp_enqueue_script( 'codexin-post-like-script', CODEXIN_CORE_ASSET_DIR . '/js/codexin-post-like.js', array( 'jquery' ), '0.5', true );
-			wp_enqueue_script( 'modernizr-custom', CODEXIN_CORE_ASSET_DIR . '/js/modernizr-custom.js', array( 'jquery' ), '0.5', true );
+			//wp_enqueue_script( 'modernizr-custom', CODEXIN_CORE_ASSET_DIR . '/js/modernizr-custom.js', array( 'jquery' ), '0.5', true );
 			wp_localize_script( 'codexin-post-like-script', 'postLikes', array(
 				'ajaxurl' => admin_url( 'admin-ajax.php' ),
 				'like' => esc_html__( 'Like', 'codexin' ),
