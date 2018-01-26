@@ -212,7 +212,7 @@ function cx_blog_shortcode( $atts, $content = null ) {
 
 							            <a href="<?php echo esc_url( get_the_permalink() ); ?>" class="blog-media-wrapper">
 							                <figure class="item-img-wrap" itemscope itemtype="http://schema.org/ImageObject">
-							                    <img src="<?php echo esc_url( $post_thumbnail ); ?>" class="img-responsive" alt="<?php echo esc_attr($image_alt); ?>" itemprop="image">
+							                    <img src="<?php echo esc_url( $post_thumbnail ); ?>" class="img-responsive" alt="<?php echo esc_attr( $image_alt ); ?>" itemprop="image">
 							                    <div class="item-img-overlay">
 							                        <span></span>
 							                    </div>

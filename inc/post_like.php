@@ -18,15 +18,15 @@ defined( 'ABSPATH' ) OR die( esc_html__( 'This script cannot be accessed directl
  *
  * @since 1.0
  */
-function codexin_get_post_views($postID){
+function codexin_get_post_views( $postID ) {
     $count_key = 'cx_post_views';
-    $count = get_post_meta($postID, $count_key, true);
-    if($count==''){
-        delete_post_meta($postID, $count_key);
-        add_post_meta($postID, $count_key, '0');
+    $count = get_post_meta( $postID, $count_key, true );
+    if( $count=='' ) {
+        delete_post_meta( $postID, $count_key );
+        add_post_meta( $postID, $count_key, '0' );
         return " 0";
     }
-    return ' '.$count;
+    return ' '. $count;
 }
 
 
@@ -35,16 +35,16 @@ function codexin_get_post_views($postID){
  *
  * @since 1.0
  */
-function codexin_set_post_views($postID) {
+function codexin_set_post_views( $postID ) {
     $count_key = 'cx_post_views';
-    $count = get_post_meta($postID, $count_key, true);
-    if($count==''){
+    $count = get_post_meta( $postID, $count_key, true );
+    if( $count=='' ) {
         $count = 0;
-        delete_post_meta($postID, $count_key);
-        add_post_meta($postID, $count_key, '0');
+        delete_post_meta( $postID, $count_key );
+        add_post_meta( $postID, $count_key, '0' );
     }else{
         $count++;
-        update_post_meta($postID, $count_key, $count);
+        update_post_meta( $postID, $count_key, $count );
     }
 }
 //To keep the count accurate, lets get rid of prefetching
@@ -61,7 +61,7 @@ add_action( 'wp_ajax_codexin_post_like', 'codexin_post_like' );
 function codexin_post_like() {
     // Security
     $nonce = isset( $_REQUEST['nonce'] ) ? sanitize_text_field( $_REQUEST['nonce'] ) : 0;
-    if ( !wp_verify_nonce( $nonce, 'simple-likes-nonce' ) ) {
+    if ( ! wp_verify_nonce( $nonce, 'simple-likes-nonce' ) ) {
         exit( esc_html__( 'Not permitted', 'codexin' ) );
     }
     // Test if javascript is disabled

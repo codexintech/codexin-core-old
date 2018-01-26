@@ -499,7 +499,7 @@ function codexin_register_meta_boxes( $meta_boxes ) {
                 'type'    => 'select',
                 'options' => array(
                     '_blank' => esc_html__( 'Yes', 'codexin' ),
-                    '_self' => esc_html__( 'No', 'codexin' ),
+                    '_self'  => esc_html__( 'No', 'codexin' ),
                 ),
 
                 'std'     => '_blank',

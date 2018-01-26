@@ -14,7 +14,7 @@
 
         $data = $data + '&action=codexin_ajax_mc';
 
-        $.post(ajaxMailChimp.ajaxurl, $data, function(response) {
+        $.post(cx_ajax_mailchimp.ajaxurl, $data, function(response) {
             $button.removeClass('loading').html($button.data('text'));
             $button.prop('disabled', false);
 
@@ -26,12 +26,5 @@
             }
         }, 'json');
     });
-
-
-    /************************************************************
-        Detecting mailchimp widget's position and re-style that for page contents
-    *************************************************************/
-
-    //$('.codexin-mailchimp-wrapper').parents('#primary').addClass('mailchimp-inside-page');
 
 })(jQuery);

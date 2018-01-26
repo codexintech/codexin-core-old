@@ -76,7 +76,7 @@ if( ! class_exists( 'Codexin_Core' ) ) {
 			require_once CODEXIN_CORE_INC_DIR . '/post_like.php';
 
 			// Initalizing custom widgets
-			$cx_widgets = glob(CODEXIN_CORE_WDGT_DIR.'/*.php');
+			$cx_widgets = glob( CODEXIN_CORE_WDGT_DIR.'/*.php' );
 			foreach( $cx_widgets as $cx_widget ) {
 			    require_once( sanitize_text_field( $cx_widget ) );    		    
 			}
@@ -103,16 +103,15 @@ if( ! class_exists( 'Codexin_Core' ) ) {
 
 		public function codexin_styles() {
 
-			wp_enqueue_style( 'codexin-shortcodes-stylesheet', CODEXIN_CORE_ASSET_DIR . '/css/shortcodes.css', false, '1.0','all');
-			wp_enqueue_style( 'codexin-widget-stylesheet', CODEXIN_CORE_ASSET_DIR . '/css/widgets.css', false, '1.0','all');
-			// wp_enqueue_style( 'codexin-responsive-stylesheet', CODEXIN_CORE_ASSET_DIR . '/css/responsive.css', false, '1.0','all');
+			wp_enqueue_style( 'codexin-shortcodes-stylesheet', CODEXIN_CORE_ASSET_DIR . '/css/shortcodes.css', false, '1.0','all' );
+			wp_enqueue_style( 'codexin-widget-stylesheet', CODEXIN_CORE_ASSET_DIR . '/css/widgets.css', false, '1.0','all' );
+			// wp_enqueue_style( 'codexin-responsive-stylesheet', CODEXIN_CORE_ASSET_DIR . '/css/responsive.css', false, '1.0','all' );
 
 		}
 
 		public function codexin_script() {
 
 			wp_enqueue_script( 'codexin-post-like-script', CODEXIN_CORE_ASSET_DIR . '/js/codexin-post-like.js', array( 'jquery' ), '0.5', true );
-			//wp_enqueue_script( 'modernizr-custom', CODEXIN_CORE_ASSET_DIR . '/js/modernizr-custom.js', array( 'jquery' ), '0.5', true );
 			wp_localize_script( 'codexin-post-like-script', 'postLikes', array(
 				'ajaxurl' => admin_url( 'admin-ajax.php' ),
 				'like' => esc_html__( 'Like', 'codexin' ),
@@ -134,7 +133,7 @@ if( ! class_exists( 'Codexin_Core' ) ) {
 
 		public function codexin_admin_styles() {
 
-			wp_enqueue_style( 'codexin-admin-stylesheet', CODEXIN_CORE_ASSET_DIR . '/css/admin/admin-styles.css', false, '1.0','all');
+			wp_enqueue_style( 'codexin-admin-stylesheet', CODEXIN_CORE_ASSET_DIR . '/css/admin/admin-styles.css', false, '1.0','all' );
 
 		}
 
@@ -164,13 +163,13 @@ if( ! class_exists( 'Codexin_Core' ) ) {
 			 */
 			add_action( 'init', 'codexin_add_image_sizes' );
 			function codexin_add_image_sizes() {
-				add_image_size('codexin-core-rectangle-one', 600, 400, true);
-				add_image_size('codexin-core-rectangle-two', 570, 464, true);
-				add_image_size('codexin-core-rectangle-three', 480, 595, true);
-				add_image_size('codexin-core-rectangle-four', 600, 327, true);
-				add_image_size('codexin-core-rectangle-five', 740, 580, true);
-				add_image_size('codexin-core-square-one', 220, 220, true);
-				add_image_size('codexin-core-square-two', 500, 500, true);
+				add_image_size( 'codexin-core-rectangle-one', 600, 400, true );
+				add_image_size( 'codexin-core-rectangle-two', 570, 464, true );
+				add_image_size( 'codexin-core-rectangle-three', 480, 595, true );
+				add_image_size( 'codexin-core-rectangle-four', 600, 327, true );
+				add_image_size( 'codexin-core-rectangle-five', 740, 580, true );
+				add_image_size( 'codexin-core-square-one', 220, 220, true );
+				add_image_size( 'codexin-core-square-two', 500, 500, true );
 			}
 
 			/**
@@ -178,17 +177,14 @@ if( ! class_exists( 'Codexin_Core' ) ) {
 			 *
 			 * @since v1.0
 			 */
-			add_action('init', 'codexin_flaticons');
+			add_action( 'init', 'codexin_flaticons' );
 			function codexin_flaticons() {
 				if( function_exists( 'kc_add_icon' ) ) {
 					kc_add_icon( CODEXIN_CORE_ASSET_DIR . '/icofonts/flaticon.css' );
 				}
 			}
-
 		}
-
 	}
-
 }
 
 

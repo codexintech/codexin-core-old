@@ -21,7 +21,7 @@ class CodexinAdminMenu {
 
 	public function __construct() {
 
-		add_action( 'admin_init', array ( $this, 'codexin_admin_init' ) );
+		add_action( 'admin_init', array( $this, 'codexin_admin_init' ) );
 		add_action( 'admin_menu', array( $this, 'codexin_admin_menu' ) );
 
 	}
@@ -163,7 +163,7 @@ class CodexinAdminMenu {
 		
 		add_settings_field(
             'fb_url',                                   // ID
-            esc_html__('Facebook URL', 'codexin'),      // Title 
+            esc_html__( 'Facebook URL', 'codexin' ),      // Title 
             array( $this, 'fb_url_callback' ),          // Callback
             'codexin-setting-social',                   // Page
             'setting_section_id'                        // Section      
@@ -171,7 +171,7 @@ class CodexinAdminMenu {
 
 		add_settings_field(
             'in_url',                                   // ID
-            esc_html__('Instagram URL', 'codexin'),     // Title 
+            esc_html__( 'Instagram URL', 'codexin' ),     // Title 
             array( $this, 'in_url_callback' ),          // Callback
             'codexin-setting-social',                   // Page
             'setting_section_id'                        // Section      
@@ -179,7 +179,7 @@ class CodexinAdminMenu {
 
 		add_settings_field(
             'pin_url',                                  // ID
-            esc_html__('Pinterest URL', 'codexin'),     // Title 
+            esc_html__( 'Pinterest URL', 'codexin' ),     // Title 
             array( $this, 'pin_url_callback' ),         // Callback
             'codexin-setting-social',                   // Page
             'setting_section_id'                        // Section      
@@ -187,7 +187,7 @@ class CodexinAdminMenu {
 
 		add_settings_field(
             'be_url',                                   // ID
-            esc_html__('Behance URL', 'codexin'),       // Title 
+            esc_html__( 'Behance URL', 'codexin' ),       // Title 
             array( $this, 'be_url_callback' ),          // Callback
             'codexin-setting-social',                   // Page
             'setting_section_id'                        // Section      
@@ -195,7 +195,7 @@ class CodexinAdminMenu {
 
 		add_settings_field(
             'gp_url',                                   // ID
-            esc_html__('GooglePlus URL', 'codexin'),    // Title 
+            esc_html__( 'GooglePlus URL', 'codexin' ),    // Title 
             array( $this, 'gp_url_callback' ),          // Callback
             'codexin-setting-social',                   // Page
             'setting_section_id'                        // Section      
@@ -203,7 +203,7 @@ class CodexinAdminMenu {
 
 		add_settings_field(
             'li_url',                                   // ID
-            esc_html__('LinkedIn URL', 'codexin'),      // Title 
+            esc_html__( 'LinkedIn URL', 'codexin' ),      // Title 
             array( $this, 'li_url_callback' ),          // Callback
             'codexin-setting-social',                   // Page
             'setting_section_id'                        // Section      
@@ -211,7 +211,7 @@ class CodexinAdminMenu {
 
 		add_settings_field(
             'yt_url', // ID
-            esc_html__('Youtube URL', 'codexin'),       // Title 
+            esc_html__( 'Youtube URL', 'codexin' ),       // Title 
             array( $this, 'yt_url_callback' ),          // Callback
             'codexin-setting-social',                   // Page
             'setting_section_id'                        // Section      
@@ -219,7 +219,7 @@ class CodexinAdminMenu {
 
 		add_settings_field(
             'sk_url',                                   // ID
-            esc_html__('Skype URL', 'codexin'),         // Title 
+            esc_html__( 'Skype URL', 'codexin' ),         // Title 
             array( $this, 'sk_url_callback' ),          // Callback
             'codexin-setting-social',                   // Page
             'setting_section_id'                        // Section      
@@ -237,14 +237,14 @@ class CodexinAdminMenu {
 
         add_settings_section(
             'setting_section_id',                       // ID
-            esc_html__('Google Map API', 'codexin'),    // Title
+            esc_html__( 'Google Map API', 'codexin' ),    // Title
             array( $this, 'gmap_section_info' ),        // Callback
             'codexin-setting-gmap'                      // Page
         );         
 
 		add_settings_field(
             'gmap_api',                                 // ID
-            esc_html__('Google Map API Key', 'codexin'),// Title 
+            esc_html__( 'Google Map API Key', 'codexin' ),// Title 
             array( $this, 'gmap_api_callback' ),        // Callback
             'codexin-setting-gmap',                     // Page
             'setting_section_id'                        // Section      
@@ -262,14 +262,14 @@ class CodexinAdminMenu {
 
         add_settings_section(
             'setting_section_id',                       // ID
-            esc_html__('Twitter OAuth Settings', 'codexin'), // Title
+            esc_html__( 'Twitter OAuth Settings', 'codexin' ), // Title
             array( $this, 'twitter_section_info' ),     // Callback
             'codexin-setting-twitter'                   // Page
         );         
 
         add_settings_field(
             'tw_username',                              // ID
-            esc_html__('Twitter UserName', 'codexin'),  // Title 
+            esc_html__( 'Twitter UserName', 'codexin' ),  // Title 
             array( $this, 'tw_username_callback' ),     // Callback
             'codexin-setting-twitter',                  // Page
             'setting_section_id'                        // Section      
@@ -277,7 +277,7 @@ class CodexinAdminMenu {
 
         add_settings_field(
             'tw_acc_token', // ID
-            esc_html__('Access Token', 'codexin'),      // Title 
+            esc_html__( 'Access Token', 'codexin' ),      // Title 
             array( $this, 'tw_acc_token_callback' ),    // Callback
             'codexin-setting-twitter',                  // Page
             'setting_section_id'                        // Section      
@@ -285,7 +285,7 @@ class CodexinAdminMenu {
 
         add_settings_field(
             'tw_acc_token_sec',                         // ID
-            esc_html__('Access Token Secret', 'codexin'), // Title 
+            esc_html__( 'Access Token Secret', 'codexin' ), // Title 
             array( $this, 'tw_acc_token_sec_callback' ), // Callback
             'codexin-setting-twitter',                  // Page
             'setting_section_id'                        // Section      
@@ -293,7 +293,7 @@ class CodexinAdminMenu {
 
         add_settings_field(
             'tw_cons_key',                              // ID
-            esc_html__('Consumer Key', 'codexin'),      // Title 
+            esc_html__( 'Consumer Key', 'codexin' ),      // Title 
             array( $this, 'tw_cons_key_callback' ),     // Callback
             'codexin-setting-twitter',                  // Page
             'setting_section_id'                        // Section      
@@ -301,7 +301,7 @@ class CodexinAdminMenu {
 
         add_settings_field(
             'tw_cons_secret',                           // ID
-            esc_html__('Consumer Secret', 'codexin'),   // Title 
+            esc_html__( 'Consumer Secret', 'codexin' ),   // Title 
             array( $this, 'tw_cons_secret_callback' ),  // Callback
             'codexin-setting-twitter',                  // Page
             'setting_section_id'                        // Section      
@@ -319,25 +319,25 @@ class CodexinAdminMenu {
 
         add_settings_section(
             'setting_section_id',                       // ID
-            esc_html__('MailChimp Settings', 'codexin'), // Title
+            esc_html__( 'MailChimp Settings', 'codexin' ), // Title
             array( $this, 'mailchimp_section_info' ),   // Callback
             'codexin-setting-mailchimp'                 // Page
         );         
 
         add_settings_field(
             'mc_api',                                   // ID
-            esc_html__('MailChimp API Key', 'codexin'), // Title 
+            esc_html__( 'MailChimp API Key', 'codexin' ), // Title 
             array( $this, 'mc_api_callback' ),          // Callback
             'codexin-setting-mailchimp',                // Page
             'setting_section_id'                        // Section      
         );
 
         $api_key = get_option( 'codexin_options_mailchimp_opt' )['mc_api'];
-        if ( isset ( $api_key ) && !empty ( $api_key ) ) {
+        if( isset( $api_key ) && ! empty( $api_key ) ) {
 
             add_settings_field(
                 'mc_lists',                             // ID
-                esc_html__('Your Email Lists', 'codexin'), // Title 
+                esc_html__( 'Your Email Lists', 'codexin' ), // Title 
                 array( $this, 'mc_lists_callback' ),    // Callback
                 'codexin-setting-mailchimp',            // Page
                 'setting_section_id'                    // Section      
@@ -345,7 +345,7 @@ class CodexinAdminMenu {
 
             add_settings_field(
                 'mc_success',                           // ID
-                esc_html__('Success Message (Double Opt-In Disabled)', 'codexin'), // Title 
+                esc_html__( 'Success Message (Double Opt-In Disabled)', 'codexin' ), // Title 
                 array( $this, 'mc_success_callback' ),  // Callback
                 'codexin-setting-mailchimp',            // Page
                 'setting_section_id'                    // Section      
@@ -353,7 +353,7 @@ class CodexinAdminMenu {
 
             add_settings_field(
                 'mcd_success',                          // ID
-                esc_html__('Success Message (Double Opt-In Enabled)', 'codexin'), // Title 
+                esc_html__( 'Success Message (Double Opt-In Enabled)', 'codexin' ), // Title 
                 array( $this, 'mcd_success_callback' ), // Callback
                 'codexin-setting-mailchimp',            // Page
                 'setting_section_id'                    // Section      
@@ -377,22 +377,22 @@ class CodexinAdminMenu {
 
     // Social section information
 	public function social_section_info() {
-		printf( '<p>%s</p>', esc_html__( 'This Section Represents the Social Profile Input Section. Please Enter Your Valid Social Profile Information listed below:', 'codexin' ) );
+		printf( '<p>%s</p>', esc_html__( 'This Section represents the Social Profile input Section. Please enter your valid Social Profile Information listed below:', 'codexin' ) );
 	}
 
     // Google map api section information
 	public function gmap_section_info() {
-		printf( '<p>%s</p>', esc_html__( 'This Section Represents the Google Map API Input Section. Please Enter Required Valid Information listed below:', 'codexin' ) );
+		printf( '<p>%s</p>', esc_html__( 'This Section reepresents the Google Map API input Section. Please enter required valid information listed below:', 'codexin' ) );
 	}
 
     // Twitter api section information
     public function twitter_section_info() {
-        printf( '<p>%1$s<a href="%2$s" target="_blank">%3$s</a></p>', esc_html__( 'This Section Represents the Twitter OAuth Input Section. If You Don\'t Have the Required Information, ', 'codexin'), esc_url( '//dev.twitter.com/apps' ), esc_html__( 'Please Create Your Twitter App From Here.', 'codexin' ) );
+        printf( '<p>%1$s<a href="%2$s" target="_blank">%3$s</a></p>', esc_html__( 'This Section represents the Twitter OAuth input Section. If you don\'t have the required information, ', 'codexin' ), esc_url( '//dev.twitter.com/apps' ), esc_html__( 'please create your Twitter App from here.', 'codexin' ) );
     }
 
     // Mailchimp settings section information
     public function mailchimp_section_info() {
-        printf( '<p>%1$s<a href="%2$s" target="_blank">%3$s</a></p>', esc_html__( 'This Section Represents the Mailchimp Settings Section. If You Don\'t Have the Required Information, ', 'codexin'), esc_url( '//admin.mailchimp.com/account/api' ), esc_html__( 'Get your API Key from here.', 'codexin' ) );
+        printf( '<p>%1$s<a href="%2$s" target="_blank">%3$s</a></p>', esc_html__( 'This Section represents the Mailchimp Settings Section. If you don\'t have the required information, ', 'codexin' ), esc_url( '//admin.mailchimp.com/account/api' ), esc_html__( 'create your API Key from here.', 'codexin' ) );
     }
 
     /**
@@ -403,7 +403,7 @@ class CodexinAdminMenu {
 	public function tw_url_callback() {
         printf(
             '<input type="text" class="regular-text cx-core-text" id="tw_url" name="codexin_options_social[tw_url]" value="%s" />',
-            isset( $this->options_social['tw_url'] ) ? esc_attr( $this->options_social['tw_url']) : ''
+            isset( $this->options_social['tw_url'] ) ? esc_attr( $this->options_social['tw_url'] ) : ''
         );
         printf( '&nbsp;&nbsp;<span class="description">%s</span>', esc_html__( 'Please Insert Your Twitter Profile URL', 'codexin' ) );
     }
@@ -411,7 +411,7 @@ class CodexinAdminMenu {
 	public function fb_url_callback() {
         printf(
             '<input type="text" class="regular-text cx-core-text" id="fb_url" name="codexin_options_social[fb_url]" value="%s" />',
-            isset( $this->options_social['fb_url'] ) ? esc_attr( $this->options_social['fb_url']) : ''
+            isset( $this->options_social['fb_url'] ) ? esc_attr( $this->options_social['fb_url'] ) : ''
         );
         printf( '&nbsp;&nbsp;<span class="description">%s</span>', esc_html__( 'Please Insert Your Facebook Profile URL', 'codexin' ) );
     }
@@ -419,7 +419,7 @@ class CodexinAdminMenu {
 	public function in_url_callback() {
         printf(
             '<input type="text" class="regular-text cx-core-text" id="in_url" name="codexin_options_social[in_url]" value="%s" />',
-            isset( $this->options_social['in_url'] ) ? esc_attr( $this->options_social['in_url']) : ''
+            isset( $this->options_social['in_url'] ) ? esc_attr( $this->options_social['in_url'] ) : ''
         );
         printf( '&nbsp;&nbsp;<span class="description">%s</span>', esc_html__( 'Please Insert Your Instagram Profile URL', 'codexin' ) );
     }
@@ -427,7 +427,7 @@ class CodexinAdminMenu {
 	public function pin_url_callback() {
         printf(
             '<input type="text" class="regular-text cx-core-text" id="pin_url" name="codexin_options_social[pin_url]" value="%s" />',
-            isset( $this->options_social['pin_url'] ) ? esc_attr( $this->options_social['pin_url']) : ''
+            isset( $this->options_social['pin_url'] ) ? esc_attr( $this->options_social['pin_url'] ) : ''
         );
         printf( '&nbsp;&nbsp;<span class="description">%s</span>', esc_html__( 'Please Insert Your Pinterest Profile URL', 'codexin' ) );
     }
@@ -435,7 +435,7 @@ class CodexinAdminMenu {
 	public function be_url_callback() {
         printf(
             '<input type="text" class="regular-text cx-core-text" id="be_url" name="codexin_options_social[be_url]" value="%s" />',
-            isset( $this->options_social['be_url'] ) ? esc_attr( $this->options_social['be_url']) : ''
+            isset( $this->options_social['be_url'] ) ? esc_attr( $this->options_social['be_url'] ) : ''
         );
         printf( '&nbsp;&nbsp;<span class="description">%s</span>', esc_html__( 'Please Insert Your Behance Profile URL', 'codexin' ) );
     }
@@ -443,7 +443,7 @@ class CodexinAdminMenu {
 	public function gp_url_callback() {
         printf(
             '<input type="text" class="regular-text cx-core-text" id="gp_url" name="codexin_options_social[gp_url]" value="%s" />',
-            isset( $this->options_social['gp_url'] ) ? esc_attr( $this->options_social['gp_url']) : ''
+            isset( $this->options_social['gp_url'] ) ? esc_attr( $this->options_social['gp_url'] ) : ''
         );
         printf( '&nbsp;&nbsp;<span class="description">%s</span>', esc_html__( 'Please Insert Your GooglePlus Profile URL', 'codexin' ) );
     }
@@ -451,7 +451,7 @@ class CodexinAdminMenu {
 	public function li_url_callback() {
         printf(
             '<input type="text" class="regular-text cx-core-text" id="li_url" name="codexin_options_social[li_url]" value="%s" />',
-            isset( $this->options_social['li_url'] ) ? esc_attr( $this->options_social['li_url']) : ''
+            isset( $this->options_social['li_url'] ) ? esc_attr( $this->options_social['li_url'] ) : ''
         );
         printf( '&nbsp;&nbsp;<span class="description">%s</span>', esc_html__( 'Please Insert Your LinkedIn Profile URL', 'codexin' ) );
     }
@@ -459,7 +459,7 @@ class CodexinAdminMenu {
 	public function yt_url_callback() {
         printf(
             '<input type="text" class="regular-text cx-core-text" id="yt_url" name="codexin_options_social[yt_url]" value="%s" />',
-            isset( $this->options_social['yt_url'] ) ? esc_attr( $this->options_social['yt_url']) : ''
+            isset( $this->options_social['yt_url'] ) ? esc_attr( $this->options_social['yt_url'] ) : ''
         );
         printf( '&nbsp;&nbsp;<span class="description">%s</span>', esc_html__( 'Please Insert Your YouTube Profile URL', 'codexin' ) );
     }
@@ -467,7 +467,7 @@ class CodexinAdminMenu {
 	public function sk_url_callback() {
         printf(
             '<input type="text" class="regular-text cx-core-text" id="sk_url" name="codexin_options_social[sk_url]" value="%s" />',
-            isset( $this->options_social['sk_url'] ) ? esc_attr( $this->options_social['sk_url']) : ''
+            isset( $this->options_social['sk_url'] ) ? esc_attr( $this->options_social['sk_url'] ) : ''
         );
         printf( '&nbsp;&nbsp;<span class="description">%s</span>', esc_html__( 'Please Insert Your Skype Profile URL', 'codexin' ) );
     }
@@ -481,9 +481,9 @@ class CodexinAdminMenu {
 	public function gmap_api_callback() {
         printf(
             '<input type="text" class="regular-text cx-core-text" id="gmap_api" name="codexin_options_gmap_api[gmap_api]" value="%s" />',
-            isset( $this->options_gmap_api['gmap_api'] ) ? esc_attr( $this->options_gmap_api['gmap_api']) : ''
+            isset( $this->options_gmap_api['gmap_api'] ) ? esc_attr( $this->options_gmap_api['gmap_api'] ) : ''
         );
-        printf( '&nbsp;&nbsp;<span class="description">%1$s<a href="%2$s" target="_blank">%3$s</a></span>', esc_html__( 'Generate Your Google Map API Key from ', 'codexin' ), esc_url('https://developers.google.com/maps/documentation/javascript/get-api-key'), esc_html__('here', 'codexin' ) );
+        printf( '&nbsp;&nbsp;<span class="description">%1$s<a href="%2$s" target="_blank">%3$s</a></span>', esc_html__( 'Generate Your Google Map API Key from ', 'codexin' ), esc_url( 'https://developers.google.com/maps/documentation/javascript/get-api-key' ), esc_html__( 'here', 'codexin' ) );
     }
 
 
@@ -495,15 +495,15 @@ class CodexinAdminMenu {
     public function tw_username_callback() {
         printf(
             '<input type="text" class="regular-text cx-core-text" id="tw_username" name="codexin_options_twitter_api[tw_username]" value="%s" />',
-            isset( $this->options_tw_api['tw_username'] ) ? esc_attr( $this->options_tw_api['tw_username']) : ''
+            isset( $this->options_tw_api['tw_username'] ) ? esc_attr( $this->options_tw_api['tw_username'] ) : ''
         );
-        printf( '&nbsp;&nbsp;<span class="description">%s</span>', esc_html__( 'Please Insert Your Twitter User Name (without \'@\')', 'codexin' ) );
+        printf( '&nbsp;&nbsp;<span class="description">%s</span>', esc_html__( 'Please Insert Your Twitter User Name (without \'@\' )', 'codexin' ) );
     }
 
     public function tw_acc_token_callback() {
         printf(
             '<input type="password" class="regular-text cx-core-text" id="tw_acc_token" name="codexin_options_twitter_api[tw_acc_token]" value="%s" />',
-            isset( $this->options_tw_api['tw_acc_token'] ) ? esc_attr( $this->options_tw_api['tw_acc_token']) : ''
+            isset( $this->options_tw_api['tw_acc_token'] ) ? esc_attr( $this->options_tw_api['tw_acc_token'] ) : ''
         );
         printf( '&nbsp;&nbsp;<span class="description">%s</span>', esc_html__( 'Please Insert Your Twitter OAuth Access Token', 'codexin' ) );
     }
@@ -511,7 +511,7 @@ class CodexinAdminMenu {
     public function tw_acc_token_sec_callback() {
         printf(
             '<input type="password" class="regular-text cx-core-text" id="tw_acc_token_sec" name="codexin_options_twitter_api[tw_acc_token_sec]" value="%s" />',
-            isset( $this->options_tw_api['tw_acc_token_sec'] ) ? esc_attr( $this->options_tw_api['tw_acc_token_sec']) : ''
+            isset( $this->options_tw_api['tw_acc_token_sec'] ) ? esc_attr( $this->options_tw_api['tw_acc_token_sec'] ) : ''
         );
         printf( '&nbsp;&nbsp;<span class="description">%s</span>', esc_html__( 'Please Insert Your Twitter OAuth Access Token Secret', 'codexin' ) );
     }
@@ -519,7 +519,7 @@ class CodexinAdminMenu {
     public function tw_cons_key_callback() {
         printf(
             '<input type="password" class="regular-text cx-core-text" id="tw_cons_key" name="codexin_options_twitter_api[tw_cons_key]" value="%s" />',
-            isset( $this->options_tw_api['tw_cons_key'] ) ? esc_attr( $this->options_tw_api['tw_cons_key']) : ''
+            isset( $this->options_tw_api['tw_cons_key'] ) ? esc_attr( $this->options_tw_api['tw_cons_key'] ) : ''
         );
         printf( '&nbsp;&nbsp;<span class="description">%s</span>', esc_html__( 'Please Insert Your Twitter Consumer Key', 'codexin' ) );
     }
@@ -527,7 +527,7 @@ class CodexinAdminMenu {
     public function tw_cons_secret_callback() {
         printf(
             '<input type="password" class="regular-text cx-core-text" id="tw_cons_secret" name="codexin_options_twitter_api[tw_cons_secret]" value="%s" />',
-            isset( $this->options_tw_api['tw_cons_secret'] ) ? esc_attr( $this->options_tw_api['tw_cons_secret']) : ''
+            isset( $this->options_tw_api['tw_cons_secret'] ) ? esc_attr( $this->options_tw_api['tw_cons_secret'] ) : ''
         );
         printf( '&nbsp;&nbsp;<span class="description">%s</span>', esc_html__( 'Please Insert Your Twitter Consumer Secret', 'codexin' ) );
     }
@@ -541,7 +541,7 @@ class CodexinAdminMenu {
     public function mc_api_callback() {
         printf(
             '<input type="password" class="regular-text cx-core-text" id="mc_api" name="codexin_options_mailchimp_opt[mc_api]" value="%s" />',
-            isset( $this->options_mc_opt['mc_api'] ) ? esc_attr( $this->options_mc_opt['mc_api']) : ''
+            isset( $this->options_mc_opt['mc_api'] ) ? esc_attr( $this->options_mc_opt['mc_api'] ) : ''
         );
         printf( '&nbsp;&nbsp;<span class="description">%s</span>', esc_html__( 'Please Insert Your MailChimp API Key', 'codexin' ) );
     }
@@ -549,19 +549,19 @@ class CodexinAdminMenu {
     public function mc_lists_callback() {
 
         $api_key = $this->options_mc_opt['mc_api'];
-        if ( isset ( $api_key ) && !empty ( $api_key ) ) {
-            $mcapi = new MCAPI($api_key);
+        if( isset( $api_key ) && ! empty( $api_key ) ) {
+            $mcapi = new MCAPI( $api_key);
             $lists = $mcapi->lists();
 
-            if( !$lists['data'] ) {
-                echo '<p>Enter a valid MailChimp API Key</p>';
+            if( ! $lists['data'] ) {
+                echo '<p>'. esc_html__( 'Either you have no Email Lists or your Mailchimp API Key is incorrect.', 'codexin' ) .'</p>';
             } else {
 
                 echo "<ul class='cx_mailchimp_lists' style='margin-top:7px'>";
                 $i = 1;
 
-                printf( '<li style="margin-bottom:15px;">%1$s ' . $lists['total'] . ' %2$s</li>', esc_html__( 'Following', 'codexin' ), esc_html__( 'lists are found with your MailChimp Account. You can use any of them in the Codexin MailChimp widget.', 'codexin' ));
-                foreach ($lists['data'] as $key => $value) {
+                printf( '<li style="margin-bottom:15px;">%1$s ' . $lists['total'] . ' %2$s</li>', esc_html__( 'Following', 'codexin' ), esc_html__( 'lists are found with your MailChimp Account. You can use any of them in the Codexin MailChimp widget.', 'codexin' ) );
+                foreach( $lists['data'] as $key => $value) {
                     printf(
                         '<li>'. $i .'.&nbsp;<b>%1$s</b> ( <b>List ID:</b> %2$s, <b>Subscribers:</b> %3$s )</li>',
                         $value['name'],
@@ -573,7 +573,7 @@ class CodexinAdminMenu {
                 echo "</ul>";
             }
         } else {
-            echo '<p>Enter a valid MailChimp API Key</p>';
+            echo '<p>'. esc_html__( 'Enter a valid MailChimp API Key', 'codexin' ) .'</p>';
         }
 
     }
@@ -581,17 +581,17 @@ class CodexinAdminMenu {
     public function mc_success_callback() {
         printf(
             '<input type="text" class="large-text cx-core-text" id="mc_success" name="codexin_options_mailchimp_opt[mc_success]" value="%s" />',
-            isset( $this->options_mc_opt['mc_success'] ) ? esc_attr( $this->options_mc_opt['mc_success']) : esc_html__( 'You have been successfully subscribed. Thank You.', 'codexin' )
+            isset( $this->options_mc_opt['mc_success'] ) ? esc_attr( $this->options_mc_opt['mc_success'] ) : esc_html__( 'You have been successfully subscribed. Thank You.', 'codexin' )
         );
-        printf( '<p class="description">%s</p>', esc_html__( 'The message that is shown when an email address is successfully subscribed (When double opt-In is disabled).', 'codexin' ) );
+        printf( '<span class="description">%s</span>', esc_html__( 'The message that is shown when an email address is successfully subscribed (When double opt-In is disabled).', 'codexin' ) );
     }
 
     public function mcd_success_callback() {
         printf(
             '<input type="text" class="large-text cx-core-text" id="mcd_success" name="codexin_options_mailchimp_opt[mcd_success]" value="%s" />',
-            isset( $this->options_mc_opt['mcd_success'] ) ? esc_attr( $this->options_mc_opt['mcd_success']) : esc_html__( 'Your sign-up request was successful! Please check your email inbox to confirm. Thank You.', 'codexin' )
+            isset( $this->options_mc_opt['mcd_success'] ) ? esc_attr( $this->options_mc_opt['mcd_success'] ) : esc_html__( 'Your sign-up request was successful! Please check your email inbox to confirm. Thank You.', 'codexin' )
         );
-        printf( '<p class="description">%s</p>', esc_html__( 'The message that is shown when an email address is successfully subscribed (When double opt-In is enabled).', 'codexin' ) );
+        printf( '<span class="description">%s</span>', esc_html__( 'The message that is shown when an email address is successfully subscribed (When double opt-In is enabled).', 'codexin' ) );
     }
 
     /**
@@ -604,7 +604,7 @@ class CodexinAdminMenu {
         echo '<p><b>'. esc_html__( '1. Social Media Profile', 'codexin' ) .'</b> - '. esc_html__( 'All of your \'Social Media Profile\' information to show thoughout the theme.' ) .'</p>';
         echo '<p><b>'. esc_html__( '2. Google Map API', 'codexin' ) .'</b> - '. esc_html__( '\'Google Map API\' information to activate google map in the theme.' ) .'</p>';
         echo '<p><b>'. esc_html__( '3. Twitter API', 'codexin' ) .'</b> - '. esc_html__( '\'Twitter API\' information to connect with Twitter.' ) .'</p>';
-        echo '<p><b>'. esc_html__( '4. Mailchimp Settings', 'codexin' ) .'</b> - '. esc_html__( '\'Mailchimp API\' information to connect with Mailchimp service.' ) .'</p>';
+        echo '<p><b>'. esc_html__( '4. Mailchimp Settings', 'codexin' ) .'</b> - '. esc_html__( '\'Mailchimp API\' information to connect with Mailchimp service and look at the Email Lists at a glace.' ) .'</p>';
     }
 
     /**
@@ -698,6 +698,7 @@ class CodexinAdminMenu {
 
 } 
 
+// Instantiating the Admin Menu Class
 $codexin_admin = new CodexinAdminMenu;
 
 

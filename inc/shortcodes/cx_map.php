@@ -160,7 +160,7 @@ function cx_map_kc() {
 										'grey' 			=> esc_html__( 'Grey', 'codexin' ),
 										'retro' 		=> esc_html__( 'Retro', 'codexin' ),
 										'dark'			=> esc_html__( 'Dark', 'codexin' ),
-										'bw' 			=> esc_html__( 'Black & White', 'codexin' ),
+										'bw' 			=> esc_html__( 'Black and White', 'codexin' ),
 										'light' 		=> esc_html__( 'Light', 'codexin' ),
 										'blue' 			=> esc_html__( 'Blue', 'codexin' ),
 										'DarkTurquoise' => esc_html__( 'Dark Turquoise', 'codexin' ),

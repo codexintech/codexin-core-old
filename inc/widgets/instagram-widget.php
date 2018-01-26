@@ -1,14 +1,13 @@
 <?php
 
+/**
+ * Widget Class -  Instagram
+ *
+ * @since 1.0
+ */
 
-
-/*
-    ==========================================
-        CODEXIN INSTAGRAM WIDGET CLASS
-    ==========================================
-*/
-
-
+// Do not allow directly accessing this file.
+defined( 'ABSPATH' ) OR die( esc_html__( 'This script cannot be accessed directly.', 'codexin' ) );
 
 class Codexin_Instagram_Widget extends WP_Widget {
     
@@ -17,67 +16,11 @@ class Codexin_Instagram_Widget extends WP_Widget {
 
         // Initializing the basic parameters
         $widget_ops = array(
-            'classname' => 'codexin-instagram-widget',
-            'description' => esc_html('Displays Your Latest Instagrams', 'codexin'),
+            'classname'     => esc_attr( 'codexin-instagram-widget' ),
+            'description'   => esc_html__( 'Displays Your Latest Instagrams', 'codexin' ),
         );
-        parent::__construct( 'codexin_instagram_widget', esc_html__('Codexin: Instagram Widget', 'codexin'), $widget_ops );
+        parent::__construct( 'codexin_instagram_widget', esc_html__( 'Codexin: Instagram Widget', 'codexin' ), $widget_ops );
 
-    }
-    
-    // Front-end display of widget
-    public function widget( $args, $instance ) {
-
-        // Assigning or updating the values
-        $title    = ( ! empty( $instance['title'] ) ) ? apply_filters( 'widget_title', $instance['title'] ) : '';
-        $username = ( ! empty( $instance['username'] ) ) ? esc_attr( $instance['username'] ) : '';
-
-        // Get instagrams
-        $cx_instagram = $this->get_instagrams_data( array(
-            'user_id'     => $instance['user_id'],
-            'client_id'   => $instance['client_id'],
-            'accss_token' => $instance['accss_token'],
-            'count'       => $instance['count'],
-            'flush_cache' => false,
-        ) );
-
-        // Check the parameters
-        if ( false !== $cx_instagram ) : ?>
-
-            <?php
-                printf( '%s', $args['before_widget'] );
-                printf( '%s' . esc_html( $title ) . '%s', $args['before_title'], $args['after_title'] );
-                $ig_image_lo_res = apply_filters( 'codexin_lo_image_res', 'thumbnail' );
-                $ig_image_hi_res = apply_filters( 'codexin_hi_image_res', 'standard_resolution' );
-            ?>
-
-            <div class="instagram-images image-pop-up">
-
-                <?php 
-                // Looping through the parameters
-                foreach( $cx_instagram['data'] as $key => $ig_image ) {
-                    echo apply_filters( 'codexin_ig_image_html', sprintf( 
-                        '<figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-                            <a href="%1$s" itemprop="contentUrl" data-size="640x640">
-                                <img src="%2$s" itemprop="thumbnail" alt="Instagram Image" />
-                                <div class="hoverable"></div>
-                            </a>
-                            <figcaption itemprop="caption description">%3$s</figcaption>
-                        </figure>',
-                        $ig_image['images'][ $ig_image_hi_res ]['url'],
-                        $ig_image['images'][ $ig_image_lo_res ]['url'],
-                        $ig_image['caption']['text']
-                    ), $ig_image );
-                }
-                ?>
-
-            </div>
-            <a href="https://instagram.com/<?php echo esc_html( $username ); ?>" class='more' target='_blank'><i><?php printf( esc_html__( 'Follow %1$s on Instagram', 'codexin' ), esc_html( $username ) ); ?></i></a>
-
-            <?php printf( '%s', $args['after_widget'] ); ?>
-
-        <?php elseif( ( defined( 'WP_DEBUG' ) && true === WP_DEBUG ) && ( defined( 'WP_DEBUG_DISPLAY' ) && false !== WP_DEBUG_DISPLAY ) ): ?>
-            <div class="error"><p><?php esc_html_e( 'Error: We were unable to fetch your instagram feed.', 'codexin' ); ?></p></div>
-        <?php endif;
     }
 
     // Back-end display of widget
@@ -94,65 +37,65 @@ class Codexin_Instagram_Widget extends WP_Widget {
 
         $this->form_input(
             array(
-                'label'       => esc_html__( 'Widget Title:', 'codexin'),
+                'label'       => esc_html__( 'Widget Title:', 'codexin' ),
                 'name'        => $this->get_field_name( 'title' ),
                 'id'          => $this->get_field_id( 'title' ),
                 'type'        => 'text',
                 'value'       => $title,
-                'placeholder' => 'Instagram Feed'
+                'placeholder' => esc_html__( 'Ex: Instagram Feed', 'codexin' )
             )
         );
         $this->form_input(
             array(
-                'label'       => esc_html__( 'Username:', 'codexin'),
+                'label'       => esc_html__( 'Username:', 'codexin' ),
                 'name'        => $this->get_field_name( 'username' ),
                 'id'          => $this->get_field_id( 'username' ),
                 'type'        => 'text',
                 'value'       => $username,
-                'placeholder' => 'Insert User Name'
+                'placeholder' => esc_html__( 'Insert User Name', 'codexin' )
             )
         );
         $this->form_input(
             array(
-                'label'       => esc_html__( 'User ID:', 'codexin'),
+                'label'       => esc_html__( 'User ID:', 'codexin' ),
                 'name'        => $this->get_field_name( 'user_id' ),
                 'id'          => $this->get_field_id( 'user_id' ),
                 'type'        => 'text',
                 'value'       => $user_id,
-                'placeholder' => 'Insert User ID',
+                'placeholder' => esc_html__( 'Insert User ID', 'codexin' ),
                 'desc'        => sprintf( __( 'Lookup your User ID from <a href="%1$s" target="_blank">here</a>', 'codexin' ), esc_url( '//ershad7.com/InstagramUserID/' ) )
             )
         );
         $this->form_input(
             array(
-                'label'       => esc_html__( 'Access Token:', 'codexin'),
+                'label'       => esc_html__( 'Access Token:', 'codexin' ),
                 'name'        => $this->get_field_name( 'accss_token' ),
                 'id'          => $this->get_field_id( 'accss_token' ),
                 'type'        => 'text',
                 'value'       => $accss_token,
-                'placeholder' => 'Insert Access Token',
+                'placeholder' => esc_html__( 'Insert Access Token', 'codexin' ),
                 'desc'        => sprintf( __( 'Generate Your Access Token from <a href="%1$s" target="_blank">here</a>', 'codexin' ), esc_url( '//instagram.pixelunion.net/' ) )
             )
         );
         $this->form_input(
             array(
-                'label'       => esc_html__( 'Client ID:', 'codexin'),
+                'label'       => esc_html__( 'Client ID:', 'codexin' ),
                 'name'        => $this->get_field_name( 'client_id' ),
                 'id'          => $this->get_field_id( 'client_id' ),
                 'type'        => 'text',
                 'value'       => $client_id,
-                'placeholder' => 'Insert Client ID',
+                'placeholder' => esc_html__( 'Insert Client ID', 'codexin' ),
                 'desc'        => sprintf( __( 'Register a new client from <a href="%1$s" target="_blank">here</a>', 'codexin' ), esc_url( '//instagram.com/developer/clients/manage/' )
             ) )
         );
         $this->form_input(
             array(
-                'label'       => esc_html__( 'Number of Photos to be Shown:', 'codexin'),
+                'label'       => esc_html__( 'Number of Photos to be Shown:', 'codexin' ),
                 'name'        => $this->get_field_name( 'count' ),
                 'id'          => $this->get_field_id( 'count' ),
                 'type'        => 'number',
                 'value'       => $count,
-                'placeholder' => esc_html__('9', 'codexin')
+                'placeholder' => esc_html__( '9', 'codexin' )
             )
         );
 
@@ -199,6 +142,66 @@ class Codexin_Instagram_Widget extends WP_Widget {
         );
     }
 
+    // Front-end display of widget
+    public function widget( $args, $instance ) {
+
+        // Assigning or updating the values
+        $title    = ( ! empty( $instance['title'] ) ) ? apply_filters( 'widget_title', $instance['title'] ) : '';
+        $username = ( ! empty( $instance['username'] ) ) ? esc_attr( $instance['username'] ) : '';
+
+        // Get instagrams
+        $cx_instagram = $this->get_instagrams_data( array(
+            'user_id'     => $instance['user_id'],
+            'client_id'   => $instance['client_id'],
+            'accss_token' => $instance['accss_token'],
+            'count'       => $instance['count'],
+            'flush_cache' => false,
+        ) );
+
+        // Check the parameters
+        if ( false !== $cx_instagram ) { ?>
+
+            <?php
+                printf( '%s', $args['before_widget'] );
+
+                if( ! empty( $title ) ) {         
+                    printf( '%s' . apply_filters( 'widget_title', $title ) . '%s', $args[ 'before_title' ], $args[ 'after_title' ]);          
+                }
+
+                $ig_image_lo_res = apply_filters( 'codexin_lo_image_res', 'thumbnail' );
+                $ig_image_hi_res = apply_filters( 'codexin_hi_image_res', 'standard_resolution' );
+            ?>
+
+            <div class="instagram-images image-pop-up">
+
+                <?php 
+                // Looping through the parameters
+                foreach( $cx_instagram['data'] as $key => $ig_image ) {
+                    echo apply_filters( 'codexin_ig_image_html', sprintf( 
+                        '<figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+                            <a href="%1$s" itemprop="contentUrl" data-size="640x640">
+                                <img src="%2$s" itemprop="thumbnail" alt="Instagram Image" />
+                                <div class="hoverable"></div>
+                            </a>
+                            <figcaption itemprop="caption description">%3$s</figcaption>
+                        </figure>',
+                        esc_url( $ig_image['images'][ $ig_image_hi_res ]['url'] ),
+                        esc_url( $ig_image['images'][ $ig_image_lo_res ]['url'] ),
+                        esc_html( $ig_image['caption']['text'] )
+                    ), $ig_image );
+                }
+                ?>
+
+            </div>
+            <a href="<?php echo esc_url( '//instagram.com/'. esc_html( $username ) ); ?>" class='more' target='_blank'><i><?php printf( esc_html__( 'Follow %1$s on Instagram', 'codexin' ), esc_html( $username ) ); ?></i></a>
+
+            <?php printf( '%s', $args['after_widget'] ); ?>
+
+        <?php } elseif( ( defined( 'WP_DEBUG' ) && true === WP_DEBUG ) && ( defined( 'WP_DEBUG_DISPLAY' ) && false !== WP_DEBUG_DISPLAY ) ) { ?>
+            <div class="cx-error"><p><?php esc_html_e( 'Error: We were unable to fetch your instagram feed.', 'codexin' ); ?></p></div>
+        <?php }
+    }
+
 
     // Getting data from Instagram API.
     public function get_instagrams_data( $args = array() ) {
@@ -212,7 +215,7 @@ class Codexin_Instagram_Widget extends WP_Widget {
 
         // Check if all the fields are filled up
         if ( empty( $client_id ) || empty( $user_id ) || empty( $accss_token ) ) {
-            echo '<div class="error"><p>' . esc_html__('Error: Please Provide Valid Instagram User ID, Client ID and Access Token', 'codexin') . '</p></div>';
+            echo '<div class="cx-error"><p>' . esc_html__( 'Error: Please Provide Valid Instagram User ID, Client ID and Access Token.', 'codexin' ) . '</p></div>';
             return false;
         }
 
@@ -247,7 +250,7 @@ class Codexin_Instagram_Widget extends WP_Widget {
             $data = json_decode( wp_remote_retrieve_body( $ig_ping ), true );
 
             // Check the result whether its an array
-            if ( $data && !is_array( $data ) ) {
+            if ( $data && ! is_array( $data ) ) {
                 return false;
             }
 

@@ -35,7 +35,7 @@ class CodexinShortcodeloader {
 	public function codexin_shortcodes() {
 
 		$shortcodes = self::cx_sc_names();
-		foreach ($shortcodes as $shortcode) {
+		foreach( $shortcodes as $shortcode ) {
 			add_shortcode( $shortcode, $shortcode . '_shortcode' );
 		}
 			
@@ -45,7 +45,7 @@ class CodexinShortcodeloader {
 	public function cx_kc_mapper() {
 
 		$cx_names = self::cx_sc_names();
-		foreach ($cx_names as $cx_name) {
+		foreach( $cx_names as $cx_name ) {
 			add_action( 'init', $cx_name . '_kc' , 99 );
 		}
 
@@ -59,7 +59,6 @@ class CodexinShortcodeloader {
 	}
 
 }
-
 
 // Instantiaing the class
 $shortcode_loader = new CodexinShortcodeloader;

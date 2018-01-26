@@ -58,7 +58,7 @@ function codexin_custompost_type() {
 									'thumbnail',
 									'comments'
 								),
-		'taxonomies'			=> array( ''),
+		'taxonomies'			=> array( '' ),
 		'menu_position'			=> 5,
 		'exclude_from_search'	=> false
 	);
@@ -106,7 +106,7 @@ function codexin_custompost_type() {
 									'excerpt',
 									'thumbnail'
 								),
-		'taxonomies'			=> array(''),
+		'taxonomies'			=> array( '' ),
 		'menu_position'			=> 11,
 		'exclude_from_search'	=> false
 	);
@@ -152,7 +152,7 @@ function codexin_custompost_type() {
 									'title',
 									'thumbnail'
 								),
-		'taxonomies'			=> array(''),
+		'taxonomies'			=> array( '' ),
 		'menu_position'			=> 12,
 		'exclude_from_search'	=> false
 	);
@@ -200,7 +200,7 @@ function codexin_custompost_type() {
 									'editor',
 									'excerpt'
 								),
-		'taxonomies'			=> array(''),
+		'taxonomies'			=> array( '' ),
 		'menu_position'			=> 5,
 		'exclude_from_search'	=> false
 	);
@@ -247,7 +247,7 @@ function codexin_custompost_type() {
 									'excerpt',
 									'thumbnail',
 								),
-		'taxonomies'			=> array( ''),
+		'taxonomies'			=> array( '' ),
 		'menu_position'			=> 7,
 		'exclude_from_search'	=> false
 	);
@@ -259,7 +259,7 @@ function codexin_custompost_type() {
 } // End codexin_custompost_type()
 
 
-add_action('init', 'codexin_cpt_taxonomies');
+add_action( 'init', 'codexin_cpt_taxonomies' );
 /**
  * Function to register all the Custom Taxonomies for Custom Post Type
  *
