@@ -158,7 +158,7 @@ class Codexin_Twitter_Widget extends WP_Widget {
 			if( $cx_twitter && is_array( $cx_twitter ) ) {
 			?>
 				<div class="twitter-widget">
-					<div class="cx-tweets-container" id="twitter_<?php echo $args['widget_id']; ?>">
+					<div class="cx-tweets-container" id="twitter_<?php echo esc_attr( $args['widget_id'] ); ?>">
 						<?php foreach( $cx_twitter as $cx_tweet ) { ?>
 							<div class="twitter-feed-wrapper clearfix">
 								<?php if( 'on' == $instance[ 'tw_profile' ] ) { ?>
@@ -184,7 +184,7 @@ class Codexin_Twitter_Widget extends WP_Widget {
 										$latestTweet = preg_replace( '/https:\/\/([a-z0-9_\.\-\+\&\!\#\~\/\,]+)/i', '<a href="//$1" target="_blank">https://$1</a>', $latestTweet );
 										$latestTweet = preg_replace( '/@([a-z0-9_]+)/i', '<a href="//twitter.com/$1" target="_blank">@$1</a>', $latestTweet );
 										$latestTweet = preg_replace( '/#(\w+)/', '<a href="//twitter.com/hashtag/$1?src=hash" target="_blank">#$1</a>', $latestTweet );
-										echo $latestTweet;
+										printf( '%s', $latestTweet );
 										?>
 									</p>
 									<?php

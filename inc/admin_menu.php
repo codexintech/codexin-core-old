@@ -59,7 +59,7 @@ class CodexinAdminMenu {
 	    <div id="codexin_core" class="wrap">    
 	        <h1><?php esc_html_e( 'Codexin Core Options', 'codexin' ) ?></h1>
 
-	        <p class="description"><?php printf( '%1$s<b>%2$s</b>%3$s', esc_html__( 'These settings showcases the core functionality of the ', 'codexin' ), esc_html__( ' Codexin Core ' , 'codexin' ), esc_html( ' Plugin.', 'codexin' ) ) ?></p>
+	        <p class="description"><?php printf( '%1$s<b>%2$s</b>%3$s', esc_html__( 'These settings showcases the core functionality of the ', 'codexin' ), esc_html__( ' Codexin Core ' , 'codexin' ), esc_html__( ' Plugin.', 'codexin' ) ) ?></p>
 
             <h2 class="nav-tab-wrapper">
 				<a href="<?php echo admin_url( 'admin.php?page=codexin-options' ); ?>" class="nav-tab<?php if( ! isset( $_GET['action'] ) || isset( $_GET['action'] ) && 'social' != $_GET['action']  && 'api' != $_GET['action'] && 'twitter_api' != $_GET['action'] && 'mailchimp_opt' != $_GET['action'] ) echo ' nav-tab-active'; ?>"><?php esc_html_e( 'General', 'codexin' ); ?></a>
@@ -372,7 +372,7 @@ class CodexinAdminMenu {
 
     // General section information
 	public function general_section_info() {
-		echo '<h1>Welcome to Codexin Core Options. </h1>';
+		echo '<h1>'. esc_html__( 'Welcome to Codexin Core Options.', 'codexin' ) .'</h1>';
 	}
 
     // Social section information
@@ -601,10 +601,10 @@ class CodexinAdminMenu {
     **/
     public function placeholder_callback() {
 		echo '<p class="description" style="margin-bottom:10px">'. esc_html__( 'Thank you for using \'Reveal\' Theme. In this Options Page, you will be able to store all the following information to be able to use with the theme.', 'codexin' ) .'</p>';
-        echo '<p><b>'. esc_html__( '1. Social Media Profile', 'codexin' ) .'</b> - '. esc_html__( 'All of your \'Social Media Profile\' information to show thoughout the theme.' ) .'</p>';
-        echo '<p><b>'. esc_html__( '2. Google Map API', 'codexin' ) .'</b> - '. esc_html__( '\'Google Map API\' information to activate google map in the theme.' ) .'</p>';
-        echo '<p><b>'. esc_html__( '3. Twitter API', 'codexin' ) .'</b> - '. esc_html__( '\'Twitter API\' information to connect with Twitter.' ) .'</p>';
-        echo '<p><b>'. esc_html__( '4. Mailchimp Settings', 'codexin' ) .'</b> - '. esc_html__( '\'Mailchimp API\' information to connect with Mailchimp service and look at the Email Lists at a glace.' ) .'</p>';
+        echo '<p><b>'. esc_html__( '1. Social Media Profile', 'codexin' ) .'</b> - '. esc_html__( 'All of your \'Social Media Profile\' information to show thoughout the theme.', 'codexin' ) .'</p>';
+        echo '<p><b>'. esc_html__( '2. Google Map API', 'codexin' ) .'</b> - '. esc_html__( '\'Google Map API\' information to activate google map in the theme.', 'codexin' ) .'</p>';
+        echo '<p><b>'. esc_html__( '3. Twitter API', 'codexin' ) .'</b> - '. esc_html__( '\'Twitter API\' information to connect with Twitter.', 'codexin' ) .'</p>';
+        echo '<p><b>'. esc_html__( '4. Mailchimp Settings', 'codexin' ) .'</b> - '. esc_html__( '\'Mailchimp API\' information to connect with Mailchimp service and look at the Email Lists at a glace.', 'codexin' ) .'</p>';
     }
 
     /**
@@ -693,8 +693,6 @@ class CodexinAdminMenu {
 
         return $new_input;
     }
-
-
 
 } 
 

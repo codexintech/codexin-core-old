@@ -768,7 +768,7 @@ function cx_events_mini_kc() {
 
  										esc_html__( 'Title', 'codexin' ) => array(
  											array( 'property' => 'color', 'label' => esc_html__( 'Color', 'codexin'), 'selector' => '.panel-title a, .events-single-title a'),
- 											array( 'property' => 'color', 'label' => esc_html__( 'Color On Hover' ), 'selector' => '.panel-title a:hover, .events-single-title a:hover'),
+ 											array( 'property' => 'color', 'label' => esc_html__( 'Color On Hover', 'codexin' ), 'selector' => '.panel-title a:hover, .events-single-title a:hover'),
  											array( 'property' => 'font-family', 'label' => esc_html__( 'Font Family', 'codexin'), 'selector' => '.panel-title a, .events-single-title a'),
  											array( 'property' => 'font-size', 'label' => esc_html__( 'Font Size', 'codexin'), 'selector' => '.panel-title a, .events-single-title a'),
  											array( 'property' => 'line-height', 'label' => esc_html__( 'Line Height', 'codexin'), 'selector' => '.panel-title a, .events-single-title a'),

@@ -280,10 +280,10 @@ function codexin_register_meta_boxes( $meta_boxes ) {
         'priority'      => 'high',
         'fields'        => array(
             array(
-                'name'     => esc_html__( 'Header layout', 'reveal' ),
+                'name'     => esc_html__( 'Header layout', 'codexin' ),
                 'type'     => 'image_select',
                 'id'       => $prefix.'header_layout',
-                'desc'     => esc_html__( "Please choose header layout for this page only. If you wish to use the global settings, select the first image named 'Global Header'.", 'reveal' ),
+                'desc'     => esc_html__( "Please choose header layout for this page only. If you wish to use the global settings, select the first image named 'Global Header'.", 'codexin' ),
                 'options'  => array(
                     0 => CODEXIN_CORE_ASSET_DIR . '/images/header/header-0.png',
                     1 => CODEXIN_CORE_ASSET_DIR . '/images/header/header-1.png',

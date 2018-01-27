@@ -81,7 +81,7 @@ function cx_testimonial_mini_shortcode( $atts, $content = null ) {
 									<div class="item">
 										<div class="quote-wrapper clearfix">
 											<div class="quote-author-thumb cx-color-1">
-												<i class="fa <?php echo $testimonial_icon; ?>"></i>
+												<i class="<?php echo esc_attr( $testimonial_icon ); ?>"></i>
 											</div>
 											<div class="quote-text">
 												<p> "<?php echo esc_html( get_the_excerpt() ); ?>" </p>
@@ -607,99 +607,99 @@ function cx_testimonial_mini_kc() {
 										"screens" => "any,1199,991,767,479",
 
 										esc_html__( 'Name', 'codexin' )	=> array(
-											array( 'property' => 'color', 'label' => esc_html__( 'Color' ), 'selector' => '.client-name .title-3, .quote-author-name, .media-title' ),
-											array( 'property' => 'font-family', 'label' => esc_html__( 'Font Family' ), 'selector' => '.client-name .title-3, .quote-author-name, .media-title' ),
-											array( 'property' => 'font-size', 'label' => esc_html__( 'Font Size' ), 'selector' => '.client-name .title-3, .quote-author-name, .media-title' ),
-											array( 'property' => 'text-transform', 'label' => esc_html__( 'Text Transform' ), 'selector' => '.client-name .title-3, .quote-author-name, .media-title' ),
-											array( 'property' => 'text-align', 'label' => esc_html__( 'Text Align' ), 'selector' => '.client-name .title-3, .quote-author-name, .media-title' ),
-											array( 'property' => 'font-weight', 'label' => esc_html__( 'Font Weight' ), 'selector' => '.client-name .title-3, .quote-author-name, .media-title' ),
-											array( 'property' => 'line-height', 'label' => esc_html__( 'Line Height' ), 'selector' => '.client-name .title-3, .quote-author-name, .media-title' ),
-											array( 'property' => 'margin', 'label' => esc_html__( 'Margin' ), 'selector' => '.client-name .title-3, .quote-author-name, .media-title' ),
-											array( 'property' => 'padding', 'label' => esc_html__( 'Padding' ), 'selector' => '.client-name .title-3, .quote-author-name, .media-title' ),
+											array( 'property' => 'color', 'label' => esc_html__( 'Color', 'codexin' ), 'selector' => '.client-name .title-3, .quote-author-name, .media-title' ),
+											array( 'property' => 'font-family', 'label' => esc_html__( 'Font Family', 'codexin' ), 'selector' => '.client-name .title-3, .quote-author-name, .media-title' ),
+											array( 'property' => 'font-size', 'label' => esc_html__( 'Font Size', 'codexin' ), 'selector' => '.client-name .title-3, .quote-author-name, .media-title' ),
+											array( 'property' => 'text-transform', 'label' => esc_html__( 'Text Transform', 'codexin' ), 'selector' => '.client-name .title-3, .quote-author-name, .media-title' ),
+											array( 'property' => 'text-align', 'label' => esc_html__( 'Text Align', 'codexin' ), 'selector' => '.client-name .title-3, .quote-author-name, .media-title' ),
+											array( 'property' => 'font-weight', 'label' => esc_html__( 'Font Weight', 'codexin' ), 'selector' => '.client-name .title-3, .quote-author-name, .media-title' ),
+											array( 'property' => 'line-height', 'label' => esc_html__( 'Line Height', 'codexin' ), 'selector' => '.client-name .title-3, .quote-author-name, .media-title' ),
+											array( 'property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin' ), 'selector' => '.client-name .title-3, .quote-author-name, .media-title' ),
+											array( 'property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin' ), 'selector' => '.client-name .title-3, .quote-author-name, .media-title' ),
 										),
 
 										esc_html__( 'Icon', 'codexin' )	=> array(
-											array( 'property' => 'color', 'label' => 'Icon Color', 'selector' => '.quote-author-thumb i, .quote-author-meta i, .slick-slider-nav .item.slick-current .cx-overlay::before' ),
-											array( 'property' => 'border', 'label' => 'Icon Box Border', 'selector' => '.quote-author-thumb i, .quote-author-meta i' ),
-											array( 'property' => 'border-radius', 'label' => 'Icon Box Border Radius', 'selector' => '.quote-author-thumb i, .quote-author-meta i' ),
-											array( 'property' => 'display', 'label' => 'Display', 'selector' => '.quote-author-thumb i, .quote-author-meta i' ),
-											array( 'property' => 'font-size', 'label' => 'Font Size', 'selector' => '.quote-author-thumb i, .quote-author-meta i, .slick-slider-nav .item.slick-current .cx-overlay::before' ),
-											array( 'property' => 'text-align', 'label' => 'Text Align', 'selector' => '.quote-author-thumb i, .quote-author-meta i' ),
-											array( 'property' => 'line-height', 'label' => 'Line Height', 'selector' => '.quote-author-thumb i, .quote-author-meta i' ),
-											array( 'property' => 'padding', 'label' => 'Padding', 'selector' => '.quote-author-thumb i, .quote-author-meta i' ),
-											array( 'property' => 'margin', 'label' => 'Margin', 'selector' => '.quote-author-thumb i, .quote-author-meta i' ),
+											array( 'property' => 'color', 'label' => esc_html__( 'Icon Color', 'codexin' ), 'selector' => '.quote-author-thumb i, .quote-author-meta i, .slick-slider-nav .item.slick-current .cx-overlay::before' ),
+											array( 'property' => 'border', 'label' => esc_html__( 'Icon Box Border', 'codexin' ), 'selector' => '.quote-author-thumb i, .quote-author-meta i' ),
+											array( 'property' => 'border-radius', 'label' => esc_html__( 'Icon Box Border Radius', 'codexin' ), 'selector' => '.quote-author-thumb i, .quote-author-meta i' ),
+											array( 'property' => 'display', 'label' => esc_html__( 'Display', 'codexin' ), 'selector' => '.quote-author-thumb i, .quote-author-meta i' ),
+											array( 'property' => 'font-size', 'label' => esc_html__( 'Font Size', 'codexin' ), 'selector' => '.quote-author-thumb i, .quote-author-meta i, .slick-slider-nav .item.slick-current .cx-overlay::before' ),
+											array( 'property' => 'text-align', 'label' => esc_html__( 'Text Align', 'codexin' ), 'selector' => '.quote-author-thumb i, .quote-author-meta i' ),
+											array( 'property' => 'line-height', 'label' => esc_html__( 'Line Height', 'codexin' ), 'selector' => '.quote-author-thumb i, .quote-author-meta i' ),
+											array( 'property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin' ), 'selector' => '.quote-author-thumb i, .quote-author-meta i' ),
+											array( 'property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin' ), 'selector' => '.quote-author-thumb i, .quote-author-meta i' ),
 										),
 
 										esc_html__( 'Designation', 'codexin' ) => array(
-											array( 'property' => 'color', 'label' => esc_html__( 'Text Color' ), 'selector' => '.media-designation, .author-designation'),
-											array( 'property' => 'font-family', 'label' => esc_html__( 'Font Family' ), 'selector' => '.media-designation, .author-designation'),
-											array( 'property' => 'font-size', 'label' => esc_html__( 'Font Size' ), 'selector' => '.media-designation, .author-designation'),
-											array( 'property' => 'line-height', 'label' => esc_html__( 'Line Height' ), 'selector' => '.media-designation, .author-designation'),
-											array( 'property' => 'text-align', 'label' => esc_html__( 'Text Align' ), 'selector' => '.media-designation, .author-designation'),
-											array( 'property' => 'margin', 'label' => esc_html__( 'Margin' ), 'selector' => '.media-designation, .author-designation'),
-											array( 'property' => 'padding', 'label' => esc_html__( 'Padding' ), 'selector' => '.media-designation, .author-designation'),
+											array( 'property' => 'color', 'label' => esc_html__( 'Text Color', 'codexin' ), 'selector' => '.media-designation, .author-designation'),
+											array( 'property' => 'font-family', 'label' => esc_html__( 'Font Family', 'codexin' ), 'selector' => '.media-designation, .author-designation'),
+											array( 'property' => 'font-size', 'label' => esc_html__( 'Font Size', 'codexin' ), 'selector' => '.media-designation, .author-designation'),
+											array( 'property' => 'line-height', 'label' => esc_html__( 'Line Height', 'codexin' ), 'selector' => '.media-designation, .author-designation'),
+											array( 'property' => 'text-align', 'label' => esc_html__( 'Text Align', 'codexin' ), 'selector' => '.media-designation, .author-designation'),
+											array( 'property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin' ), 'selector' => '.media-designation, .author-designation'),
+											array( 'property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin' ), 'selector' => '.media-designation, .author-designation'),
 										),
 
 										esc_html__( 'Description', 'codexin' ) => array(
-											array( 'property' => 'color', 'label' => esc_html__( 'Text Color' ), 'selector' => '.quote-text p, .media-texts'),
-											array( 'property' => 'font-family', 'label' => esc_html__( 'Font Family' ), 'selector' => '.quote-text p, .media-text'),
-											array( 'property' => 'font-size', 'label' => esc_html__( 'Font Size' ), 'selector' => '.quote-text p, .media-texts'),
-											array( 'property' => 'line-height', 'label' => esc_html__( 'Line Height' ), 'selector' => '.quote-text p, .media-texts'),
-											array( 'property' => 'text-align', 'label' => esc_html__( 'Text Align' ), 'selector' => '.quote-text p, .media-texts'),
-											array( 'property' => 'font-style', 'label' => esc_html__( 'Font Style' ), 'selector' => '.quote-text p, .media-texts'),
-											array( 'property' => 'margin', 'label' => esc_html__( 'Margin' ), 'selector' => '.quote-text p, .media-texts'),
-											array( 'property' => 'padding', 'label' => esc_html__( 'Padding' ), 'selector' => '.quote-text p, .media-texts'),
+											array( 'property' => 'color', 'label' => esc_html__( 'Text Color', 'codexin' ), 'selector' => '.quote-text p, .media-texts'),
+											array( 'property' => 'font-family', 'label' => esc_html__( 'Font Family', 'codexin' ), 'selector' => '.quote-text p, .media-text'),
+											array( 'property' => 'font-size', 'label' => esc_html__( 'Font Size', 'codexin' ), 'selector' => '.quote-text p, .media-texts'),
+											array( 'property' => 'line-height', 'label' => esc_html__( 'Line Height', 'codexin' ), 'selector' => '.quote-text p, .media-texts'),
+											array( 'property' => 'text-align', 'label' => esc_html__( 'Text Align', 'codexin' ), 'selector' => '.quote-text p, .media-texts'),
+											array( 'property' => 'font-style', 'label' => esc_html__( 'Font Style', 'codexin' ), 'selector' => '.quote-text p, .media-texts'),
+											array( 'property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin' ), 'selector' => '.quote-text p, .media-texts'),
+											array( 'property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin' ), 'selector' => '.quote-text p, .media-texts'),
 										),
 
 										esc_html__( 'Image', 'codexin' ) => array(
 											
-											array( 'property' => 'border', 'label' => 'Image Box Border', 'selector' => '.media-thumb img, .quote-author-thumb, .quote-author-media img'),
-											array( 'property' => 'border-radius', 'label' => 'Image Box Border Radius', 'selector' => '.media-thumb img, .quote-author-thumb, .quote-author-media img'),
-											array( 'property' => 'background-color', 'label' => 'Active Image Overlay Color for Layout-5', 'selector' => '.slick-slider-nav .item.slick-current .cx-overlay'),
-											array( 'property' => 'box-shadow', 'label' => 'Active Image Box Shadow for Layout-5', 'selector' => '.slick-slider-nav .item.slick-current .quote-author-media img'),
-											array( 'property' => 'padding', 'label' => 'Padding', 'selector' => '.media-thumb img, .quote-author-thumb, .quote-author-media img'),
-											array( 'property' => 'margin', 'label' => 'Margin', 'selector' => '.media-thumb img, .quote-author-thumb, .quote-author-media img'),
+											array( 'property' => 'border', 'label' => esc_html__( 'Image Box Border', 'codexin' ), 'selector' => '.media-thumb img, .quote-author-thumb, .quote-author-media img'),
+											array( 'property' => 'border-radius', 'label' => esc_html__( 'Image Box Border Radius', 'codexin' ), 'selector' => '.media-thumb img, .quote-author-thumb, .quote-author-media img'),
+											array( 'property' => 'background-color', 'label' => esc_html__( 'Active Image Overlay Color for Layout-5', 'codexin' ), 'selector' => '.slick-slider-nav .item.slick-current .cx-overlay'),
+											array( 'property' => 'box-shadow', 'label' => esc_html__( 'Active Image Box Shadow for Layout-5', 'codexin' ), 'selector' => '.slick-slider-nav .item.slick-current .quote-author-media img'),
+											array( 'property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin' ), 'selector' => '.media-thumb img, .quote-author-thumb, .quote-author-media img'),
+											array( 'property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin' ), 'selector' => '.media-thumb img, .quote-author-thumb, .quote-author-media img'),
 										),
 
 										esc_html__( 'Nav', 'codexin' ) => array(
-											array( 'property' => 'color', 'label' => 'Color of Nav Arrow', 'selector' => '.slick-slider span.slick-arrow'),
-											array( 'property' => 'background', 'label' => 'Background of Nav Arrow', 'selector' => '.slick-slider span.slick-arrow'),
-											array( 'property' => 'font-size', 'label' => 'Arrow Font Size of Nav Arrow', 'selector' => '.slick-slider span.slick-arrow'),
-											array( 'property' => 'margin', 'label' => 'Margin of Nav Arrow', 'selector' => '.slick-slider span.slick-arrow'),
-											array( 'property' => 'padding', 'label' => 'padding of Nav Arrow', 'selector' => '.slick-slider span.slick-arrow'),
-											array( 'property' => 'color', 'label' => 'Color of Dot Nav', 'selector' => '.slick-dots li button:before'),
-											array( 'property' => 'color', 'label' => 'Color of Dot Nav on Active State', 'selector' => '.slick-dots li.slick-active button:before'),
-											array( 'property' => 'color', 'label' => 'Color of Dot Nav on Hover', 'selector' => '.slick-dots li button:hover:before'),
-											array( 'property' => 'margin', 'label' => 'Margin of Dot Nav', 'selector' => '.slick-dots li'),
-											array( 'property' => 'padding', 'label' => 'padding of Dot Nav', 'selector' => '.slick-dots li')
+											array( 'property' => 'color', 'label' => esc_html__( 'Color of Nav Arrow', 'codexin' ), 'selector' => '.slick-slider span.slick-arrow'),
+											array( 'property' => 'background', 'label' => esc_html__( 'Background of Nav Arrow', 'codexin' ), 'selector' => '.slick-slider span.slick-arrow'),
+											array( 'property' => 'font-size', 'label' => esc_html__( 'Arrow Font Size of Nav Arrow', 'codexin' ), 'selector' => '.slick-slider span.slick-arrow'),
+											array( 'property' => 'margin', 'label' => esc_html__( 'Margin of Nav Arrow', 'codexin' ), 'selector' => '.slick-slider span.slick-arrow'),
+											array( 'property' => 'padding', 'label' => esc_html__( 'padding of Nav Arrow', 'codexin' ), 'selector' => '.slick-slider span.slick-arrow'),
+											array( 'property' => 'color', 'label' => esc_html__( 'Color of Dot Nav', 'codexin' ), 'selector' => '.slick-dots li button:before'),
+											array( 'property' => 'color', 'label' => esc_html__( 'Color of Dot Nav on Active State', 'codexin' ), 'selector' => '.slick-dots li.slick-active button:before'),
+											array( 'property' => 'color', 'label' => esc_html__( 'Color of Dot Nav on Hover', 'codexin' ), 'selector' => '.slick-dots li button:hover:before'),
+											array( 'property' => 'margin', 'label' => esc_html__( 'Margin of Dot Nav', 'codexin' ), 'selector' => '.slick-dots li'),
+											array( 'property' => 'padding', 'label' => esc_html__( 'padding of Dot Nav', 'codexin' ), 'selector' => '.slick-dots li')
 										),
 
 										esc_html__( 'Divider', 'codexin' ) => array(
-											array( 'property' => 'background', 'label' => 'Color', 'selector' => '.quote-author-name::before, .media-texts::before'),
-											array( 'property' => 'width', 'label' => 'Width', 'selector' => '.quote-author-name::before, .media-texts::before'),
-											array( 'property' => 'height', 'label' => 'Height', 'selector' => '.quote-author-name::before, .media-texts::before'),
-											array( 'property' => 'margin', 'label' => 'Margin', 'selector' => '.quote-author-name::before, .media-texts::before'),
-											array( 'property' => 'padding', 'label' => 'padding', 'selector' => '.quote-author-name::before, .media-texts::before')
+											array( 'property' => 'background', 'label' => esc_html__( 'Color', 'codexin' ), 'selector' => '.quote-author-name::before, .media-texts::before'),
+											array( 'property' => 'width', 'label' => esc_html__( 'Width', 'codexin' ), 'selector' => '.quote-author-name::before, .media-texts::before'),
+											array( 'property' => 'height', 'label' => esc_html__( 'Height', 'codexin' ), 'selector' => '.quote-author-name::before, .media-texts::before'),
+											array( 'property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin' ), 'selector' => '.quote-author-name::before, .media-texts::before'),
+											array( 'property' => 'padding', 'label' => esc_html__( 'padding', 'codexin' ), 'selector' => '.quote-author-name::before, .media-texts::before')
 										),
 
 										esc_html__( 'Slider Wrapper', 'codexin' ) => array(
-											array( 'property' => 'background', 'label' => 'Color', 'selector' => '.item'),
-											array( 'property' => 'border', 'label' => 'Border', 'selector' => '.item'),
-											array( 'property' => 'border-radius', 'label' => 'Border Radius', 'selector' => '.item'),
-											array( 'property' => 'height', 'label' => 'Height', 'selector' => '.item'),
-											array( 'property' => 'margin', 'label' => 'Margin', 'selector' => '.item'),
-											array( 'property' => 'padding', 'label' => 'padding', 'selector' => '.item')
+											array( 'property' => 'background', 'label' => esc_html__( 'Color', 'codexin' ), 'selector' => '.item'),
+											array( 'property' => 'border', 'label' => esc_html__( 'Border', 'codexin' ), 'selector' => '.item'),
+											array( 'property' => 'border-radius', 'label' => esc_html__( 'Border Radius', 'codexin' ), 'selector' => '.item'),
+											array( 'property' => 'height', 'label' => esc_html__( 'Height', 'codexin' ), 'selector' => '.item'),
+											array( 'property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin' ), 'selector' => '.item'),
+											array( 'property' => 'padding', 'label' => esc_html__( 'padding', 'codexin' ), 'selector' => '.item')
 										),
 
 										esc_html__( 'Box', 'codexin' )	=> array(
 											array( 'property' => 'background'),
-											array( 'property' => 'border', 'label' => 'Border'),
-											array( 'property' => 'border-radius', 'label' => 'Border Radius'),
-											array( 'property' => 'box-shadow', 'label' => 'Box Shadow'),
-											array( 'property' => 'box-shadow', 'label' => 'Box Shadow on Hover'),
-											array( 'property' => 'transition', 'label' => 'Hover Transition Animation'),
-											array( 'property' => 'margin', 'label' => 'Margin'),
-											array( 'property' => 'padding', 'label' => 'Padding'),
+											array( 'property' => 'border', 'label' => esc_html__( 'Border', 'codexin' ) ),
+											array( 'property' => 'border-radius', 'label' => esc_html__( 'Border Radius', 'codexin' ) ),
+											array( 'property' => 'box-shadow', 'label' => esc_html__( 'Box Shadow', 'codexin' ) ),
+											array( 'property' => 'box-shadow', 'label' => esc_html__( 'Box Shadow on Hover', 'codexin' ) ),
+											array( 'property' => 'transition', 'label' => esc_html__( 'Hover Transition Animation', 'codexin' ) ),
+											array( 'property' => 'margin', 'label' => esc_html__( 'Margin', 'codexin' ) ),
+											array( 'property' => 'padding', 'label' => esc_html__( 'Padding', 'codexin' ) ),
 										),
 									) //End inner-option array
 								) //End option array
@@ -711,7 +711,6 @@ function cx_testimonial_mini_kc() {
 								'name'    		=> 'animate',
 								'type'    		=> 'animate'
 							)
-
 						),//End animate
 	                ), //End params array()..
 	            ),  // End of elemnt cx_testimonial

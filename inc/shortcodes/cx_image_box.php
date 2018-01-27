@@ -55,7 +55,7 @@ function cx_image_box_shortcode( $atts, $content = null ) {
 			echo '<div class="'. esc_attr( implode( ' ', $classes ) ) .'">';
 
 				if( empty( $image ) ) {
-				echo '<p class="cx-error">'. esc_html__( 'Please Upload Your Image', 'reveal' ).'</p>'; 
+				echo '<p class="cx-error">'. esc_html__( 'Please Upload Your Image', 'codexin' ).'</p>'; 
 				} else {
 					if ( $img_action == 'open_custom_link' ) {
 						echo '<a href="'. esc_url( $retrieve_link[0] ) .'" '. $title.' '.$target.'>';

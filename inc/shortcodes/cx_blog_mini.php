@@ -341,9 +341,9 @@ function cx_blog_mini_shortcode( $atts, $content = null ) {
 										?>
 									</h3>
 									<ul class="meta cx-color-0">
-										<li><a href="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ), get_the_author_meta( 'user_nicename' ) ) ); ?>"><?php echo esc_html__( 'By ', 'reveal' ); the_author(); ?> </a> </li>
-										<li><a href="<?php echo esc_url( get_day_link( get_post_time( 'Y' ), get_post_time( 'm' ), get_post_time( 'j' ) ) );  ?>" class="entry-date"><?php echo esc_html__( 'On ', 'reveal' ); echo get_the_time( 'd M, Y' ); ?></a> </li>
-										<li><?php echo esc_html__( 'In', 'reveal' ); ?> <?php the_category( ', ' ); ?> </li>
+										<li><a href="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ), get_the_author_meta( 'user_nicename' ) ) ); ?>"><?php echo esc_html__( 'By ', 'codexin' ); the_author(); ?> </a> </li>
+										<li><a href="<?php echo esc_url( get_day_link( get_post_time( 'Y' ), get_post_time( 'm' ), get_post_time( 'j' ) ) );  ?>" class="entry-date"><?php echo esc_html__( 'On ', 'codexin' ); echo get_the_time( 'd M, Y' ); ?></a> </li>
+										<li><?php echo esc_html__( 'In', 'codexin' ); ?> <?php the_category( ', ' ); ?> </li>
 									</ul>
 									<div class="blog-desc">
 										<?php 
@@ -392,8 +392,8 @@ function cx_blog_mini_shortcode( $atts, $content = null ) {
 											?>
 										</h3>
 										<ul class="meta cx-color-0">
-											<li><a href="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ), get_the_author_meta( 'user_nicename' ) ) ); ?>"><?php echo esc_html__( 'By ', 'reveal' ); the_author(); ?> </a> </li>
-											<li><a href="<?php echo esc_url( get_day_link( get_post_time( 'Y' ), get_post_time( 'm' ), get_post_time( 'j' ) ) );  ?>" class="entry-date"><?php echo esc_html__( 'On ', 'reveal' ); echo get_the_time( 'd M, Y' ); ?></a> </li>
+											<li><a href="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ), get_the_author_meta( 'user_nicename' ) ) ); ?>"><?php echo esc_html__( 'By ', 'codexin' ); the_author(); ?> </a> </li>
+											<li><a href="<?php echo esc_url( get_day_link( get_post_time( 'Y' ), get_post_time( 'm' ), get_post_time( 'j' ) ) );  ?>" class="entry-date"><?php echo esc_html__( 'On ', 'codexin' ); echo get_the_time( 'd M, Y' ); ?></a> </li>
 											<li><i class="fa fa-eye"></i> <?php echo codexin_get_post_views( get_the_ID() ); ?> </li>
 											<li><a href="<?php comments_link(); ?>"><i class="fa fa-comments"></i> <?php comments_number( '0', '1', '%' ); ?></a> </li>
 										</ul>

@@ -49,14 +49,14 @@ function cx_smart_slider_shortcode( $atts, $content = null ) {
 function cx_get_sm_sliders() {
 	$sliders = array();
 	$sliders[] = esc_html__( 'Select a Slider Name', 'codexin' );
- 	if ( is_plugin_active( 'nextend-smart-slider3-pro/nextend-smart-slider3-pro.php' ) ) {
+ 	if ( class_exists( 'SmartSlider3' ) ) {
       	global $wpdb; 
       	$smartsliders = $wpdb->get_results( "SELECT id, title FROM ". $wpdb->prefix ."nextend2_smartslider3_sliders" );
       	foreach( $smartsliders as $slide ) {
       		$sliders[$slide->id] = $slide->title;
       	}
   	} else {
-      	$sliders[0] = esc_html__( 'No Slider Found', 'codexin' );
+      	$sliders[0] = esc_html__( 'Please install and activate Smart Slider', 'codexin' );
   	}
 
   	return $sliders;

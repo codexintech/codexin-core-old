@@ -113,9 +113,9 @@ if( ! class_exists( 'Codexin_Core' ) ) {
 
 			wp_enqueue_script( 'codexin-post-like-script', CODEXIN_CORE_ASSET_DIR . '/js/codexin-post-like.js', array( 'jquery' ), '0.5', true );
 			wp_localize_script( 'codexin-post-like-script', 'postLikes', array(
-				'ajaxurl' => admin_url( 'admin-ajax.php' ),
-				'like' => esc_html__( 'Like', 'codexin' ),
-				'unlike' => esc_html__( 'Unlike', 'codexin' )
+				'ajaxurl' 	=> admin_url( 'admin-ajax.php' ),
+				'like' 		=> esc_html__( 'Like', 'codexin' ),
+				'unlike' 	=> esc_html__( 'Unlike', 'codexin' )
 			) );
 
 		}
