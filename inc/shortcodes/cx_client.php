@@ -80,7 +80,7 @@ function cx_client_shortcode( $atts, $content = null ) {
 						
 						while( $data->have_posts() ) {
 							$data->the_post();							
-							$client_url = rwmb_meta( 'reveal_clients_surl' );
+							$client_url = rwmb_meta( 'codexin_clients_surl' );
 							$c_url 		= ! empty( $client_url ) ? esc_url( $client_url ) : '#';
 
 							// Retrieving Image alt tag
@@ -131,7 +131,7 @@ function cx_client_shortcode( $atts, $content = null ) {
 								$data->the_post();
 
 								$i++;
-								$client_url = rwmb_meta( 'reveal_clients_surl' );
+								$client_url = rwmb_meta( 'codexin_clients_surl' );
 								$c_url 		= ! empty( $client_url ) ? esc_url( $client_url ) : '#';
 
 								// Retrieving Image alt tag

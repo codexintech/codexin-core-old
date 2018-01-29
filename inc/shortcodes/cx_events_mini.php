@@ -72,7 +72,7 @@ function cx_events_mini_shortcode( $atts, $content = null ) {
 	// Buiding up args for query
 	$args = array(
 		'post_type'				=> 'events',
-		'meta_key'				=> ( $orderby == 'meta_value' ) ? 'reveal_event_start_date' : '',
+		'meta_key'				=> ( $orderby == 'meta_value' ) ? 'codexin_event_start_date' : '',
 		'order'					=> $order,
 		'orderby'				=> $orderby,
 		'posts_per_page'		=> $number_of_events
@@ -184,10 +184,10 @@ function cx_events_mini_shortcode( $atts, $content = null ) {
 							$image_alt = ( ! empty( codexin_retrieve_alt_tag() ) ) ? codexin_retrieve_alt_tag() : get_the_title();
 
 							// Retrieving the meta infos
-							$start_time = rwmb_meta( 'reveal_event_start_time' );
-							$end_time 	= rwmb_meta( 'reveal_event_end_time' );
-							$address 	= strtolower( rwmb_meta( 'reveal_event_address' ) );
-							$date 		= strtotime( rwmb_meta( 'reveal_event_start_date' ) );
+							$start_time = rwmb_meta( 'codexin_event_start_time' );
+							$end_time 	= rwmb_meta( 'codexin_event_end_time' );
+							$address 	= strtolower( rwmb_meta( 'codexin_event_address' ) );
+							$date 		= strtotime( rwmb_meta( 'codexin_event_start_date' ) );
 
 							$thumbnail_size = 'codexin-core-rectangle-four';
 							if( function_exists( 'codexin_attachment_metas_extended' ) ) {
@@ -282,10 +282,10 @@ function cx_events_mini_shortcode( $atts, $content = null ) {
 							$image_alt = ( ! empty( codexin_retrieve_alt_tag() ) ) ? codexin_retrieve_alt_tag() : get_the_title();
 
 							// Retrieving the meta infos
-							$start_time = rwmb_meta( 'reveal_event_start_time' );
-							$end_time 	= rwmb_meta( 'reveal_event_end_time' );
-							$address 	= strtolower( rwmb_meta( 'reveal_event_address' ) );
-							$date 		= strtotime( rwmb_meta( 'reveal_event_start_date' ) ); 
+							$start_time = rwmb_meta( 'codexin_event_start_time' );
+							$end_time 	= rwmb_meta( 'codexin_event_end_time' );
+							$address 	= strtolower( rwmb_meta( 'codexin_event_address' ) );
+							$date 		= strtotime( rwmb_meta( 'codexin_event_start_date' ) ); 
 
 							$thumbnail_size = 'codexin-core-rectangle-four';
 							if( function_exists( 'codexin_attachment_metas_extended' ) ) {
@@ -395,8 +395,8 @@ function cx_events_mini_shortcode( $atts, $content = null ) {
 								$image_alt = ( ! empty( codexin_retrieve_alt_tag() ) ) ? codexin_retrieve_alt_tag() : get_the_title();
 
 								// Retrieving the meta infos
-								$address 	= strtolower( rwmb_meta( 'reveal_event_address' ) );
-								$date 		= strtotime( rwmb_meta( 'reveal_event_start_date' ) );
+								$address 	= strtolower( rwmb_meta( 'codexin_event_address' ) );
+								$date 		= strtotime( rwmb_meta( 'codexin_event_start_date' ) );
 
 								$thumbnail_size = 'codexin-core-rectangle-four';
 								if( function_exists( 'codexin_attachment_metas_extended' ) ) {

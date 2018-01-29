@@ -98,7 +98,7 @@ function cx_blog_shortcode( $atts, $content = null ) {
 						    <div class="<?php echo ( $layout == 'grid' ) ? esc_attr( 'blog-wrapper reveal-bg-1' ) : esc_attr( 'post-wrapper reveal-border-1' ); ?>">
 						    	<?php if( has_post_format( 'gallery' ) ) {
 
-						        $cx_gallery = ( $layout == 'grid' ) ? rwmb_meta( 'reveal_gallery', 'type=image_advanced&size=codexin-core-rectangle-one' ) : rwmb_meta( 'reveal_gallery', 'type=image_advanced&size=codexin-framework-rectangle-four' );
+						        $cx_gallery = ( $layout == 'grid' ) ? rwmb_meta( 'codexin_gallery', 'type=image_advanced&size=codexin-core-rectangle-one' ) : rwmb_meta( 'codexin_gallery', 'type=image_advanced&size=codexin-framework-rectangle-four' );
 						        echo '<div class="gallery-carousel image-pop-up">';
 							        foreach( $cx_gallery as $cx_image ) {
 
@@ -126,24 +126,24 @@ function cx_blog_shortcode( $atts, $content = null ) {
 
 							    } elseif( has_post_format( 'audio' ) ) {
 
-						            $cx_embed = rwmb_meta( 'reveal_audio', 'type=oembed' );
+						            $cx_embed = rwmb_meta( 'codexin_audio', 'type=oembed' );
 						            echo '<div class="embed">';
 						                echo sprintf( '%s', $cx_embed );
 						            echo '</div> <!-- end of embed -->';
 
 								} elseif( has_post_format( 'video' ) ) {
 
-						            $cx_embed = rwmb_meta( 'reveal_video', 'type=oembed' );
+						            $cx_embed = rwmb_meta( 'codexin_video', 'type=oembed' );
 						            echo '<div class="embed">';
 						                echo sprintf( '%s', $cx_embed );
 						            echo '</div> <!-- end of embed -->';
 
 								} elseif( has_post_format( 'link' ) ) {
 
-						            $link_url 		= rwmb_meta( 'reveal_link_url', 'type=text' );
-						            $link_txt 		= rwmb_meta( 'reveal_link_text', 'type=text' );
-						            $link_rel 		= rwmb_meta( 'reveal_link_rel', 'type=text' ); 
-						            $link_target 	= rwmb_meta( 'reveal_link_target', 'type=select' ); 
+						            $link_url 		= rwmb_meta( 'codexin_link_url' );
+						            $link_txt 		= rwmb_meta( 'codexin_link_text' );
+						            $link_rel 		= rwmb_meta( 'codexin_link_rel' ); 
+						            $link_target 	= rwmb_meta( 'codexin_link_target' ); 
 
 						            $cx_rel = ( !empty( $link_rel ) ) ? 'rel="'. esc_attr( $link_rel ) .'"' : '';
 						            ?>
@@ -159,9 +159,9 @@ function cx_blog_shortcode( $atts, $content = null ) {
 							    <?php
 								} elseif ( has_post_format( 'quote' ) ) {
 
-						            $cx_quote 		= rwmb_meta( 'reveal_quote_text', 'type=textarea' );
-						            $cx_name 		= rwmb_meta( 'reveal_quote_name', 'type=text' );
-						            $cx_source 		= rwmb_meta( 'reveal_quote_source', 'type=url' );
+						            $cx_quote 		= rwmb_meta( 'codexin_quote_text' );
+						            $cx_name 		= rwmb_meta( 'codexin_quote_name' );
+						            $cx_source 		= rwmb_meta( 'codexin_quote_source' );
 
 						            if( !empty( $cx_quote ) ) { ?>
 						                <div class="post-quote reveal-color-0 reveal-border-1">

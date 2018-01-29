@@ -45,7 +45,7 @@ function cx_testimonials_shortcode( $atts, $content = null ) {
 							'post_type'				=> 'testimonial',
 							'order'					=> $order,
 							'orderby'				=> $orderby,
-							'meta_key'				=> ( $orderby == 'meta_value' ) ? 'reveal_author_name' : '',
+							'meta_key'				=> ( $orderby == 'meta_value' ) ? 'codexin_author_name' : '',
 							'posts_per_page'		=> ( $pagination ) ? '' : -1,
 							'paged'					=> $paged
 						);
@@ -60,9 +60,9 @@ function cx_testimonials_shortcode( $atts, $content = null ) {
 
 								    $img_alt 		= ( ! empty( codexin_retrieve_alt_tag() ) ) ? codexin_retrieve_alt_tag() : get_the_title();
 
-									$rt_name 		= rwmb_meta( 'reveal_author_name' ); 
-									$rt_desig 		= rwmb_meta( 'reveal_author_desig' ); 
-									$rt_company 	= rwmb_meta( 'reveal_author_company' ); 
+									$rt_name 		= rwmb_meta( 'codexin_author_name' ); 
+									$rt_desig 		= rwmb_meta( 'codexin_author_desig' ); 
+									$rt_company 	= rwmb_meta( 'codexin_author_company' ); 
 									$post_classes 	= 'clearfix testimonials-list';
 
 									$thumbnail_size = 'codexin-core-square-one';

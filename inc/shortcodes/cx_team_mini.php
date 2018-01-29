@@ -57,12 +57,12 @@ function cx_team_mini_shortcode( $atts, $content = null ) {
 						// Retrieving Image alt tag
 						$img_alt = ( !empty( codexin_retrieve_alt_tag() ) ) ? codexin_retrieve_alt_tag() : get_the_title();
 
-						$designation = rwmb_meta( 'reveal_team_designation' );
-						$fb = rwmb_meta( 'reveal_team_facebook' );
-						$tr = rwmb_meta( 'reveal_team_twitter' );
-						$ig = rwmb_meta( 'reveal_team_ig' );
-						$gp = rwmb_meta( 'reveal_team_gp' );
-						$li = rwmb_meta( 'reveal_team_ld' );
+						$designation = rwmb_meta( 'codexin_team_designation' );
+						$fb = rwmb_meta( 'codexin_team_facebook' );
+						$tr = rwmb_meta( 'codexin_team_twitter' );
+						$ig = rwmb_meta( 'codexin_team_ig' );
+						$gp = rwmb_meta( 'codexin_team_gp' );
+						$li = rwmb_meta( 'codexin_team_ld' );
 
 						$thumbnail_size = 'codexin-core-rectangle-three';
 						if( function_exists( 'codexin_attachment_metas_extended' ) ) {

@@ -55,7 +55,7 @@ function cx_events_shortcode( $atts, $content = null ) {
 
 					$args = array(
 						'post_type'				=> 'events',
-						'meta_key'				=> ( $orderby == 'meta_value' ) ? 'reveal_event_start_date' : '',
+						'meta_key'				=> ( $orderby == 'meta_value' ) ? 'codexin_event_start_date' : '',
 						'order'					=> $order,
 						'orderby'				=> $orderby,
 						'paged'   				=> $paged,
@@ -95,10 +95,10 @@ function cx_events_shortcode( $atts, $content = null ) {
 							}
 
 							// Retrieving Values from the Metaboxes
-							$e_start_date 	= strtotime( rwmb_meta( 'reveal_event_start_date', 'type=date' ) );
-							$e_end_date 	= rwmb_meta( 'reveal_event_end_date', 'type=date' );
-							$e_start_time 	= rwmb_meta( 'reveal_event_start_time', 'type=time' );
-							$e_end_time 	= rwmb_meta( 'reveal_event_end_time', 'type=time' );
+							$e_start_date 	= strtotime( rwmb_meta( 'codexin_event_start_date' ) );
+							$e_end_date 	= rwmb_meta( 'codexin_event_end_date' );
+							$e_start_time 	= rwmb_meta( 'codexin_event_start_time' );
+							$e_end_time 	= rwmb_meta( 'codexin_event_end_time' );
 							$e_st_date 		= date( get_option( 'date_format' ), $e_start_date );
 
 							$thumbnail_size = ( $layout == 'list' ) ? 'codexin-framework-rectangle-one' : 'codexin-core-rectangle-four';

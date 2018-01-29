@@ -16,7 +16,7 @@ add_filter( 'rwmb_meta_boxes', 'codexin_register_meta_boxes' );
  * @since 1.0
  */
 function codexin_register_meta_boxes( $meta_boxes ) {
-    $prefix = 'reveal_';
+    $prefix = 'codexin_';
 
     // Retrieving the created slider names and ids from Smart Slider
     if ( is_plugin_active( 'nextend-smart-slider3-pro/nextend-smart-slider3-pro.php' ) ) {
@@ -282,7 +282,7 @@ function codexin_register_meta_boxes( $meta_boxes ) {
             array(
                 'name'     => esc_html__( 'Header layout', 'codexin' ),
                 'type'     => 'image_select',
-                'id'       => $prefix.'header_layout',
+                'id'       => $prefix.'header_layout_meta',
                 'desc'     => esc_html__( "Please choose header layout for this page only. If you wish to use the global settings, select the first image named 'Global Header'.", 'codexin' ),
                 'options'  => array(
                     0 => CODEXIN_CORE_ASSET_DIR . '/images/header/header-0.png',

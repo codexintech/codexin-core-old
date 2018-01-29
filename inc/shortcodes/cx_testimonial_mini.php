@@ -76,7 +76,7 @@ function cx_testimonial_mini_shortcode( $atts, $content = null ) {
 								//Start loop here...
 								while( $data->have_posts() ) {
 									$data->the_post();
-									$aut_name = rwmb_meta( 'reveal_author_name' );
+									$aut_name = rwmb_meta( 'codexin_author_name' );
 									?>
 									<div class="item">
 										<div class="quote-wrapper clearfix">
@@ -125,9 +125,9 @@ function cx_testimonial_mini_shortcode( $atts, $content = null ) {
 							// Retrieving Image alt tag
 							$img_alt = ( ! empty( codexin_retrieve_alt_tag() ) ) ? codexin_retrieve_alt_tag() : get_the_title();
 
-							$name 	 = rwmb_meta( 'reveal_author_name' );
-							$desig 	 = rwmb_meta( 'reveal_author_desig' ); 
-							$company = rwmb_meta( 'reveal_author_company' );  
+							$name 	 = rwmb_meta( 'codexin_author_name' );
+							$desig 	 = rwmb_meta( 'codexin_author_desig' ); 
+							$company = rwmb_meta( 'codexin_author_company' );  
 
 							$thumbnail_size = 'codexin-core-square-one';
 							if( function_exists( 'codexin_attachment_metas_extended' ) ) {
@@ -205,9 +205,9 @@ function cx_testimonial_mini_shortcode( $atts, $content = null ) {
 
 								// Retrieving Image alt tag
 								$img_alt = ( ! empty( codexin_retrieve_alt_tag() ) ) ? codexin_retrieve_alt_tag() : get_the_title();
-								$name 	 = rwmb_meta( 'reveal_author_name' );
-								$desig   = rwmb_meta( 'reveal_author_desig' );
-								$company = rwmb_meta( 'reveal_author_company' );
+								$name 	 = rwmb_meta( 'codexin_author_name' );
+								$desig   = rwmb_meta( 'codexin_author_desig' );
+								$company = rwmb_meta( 'codexin_author_company' );
 
 								$thumbnail_size = 'codexin-core-square-one';
 								if( function_exists( 'codexin_attachment_metas_extended' ) ) {
@@ -296,9 +296,9 @@ function cx_testimonial_mini_shortcode( $atts, $content = null ) {
 
 									// Retrieving Image alt tag
 									$img_alt = ( ! empty( codexin_retrieve_alt_tag() ) ) ? codexin_retrieve_alt_tag() : get_the_title();
-									$name 	 = rwmb_meta( 'reveal_author_name' ); 
-									$desig 	 = rwmb_meta( 'reveal_author_desig' );
-									$company = rwmb_meta( 'reveal_author_company' );
+									$name 	 = rwmb_meta( 'codexin_author_name' ); 
+									$desig 	 = rwmb_meta( 'codexin_author_desig' );
+									$company = rwmb_meta( 'codexin_author_company' );
 
 									$thumbnail_size = 'codexin-core-square-one';
 									if( function_exists( 'codexin_attachment_metas_extended' ) ) {
@@ -417,9 +417,9 @@ function cx_testimonial_mini_shortcode( $atts, $content = null ) {
 									while( $new_data->have_posts() ) {
 										$new_data->the_post(); 
 
-										$name 	 = rwmb_meta( 'reveal_author_name' );
-										$desig 	 = rwmb_meta( 'reveal_author_desig' );
-										$company = rwmb_meta( 'reveal_author_company' );
+										$name 	 = rwmb_meta( 'codexin_author_name' );
+										$desig 	 = rwmb_meta( 'codexin_author_desig' );
+										$company = rwmb_meta( 'codexin_author_company' );
 
 										?>
 										<div class="item">

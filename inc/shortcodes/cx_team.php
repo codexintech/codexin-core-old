@@ -53,7 +53,7 @@ function cx_team_shortcode( $atts, $content = null ) {
 
 		            	$data->the_post();
 					    $img_alt = ( ! empty( codexin_retrieve_alt_tag() ) ) ? codexin_retrieve_alt_tag() : get_the_title();
-						$r_team_desig = rwmb_meta( 'reveal_team_designation' );
+						$r_team_desig = rwmb_meta( 'codexin_team_designation' );
 
 						$thumbnail_size = 'codexin-core-square-two';
 						if( function_exists( 'codexin_attachment_metas_extended' ) ) {

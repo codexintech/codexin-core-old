@@ -169,7 +169,7 @@ class Codexin_Recent_Projects extends WP_Widget {
 						echo '</a></h4>';
 
 						//fetch custom-meta data
-						$pr_date = $this->project_date = rwmb_meta( 'reveal_portfolio_date' );
+						$pr_date = $this->project_date = rwmb_meta( 'codexin_portfolio_date' );
 						$p_date  = date( get_option('date_format'), strtotime( $pr_date ) );
 
 						if( 'on' == $instance[ 'meta_date' ] ) {

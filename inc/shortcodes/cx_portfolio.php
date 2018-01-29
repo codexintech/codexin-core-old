@@ -95,7 +95,7 @@ function cx_portfolio_shortcode( $atts, $content = null ) {
 						$port_list = get_the_term_list( $data->ID, 'portfolio-category', '', ', ', '' );
 
 						// Retrieving Values from the Metaboxes
-						$p_date 	= strtotime( rwmb_meta( 'reveal_portfolio_date' ) );
+						$p_date 	= strtotime( rwmb_meta( 'codexin_portfolio_date' ) );
 						$port_date 	= date( get_option( 'date_format' ), $p_date );
 
 						$thumbnail_size = ( $layout == 'list' ) ? 'codexin-framework-rectangle-one' : 'codexin-core-rectangle-one';
