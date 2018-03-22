@@ -59,7 +59,7 @@ function cx_blog_mini_shortcode( $atts, $content = null ) {
 		    $master_class[] = 'cx-blog';
 
 		?>
-			<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
+			<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>" itemscope itemtype="https://schema.org/Blog">
 				<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
 					<?php
 					//start query..
@@ -83,7 +83,7 @@ function cx_blog_mini_shortcode( $atts, $content = null ) {
 
 					 ?>
 							<div class="col-md-<?php echo esc_html( $column ); ?> col-sm-<?php echo ( $column == 4 ) ? esc_attr( $column ) : esc_attr( 6 ); ?>">
-								<article id="post-<?php echo esc_attr( get_the_ID() ); ?>" <?php post_class(); ?> itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
+								<article id="post-<?php echo esc_attr( get_the_ID() ); ?>" <?php post_class(); ?>>
 									<div class="blog-wrapper">
 										<div class="img-thumb">
 											<a href="<?php echo esc_url( get_the_permalink() ); ?>">
@@ -197,7 +197,7 @@ function cx_blog_mini_shortcode( $atts, $content = null ) {
 		$master_class[] = 'cx-blog-2';
 	
 		?>
-		<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
+		<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>" itemscope itemtype="https://schema.org/Blog">
 			<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
 
 				<?php 
@@ -222,7 +222,7 @@ function cx_blog_mini_shortcode( $atts, $content = null ) {
 
 				?>
 					<div class="col-md-<?php echo esc_attr( $column ); ?> col-sm-<?php echo ( $column == 4 ) ? esc_attr( $column ) : esc_attr( 6 ); ?>">
-						<article id="post-<?php echo esc_attr( get_the_ID() ); ?>" <?php post_class(); ?> itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
+						<article id="post-<?php echo esc_attr( get_the_ID() ); ?>" <?php post_class(); ?>>
 							<div class="blog-wrapper">
 								<div class="img-thumb cx-bg-overlay">
 									<img src="<?php echo esc_url( $post_thumbnail ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" class="img-responsive">
@@ -296,7 +296,7 @@ function cx_blog_mini_shortcode( $atts, $content = null ) {
 
 			?>
 				
-			<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
+			<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>" itemscope itemtype="https://schema.org/Blog">
 				<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
 				<?php 
 				//start query..
@@ -437,7 +437,7 @@ function cx_blog_mini_shortcode( $atts, $content = null ) {
 
 			?>
 				
-			<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>">
+			<div class="<?php echo esc_attr( implode( ' ', $master_class ) ); ?>" itemscope itemtype="https://schema.org/Blog">
 				<div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>">
 				<?php 
 				//start query..
@@ -445,61 +445,62 @@ function cx_blog_mini_shortcode( $atts, $content = null ) {
 
 				$data = new WP_Query( $args );
 
-				if( $data->have_posts() ) :
+				if( $data->have_posts() ) {
 
-					while( $data->have_posts() ) : $data->the_post();
+					while( $data->have_posts() ) {
+						$data->the_post();
 
-					// Retrieving Image alt tag
-					$image_alt = ( !empty( codexin_retrieve_alt_tag() ) ) ? codexin_retrieve_alt_tag() : get_the_title();
+						// Retrieving Image alt tag
+						$image_alt = ( !empty( codexin_retrieve_alt_tag() ) ) ? codexin_retrieve_alt_tag() : get_the_title();
 
-					$thumbnail_size = 'codexin-core-square-two';
-					if( function_exists( 'codexin_attachment_metas_extended' ) ) {
-						$post_thumbnail = codexin_attachment_metas_extended( get_the_ID(), 'blog', $thumbnail_size )['src'];
-					} else {
-						$post_thumbnail = ( has_post_thumbnail() ) ? get_the_post_thumbnail_url( get_the_ID(), $thumbnail_size ) : '//placehold.it/600X400';
-					}
-					?>
-					<!-- Left column post -->
-					<div class="col-md-4 col-sm-4">
-						<article id="post-<?php echo esc_attr( get_the_ID() ); ?>" <?php post_class(); ?> itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
-							<div class="blog-wrapper">
-								<div class="img-thumb">
-									<a href="<?php echo esc_url( get_the_permalink() ); ?>">
-										<img src="<?php echo esc_url( $post_thumbnail ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" class="img-responsive">
-									</a>
-								</div> <!-- End of img-thumb -->
-								<div class="blog-content cx-color-2">
-									<div class="blog-category">
-										<?php the_category(' '); ?>
-									</div>
-									<h3 class="blog-title">
+						$thumbnail_size = 'codexin-core-square-two';
+						if( function_exists( 'codexin_attachment_metas_extended' ) ) {
+							$post_thumbnail = codexin_attachment_metas_extended( get_the_ID(), 'blog', $thumbnail_size )['src'];
+						} else {
+							$post_thumbnail = ( has_post_thumbnail() ) ? get_the_post_thumbnail_url( get_the_ID(), $thumbnail_size ) : '//placehold.it/600X400';
+						}
+						?>
+						<!-- Left column post -->
+						<div class="col-md-4 col-sm-4">
+							<article id="post-<?php echo esc_attr( get_the_ID() ); ?>" <?php post_class(); ?>>
+								<div class="blog-wrapper">
+									<div class="img-thumb">
 										<a href="<?php echo esc_url( get_the_permalink() ); ?>">
-											<?php 
-					                    	if( function_exists( 'codexin_char_limit' ) ) {
-						                        echo apply_filters( 'the_title', codexin_char_limit( $title_length, 'title' ) );
-					                    	} else {
-										    	echo esc_html( wp_trim_words( get_the_title(), $title_length ) );
-					                    	}
-											?>
+											<img src="<?php echo esc_url( $post_thumbnail ); ?>" alt="<?php echo esc_attr( $image_alt ); ?>" class="img-responsive">
 										</a>
-									</h3>
-									<ul class="meta">
-										<li><i class="fa fa-clock-o"></i> <a href="<?php echo get_day_link( get_post_time( 'Y' ), get_post_time( 'm' ), get_post_time( 'j' ) );  ?>"><?php echo get_the_time( 'd M, Y' ); ?></a> </li>
-										<li><i class="fa fa-eye"></i> <?php echo codexin_get_post_views( get_the_ID() ); ?> </li>
-										<li><i class="fa fa-comments"></i> <a href="<?php comments_link(); ?>"><?php comments_number( 'No Comments', '1 Comment', '% Comments' ); ?></a> </li>
-									</ul>
-								</div> <!-- end of blog-content -->
-							</div> <!-- end blog-wrapper-left -->
-						</article> <!-- end of #post-## -->
-					</div> <!--end The col -->
-						<?php 
-						endwhile;
-					endif;
-					wp_reset_postdata();
-					?>
-					</div> <!-- end of row -->
-				</div> <!-- end of cx-blog-4 -->
-				<div class="clearfix"></div>
+									</div> <!-- End of img-thumb -->
+									<div class="blog-content cx-color-2">
+										<div class="blog-category">
+											<?php the_category(' '); ?>
+										</div>
+										<h3 class="blog-title">
+											<a href="<?php echo esc_url( get_the_permalink() ); ?>">
+												<?php 
+						                    	if( function_exists( 'codexin_char_limit' ) ) {
+							                        echo apply_filters( 'the_title', codexin_char_limit( $title_length, 'title' ) );
+						                    	} else {
+											    	echo esc_html( wp_trim_words( get_the_title(), $title_length ) );
+						                    	}
+												?>
+											</a>
+										</h3>
+										<ul class="meta">
+											<li><i class="fa fa-clock-o"></i> <a href="<?php echo get_day_link( get_post_time( 'Y' ), get_post_time( 'm' ), get_post_time( 'j' ) );  ?>"><?php echo get_the_time( 'd M, Y' ); ?></a> </li>
+											<li><i class="fa fa-eye"></i> <?php echo codexin_get_post_views( get_the_ID() ); ?> </li>
+											<li><i class="fa fa-comments"></i> <a href="<?php comments_link(); ?>"><?php comments_number( 'No Comments', '1 Comment', '% Comments' ); ?></a> </li>
+										</ul>
+									</div> <!-- end of blog-content -->
+								</div> <!-- end blog-wrapper-left -->
+							</article> <!-- end of #post-## -->
+						</div> <!--end The col -->
+					<?php 
+					}
+				}
+				wp_reset_postdata();
+				?>
+				</div> <!-- end of row -->
+			</div> <!-- end of cx-blog-4 -->
+			<div class="clearfix"></div>
 
 		<?php } // end of layout-4 ?>
 			
